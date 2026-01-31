@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cliente NAP Transporte - GitHack Fix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+    .glass { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+    .terminal { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0c0c0c; border: 1px solid #333; }
+    .log-info { color: #60a5fa; }
+    .log-success { color: #4ade80; }
+    .log-error { color: #f87171; }
+    .log-warn { color: #fbbf24; }
+    .log-net { color: #c084fc; }
+    .org-item { transition: all 0.2s; cursor: pointer; }
+    .org-item:hover { background: rgba(139, 92, 246, 0.2); }
+    .org-item.active { background: rgba(139, 92, 246, 0.3); border-left: 4px solid #8b5cf6; } /* FIX: border-l-4 */
+    .dataset-card { transition: all 0.2s; cursor: pointer; }
+    .dataset-card:hover { transform: translateY(-2px); border-color: #8b5cf6; }
+    .btn-primary { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    .btn-primary:hover { background: linear-gradient(135deg, #818cf8, #a78bfa); }
+    .btn-success { background: linear-gradient(135deg, #059669, #10b981); }
+    .file-item { transition: all 0.2s; }
+    .file-item:hover { background: rgba(139, 92, 246, 0.2); }
+    .file-item.active { background: rgba(139, 92, 246, 0.3); }
+  </style>
+</head>
+<body class="p-4">
+
+  <div class="max-w-7xl mx-auto">
+    
+    <header class="glass rounded-xl p-4 mb-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-gradient-to-br from-blue-600 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center font-bold">
+          NAP
+        </div>
+        <div>
+          <h1 class="font-bold">Punto de Acceso Nacional de Transporte</h1>
+          <p class="text-xs text-slate-400">Cliente API v5 - Corregido (HTTPS)</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="status" class="text-xs px-3 py-1 rounded-full bg-slate-700">Verificando...</span>
+      </div>
+    </header>
+
+    <div class="glass rounded-xl p-4 mb-4">
+      <div class="flex gap-4 items-end flex-wrap">
+        <div class="flex-1 min-w-[300px]">
+          <label class="block text-xs text-slate-400 mb-1 font-semibold uppercase">NAP API Key</label>
+          <input type="text" id="napApiKey" value="03714981-fe65-4313-b9e2-66556ce6eb65" 
+                 class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm font-mono">
+        </div>
+        <button onclick="testConnection()" id="btnTest" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2">
+          <i class="fa-solid fa-satellite-dish"></i> Test
+        </button>
+        <button onclick="loadOrganizations()" id="btnConnect" class="btn-primary text-white font-bold py-2 px-6 rounded-lg flex items-center gap-2">
+          <i class="fa-solid fa-plug"></i> Conectar
+        </button>
+      </div>
+      
+      <p class="text-[10px] text-slate-400 mt-2">Abre este HTML desde GitHack (HTTPS) para evitar bloqueo por CORS.</p>
+    </div>
+
+    <div class="grid grid-cols-12 gap-4">
+      
+      <aside class="col-span-12 md:col-span-3">
+        <div class="glass rounded-xl overflow-hidden">
+          <div class="p-3 border-b border-slate-700 flex justify-between items-center">
+            <span class="text-xs font-bold text-slate-400 uppercase">Organizaciones</span>
+            <span id="orgCount" class="text-xs bg-slate-700 px-2 py-0.5 rounded">0</span>
+          </div>
+          <div class="p-2">
+            <input type="text" id="searchOrg" placeholder="Buscar (ej: Renfe)..." 
+                   class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs">
+          </div>
+          <div id="orgList" class="max-h-[500px] overflow-y-auto">
+            <div class="p-8 text-center text-slate-500 text-xs">
+              <i class="fa-solid fa-building text-2xl mb-2 opacity-30"></i>
+              <p>Pulsa Conectar para cargar</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="col-span-12 md:col-span-9">
+        
+        <div id="searchPanel" class="glass rounded-xl p-4 mb-4">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="font-bold text-lg"><i class="fa-solid fa-train mr-2 text-cyan-400"></i>Buscar trenes</h2>
+            <span id="dataStatus" class="text-xs text-slate-400">Datos Renfe: pendiente</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs text-slate-400 mb-1 font-semibold uppercase">Origen</label>
+              <input type="text" id="originInput" list="stopsList" placeholder="Ej: Madrid Puerta de Atocha" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-2 text-sm">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1 font-semibold uppercase">Destino</label>
+              <input type="text" id="destInput" list="stopsList" placeholder="Ej: Barcelona Sants" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-2 text-sm">
+            </div>
+            <div class="flex items-end">
+              <button id="btnSearch" class="btn-primary text-white font-bold py-2 px-6 rounded-lg w-full">Buscar</button>
+            </div>
+          </div>
+          <datalist id="stopsList"></datalist>
+          <div id="searchResults" class="mt-4 text-xs text-slate-300"></div>
+        </div>
+
+        <div id="datasetsPanel" class="glass rounded-xl p-4 mb-4 hidden">
+          <div class="flex justify-between items-center mb-4">
+            <h2 id="orgTitle" class="font-bold text-lg">
+              <i class="fa-solid fa-building mr-2 text-purple-400"></i>
+              Organización
+            </h2>
+            <button onclick="closeDatasetsPanel()" class="text-slate-400 hover:text-white text-xl">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <div id="datasetGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto">
+            </div>
+        </div>
+
+        <div id="fileViewerPanel" class="glass rounded-xl overflow-hidden mb-4 hidden">
+          <div class="p-3 border-b border-slate-700 flex justify-between items-center bg-slate-800">
+            <h3 id="fileViewerTitle" class="font-bold text-sm">
+              <i class="fa-solid fa-file-zipper mr-2 text-green-400"></i>
+              Contenido GTFS
+            </h3>
+            <button onclick="closeFileViewer()" class="text-slate-400 hover:text-white">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <div class="flex" style="height: 400px;">
+            <div id="fileList" class="w-48 border-r border-slate-700 overflow-y-auto bg-slate-900">
+              </div>
+            <div class="flex-1 overflow-auto">
+              <pre id="fileContent" class="p-4 text-xs font-mono text-slate-300 whitespace-pre">Selecciona un archivo</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="terminal rounded-xl overflow-hidden">
+          <div class="bg-slate-800 px-4 py-2 flex justify-between items-center border-b border-slate-700">
+            <span class="text-xs font-bold text-slate-300">
+              <i class="fa-solid fa-terminal text-green-500 mr-2"></i>API Logs
+            </span>
+            <button onclick="clearLogs()" class="text-xs text-slate-500 hover:text-white">Limpiar</button>
+          </div>
+          <div id="logs" class="p-3 h-48 overflow-y-auto text-xs leading-relaxed">
+            <div class="log-info">[SYSTEM] Cliente NAP v5 (Fixed) iniciado</div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+<script>
+/**
+ * CLIENTE NAP v5 - FIX
+ * Solucionados errores de sintaxis, CSV parsing y lógica GTFS.
+ */
+
+const NAP_BASE = 'https://nap.transportes.gob.es/api';
+let organizations = [];
+let allOrganizations = [];
+let currentZip = null;
+let loadedFiles = {};
+
+const gtfs = {
+  stops: new Map(),
+  routes: new Map(),
+  trips: new Map(),
+  stopTimesByTrip: new Map(),
+  tripsByStop: new Map(),
+  stopNameIndex: new Map(),
+  stopNames: []
+};
+let renfeLoaded = false;
+
+// ========== UTILS & LOGGING ==========
+function log(msg, type = 'info') {
+  const el = document.getElementById('logs');
+  const time = new Date().toLocaleTimeString('es-ES');
+  el.innerHTML += `<div class="log-${type}">[${time}] ${msg}</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+function clearLogs() {
+  document.getElementById('logs').innerHTML = '<div class="log-info">[SYSTEM] Logs limpiados</div>';
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function normalizeStr(str) {
+    // Elimina acentos y pasa a minúsculas para búsquedas
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function setStatus(text, color) {
+  const el = document.getElementById('status');
+  el.textContent = text;
+  el.className = `text-xs px-3 py-1 rounded-full ${color}`;
+}
+
+function setDataStatus(text) {
+  const el = document.getElementById('dataStatus');
+  if (el) el.textContent = text;
+}
+
+function getNapApiKey() {
+  return document.getElementById('napApiKey').value.trim();
+}
+
+function showHttpsNotice() {
+  if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+    log('Abre este HTML desde GitHack (HTTPS) para evitar CORS.', 'warn');
+    setStatus('HTTPS', 'bg-yellow-600');
+  } else {
+    setStatus('Listo', 'bg-green-600');
+  }
+}
+
+function setSearchEnabled(enabled) {
+  const btn = document.getElementById('btnSearch');
+  if (btn) btn.disabled = !enabled;
+}
+
+function resetGtfs() {
+    gtfs.stops.clear();
+    gtfs.routes.clear();
+    gtfs.trips.clear();
+    gtfs.stopTimesByTrip.clear();
+    gtfs.tripsByStop.clear();
+    gtfs.stopNameIndex.clear();
+    gtfs.stopNames = [];
+    renfeLoaded = false;
+    log('Base de datos GTFS reiniciada', 'info');
+}
+
+// ========== API CALLS ==========
+async function napFetch(endpoint, options = {}) {
+  const url = `${NAP_BASE}${endpoint}`;
+  log(`GET ${endpoint}`, 'net');
+
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      'ApiKey': getNapApiKey(),
+      'Accept': 'application/json',
+      ...(options.headers || {})
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  }
+
+  return response;
+}
+
+// ========== CSV PARSER (CORREGIDO) ==========
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 1;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        field += char;
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = true;
+    } else if (char === ',') {
+      row.push(field);
+      field = '';
+    } else if (char === '\n') { // FIX: Corrected line break logic
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = '';
+    } else if (char === '\r') { // FIX: Ignore Carriage Return
+      continue;
+    } else {
+      field += char;
+    }
+  }
+
+  if (field.length || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  if (rows.length === 0) return [];
+  const header = rows.shift().map(h => h.trim()); // Trim headers
+  const objects = [];
+  
+  for (const r of rows) {
+    if (r.length === 1 && r[0] === '') continue; // Skip empty lines
+    const obj = {};
+    // FIX: Ensure logic doesn't crash if row length differs from header
+    header.forEach((key, idx) => {
+      obj[key] = r[idx] ?? '';
+    });
+    objects.push(obj);
+  }
+  return objects;
+}
+
+// ========== GTFS INDEX ==========
+function addStop(stopId, name, lat, lon) {
+  if (!stopId || !name) return;
+  gtfs.stops.set(stopId, { name, lat, lon });
+  
+  const key = normalizeStr(name);
+  if (!gtfs.stopNameIndex.has(key)) gtfs.stopNameIndex.set(key, new Set());
+  gtfs.stopNameIndex.get(key).add(stopId);
+}
+
+function addRoute(routeId, shortName, longName) {
+  if (!routeId) return;
+  gtfs.routes.set(routeId, { shortName, longName });
+}
+
+function addTrip(tripId, routeId, headsign) {
+  if (!tripId) return;
+  gtfs.trips.set(tripId, { routeId, headsign });
+}
+
+function addStopTime(tripId, stopId, seqStr, arr, dep) {
+  const seq = Number(seqStr);
+  if (!tripId || !stopId || Number.isNaN(seq)) return; // FIX: NaN check
+  
+  if (!gtfs.stopTimesByTrip.has(tripId)) gtfs.stopTimesByTrip.set(tripId, []);
+  gtfs.stopTimesByTrip.get(tripId).push({ stopId, seq, arr, dep });
+
+  if (!gtfs.tripsByStop.has(stopId)) gtfs.tripsByStop.set(stopId, new Set());
+  gtfs.tripsByStop.get(stopId).add(tripId);
+}
+
+function finalizeGtfsIndex() {
+  log('Indexando GTFS...', 'info');
+  gtfs.stopTimesByTrip.forEach((list) => {
+    list.sort((a, b) => a.seq - b.seq);
+  });
+  
+  const names = new Set();
+  gtfs.stops.forEach((value) => {
+    names.add(value.name);
+  });
+  
+  gtfs.stopNames = Array.from(names).sort((a, b) => a.localeCompare(b));
+  updateStopDatalist();
+}
+
+function updateStopDatalist() {
+  const list = document.getElementById('stopsList');
+  if (!list) return;
+  list.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  
+  // Limitar a 500 opciones para no colgar el navegador
+  gtfs.stopNames.slice(0, 500).forEach((name) => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    frag.appendChild(opt);
+  });
+  list.appendChild(frag);
+}
+
+function getStopIdsByName(input) {
+  const name = normalizeStr(input.trim());
+  if (!name) return [];
+  
+  const exact = gtfs.stopNameIndex.get(name);
+  if (exact) return Array.from(exact);
+
+  const matches = [];
+  gtfs.stopNameIndex.forEach((ids, stopNameKey) => {
+    if (stopNameKey.includes(name)) {
+      ids.forEach(id => matches.push(id));
+    }
+  });
+  return matches;
+}
+
+function searchTrips(originName, destName) {
+  const originIds = new Set(getStopIdsByName(originName));
+  const destIds = new Set(getStopIdsByName(destName));
+  
+  if (!originIds.size || !destIds.size) return [];
+
+  const candidateTrips = new Set();
+  originIds.forEach((stopId) => {
+    const trips = gtfs.tripsByStop.get(stopId);
+    if (trips) trips.forEach(tripId => candidateTrips.add(tripId));
+  });
+
+  const results = [];
+  candidateTrips.forEach((tripId) => {
+    const stops = gtfs.stopTimesByTrip.get(tripId);
+    if (!stops || !stops.length) return;
+
+    let originStop = null;
+    let destStop = null;
+
+    for (const st of stops) {
+      if (!originStop && originIds.has(st.stopId)) {
+        originStop = st;
+        continue;
+      }
+      if (originStop && destIds.has(st.stopId)) {
+        destStop = st;
+        break;
+      }
+    }
+
+    if (originStop && destStop && originStop.seq < destStop.seq) {
+      const trip = gtfs.trips.get(tripId) || {};
+      const route = gtfs.routes.get(trip.routeId) || {};
+      results.push({
+        tripId,
+        routeId: trip.routeId,
+        routeName: route.shortName || route.longName || 'Ruta',
+        headsign: trip.headsign || '',
+        dep: originStop.dep || originStop.arr || '',
+        arr: destStop.arr || destStop.dep || ''
+      });
+    }
+  });
+
+  results.sort((a, b) => a.dep.localeCompare(b.dep));
+  return results.slice(0, 100);
+}
+
+function renderSearchResults(results, originName, destName) {
+  const container = document.getElementById('searchResults');
+  if (!container) return;
+
+  if (!results.length) {
+    // FIX: Fixed string interpolation characters
+    container.innerHTML = `<div class="text-slate-400">Sin resultados para "${escapeHtml(originName)}" → "${escapeHtml(destName)}".</div>`;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="text-slate-300 mb-2">${results.length} resultados para "${escapeHtml(originName)}" → "${escapeHtml(destName)}"</div>
+    <div class="space-y-2 max-h-[400px] overflow-y-auto">
+      ${results.map(r => `
+        <div class="p-2 bg-slate-800 rounded border border-slate-700 hover:border-blue-500 transition-colors">
+          <div class="flex justify-between items-center mb-1">
+             <div class="text-sm font-bold text-white">${escapeHtml(r.routeName)}</div>
+             <div class="text-xs text-slate-400">${escapeHtml(r.tripId)}</div>
+          </div>
+          <div class="text-xs text-slate-300 mb-1">${r.headsign ? escapeHtml(r.headsign) : 'Sin destino'}</div>
+          <div class="text-xs flex justify-between bg-slate-900 p-2 rounded">
+            <span class="text-green-400"><i class="fa-solid fa-plane-departure mr-1"></i>${escapeHtml(r.dep || '--:--')}</span>
+            <span class="text-slate-500"><i class="fa-solid fa-arrow-right"></i></span>
+            <span class="text-cyan-400"><i class="fa-solid fa-plane-arrival mr-1"></i>${escapeHtml(r.arr || '--:--')}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ========== DATA LOADING ==========
+async function parseGtfsZip(zip, label) {
+  // FIX: Detect actual filenames even if inside folders
+  const findFile = (name) => {
+    const regex = new RegExp(`(^|/)${name}$`, 'i');
+    const match = Object.keys(zip.files).find(key => regex.test(key) && !zip.files[key].dir);
+    return match ? zip.file(match) : null;
+  };
+
+  const filesMap = {
+    'stops.txt': (row) => addStop(row.stop_id, row.stop_name, row.stop_lat, row.stop_lon),
+    'routes.txt': (row) => addRoute(row.route_id, row.route_short_name, row.route_long_name),
+    'trips.txt': (row) => addTrip(row.trip_id, row.route_id, row.trip_headsign),
+    'stop_times.txt': (row) => addStopTime(row.trip_id, row.stop_id, row.stop_sequence, row.arrival_time, row.departure_time)
+  };
+
+  for (const [fileName, handler] of Object.entries(filesMap)) {
+    const file = findFile(fileName);
+    if (!file) continue;
+    
+    log(`Procesando ${label}: ${fileName}`, 'info');
+    const text = await file.async('string');
+    const rows = parseCsv(text);
+    rows.forEach(handler);
+  }
+}
+
+async function processZipBlob(blob, label, openViewer) {
+  try {
+    const zip = await JSZip.loadAsync(blob);
+    await parseGtfsZip(zip, label);
+    if (openViewer) {
+      await openZipViewer(zip, label);
+    }
+  } catch (e) {
+    log(`Error leyendo ZIP: ${e.message}`, 'error');
+    throw e;
+  }
+}
+
+async function autoLoadRenfe() {
+  setSearchEnabled(false);
+  setDataStatus('Datos Renfe: cargando...');
+  log('Cargando datos de Renfe...', 'net');
+  resetGtfs();
+
+  try {
+    if (!getNapApiKey()) {
+      log('API Key vacía. Introduce la clave y recarga.', 'error');
+      setDataStatus('Datos Renfe: API Key');
+      return;
+    }
+    const orgResponse = await napFetch('/Organizacion');
+    const orgs = await orgResponse.json();
+    if (Array.isArray(orgs)) {
+      allOrganizations = orgs.sort((a, b) => (a.Nombre || '').localeCompare(b.Nombre || ''));
+      organizations = [...allOrganizations];
+      renderOrganizations();
+    }
+
+    const renfe = (orgs || []).find(o => (o.Nombre || '').toLowerCase().includes('renfe'));
+    if (!renfe) {
+      log('No se encontró organización Renfe.', 'warn');
+      setDataStatus('Datos Renfe: no encontrado');
+      return;
+    }
+
+    log(`Renfe encontrado (ID: ${renfe.Id})`, 'success');
+
+    const dsResponse = await napFetch(`/Fichero/GetListByOrganizacion/${renfe.Id}`);
+    const datasets = await dsResponse.json();
+    
+    // Obtener todos los IDs de ficheros
+    const fileIds = [];
+    (datasets || []).forEach(ds => {
+       if (ds.Ficheros) ds.Ficheros.forEach(f => fileIds.push(f.Id));
+    });
+
+    if (!fileIds.length) {
+      log('Renfe no tiene ficheros disponibles.', 'warn');
+      setDataStatus('Datos Renfe: sin ficheros');
+      return;
+    }
+
+    // Cargar solo el primero para demo (Renfe suele dividir por núcleos, cargar todo bloquea el navegador)
+    const filesToLoad = fileIds.slice(0, 2); // Limite a 2 para evitar crash
+    log(`Descargando ${filesToLoad.length} ficheros de Renfe...`, 'info');
+
+    let count = 0;
+    for (const fileId of filesToLoad) {
+      count += 1;
+      log(`Descargando fichero ${count}/${filesToLoad.length} (ID: ${fileId})`, 'net');
+      const linkResponse = await napFetch(`/Fichero/downloadLink/${fileId}`);
+      let downloadUrl = await linkResponse.text();
+      downloadUrl = downloadUrl.replace(/^"|"$/g, '').trim(); // FIX: Strip quotes
+
+      const fileResponse = await fetch(downloadUrl);
+      if (!fileResponse.ok) {
+        log(`Error descargando fichero ${fileId}: ${fileResponse.status}`, 'warn');
+        continue;
+      }
+      const blob = await fileResponse.blob();
+      await processZipBlob(blob, `Renfe ${fileId}`, false);
+    }
+
+    finalizeGtfsIndex();
+    renfeLoaded = true;
+    setDataStatus(`Datos Renfe: ${gtfs.stops.size} paradas, ${gtfs.trips.size} viajes`);
+    log('Datos de Renfe cargados y listos para búsquedas.', 'success');
+    setSearchEnabled(true);
+  } catch (e) {
+    log(`Error cargando Renfe: ${e.message}`, 'error');
+    setDataStatus('Datos Renfe: error');
+    setSearchEnabled(false);
+  }
+}
+
+// ========== UI ACTIONS ==========
+async function testConnection() {
+  const btn = document.getElementById('btnTest');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+  log('Probando conexión con NAP API...', 'net');
+
+  try {
+    const response = await napFetch('/TipoTransporte');
+    const data = await response.json();
+    log(`Conexión exitosa! ${data.length} tipos de transporte`, 'success');
+    setStatus('Conectado', 'bg-green-600');
+  } catch (e) {
+    log(`Error: ${e.message}`, 'error');
+    if (e.message.includes('Failed to fetch')) {
+      log('Posible CORS. Abre el HTML desde GitHack (HTTPS).', 'error');
+    }
+    setStatus('Error', 'bg-red-600');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-satellite-dish"></i> Test';
+  }
+}
+
+async function loadOrganizations() {
+  const btn = document.getElementById('btnConnect');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cargando...';
+  setStatus('Cargando...', 'bg-yellow-600');
+
+  try {
+    const response = await napFetch('/Organizacion');
+    const data = await response.json();
+
+    if (Array.isArray(data)) {
+      allOrganizations = data.sort((a, b) => (a.Nombre || '').localeCompare(b.Nombre || ''));
+      organizations = [...allOrganizations];
+      renderOrganizations();
+      log(`${data.length} organizaciones cargadas`, 'success');
+      setStatus('Conectado', 'bg-green-600');
+    }
+  } catch (e) {
+    log(`Error: ${e.message}`, 'error');
+    setStatus('Error', 'bg-red-600');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-plug"></i> Conectar';
+  }
+}
+
+function renderOrganizations() {
+  const container = document.getElementById('orgList');
+  document.getElementById('orgCount').textContent = organizations.length;
+
+  if (organizations.length === 0) {
+    container.innerHTML = '<div class="p-4 text-center text-slate-500 text-xs">No encontrado</div>';
+    return;
+  }
+
+  container.innerHTML = organizations.map(org => `
+    <div class="org-item p-3 border-l-4 border-transparent" data-id="${org.Id}" data-name="${encodeURIComponent(org.Nombre || '')}">
+      <div class="font-medium text-sm truncate">${escapeHtml(org.Nombre || 'Sin nombre')}</div>
+      <div class="text-[10px] text-slate-500 font-mono">ID: ${org.Id}</div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.org-item').forEach(el => {
+    el.onclick = () => selectOrganization(el.dataset.id, decodeURIComponent(el.dataset.name || ''), el);
+  });
+}
+
+document.getElementById('searchOrg').addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase();
+  organizations = allOrganizations.filter(o =>
+    (o.Nombre || '').toLowerCase().includes(term)
+  );
+  renderOrganizations();
+});
+
+// ========== DATASETS ==========
+async function selectOrganization(orgId, orgName, element) {
+  if (!orgId) return;
+
+  document.querySelectorAll('.org-item').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+
+  const panel = document.getElementById('datasetsPanel');
+  panel.classList.remove('hidden');
+  document.getElementById('orgTitle').innerHTML = `<i class="fa-solid fa-building mr-2 text-purple-400"></i>${escapeHtml(orgName)}`;
+
+  const grid = document.getElementById('datasetGrid');
+  grid.innerHTML = '<div class="col-span-2 text-center py-8 text-slate-500"><i class="fa-solid fa-spinner fa-spin text-2xl"></i><p class="mt-2 text-xs">Cargando datasets...</p></div>';
+
+  try {
+    const response = await napFetch(`/Fichero/GetListByOrganizacion/${orgId}`);
+    const data = await response.json();
+    renderDatasets(data);
+  } catch (e) {
+    log(`Error: ${e.message}`, 'error');
+    grid.innerHTML = `<div class="col-span-2 text-center py-8 text-red-400"><p class="mt-2 text-xs">Error: ${e.message}</p></div>`;
+  }
+}
+
+function renderDatasets(datasets) {
+  const grid = document.getElementById('datasetGrid');
+
+  if (!datasets || datasets.length === 0) {
+    grid.innerHTML = '<div class="col-span-2 text-center py-8 text-slate-500 text-xs">Sin datasets públicos</div>';
+    return;
+  }
+
+  grid.innerHTML = datasets.map(ds => {
+    const fileCount = ds.Ficheros ? ds.Ficheros.length : 0;
+    const fileId = ds.Ficheros && ds.Ficheros[0] ? ds.Ficheros[0].Id : null;
+    const name = ds.Nombre || 'Sin nombre';
+
+    return `
+      <div class="dataset-card bg-slate-800 border border-slate-700 rounded-lg p-4"
+           data-id="${ds.Id}">
+        <div class="font-medium text-sm mb-2 line-clamp-2">${escapeHtml(name)}</div>
+        <div class="flex justify-between items-center text-xs mt-3">
+          <span class="text-slate-500 font-mono">ID: ${ds.Id}</span>
+          <span class="text-purple-400"><i class="fa-solid fa-file-zipper mr-1"></i>${fileCount}</span>
+        </div>
+        ${fileId ? `<button data-file-id="${fileId}" data-name="${encodeURIComponent(name)}"
+                           class="btn-success w-full mt-3 py-1.5 rounded text-xs font-bold download-btn">
+          <i class="fa-solid fa-download mr-1"></i> Descargar GTFS
+        </button>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      downloadDataset(btn.dataset.fileId, decodeURIComponent(btn.dataset.name));
+    });
+  });
+}
+
+function closeDatasetsPanel() {
+  document.getElementById('datasetsPanel').classList.add('hidden');
+  document.querySelectorAll('.org-item').forEach(el => el.classList.remove('active'));
+}
+
+// ========== DOWNLOAD & VIEW GTFS ==========
+async function downloadDataset(fileId, name) {
+  log(`Iniciando descarga: ${name}`, 'net');
+  resetGtfs();
+
+  try {
+    const linkResponse = await napFetch(`/Fichero/downloadLink/${fileId}`);
+    let downloadUrl = await linkResponse.text();
+    downloadUrl = downloadUrl.replace(/^"|"$/g, '').trim();
+
+    const fileResponse = await fetch(downloadUrl);
+    if (!fileResponse.ok) throw new Error(`Download failed: ${fileResponse.status}`);
+
+    const blob = await fileResponse.blob();
+    log(`Descargado ${(blob.size / 1024 / 1024).toFixed(2)} MB`, 'success');
+
+    await processZipBlob(blob, name, true);
+    finalizeGtfsIndex();
+    
+    renfeLoaded = true;
+    setSearchEnabled(true);
+    setDataStatus(`Datos: ${gtfs.stops.size} paradas, ${gtfs.trips.size} viajes`);
+
+  } catch (e) {
+    log(`Error: ${e.message}`, 'error');
+    alert(`Error descargando: ${e.message}`);
+  }
+}
+
+async function openZipViewer(zip, name) {
+  try {
+    currentZip = zip;
+    loadedFiles = {};
+
+    document.getElementById('fileViewerPanel').classList.remove('hidden');
+    document.getElementById('fileViewerTitle').innerHTML = `<i class="fa-solid fa-file-zipper mr-2 text-green-400"></i>${escapeHtml(name)}`;
+
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = '';
+
+    // FIX: List all files properly using JSZip API
+    const files = [];
+    currentZip.forEach((path, entry) => {
+      if (!entry.dir) files.push(path);
+    });
+
+    const priority = ['agency.txt', 'stops.txt', 'routes.txt', 'trips.txt', 'stop_times.txt'];
+    files.sort((a, b) => {
+      const aIdx = priority.indexOf(a.split('/').pop()); // Check filename only
+      const bIdx = priority.indexOf(b.split('/').pop());
+      if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+      if (aIdx !== -1) return -1;
+      if (bIdx !== -1) return 1;
+      return a.localeCompare(b);
+    });
+
+    files.forEach(path => {
+      const div = document.createElement('div');
+      div.className = 'file-item p-2 text-xs cursor-pointer truncate';
+      div.innerHTML = `<i class="fa-solid fa-file-lines mr-2 opacity-50"></i>${path}`;
+      div.onclick = () => viewFile(path, div);
+      fileList.appendChild(div);
+    });
+
+    // Auto open first txt
+    const firstTxt = files.find(f => f.endsWith('.txt'));
+    if (firstTxt) {
+        setTimeout(() => {
+            const el = fileList.querySelector('.file-item');
+            if (el) viewFile(firstTxt, el);
+        }, 100);
+    }
+
+  } catch (e) {
+    log(`Error abriendo visor ZIP: ${e.message}`, 'error');
+  }
+}
+
+async function viewFile(path, element) {
+  document.querySelectorAll('.file-item').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+  const content = document.getElementById('fileContent');
+  content.textContent = 'Cargando...';
+
+  try {
+    if (!loadedFiles[path]) {
+      const text = await currentZip.file(path).async('string');
+      const MAX = 100000;
+      loadedFiles[path] = text.length > MAX
+        ? text.substring(0, MAX) + '\n\n... [TRUNCADO - archivo muy grande] ...'
+        : text;
+    }
+    content.textContent = loadedFiles[path];
+  } catch (e) {
+    content.textContent = `Error: ${e.message}`;
+  }
+}
+
+function closeFileViewer() {
+  document.getElementById('fileViewerPanel').classList.add('hidden');
+}
+
+// ========== SEARCH ==========
+function setupSearch() {
+  const btn = document.getElementById('btnSearch');
+  const originInput = document.getElementById('originInput');
+  const destInput = document.getElementById('destInput');
+
+  const run = () => {
+    if (!renfeLoaded) {
+      log('Datos GTFS no cargados. Conecta y descarga un dataset.', 'warn');
+      return;
+    }
+    const origin = originInput.value.trim();
+    const dest = destInput.value.trim();
+    if (!origin || !dest) {
+      renderSearchResults([], origin, dest);
+      return;
+    }
+    const results = searchTrips(origin, dest);
+    renderSearchResults(results, origin, dest);
+  };
+
+  if(btn) btn.addEventListener('click', run);
+  if(originInput) originInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') run(); });
+  if(destInput) destInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') run(); });
+}
+
+// ========== INIT ==========
+window.addEventListener('DOMContentLoaded', () => {
+  showHttpsNotice();
+  setupSearch();
+  autoLoadRenfe();
+});
+</script>
+</body>
+</html>
