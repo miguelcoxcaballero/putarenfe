@@ -37,6 +37,14 @@
       position: relative
     }
 
+    .renfe-brand-logo {
+      display: block;
+      width: 190px;
+      height: auto;
+      max-width: 100%;
+      color: var(--renfe-purple)
+    }
+
     .section-titulo {
       padding-left: .7rem
     }
@@ -432,6 +440,186 @@
       max-height: 90vh
     }
 
+    .modal-adif-timetable {
+      background: #fff;
+      border-radius: 20px;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10020;
+      padding: 1rem;
+      width: min(96vw, 1100px);
+      max-height: 92vh;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, .24);
+      display: none
+    }
+
+    .adif-modal-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: .75rem 0 1rem;
+      border-bottom: 1px solid #dee7ed
+    }
+
+    .adif-modal-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0d0d0d
+    }
+
+    .adif-modal-meta {
+      font-size: .82rem;
+      color: #666
+    }
+
+    .adif-filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .adif-filter-btn {
+      border: 1px solid #333;
+      background: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: .9rem;
+      cursor: pointer
+    }
+
+    .adif-filter-btn.selected {
+      background: var(--renfe-purple);
+      border-color: var(--renfe-purple);
+      color: #fff
+    }
+
+    .adif-modal-body {
+      overflow: auto;
+      max-height: calc(92vh - 10rem);
+      padding-top: 1rem
+    }
+
+    .adif-loading,
+    .adif-empty {
+      padding: 1rem 0;
+      color: #666
+    }
+
+    .adif-schedule-section+.adif-schedule-section {
+      margin-top: 1.25rem
+    }
+
+    .adif-schedule-heading {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #0d0d0d;
+      margin-bottom: .5rem
+    }
+
+    .adif-schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed
+    }
+
+    .adif-schedule-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #f8f9fa;
+      font-size: .74rem;
+      color: #6c757d;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      padding: 10px 8px;
+      border-bottom: 2px solid #dee2e6
+    }
+
+    .adif-schedule-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top
+    }
+
+    .adif-col-time {
+      width: 110px
+    }
+
+    .adif-col-track {
+      width: 70px;
+      text-align: center
+    }
+
+    .adif-time-main {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #111
+    }
+
+    .adif-time-sub,
+    .adif-dest-sub,
+    .adif-train-op {
+      display: block;
+      font-size: .78rem;
+      color: #777;
+      line-height: 1.25
+    }
+
+    .adif-dest-main {
+      font-weight: 600;
+      color: #222
+    }
+
+    .adif-train-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.25rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #efefef;
+      color: #111;
+      font-weight: 700;
+      font-size: .82rem
+    }
+
+    .adif-track-live {
+      display: inline-block;
+      min-width: 2rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: #fff4d1;
+      color: #7a5a00;
+      font-weight: 700
+    }
+
+    .adif-observation {
+      background: #faf7ef
+    }
+
+    .adif-observation-text {
+      font-size: .82rem;
+      color: #5f5330
+    }
+
+    @media(max-width:768px) {
+      .modal-adif-timetable {
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        padding: .85rem
+      }
+
+      .adif-modal-body {
+        max-height: calc(100vh - 10.5rem)
+      }
+    }
+
     .section-header-modal {
       width: 100%
     }
@@ -790,6 +978,21 @@
 </head>
 
 <body>
+  <svg id="renfe-brand-symbols" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="renfe-brand-mark" viewBox="0 0 2932 1440">
+      <g transform="translate(0,1440) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+        <path d="M24775 9959 c-187 -25 -380 -93 -565 -200 -369 -211 -606 -537 -744 -1024 -48 -171 -54 -204 -266 -1465 -82 -492 -164 -976 -181 -1075 -102 -598 -144 -762 -246 -974 -50 -102 -65 -124 -152 -211 -81 -82 -110 -104 -187 -142 -50 -25 -125 -54 -166 -63 l-75 -18 -40 -81 c-67 -135 -70 -126 39 -126 229 1 478 60 681 161 354 177 625 481 780 874 106 269 135 404 297 1370 107 633 122 714 155 801 69 183 208 286 410 302 l80 7 56 100 c31 55 60 110 64 123 l6 22 -270 0 c-180 0 -271 3 -271 10 0 6 12 88 26 183 63 423 121 646 222 842 67 130 184 248 304 305 54 26 119 48 172 58 l85 16 51 99 c29 54 49 101 45 105 -11 11 -232 11 -310 1z"/>
+        <path d="M9771 9365 c-269 -59 -541 -217 -666 -386 -81 -110 -101 -165 -153 -414 l-47 -230 -141 -3 -140 -3 -45 -121 c-24 -66 -45 -125 -47 -129 -2 -5 69 -9 157 -9 159 0 161 0 161 -22 0 -21 -88 -480 -187 -968 -72 -359 -71 -520 3 -676 113 -240 492 -340 1019 -270 61 8 133 20 160 26 l51 11 52 105 c65 130 66 139 10 130 -24 -3 -97 -9 -163 -12 -98 -6 -131 -4 -180 10 -117 34 -176 97 -202 219 -21 102 -14 177 56 532 33 171 81 418 106 550 25 132 52 267 59 300 l12 60 320 2 319 2 52 133 c29 73 53 134 53 136 0 1 -155 2 -345 2 -190 0 -345 2 -345 5 0 3 16 90 36 193 67 356 114 598 137 720 l24 122 -31 -1 c-17 0 -60 -7 -95 -14z"/>
+        <path d="M3475 8364 c-327 -32 -599 -83 -764 -144 -202 -74 -276 -142 -325 -300 -22 -68 -129 -597 -221 -1085 -20 -104 -53 -280 -75 -390 -21 -110 -62 -319 -90 -465 -28 -146 -73 -377 -100 -515 -27 -137 -61 -313 -75 -390 -15 -77 -29 -150 -32 -163 l-5 -22 398 2 398 3 28 145 c15 80 50 262 78 405 28 143 71 360 95 483 24 123 45 225 47 227 1 2 60 -5 130 -15 480 -70 1001 0 1338 182 359 192 589 572 650 1070 17 131 8 385 -15 458 -59 190 -158 307 -328 390 -103 49 -187 75 -352 106 -70 13 -161 17 -415 19 -179 2 -343 1 -365 -1z m405 -293 c154 -48 250 -157 279 -315 43 -231 -37 -664 -171 -936 -56 -113 -70 -132 -157 -220 -108 -108 -183 -154 -316 -192 -71 -20 -102 -23 -275 -23 -154 0 -211 4 -272 18 -51 12 -78 23 -78 32 0 8 27 155 61 327 33 172 67 349 75 393 8 44 47 242 85 440 39 198 73 375 76 393 5 29 11 34 69 52 60 18 185 44 264 54 19 2 94 3 165 1 97 -2 147 -8 195 -24z"/>
+        <path d="M11460 8351 c-218 -24 -510 -76 -525 -93 -7 -8 -51 -100 -81 -170 -21 -49 -29 -78 -21 -78 7 0 68 9 137 20 603 95 997 98 1173 9 69 -35 102 -66 133 -121 26 -48 29 -62 29 -143 0 -49 -4 -102 -8 -117 l-7 -28 -288 0 c-394 0 -610 -21 -862 -85 -390 -98 -640 -284 -750 -559 -82 -204 -88 -393 -18 -536 82 -168 271 -268 598 -317 140 -21 667 -24 880 -4 74 6 259 23 410 36 340 31 543 54 553 64 4 4 32 135 63 292 237 1217 233 1196 216 1318 -18 129 -54 204 -138 287 -109 110 -245 169 -494 215 -166 31 -755 37 -1000 10z m780 -1001 c0 -17 -57 -307 -143 -724 l-33 -160 -69 -23 c-160 -54 -429 -77 -572 -50 -144 28 -237 85 -288 178 -26 47 -30 66 -33 155 -12 301 168 532 470 604 130 31 207 37 446 39 214 1 222 0 222 -19z"/>
+        <path d="M16180 8364 c-823 -37 -1184 -182 -1290 -517 -18 -60 -43 -181 -94 -472 -48 -274 -206 -1150 -212 -1178 l-6 -27 404 2 403 3 27 155 c14 85 56 322 93 525 36 204 86 484 111 622 47 265 59 311 99 379 29 50 113 128 168 155 116 60 374 87 644 69 151 -9 268 -22 330 -35 19 -5 31 9 85 102 75 128 92 163 81 174 -24 23 -617 53 -843 43z"/>
+        <path d="M18190 8355 c-314 -40 -582 -129 -763 -254 -99 -69 -222 -197 -292 -305 -108 -165 -200 -423 -241 -672 -26 -156 -26 -435 0 -524 96 -330 376 -465 1006 -486 316 -11 707 20 980 78 87 18 110 26 131 50 26 27 110 180 123 225 7 20 5 21 -27 12 -78 -21 -333 -58 -480 -70 -219 -16 -515 -7 -625 20 -239 60 -343 183 -359 427 -3 50 -2 93 3 96 5 3 128 1 274 -5 516 -19 902 25 1149 131 308 132 471 357 488 672 18 338 -167 515 -622 597 -119 21 -596 26 -745 8z m474 -265 c121 -47 186 -151 186 -298 0 -96 -20 -175 -66 -261 -41 -78 -62 -103 -135 -162 -154 -125 -361 -168 -749 -155 -112 4 -206 9 -208 11 -7 7 40 216 68 304 56 173 121 291 213 388 138 147 291 205 517 199 91 -2 127 -7 174 -26z"/>
+        <path d="M26095 8364 c-16 -2 -66 -9 -110 -15 -284 -37 -559 -132 -733 -251 -73 -50 -189 -165 -254 -253 -71 -95 -165 -283 -206 -415 -91 -290 -117 -636 -62 -838 55 -204 213 -347 452 -412 339 -91 1016 -90 1499 4 155 30 153 29 203 109 53 86 102 184 95 192 -3 2 -21 0 -40 -5 -65 -19 -324 -58 -467 -71 -183 -15 -518 -7 -622 16 -165 36 -295 132 -339 249 -36 97 -53 281 -26 281 6 0 132 -4 280 -8 478 -14 839 21 1080 104 154 54 337 177 410 277 46 63 99 174 119 247 9 33 19 112 22 175 6 105 4 122 -20 195 -71 222 -235 333 -587 396 -104 18 -168 22 -394 24 -148 2 -283 1 -300 -1z m336 -258 c166 -36 248 -131 257 -301 8 -154 -42 -280 -158 -395 -160 -160 -357 -209 -789 -196 -118 3 -216 8 -218 10 -7 7 47 232 79 328 110 334 306 523 583 561 68 9 184 6 246 -7z"/>
+        <path d="M21055 8340 c-121 -4 -376 -8 -567 -9 l-347 -1 -10 -52 c-12 -60 -49 -267 -115 -638 -24 -140 -68 -385 -96 -545 -28 -159 -58 -326 -65 -370 -7 -44 -32 -184 -54 -312 -23 -127 -41 -234 -41 -237 0 -3 179 -6 398 -6 l398 0 12 73 c8 39 22 119 32 177 10 58 28 159 39 225 25 143 114 657 170 985 22 129 45 272 52 317 7 45 15 87 18 92 10 16 431 32 546 21 271 -26 394 -143 412 -390 7 -100 -1 -149 -198 -1233 -21 -120 -39 -229 -39 -243 l0 -24 394 0 393 0 7 38 c3 20 13 75 22 122 8 47 42 240 74 430 33 190 69 392 79 450 62 332 79 543 52 660 -7 30 -30 91 -51 135 -83 173 -241 273 -513 322 -106 19 -625 25 -1002 13z"/>
+        <path d="M5577 8298 c-3 -18 -67 -337 -142 -708 -151 -752 -163 -827 -147 -947 38 -280 205 -421 582 -492 333 -62 912 -52 1313 24 273 52 502 139 587 224 90 90 95 107 225 776 47 242 117 598 155 791 39 194 70 355 70 359 0 13 -431 -3 -505 -18 -208 -45 -295 -121 -349 -307 -9 -30 -36 -154 -60 -275 -25 -121 -77 -377 -116 -570 -39 -192 -78 -377 -86 -409 -45 -174 -156 -285 -332 -332 -84 -22 -235 -29 -332 -15 -169 25 -258 79 -312 188 -31 63 -33 76 -36 183 -3 110 0 132 72 490 97 483 206 1043 206 1058 0 9 -99 12 -394 12 l-393 0 -6 -32z"/>
+      </g>
+    </symbol>
+  </svg>
   <div id="map"></div>
 
   <div class="container panel-lineas">
@@ -797,8 +1000,11 @@
       <section class="section-header">
         <div class="row d-flex align-items-center justify-content-between h-100" style="min-height:30px">
           <div class="col d-flex align-items-center" style="text-align:left">
-            <div role="button"><img src="https://tiempo-real.largorecorrido.renfe.com/imgs/lyrbutton/renfe.svg"
-                alt="renfe"></div>
+                        <div role="button" aria-label="Renfe">
+              <svg class="renfe-brand-logo" viewBox="0 0 2932 1440" role="img" aria-label="Renfe">
+                <use href="#renfe-brand-mark" xlink:href="#renfe-brand-mark"></use>
+              </svg>
+            </div>
           </div>
           <div class="col d-flex align-items-center justify-content-end gap-4">
             <div role="button" class="button-info d-flex align-items-center justify-content-center" tabindex="0"
@@ -1140,8 +1346,11 @@
       <section class="section-header-movil">
         <div class="row d-flex align-items-center justify-content-between">
           <div class="col d-flex align-items-center" style="text-align:left">
-            <div role="button"><img src="https://tiempo-real.largorecorrido.renfe.com/imgs/lyrbutton/renfe.svg"
-                alt="renfe"></div>
+                        <div role="button" aria-label="Renfe">
+              <svg class="renfe-brand-logo" viewBox="0 0 2932 1440" role="img" aria-label="Renfe">
+                <use href="#renfe-brand-mark" xlink:href="#renfe-brand-mark"></use>
+              </svg>
+            </div>
           </div>
           <div class="col d-flex align-items-center justify-content-end gap-4">
             <div role="button" class="button-info d-flex align-items-center justify-content-center"
@@ -1166,8 +1375,11 @@
       <section class="section-header-movil">
         <div class="row d-flex align-items-center justify-content-between">
           <div class="col d-flex align-items-center" style="text-align:left">
-            <div role="button"><img src="https://tiempo-real.largorecorrido.renfe.com/imgs/lyrbutton/renfe.svg"
-                alt="renfe"></div>
+                        <div role="button" aria-label="Renfe">
+              <svg class="renfe-brand-logo" viewBox="0 0 2932 1440" role="img" aria-label="Renfe">
+                <use href="#renfe-brand-mark" xlink:href="#renfe-brand-mark"></use>
+              </svg>
+            </div>
           </div>
           <div class="col d-flex align-items-center justify-content-end gap-4">
             <div role="button" class="button-info d-flex align-items-center justify-content-center"
@@ -1199,6 +1411,37 @@
     <div class="d-flex flex-column modal-tren-content"></div>
   </div>
   <div class="modal-infopopup modal-info-movil modal-estacion-movil" style="display:none"></div>
+
+  <div class="modal-adif-timetable">
+    <div class="d-flex flex-column h-100">
+      <section class="section-header-modal">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <div class="title-menu">Horarios ADIF</div>
+            <div class="adif-modal-title" id="adifTimetableStationTitle">-</div>
+            <div class="adif-modal-meta" id="adifTimetableMeta"></div>
+          </div>
+          <div role="button" class="button-close-modal" onclick="closeModal('.modal-adif-timetable')"><img
+              src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/close.svg" alt="Cerrar"></div>
+        </div>
+      </section>
+      <section class="adif-modal-toolbar">
+        <div class="adif-filter-group">
+          <button class="adif-filter-btn selected" type="button" data-adif-filter="all">Todos</button>
+          <button class="adif-filter-btn" type="button" data-adif-filter="cercanias">Cercanías</button>
+          <button class="adif-filter-btn" type="button" data-adif-filter="avldmd">Larga / Media / AV</button>
+        </div>
+        <div class="d-flex gap-2">
+          <div class="btntool" role="button" onclick="refreshAdifTimetable()">
+            <div class="text-btntool"><img
+                src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/refreshtraindata.svg" alt="Refrescar"><span>Refrescar</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="adif-modal-body" id="adifTimetableBody"></div>
+    </div>
+  </div>
 
   <div class="controls-right">
     <div class="ol-control ol-tool"><button id="btn-refreshtrain" title="Refrescar trenes" onclick="this.blur()"><img
@@ -6184,6 +6427,7 @@
   <script>
     const B = "https://tiempo-real.largorecorrido.renfe.com";
     const B_CERCA = "https://tiempo-real.renfe.com";
+    const B_ADIF = "https://www.adif.es";
     const DATA_PROXY_STRATEGIES = [
       {
         name: "AllOriginsRaw",
@@ -6219,8 +6463,16 @@
     const CACHE_TTL_STATIONS = 7 * 24 * 60 * 60 * 1000;
     const CACHE_TTL_TRAINS = 45 * 1000;
     const CACHE_TTL_ROUTES = 5 * 60 * 1000;
+    const CACHE_TTL_ADIF_PAGE = 24 * 60 * 60 * 1000;
+    const CACHE_TTL_ADIF_TIMETABLE = 60 * 1000;
+    const ADIF_STATION_URL_OVERRIDES = {
+      "71801": "https://www.adif.es/w/71801-barcelona-sants",
+      "65000": "https://www.adif.es/w/65000-val%C3%A8ncia-est.-nord"
+    };
     let translations = { es: { lineasPanel: { capas: "Informacion de capas", estaciones: "Estaciones" }, popup: { tren: { cerrar: "Cerrar", flecha: "->", trenaccesible: "Tren accesible", antparada: "Parada anterior", proxparada: "Proxima parada", llegadaprev: "Llegada prevista", varhoraria: "Variacion horaria" }, estacion: { estacion: "Estacion", cerrar: "Cerrar", accesible: "Estacion accesible", correspondencias: "Correspondencias" } }, leyenda: { capas: "Capas", cerrar: "Cerrar", trenescluster: "Agrupacion de trenes", trenes: "Trenes en tiempo real", estaciones: "Estaciones", accesible: "Accesible", capasbase: "Capas base del mapa", estandar: "Estandar", satelite: "Satelite" }, tools: { refreshtrain: "Refrescar trenes", geolocalizar: "Geolocalizar", pausar: "Pausar trenes", sincobertura: "Sin cobertura" }, js: { estaccercana: "Estacion mas cercana", noestaccercana: "No hay estacion a menos de 100 km.", enhora: "En hora" } } };
     let currentLang = "es", pauseTrains = false, ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), dataTrenes, popuptren, popupestacion, seguirTren;
+    let adifTimetableState = { stationCode: null, stationName: "", filter: "all", rowsByType: null, meta: null };
+    let adifTimetableRequestSeq = 0;
     function t(e) { let o = translations[currentLang]; for (var p of e.split(".")) { if (!(o = o?.[p])) return e } return o }
     function applyTranslations() { document.querySelectorAll("[i18n]").forEach(a => { let o = t(a.getAttribute("i18n")); var e = a.getAttribute("i18n-attr"); e ? e.split(",").map(s => s.trim()).forEach(s => a.setAttribute(s, o)) : a.textContent = o }) }
     function buildRenfeUrl(path, baseUrl = B) { return /^https?:\/\//i.test(path) ? path : baseUrl + path }
@@ -6266,6 +6518,18 @@
       proxies.forEach(proxy => attempts.push({ name: proxy.name, url: proxy.build(targetUrl), read: proxy.read }));
       return attempts;
     }
+    function getAttemptListForTarget(targetUrl, directOriginUrl) {
+      const attempts = [];
+      if (directOriginUrl) {
+        try {
+          if (location.origin === new URL(directOriginUrl).origin) attempts.push({ name: "directo", url: targetUrl, read: response => response.text() });
+        } catch { }
+      }
+      const preferred = getPreferredProxyName();
+      const proxies = [...DATA_PROXY_STRATEGIES].sort((a, b) => a.name === preferred ? -1 : b.name === preferred ? 1 : 0);
+      proxies.forEach(proxy => attempts.push({ name: proxy.name, url: proxy.build(targetUrl), read: proxy.read }));
+      return attempts;
+    }
     async function fetchText(url, reader, timeoutMs = 8000) {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -6305,12 +6569,355 @@
       }
       throw new Error(errors.join(" | "));
     }
+    async function fetchRemoteText(targetUrl, options = {}) {
+      const timeoutMs = options.timeoutMs || 12000;
+      const directOriginUrl = options.directOriginUrl || null;
+      const attempts = getAttemptListForTarget(addCacheBust(targetUrl), directOriginUrl);
+      const errors = [];
+      for (const attempt of attempts) {
+        try {
+          const text = await fetchText(attempt.url, attempt.read, timeoutMs);
+          setPreferredProxyName(attempt.name);
+          return text;
+        } catch (error) {
+          errors.push(`${attempt.name}: ${error.message}`);
+        }
+      }
+      throw new Error(errors.join(" | "));
+    }
+    async function fetchRemoteJsonUrl(targetUrl, options = {}) {
+      const text = await fetchRemoteText(targetUrl, options);
+      return JSON.parse(text);
+    }
     function notifyLoadError(key, message, error) {
       const flag = `__${key}ErrorShown`;
       console.error(message, error);
       if (!window[flag]) {
         window[flag] = true;
         showPopupMessage(message);
+      }
+    }
+    function repairMojibake(value) {
+      const text = String(value || "").trim();
+      if (!text) return "";
+      if (!/[ÃÂâ€]/.test(text)) return text;
+      try { return decodeURIComponent(escape(text)) } catch { return text }
+    }
+    function stripHtml(value) {
+      return String(value || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    }
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    }
+    function normalizeAdifName(value) {
+      return repairMojibake(String(value || "").trim()).replace(/\s+/g, " ");
+    }
+    function slugifyAdifName(value) {
+      let text = normalizeAdifName(value).toLowerCase();
+      if (!text) return "";
+      text = text.replace(/\bpuerta\b/g, "pta");
+      text = text.replace(/\bcercan[ií]as\b/g, "c.");
+      text = text.replace(/\bestaci[oó]n\b/g, "est.");
+      text = text.replace(/\bestaci[oó]\b/g, "est.");
+      text = text.replace(/\bde llobregat\b/g, "ll.");
+      text = text.replace(/l['’]/g, "l-");
+      text = text.replace(/d['’]/g, "d");
+      text = text.replace(/[\/(),]/g, " ");
+      text = text.replace(/['’]/g, "");
+      text = text.replace(/\s+/g, "-");
+      text = text.replace(/[^a-z0-9áéíóúàèìòùüïçñ.\-]/g, "");
+      text = text.replace(/-+/g, "-").replace(/^-|-$/g, "");
+      return text;
+    }
+    function slugifyAsciiAdifName(value) {
+      return slugifyAdifName(normalizeAdifName(value).normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+    }
+    function getAdifNameVariants(name) {
+      const raw = normalizeAdifName(name);
+      if (!raw) return [];
+      const variants = new Set([raw]);
+      variants.add(raw.replace(/\bEstación\b/gi, "Est."));
+      variants.add(raw.replace(/\bEstació\b/gi, "Est."));
+      variants.add(raw.replace(/\bPuerta\b/gi, "Pta"));
+      variants.add(raw.replace(/\bCercanías\b/gi, "C."));
+      variants.add(raw.replace(/\bCercanias\b/gi, "C."));
+      return [...variants];
+    }
+    function buildAdifPathCandidate(code, slug) {
+      if (!slug) return `${B_ADIF}/w/${encodeURIComponent(code)}`;
+      return `${B_ADIF}/w/${encodeURIComponent(code)}-${encodeURIComponent(slug)}`;
+    }
+    function getAdifStationUrlCandidates(feature) {
+      const code = String(feature?.get("stationCodeRaw") || feature?.get("stationCode") || "").trim();
+      if (!code) return [];
+      const urls = new Set();
+      if (ADIF_STATION_URL_OVERRIDES[code]) urls.add(ADIF_STATION_URL_OVERRIDES[code]);
+      const nameCandidates = new Set();
+      [feature.get("displayName"), feature.get("ldProps") && feature.get("ldProps").NOMBRE, feature.get("cercProps") && feature.get("cercProps").NOMBRE_ESTACION].forEach(name => getAdifNameVariants(name).forEach(v => nameCandidates.add(v)));
+      urls.add(buildAdifPathCandidate(code, ""));
+      [...nameCandidates].forEach(name => {
+        const unicodeSlug = slugifyAdifName(name);
+        const asciiSlug = slugifyAsciiAdifName(name);
+        if (unicodeSlug) urls.add(buildAdifPathCandidate(code, unicodeSlug));
+        if (asciiSlug) urls.add(buildAdifPathCandidate(code, asciiSlug));
+      });
+      return [...urls];
+    }
+    function parseAdifTrafficFilters(html) {
+      const matches = [...html.matchAll(/name="trafficType"[^>]*value="([^"]+)"/g)].map(match => match[1]).filter(Boolean);
+      return [...new Set(matches.length ? matches : ["cercanias", "avldmd"])];
+    }
+    function extractAdifConfigFromHtml(html, stationCode) {
+      const endpointMatch = html.match(/url:\s*"([^"]*consultarHorario[^"]*)"/);
+      if (!endpointMatch) return null;
+      const commuterMatch = html.match(/_servicios_estacion_ServiciosEstacionPortlet_commuterNetwork:\s*"([^"]*)"/);
+      const endpointUrl = endpointMatch[1].replace(/\\u0026/g, "&").replace(/&amp;/g, "&");
+      return {
+        endpointUrl,
+        commuterNetwork: commuterMatch ? commuterMatch[1] : "",
+        trafficFilters: parseAdifTrafficFilters(html),
+        stationCode: String(stationCode || "")
+      };
+    }
+    function parseAdifHtmlTable(html, typeKey, forcedTrafficType) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const rows = [];
+      doc.querySelectorAll(`#horas-trenes-estacion-${typeKey} tbody tr`).forEach(row => {
+        if (row.querySelector(".col-observacion")) {
+          rows.push({ kind: "observation", observation: stripHtml(row.textContent), trafficType: forcedTrafficType || "all", searchType: typeKey === "salidas" ? "proximasSalidas" : "proximasLlegadas" });
+          return;
+        }
+        const horaSpans = row.querySelectorAll(".col-hora span");
+        const destinoNode = row.querySelector(".col-destino");
+        const destinoLink = destinoNode && destinoNode.querySelector("a");
+        const destinoSpans = destinoNode ? destinoNode.querySelectorAll("span") : [];
+        const trenOp = row.querySelector(".col-tren > div > span:first-child");
+        const lineBadge = row.querySelector(".col-tren span.lineColored");
+        const fallbackTrain = row.querySelector(".col-tren > div > span:last-child span");
+        const viaSpan = row.querySelector(".col-via span");
+        rows.push({
+          kind: "row",
+          hora: stripHtml(horaSpans[0] && horaSpans[0].textContent),
+          horaEstado: stripHtml(horaSpans[1] && horaSpans[1].textContent),
+          estacion: stripHtml(destinoLink ? destinoLink.textContent : destinoNode && destinoNode.firstChild && destinoNode.firstChild.textContent),
+          estacionLink: destinoLink ? destinoLink.href : "",
+          estacionEstado: stripHtml(destinoSpans[0] && destinoSpans[0].textContent),
+          trenDatosOp: stripHtml(trenOp && trenOp.textContent),
+          tren: stripHtml(lineBadge ? lineBadge.textContent : fallbackTrain && fallbackTrain.textContent),
+          via: stripHtml(viaSpan && viaSpan.textContent),
+          immediate: !!(viaSpan && viaSpan.classList.contains("train-blink")),
+          accesible: !!row.querySelector(".fa-wheelchair"),
+          isCercanias: row.classList.contains("cercanias"),
+          cercaniasColour: lineBadge && lineBadge.style && lineBadge.style.backgroundColor ? lineBadge.style.backgroundColor.replace(/^#/, "") : "",
+          markupColor: row.className,
+          trafficType: forcedTrafficType || (row.classList.contains("cercanias") ? "cercanias" : "avldmd"),
+          searchType: typeKey === "salidas" ? "proximasSalidas" : "proximasLlegadas"
+        });
+      });
+      return rows;
+    }
+    async function resolveAdifStationConfig(feature, forceFresh = false) {
+      const code = String(feature.get("stationCodeRaw") || feature.get("stationCode") || "").trim();
+      if (!code) throw new Error("Estacion sin codigo");
+      const cacheKey = `adif.page.${code}`;
+      if (!forceFresh) {
+        const cached = getCachedJson(cacheKey, CACHE_TTL_ADIF_PAGE);
+        if (cached && cached.endpointUrl) return cached;
+      }
+      const candidates = getAdifStationUrlCandidates(feature);
+      const errors = [];
+      for (const pageUrl of candidates) {
+        try {
+          const html = await fetchRemoteText(pageUrl, { directOriginUrl: B_ADIF, timeoutMs: 15000 });
+          const config = extractAdifConfigFromHtml(html, code);
+          if (config) {
+            config.pageUrl = pageUrl;
+            config.htmlFallback = {
+              salidas: parseAdifHtmlTable(html, "salidas", "all"),
+              llegadas: parseAdifHtmlTable(html, "llegadas", "all")
+            };
+            setCachedJson(cacheKey, config);
+            return config;
+          }
+          errors.push(`${pageUrl}: sin portlet de horarios`);
+        } catch (error) {
+          errors.push(`${pageUrl}: ${error.message}`);
+        }
+      }
+      throw new Error(errors.join(" | "));
+    }
+    function buildAdifHorarioUrl(config, searchType, trafficType, numPage) {
+      const url = new URL(config.endpointUrl);
+      url.searchParams.set("_servicios_estacion_ServiciosEstacionPortlet_searchType", searchType);
+      url.searchParams.set("_servicios_estacion_ServiciosEstacionPortlet_trafficType", trafficType || "");
+      url.searchParams.set("_servicios_estacion_ServiciosEstacionPortlet_numPage", String(numPage || 0));
+      url.searchParams.set("_servicios_estacion_ServiciosEstacionPortlet_commuterNetwork", config.commuterNetwork || "");
+      url.searchParams.set("_servicios_estacion_ServiciosEstacionPortlet_stationCode", config.stationCode);
+      return url.toString();
+    }
+    function normalizeAdifHorarioRow(row, trafficType, searchType) {
+      return {
+        kind: row.observation ? "observation" : "row",
+        observation: row.observation || "",
+        hora: row.hora || "",
+        horaEstado: row.horaEstado || "",
+        estacion: row.estacion || "",
+        estacionLink: row.estacionLink || "",
+        estacionEstado: row.estacionEstado || "",
+        trenDatosOp: row.trenDatosOp || "",
+        tren: row.tren || "",
+        via: row.via || "",
+        immediate: !!row.immediate,
+        accesible: !!row.accesible,
+        isCercanias: !!row.isCercanias || trafficType === "cercanias",
+        cercaniasColour: row.cercaniasColour || "",
+        markupColor: row.markupColor || "",
+        trafficType,
+        searchType
+      };
+    }
+    async function fetchAdifHorarioSeries(config, searchType, trafficType) {
+      const rows = [];
+      const seen = new Set();
+      for (let numPage = 0; numPage < 12; numPage++) {
+        const result = await fetchRemoteJsonUrl(buildAdifHorarioUrl(config, searchType, trafficType, numPage), { directOriginUrl: B_ADIF, timeoutMs: 15000 });
+        const horarios = Array.isArray(result && result.horarios) ? result.horarios : [];
+        if (!horarios.length) break;
+        let newCount = 0;
+        horarios.forEach(item => {
+          const normalized = normalizeAdifHorarioRow(item, trafficType, searchType);
+          const dedupeKey = [searchType, trafficType, normalized.kind, normalized.hora, normalized.horaEstado, normalized.estacion, normalized.trenDatosOp, normalized.tren, normalized.via, normalized.observation].join("|");
+          if (seen.has(dedupeKey)) return;
+          seen.add(dedupeKey);
+          rows.push(normalized);
+          newCount++;
+        });
+        if (!newCount) break;
+      }
+      return rows;
+    }
+    function getAdifFallbackRows(config, searchType, trafficType) {
+      if (!config || !config.htmlFallback) return [];
+      const source = searchType === "proximasSalidas" ? config.htmlFallback.salidas : config.htmlFallback.llegadas;
+      return (source || []).map(row => ({ ...row, trafficType: trafficType === "all" ? row.trafficType : trafficType, searchType }));
+    }
+    async function loadAdifTimetableData(feature, forceFresh = false) {
+      const code = String(feature.get("stationCodeRaw") || feature.get("stationCode") || "").trim();
+      const cacheKey = `adif.timetable.${code}`;
+      if (!forceFresh) {
+        const cached = getCachedJson(cacheKey, CACHE_TTL_ADIF_TIMETABLE);
+        if (cached && cached.rowsByType) return cached;
+      }
+      const config = await resolveAdifStationConfig(feature, forceFresh);
+      const availableTraffic = config.trafficFilters && config.trafficFilters.length ? config.trafficFilters : ["cercanias", "avldmd"];
+      const rowsByType = { proximasSalidas: [], proximasLlegadas: [] };
+      const errors = [];
+      for (const searchType of ["proximasSalidas", "proximasLlegadas"]) {
+        for (const trafficType of availableTraffic) {
+          try {
+            rowsByType[searchType].push(...await fetchAdifHorarioSeries(config, searchType, trafficType));
+          } catch (error) {
+            errors.push(`${searchType}/${trafficType}: ${error.message}`);
+          }
+        }
+        if (!rowsByType[searchType].length) rowsByType[searchType] = getAdifFallbackRows(config, searchType, "all");
+      }
+      const payload = {
+        stationCode: code,
+        pageUrl: config.pageUrl || "",
+        resolvedAt: new Date().toISOString(),
+        rowsByType,
+        errors
+      };
+      setCachedJson(cacheKey, payload);
+      return payload;
+    }
+    function getAdifFilterLabel(filter) {
+      if (filter === "cercanias") return "Cercanías";
+      if (filter === "avldmd") return "Larga / Media / AV";
+      return "Todos";
+    }
+    function formatAdifBadge(row) {
+      if (row.isCercanias) {
+        const color = normalizeCssColor(row.cercaniasColour ? "#" + row.cercaniasColour.replace(/^#/, "") : "") || "#830065";
+        const textColor = useWhiteAccesibility(color) ? "#fff" : "#000";
+        return `<span class="adif-train-badge" style="background:${color};color:${textColor}">${escapeHtml(row.tren || "-")}</span>`;
+      }
+      return `<span class="adif-train-badge">${escapeHtml(row.tren || "-")}</span>`;
+    }
+    function renderAdifRows(rows, emptyLabel) {
+      if (!rows.length) return `<div class="adif-empty">${escapeHtml(emptyLabel)}</div>`;
+      const body = rows.map(row => {
+        if (row.kind === "observation") {
+          return `<tr class="adif-observation"><td colspan="4"><div class="adif-observation-text">${escapeHtml(row.observation)}</div></td></tr>`;
+        }
+        const stationCell = row.estacionLink ? `<a href="${escapeHtml(row.estacionLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(row.estacion || "-")}</a>` : `<span>${escapeHtml(row.estacion || "-")}</span>`;
+        return `<tr>
+          <td class="adif-col-time"><span class="adif-time-main">${escapeHtml(row.hora || "-")}</span>${row.horaEstado ? `<span class="adif-time-sub">${escapeHtml(row.horaEstado)}</span>` : ""}</td>
+          <td><div class="adif-dest-main">${stationCell}</div>${row.estacionEstado ? `<span class="adif-dest-sub">${escapeHtml(row.estacionEstado)}</span>` : ""}</td>
+          <td><span class="adif-train-op">${escapeHtml(row.trenDatosOp || "")}</span>${formatAdifBadge(row)}${row.accesible ? ' <span title="Accesible">♿</span>' : ""}</td>
+          <td class="adif-col-track">${row.via ? `<span class="${row.immediate ? "adif-track-live" : ""}">${escapeHtml(row.via)}</span>` : "-"}</td>
+        </tr>`;
+      }).join("");
+      return `<table class="adif-schedule-table"><thead><tr><th class="adif-col-time">Hora</th><th>Origen / Destino</th><th>Tren / Línea</th><th class="adif-col-track">Vía</th></tr></thead><tbody>${body}</tbody></table>`;
+    }
+    function renderAdifTimetableModal() {
+      const body = document.getElementById("adifTimetableBody");
+      const meta = document.getElementById("adifTimetableMeta");
+      const title = document.getElementById("adifTimetableStationTitle");
+      if (!body || !title || !meta) return;
+      title.textContent = adifTimetableState.stationName || adifTimetableState.stationCode || "-";
+      meta.textContent = adifTimetableState.meta ? `Fuente oficial ADIF${adifTimetableState.meta.pageUrl ? " · " + adifTimetableState.meta.pageUrl.replace(B_ADIF, "") : ""}${adifTimetableState.meta.resolvedAt ? " · Actualizado " + new Date(adifTimetableState.meta.resolvedAt).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : ""}` : "";
+      document.querySelectorAll(".adif-filter-btn").forEach(btn => btn.classList.toggle("selected", btn.dataset.adifFilter === adifTimetableState.filter));
+      if (!adifTimetableState.rowsByType) {
+        body.innerHTML = '<div class="adif-loading">Cargando horarios oficiales de ADIF...</div>';
+        return;
+      }
+      const filter = adifTimetableState.filter;
+      const filterRows = rows => rows.filter(row => row.kind === "observation" || filter === "all" || row.trafficType === filter || (filter === "cercanias" && row.isCercanias) || (filter === "avldmd" && !row.isCercanias));
+      const salidas = filterRows(adifTimetableState.rowsByType.proximasSalidas || []);
+      const llegadas = filterRows(adifTimetableState.rowsByType.proximasLlegadas || []);
+      body.innerHTML = `<div class="adif-schedule-section"><div class="adif-schedule-heading">Salidas · ${escapeHtml(getAdifFilterLabel(filter))}</div>${renderAdifRows(salidas, "No hay salidas para este filtro.")}</div><div class="adif-schedule-section"><div class="adif-schedule-heading">Llegadas · ${escapeHtml(getAdifFilterLabel(filter))}</div>${renderAdifRows(llegadas, "No hay llegadas para este filtro.")}</div>`;
+    }
+    async function openAdifTimetable(stationCode) {
+      const feature = getStationFeatureByCode(stationCode);
+      if (!feature) {
+        showPopupMessage("No se pudo localizar la estación.");
+        return;
+      }
+      const requestId = ++adifTimetableRequestSeq;
+      adifTimetableState = { stationCode: String(stationCode), stationName: feature.get("displayName") || String(stationCode), filter: adifTimetableState.stationCode === String(stationCode) ? adifTimetableState.filter : "all", rowsByType: null, meta: null };
+      $(".modal-adif-timetable").show();
+      renderAdifTimetableModal();
+      try {
+        const payload = await loadAdifTimetableData(feature, false);
+        if (requestId !== adifTimetableRequestSeq) return;
+        adifTimetableState.rowsByType = payload.rowsByType;
+        adifTimetableState.meta = { pageUrl: payload.pageUrl, resolvedAt: payload.resolvedAt, errors: payload.errors };
+        renderAdifTimetableModal();
+      } catch (error) {
+        if (requestId !== adifTimetableRequestSeq) return;
+        notifyLoadError("adifTimetable", "No se pudieron cargar los horarios oficiales de ADIF.", error);
+        document.getElementById("adifTimetableBody").innerHTML = `<div class="adif-empty">No se pudieron cargar los horarios oficiales de ADIF para esta estación.</div>`;
+      }
+    }
+    async function refreshAdifTimetable() {
+      if (!adifTimetableState.stationCode) return;
+      const feature = getStationFeatureByCode(adifTimetableState.stationCode);
+      if (!feature) return;
+      const requestId = ++adifTimetableRequestSeq;
+      adifTimetableState.rowsByType = null;
+      renderAdifTimetableModal();
+      try {
+        const payload = await loadAdifTimetableData(feature, true);
+        if (requestId !== adifTimetableRequestSeq) return;
+        adifTimetableState.rowsByType = payload.rowsByType;
+        adifTimetableState.meta = { pageUrl: payload.pageUrl, resolvedAt: payload.resolvedAt, errors: payload.errors };
+        renderAdifTimetableModal();
+      } catch (error) {
+        if (requestId !== adifTimetableRequestSeq) return;
+        notifyLoadError("adifTimetableRefresh", "No se pudieron refrescar los horarios oficiales de ADIF.", error);
+        document.getElementById("adifTimetableBody").innerHTML = `<div class="adif-empty">No se pudieron refrescar los horarios oficiales de ADIF para esta estación.</div>`;
       }
     }
 
@@ -6320,6 +6927,10 @@
       applyTranslations();
       (ismobile ? $(".panel-filtros-movil") : $(".panel-lineas")).show();
       initEvents();
+      document.querySelectorAll(".adif-filter-btn").forEach(btn => btn.addEventListener("click", function () {
+        adifTimetableState.filter = this.dataset.adifFilter || "all";
+        renderAdifTimetableModal();
+      }));
       var e = $(".leyend-content").html(); $(".leyend-content-movil").html(e);
     };
 
@@ -6744,7 +7355,7 @@
       return popuptren.replace("${TIPOTREN}", tp).replace("${CODTREN}", e.get("codComercial") || "-").replace("${SHOWANT}", e.get("codEstAnt") == e.get("codEstSig") ? "d-none" : "").replace("${SHOWACC}", e.get("accesible") ? "" : "d-none").replace("${PARADAANTERIOR}", e.get("codEstAnt") ? getStationNameByCode(e.get("codEstAnt")) : "-").replace("${PARADASIGUIENTE}", e.get("codEstSig") ? getStationNameByCode(e.get("codEstSig")) : "-").replace("${ORIGEN}", e.get("codOrigen") ? getStationNameByCode(e.get("codOrigen")) : "-").replace("${DESTINO}", e.get("codDestino") ? getStationNameByCode(e.get("codDestino")) : "-").replace("${IDTREN}", e.get("codComercial") || "-").replace("${IDTRENRUTA}", e.get("codComercial") || "-").replace("${SHOWSEG}", seg ? "d-none" : "").replace("${SHOWSEGCANC}", seg ? "" : "d-none").replace("${HORAPREV}", e.get("horaLlegadaSigEst") ? formatHour(e.get("horaLlegadaSigEst")) : "-").replace("${RETRASO}", d)
     }
     function popupInfoEstacion(e) {
-      const ld = e.get("ldProps"), cerc = e.get("cercProps"), acc = (ld && isAccesibleCriteria(ld.ACCESIBLE)) || (cerc && isCercaniasStationAccesible(cerc.ACCESIBILIDAD)), at = ld && ld.ATENDO == "1", parking = cerc && isCercaniasStationParking(cerc.PARKING_BICIS), code = e.get("stationCode") || "-", name = e.get("displayName") || "-", dir1 = ld && ld.DIR ? ld.DIR : "-", dir2 = ld && ld.PROV && ld.LOCALIDAD ? ld.LOCALIDAD + " (" + ld.PROV + ")" : "-", lineas = cerc ? renderCercaniasLineBadges(cerc.NUCLEO, cerc.LINEAS, cerc.COLOR) : "", bus = cerc && cerc.COR_BUS ? '<div class="pt-1 cor_bus_container"><img src="' + B_CERCA + '/imgs/lyrbutton/bus.svg" alt="Bus"><span>' + cerc.COR_BUS + '</span></div>' : "", metro = cerc && cerc.COR_METRO ? '<div class="pt-2 cor_metro_container"><img src="' + B_CERCA + '/imgs/tool/metro.svg" alt="Metro"><span>' + cerc.COR_METRO + '</span></div>' : "", html = '<div class="d-flex flex-column"><section class="section-header-modal-station"><div class="d-flex justify-content-between"><div class="row"><span class="title-menu">Estacion - ' + code + '</span></div><div><div role="button" class="button-close-modal" onclick="closeModal(\'.modal-estacion,.modal-estacion-movil\')"><img src="' + B + '/imgs/tool/close.svg" alt="Cerrar"></div></div></div></section><div class="d-flex flex-column"><section class="section-mid-modal-station"><div class="row pt-3"><span class="name-line-train-modal">' + name + '</span></div><section class="section-tag-mid-modal-station row pt-1"><div class="d-flex flex-wrap gap-2">' + (acc ? '<div class="estaccessible"><div class="tag-info accessible"><img class="icon-accessible" src="' + B + '/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Estacion accesible</span></div></div>' : '') + (at ? '<div class="estatendo"><div class="tag-info atendo"><img class="icon-accessible" src="' + B + '/imgs/tool/accessible.svg" alt="Acerca"><span class="text-tag-modal-accessible">Acerca</span></div></div>' : '') + (parking ? '<div class="estparking"><div class="tag-info" style="background:#33A85C"><img class="icon-parking" src="' + B_CERCA + '/imgs/tool/parking.svg" alt="Aparcabicis"><span class="text-tag-modal-accessible">Aparcabicis</span></div></div>' : '') + '</div><div class="d-flex flex-column overflow-auto" style="max-height:40vh"><section class="section-footer-modal-station"><div class="row cor_container"><div class="pt-2 ps-1"><img src="' + B + '/imgs/symbol/dir.svg" alt="Dir"><span>' + dir1 + '</span></div><div class="pt-2 ps-5"><span>' + dir2 + '</span></div></div></section></div><div class="row p-3 correspondencias"><div class="separator-tag-modal-station"></div></div></section></section></div><div class="d-flex flex-column overflow-auto" style="max-height:40vh"><section class="section-footer-modal-station"><div class="row cor_container"><span class="correspondences">Correspondencias</span><div class="linecorresp d-flex flex-wrap">' + lineas + '</div>' + metro + bus + (cerc ? '<div class="pt-2 cor_ld_container"><img src="' + B_CERCA + '/imgs/symbol/cercanias.svg" alt="Cercanias"><span>Cercanias</span></div>' : '') + '</div></section></div></div>';
+      const ld = e.get("ldProps"), cerc = e.get("cercProps"), acc = (ld && isAccesibleCriteria(ld.ACCESIBLE)) || (cerc && isCercaniasStationAccesible(cerc.ACCESIBILIDAD)), at = ld && ld.ATENDO == "1", parking = cerc && isCercaniasStationParking(cerc.PARKING_BICIS), code = e.get("stationCode") || "-", name = e.get("displayName") || "-", dir1 = ld && ld.DIR ? ld.DIR : "-", dir2 = ld && ld.PROV && ld.LOCALIDAD ? ld.LOCALIDAD + " (" + ld.PROV + ")" : "-", lineas = cerc ? renderCercaniasLineBadges(cerc.NUCLEO, cerc.LINEAS, cerc.COLOR) : "", bus = cerc && cerc.COR_BUS ? '<div class="pt-1 cor_bus_container"><img src="' + B_CERCA + '/imgs/lyrbutton/bus.svg" alt="Bus"><span>' + cerc.COR_BUS + '</span></div>' : "", metro = cerc && cerc.COR_METRO ? '<div class="pt-2 cor_metro_container"><img src="' + B_CERCA + '/imgs/tool/metro.svg" alt="Metro"><span>' + cerc.COR_METRO + '</span></div>' : "", trainsButton = code && code !== "-" ? '<div class="d-flex mt-3 justify-content-end"><div class="btntool" role="button" onclick="openAdifTimetable(\'' + escapeHtml(code) + '\')"><div class="text-btntool"><img src="' + B + '/imgs/tool/train.svg" alt="Ver trenes"><span>Ver trenes</span></div></div></div>' : "", html = '<div class="d-flex flex-column"><section class="section-header-modal-station"><div class="d-flex justify-content-between"><div class="row"><span class="title-menu">Estacion - ' + code + '</span></div><div><div role="button" class="button-close-modal" onclick="closeModal(\'.modal-estacion,.modal-estacion-movil\')"><img src="' + B + '/imgs/tool/close.svg" alt="Cerrar"></div></div></div></section><div class="d-flex flex-column"><section class="section-mid-modal-station"><div class="row pt-3"><span class="name-line-train-modal">' + name + '</span></div><section class="section-tag-mid-modal-station row pt-1"><div class="d-flex flex-wrap gap-2">' + (acc ? '<div class="estaccessible"><div class="tag-info accessible"><img class="icon-accessible" src="' + B + '/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Estacion accesible</span></div></div>' : '') + (at ? '<div class="estatendo"><div class="tag-info atendo"><img class="icon-accessible" src="' + B + '/imgs/tool/accessible.svg" alt="Acerca"><span class="text-tag-modal-accessible">Acerca</span></div></div>' : '') + (parking ? '<div class="estparking"><div class="tag-info" style="background:#33A85C"><img class="icon-parking" src="' + B_CERCA + '/imgs/tool/parking.svg" alt="Aparcabicis"><span class="text-tag-modal-accessible">Aparcabicis</span></div></div>' : '') + '</div><div class="d-flex flex-column overflow-auto" style="max-height:40vh"><section class="section-footer-modal-station"><div class="row cor_container"><div class="pt-2 ps-1"><img src="' + B + '/imgs/symbol/dir.svg" alt="Dir"><span>' + dir1 + '</span></div><div class="pt-2 ps-5"><span>' + dir2 + '</span></div></div></section></div><div class="row p-3 correspondencias"><div class="separator-tag-modal-station"></div></div></section></section></div><div class="d-flex flex-column overflow-auto" style="max-height:40vh"><section class="section-footer-modal-station"><div class="row cor_container"><span class="correspondences">Correspondencias</span><div class="linecorresp d-flex flex-wrap">' + lineas + '</div>' + metro + bus + (cerc ? '<div class="pt-2 cor_ld_container"><img src="' + B_CERCA + '/imgs/symbol/cercanias.svg" alt="Cercanias"><span>Cercanias</span></div>' : '') + '</div></section>' + trainsButton + '</div></div>';
       (ismobile ? $(".modal-estacion-movil") : $(".modal-estacion")).html(html).show();
     }
     function popupInfoEstacionCercanias(e) {
@@ -6881,3 +7492,4 @@
 </body>
 
 </html>
+
