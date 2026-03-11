@@ -8193,16 +8193,22 @@
       const availableWidth = Math.max(0, body.clientWidth - parseFloat(styles.paddingLeft || 0) - parseFloat(styles.paddingRight || 0));
       const availableHeight = Math.max(0, body.clientHeight - parseFloat(styles.paddingTop || 0) - parseFloat(styles.paddingBottom || 0));
       if (!availableWidth || !availableHeight) return;
-      const aspect = window.matchMedia("(max-width: 768px)").matches ? 5 / 6 : 16 / 9;
-      let width = availableWidth;
+      const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
+      const aspect = isMobileViewport ? 5 / 6 : 16 / 9;
+      const safeInsetX = isMobileViewport ? 6 : 8;
+      const safeInsetY = isMobileViewport ? 16 : 12;
+      const innerWidth = Math.max(0, availableWidth - safeInsetX * 2);
+      const innerHeight = Math.max(0, availableHeight - safeInsetY);
+      if (!innerWidth || !innerHeight) return;
+      let width = innerWidth;
       let height = width / aspect;
-      if (height > availableHeight) {
-        height = availableHeight;
+      if (height > innerHeight) {
+        height = innerHeight;
         width = height * aspect;
       }
       width = Math.max(1, Math.floor(width));
       height = Math.max(1, Math.floor(height));
-      stage.style.height = `${availableHeight}px`;
+      stage.style.height = `${innerHeight}px`;
       container.style.width = `${width}px`;
       container.style.height = `${height}px`;
     }
