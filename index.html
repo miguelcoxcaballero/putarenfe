@@ -7286,6 +7286,64 @@
       }
       return null;
     }
+    const FRENCH_TGV_ROUTE_ENTRIES = [
+      [{l:"P",c:"87374",n:"Perpignan"},{l:"N",c:"87088",n:"Narbonne"},{l:"B",c:"87078",n:"B\u00e9ziers"},{l:"A",c:"87287",n:"Agde"},
+       {l:"S",c:"87175",n:"S\u00e8te"},{l:"M",c:"87173",n:"Montpellier Saint-Roch"},{l:"N",c:"87302",n:"N\u00eemes"},
+       {l:"V",c:"87810",n:"Valence TGV"},{l:"L",c:"87303",n:"Lyon Part-Dieu"},{l:"P",c:"87013",n:"Paris Gare de Lyon"}],
+      [{l:"P",c:"87374",n:"Perpignan"},{l:"N",c:"87088",n:"Narbonne"},{l:"B",c:"87078",n:"B\u00e9ziers"},{l:"A",c:"87287",n:"Agde"},
+       {l:"S",c:"87175",n:"S\u00e8te"},{l:"M",c:"87173",n:"Montpellier Saint-Roch"},{l:"N",c:"87302",n:"N\u00eemes"},
+       {l:"A",c:"87814",n:"Avignon TGV"},{l:"A",c:"87912",n:"Aix-en-Provence TGV"},{l:"M",c:"87089",n:"Marseille Saint-Charles"}],
+      [{l:"P",c:"87374",n:"Perpignan"},{l:"N",c:"87088",n:"Narbonne"},{l:"B",c:"87078",n:"B\u00e9ziers"},{l:"A",c:"87287",n:"Agde"},
+       {l:"S",c:"87175",n:"S\u00e8te"},{l:"M",c:"87173",n:"Montpellier Saint-Roch"},{l:"N",c:"87302",n:"N\u00eemes"},
+       {l:"A",c:"87814",n:"Avignon TGV"},{l:"V",c:"87810",n:"Valence TGV"},{l:"L",c:"87303",n:"Lyon Part-Dieu"},{l:"P",c:"87013",n:"Paris Gare de Lyon"}]
+    ];
+    function getFrenchLetterStationCode(value) {
+      var raw = String(value || "").trim().toUpperCase();
+      return /^[A-Z]$/.test(raw) ? raw : "";
+    }
+    function matchFrenchRouteEntriesByLetters(letters, route) {
+      if (!Array.isArray(letters) || !letters.length || !Array.isArray(route) || !route.length) return null;
+      var routeIndex = 0, matched = [];
+      for (var i = 0; i < letters.length; i++) {
+        var found = false;
+        while (routeIndex < route.length) {
+          if (route[routeIndex].l === letters[i]) {
+            matched.push(route[routeIndex]);
+            routeIndex++;
+            found = true;
+            break;
+          }
+          routeIndex++;
+        }
+        if (!found) return null;
+      }
+      return matched;
+    }
+    function resolveFrenchRouteMatchFromLetters(letters) {
+      if (!Array.isArray(letters) || !letters.length) return null;
+      for (var r = 0; r < FRENCH_TGV_ROUTE_ENTRIES.length; r++) {
+        var route = FRENCH_TGV_ROUTE_ENTRIES[r];
+        var matched = matchFrenchRouteEntriesByLetters(letters, route);
+        if (matched) return { route: route, entries: matched };
+        var reversedRoute = route.slice().reverse();
+        matched = matchFrenchRouteEntriesByLetters(letters, reversedRoute);
+        if (matched) return { route: reversedRoute, entries: matched };
+      }
+      return null;
+    }
+    function resolveFrenchLetterCodes(estaciones) {
+      var idxs = [], i;
+      for (i = 0; i < estaciones.length; i++) {
+        if (getFrenchLetterStationCode(estaciones[i] && estaciones[i].p)) idxs.push(i);
+      }
+      if (idxs.length === 0) return null;
+      var letters = idxs.map(function(j) { return getFrenchLetterStationCode(estaciones[j] && estaciones[j].p); });
+      var match = resolveFrenchRouteMatchFromLetters(letters);
+      if (!match) return null;
+      var result = {};
+      idxs.forEach(function(idx, k) { result[idx] = match.entries[k].n; });
+      return result;
+    }
     let translations = { es: { lineasPanel: { capas: "Informacion de capas", estaciones: "Estaciones" }, popup: { tren: { cerrar: "Cerrar", flecha: "->", trenaccesible: "Tren accesible", antparada: "Parada anterior", proxparada: "Proxima parada", llegadaprev: "Llegada prevista", varhoraria: "Variacion horaria" }, estacion: { estacion: "Estacion", cerrar: "Cerrar", accesible: "Estacion accesible", correspondencias: "Correspondencias" } }, leyenda: { capas: "Capas", cerrar: "Cerrar", trenescluster: "Agrupacion de trenes", trenes: "Trenes en tiempo real", estaciones: "Estaciones", accesible: "Accesible", capasbase: "Capas base del mapa", estandar: "Estandar", satelite: "Satelite" }, tools: { refreshtrain: "Refrescar trenes", geolocalizar: "Geolocalizar", pausar: "Pausar trenes", sincobertura: "Sin cobertura" }, js: { estaccercana: "Estacion mas cercana", noestaccercana: "No hay estacion a menos de 100 km.", enhora: "En hora" } } };
     let currentLang = "es", pauseTrains = false, ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), dataTrenes, popuptren, popupestacion, seguirTren;
     let adifTimetableState = {
@@ -8073,8 +8131,166 @@
       }
       return "";
     }
+    function getAdifStopCode(stop) {
+      const candidates = [stop?.station_code, stop?.stationCode, stop?.uic, stop?.id, stop?.code, stop?.p]
+        .map(value => String(value || "").trim())
+        .filter(Boolean);
+      return candidates.find(value => /^\d{4,7}$/.test(normalizeStationCode(value))) || candidates[0] || "";
+    }
+    function getAdifStopRouteLetter(stop) {
+      const candidates = [stop?.code, stop?.station_code, stop?.stationCode, stop?.id, stop?.uic, stop?.p]
+        .map(value => getFrenchLetterStationCode(value))
+        .filter(Boolean);
+      return candidates[0] || "";
+    }
+    function getAdifStopDisplayName(stop) {
+      const rawCode = getAdifStopCode(stop);
+      return [stop?.name, stop?.station_name, stop?.short_name, stop?.long_name]
+        .map(value => String(value || "").trim())
+        .find(value => value && value !== rawCode && !/^\d{4,6}$/.test(value) && !getFrenchLetterStationCode(value)) || "";
+    }
+    function setAdifNamedFields(target, name) {
+      const resolved = String(name || "").trim();
+      if (!target || typeof target !== "object" || !resolved) return;
+      target.name = resolved;
+      target.station_name = resolved;
+      target.short_name = resolved;
+      target.long_name = resolved;
+    }
+    function setAdifStationEntryName(stations, code, name) {
+      const rawCode = String(code || "").trim();
+      const resolved = String(name || "").trim();
+      if (!stations || typeof stations !== "object" || !rawCode || !resolved || getFrenchLetterStationCode(rawCode)) return;
+      const variants = [...getAdifCodeVariants(rawCode)];
+      const normalized = normalizeStationCode(rawCode);
+      if (/^\d+$/.test(normalized)) variants.push(normalized.padStart(7, "0"));
+      [...new Set(variants.filter(Boolean))].forEach(key => {
+        if (!stations[key] || typeof stations[key] !== "object") stations[key] = {};
+        setAdifNamedFields(stations[key], resolved);
+      });
+    }
+    function getAdifTrainStopArray(train, key) {
+      return Array.isArray(train?.[key]) ? train[key].filter(stop => stop && typeof stop === "object") : [];
+    }
+    function getAdifTrainStopGroup(train, listKey, singleKey) {
+      const items = getAdifTrainStopArray(train, listKey);
+      if (items.length) return items;
+      const single = train?.[singleKey];
+      return single && typeof single === "object" ? [single] : [];
+    }
+    function collectAdifStopRefs(parts) {
+      const refs = [];
+      parts.forEach(part => {
+        if (!Array.isArray(part)) return;
+        part.forEach(stop => {
+          if (stop && typeof stop === "object") refs.push(stop);
+        });
+      });
+      return refs;
+    }
+    function resolveFrenchEntriesForAdifStops(stops, route = null, fromEnd = false) {
+      if (!Array.isArray(stops) || !stops.length) return null;
+      const seq = fromEnd ? stops.slice().reverse() : stops;
+      const indexes = [];
+      const letters = [];
+      seq.forEach((stop, index) => {
+        const letter = getAdifStopRouteLetter(stop);
+        if (!letter) return;
+        indexes.push(index);
+        letters.push(letter);
+      });
+      if (!letters.length) return null;
+      let match = null;
+      if (route) {
+        const routeForMatch = fromEnd ? route.slice().reverse() : route;
+        const entries = matchFrenchRouteEntriesByLetters(letters, routeForMatch);
+        if (entries) match = { route, entries };
+      } else {
+        match = resolveFrenchRouteMatchFromLetters(letters);
+      }
+      if (!match || !Array.isArray(match.entries) || !match.entries.length) return null;
+      const entriesByIndex = {};
+      indexes.forEach((index, position) => {
+        const originalIndex = fromEnd ? stops.length - 1 - index : index;
+        entriesByIndex[originalIndex] = match.entries[position];
+      });
+      return { route: route || match.route, entriesByIndex, count: Object.keys(entriesByIndex).length };
+    }
+    function applyFrenchNamesToAdifStops(stops, route, stations, fromEnd = false) {
+      const resolved = resolveFrenchEntriesForAdifStops(stops, route, fromEnd);
+      if (!resolved) return 0;
+      Object.keys(resolved.entriesByIndex).forEach(key => {
+        const stop = stops[parseInt(key, 10)];
+        const entry = resolved.entriesByIndex[key];
+        if (!stop || !entry) return;
+        setAdifNamedFields(stop, entry.n);
+        if (entry.c) {
+          let wroteCode = false;
+          ["code", "station_code", "stationCode", "id", "uic", "p"].forEach(field => {
+            if (!Object.prototype.hasOwnProperty.call(stop, field) && field !== "code") return;
+            const current = String(stop[field] || "").trim();
+            if (!current || getFrenchLetterStationCode(current)) {
+              stop[field] = entry.c;
+              wroteCode = true;
+            }
+          });
+          if (!wroteCode && (!getAdifStopCode(stop) || getAdifStopRouteLetter(stop))) stop.code = entry.c;
+          setAdifStationEntryName(stations, entry.c, entry.n);
+        }
+      });
+      return resolved.count;
+    }
+    function resolveFrenchRouteForAdifTrain(train) {
+      const origins = getAdifTrainStopGroup(train, "origins", "origin");
+      const destinations = getAdifTrainStopGroup(train, "destinations", "destination");
+      const previousStops = getAdifTrainStopGroup(train, "previous_stops", "previous_stop");
+      const nextStops = getAdifTrainStopGroup(train, "next_stops", "next_stop");
+      const currentStops = train?.current_stop && typeof train.current_stop === "object" ? [train.current_stop] : [];
+      const candidates = [
+        collectAdifStopRefs([origins, getAdifTrainStopArray(train, "all_stops"), destinations]),
+        collectAdifStopRefs([origins, getAdifTrainStopArray(train, "commercial_stops"), destinations]),
+        collectAdifStopRefs([origins, getAdifTrainStopArray(train, "stops"), destinations]),
+        collectAdifStopRefs([origins, getAdifTrainStopArray(train, "route"), destinations]),
+        collectAdifStopRefs([origins, getAdifTrainStopArray(train, "itinerary"), destinations]),
+        collectAdifStopRefs([previousStops, currentStops, nextStops, destinations]),
+        getAdifTrainStopArray(train, "all_stops"),
+        getAdifTrainStopArray(train, "commercial_stops"),
+        getAdifTrainStopArray(train, "stops"),
+        getAdifTrainStopArray(train, "route"),
+        getAdifTrainStopArray(train, "itinerary")
+      ];
+      let best = null;
+      candidates.forEach(candidate => {
+        const resolved = resolveFrenchEntriesForAdifStops(candidate);
+        if (!resolved || resolved.count < 2) return;
+        const score = resolved.count * 100 - candidate.length;
+        if (!best || score > best.score) best = { route: resolved.route, score };
+      });
+      return best ? best.route : null;
+    }
+    function patchFrenchTrainStationNames(train, stations) {
+      const route = resolveFrenchRouteForAdifTrain(train);
+      if (!route) return;
+      const origins = getAdifTrainStopGroup(train, "origins", "origin");
+      const destinations = getAdifTrainStopGroup(train, "destinations", "destination");
+      const previousStops = getAdifTrainStopGroup(train, "previous_stops", "previous_stop");
+      const nextStops = getAdifTrainStopGroup(train, "next_stops", "next_stop");
+      const currentStops = train?.current_stop && typeof train.current_stop === "object" ? [train.current_stop] : [];
+      applyFrenchNamesToAdifStops(collectAdifStopRefs([origins, getAdifTrainStopArray(train, "all_stops"), destinations]), route, stations);
+      applyFrenchNamesToAdifStops(collectAdifStopRefs([origins, getAdifTrainStopArray(train, "commercial_stops"), destinations]), route, stations);
+      applyFrenchNamesToAdifStops(collectAdifStopRefs([origins, getAdifTrainStopArray(train, "stops"), destinations]), route, stations);
+      applyFrenchNamesToAdifStops(collectAdifStopRefs([origins, getAdifTrainStopArray(train, "route"), destinations]), route, stations);
+      applyFrenchNamesToAdifStops(collectAdifStopRefs([origins, getAdifTrainStopArray(train, "itinerary"), destinations]), route, stations);
+      applyFrenchNamesToAdifStops(collectAdifStopRefs([previousStops, currentStops, nextStops, destinations]), route, stations);
+      applyFrenchNamesToAdifStops(origins, route, stations);
+      applyFrenchNamesToAdifStops(destinations, route, stations, true);
+      applyFrenchNamesToAdifStops(previousStops, route, stations);
+      applyFrenchNamesToAdifStops(collectAdifStopRefs([currentStops, nextStops]), route, stations);
+    }
     function getAdifHubStationName(payload, stop) {
-      const rawCode = String(stop?.code || stop?.station_code || stop?.stationCode || stop?.id || "").trim();
+      const contextualName = getAdifStopDisplayName(stop);
+      if (contextualName) return contextualName;
+      const rawCode = getAdifStopCode(stop);
       const override = getAdifStationNameOverride(rawCode);
       if (override) return override;
       const stations = payload?.stations || {};
@@ -8088,39 +8304,40 @@
         const localName = getStationNameByCode(code);
         if (localName && localName !== code) return localName;
       }
-      return stop?.name || stop?.station_name || rawCode || "-";
+      return rawCode || "-";
     }
     function resolveAdifPayloadStationName(code, fallbackName) {
-      const override = getAdifStationNameOverride(code);
+      const rawCode = String(code || "").trim();
+      const override = getAdifStationNameOverride(rawCode);
       if (override) return override;
-      const localName = getStationNameByCode(code);
-      if (localName && localName !== String(code || "").trim()) return localName;
+      const localName = getStationNameByCode(rawCode);
+      if (localName && localName !== rawCode) return localName;
       const fallback = String(fallbackName || "").trim();
-      return fallback && !/^\d{4,6}$/.test(fallback) ? fallback : "";
+      return fallback && fallback !== rawCode && !/^\d{4,6}$/.test(fallback) && !getFrenchLetterStationCode(fallback) ? fallback : "";
     }
     function enrichAdifPayloadStopName(stop, stations) {
       if (!stop || typeof stop !== "object") return;
-      const rawCode = String(stop.code || stop.station_code || stop.stationCode || stop.id || "").trim();
+      const rawCode = getAdifStopCode(stop);
       if (!rawCode) return;
-      const resolvedName = resolveAdifPayloadStationName(rawCode, stop.name || stop.station_name || "");
+      const resolvedName = resolveAdifPayloadStationName(rawCode, getAdifStopDisplayName(stop));
       if (!resolvedName) return;
-      stop.name = resolvedName;
-      stop.station_name = resolvedName;
-      getAdifCodeVariants(rawCode).forEach(key => {
-        if (!stations[key] || typeof stations[key] !== "object") stations[key] = { name: resolvedName };
-        else stations[key].name = resolvedName;
-      });
+      setAdifNamedFields(stop, resolvedName);
+      setAdifStationEntryName(stations, rawCode, resolvedName);
     }
     function enrichAdifPayloadStationNames(data) {
       if (!data || typeof data !== "object") return;
       const stations = data.stations && typeof data.stations === "object" ? data.stations : (data.stations = {});
+      Object.keys(ADIF_STATION_NAME_OVERRIDES).forEach(code => {
+        setAdifStationEntryName(stations, code, ADIF_STATION_NAME_OVERRIDES[code]);
+      });
       Object.keys(stations).forEach(code => {
-        const resolvedName = resolveAdifPayloadStationName(code, stations[code]?.name || "");
+        const resolvedName = resolveAdifPayloadStationName(code, stations[code]?.name || stations[code]?.station_name || "");
         if (!resolvedName) return;
-        if (!stations[code] || typeof stations[code] !== "object") stations[code] = { name: resolvedName };
-        else stations[code].name = resolvedName;
+        if (!stations[code] || typeof stations[code] !== "object") stations[code] = {};
+        setAdifNamedFields(stations[code], resolvedName);
       });
       (data.trains || []).forEach(train => {
+        patchFrenchTrainStationNames(train, stations);
         ["origins", "destinations", "stops", "all_stops", "previous_stops", "next_stops", "commercial_stops", "route", "itinerary"].forEach(key => {
           const items = Array.isArray(train?.[key]) ? train[key] : [];
           items.forEach(stop => enrichAdifPayloadStopName(stop, stations));
@@ -8146,15 +8363,17 @@
     function buildAdifHubRows(payload) {
       const rowsByType = { proximasSalidas: [], proximasLlegadas: [] };
       const trains = Array.isArray(payload?.trains) ? payload.trains : [];
+      const stations = payload?.stations && typeof payload.stations === "object" ? payload.stations : (payload.stations = {});
       trains.forEach(train => {
         if (!train) return;
+        patchFrenchTrainStationNames(train, stations);
         const trafficTypeRaw = String(train.traffic_type || "").toUpperCase();
         const productCode = String(train?.commercial_id?.[0]?.product || "").toUpperCase();
         if (trafficTypeRaw === "-" || productCode === "SSERV" || productCode === "ESPECRF") return;
         const isCercanias = trafficTypeRaw === "C";
         const trafficType = isCercanias ? "cercanias" : "avldmd";
-        const origin = Array.isArray(train.origins) ? train.origins[0] || null : null;
-        const destination = Array.isArray(train.destinations) ? train.destinations[0] || null : null;
+        const origin = Array.isArray(train.origins) ? train.origins[0] || null : (train?.origin && typeof train.origin === "object" ? train.origin : null);
+        const destination = Array.isArray(train.destinations) ? train.destinations[0] || null : (train?.destination && typeof train.destination === "object" ? train.destination : null);
         const rawLine = (destination && destination.line) || (origin && origin.line) || "";
         const lineLabel = isCercanias ? extractAdifCercaniasLineLabel(rawLine) : "";
         const lineColor = isCercanias ? getAdifHubLineColor(payload, rawLine, lineLabel) : "";
@@ -8294,14 +8513,15 @@
       throw lastError || new Error("No se pudo obtener respuesta valida de InfoStation");
     }
     function applyAdifHubPayload(feature, payload, resolvedCode, fromCache = false) {
-      const rowsByType = payload?.rowsByType || buildAdifHubRows(payload);
+      const rawPayload = payload?.rawPayload || payload || null;
+      const rowsByType = rawPayload ? buildAdifHubRows(rawPayload) : (payload?.rowsByType || buildAdifHubRows(payload));
       adifTimetableState.stationCode = String(feature.get("stationCodeRaw") || feature.get("stationCode") || resolvedCode || "");
       adifTimetableState.stationName = feature.get("displayName") || adifTimetableState.stationCode || "-";
       adifTimetableState.rowsByType = rowsByType;
       adifTimetableState.resolvedCode = resolvedCode || payload?.resolvedCode || "";
       adifTimetableState.loading = false;
       adifTimetableState.error = "";
-      adifTimetableState.rawPayload = payload?.rawPayload || null;
+      adifTimetableState.rawPayload = rawPayload && rawPayload !== payload ? rawPayload : (rawPayload?.trains ? rawPayload : null);
       adifTimetableState.meta = {
         resolvedCode: adifTimetableState.resolvedCode,
         resolvedAt: payload?.resolvedAt || new Date().toISOString(),
@@ -8399,46 +8619,9 @@
       if (!data.stations || typeof data.stations !== "object") data.stations = {};
       const stations = data.stations;
       Object.keys(ADIF_STATION_NAME_OVERRIDES).forEach(code => {
-        const name = ADIF_STATION_NAME_OVERRIDES[code];
-        const variants = [...getAdifCodeVariants(code), String(code).padStart(7, "0")];
-        [...new Set(variants)].forEach(variant => {
-          if (!stations[variant] || typeof stations[variant] !== "object") stations[variant] = {};
-          stations[variant].name = name;
-          stations[variant].short_name = name;
-          stations[variant].long_name = name;
-          stations[variant].station_name = name;
-        });
+        setAdifStationEntryName(stations, code, ADIF_STATION_NAME_OVERRIDES[code]);
       });
-      Object.keys(stations).forEach(key => {
-        const override = getAdifStationNameOverride(key);
-        if (override) {
-          if (typeof stations[key] !== "object") stations[key] = {};
-          stations[key].name = override;
-          stations[key].short_name = override;
-          stations[key].long_name = override;
-          stations[key].station_name = override;
-        }
-      });
-      function patchStop(stop) {
-        if (!stop || typeof stop !== "object") return;
-        const rawCode = String(stop.code || stop.station_code || stop.stationCode || stop.id || stop.uic || "").trim();
-        if (!rawCode) return;
-        const override = getAdifStationNameOverride(rawCode);
-        if (override) {
-          stop.name = override;
-          stop.station_name = override;
-          stop.short_name = override;
-          stop.long_name = override;
-        }
-      }
-      (data.trains || []).forEach(train => {
-        ["origins", "destinations", "stops", "all_stops", "previous_stops", "next_stops", "commercial_stops", "route", "itinerary"].forEach(key => {
-          (Array.isArray(train?.[key]) ? train[key] : []).forEach(patchStop);
-        });
-        ["origin", "destination", "previous_stop", "next_stop", "current_stop"].forEach(key => {
-          patchStop(train?.[key]);
-        });
-      });
+      (data.trains || []).forEach(train => patchFrenchTrainStationNames(train, stations));
     }
     function prepareAdifPayloadForGravita(payload) {
       const data = cloneAdifPayload(payload);
@@ -9319,7 +9502,3 @@
 </body>
 
 </html>
-
-
-
-
