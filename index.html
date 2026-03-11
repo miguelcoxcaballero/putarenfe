@@ -7,6 +7,10 @@
   <link rel="icon" href="https://tiempo-real.largorecorrido.renfe.com/favicon-32.ico" type="image/x-icon">
   <title>Renfe - Visor Tiempo Real - Largo Recorrido</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,1697 +18,12 @@
   <script src="https://cdn.jsdelivr.net/npm/ol@10.3.0/dist/ol.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
 
-  <style>
-    :root {
-      --renfe-purple: #8d244d;
-      --renfe-gray: #e2e2e2;
-      --text-main: #333333;
-      --text-past: #999999
-    }
-
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif !important;
-      overflow: hidden
-    }
-
-    #map {
-      width: 100%;
-      height: 100%;
-      position: relative
-    }
-
-    .renfe-brand-logo {
-      display: block;
-      width: 190px;
-      height: auto;
-      max-width: 100%;
-      color: var(--renfe-purple)
-    }
-
-    .section-titulo {
-      padding-left: .7rem
-    }
-
-    .modal-estacion,
-    .modal-tren,
-    .panel-lineas {
-      display: none
-    }
-
-    .modal-estacion-movil,
-    .modal-leyend-movil,
-    .modal-tren-movil,
-    .panel-capas-movil,
-    .panel-filtros-movil {
-      display: none
-    }
-
-    .row {
-      margin: 0 !important
-    }
-
-    .group-tren {
-      background: #646363 !important
-    }
-
-    ::-webkit-scrollbar {
-      width: 4px;
-      border-radius: 12px
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f7f7f7;
-      border-radius: 12px
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #bbb;
-      border-radius: 12px
-    }
-
-    .btntool {
-      border: 1px solid #333;
-      text-align: center;
-      padding: 6px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      background: #fff;
-      width: fit-content
-    }
-
-    .btntool:hover {
-      background: var(--renfe-purple);
-      cursor: pointer
-    }
-
-    .btntool:hover .text-btntool {
-      filter: brightness(0) invert(1)
-    }
-
-    .text-btntool {
-      align-items: center;
-      line-height: 1.1;
-      white-space: normal;
-      color: #000 !important;
-      display: flex
-    }
-
-    .text-btntool img {
-      margin-right: .5em
-    }
-
-    .nav-link.active {
-      color: var(--renfe-purple) !important;
-      font-weight: 700
-    }
-
-    .nav-link {
-      color: #000 !important
-    }
-
-    .train-toolbar {
-      margin: 12px 0;
-      position: absolute;
-      bottom: 0;
-      left: 24px;
-      gap: 8px;
-      background: rgba(255, 255, 255, .95);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
-      padding: 6px 12px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      z-index: 900
-    }
-
-    #btn-train.ol-tool {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      padding: 0;
-      border: none;
-      background: 0 0
-    }
-
-    #btn-train img {
-      width: 24px;
-      height: 24px;
-      border: none !important
-    }
-
-    #qrInput {
-      width: 80px;
-      height: 32px;
-      display: block;
-      margin: 0 8px;
-      text-align: center;
-      font-size: 1.1em;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      background: #fff
-    }
-
-    .separator-vertical-toolbar {
-      display: inline-block;
-      width: 2px;
-      height: 36px;
-      background: #888;
-      margin: 0 5px;
-      border-radius: 2px;
-      vertical-align: middle;
-      opacity: .8
-    }
-
-    .tabs-modal-tren {
-      max-width: 90vw;
-      width: 90%
-    }
-
-    #customToast {
-      z-index: 2000;
-      min-width: 200px;
-      max-width: 80vw;
-      margin-bottom: 65px;
-      background-color: rgb(0, 0, 0, .9) !important;
-      border-radius: 12px
-    }
-
-    #customToast div {
-      padding: 2px
-    }
-
-    .ol-zoom {
-      position: fixed
-    }
-
-    .ol-control {
-      background-color: transparent
-    }
-
-    .ol-zoom-in {
-      border-radius: 9px 9px 0 0 !important
-    }
-
-    .ol-zoom-out {
-      border-radius: 0 0 9px 9px !important
-    }
-
-    .ol-pause {
-      border-radius: 24px;
-      background-color: #fff;
-      font-weight: 700;
-      width: 36px;
-      height: 36px;
-      font-size: 25px
-    }
-
-    .ol-pause button {
-      border-radius: 24px;
-      background-color: #fff;
-      font-weight: 700;
-      width: 34px;
-      height: 34px;
-      padding: 6px
-    }
-
-    .ol-pause button:focus {
-      outline: 1px solid var(--renfe-purple)
-    }
-
-    .ol-pause button:hover {
-      background-color: var(--renfe-purple)
-    }
-
-    .ol-pause button:hover img {
-      filter: brightness(0) invert(1)
-    }
-
-    .ol-zoom .ol-zoom-in,
-    .ol-zoom .ol-zoom-out {
-      background-color: #fff;
-      font-weight: 700;
-      width: 36px;
-      height: 38px;
-      font-size: 25px
-    }
-
-    .ol-zoom .ol-zoom-in:hover,
-    .ol-zoom .ol-zoom-out:hover {
-      background-color: var(--renfe-purple);
-      color: #fff;
-      cursor: pointer
-    }
-
-    .ol-zoom .ol-zoom-in:focus,
-    .ol-zoom .ol-zoom-out:focus {
-      outline: 1px solid var(--renfe-purple);
-      color: var(--renfe-purple)
-    }
-
-    .ol-attribution {
-      bottom: 3px !important;
-      right: 3px !important;
-      font-size: 12px;
-      padding: 0;
-      background-color: rgba(255, 255, 255, .7);
-      border-radius: 4px
-    }
-
-    .ol-attribution button {
-      border-color: var(--renfe-purple);
-      color: var(--renfe-purple)
-    }
-
-    .ol-tool {
-      border-radius: 24px;
-      background-color: #fff;
-      font-weight: 700;
-      width: 34px;
-      height: 34px;
-      font-size: 25px
-    }
-
-    .ol-tool button {
-      border-radius: 24px;
-      background-color: #fff;
-      font-weight: 700
-    }
-
-    .ol-tool button:focus {
-      outline: 1px solid var(--renfe-purple)
-    }
-
-    .ol-toolactive button {
-      background-color: var(--renfe-purple)
-    }
-
-    .ol-toolactive button img {
-      filter: brightness(0) invert(1)
-    }
-
-    .ol-tool button:hover {
-      background-color: var(--renfe-purple)
-    }
-
-    .ol-tool button:hover img {
-      filter: brightness(0) invert(1)
-    }
-
-    .ol-nocoverage {
-      display: none
-    }
-
-    .navigation-menu {
-      position: absolute;
-      z-index: 900;
-      background-color: #fff;
-      width: 400px;
-      max-height: calc(100% - 5em);
-      top: 0;
-      left: 0;
-      border-radius: 24px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      padding: 1rem;
-      margin: 1.5rem
-    }
-
-    .title-menu {
-      font-weight: 700;
-      padding-top: 2px;
-      font-size: 20px;
-      color: #0d0d0d;
-      line-height: 28px
-    }
-
-    .section-header {
-      width: 100%;
-      height: 56px
-    }
-
-    .button-info {
-      cursor: pointer;
-      background: #eff3f6;
-      width: 40px;
-      height: 40px;
-      border-radius: 123px;
-      padding: 8px;
-      text-align: center
-    }
-
-    .controls-right {
-      position: fixed;
-      max-height: calc(100vh - 32px);
-      bottom: 0;
-      right: 0;
-      margin-right: .8rem;
-      margin-bottom: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      z-index: 900
-    }
-
-    .controls-right .ol-control {
-      position: static
-    }
-
-    .block-select-station {
-      margin-right: 1em
-    }
-
-    .navigation-menu-movil {
-      position: absolute;
-      z-index: 900;
-      background-color: #fff;
-      margin: 1em;
-      max-height: 100vh;
-      top: 0;
-      border-radius: 26px;
-      width: calc(100vw - 2em)
-    }
-
-    .title-menu-movil {
-      font-weight: 700;
-      padding-top: 2px;
-      font-size: 17px;
-      color: #0d0d0d
-    }
-
-    .button-close-movil {
-      cursor: pointer;
-      background: #eff3f6;
-      width: 40px;
-      height: 40px;
-      border-radius: 123px
-    }
-
-    .info-close-movil {
-      margin-left: 12px;
-      margin-top: 12px
-    }
-
-    .select-leyend {
-      position: absolute;
-      z-index: 900;
-      background-color: #fff;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      right: 0
-    }
-
-    .modal-info {
-      background: #fff;
-      border-radius: 20px;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 9999;
-      padding: 1rem;
-      width: 40vw;
-      max-width: 30rem;
-      min-width: 30rem;
-      max-height: 90vh
-    }
-
-    @font-face {
-      font-family: "AdifHauss";
-      src: url("./pantallas-estaciones-main/public/fonts/AdifHauss-Medium.woff2") format("woff2"),
-        url("./pantallas-estaciones-main/public/fonts/AdifHauss-Medium.woff") format("woff");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap
-    }
-
-    @font-face {
-      font-family: "AdifHauss";
-      src: url("./pantallas-estaciones-main/public/fonts/AdifHauss-Bold.woff2") format("woff2");
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap
-    }
-
-    .modal-adif-timetable {
-      --adif-blue: #001b41;
-      --adif-dark-blue: #102341;
-      --adif-light-blue: #1a3254;
-      --adif-light-green: #bfefd5;
-      --adif-dark-green: #acdac6;
-      background: #fff;
-      border-radius: 24px;
-      border: 1px solid rgba(0, 0, 0, .08);
-      color: #111;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10020;
-      padding: 1.15rem;
-      width: min(96vw, 1120px);
-      height: min(92vh, 940px);
-      max-height: 92vh;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, .38);
-      display: none;
-      overflow: hidden
-    }
-
-    .modal-adif-timetable .section-header-modal {
-      padding-bottom: .8rem;
-      border-bottom: 1px solid #e8edf3
-    }
-
-    .adif-modal-header-copy {
-      display: flex;
-      flex-direction: column;
-      gap: .25rem
-    }
-
-    .adif-modal-brand {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      min-height: 1.8rem;
-      padding: .18rem .7rem;
-      border-radius: 999px;
-      border: 1px solid #dbe6ef;
-      background: #f5f8fb;
-      color: #476175;
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase
-    }
-
-    .modal-adif-timetable .title-menu {
-      color: #516678;
-      font-size: .86rem;
-      letter-spacing: .04em;
-      text-transform: uppercase
-    }
-
-    .adif-modal-title {
-      font-weight: 700;
-      font-size: 1.35rem;
-      line-height: 1.05;
-      color: #0f1720
-    }
-
-    .adif-modal-meta {
-      font-size: .84rem;
-      color: #6f8191
-    }
-
-    .modal-adif-timetable .button-close-modal {
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 999px;
-      border: 1px solid #d9e3eb;
-      background: #f7fafc
-    }
-
-    .modal-adif-timetable .button-close-modal img,
-    .modal-adif-timetable .btntool img {
-      filter: brightness(0) saturate(100%) invert(26%) sepia(14%) saturate(799%) hue-rotate(163deg) brightness(95%) contrast(89%)
-    }
-
-    .adif-modal-toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
-      padding: .9rem 0 1rem;
-      border-bottom: 1px solid #e8edf3
-    }
-
-    .adif-filter-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px
-    }
-
-    .adif-screen-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px
-    }
-
-    .adif-language-group {
-      display: flex;
-      align-items: center;
-      gap: 8px
-    }
-
-    .adif-language-label {
-      color: #5d7081;
-      font-size: .82rem;
-      font-weight: 700;
-      white-space: nowrap
-    }
-
-    .adif-filter-btn {
-      border: 1px solid #d9e3eb;
-      background: #fff;
-      color: #304759;
-      border-radius: 12px;
-      padding: 7px 13px;
-      font-size: .88rem;
-      cursor: pointer;
-      font-family: inherit
-    }
-
-    .adif-screen-btn {
-      border: 1px solid #d9e3eb;
-      background: #f7fafc;
-      color: #304759;
-      border-radius: 12px;
-      padding: 7px 13px;
-      font-size: .88rem;
-      cursor: pointer;
-      font-family: inherit
-    }
-
-    .adif-filter-btn.selected {
-      background: #102341;
-      border-color: #102341;
-      color: #fff
-    }
-
-    .adif-screen-btn.selected {
-      background: #bfefd5;
-      border-color: #8fc9ae;
-      color: #102341;
-      font-weight: 700
-    }
-
-    .adif-language-select {
-      border: 1px solid #d9e3eb;
-      background: #fff;
-      color: #304759;
-      border-radius: 12px;
-      padding: 7px 36px 7px 12px;
-      font-size: .88rem;
-      cursor: pointer;
-      font-family: inherit;
-      appearance: none;
-      -webkit-appearance: none;
-      background-image:
-        linear-gradient(45deg, transparent 50%, #304759 50%),
-        linear-gradient(135deg, #304759 50%, transparent 50%);
-      background-position:
-        calc(100% - 18px) calc(50% - 2px),
-        calc(100% - 12px) calc(50% - 2px);
-      background-size: 6px 6px, 6px 6px;
-      background-repeat: no-repeat
-    }
-
-    .modal-adif-timetable .btntool {
-      border: 1px solid #d9e3eb;
-      background: #f7fafc;
-      border-radius: 12px;
-      min-height: 0;
-      box-shadow: none
-    }
-
-    .modal-adif-timetable .text-btntool span {
-      color: #304759;
-      font-family: inherit
-    }
-
-    .adif-modal-body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 1 1 auto;
-      min-height: 0;
-      overflow: hidden;
-      padding-top: 1rem;
-      margin-top: .2rem
-    }
-
-    .adif-gravita-stage {
-      width: 100%;
-      height: 100%;
-      min-height: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden
-    }
-
-    .adif-gravita-container {
-      position: relative;
-      width: min(100%, 1200px);
-      aspect-ratio: 16 / 9;
-      min-height: 320px;
-      max-height: calc(92vh - 17rem);
-      background: #001b41;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 16px 30px rgba(0, 0, 0, .18)
-    }
-
-    .adif-gravita-container .loader-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #001b41;
-      z-index: 1
-    }
-
-    .adif-gravita-container .loader-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem
-    }
-
-    .adif-gravita-container .loader-logo {
-      width: 35%;
-      min-width: 120px;
-      max-width: 180px;
-      stroke: #bfefd5;
-      color: #bfefd5;
-      fill: none;
-      animation: adifPulseLogo 1.5s ease-in-out infinite
-    }
-
-    .adif-gravita-container .loader-text {
-      color: #fff;
-      font-family: "AdifHauss", sans-serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      letter-spacing: .5px;
-      text-align: center;
-      opacity: .7
-    }
-
-    .adif-gravita-container iframe {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border: none;
-      cursor: none;
-      z-index: 2
-    }
-
-    .adif-gravita-container.adif-gravita-loaded .loader-container {
-      display: none
-    }
-
-    .adif-board {
-      font-family: "AdifHauss", sans-serif;
-      color: #fff;
-      background: radial-gradient(circle at top right, rgba(191, 239, 213, .18), transparent 24%), linear-gradient(180deg, var(--adif-blue) 0%, var(--adif-dark-blue) 100%);
-      border-radius: 20px;
-      border: 1px solid rgba(191, 239, 213, .14);
-      overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(191, 239, 213, .06);
-      animation: adifBoardFade .25s ease-out
-    }
-
-    .adif-board-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 1.1rem;
-      background: rgba(191, 239, 213, .06);
-      border-bottom: 1px solid rgba(191, 239, 213, .12)
-    }
-
-    .adif-board-brandwrap {
-      display: flex;
-      align-items: center;
-      gap: .85rem;
-      min-width: 0
-    }
-
-    .adif-board-logo-shell {
-      width: 4rem;
-      height: 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 1rem;
-      background: rgba(191, 239, 213, .08);
-      border: 1px solid rgba(191, 239, 213, .14)
-    }
-
-    .adif-board-logo {
-      width: 2.5rem;
-      height: 2.5rem;
-      color: var(--adif-light-green);
-      stroke: var(--adif-light-green);
-      fill: none;
-      flex: 0 0 auto
-    }
-
-    .adif-board-tag {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      padding: .18rem .55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(191, 239, 213, .18);
-      background: rgba(191, 239, 213, .08);
-      color: var(--adif-light-green);
-      font-size: .68rem;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      font-weight: 700
-    }
-
-    .adif-board-station {
-      display: block;
-      margin-top: .2rem;
-      font-size: 1.45rem;
-      line-height: 1.05;
-      font-weight: 700;
-      color: #fff
-    }
-
-    .adif-board-subtitle {
-      display: block;
-      margin-top: .1rem;
-      color: rgba(191, 239, 213, .76);
-      font-size: .84rem
-    }
-
-    .adif-board-status {
-      display: flex;
-      flex-direction: column;
-      gap: .35rem;
-      align-items: flex-end;
-      text-align: right
-    }
-
-    .adif-board-clock {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 6.5rem;
-      min-height: 2.5rem;
-      padding: .2rem .85rem;
-      border-radius: .9rem;
-      background: var(--adif-light-green);
-      color: var(--adif-blue);
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: .04em
-    }
-
-    .adif-board-statusline {
-      color: rgba(191, 239, 213, .78);
-      font-size: .76rem
-    }
-
-    .adif-board-panels {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      padding: 1rem
-    }
-
-    .adif-schedule-section {
-      background: rgba(26, 50, 84, .78);
-      border: 1px solid rgba(191, 239, 213, .14);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(191, 239, 213, .06)
-    }
-
-    .adif-schedule-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .75rem;
-      padding: .95rem 1rem;
-      font-weight: 700;
-      font-size: .98rem;
-      color: #fff;
-      background: rgba(191, 239, 213, .08)
-    }
-
-    .adif-screen-arrivals .adif-schedule-heading {
-      flex-direction: row-reverse
-    }
-
-    .adif-schedule-count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 2rem;
-      height: 2rem;
-      padding: 0 .55rem;
-      border-radius: 999px;
-      background: var(--adif-light-green);
-      color: var(--adif-blue);
-      font-size: .82rem;
-      font-weight: 700
-    }
-
-    .adif-schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed
-    }
-
-    .adif-schedule-table th {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      background: rgba(191, 239, 213, .94);
-      font-size: .72rem;
-      color: var(--adif-blue);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(0, 27, 65, .12)
-    }
-
-    .adif-schedule-table td {
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(191, 239, 213, .1);
-      vertical-align: top;
-      color: #fff
-    }
-
-    .adif-schedule-table tbody tr:nth-child(even) {
-      background: rgba(0, 0, 0, .08)
-    }
-
-    .adif-schedule-table tbody tr:hover {
-      background: rgba(191, 239, 213, .06)
-    }
-
-    .adif-screen-departures .adif-row-cercanias td:first-child {
-      box-shadow: inset 3px 0 0 #4db9ff
-    }
-
-    .adif-screen-departures .adif-row-avldmd td:first-child {
-      box-shadow: inset 3px 0 0 var(--adif-light-green)
-    }
-
-    .adif-screen-arrivals .adif-row-cercanias td:last-child {
-      box-shadow: inset -3px 0 0 #4db9ff
-    }
-
-    .adif-screen-arrivals .adif-row-avldmd td:last-child {
-      box-shadow: inset -3px 0 0 var(--adif-light-green)
-    }
-
-    .adif-col-time {
-      width: 112px
-    }
-
-    .adif-col-track {
-      width: 84px;
-      text-align: center
-    }
-
-    .adif-time-main {
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: #fff;
-      letter-spacing: .02em
-    }
-
-    .adif-time-sub,
-    .adif-dest-sub,
-    .adif-train-op {
-      display: block;
-      font-size: .78rem;
-      color: rgba(191, 239, 213, .74);
-      line-height: 1.25
-    }
-
-    .adif-dest-main {
-      font-weight: 600;
-      color: #fff
-    }
-
-    .adif-dest-main a {
-      color: #fff;
-      text-decoration: none
-    }
-
-    .adif-dest-main a:hover {
-      color: var(--adif-light-green)
-    }
-
-    .adif-train-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 2.7rem;
-      padding: 4px 10px;
-      border-radius: 10px;
-      background: rgba(191, 239, 213, .12);
-      border: 1px solid rgba(191, 239, 213, .18);
-      color: var(--adif-light-green);
-      font-weight: 700;
-      font-size: .8rem
-    }
-
-    .adif-track-pill,
-    .adif-track-live {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 2.2rem;
-      padding: 4px 8px;
-      border-radius: 10px;
-      font-weight: 700
-    }
-
-    .adif-track-pill {
-      background: rgba(191, 239, 213, .12);
-      color: #fff
-    }
-
-    .adif-track-live {
-      background: var(--adif-light-green);
-      color: var(--adif-blue);
-      animation: adifTrackBlink 1.05s ease-in-out infinite
-    }
-
-    .adif-observation {
-      background: rgba(191, 239, 213, .08) !important
-    }
-
-    .adif-observation-text {
-      font-size: .82rem;
-      color: var(--adif-light-green)
-    }
-
-    .adif-loading,
-    .adif-empty {
-      min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1.2rem;
-      color: var(--adif-light-green)
-    }
-
-    .adif-loading-card,
-    .adif-empty-card {
-      width: 100%;
-      min-height: 260px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1.4rem;
-      background: linear-gradient(180deg, rgba(26, 50, 84, .92) 0%, rgba(16, 35, 65, .96) 100%);
-      border: 1px dashed rgba(191, 239, 213, .18);
-      border-radius: 18px
-    }
-
-    .adif-loading-logo {
-      width: 4rem;
-      height: 4rem;
-      color: var(--adif-light-green);
-      stroke: var(--adif-light-green);
-      fill: none;
-      animation: adifPulseLogo 1.5s ease-in-out infinite
-    }
-
-    .adif-loading-text {
-      color: rgba(191, 239, 213, .82);
-      font-size: .95rem
-    }
-
-    @keyframes adifPulseLogo {
-      0% {
-        opacity: .3
-      }
-
-      50% {
-        opacity: .9
-      }
-
-      100% {
-        opacity: .3
-      }
-    }
-
-    @keyframes adifTrackBlink {
-      0% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: .58
-      }
-
-      100% {
-        opacity: 1
-      }
-    }
-
-    @keyframes adifBoardFade {
-      from {
-        opacity: 0;
-        transform: translateY(8px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    @media(max-width:768px) {
-      .modal-adif-timetable {
-        width: 100vw;
-        height: 100vh;
-        max-height: 100vh;
-        border-radius: 0;
-        padding: .85rem .85rem calc(1rem + env(safe-area-inset-bottom, 0px))
-      }
-
-      .adif-modal-body {
-        padding-top: .75rem
-      }
-
-      .adif-board-topbar,
-      .adif-board-panels {
-        padding: .9rem
-      }
-
-      .adif-board-topbar {
-        flex-direction: column;
-        align-items: stretch
-      }
-
-      .adif-board-status {
-        align-items: flex-start;
-        text-align: left
-      }
-
-      .adif-board-panels {
-        grid-template-columns: 1fr
-      }
-
-      .adif-modal-toolbar {
-        align-items: stretch
-      }
-
-      .adif-filter-group,
-      .adif-screen-group,
-      .adif-language-group {
-        width: 100%
-      }
-
-      .adif-filter-group > *,
-      .adif-screen-group > * {
-        flex: 1 1 0;
-        text-align: center
-      }
-
-      .adif-language-group {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px
-      }
-
-      .adif-language-select {
-        width: 100%
-      }
-
-      .adif-gravita-container {
-        width: 100%;
-        aspect-ratio: 5 / 6;
-        min-height: 0;
-        max-height: none
-      }
-    }
-
-    .section-header-modal {
-      width: 100%
-    }
-
-    .line-train-modal {
-      border-radius: 8px;
-      background: grey;
-      text-align: center
-    }
-
-    .cercanias-line-logo {
-      display: inline-flex;
-      margin: 0 .65rem .65rem 0;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, .14);
-      vertical-align: middle;
-      overflow: hidden
-    }
-
-    .cercanias-line-logo--cercanias {
-      align-items: center;
-      justify-content: center;
-      min-height: 2.55rem;
-      padding: 0 1rem;
-      border-radius: 999px
-    }
-
-    .cercanias-line-logo--rodalies {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      min-width: 4.2rem;
-      min-height: 4.2rem;
-      padding: .45rem .58rem .38rem;
-      border-radius: .18rem
-    }
-
-    .cercanias-line-logo-main,
-    .cercanias-line-logo-sub {
-      display: block;
-      font-family: AdifHauss, "Segoe UI", sans-serif;
-      font-style: normal;
-      white-space: nowrap
-    }
-
-    .cercanias-line-logo--cercanias .cercanias-line-logo-main {
-      font-size: 1.9rem;
-      font-weight: 800;
-      line-height: .95;
-      letter-spacing: -.05em
-    }
-
-    .cercanias-line-logo--rodalies .cercanias-line-logo-main {
-      font-size: 2.1rem;
-      font-weight: 700;
-      line-height: .9;
-      letter-spacing: -.06em
-    }
-
-    .cercanias-line-logo--rodalies .cercanias-line-logo-sub {
-      margin-top: .12rem;
-      font-size: .78rem;
-      font-weight: 700;
-      line-height: .95;
-      letter-spacing: -.02em
-    }
-
-    @media (max-width: 640px) {
-      .cercanias-line-logo {
-        margin: 0 .5rem .5rem 0
-      }
-
-      .cercanias-line-logo--cercanias {
-        min-height: 2.2rem;
-        padding: 0 .82rem
-      }
-
-      .cercanias-line-logo--cercanias .cercanias-line-logo-main {
-        font-size: 1.55rem
-      }
-
-      .cercanias-line-logo--rodalies {
-        min-width: 3.6rem;
-        min-height: 3.6rem;
-        padding: .36rem .46rem .3rem
-      }
-
-      .cercanias-line-logo--rodalies .cercanias-line-logo-main {
-        font-size: 1.78rem
-      }
-
-      .cercanias-line-logo--rodalies .cercanias-line-logo-sub {
-        font-size: .68rem
-      }
-    }
-
-    .text-line-train-modal {
-      color: #fff;
-      line-height: 2;
-      padding: 0 .5em
-    }
-
-    .name-line-train-modal {
-      font-weight: 700;
-      line-height: 36px;
-      font-size: 24px;
-      color: #000
-    }
-
-    .tag-info {
-      border-radius: 8px;
-      padding: 0 6px
-    }
-
-    .accessible {
-      background: #2969c7
-    }
-
-    .atendo {
-      background: #ff822d
-    }
-
-    .text-tag-modal-accessible {
-      color: #fff
-    }
-
-    .icon-accessible {
-      margin-bottom: 3px
-    }
-
-    .button-close-modal {
-      width: 32px;
-      height: 32px;
-      border-radius: 123px;
-      background: #eff3f6;
-      display: flex;
-      justify-content: center;
-      align-items: center
-    }
-
-    .correspondences {
-      font-weight: 600;
-      font-size: 18px;
-      padding-bottom: 8px
-    }
-
-    .separator-tag-modal-station {
-      background: #dee7ed;
-      height: 1.4px;
-      border-radius: 1px
-    }
-
-    .modal-info-movil {
-      background: #fff;
-      width: 100%;
-      border-radius: 26px 26px 0 0;
-      bottom: 0;
-      position: absolute;
-      z-index: 1200;
-      padding: 1rem 1rem 2rem
-    }
-
-    .modal-info-train-movil {
-      background: #fff;
-      width: 100%;
-      border-radius: 26px 26px 0 0;
-      bottom: 0;
-      position: absolute;
-      z-index: 1200;
-      padding: 1rem 1rem 2rem
-    }
-
-    .modal-leyend,
-    .modal-station,
-    .modal-timeline {
-      position: fixed;
-      z-index: 1900;
-      background-color: #fff;
-      width: 400px;
-      height: 100%;
-      top: 0;
-      overflow: hidden;
-      right: 0
-    }
-
-    @media(max-width:768px) {
-
-      .modal-timeline,
-      .modal-station {
-        width: 100%
-      }
-
-      .navigation-menu-movil {
-        margin: .75rem;
-        width: calc(100vw - 1.5rem);
-        max-height: calc(100vh - 1.5rem);
-        border-radius: 22px;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, .18)
-      }
-
-      .navigation-menu-movil.p-3 {
-        padding: .9rem !important
-      }
-
-      .title-menu-movil {
-        font-size: 16px;
-        line-height: 1.25
-      }
-
-      .button-close-movil,
-      .button-info,
-      .button-close-modal {
-        width: 44px;
-        height: 44px
-      }
-
-      .controls-right {
-        right: .6rem;
-        bottom: calc(.85rem + env(safe-area-inset-bottom, 0px));
-        margin-right: 0;
-        margin-bottom: 0;
-        gap: 10px
-      }
-
-      .controls-right .ol-tool,
-      .controls-right .ol-pause,
-      .controls-right .ol-zoom .ol-zoom-in,
-      .controls-right .ol-zoom .ol-zoom-out {
-        width: 42px;
-        height: 42px
-      }
-
-      .controls-right .ol-tool button,
-      .controls-right .ol-pause button {
-        width: 42px;
-        height: 42px
-      }
-
-      .train-toolbar {
-        left: .75rem;
-        right: .75rem;
-        bottom: calc(.75rem + env(safe-area-inset-bottom, 0px));
-        margin: 0;
-        width: auto;
-        max-width: none;
-        padding: 8px 10px;
-        gap: 6px;
-        flex-wrap: wrap;
-        justify-content: center;
-        border-radius: 14px
-      }
-
-      #qrInput {
-        width: 72px;
-        height: 36px;
-        margin: 0 4px;
-        font-size: 1rem
-      }
-
-      .separator-vertical-toolbar {
-        height: 28px;
-        margin: 0 2px
-      }
-
-      .modal-info-movil,
-      .modal-info-train-movil {
-        max-height: calc(100vh - 3.5rem);
-        overflow-y: auto;
-        padding: 1rem 1rem calc(1.4rem + env(safe-area-inset-bottom, 0px))
-      }
-
-      .tabs-modal-tren {
-        width: 100%;
-        max-width: 100%
-      }
-
-      #customToast {
-        margin-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
-        max-width: calc(100vw - 1.5rem)
-      }
-
-      .btntool {
-        min-height: 40px;
-        padding: 8px 12px
-      }
-
-      .text-btntool {
-        font-size: .95rem
-      }
-    }
-
-    .section-header-leyenda,
-    .section-header-station,
-    .section-header-timeline {
-      padding-top: 3%;
-      height: 5rem;
-      padding-right: 1em
-    }
-
-    .title-leyend,
-    .title-station,
-    .title-timeline {
-      font-weight: 700;
-      font-size: 25px;
-      color: #0d0d0d
-    }
-
-    .form-switch .form-check-input {
-      width: 48px;
-      height: 26px;
-      background-color: #dee7ed
-    }
-
-    .form-check-input:focus {
-      border-color: transparent;
-      box-shadow: none
-    }
-
-    .form-check-input:checked {
-      width: 48px;
-      height: 28px;
-      background-color: var(--renfe-purple);
-      border-color: var(--renfe-purple)
-    }
-
-    .sublayendes-title span {
-      font-weight: 700;
-      font-style: italic;
-      font-size: 14px;
-      color: #7a7777
-    }
-
-    .text-swicth {
-      line-height: 2
-    }
-
-    .chip-circle-icon {
-      margin-left: 3.5px;
-      margin-bottom: 100%;
-      margin-top: 1px
-    }
-
-    .chip-circle-icon-cercanias {
-      width: 30px;
-      margin-top: -4px;
-      padding-left: 2px
-    }
-
-    .chip-circle {
-      width: 30px;
-      height: 30px;
-      padding: 6px;
-      border-radius: 30px;
-      display: inline-grid
-    }
-
-    .chip-circle-station {
-      margin-top: 3px;
-      color: #fff;
-      margin-left: 3px
-    }
-
-    .chip-circle-real-time {
-      margin-left: 4px;
-      margin-bottom: 100%;
-      margin-top: 1px
-    }
-
-    .train {
-      background: var(--renfe-purple)
-    }
-
-    .largadistancia {
-      background: #dc1b1f;
-      padding-top: 0;
-      padding-left: 3px
-    }
-
-    .card-mapa-legend {
-      height: 82px;
-      border-radius: 8px;
-      border: 1.5px solid #000;
-      background: #d9d9d9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      cursor: pointer
-    }
-
-    .mapa-selected {
-      border: 3px solid #000
-    }
-
-    .card-mapa-legend img {
-      min-width: 100%;
-      min-height: 100%
-    }
-
-    .card-mapa-text {
-      display: block;
-      margin: 8px auto 0;
-      text-align: center
-    }
-
-    .station-item {
-      position: relative;
-      padding-left: 65px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: flex-start
-    }
-
-    .dot {
-      position: absolute;
-      left: 25px;
-      top: 22px;
-      width: 15px;
-      height: 15px;
-      background: var(--renfe-purple);
-      border: 2px solid #fff;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 4
-    }
-
-    .station-item::before {
-      content: '';
-      position: absolute;
-      left: 25px;
-      top: 22px;
-      height: calc(100% + 15px);
-      width: 3px;
-      background: var(--renfe-purple);
-      transform: translateX(-50%);
-      z-index: 1
-    }
-
-    .duration-badge {
-      position: absolute;
-      left: 25px;
-      top: calc(100% + 7.5px);
-      transform: translate(-50%, -50%);
-      background: #fff;
-      border: 2px solid var(--renfe-purple);
-      border-radius: 15px;
-      padding: 2px 10px 3px;
-      font-size: .7rem;
-      font-weight: 700;
-      color: var(--text-main);
-      z-index: 5;
-      white-space: nowrap
-    }
-
-    .card {
-      position: relative;
-      background: #fff;
-      padding: 8px 10px;
-      border-radius: 4px;
-      border-left: 4px solid transparent;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      gap: 15px;
-      align-items: center
-    }
-
-    .card:hover {
-      background: #e6e5e5
-    }
-
-    .card::after {
-      content: '';
-      position: absolute;
-      left: -7px;
-      top: 15px;
-      width: 14px;
-      height: 14px;
-      background: inherit;
-      transform: rotate(45deg);
-      z-index: -1
-    }
-
-    .station-item:last-child {
-      margin-bottom: 0
-    }
-
-    .station-item:last-child .duration-badge,
-    .station-item:last-child::before {
-      display: none
-    }
-
-    .station-item.past::before {
-      background: var(--renfe-gray)
-    }
-
-    .station-item.past .dot {
-      border-color: var(--renfe-gray);
-      background: var(--renfe-gray)
-    }
-
-    .station-item.current .dot {
-      background: var(--renfe-purple);
-      box-shadow: 0 0 0 5px rgba(141, 36, 77, .2)
-    }
-
-    .current .card {
-      border-left-color: var(--renfe-purple);
-      background: #f9f0f4
-    }
-
-    .station-name {
-      font-weight: 700;
-      color: var(--text-main);
-      font-size: .9rem
-    }
-
-    .times {
-      font-size: .95rem;
-      color: var(--renfe-purple);
-      font-style: italic
-    }
-
-    .past .station-name {
-      color: var(--text-past);
-      font-weight: 400
-    }
-
-    .section-leyenda {
-      overflow-y: auto;
-      overflow-x: hidden
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <svg id="renfe-brand-symbols" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
-    <symbol id="renfe-brand-mark" viewBox="0 0 2932 1440">
+    <symbol id="renfe-brand-mark" viewBox="280 435 2450 195">
       <g transform="translate(0,1440) scale(0.1,-0.1)" fill="currentColor" stroke="none">
         <path d="M24775 9959 c-187 -25 -380 -93 -565 -200 -369 -211 -606 -537 -744 -1024 -48 -171 -54 -204 -266 -1465 -82 -492 -164 -976 -181 -1075 -102 -598 -144 -762 -246 -974 -50 -102 -65 -124 -152 -211 -81 -82 -110 -104 -187 -142 -50 -25 -125 -54 -166 -63 l-75 -18 -40 -81 c-67 -135 -70 -126 39 -126 229 1 478 60 681 161 354 177 625 481 780 874 106 269 135 404 297 1370 107 633 122 714 155 801 69 183 208 286 410 302 l80 7 56 100 c31 55 60 110 64 123 l6 22 -270 0 c-180 0 -271 3 -271 10 0 6 12 88 26 183 63 423 121 646 222 842 67 130 184 248 304 305 54 26 119 48 172 58 l85 16 51 99 c29 54 49 101 45 105 -11 11 -232 11 -310 1z"/>
         <path d="M9771 9365 c-269 -59 -541 -217 -666 -386 -81 -110 -101 -165 -153 -414 l-47 -230 -141 -3 -140 -3 -45 -121 c-24 -66 -45 -125 -47 -129 -2 -5 69 -9 157 -9 159 0 161 0 161 -22 0 -21 -88 -480 -187 -968 -72 -359 -71 -520 3 -676 113 -240 492 -340 1019 -270 61 8 133 20 160 26 l51 11 52 105 c65 130 66 139 10 130 -24 -3 -97 -9 -163 -12 -98 -6 -131 -4 -180 10 -117 34 -176 97 -202 219 -21 102 -14 177 56 532 33 171 81 418 106 550 25 132 52 267 59 300 l12 60 320 2 319 2 52 133 c29 73 53 134 53 136 0 1 -155 2 -345 2 -190 0 -345 2 -345 5 0 3 16 90 36 193 67 356 114 598 137 720 l24 122 -31 -1 c-17 0 -60 -7 -95 -14z"/>
@@ -1720,42 +39,21 @@
   </svg>
   <div id="map"></div>
 
-  <div class="container panel-lineas">
-    <div class="navigation-menu">
-      <section class="section-header">
-        <div class="row d-flex align-items-center justify-content-between h-100" style="min-height:30px">
-          <div class="col d-flex align-items-center" style="text-align:left">
-                        <div role="button" aria-label="Renfe">
-              <svg class="renfe-brand-logo" viewBox="0 0 2932 1440" role="img" aria-label="Renfe">
-                <use href="#renfe-brand-mark" xlink:href="#renfe-brand-mark"></use>
-              </svg>
-            </div>
-          </div>
-          <div class="col d-flex align-items-center justify-content-end gap-4">
-            <div role="button" class="button-info d-flex align-items-center justify-content-center" tabindex="0"
-              data-bs-toggle="collapse" data-bs-target="#modal-leyend" i18n="lineasPanel.capas"
-              i18n-attr="aria-label,title">
-              <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/lyrbutton/capas.svg" i18n="lineasPanel.capas"
-                i18n-attr="alt">
-            </div>
-          </div>
-        </div>
-      </section>
-      <div id="content-lineas" class="collapse show w-100">
-        <div class="row w-100">
-          <hr class="w-100 mx-1 mt-4">
-        </div>
-        <div class="d-flex flex-column align-items-start overflow-auto overflow-x-hidden w-100">
-          <section class="section-titulo">
-            <div>
-              <span class="fw-bold fs-5 lh-sm">Consulta el estado de los trenes</span><br>
-              <span class="fw-bold fs-6 lh-sm"><i>Alta Velocidad, Larga y Media Distancia</i></span>
-            </div>
-          </section>
+  <header class="app-header">
+    <div class="header-content d-flex align-items-center justify-content-between">
+      <div class="header-logo" role="button" aria-label="Renfe">
+        <svg class="renfe-brand-logo" viewBox="0 0 2932 1440" role="img" aria-label="Renfe">
+          <use href="#renfe-brand-mark" xlink:href="#renfe-brand-mark"></use>
+        </svg>
+      </div>
+      <div class="header-menu">
+        <div role="button" class="button-info d-flex align-items-center justify-content-center" tabindex="0"
+          data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Abrir menú">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <div class="modal-infopopup modal-info modal-tren" style="display:none">
     <div class="d-flex flex-column mb-2">
@@ -1776,10 +74,10 @@
       </section>
       <section class="section-mid-modal row pt-3">
         <div class="d-flex">
-          <div class="lineas">
-            <div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span
-                class="text-line-train-modal"><span>${ORIGEN}</span> <img
-                  src="https://tiempo-real.largorecorrido.renfe.com/imgs/symbol/arrow.svg" alt="→">
+          <div class="lineas w-100">
+            <div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center py-2" style="border-radius:var(--radius-sm);background:linear-gradient(135deg,rgba(107,29,59,0.9),var(--renfe-purple));color:#fff;box-shadow:var(--shadow-md)"><span
+                class="text-line-train-modal" style="font-weight:600;letter-spacing:0.02em"><span>${ORIGEN}</span> <img
+                  src="https://tiempo-real.largorecorrido.renfe.com/imgs/symbol/arrow.svg" alt="→" style="filter:brightness(0) invert(1);vertical-align:middle;margin:0 8px">
                 <span>${DESTINO}</span></span></div>
           </div>
         </div>
@@ -2035,21 +333,7 @@
             </div>
           </section>
         </section>
-        <section class="section-map d-flex flex-column align-items-start gap-3 my-4">
-          <div class="row"><span class="title-menu-movil" i18n="leyenda.capasbase"></span></div>
-          <div class="row d-flex justify-content-start">
-            <div class="w-50">
-              <div class="card-mapa-legend btn-callejero mapa-selected"><img
-                  src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/standard.svg" i18n="leyenda.estandar"
-                  i18n-attr="alt"></div><span class="card-mapa-text" i18n="leyenda.estandar"></span>
-            </div>
-            <div class="w-50">
-              <div class="card-mapa-legend btn-orto p-0"><img
-                  src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/satellite.svg" i18n="leyenda.satelite"
-                  i18n-attr="alt"></div><span class="card-mapa-text" i18n="leyenda.satelite"></span>
-            </div>
-          </div>
-        </section>
+
       </section>
     </div>
   </div>
@@ -2079,49 +363,29 @@
           </div>
           <div class="col d-flex align-items-center justify-content-end gap-4">
             <div role="button" class="button-info d-flex align-items-center justify-content-center"
-              onclick="openModal('.panel-capas-movil')"><img
-                src="https://tiempo-real.largorecorrido.renfe.com/imgs/lyrbutton/capas.svg" alt="Capas"></div>
+              data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </div>
           </div>
         </div>
       </section>
       <div id="content-filtros-movil">
         <div class="row w-100">
-          <hr class="w-100 mx-1 mt-4">
+          <hr class="w-100 mx-1 mt-3" style="opacity:0.15">
         </div>
-        <section class="section-titulo">
-          <div><span class="fw-bold fs-5 lh-sm">Consulta el estado de los trenes</span><br><span
-              class="fw-bold fs-6 lh-sm"><i>Alta Velocidad, Larga y Media Distancia</i></span></div>
+        <section class="section-titulo" style="padding:0.25rem 0.7rem">
+          <div style="padding:1rem;background:var(--surface);backdrop-filter:blur(12px);border-radius:var(--radius-sm);border-left:4px solid var(--renfe-purple);box-shadow:var(--shadow-sm)">
+            <span style="font-weight:700;font-size:1.1rem;line-height:1.3;color:var(--text-main);display:block">Consulta el estado de los trenes</span>
+            <span style="font-weight:500;font-size:0.9rem;color:var(--text-secondary);margin-top:4px;display:block">Alta Velocidad, Larga y Media Distancia</span>
+          </div>
         </section>
       </div>
     </div>
   </div>
-  <div class="p-0 panel-capas-movil">
-    <div class="d-flex flex-column p-3 navigation-menu-movil">
-      <section class="section-header-movil">
-        <div class="row d-flex align-items-center justify-content-between">
-          <div class="col d-flex align-items-center" style="text-align:left">
-                        <div role="button" aria-label="Renfe">
-              <svg class="renfe-brand-logo" viewBox="0 0 2932 1440" role="img" aria-label="Renfe">
-                <use href="#renfe-brand-mark" xlink:href="#renfe-brand-mark"></use>
-              </svg>
-            </div>
-          </div>
-          <div class="col d-flex align-items-center justify-content-end gap-4">
-            <div role="button" class="button-info d-flex align-items-center justify-content-center"
-              onclick="closeModal('.panel-capas-movil')"><img
-                src="https://tiempo-real.largorecorrido.renfe.com/imgs/lyrbutton/capas.svg" alt="Capas"></div>
-          </div>
-        </div>
-      </section>
-      <div class="row w-100">
-        <hr class="w-100 mx-1 mt-4">
-      </div>
-      <section class="section-leyenda leyend-content-movil d-flex flex-column p-2"
-        style="overflow-y:auto;overflow-x:hidden"></section>
-    </div>
-  </div>
+
 
   <div class="modal-infopopup modal-info-train-movil modal-tren-movil" style="display:none">
+    <div style="width:36px;height:4px;background:var(--renfe-gray);border-radius:4px;margin:0 auto 12px;opacity:0.6"></div>
     <div class="d-flex flex-column mb-2">
       <section class="section-header-modal">
         <div class="d-flex justify-content-between">
@@ -2135,7 +399,9 @@
     </div>
     <div class="d-flex flex-column modal-tren-content"></div>
   </div>
-  <div class="modal-infopopup modal-info-movil modal-estacion-movil" style="display:none"></div>
+  <div class="modal-infopopup modal-info-movil modal-estacion-movil" style="display:none">
+    <div style="width:36px;height:4px;background:var(--renfe-gray);border-radius:4px;margin:0 auto 12px;opacity:0.6"></div>
+  </div>
 
   <div class="modal-adif-timetable">
     <div class="d-flex flex-column h-100">
@@ -2179,19 +445,28 @@
   </div>
 
   <div class="controls-right">
-    <div class="ol-control ol-tool"><button id="btn-refreshtrain" title="Refrescar trenes" onclick="this.blur()"><img
-          src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/refreshtraindata.svg" alt="Refrescar"></button>
+    <div class="ol-control ol-tool">
+      <button id="btn-refreshtrain" title="Refrescar trenes" onclick="this.blur()">
+        <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/refreshtraindata.svg" alt="Refrescar">
+      </button>
     </div>
-    <div id="btn-geolocate" class="ol-control ol-tool"><button title="Geolocalizar" onclick="this.blur()"><img
-          src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/geolocation.svg" alt="Geo"></button></div>
+    <div id="btn-geolocate" class="ol-control ol-tool">
+      <button title="Geolocalizar" onclick="this.blur()">
+        <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/geolocation.svg" alt="Geo">
+      </button>
+    </div>
     <div id="zoomControls"></div>
-    <div id="btn-pausecont" class="ol-control ol-pause"><button id="btn-pause" title="Pausar" onclick="this.blur()"><img
-          src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/pause.svg" alt="Pausar"></button></div>
-    <div class="ol-nocoverage"><img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/no-coverage.svg"
-        alt="Sin cobertura"></div>
-    <div class="ol-attribution ol-unselectable ol-control ol-collapsed" style="pointer-events:auto"
-      data-bs-toggle="modal" data-bs-target="#modalAttributions"><button type="button" title="Info"><span
-          class="ol-attribution-expand">i</span></button></div>
+    <div id="btn-pausecont" class="ol-control ol-pause">
+      <button id="btn-pause" title="Pausar" onclick="this.blur()">
+        <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/pause.svg" alt="Pausar">
+      </button>
+    </div>
+    <div class="ol-nocoverage">
+      <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/no-coverage.svg" alt="Sin cobertura">
+    </div>
+    <div class="ol-attribution ol-unselectable ol-control ol-collapsed" style="pointer-events:auto" data-bs-toggle="modal" data-bs-target="#modalAttributions">
+      <button type="button" title="Info"><span class="ol-attribution-expand">i</span></button>
+    </div>
   </div>
 
   <div id="customToast"
@@ -2202,31 +477,72 @@
     </div>
   </div>
 
-  <div class="train-toolbar d-flex flex-row align-items-center">
-    <button id="btn-train" class="ol-tool" title="Buscar tren"><img id="trainIDicon"
-        src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/train.svg" alt=""></button>
-    <input type="text" id="qrInput" maxlength="5" size="5" placeholder="01234" inputmode="numeric" pattern="[0-9]*">
-    <img id="clearQRInput" role="button" src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/borrar.svg"
-      alt="Borrar" class="disabled" aria-disabled="true" style="pointer-events:none;opacity:0.4">
-    <span class="separator-vertical-toolbar"></span>
-    <img onclick="renderTimeline()" id="rutaCtrl" role="button"
-      src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/route.svg" alt="Ruta" class="disabled"
-      aria-disabled="true" style="pointer-events:none;opacity:0.4">
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header" style="border-bottom: 1px solid var(--border-color); padding: 1.25rem 1.5rem; background: linear-gradient(135deg, rgba(235, 221, 233, 0.4), rgba(219, 219, 229, 0.4));">
+      <h5 class="offcanvas-title" id="mobileMenuLabel" style="font-weight: 700; font-size: 1.2rem; color: var(--text-main); letter-spacing: -0.01em;">Menú</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column gap-4" style="padding: 1.5rem;">
+      
+      <!-- TRAIN SEARCH WIDGET -->
+      <section class="menu-section d-flex flex-column gap-2">
+        <span style="font-weight: 700; font-size: 1.05rem; color: var(--text-main);">Buscar tren</span>
+        <div class="d-flex align-items-center" style="background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--renfe-purple); padding: 8px; box-shadow: var(--shadow-sm);">
+          <div class="d-flex w-100 position-relative align-items-center">
+            <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/train.svg" alt="Tren" style="width: 28px; height: 28px; margin-right: 8px;">
+            <input type="text" id="qrInput" maxlength="5" size="5" placeholder="Número de tren..." inputmode="numeric" pattern="[0-9]*" class="form-control" style="border: none; background: transparent; box-shadow: none; font-size: 1rem; font-weight: 600; color: var(--text-main); padding: 0 32px 0 0;">
+            <img id="clearQRInput" role="button" src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/borrar.svg" alt="Borrar" class="disabled position-absolute top-50 translate-middle-y end-0" aria-disabled="true" style="pointer-events: none; opacity: 0; transition: opacity var(--transition); width: 18px; height: 18px;">
+          </div>
+          <div style="width: 1px; height: 32px; background: var(--border-color); margin: 0 12px;"></div>
+          <button id="btn-train" class="btn btn-sm text-white d-flex justify-content-center align-items-center" style="background: var(--renfe-purple); border-radius: 8px; min-width: 44px; height: 44px; transition: var(--transition);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+        </div>
+      </section>
+
+      <hr style="opacity: 0.15; margin: 0;">
+
+      <!-- MAP LAYERS WIDGET (MOVED FROM DESKTOP SIDE PANEL) -->
+      <section class="menu-section d-flex flex-column gap-3">
+        <span style="font-weight: 700; font-size: 1.05rem; color: var(--text-main);">Capa base del mapa</span>
+        <div class="row align-items-stretch">
+          <div class="col-6 pe-2">
+             <div class="card-mapa-legend btn-callejero mapa-selected h-100 d-flex flex-column align-items-center pt-3 pb-2 text-center" style="background: var(--surface); border: 2px solid var(--renfe-purple); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-sm);">
+                <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/standard.svg" style="height: 48px; margin-bottom: 8px;" alt="Estándar">
+                <span style="font-weight: 600; font-size: 0.9rem; color: var(--text-main); line-height: 1;">Estándar</span>
+             </div>
+          </div>
+          <div class="col-6 ps-2">
+             <div class="card-mapa-legend btn-orto h-100 d-flex flex-column align-items-center pt-3 pb-2 text-center" style="background: #f9f7f8; border: 2px solid transparent; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-sm);">
+                <img src="https://tiempo-real.largorecorrido.renfe.com/imgs/tool/satellite.svg" style="height: 48px; margin-bottom: 8px;" alt="Satélite">
+                <span style="font-weight: 600; font-size: 0.9rem; color: var(--text-secondary); line-height: 1;">Satélite</span>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      <hr style="opacity: 0.15; margin: 0;">
+
+      <!-- LAYER TOGGLES -->
+      <section class="section-leyenda leyend-content-movil d-flex flex-column gap-2" style="overflow-y: auto; overflow-x: hidden;"></section>
+
+    </div>
   </div>
 
   <div class="modal fade" id="modalAttributions" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Atribuciones e informacion</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius:var(--radius-lg);border:1px solid var(--border-color);box-shadow:var(--shadow-xl);overflow:hidden">
+        <div class="modal-header" style="border-bottom:1px solid var(--border-color);padding:1.25rem 1.5rem;background:linear-gradient(135deg,#fdf2f6,#f8f4f9)">
+          <h5 class="modal-title" style="font-weight:700;font-size:1.1rem;color:var(--text-main);letter-spacing:-0.01em">Atribuciones e informacion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body"><span class="title-menu">ATRIBUCIONES</span>
-          <ul style="list-style:disc;padding-left:1.5em">
-            <li><b>Mapa base:</b> &copy; IGN</li>
-            <li><b>Red Ferroviaria:</b> ADIF</li>
+        <div class="modal-body" style="padding:1.5rem">
+          <p style="font-weight:600;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.06em;color:var(--text-secondary);margin-bottom:0.75rem">Atribuciones</p>
+          <ul style="list-style:none;padding:0;margin:0 0 1rem 0">
+            <li style="padding:0.5rem 0.75rem;background:#f9f7f8;border-radius:var(--radius-sm);margin-bottom:0.5rem;font-size:0.9rem"><b style="color:var(--renfe-purple)">Mapa base:</b> &copy; IGN</li>
+            <li style="padding:0.5rem 0.75rem;background:#f9f7f8;border-radius:var(--radius-sm);font-size:0.9rem"><b style="color:var(--renfe-purple)">Red Ferroviaria:</b> ADIF</li>
           </ul>
-          <p>Informacion meramente informativa.</p>
+          <p style="font-size:0.82rem;color:var(--text-secondary);margin:0">Informacion meramente informativa.</p>
         </div>
       </div>
     </div>
@@ -7243,49 +5559,6 @@
       "87814": "Avignon TGV",
       "87912": "Aix-en-Provence TGV"
     };
-    const FRENCH_TGV_ROUTES = [
-      [{l:"P",n:"Perpignan"},{l:"N",n:"Narbonne"},{l:"B",n:"Béziers"},{l:"A",n:"Agde"},
-       {l:"S",n:"Sète"},{l:"M",n:"Montpellier Saint-Roch"},{l:"N",n:"Nîmes"},
-       {l:"V",n:"Valence TGV"},{l:"L",n:"Lyon Part-Dieu"},{l:"P",n:"Paris Gare de Lyon"}],
-      [{l:"P",n:"Perpignan"},{l:"N",n:"Narbonne"},{l:"B",n:"Béziers"},{l:"A",n:"Agde"},
-       {l:"S",n:"Sète"},{l:"M",n:"Montpellier Saint-Roch"},{l:"N",n:"Nîmes"},
-       {l:"A",n:"Avignon TGV"},{l:"A",n:"Aix-en-Provence TGV"},{l:"M",n:"Marseille Saint-Charles"}],
-      [{l:"P",n:"Perpignan"},{l:"N",n:"Narbonne"},{l:"B",n:"Béziers"},{l:"A",n:"Agde"},
-       {l:"S",n:"Sète"},{l:"M",n:"Montpellier Saint-Roch"},{l:"N",n:"Nîmes"},
-       {l:"A",n:"Avignon TGV"},{l:"V",n:"Valence TGV"},{l:"L",n:"Lyon Part-Dieu"},{l:"P",n:"Paris Gare de Lyon"}]
-    ];
-    function resolveFrenchLetterCodes(estaciones) {
-      var idxs = [], i;
-      for (i = 0; i < estaciones.length; i++) {
-        var p = estaciones[i].p;
-        if (p && p.length === 1 && /^[A-Z]$/.test(p)) idxs.push(i);
-      }
-      if (idxs.length === 0) return null;
-      var letters = idxs.map(function(j) { return estaciones[j].p; });
-      function tryMatch(seq) {
-        var si = 0, names = [], k;
-        for (k = 0; k < letters.length; k++) {
-          var found = false;
-          while (si < seq.length) {
-            if (seq[si].l === letters[k]) { names.push(seq[si].n); si++; found = true; break; }
-            si++;
-          }
-          if (!found) return null;
-        }
-        return names;
-      }
-      for (var r = 0; r < FRENCH_TGV_ROUTES.length; r++) {
-        var route = FRENCH_TGV_ROUTES[r];
-        var names = tryMatch(route);
-        if (!names) names = tryMatch(route.slice().reverse());
-        if (names) {
-          var result = {};
-          idxs.forEach(function(idx, k) { result[idx] = names[k]; });
-          return result;
-        }
-      }
-      return null;
-    }
     const FRENCH_TGV_ROUTE_ENTRIES = [
       [{l:"P",c:"87374",n:"Perpignan"},{l:"N",c:"87088",n:"Narbonne"},{l:"B",c:"87078",n:"B\u00e9ziers"},{l:"A",c:"87287",n:"Agde"},
        {l:"S",c:"87175",n:"S\u00e8te"},{l:"M",c:"87173",n:"Montpellier Saint-Roch"},{l:"N",c:"87302",n:"N\u00eemes"},
@@ -7319,15 +5592,17 @@
       }
       return matched;
     }
-    function resolveFrenchRouteMatchFromLetters(letters) {
+    function resolveFrenchRouteMatchFromLetters(letters, preferReverse = false) {
       if (!Array.isArray(letters) || !letters.length) return null;
       for (var r = 0; r < FRENCH_TGV_ROUTE_ENTRIES.length; r++) {
         var route = FRENCH_TGV_ROUTE_ENTRIES[r];
-        var matched = matchFrenchRouteEntriesByLetters(letters, route);
-        if (matched) return { route: route, entries: matched };
         var reversedRoute = route.slice().reverse();
-        matched = matchFrenchRouteEntriesByLetters(letters, reversedRoute);
-        if (matched) return { route: reversedRoute, entries: matched };
+        var primaryRoute = preferReverse ? reversedRoute : route;
+        var secondaryRoute = preferReverse ? route : reversedRoute;
+        var matched = matchFrenchRouteEntriesByLetters(letters, primaryRoute);
+        if (matched) return { route: primaryRoute, entries: matched };
+        matched = matchFrenchRouteEntriesByLetters(letters, secondaryRoute);
+        if (matched) return { route: secondaryRoute, entries: matched };
       }
       return null;
     }
@@ -7343,6 +5618,37 @@
       var result = {};
       idxs.forEach(function(idx, k) { result[idx] = match.entries[k].n; });
       return result;
+    }
+    function normalizeTrainIdentifier(value) {
+      var raw = String(value || "").trim();
+      var digits = raw.replace(/\D/g, "");
+      if (!digits) return { raw: raw, digits: "", plain: "" };
+      return { raw: raw, digits: digits.padStart(5, "0"), plain: String(parseInt(digits, 10)) };
+    }
+    function getRouteInfoTrainById(value) {
+      if (!rutasInfo || !Array.isArray(rutasInfo.trenes)) return null;
+      var id = normalizeTrainIdentifier(value);
+      if (!id.digits && !id.raw) return null;
+      for (var i = 0; i < rutasInfo.trenes.length; i++) {
+        var train = rutasInfo.trenes[i];
+        var current = normalizeTrainIdentifier(train && train.idTren);
+        if (!current.digits && !current.raw) continue;
+        if ((id.digits && current.digits === id.digits) || (id.plain && current.plain === id.plain) || (id.raw && current.raw === id.raw)) return train;
+      }
+      return null;
+    }
+    function buildRouteInfoEntries(routeTrain) {
+      if (!routeTrain || !Array.isArray(routeTrain.estaciones) || !routeTrain.estaciones.length) return null;
+      var frenchNames = resolveFrenchLetterCodes(routeTrain.estaciones) || {};
+      return routeTrain.estaciones.map(function(stop, index) {
+        var code = String(stop && stop.p || "").trim();
+        var numericCode = normalizeStationCode(code);
+        return {
+          l: getFrenchLetterStationCode(code),
+          c: /^\d+$/.test(numericCode) ? numericCode : "",
+          n: frenchNames[index] || getStationNameByCode(code) || code || "-"
+        };
+      });
     }
     let translations = { es: { lineasPanel: { capas: "Informacion de capas", estaciones: "Estaciones" }, popup: { tren: { cerrar: "Cerrar", flecha: "->", trenaccesible: "Tren accesible", antparada: "Parada anterior", proxparada: "Proxima parada", llegadaprev: "Llegada prevista", varhoraria: "Variacion horaria" }, estacion: { estacion: "Estacion", cerrar: "Cerrar", accesible: "Estacion accesible", correspondencias: "Correspondencias" } }, leyenda: { capas: "Capas", cerrar: "Cerrar", trenescluster: "Agrupacion de trenes", trenes: "Trenes en tiempo real", estaciones: "Estaciones", accesible: "Accesible", capasbase: "Capas base del mapa", estandar: "Estandar", satelite: "Satelite" }, tools: { refreshtrain: "Refrescar trenes", geolocalizar: "Geolocalizar", pausar: "Pausar trenes", sincobertura: "Sin cobertura" }, js: { estaccercana: "Estacion mas cercana", noestaccercana: "No hay estacion a menos de 100 km.", enhora: "En hora" } } };
     let currentLang = "es", pauseTrains = false, ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), dataTrenes, popuptren, popupestacion, seguirTren;
@@ -7364,6 +5670,8 @@
     let adifTimetableSocket = null;
     let adifTimetableResizeTimer = null;
     let adifBoardLogoSeq = 0;
+    let adifGravitaShellHtml = "";
+    let adifGravitaShellPromise = null;
     const ADIF_HUB_URL = "wss://info.adif.es/InfoStation";
     const ADIF_HUB_RS = String.fromCharCode(30);
     function t(e) { let o = translations[currentLang]; for (var p of e.split(".")) { if (!(o = o?.[p])) return e } return o }
@@ -8045,6 +6353,11 @@
         adifTimetableResizeTimer = null;
       }
       cleanupAdifTimetableSocket();
+      document.querySelectorAll(".adif-gravita-container iframe").forEach(iframe => {
+        if (!iframe?.dataset?.localBlobUrl) return;
+        try { URL.revokeObjectURL(iframe.dataset.localBlobUrl) } catch { }
+        delete iframe.dataset.localBlobUrl;
+      });
       $(".modal-adif-timetable").hide();
     }
     function parseAdifHubFrames(raw) {
@@ -8132,18 +6445,24 @@
       return "";
     }
     function getAdifStopCode(stop) {
+      if (typeof stop === "string") return String(stop || "").trim();
       const candidates = [stop?.station_code, stop?.stationCode, stop?.uic, stop?.id, stop?.code, stop?.p]
         .map(value => String(value || "").trim())
         .filter(Boolean);
       return candidates.find(value => /^\d{4,7}$/.test(normalizeStationCode(value))) || candidates[0] || "";
     }
     function getAdifStopRouteLetter(stop) {
+      if (typeof stop === "string") return getFrenchLetterStationCode(stop);
       const candidates = [stop?.code, stop?.station_code, stop?.stationCode, stop?.id, stop?.uic, stop?.p]
         .map(value => getFrenchLetterStationCode(value))
         .filter(Boolean);
       return candidates[0] || "";
     }
     function getAdifStopDisplayName(stop) {
+      if (typeof stop === "string") {
+        const value = String(stop || "").trim();
+        return value && !getFrenchLetterStationCode(value) && !/^\d{4,6}$/.test(value) ? value : "";
+      }
       const rawCode = getAdifStopCode(stop);
       return [stop?.name, stop?.station_name, stop?.short_name, stop?.long_name]
         .map(value => String(value || "").trim())
@@ -8170,19 +6489,23 @@
       });
     }
     function getAdifTrainStopArray(train, key) {
-      return Array.isArray(train?.[key]) ? train[key].filter(stop => stop && typeof stop === "object") : [];
+      return Array.isArray(train?.[key]) ? train[key].filter(stop => typeof stop === "string" ? String(stop).trim() : !!(stop && typeof stop === "object")) : [];
     }
     function getAdifTrainStopGroup(train, listKey, singleKey) {
       const items = getAdifTrainStopArray(train, listKey);
       if (items.length) return items;
       const single = train?.[singleKey];
-      return single && typeof single === "object" ? [single] : [];
+      return typeof single === "string" ? (String(single).trim() ? [single] : []) : (single && typeof single === "object" ? [single] : []);
     }
     function collectAdifStopRefs(parts) {
       const refs = [];
       parts.forEach(part => {
         if (!Array.isArray(part)) return;
         part.forEach(stop => {
+          if (typeof stop === "string") {
+            if (String(stop).trim()) refs.push(stop);
+            return;
+          }
           if (stop && typeof stop === "object") refs.push(stop);
         });
       });
@@ -8206,7 +6529,7 @@
         const entries = matchFrenchRouteEntriesByLetters(letters, routeForMatch);
         if (entries) match = { route, entries };
       } else {
-        match = resolveFrenchRouteMatchFromLetters(letters);
+        match = resolveFrenchRouteMatchFromLetters(letters, fromEnd);
       }
       if (!match || !Array.isArray(match.entries) || !match.entries.length) return null;
       const entriesByIndex = {};
@@ -8223,6 +6546,11 @@
         const stop = stops[parseInt(key, 10)];
         const entry = resolved.entriesByIndex[key];
         if (!stop || !entry) return;
+        if (typeof stop === "string") {
+          stops[parseInt(key, 10)] = entry.n;
+          setAdifStationEntryName(stations, entry.c, entry.n);
+          return;
+        }
         setAdifNamedFields(stop, entry.n);
         if (entry.c) {
           let wroteCode = false;
@@ -8259,6 +6587,14 @@
         getAdifTrainStopArray(train, "route"),
         getAdifTrainStopArray(train, "itinerary")
       ];
+      Object.keys(train).forEach(key => {
+        const val = train[key];
+        if (!Array.isArray(val)) return;
+        const stops = val.filter(s => typeof s === "string" ? String(s).trim() : !!(s && typeof s === "object"));
+        if (stops.length < 2) return;
+        candidates.push(collectAdifStopRefs([origins, stops, destinations]));
+        candidates.push(stops);
+      });
       let best = null;
       candidates.forEach(candidate => {
         const resolved = resolveFrenchEntriesForAdifStops(candidate);
@@ -8271,6 +6607,7 @@
     function patchFrenchTrainStationNames(train, stations) {
       const route = resolveFrenchRouteForAdifTrain(train);
       if (!route) return;
+      if (!Array.isArray(train.__renfeRouteEntries) || !train.__renfeRouteEntries.length) train.__renfeRouteEntries = route;
       const origins = getAdifTrainStopGroup(train, "origins", "origin");
       const destinations = getAdifTrainStopGroup(train, "destinations", "destination");
       const previousStops = getAdifTrainStopGroup(train, "previous_stops", "previous_stop");
@@ -8286,6 +6623,64 @@
       applyFrenchNamesToAdifStops(destinations, route, stations, true);
       applyFrenchNamesToAdifStops(previousStops, route, stations);
       applyFrenchNamesToAdifStops(collectAdifStopRefs([currentStops, nextStops]), route, stations);
+      Object.keys(train).forEach(key => {
+        const val = train[key];
+        if (Array.isArray(val)) {
+          const stops = val.filter(s => typeof s === "string" ? String(s).trim() : !!(s && typeof s === "object"));
+          if (stops.length) applyFrenchNamesToAdifStops(val, route, stations, /dest/i.test(key));
+        } else if (typeof val === "string" && getFrenchLetterStationCode(val)) {
+          const single = [val];
+          if (applyFrenchNamesToAdifStops(single, route, stations, /dest/i.test(key))) train[key] = single[0];
+        } else if (val && typeof val === "object" && !Array.isArray(val)) {
+          applyFrenchNamesToAdifStops([val], route, stations, /dest/i.test(key));
+        }
+      });
+    }
+    function isFrenchStationishKeyPath(path) {
+      return /(dest|orig|stop|route|itiner|station|parada|destino|origen|termin|towards|main)/i.test(String(path || ""));
+    }
+    function parseFrenchDisplayLetterSequence(value) {
+      const text = String(value || "").trim().toUpperCase();
+      if (!text) return null;
+      if (getFrenchLetterStationCode(text)) return [text];
+      if (!/^[A-Z](?:\s*[\u00B7\.\-\/,;:|]+\s*|\s+)[A-Z](?:(?:\s*[\u00B7\.\-\/,;:|]+\s*|\s+)[A-Z])*$/u.test(text)) return null;
+      const letters = text.match(/[A-Z]/g) || [];
+      return letters.length ? letters : null;
+    }
+    function getFrenchDisplayReplacement(train, value, preferReverse = false) {
+      const letters = parseFrenchDisplayLetterSequence(value);
+      if (!letters || !letters.length) return "";
+      const match = resolveFrenchDisplayMatchForTrain(train, letters, preferReverse);
+      if (!match?.entries?.length || match.entries.length !== letters.length) return "";
+      if (letters.length === 1) return normalizeAdifName(match.entries[0]?.n);
+      return match.entries.map(entry => normalizeAdifName(entry?.n)).filter(Boolean).join(" " + String.fromCharCode(183) + " ");
+    }
+    function patchFrenchDisplayStringsDeep(node, train, keyPath = "") {
+      if (typeof node === "string") {
+        const letters = parseFrenchDisplayLetterSequence(node);
+        if (!letters || (!isFrenchStationishKeyPath(keyPath) && letters.length < 2)) return node;
+        const preferReverse = /(dest|towards|final|termin|main)/i.test(keyPath) && !/(orig|from|prev|previous)/i.test(keyPath);
+        return getFrenchDisplayReplacement(train, node, preferReverse) || node;
+      }
+      if (Array.isArray(node)) {
+        const keyPathText = String(keyPath || "");
+        const letters = node.every(item => typeof item === "string" && getFrenchLetterStationCode(item))
+          ? node.map(item => getFrenchLetterStationCode(item))
+          : null;
+        if (letters && letters.length && isFrenchStationishKeyPath(keyPathText)) {
+          const preferReverse = /(dest|towards|final|termin|main)/i.test(keyPathText) && !/(orig|from|prev|previous)/i.test(keyPathText);
+          const match = resolveFrenchDisplayMatchForTrain(train, letters, preferReverse);
+          if (match?.entries?.length === letters.length) return match.entries.map(entry => normalizeAdifName(entry?.n)).filter(Boolean);
+        }
+        for (let i = 0; i < node.length; i++) node[i] = patchFrenchDisplayStringsDeep(node[i], train, `${keyPath}[${i}]`);
+        return node;
+      }
+      if (!node || typeof node !== "object") return node;
+      Object.keys(node).forEach(key => {
+        if (key === "__renfeRouteEntries") return;
+        node[key] = patchFrenchDisplayStringsDeep(node[key], train, keyPath ? `${keyPath}.${key}` : key);
+      });
+      return node;
     }
     function getAdifHubStationName(payload, stop) {
       const contextualName = getAdifStopDisplayName(stop);
@@ -8360,6 +6755,24 @@
         : [train?.platform, train?.platform_preview, train?.platform_out, train?.platform_preview_out];
       return values.map(value => String(value || "").trim()).find(Boolean) || "";
     }
+    function getAdifHubIntermediateStops(payload, train) {
+      const keys = ["commercial_stops", "all_stops", "stops", "route", "itinerary"];
+      for (const key of keys) {
+        if (!Array.isArray(train[key]) || !train[key].length) continue;
+        const names = train[key].filter(s => s && typeof s === "object").map(s => getAdifHubStationName(payload, s)).filter(n => n && n !== "-");
+        if (names.length) return names;
+      }
+      for (const key of Object.keys(train)) {
+        if (keys.includes(key)) continue;
+        const val = train[key];
+        if (!Array.isArray(val) || val.length < 2) continue;
+        const stops = val.filter(s => s && typeof s === "object" && (s.code || s.station_code || s.name));
+        if (stops.length < 2) continue;
+        const names = stops.map(s => getAdifHubStationName(payload, s)).filter(n => n && n !== "-");
+        if (names.length) return names;
+      }
+      return [];
+    }
     function buildAdifHubRows(payload) {
       const rowsByType = { proximasSalidas: [], proximasLlegadas: [] };
       const trains = Array.isArray(payload?.trains) ? payload.trains : [];
@@ -8383,6 +6796,7 @@
         const countdown = Number(train.countdown);
         const departureTime = getAdifHubTimeLabel(train.departure_time);
         const arrivalTime = getAdifHubTimeLabel(train.arrival_time);
+        const paradas = getAdifHubIntermediateStops(payload, train);
         if (departureTime && String(train.class_stop || "").toLowerCase() !== "destination") {
           rowsByType.proximasSalidas.push({
             kind: "train",
@@ -8399,6 +6813,7 @@
             via: getAdifHubPlatform(train, false),
             immediate: !!(train.immediate_out || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
             cercaniasColour: lineColor.replace(/^#/, ""),
+            paradas,
             _sort: getAdifHubSortValue(train.departure_time)
           });
         }
@@ -8418,6 +6833,7 @@
             via: getAdifHubPlatform(train, true),
             immediate: !!(train.immediate_in || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
             cercaniasColour: lineColor.replace(/^#/, ""),
+            paradas,
             _sort: getAdifHubSortValue(train.arrival_time)
           });
         }
@@ -8581,6 +6997,9 @@
     function getAdifGravitaInterfaceValue(screen) {
       return screen === "arrivals" ? "adif-gravita-arrivals" : "adif-gravita-departures";
     }
+    function getAdifIframeFontSizeValue() {
+      return ismobile ? 22 : 20;
+    }
     function buildAdifGravitaUrl(stationCode, interfaz, filter, language) {
       const baseParams = {
         rutaRecursos: "../../../recursos",
@@ -8611,6 +7030,503 @@
       });
       return `https://info.adif.es/assets/gravita/gravita.html?${params.toString()}`;
     }
+    function normalizeAdifGravitaShellHtml(html, iframeUrl = "") {
+      let output = String(html || "");
+      if (!output) return "";
+      output = output.replace(/<meta[^>]+http-equiv=["']Content-Security-Policy["'][^>]*>/gi, "");
+      output = output.replace(/<meta[^>]+http-equiv=["']X-Content-Security-Policy["'][^>]*>/gi, "");
+      const query = (() => {
+        try { return new URL(String(iframeUrl || "https://info.adif.es/assets/gravita/gravita.html")).search || "" } catch { return "" }
+      })();
+      const bootstrap = `<script>(function(){try{var q=${JSON.stringify(query)};if(q&&window.history&&window.history.replaceState&&window.location.search!==q)window.history.replaceState(null,"",q);}catch(e){}})();<\/script>`;
+      if (!/<base\s/i.test(output)) {
+        output = output.replace(/<head([^>]*)>/i, `<head$1><base href="https://info.adif.es/assets/gravita/">${bootstrap}`);
+      } else {
+        output = output.replace(/<head([^>]*)>/i, `<head$1>${bootstrap}`);
+      }
+      return output;
+    }
+    async function ensureAdifGravitaShellHtml() {
+      if (adifGravitaShellHtml) return adifGravitaShellHtml;
+      if (adifGravitaShellPromise) return adifGravitaShellPromise;
+      adifGravitaShellPromise = (async () => {
+        const cacheKey = "adif.gravita.shell.html.v2";
+        const cached = getStorage(cacheKey);
+        if (cached) {
+          adifGravitaShellHtml = cached;
+          return adifGravitaShellHtml;
+        }
+        const html = normalizeAdifGravitaShellHtml(await fetchRemoteText("https://info.adif.es/assets/gravita/gravita.html", {
+          directOriginUrl: "https://info.adif.es/assets/gravita/gravita.html",
+          timeoutMs: 15000,
+          cacheBust: false
+        }), "https://info.adif.es/assets/gravita/gravita.html");
+        adifGravitaShellHtml = html;
+        setStorage(cacheKey, html);
+        return adifGravitaShellHtml;
+      })().finally(() => { adifGravitaShellPromise = null });
+      return adifGravitaShellPromise;
+    }
+    function collapseAdifText(value) {
+      return String(value || "").replace(/\s+/g, " ").trim();
+    }
+    async function ensureAdifRouteInfoFresh() {
+      if (rutasInfo && rutasInfoTS && Date.now() - rutasInfoTS <= 3e5 && Array.isArray(rutasInfo.trenes) && rutasInfo.trenes.length) return true;
+      try {
+        await cargarRuta();
+      } catch {
+        return false;
+      }
+      return !!(rutasInfo && Array.isArray(rutasInfo.trenes) && rutasInfo.trenes.length);
+    }
+    function getAdifTrainContextRouteEntries(train) {
+      if (!train || typeof train !== "object") return null;
+      if (Object.prototype.hasOwnProperty.call(train, "__renfeRouteEntries")) return Array.isArray(train.__renfeRouteEntries) ? train.__renfeRouteEntries : null;
+      const routeInfoEntries = buildRouteInfoEntries(getRouteInfoTrainById(getAdifHubTrainNumber(train)));
+      const frenchRouteEntries = resolveFrenchRouteForAdifTrain(train);
+      train.__renfeRouteEntries = Array.isArray(routeInfoEntries) && routeInfoEntries.length
+        ? routeInfoEntries
+        : (Array.isArray(frenchRouteEntries) && frenchRouteEntries.length ? frenchRouteEntries : null);
+      return train.__renfeRouteEntries;
+    }
+    function getAdifResolvedStopNamesForRender(payload, train, stops, fromEnd = false) {
+      const list = Array.isArray(stops) ? stops.filter(stop => typeof stop === "string" ? String(stop).trim() : !!(stop && typeof stop === "object")) : [];
+      if (!list.length) return [];
+      const routeEntries = getAdifTrainContextRouteEntries(train);
+      const names = list.map(stop => normalizeAdifName(getAdifHubStationName(payload, stop)) || "-");
+      if (routeEntries && routeEntries.length) {
+        const routeNamesByCode = new Map();
+        routeEntries.forEach(entry => {
+          const code = normalizeStationCode(entry?.c);
+          const name = normalizeAdifName(entry?.n);
+          if (!code || !name) return;
+          routeNamesByCode.set(code, name);
+          routeNamesByCode.set(code.padStart(5, "0"), name);
+          routeNamesByCode.set(code.padStart(7, "0"), name);
+        });
+        list.forEach((stop, index) => {
+          const code = normalizeStationCode(getAdifStopCode(stop));
+          if (code && routeNamesByCode.has(code)) names[index] = routeNamesByCode.get(code);
+        });
+      }
+      const resolvedFrench = routeEntries
+        ? resolveFrenchEntriesForAdifStops(list, routeEntries, fromEnd)
+        : resolveFrenchEntriesForAdifStops(list, null, fromEnd);
+      if (resolvedFrench?.entriesByIndex) {
+        Object.keys(resolvedFrench.entriesByIndex).forEach(key => {
+          const index = parseInt(key, 10);
+          const entry = resolvedFrench.entriesByIndex[key];
+          if (Number.isInteger(index) && entry?.n) names[index] = normalizeAdifName(entry.n);
+        });
+      }
+      return names.map(name => normalizeAdifName(name)).filter(name => name && name !== "-");
+    }
+    function getAdifResolvedEndpointNameForRender(payload, train, stop, fromEnd = false) {
+      const names = getAdifResolvedStopNamesForRender(payload, train, stop ? [stop] : [], fromEnd);
+      if (names.length) return names[0];
+      return normalizeAdifName(getAdifHubStationName(payload, stop));
+    }
+    function resolveFrenchDisplayMatchForTrain(train, letters, preferReverse = false) {
+      if (!Array.isArray(letters) || !letters.length) return null;
+      const routes = [];
+      const pushRoute = route => {
+        if (!Array.isArray(route) || !route.length) return;
+        const key = route.map(entry => `${entry?.l || ""}:${entry?.c || ""}:${entry?.n || ""}`).join("|");
+        if (!key || routes.some(item => item.key === key)) return;
+        routes.push({ key, route });
+      };
+      pushRoute(getAdifTrainContextRouteEntries(train));
+      FRENCH_TGV_ROUTE_ENTRIES.forEach(pushRoute);
+      for (const item of routes) {
+        const route = item.route;
+        const reversedRoute = route.slice().reverse();
+        const primaryRoute = preferReverse ? reversedRoute : route;
+        const secondaryRoute = preferReverse ? route : reversedRoute;
+        let matched = matchFrenchRouteEntriesByLetters(letters, primaryRoute);
+        if (matched) return { route: primaryRoute, entries: matched };
+        matched = matchFrenchRouteEntriesByLetters(letters, secondaryRoute);
+        if (matched) return { route: secondaryRoute, entries: matched };
+      }
+      return null;
+    }
+    function resolveFrenchNamesFromIframeRow(row, train, screen) {
+      if (!row || !Array.isArray(row.stopNames)) return null;
+      const mainLabel = normalizeAdifName(row.mainName);
+      const stopLabels = row.stopNames.map(name => normalizeAdifName(name)).filter(Boolean);
+      const mainLetter = getFrenchLetterStationCode(mainLabel);
+      const stopLetters = stopLabels.map(label => getFrenchLetterStationCode(label));
+      if (!mainLetter || !stopLabels.length || stopLetters.some(letter => !letter)) return null;
+      const preferredMainSide = screen === "arrivals" ? "first" : "last";
+      const attempts = [
+        { side: "last", letters: [...stopLetters, mainLetter], preferReverse: false },
+        { side: "first", letters: [mainLetter, ...stopLetters], preferReverse: true }
+      ];
+      let best = null;
+      attempts.forEach(attempt => {
+        const match = resolveFrenchDisplayMatchForTrain(train, attempt.letters, attempt.preferReverse);
+        if (!match?.entries?.length) return;
+        const score = match.entries.length * 10 + (attempt.side === preferredMainSide ? 1 : 0);
+        if (!best || score > best.score) best = { attempt, match, score };
+      });
+      if (!best) return null;
+      const names = best.match.entries.map(entry => normalizeAdifName(entry?.n)).filter(Boolean);
+      if (!names.length) return null;
+      if (best.attempt.side === "first") {
+        return { mainName: names[0], stopNames: names.slice(1) };
+      }
+      return { mainName: names[names.length - 1], stopNames: names.slice(0, -1) };
+    }
+    function getAdifGravitaStopNames(payload, train, endpointStop, endpointFromEnd = false) {
+      const stopKeys = ["commercial_stops", "all_stops", "stops", "route", "itinerary"];
+      for (const key of stopKeys) {
+        const stops = getAdifTrainStopArray(train, key);
+        const names = getAdifResolvedStopNamesForRender(payload, train, stops, false);
+        if (names.length >= 2) {
+          if (endpointStop) {
+            const endpointName = getAdifResolvedEndpointNameForRender(payload, train, endpointStop, endpointFromEnd);
+            if (endpointName && names[names.length - 1] !== endpointName) names.push(endpointName);
+          }
+          return [...new Set(names)];
+        }
+      }
+      return endpointStop ? [getAdifResolvedEndpointNameForRender(payload, train, endpointStop, endpointFromEnd)].filter(Boolean) : [];
+    }
+    function buildAdifIframeRows(payload, screen) {
+      const rows = [];
+      const trains = Array.isArray(payload?.trains) ? payload.trains : [];
+      trains.forEach(train => {
+        if (!train) return;
+        const trafficTypeRaw = String(train.traffic_type || "").toUpperCase();
+        const productCode = String(train?.commercial_id?.[0]?.product || "").toUpperCase();
+        if (trafficTypeRaw === "-" || productCode === "SSERV" || productCode === "ESPECRF") return;
+        const isCercanias = trafficTypeRaw === "C";
+        const trafficType = isCercanias ? "cercanias" : "avldmd";
+        const origin = Array.isArray(train.origins) ? train.origins[0] || null : (train?.origin && typeof train.origin === "object" ? train.origin : null);
+        const destination = Array.isArray(train.destinations) ? train.destinations[0] || null : (train?.destination && typeof train.destination === "object" ? train.destination : null);
+        const rawLine = (destination && destination.line) || (origin && origin.line) || "";
+        const lineLabel = isCercanias ? extractAdifCercaniasLineLabel(rawLine) : "";
+        const lineColor = isCercanias ? getAdifHubLineColor(payload, rawLine, lineLabel) : "";
+        const badge = isCercanias ? (lineLabel || "C") : (getAdifHubTrainNumber(train) || getAdifHubProductLabel(train) || "-");
+        const operatorLabel = getAdifHubProductLabel(train);
+        const isAccessible = !!(train.accessible || train.accesible || train.pmr || train.reduced_mobility);
+        const countdown = Number(train.countdown);
+        if (screen === "arrivals") {
+          const arrivalTime = getAdifHubTimeLabel(train.arrival_time);
+          if (!arrivalTime || String(train.class_stop || "").toLowerCase() === "origin") return;
+          const row = {
+            hora: arrivalTime,
+            horaEstado: getAdifHubPredictedTime(train.arrival_time, train.delay_in),
+            trafficType,
+            isCercanias,
+            tren: badge,
+            trenDatosOp: operatorLabel,
+            accesible: isAccessible,
+            via: getAdifHubPlatform(train, true),
+            immediate: !!(train.immediate_in || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
+            cercaniasColour: lineColor.replace(/^#/, ""),
+            mainName: getAdifResolvedEndpointNameForRender(payload, train, origin, false),
+            stopNames: getAdifGravitaStopNames(payload, train, origin, false),
+            _sort: getAdifHubSortValue(train.arrival_time)
+          };
+          const frenchNames = resolveFrenchNamesFromIframeRow(row, train, screen);
+          if (frenchNames) {
+            row.mainName = frenchNames.mainName;
+            row.stopNames = frenchNames.stopNames;
+          }
+          rows.push(row);
+          return;
+        }
+        const departureTime = getAdifHubTimeLabel(train.departure_time);
+        if (!departureTime || String(train.class_stop || "").toLowerCase() === "destination") return;
+        const row = {
+          hora: departureTime,
+          horaEstado: getAdifHubPredictedTime(train.departure_time, train.delay_out),
+          trafficType,
+          isCercanias,
+          tren: badge,
+          trenDatosOp: operatorLabel,
+          accesible: isAccessible,
+          via: getAdifHubPlatform(train, false),
+          immediate: !!(train.immediate_out || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
+          cercaniasColour: lineColor.replace(/^#/, ""),
+          mainName: getAdifResolvedEndpointNameForRender(payload, train, destination, true),
+          stopNames: getAdifGravitaStopNames(payload, train, destination, true),
+          _sort: getAdifHubSortValue(train.departure_time)
+        };
+        const frenchNames = resolveFrenchNamesFromIframeRow(row, train, screen);
+        if (frenchNames) {
+          row.mainName = frenchNames.mainName;
+          row.stopNames = frenchNames.stopNames;
+        }
+        rows.push(row);
+      });
+      rows.sort((a, b) => (a._sort || Number.MAX_SAFE_INTEGER) - (b._sort || Number.MAX_SAFE_INTEGER));
+      rows.forEach(row => delete row._sort);
+      return rows.slice(0, 16);
+    }
+    function renderAdifIframeBoardHtml(payload, screen) {
+      const rows = buildAdifIframeRows(payload, screen);
+      const nowDate = new Date();
+      const now = nowDate.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+      const seconds = nowDate.toLocaleTimeString("es-ES", { second: "2-digit" });
+      const title = screen === "arrivals" ? "Llegadas" : "Salidas";
+      const fillerRows = Math.max(0, 16 - rows.length);
+      const baseHref = escapeHtml(document.baseURI || window.location.href || "");
+      const fontSizeValue = getAdifIframeFontSizeValue();
+      const fontScale = Math.max(.9, Number(fontSizeValue) / 18);
+      const bodyRows = rows.map(row => {
+        const badgeColor = row.isCercanias ? (normalizeCssColor("#" + String(row.cercaniasColour || "").replace(/^#/, "")) || "#8ab26f") : "#ffffff";
+        const badgeTextColor = row.isCercanias ? (useWhiteAccesibility(badgeColor) ? "#fff" : "#132147") : "#1a2750";
+        const stopText = row.stopNames && row.stopNames.length > 1 ? row.stopNames.join(" " + String.fromCharCode(183) + " ") : "";
+        return `<div class="board-row board-row-${escapeHtml(row.trafficType || "all")}">
+          <div class="board-time">
+            <div class="board-time-main">${escapeHtml(row.hora || "-")}</div>
+            ${row.horaEstado ? `<div class="board-time-sub">${escapeHtml(row.horaEstado)}</div>` : ""}
+          </div>
+          <div class="board-destination">
+            <div class="board-destination-main">${escapeHtml(row.mainName || "-")}</div>
+            ${stopText ? `<div class="board-destination-stops">${escapeHtml(stopText)}</div>` : ""}
+          </div>
+          <div class="board-train">
+            <span class="board-badge" style="background:${badgeColor};color:${badgeTextColor}">${escapeHtml(row.tren || "-")}</span>
+            <span class="board-operator">${escapeHtml(row.trenDatosOp || "")}</span>
+            ${row.accesible ? '<span class="board-access">Acc.</span>' : ""}
+          </div>
+          <div class="board-track">${row.via ? `<span class="${row.immediate ? "board-track-live" : "board-track-pill"}">${escapeHtml(row.via)}</span>` : "<span class=\"board-track-empty\">-</span>"}</div>
+        </div>`;
+      }).join("") + Array.from({ length: fillerRows }).map(() => `<div class="board-row board-row-empty"><div class="board-time"></div><div class="board-destination"></div><div class="board-train"></div><div class="board-track"></div></div>`).join("");
+      return `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  ${baseHref ? `<base href="${baseHref}">` : ""}
+  <style>
+    @font-face { font-family: "AdifHauss"; src: url("./pantallas-estaciones-main/public/fonts/AdifHauss-Medium.woff2") format("woff2"), url("./pantallas-estaciones-main/public/fonts/AdifHauss-Medium.woff") format("woff"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "AdifHauss"; src: url("./pantallas-estaciones-main/public/fonts/AdifHauss-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+    :root { color-scheme: only light; --board-font-scale: ${String(fontScale)}; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #08163b; font-family: "AdifHauss", sans-serif; }
+    body { color: #fff; }
+    .board-shell { width: 100%; height: 100%; display: grid; grid-template-rows: auto 1fr; background: #162b5e; }
+    .board-header { background: #bfefd5; color: #10264d; display: grid; grid-template-columns: 1fr auto; align-items: start; padding: 2.3vh 2.4vw 1.2vh 2.4vw; gap: 1vw; }
+    .board-brand { display: flex; align-items: center; gap: 1vw; min-width: 0; }
+    .board-brand svg { width: min(6.2vw, 66px); height: auto; color: #0f284f; stroke: #0f284f; fill: none; flex: 0 0 auto; }
+    .board-title { font-size: calc(clamp(24px, 4vw, 58px) * var(--board-font-scale)); line-height: .95; font-weight: 700; }
+    .board-clockbox { text-align: right; line-height: .9; }
+    .board-clock { font-size: calc(clamp(34px, 5.2vw, 74px) * var(--board-font-scale)); font-weight: 700; }
+    .board-seconds { font-size: .44em; vertical-align: baseline; margin-left: .12em; }
+    .board-cols { display: flex; justify-content: flex-end; gap: 2vw; font-size: calc(clamp(12px, 1.3vw, 20px) * var(--board-font-scale)); font-weight: 700; margin-top: .35vh; }
+    .board-body { height: 100%; display: grid; grid-template-rows: repeat(16, 1fr); }
+    .board-row { display: grid; grid-template-columns: 15% 45% 26% 14%; align-items: center; min-height: 0; padding: 0 1.6vw 0 1.9vw; }
+    .board-row:nth-child(odd) { background: #263865; }
+    .board-row:nth-child(even) { background: #192855; }
+    .board-row-empty { opacity: .34; }
+    .board-time { min-width: 0; }
+    .board-time-main { font-size: calc(clamp(20px, 3vw, 46px) * var(--board-font-scale)); font-weight: 700; line-height: .95; }
+    .board-time-sub { margin-top: .22vh; color: #7ce4ad; font-size: calc(clamp(11px, 1.6vw, 22px) * var(--board-font-scale)); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .board-destination { min-width: 0; padding-right: .8vw; }
+    .board-destination-main { font-size: calc(clamp(21px, 3vw, 44px) * var(--board-font-scale)); font-weight: 700; line-height: .92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .board-destination-stops { margin-top: .25vh; font-size: calc(clamp(10px, 1.15vw, 18px) * var(--board-font-scale)); font-weight: 500; line-height: 1.02; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .01em; }
+    .board-train { min-width: 0; display: flex; align-items: center; gap: .45vw; justify-content: flex-start; }
+    .board-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 3.1vw; padding: .22em .4em; border-radius: .25em; font-size: calc(clamp(12px, 1.4vw, 22px) * var(--board-font-scale)); font-weight: 700; }
+    .board-operator { font-size: calc(clamp(11px, 1.15vw, 18px) * var(--board-font-scale)); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: .96; }
+    .board-access { font-size: calc(clamp(9px, .95vw, 15px) * var(--board-font-scale)); font-weight: 700; color: #bfe9d2; white-space: nowrap; }
+    .board-track { display: flex; justify-content: flex-end; align-items: center; }
+    .board-track-pill, .board-track-live { display: inline-flex; align-items: center; justify-content: center; min-width: 3.7vw; padding: .18em .42em; border-radius: .3em; font-size: calc(clamp(18px, 2.5vw, 40px) * var(--board-font-scale)); font-weight: 700; }
+    .board-track-pill { background: rgba(255,255,255,.12); color: #fff; }
+    .board-track-live { background: #ffffff; color: #112650; }
+    .board-track-empty { font-size: calc(clamp(18px, 2.5vw, 40px) * var(--board-font-scale)); font-weight: 700; opacity: .5; }
+    @media (max-width: 768px) {
+      .board-header { padding: 1.6vh 2vw .8vh 2vw; }
+      .board-row { grid-template-columns: 17% 42% 25% 16%; padding: 0 1.5vw; }
+      .board-brand { gap: 1.7vw; }
+      .board-cols { gap: 4vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="board-shell">
+    <div class="board-header">
+      <div class="board-brand">
+        ${renderAdifBoardLogo("board-logo")}
+        <div class="board-title">${escapeHtml(title)}</div>
+      </div>
+      <div class="board-clockbox">
+        <div class="board-clock"><span id="boardClock">${escapeHtml(now)}</span><span class="board-seconds" id="boardSeconds">${escapeHtml(seconds)}</span></div>
+        <div class="board-cols"><span>Acceso</span><span>Vía</span></div>
+      </div>
+    </div>
+    <div class="board-body">${bodyRows}</div>
+  </div>
+  <script>
+    (function () {
+      var clock = document.getElementById("boardClock");
+      var seconds = document.getElementById("boardSeconds");
+      if (!clock || !seconds) return;
+      function tick() {
+        var now = new Date();
+        clock.textContent = now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+        seconds.textContent = now.toLocaleTimeString("es-ES", { second: "2-digit" });
+      }
+      tick();
+      window.setInterval(tick, 1000);
+    })();
+  <\/script>
+</body>
+</html>`;
+    }
+    function getAdifGravitaRowModels(payload, screen) {
+      const rows = [];
+      const trains = Array.isArray(payload?.trains) ? payload.trains : [];
+      trains.forEach(train => {
+        if (!train) return;
+        const trafficTypeRaw = String(train.traffic_type || "").toUpperCase();
+        const productCode = String(train?.commercial_id?.[0]?.product || "").toUpperCase();
+        if (trafficTypeRaw === "-" || productCode === "SSERV" || productCode === "ESPECRF") return;
+        const origin = Array.isArray(train.origins) ? train.origins[0] || null : (train?.origin && typeof train.origin === "object" ? train.origin : null);
+        const destination = Array.isArray(train.destinations) ? train.destinations[0] || null : (train?.destination && typeof train.destination === "object" ? train.destination : null);
+        const trainNumber = getAdifHubTrainNumber(train);
+        if (!trainNumber) return;
+        if (screen === "arrivals") {
+          const time = getAdifHubSortValue(train.arrival_time);
+          if (!Number.isFinite(time) || String(train.class_stop || "").toLowerCase() === "origin") return;
+          rows.push({
+            trainNumber,
+            time,
+            mainName: getAdifHubStationName(payload, origin),
+            stopNames: getAdifGravitaStopNames(payload, train, origin)
+          });
+          return;
+        }
+        const time = getAdifHubSortValue(train.departure_time);
+        if (!Number.isFinite(time) || String(train.class_stop || "").toLowerCase() === "destination") return;
+        rows.push({
+          trainNumber,
+          time,
+          mainName: getAdifHubStationName(payload, destination),
+          stopNames: getAdifGravitaStopNames(payload, train, destination)
+        });
+      });
+      rows.sort((a, b) => a.time - b.time);
+      return rows;
+    }
+    function getAdifGravitaLeafElements(root) {
+      return [...root.querySelectorAll("*")].filter(el => el.childElementCount === 0 && collapseAdifText(el.textContent));
+    }
+    function getAdifGravitaOverlayRows(payload, screen) {
+      return getAdifGravitaRowModels(payload, screen).slice(0, 16);
+    }
+    function renderAdifGravitaOverlay(container, payload) {
+      const overlay = container?.querySelector(".adif-gravita-overlay");
+      if (!overlay || !payload) return;
+      const rows = getAdifGravitaOverlayRows(payload, adifTimetableState.screen);
+      const rect = container.getBoundingClientRect();
+      if (!rect.width || !rect.height || !rows.length) {
+        overlay.innerHTML = "";
+        return;
+      }
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const headerRatio = isMobile ? .102 : .078;
+      const footerRatio = isMobile ? .018 : .012;
+      const rowRatio = (1 - headerRatio - footerRatio) / 16;
+      const left = rect.width * .135;
+      const width = rect.width * .43;
+      const mainFont = Math.max(16, Math.min(44, rect.height * rowRatio * .46));
+      const stopsFont = Math.max(9, Math.min(19, rect.height * rowRatio * .205));
+      overlay.innerHTML = rows.map((row, index) => {
+        const top = rect.height * (headerRatio + rowRatio * index);
+        const height = rect.height * rowRatio;
+        const bg = index % 2 === 0 ? "rgba(38,56,101,.97)" : "rgba(24,38,81,.97)";
+        const stops = row.stopNames && row.stopNames.length > 1 ? row.stopNames.join(" " + String.fromCharCode(183) + " ") : "";
+        return `<div class="adif-gravita-overlay-row" style="left:${left}px;top:${top}px;width:${width}px;height:${height}px;background:${bg}">
+          <div class="adif-gravita-overlay-main" style="font-size:${mainFont}px">${escapeHtml(row.mainName || "-")}</div>
+          ${stops ? `<div class="adif-gravita-overlay-stops" style="font-size:${stopsFont}px">${escapeHtml(stops)}</div>` : ""}
+        </div>`;
+      }).join("");
+    }
+    function getAdifGravitaRowContainer(numberElement, trainNumber) {
+      let node = numberElement;
+      let best = numberElement?.parentElement || null;
+      while (node && node !== numberElement.ownerDocument.body) {
+        const rect = node.getBoundingClientRect();
+        const text = collapseAdifText(node.textContent);
+        if (text.includes(trainNumber) && rect.height >= 36 && rect.height <= 220) best = node;
+        if (rect.height > 260 && best) break;
+        node = node.parentElement;
+      }
+      return best;
+    }
+    function ensureAdifGravitaPatchStyle(doc) {
+      if (!doc || doc.getElementById("renfeAdifGravitaPatchStyle")) return;
+      const style = doc.createElement("style");
+      style.id = "renfeAdifGravitaPatchStyle";
+      style.textContent = `
+        [data-renfe-gravita-destination] {
+          white-space: normal !important;
+          overflow: visible !important;
+          text-overflow: clip !important;
+          line-height: 1.02 !important;
+          font-size: clamp(18px, 2.3vh, 34px) !important;
+        }
+        [data-renfe-gravita-stops] {
+          white-space: normal !important;
+          overflow: visible !important;
+          text-overflow: clip !important;
+          line-height: 1.12 !important;
+          letter-spacing: 0 !important;
+          font-size: clamp(10px, 1.15vh, 17px) !important;
+        }
+      `;
+      doc.head.appendChild(style);
+    }
+    function applyAdifGravitaDomPatches(iframe, payload) {
+      const doc = iframe?.contentDocument;
+      if (!doc?.body) return;
+      ensureAdifGravitaPatchStyle(doc);
+      const rowModels = getAdifGravitaRowModels(payload, adifTimetableState.screen);
+      const usedTrainNumbers = new Set();
+      rowModels.forEach(model => {
+        if (!model.trainNumber || usedTrainNumbers.has(model.trainNumber)) return;
+        const numberElements = getAdifGravitaLeafElements(doc.body)
+          .filter(el => collapseAdifText(el.textContent) === model.trainNumber && el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0);
+        const numberElement = numberElements[0];
+        if (!numberElement) return;
+        usedTrainNumbers.add(model.trainNumber);
+        const row = getAdifGravitaRowContainer(numberElement, model.trainNumber);
+        if (!row) return;
+        const rowLeafs = getAdifGravitaLeafElements(row);
+        const trainRect = numberElement.getBoundingClientRect();
+        const stopCandidates = rowLeafs.filter(el => /^[A-Z](\s*[^\w\s]\s*[A-Z])+$/u.test(collapseAdifText(el.textContent)));
+        if (stopCandidates.length && model.stopNames.length) {
+          const stopElement = stopCandidates.sort((a, b) => collapseAdifText(b.textContent).length - collapseAdifText(a.textContent).length)[0];
+          stopElement.textContent = model.stopNames.join(" " + String.fromCharCode(183) + " ");
+          stopElement.setAttribute("data-renfe-gravita-stops", "1");
+        }
+        const destinationCandidates = rowLeafs.filter(el => /^[A-Z]$/u.test(collapseAdifText(el.textContent)) && el.getBoundingClientRect().left < trainRect.left - 12);
+        if (destinationCandidates.length && model.mainName) {
+          const destinationElement = destinationCandidates.sort((a, b) => parseFloat(getComputedStyle(b).fontSize || "0") - parseFloat(getComputedStyle(a).fontSize || "0"))[0];
+          destinationElement.textContent = model.mainName;
+          destinationElement.setAttribute("data-renfe-gravita-destination", "1");
+        }
+      });
+    }
+    async function loadAdifGravitaFrame(iframe, iframeUrl) {
+      try {
+        const html = normalizeAdifGravitaShellHtml(await ensureAdifGravitaShellHtml(), iframeUrl);
+        const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+        const blobUrl = URL.createObjectURL(blob);
+        if (iframe.dataset.localBlobUrl) URL.revokeObjectURL(iframe.dataset.localBlobUrl);
+        iframe.dataset.localBlobUrl = blobUrl;
+        iframe.dataset.usesLocalShell = "1";
+        iframe.src = blobUrl + (new URL(String(iframeUrl || "https://info.adif.es/assets/gravita/gravita.html"))).search;
+        return true;
+      } catch {
+        iframe.dataset.usesLocalShell = "";
+        iframe.src = iframeUrl;
+        return false;
+      }
+    }
     function cloneAdifPayload(payload) {
       try { return JSON.parse(JSON.stringify(payload || {})) } catch { return null }
     }
@@ -8621,7 +7537,10 @@
       Object.keys(ADIF_STATION_NAME_OVERRIDES).forEach(code => {
         setAdifStationEntryName(stations, code, ADIF_STATION_NAME_OVERRIDES[code]);
       });
-      (data.trains || []).forEach(train => patchFrenchTrainStationNames(train, stations));
+      (data.trains || []).forEach(train => {
+        patchFrenchTrainStationNames(train, stations);
+        patchFrenchDisplayStringsDeep(train, train, "train");
+      });
     }
     function prepareAdifPayloadForGravita(payload) {
       const data = cloneAdifPayload(payload);
@@ -8714,14 +7633,17 @@
       const availableHeight = Math.max(0, body.clientHeight - parseFloat(styles.paddingTop || 0) - parseFloat(styles.paddingBottom || 0));
       if (!availableWidth || !availableHeight) return;
       const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
-      const aspect = isMobileViewport ? 5 / 6 : 16 / 9;
-      const safeInsetX = isMobileViewport ? 6 : 8;
-      const safeInsetY = isMobileViewport ? 28 : 14;
+      const viewportRatio = availableWidth / Math.max(1, availableHeight);
+      const safeInsetX = isMobileViewport ? 2 : 6;
+      const safeInsetY = isMobileViewport ? 6 : 8;
       const innerWidth = Math.max(0, availableWidth - safeInsetX * 2);
-      const innerHeight = Math.max(0, availableHeight - safeInsetY);
+      const innerHeight = Math.max(0, availableHeight - safeInsetY * 2);
       if (!innerWidth || !innerHeight) return;
-      let width = innerWidth;
-      let height = width / aspect;
+      const minAspect = isMobileViewport ? .68 : .94;
+      const maxAspect = isMobileViewport ? .92 : 1.2;
+      const aspect = Math.max(minAspect, Math.min(maxAspect, viewportRatio));
+      let width = Math.min(innerWidth, innerHeight * aspect);
+      let height = width / Math.max(aspect, .01);
       if (height > innerHeight) {
         height = innerHeight;
         width = height * aspect;
@@ -8743,31 +7665,61 @@
         }
       }, 160);
     }
-    function mountAdifGravitaPanels() {
+    async function mountAdifGravitaPanels(renderToken = "") {
+      const body = document.getElementById("adifTimetableBody");
+      if (renderToken && body?.dataset?.adifRenderToken !== renderToken) return;
+      await ensureAdifRouteInfoFresh();
+      if (renderToken && body?.dataset?.adifRenderToken !== renderToken) return;
       const payload = prepareAdifPayloadForGravita(adifTimetableState.rawPayload);
       if (!payload) return;
       document.querySelectorAll(".adif-gravita-container iframe").forEach(iframe => {
         const container = iframe.closest(".adif-gravita-container");
-        const send = () => {
+        const src = iframe.dataset.src || "";
+        const pump = () => {
+          if (renderToken && body?.dataset?.adifRenderToken !== renderToken) return;
           sendAdifPayloadToGravitaFrame(iframe, payload);
         };
-        const beginPump = () => {
-          let tries = 0;
-          send();
-          setTimeout(send, 300);
-          const intervalId = setInterval(() => {
-            tries += 1;
-            send();
-            if (tries >= 24) clearInterval(intervalId);
-          }, 350);
-        };
-        iframe.addEventListener("load", () => {
+        if (iframe.dataset.localBlobUrl) {
+          try { URL.revokeObjectURL(iframe.dataset.localBlobUrl) } catch { }
+          delete iframe.dataset.localBlobUrl;
+        }
+        let loaded = false;
+        let pumpStarted = false;
+        const reveal = () => {
           if (container) container.classList.add("adif-gravita-loaded");
           syncAdifGravitaLayout();
-          beginPump();
-        }, { once: true });
-        const src = iframe.dataset.src || "";
-        if (src && iframe.src !== src) iframe.src = src;
+        };
+        const startPump = () => {
+          if (pumpStarted) return;
+          pumpStarted = true;
+          pump();
+          window.setTimeout(pump, 250);
+          window.setTimeout(pump, 900);
+          const intervalId = setInterval(() => {
+            if (renderToken && body?.dataset?.adifRenderToken !== renderToken) { clearInterval(intervalId); return; }
+            if (!$(".modal-adif-timetable").is(":visible")) { clearInterval(intervalId); return; }
+            pump();
+          }, 1500);
+        };
+        const revealTimeout = window.setTimeout(() => {
+          reveal();
+          startPump();
+        }, 2200);
+        const onLoad = () => {
+          if (loaded) return;
+          loaded = true;
+          window.clearTimeout(revealTimeout);
+          reveal();
+          startPump();
+        };
+        iframe.addEventListener("load", onLoad, { once: true });
+        iframe.removeAttribute("srcdoc");
+        iframe.removeAttribute("src");
+        iframe.dataset.usesLocalShell = "";
+        if (src && iframe.dataset.loadedSrc !== src) {
+          iframe.dataset.loadedSrc = src;
+          iframe.src = src;
+        }
       });
     }
     function renderAdifGravitaPanels() {
@@ -8801,7 +7753,7 @@
         const stationCell = row.estacionLink ? `<a href="${escapeHtml(row.estacionLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(row.estacion || "-")}</a>` : `<span>${escapeHtml(row.estacion || "-")}</span>`;
         return `<tr class="adif-row-${escapeHtml(row.trafficType || "all")}">
           <td class="adif-col-time"><span class="adif-time-main">${escapeHtml(row.hora || "-")}</span>${row.horaEstado ? `<span class="adif-time-sub">${escapeHtml(row.horaEstado)}</span>` : ""}</td>
-          <td><div class="adif-dest-main">${stationCell}</div>${row.estacionEstado ? `<span class="adif-dest-sub">${escapeHtml(row.estacionEstado)}</span>` : ""}</td>
+          <td><div class="adif-dest-main">${stationCell}</div>${row.paradas?.length ? `<div class="adif-dest-stops">${row.paradas.map(s => escapeHtml(s)).join(' \u00b7 ')}</div>` : ""}${row.estacionEstado ? `<span class="adif-dest-sub">${escapeHtml(row.estacionEstado)}</span>` : ""}</td>
           <td><span class="adif-train-op">${escapeHtml(row.trenDatosOp || "")}</span>${formatAdifBadge(row)}${row.accesible ? ' <span title="Accesible">Acc.</span>' : ""}</td>
           <td class="adif-col-track">${row.via ? `<span class="${row.immediate ? "adif-track-live" : "adif-track-pill"}">${escapeHtml(row.via)}</span>` : "-"}</td>
         </tr>`;
@@ -8823,6 +7775,11 @@
       const filterGroup = document.querySelector(".adif-filter-group");
       const languageSelect = document.getElementById("adifLanguageSelect");
       if (!body || !title || !meta) return;
+      body.querySelectorAll?.(".adif-gravita-container iframe").forEach(iframe => {
+        if (!iframe?.dataset?.localBlobUrl) return;
+        try { URL.revokeObjectURL(iframe.dataset.localBlobUrl) } catch { }
+        delete iframe.dataset.localBlobUrl;
+      });
       title.textContent = adifTimetableState.stationName || adifTimetableState.stationCode || "-";
       if (adifTimetableState.meta?.resolvedCode) {
         const updatedAt = adifTimetableState.meta.resolvedAt
@@ -8845,10 +7802,13 @@
         body.innerHTML = `<div class="adif-board">${renderAdifBoardHeader()}${renderAdifBoardState(adifTimetableState.error || "No se pudieron cargar los horarios para esta estacion.", true)}</div>`;
         return;
       }
+      const renderToken = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      body.dataset.adifRenderToken = renderToken;
       body.innerHTML = renderAdifGravitaPanels();
       requestAnimationFrame(() => {
+        if (body.dataset.adifRenderToken !== renderToken) return;
         syncAdifGravitaLayout();
-        mountAdifGravitaPanels();
+        mountAdifGravitaPanels(renderToken);
       });
     }
     async function openAdifTimetable(stationCode) {
@@ -8900,25 +7860,8 @@
       popuptren = $(".modal-tren-content").html();
       popupestacion = $(".modal-estacion").html();
       applyTranslations();
-      (ismobile ? $(".panel-filtros-movil") : $(".panel-lineas")).show();
       initEvents();
       adifTimetableState.language = getDefaultAdifGravitaLanguage();
-      document.querySelectorAll(".adif-filter-btn").forEach(btn => btn.addEventListener("click", function () {
-        adifTimetableState.filter = this.dataset.adifFilter || "all";
-        renderAdifTimetableModal();
-      }));
-      document.querySelectorAll(".adif-screen-btn").forEach(btn => btn.addEventListener("click", function () {
-        adifTimetableState.screen = this.dataset.adifScreen === "arrivals" ? "arrivals" : "departures";
-        renderAdifTimetableModal();
-      }));
-      const adifLanguageSelect = document.getElementById("adifLanguageSelect");
-      if (adifLanguageSelect) {
-        adifLanguageSelect.value = normalizeAdifGravitaLanguage(adifTimetableState.language);
-        adifLanguageSelect.addEventListener("change", function () {
-          adifTimetableState.language = normalizeAdifGravitaLanguage(this.value);
-          renderAdifTimetableModal();
-        });
-      }
       window.addEventListener("resize", scheduleAdifTimetableResizeRefresh);
       window.addEventListener("orientationchange", scheduleAdifTimetableResizeRefresh);
       var e = $(".leyend-content").html(); $(".leyend-content-movil").html(e);
@@ -8938,6 +7881,27 @@
     function formatHour(e) { if (!e) return "-"; var m = e.match(/T(\d{2}:\d{2})/); return m ? m[1] + "h" : e }
     function closeModal(s) { $(s).hide() }
     function openModal(s) { $(s).show() }
+
+    // Use event delegation for ADIF Timetable modal buttons because its DOM is repeatedly destroyed and recreated.
+    document.addEventListener("click", function(e) {
+      if (e.target.closest(".adif-filter-btn")) {
+        const btn = e.target.closest(".adif-filter-btn");
+        adifTimetableState.filter = btn.dataset.adifFilter || "all";
+        renderAdifTimetableModal();
+      }
+      if (e.target.closest(".adif-screen-btn")) {
+        const btn = e.target.closest(".adif-screen-btn");
+        adifTimetableState.screen = btn.dataset.adifScreen === "arrivals" ? "arrivals" : "departures";
+        renderAdifTimetableModal();
+      }
+    });
+
+    document.addEventListener("change", function(e) {
+      if (e.target.id === "adifLanguageSelect") {
+        adifTimetableState.language = normalizeAdifGravitaLanguage(e.target.value);
+        renderAdifTimetableModal();
+      }
+    });
 
     let projection = ol.proj.get("EPSG:3857"), projExt = projection.getExtent(), tileSize = ol.extent.getWidth(projExt) / 256, resolutions = new Array(19), matrixIds = new Array(19);
     for (let i = 0; i < 19; i++) { resolutions[i] = tileSize / Math.pow(2, i); matrixIds[i] = i.toString() }
@@ -9168,6 +8132,108 @@
       const color = line && line.get("COLOR");
       return /^#([0-9A-F]{3}){1,2}$/i.test(color || "") ? color : "#830065";
     }
+    const CERCANIAS_BADGE_BRAND_PATH = "M33.7 20.9l6.4-6.4c-7.1-7.1-18.7-7.1-25.8 0s-7.1 18.7 0 25.8s18.7 7.1 25.8 0l-6.6-6.6c-3.2 3.2-8.5 4.3-12.7.1c-3.5-3.5-3.5-9.3 0-12.9c3.6-3.5 9.4-3.5 12.9 0Z";
+    const RODALIES_SUFFIX_LABELS = { S: "Sud", N: "Nord", A: "Aeroport" };
+    function toBadgeTitleCase(value) {
+      return String(value || "").toLowerCase().replace(/\b[a-z]/g, m => m.toUpperCase());
+    }
+    function normalizeCercaniasBadgeCode(rawLabel) {
+      const compact = String(rawLabel || "").toUpperCase().replace(/\s+/g, "").replace(/^C-?/, "");
+      if (!compact) return "";
+      const match = compact.match(/^0*([0-9]+[A-Z]*)$/);
+      return match ? match[1] : compact;
+    }
+    function normalizeRodaliesBadgeMain(prefix, digits) {
+      const numeric = String(parseInt(String(digits || "").replace(/^0+/, "") || "0", 10) || 0);
+      return String(prefix || "").toUpperCase() + numeric;
+    }
+    function splitRodaliesBadgeLabel(rawLabel) {
+      const normalized = String(rawLabel || "").trim().replace(/\s+/g, " ");
+      if (!normalized) return { main: "", sub: "" };
+      const explicit = normalized.match(/^(R(?:G|L|T)?0*\d+)(?:[\s-]+(.+))$/i);
+      if (explicit) {
+        const mainMatch = explicit[1].match(/^(R(?:G|L|T)?)(\d+)$/i);
+        return {
+          main: mainMatch ? normalizeRodaliesBadgeMain(mainMatch[1], mainMatch[2]) : String(explicit[1] || "").toUpperCase(),
+          sub: explicit[2] ? toBadgeTitleCase(explicit[2]) : ""
+        };
+      }
+      const compact = normalized.toUpperCase().replace(/\s+/g, "");
+      const compactMatch = compact.match(/^(R(?:G|L|T)?)(0*)(\d+)([A-Z]+)?$/i);
+      if (!compactMatch) return { main: compact, sub: "" };
+      const main = normalizeRodaliesBadgeMain(compactMatch[1], compactMatch[3]);
+      const suffix = String(compactMatch[4] || "").toUpperCase();
+      return { main, sub: suffix ? (RODALIES_SUFFIX_LABELS[suffix] || suffix) : "" };
+    }
+    function getWideBadgeFontSize(label) {
+      const len = String(label || "").length;
+      if (len <= 1) return 39;
+      if (len === 2) return 35;
+      if (len === 3) return 30;
+      if (len === 4) return 26;
+      return 22;
+    }
+    function getSquareBadgeMainFontSize(label, hasSub) {
+      const len = String(label || "").length;
+      if (len <= 2) return hasSub ? 42 : 48;
+      if (len === 3) return hasSub ? 36 : 42;
+      if (len === 4) return hasSub ? 30 : 35;
+      return hasSub ? 25 : 29;
+    }
+    function getSquareBadgeSubFontSize(label) {
+      const len = String(label || "").length;
+      if (len <= 4) return 33;
+      if (len <= 7) return 29;
+      return 24;
+    }
+    function getSquareBadgeSubTextLength(label) {
+      const len = String(label || "").length;
+      if (len <= 3) return 70;
+      if (len === 4) return 76;
+      if (len <= 6) return 82;
+      return 86;
+    }
+    function getBadgeBrightness(hex) {
+      const value = normalizeCssColor(hex) || "#000000";
+      const r = parseInt(value.substr(1, 2), 16);
+      const g = parseInt(value.substr(3, 2), 16);
+      const b = parseInt(value.substr(5, 2), 16);
+      return (r * 299 + g * 587 + b * 114) / 255000;
+    }
+    function getCercaniasBadgeTextColor(hex) {
+      return getBadgeBrightness(hex) >= .68 ? "#636062" : "#ffffff";
+    }
+    function renderWideLineBadgeSvg(label, bgColor, textColor, ariaLabel, withBrand) {
+      const compactLabel = String(label || "").toUpperCase();
+      const hasBranchLetter = withBrand && /\d[A-Z]+$/.test(compactLabel);
+      const fontSize = hasBranchLetter ? (compactLabel.length >= 3 ? 31 : 35) : getWideBadgeFontSize(compactLabel);
+      const dashX = hasBranchLetter ? 37.6 : 42.5;
+      const dashWidth = hasBranchLetter ? 9.1 : 15.2;
+      const textX = hasBranchLetter ? (compactLabel.length >= 3 ? 75.5 : 72.5) : (withBrand ? 78 : 50);
+      const textTransform = withBrand
+        ? (' transform="matrix(1 0 0 ' + (hasBranchLetter ? '1.14' : '1.11') + ' 0 ' + (hasBranchLetter ? '-4.41' : '-3.4') + ')"')
+        : "";
+      return '<span class="cercanias-line-logo cercanias-line-logo--wide" aria-label="' + escapeHtml(ariaLabel) + '">' +
+        '<svg viewBox="0 0 100.1 54.6" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">' +
+        '<path d="M75.1 0H24.9C11.2 0 0 11.2 0 24.9v4.8c0 13.7 11.2 24.9 24.9 24.9h50.2c13.8 0 25-11.2 25-24.9v-4.8C100.1 11.2 88.9 0 75.1 0Z" fill="' + bgColor + '"></path>' +
+        (withBrand ? '<path d="' + CERCANIAS_BADGE_BRAND_PATH + '" fill="' + textColor + '"></path><rect x="' + dashX + '" y="24.3" width="' + dashWidth + '" height="6.1" fill="' + textColor + '"></rect>' : '') +
+        '<text x="' + textX + '" y="31.5" fill="' + textColor + '" text-anchor="middle" dominant-baseline="middle" font-family="AdifHauss, Segoe UI, sans-serif" font-size="' + fontSize + '" font-weight="900"' + textTransform + '>' + escapeHtml(compactLabel) + '</text>' +
+        '</svg></span>';
+    }
+    function renderSquareLineBadgeSvg(mainLabel, subLabel, bgColor, textColor, ariaLabel) {
+      const hasSub = !!subLabel;
+      const mainFont = getSquareBadgeMainFontSize(mainLabel, hasSub);
+      const subFont = hasSub ? getSquareBadgeSubFontSize(subLabel) : 0;
+      const subTextLength = hasSub ? getSquareBadgeSubTextLength(subLabel) : 0;
+      const mainY = hasSub ? 35.5 : 54;
+      const subY = hasSub ? 74.5 : 72.5;
+      return '<span class="cercanias-line-logo cercanias-line-logo--square" aria-label="' + escapeHtml(ariaLabel) + '">' +
+        '<svg viewBox="0 0 100.7 100.7" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">' +
+        '<rect x=".35" y=".35" width="100" height="100" fill="' + bgColor + '"></rect>' +
+        '<text x="50.35" y="' + mainY + '" fill="' + textColor + '" text-anchor="middle" dominant-baseline="middle" font-family="AdifHauss, Segoe UI, sans-serif" font-size="' + mainFont + '" font-weight="900">' + escapeHtml(mainLabel) + '</text>' +
+        (hasSub ? '<text x="50.35" y="' + subY + '" fill="' + textColor + '" text-anchor="middle" dominant-baseline="middle" textLength="' + subTextLength + '" lengthAdjust="spacingAndGlyphs" font-family="AdifHauss, Segoe UI, sans-serif" font-size="' + subFont + '" font-weight="900">' + escapeHtml(subLabel) + '</text>' : '') +
+        '</svg></span>';
+    }
     function renderCercaniasLineBadges(nucleo, lineasCsv, fallbackColor) {
       const fallbackHex = normalizeCssColor(fallbackColor) || "#830065";
       const toTitleCase = value => String(value || "").toLowerCase().replace(/\b([a-záéíóúàèìòùüñç])/g, m => m.toUpperCase());
@@ -9199,6 +8265,29 @@
       if (d <= 3) return "rgba(0,128,0)";
       if (d <= 5) return "rgba(255,165,0)";
       return "rgba(255,0,0)";
+    }
+    function renderCercaniasLineBadges(nucleo, lineasCsv, fallbackColor) {
+      const fallbackHex = normalizeCssColor(fallbackColor) || "#830065";
+      return String(lineasCsv || "").split(",").map(l => l.trim()).filter(Boolean).map(linea => {
+        const lineFeature = findCercaniasLineFeature(nucleo, linea);
+        const color = (lineFeature && normalizeCssColor(lineFeature.get("COLOR"))) || fallbackHex;
+        const rawLabel = String(linea || "").trim().replace(/\s+/g, " ");
+        const compactLabel = rawLabel.toUpperCase();
+        const nucleoName = String(lineFeature && lineFeature.get("NUCLEO") || "");
+        const isRodalies = /rodalies/i.test(nucleoName) || String(nucleo) === "50" || /^(R|RG|RT|RL)/i.test(compactLabel);
+        if (isRodalies) {
+          const split = splitRodaliesBadgeLabel(lineFeature && lineFeature.get("NOMBRE") ? lineFeature.get("NOMBRE") : rawLabel);
+          const textColor = "#ffffff";
+          return renderSquareLineBadgeSvg(split.main || compactLabel, split.sub, color, textColor, (split.main || compactLabel) + (split.sub ? " " + split.sub : ""));
+        }
+        if (/^C-?\d/i.test(compactLabel)) {
+          const mainLabel = normalizeCercaniasBadgeCode(rawLabel) || compactLabel;
+          const textColor = getCercaniasBadgeTextColor(color);
+          return renderWideLineBadgeSvg(mainLabel, color, textColor, "Cercanias " + mainLabel, true);
+        }
+        const textColor = getCercaniasBadgeTextColor(color);
+        return renderWideLineBadgeSvg(compactLabel, color, textColor, compactLabel, false);
+      }).join("");
     }
     function getCercaniasTrainIcon(color) {
       return useWhiteAccesibility(color) ? "https://tiempo-real.renfe.com/imgs/symbol/train.svg" : "https://tiempo-real.renfe.com/imgs/symbol/trainblack.svg";
@@ -9404,8 +8493,22 @@
       $(".form-check-lineasAV").on("change", () => { tramosAVWmsLayer.setVisible(!tramosAVWmsLayer.getVisible()) });
       $(".form-check-lineasConv").on("change", () => { tramosConvWmsLayer.setVisible(!tramosConvWmsLayer.getVisible()) });
       $(".form-check-lineasCercanias").on("change", () => { vectorCercaniasLineasLayer.setVisible(!vectorCercaniasLineasLayer.getVisible()) });
-      $(".btn-callejero").on("click", () => { callejero.setVisible(true); orto.setVisible(false); $(".btn-callejero").addClass("mapa-selected"); $(".btn-orto").removeClass("mapa-selected") });
-      $(".btn-orto").on("click", () => { orto.setVisible(true); callejero.setVisible(false); $(".btn-orto").addClass("mapa-selected"); $(".btn-callejero").removeClass("mapa-selected") });
+      $(".btn-callejero").on("click", () => { 
+        callejero.setVisible(true); 
+        orto.setVisible(false); 
+        $(".btn-callejero").addClass("mapa-selected"); 
+        $(".btn-orto").removeClass("mapa-selected");
+        const offcanvasEl = document.getElementById('mobileMenu');
+        if (offcanvasEl && offcanvasEl.classList.contains('show')) bootstrap.Offcanvas.getInstance(offcanvasEl)?.hide();
+      });
+      $(".btn-orto").on("click", () => { 
+        orto.setVisible(true); 
+        callejero.setVisible(false); 
+        $(".btn-orto").addClass("mapa-selected"); 
+        $(".btn-callejero").removeClass("mapa-selected");
+        const offcanvasEl = document.getElementById('mobileMenu');
+        if (offcanvasEl && offcanvasEl.classList.contains('show')) bootstrap.Offcanvas.getInstance(offcanvasEl)?.hide();
+      });
       document.getElementById("btn-refreshtrain").addEventListener("click", () => { cargarTrenes(); cargarTrenesCercanias(); showPopupMessage("Actualizando trenes...") });
       document.getElementById("btn-pause").addEventListener("click", () => { pauseTrains = !pauseTrains; pauseTrains ? (document.getElementById("btn-pausecont").classList.add("ol-toolactive"), showPopupMessage("Trenes pausados")) : (document.getElementById("btn-pausecont").classList.remove("ol-toolactive"), showPopupMessage("Trenes activos")) });
       document.getElementById("btn-geolocate").addEventListener("click", () => {
@@ -9426,9 +8529,26 @@
       window.addEventListener("online", () => { $(".ol-nocoverage").hide(); cargarTrenes(); cargarTrenesCercanias() });
       window.addEventListener("offline", () => $(".ol-nocoverage").show());
       var inp = document.getElementById("qrInput");
-      inp.addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); if (this.value.length === 5) setSeguirTren(this.value); updateQRButtons() });
+      inp.addEventListener("input", function () { 
+        this.value = this.value.replace(/\D/g, ""); 
+        if (this.value.length === 5) {
+          setSeguirTren(this.value); 
+          const offcanvasEl = document.getElementById('mobileMenu');
+          if (offcanvasEl && offcanvasEl.classList.contains('show')) bootstrap.Offcanvas.getInstance(offcanvasEl)?.hide();
+        }
+        updateQRButtons(); 
+      });
       updateQRButtons();
-      $("#btn-train").on("click", () => showPopupMessage("Indique codigo de tren [5 digitos]"));
+      $("#btn-train").on("click", () => {
+        const val = $("#qrInput").val();
+        if (val && val.length === 5) {
+          setSeguirTren(val);
+          const offcanvasEl = document.getElementById('mobileMenu');
+          if (offcanvasEl && offcanvasEl.classList.contains('show')) bootstrap.Offcanvas.getInstance(offcanvasEl)?.hide();
+        } else {
+          showPopupMessage("Indique código de tren [5 dígitos]");
+        }
+      });
       $("#clearQRInput").on("click", () => clearRouteAndSeguirTren());
     }
 
