@@ -1174,43 +1174,58 @@
 
     .cercanias-line-logo {
       display: inline-flex;
-      align-items: stretch;
       margin: 0 .65rem .65rem 0;
-      border-radius: 999px;
-      overflow: hidden;
-      border: 2px solid transparent;
-      background: #fff;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, .12);
-      vertical-align: middle
+      box-shadow: 0 6px 18px rgba(15, 23, 42, .14);
+      vertical-align: middle;
+      overflow: hidden
     }
 
-    .cercanias-line-logo-prefix,
-    .cercanias-line-logo-suffix,
-    .cercanias-line-logo-single {
-      display: inline-flex;
+    .cercanias-line-logo--cercanias {
       align-items: center;
       justify-content: center;
-      min-height: 2rem;
+      min-height: 2.55rem;
+      padding: 0 1rem;
+      border-radius: 999px
+    }
+
+    .cercanias-line-logo--rodalies {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      min-width: 4.2rem;
+      min-height: 4.2rem;
+      padding: .45rem .58rem .38rem;
+      border-radius: .18rem
+    }
+
+    .cercanias-line-logo-main,
+    .cercanias-line-logo-sub {
+      display: block;
       font-family: AdifHauss, "Segoe UI", sans-serif;
-      font-size: .95rem;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: .02em;
+      font-style: normal;
       white-space: nowrap
     }
 
-    .cercanias-line-logo-prefix {
-      min-width: 2.1rem;
-      padding: 0 .55rem
+    .cercanias-line-logo--cercanias .cercanias-line-logo-main {
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.05em
     }
 
-    .cercanias-line-logo-suffix {
-      padding: 0 .72rem;
-      background: #fff
+    .cercanias-line-logo--rodalies .cercanias-line-logo-main {
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: .9;
+      letter-spacing: -.06em
     }
 
-    .cercanias-line-logo-single {
-      padding: 0 .85rem
+    .cercanias-line-logo--rodalies .cercanias-line-logo-sub {
+      margin-top: .12rem;
+      font-size: .78rem;
+      font-weight: 700;
+      line-height: .95;
+      letter-spacing: -.02em
     }
 
     @media (max-width: 640px) {
@@ -1218,11 +1233,27 @@
         margin: 0 .5rem .5rem 0
       }
 
-      .cercanias-line-logo-prefix,
-      .cercanias-line-logo-suffix,
-      .cercanias-line-logo-single {
-        min-height: 1.85rem;
-        font-size: .86rem
+      .cercanias-line-logo--cercanias {
+        min-height: 2.2rem;
+        padding: 0 .82rem
+      }
+
+      .cercanias-line-logo--cercanias .cercanias-line-logo-main {
+        font-size: 1.55rem
+      }
+
+      .cercanias-line-logo--rodalies {
+        min-width: 3.6rem;
+        min-height: 3.6rem;
+        padding: .36rem .46rem .3rem
+      }
+
+      .cercanias-line-logo--rodalies .cercanias-line-logo-main {
+        font-size: 1.78rem
+      }
+
+      .cercanias-line-logo--rodalies .cercanias-line-logo-sub {
+        font-size: .68rem
       }
     }
 
@@ -7208,8 +7239,53 @@
       "87302": "N\u00EEmes",
       "87303": "Lyon Part-Dieu",
       "87374": "Perpignan",
-      "87810": "Valence TGV"
+      "87810": "Valence TGV",
+      "87814": "Avignon TGV",
+      "87912": "Aix-en-Provence TGV"
     };
+    const FRENCH_TGV_ROUTES = [
+      [{l:"P",n:"Perpignan"},{l:"N",n:"Narbonne"},{l:"B",n:"Béziers"},{l:"A",n:"Agde"},
+       {l:"S",n:"Sète"},{l:"M",n:"Montpellier Saint-Roch"},{l:"N",n:"Nîmes"},
+       {l:"V",n:"Valence TGV"},{l:"L",n:"Lyon Part-Dieu"},{l:"P",n:"Paris Gare de Lyon"}],
+      [{l:"P",n:"Perpignan"},{l:"N",n:"Narbonne"},{l:"B",n:"Béziers"},{l:"A",n:"Agde"},
+       {l:"S",n:"Sète"},{l:"M",n:"Montpellier Saint-Roch"},{l:"N",n:"Nîmes"},
+       {l:"A",n:"Avignon TGV"},{l:"A",n:"Aix-en-Provence TGV"},{l:"M",n:"Marseille Saint-Charles"}],
+      [{l:"P",n:"Perpignan"},{l:"N",n:"Narbonne"},{l:"B",n:"Béziers"},{l:"A",n:"Agde"},
+       {l:"S",n:"Sète"},{l:"M",n:"Montpellier Saint-Roch"},{l:"N",n:"Nîmes"},
+       {l:"A",n:"Avignon TGV"},{l:"V",n:"Valence TGV"},{l:"L",n:"Lyon Part-Dieu"},{l:"P",n:"Paris Gare de Lyon"}]
+    ];
+    function resolveFrenchLetterCodes(estaciones) {
+      var idxs = [], i;
+      for (i = 0; i < estaciones.length; i++) {
+        var p = estaciones[i].p;
+        if (p && p.length === 1 && /^[A-Z]$/.test(p)) idxs.push(i);
+      }
+      if (idxs.length === 0) return null;
+      var letters = idxs.map(function(j) { return estaciones[j].p; });
+      function tryMatch(seq) {
+        var si = 0, names = [], k;
+        for (k = 0; k < letters.length; k++) {
+          var found = false;
+          while (si < seq.length) {
+            if (seq[si].l === letters[k]) { names.push(seq[si].n); si++; found = true; break; }
+            si++;
+          }
+          if (!found) return null;
+        }
+        return names;
+      }
+      for (var r = 0; r < FRENCH_TGV_ROUTES.length; r++) {
+        var route = FRENCH_TGV_ROUTES[r];
+        var names = tryMatch(route);
+        if (!names) names = tryMatch(route.slice().reverse());
+        if (names) {
+          var result = {};
+          idxs.forEach(function(idx, k) { result[idx] = names[k]; });
+          return result;
+        }
+      }
+      return null;
+    }
     let translations = { es: { lineasPanel: { capas: "Informacion de capas", estaciones: "Estaciones" }, popup: { tren: { cerrar: "Cerrar", flecha: "->", trenaccesible: "Tren accesible", antparada: "Parada anterior", proxparada: "Proxima parada", llegadaprev: "Llegada prevista", varhoraria: "Variacion horaria" }, estacion: { estacion: "Estacion", cerrar: "Cerrar", accesible: "Estacion accesible", correspondencias: "Correspondencias" } }, leyenda: { capas: "Capas", cerrar: "Cerrar", trenescluster: "Agrupacion de trenes", trenes: "Trenes en tiempo real", estaciones: "Estaciones", accesible: "Accesible", capasbase: "Capas base del mapa", estandar: "Estandar", satelite: "Satelite" }, tools: { refreshtrain: "Refrescar trenes", geolocalizar: "Geolocalizar", pausar: "Pausar trenes", sincobertura: "Sin cobertura" }, js: { estaccercana: "Estacion mas cercana", noestaccercana: "No hay estacion a menos de 100 km.", enhora: "En hora" } } };
     let currentLang = "es", pauseTrains = false, ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), dataTrenes, popuptren, popupestacion, seguirTren;
     let adifTimetableState = {
@@ -8306,7 +8382,7 @@
         countdown: false,
         maxShowStops: -1,
         showAllTrains: false,
-        fontSize: "auto"
+        fontSize: ismobile ? "18" : "auto"
       };
       const params = new URLSearchParams(baseParams);
       Object.keys(gravitaProps).forEach(key => {
@@ -8318,9 +8394,56 @@
     function cloneAdifPayload(payload) {
       try { return JSON.parse(JSON.stringify(payload || {})) } catch { return null }
     }
+    function patchFrenchStationNamesInPayload(data) {
+      if (!data || typeof data !== "object") return;
+      if (!data.stations || typeof data.stations !== "object") data.stations = {};
+      const stations = data.stations;
+      Object.keys(ADIF_STATION_NAME_OVERRIDES).forEach(code => {
+        const name = ADIF_STATION_NAME_OVERRIDES[code];
+        const variants = [...getAdifCodeVariants(code), String(code).padStart(7, "0")];
+        [...new Set(variants)].forEach(variant => {
+          if (!stations[variant] || typeof stations[variant] !== "object") stations[variant] = {};
+          stations[variant].name = name;
+          stations[variant].short_name = name;
+          stations[variant].long_name = name;
+          stations[variant].station_name = name;
+        });
+      });
+      Object.keys(stations).forEach(key => {
+        const override = getAdifStationNameOverride(key);
+        if (override) {
+          if (typeof stations[key] !== "object") stations[key] = {};
+          stations[key].name = override;
+          stations[key].short_name = override;
+          stations[key].long_name = override;
+          stations[key].station_name = override;
+        }
+      });
+      function patchStop(stop) {
+        if (!stop || typeof stop !== "object") return;
+        const rawCode = String(stop.code || stop.station_code || stop.stationCode || stop.id || stop.uic || "").trim();
+        if (!rawCode) return;
+        const override = getAdifStationNameOverride(rawCode);
+        if (override) {
+          stop.name = override;
+          stop.station_name = override;
+          stop.short_name = override;
+          stop.long_name = override;
+        }
+      }
+      (data.trains || []).forEach(train => {
+        ["origins", "destinations", "stops", "all_stops", "previous_stops", "next_stops", "commercial_stops", "route", "itinerary"].forEach(key => {
+          (Array.isArray(train?.[key]) ? train[key] : []).forEach(patchStop);
+        });
+        ["origin", "destination", "previous_stop", "next_stop", "current_stop"].forEach(key => {
+          patchStop(train?.[key]);
+        });
+      });
+    }
     function prepareAdifPayloadForGravita(payload) {
       const data = cloneAdifPayload(payload);
       if (!data) return null;
+      patchFrenchStationNamesInPayload(data);
       if (data?.trains && data?.station_settings) {
         const existingPlatforms = data.station_settings?.platforms || {};
         const trainPlatforms = new Set();
@@ -8744,7 +8867,10 @@
     }
     function getStationNameByCode(c) {
       var f = getStationFeatureByCode(c);
-      if (!f) return c;
+      if (!f) {
+        var override = getAdifStationNameOverride(c);
+        return override || c;
+      }
       return f.get("displayName") || (f.get("ldProps") && f.get("ldProps").NOMBRE) || (f.get("cercProps") && f.get("cercProps").NOMBRE_ESTACION) || f.get("NOMBRE") || f.get("NOMBRE_ESTACION") || c;
     }
     function getStationGeometryByCode(c) { var f = getStationFeatureByCode(c); return f ? f.getGeometry() : null }
@@ -8861,21 +8987,27 @@
     }
     function renderCercaniasLineBadges(nucleo, lineasCsv, fallbackColor) {
       const fallbackHex = normalizeCssColor(fallbackColor) || "#830065";
+      const toTitleCase = value => String(value || "").toLowerCase().replace(/\b([a-záéíóúàèìòùüñç])/g, m => m.toUpperCase());
       return String(lineasCsv || "").split(",").map(l => l.trim()).filter(Boolean).map(linea => {
         const lineFeature = findCercaniasLineFeature(nucleo, linea);
         const color = (lineFeature && normalizeCssColor(lineFeature.get("COLOR"))) || fallbackHex;
-        const textColor = useWhiteAccesibility(color) ? "#ffffff" : "#111827";
         const rawLabel = String(linea || "").trim().replace(/\s+/g, " ");
         const compactLabel = rawLabel.toUpperCase();
-        const splitAlphaNum = compactLabel.match(/^([A-Z]{1,3})-?(\d{1,2}[A-Z]?)$/) || compactLabel.match(/^([A-Z]{1,3})(\d{1,2}[A-Z]?)$/);
-        const splitNamedBranch = compactLabel.match(/^([A-Z]+\d+[A-Z]?)\s+(.+)$/);
-        if (splitAlphaNum) {
-          return '<span class="cercanias-line-logo" style="border-color:' + color + '"><span class="cercanias-line-logo-prefix" style="background:' + color + ';color:' + textColor + '">' + escapeHtml(splitAlphaNum[1]) + '</span><span class="cercanias-line-logo-suffix" style="color:' + color + '">' + escapeHtml(splitAlphaNum[2]) + '</span></span>';
+        const cercaniasMatch = compactLabel.match(/^C-?(\d{1,2}[A-Z]?)$/) || compactLabel.match(/^([A-Z]{1,3})-?(\d{1,2}[A-Z]?)$/);
+        const rodaliesMatch = rawLabel.match(/^(R[A-Z]?\d+[A-Z]?)(?:[\s-]+(.+))?$/i);
+        if (/^C/i.test(compactLabel) && cercaniasMatch) {
+          const pillLabel = cercaniasMatch.length === 2 ? `C-${cercaniasMatch[1]}` : `${cercaniasMatch[1]}-${cercaniasMatch[2]}`;
+          const textColor = useWhiteAccesibility(color) ? "#ffffff" : "#5c5c66";
+          return '<span class="cercanias-line-logo cercanias-line-logo--cercanias" style="background:' + color + ';color:' + textColor + '"><span class="cercanias-line-logo-main">' + escapeHtml(pillLabel) + '</span></span>';
         }
-        if (splitNamedBranch) {
-          return '<span class="cercanias-line-logo" style="border-color:' + color + '"><span class="cercanias-line-logo-prefix" style="background:' + color + ';color:' + textColor + '">' + escapeHtml(splitNamedBranch[1]) + '</span><span class="cercanias-line-logo-suffix" style="color:' + color + '">' + escapeHtml(splitNamedBranch[2]) + '</span></span>';
+        if (rodaliesMatch) {
+          const textColor = useWhiteAccesibility(color) ? "#ffffff" : "#13341f";
+          const mainLabel = String(rodaliesMatch[1] || "").toUpperCase();
+          const subLabel = rodaliesMatch[2] ? toTitleCase(rodaliesMatch[2]) : "";
+          return '<span class="cercanias-line-logo cercanias-line-logo--rodalies" style="background:' + color + ';color:' + textColor + '"><span class="cercanias-line-logo-main">' + escapeHtml(mainLabel) + '</span>' + (subLabel ? '<span class="cercanias-line-logo-sub">' + escapeHtml(subLabel) + '</span>' : '') + '</span>';
         }
-        return '<span class="cercanias-line-logo" style="border-color:' + color + '"><span class="cercanias-line-logo-single" style="background:' + color + ';color:' + textColor + '">' + escapeHtml(compactLabel) + '</span></span>';
+        const textColor = useWhiteAccesibility(color) ? "#ffffff" : "#1f2937";
+        return '<span class="cercanias-line-logo cercanias-line-logo--cercanias" style="background:' + color + ';color:' + textColor + '"><span class="cercanias-line-logo-main">' + escapeHtml(compactLabel) + '</span></span>';
       }).join("");
     }
     function getCercaniasDelayColor(delay) {
@@ -9127,10 +9259,11 @@
       let tr = rutasInfo.trenes.find(e => e.idTren == seguirTren); if (!tr) { showPopupMessage("No hay info del tren."); return }
       let feat = getFeatTrainByCode(seguirTren); if (!feat) { showPopupMessage("Tren no encontrado en mapa."); return }
       tr.locEstacion = feat.get("codEstSig"); tr.locEstacionAnt = feat.get("codEstAnt");
+      var frenchNames = resolveFrenchLetterCodes(tr.estaciones) || {};
       $("#modal-timeline").addClass("show").removeClass("collapse");
       var c = $(".timeline-content"); c.empty();
       c.append('<div><span class="title-menu">Tren ' + feat.get("codComercial") + ' (' + getTypeByCode(feat.get("codProduct")).desProduct + ')</span></div>');
-      c.append('<div class="lineas pt-2"><div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span class="text-line-train-modal">' + getStationNameByCode(tr.estaciones[0].p) + ' → ' + getStationNameByCode(tr.estaciones[tr.estaciones.length - 1].p) + '</span></div></div><br>');
+      c.append('<div class="lineas pt-2"><div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span class="text-line-train-modal">' + (frenchNames[0] || getStationNameByCode(tr.estaciones[0].p)) + ' → ' + (frenchNames[tr.estaciones.length - 1] || getStationNameByCode(tr.estaciones[tr.estaciones.length - 1].p)) + '</span></div></div><br>');
       routeStationMap(tr, feat.get("ultRetraso"));
       let isPast = true, html = "";
       tr.estaciones.forEach((st, i) => {
@@ -9143,7 +9276,7 @@
         let dl2 = parseInt(feat.get("ultRetraso"), 10) || 0, bd2 = null, do2 = 0;
         if (/^\d{2}:\d{2}$/.test(st.h) && i > 0) { var ph = tr.estaciones[i - 1].h; if (/^\d{2}:\d{2}$/.test(ph)) { var [x, y] = ph.split(":").map(Number), [w, z] = st.h.split(":").map(Number); if (w < x || (w === x && z <= y)) do2 = 1 } bd2 = new Date(); bd2.setHours(0, 0, 0, 0) }
         var tm = getHora(st.h, dl2, bd2, do2), show = !li.hasClass("past");
-        li.html('<div class="dot"></div>' + dur + '<div class="card" role="button" onclick="zoomToStation(\'' + st.p + '\')">' + (show ? '<span class="times">' + tm + 'h</span>' : '') + ' <span class="station-name">' + getStationNameByCode(st.p) + '</span></div>');
+        li.html('<div class="dot"></div>' + dur + '<div class="card" role="button" onclick="zoomToStation(\'' + st.p + '\')">' + (show ? '<span class="times">' + tm + 'h</span>' : '') + ' <span class="station-name">' + (frenchNames[i] || getStationNameByCode(st.p)) + '</span></div>');
         html += li.prop("outerHTML")
       });
       c.append('<div style="max-height:calc(100vh - 16rem);overflow-y:auto;padding-right:10px"><ul>' + html + '</ul></div>');
