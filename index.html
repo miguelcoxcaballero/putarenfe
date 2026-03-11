@@ -889,6 +889,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      min-width: 220px;
     }
 
     .adif-language-label {
@@ -898,33 +899,75 @@
       white-space: nowrap;
     }
 
+    .adif-language-shell {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-width: 220px;
+      border: 1px solid #cfdae6;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(242, 247, 252, 0.92) 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 2px 8px rgba(13, 36, 64, 0.07);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .adif-language-shell:hover {
+      border-color: #bacbde;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78), 0 4px 12px rgba(13, 36, 64, 0.1);
+    }
+
+    .adif-language-shell:focus-within {
+      border-color: #8db3d3;
+      box-shadow: 0 0 0 3px rgba(91, 131, 170, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+    }
+
+    .adif-language-icon {
+      position: absolute;
+      left: 11px;
+      width: 14px;
+      height: 14px;
+      color: #60778d;
+      opacity: 0.92;
+      pointer-events: none;
+    }
+
+    .adif-language-chevron {
+      position: absolute;
+      right: 12px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #60778d;
+      border-bottom: 2px solid #60778d;
+      transform: rotate(45deg) translateY(-2px);
+      transform-origin: center;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
     .adif-language-select {
-      border: 1px solid var(--border-solid);
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(8px);
+      width: 100%;
+      border: none;
+      background: transparent;
       color: var(--text-main);
-      border-radius: var(--radius-sm);
-      padding: 10px 36px 10px 16px;
+      border-radius: 12px;
+      padding: 10px 34px 10px 34px;
       font-size: 0.88rem;
       cursor: pointer;
       font-family: var(--font);
-      font-weight: 500;
+      font-weight: 600;
       appearance: none;
       -webkit-appearance: none;
-      background-image:
-        linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%),
-        linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%);
-      background-position:
-        calc(100% - 20px) calc(50% - 2px),
-        calc(100% - 14px) calc(50% - 2px);
-      background-size: 6px 6px, 6px 6px;
-      background-repeat: no-repeat;
+      -moz-appearance: none;
+      outline: none;
       transition: all var(--transition);
     }
 
+    .adif-language-select::-ms-expand {
+      display: none;
+    }
+
     .adif-language-select:focus {
-      outline: 2px solid var(--adif-light-green);
-      outline-offset: 1px;
+      outline: none;
     }
 
     .modal-adif-timetable .btntool {
@@ -1485,6 +1528,11 @@
         flex-direction: column;
         align-items: stretch;
         gap: 6px;
+      }
+
+      .adif-language-shell {
+        width: 100%;
+        min-width: 0;
       }
 
       .adif-language-select {
@@ -2516,17 +2564,24 @@
         </div>
         <div class="adif-language-group">
           <label class="adif-language-label" for="adifLanguageSelect">Idioma</label>
-          <select class="adif-language-select" id="adifLanguageSelect">
-            <option value="ESP">Espa&ntilde;ol</option>
-            <option value="CAT">Catal&agrave;</option>
-            <option value="VAL">Valenci&agrave;</option>
-            <option value="EUS">Euskera</option>
-            <option value="GAL">Galego</option>
-            <option value="ARA">Aragon&eacute;s</option>
-            <option value="ENG">English</option>
-            <option value="FRA">Fran&ccedil;ais</option>
-            <option value="POR">Portugu&ecirc;s</option>
-          </select>
+          <div class="adif-language-shell">
+            <svg class="adif-language-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm6.9 8h-3.03a14.7 14.7 0 0 0-1.14-5.06A7.03 7.03 0 0 1 18.9 11zM12 5.05c.85 1.1 1.52 2.92 1.8 4.95H10.2c.28-2.03.95-3.85 1.8-4.95zM9.27 5.94A14.7 14.7 0 0 0 8.13 11H5.1a7.03 7.03 0 0 1 4.17-5.06zM5.1 13h3.03c.18 1.9.58 3.67 1.14 5.06A7.03 7.03 0 0 1 5.1 13zm4.9 0h3.8c-.3 2.03-.96 3.85-1.8 4.95-.84-1.1-1.5-2.92-1.8-4.95zm4.73 5.06c.56-1.39.96-3.16 1.14-5.06h3.03a7.03 7.03 0 0 1-4.17 5.06z" fill="currentColor"></path>
+            </svg>
+            <select class="adif-language-select" id="adifLanguageSelect">
+              <option value="ESP">Espa&ntilde;ol</option>
+              <option value="CAT">Catal&agrave;</option>
+              <option value="VAL">Valenci&agrave;</option>
+              <option value="EUS">Euskera</option>
+              <option value="GAL">Galego</option>
+              <option value="ARA">Aragon&eacute;s</option>
+              <option value="AST">Asturianu</option>
+              <option value="ENG">English</option>
+              <option value="FRA">Fran&ccedil;ais</option>
+              <option value="POR">Portugu&ecirc;s</option>
+            </select>
+            <span class="adif-language-chevron" aria-hidden="true"></span>
+          </div>
         </div>
         </section>
       <div class="adif-modal-body" id="adifTimetableBody"></div>
@@ -7905,14 +7960,47 @@
         showPopupMessage(message);
       }
     }
+    const CP1252_SYMBOL_TO_CONTROL = {
+      "\u20AC": "\u0080",
+      "\u201A": "\u0082",
+      "\u0192": "\u0083",
+      "\u201E": "\u0084",
+      "\u2026": "\u0085",
+      "\u2020": "\u0086",
+      "\u2021": "\u0087",
+      "\u02C6": "\u0088",
+      "\u2030": "\u0089",
+      "\u0160": "\u008A",
+      "\u2039": "\u008B",
+      "\u0152": "\u008C",
+      "\u017D": "\u008E",
+      "\u2018": "\u0091",
+      "\u2019": "\u0092",
+      "\u201C": "\u0093",
+      "\u201D": "\u0094",
+      "\u2022": "\u0095",
+      "\u2013": "\u0096",
+      "\u2014": "\u0097",
+      "\u02DC": "\u0098",
+      "\u2122": "\u0099",
+      "\u0161": "\u009A",
+      "\u203A": "\u009B",
+      "\u0153": "\u009C",
+      "\u017E": "\u009E",
+      "\u0178": "\u009F"
+    };
+    function normalizeCp1252PseudoChars(value) {
+      return String(value ?? "").replace(/[\u20AC\u201A\u0192\u201E\u2026\u2020\u2021\u02C6\u2030\u0160\u2039\u0152\u017D\u2018\u2019\u201C\u201D\u2022\u2013\u2014\u02DC\u2122\u0161\u203A\u0153\u017E\u0178]/g, ch => CP1252_SYMBOL_TO_CONTROL[ch] || ch);
+    }
     function looksLikeMojibake(value) {
       return /[\u00C3\u00C2\u00E2]/.test(String(value ?? ""));
     }
     function repairMojibake(value) {
       const text = value == null ? "" : String(value);
       if (!text) return "";
-      if (!looksLikeMojibake(text)) return text;
-      let repaired = text;
+      const normalized = normalizeCp1252PseudoChars(text);
+      if (!looksLikeMojibake(normalized)) return normalized;
+      let repaired = normalized;
       for (let i = 0; i < 3 && looksLikeMojibake(repaired); i++) {
         try {
           const decoded = decodeURIComponent(escape(repaired));
@@ -9126,11 +9214,11 @@
       return "C,A,L,R";
     }
     function getDefaultAdifGravitaLanguage() {
-      const map = { es: "ESP", ca: "CAT", eu: "EUS", gl: "GAL", an: "ARA", ara: "ARA", en: "ENG" };
+      const map = { es: "ESP", ca: "CAT", eu: "EUS", gl: "GAL", an: "ARA", ara: "ARA", ast: "AST", en: "ENG" };
       return map[currentLang] || "ESP";
     }
     function normalizeAdifGravitaLanguage(value) {
-      const allowed = new Set(["ESP", "CAT", "VAL", "EUS", "GAL", "ARA", "ENG", "FRA", "POR"]);
+      const allowed = new Set(["ESP", "CAT", "VAL", "EUS", "GAL", "ARA", "AST", "ENG", "FRA", "POR"]);
       return allowed.has(String(value || "").toUpperCase()) ? String(value || "").toUpperCase() : getDefaultAdifGravitaLanguage();
     }
     function getAdifGravitaInterfaceValue(screen) {
@@ -9807,15 +9895,15 @@
     async function mountAdifGravitaPanels(renderToken = "") {
       const body = document.getElementById("adifTimetableBody");
       if (renderToken && body?.dataset?.adifRenderToken !== renderToken) return;
-      await ensureAdifRouteInfoFresh();
-      if (renderToken && body?.dataset?.adifRenderToken !== renderToken) return;
-      const payload = prepareAdifPayloadForGravita(adifTimetableState.rawPayload);
-      if (!payload) return;
+      const hasPayload = !!adifTimetableState.rawPayload;
+      if (hasPayload) ensureAdifRouteInfoFresh().catch(() => { });
+      const payload = hasPayload ? prepareAdifPayloadForGravita(adifTimetableState.rawPayload) : null;
       document.querySelectorAll(".adif-gravita-container iframe").forEach(iframe => {
         const container = iframe.closest(".adif-gravita-container");
         const src = iframe.dataset.src || "";
         const pump = () => {
           if (renderToken && body?.dataset?.adifRenderToken !== renderToken) return;
+          if (!payload) return;
           sendAdifPayloadToGravitaFrame(iframe, payload);
         };
         if (iframe.dataset.localBlobUrl) {
@@ -9831,19 +9919,20 @@
         const startPump = () => {
           if (pumpStarted) return;
           pumpStarted = true;
+          if (!payload) return;
           pump();
-          window.setTimeout(pump, 250);
-          window.setTimeout(pump, 900);
+          window.setTimeout(pump, 120);
+          window.setTimeout(pump, 500);
           const intervalId = setInterval(() => {
             if (renderToken && body?.dataset?.adifRenderToken !== renderToken) { clearInterval(intervalId); return; }
             if (!$(".modal-adif-timetable").is(":visible")) { clearInterval(intervalId); return; }
             pump();
-          }, 1500);
+          }, 1200);
         };
         const revealTimeout = window.setTimeout(() => {
           reveal();
           startPump();
-        }, 2200);
+        }, payload ? 900 : 450);
         const onLoad = () => {
           if (loaded) return;
           loaded = true;
@@ -9855,18 +9944,20 @@
         iframe.removeAttribute("srcdoc");
         iframe.removeAttribute("src");
         iframe.dataset.usesLocalShell = "";
-        if (src && iframe.dataset.loadedSrc !== src) {
+        if (src && (iframe.dataset.loadedSrc !== src || !iframe.getAttribute("src"))) {
           iframe.dataset.loadedSrc = src;
           iframe.src = src;
         }
       });
     }
-    function renderAdifGravitaPanels() {
+    function renderAdifGravitaPanels(customMessage = "", hideIframe = false) {
       const stationCode = adifTimetableState.resolvedCode || normalizeStationCode(adifTimetableState.stationCode);
       const screen = adifTimetableState.screen === "arrivals" ? "arrivals" : "departures";
       const iframeUrl = buildAdifGravitaUrl(stationCode, getAdifGravitaInterfaceValue(screen), adifTimetableState.filter, adifTimetableState.language);
       const label = screen === "arrivals" ? "llegadas" : "salidas";
-      return `<div class="adif-gravita-stage"><div class="adif-gravita-container"><div class="loader-container"><div class="loader-content">${renderAdifWordmarkLogo("loader-logo")}<span class="loader-text">Cargando ${label}...</span></div></div><iframe data-src="${escapeHtml(iframeUrl)}" title="${screen === "arrivals" ? "Llegadas" : "Salidas"} ADIF"></iframe></div></div>`;
+      const message = customMessage || `Cargando ${label}...`;
+      const iframeHtml = hideIframe ? "" : `<iframe data-src="${escapeHtml(iframeUrl)}" title="${screen === "arrivals" ? "Llegadas" : "Salidas"} ADIF"></iframe>`;
+      return `<div class="adif-gravita-stage"><div class="adif-gravita-container"><div class="loader-container"><div class="loader-content">${renderAdifWordmarkLogo("loader-logo")}<span class="loader-text">${escapeHtml(message)}</span></div></div>${iframeHtml}</div></div>`;
     }
     function formatAdifBadge(row) {
       if (row.isCercanias) {
@@ -9941,12 +10032,17 @@
         body.dataset.adifRenderToken = "";
         body.innerHTML = renderAdifGravitaPanels();
         repairDomMojibake(body);
-        requestAnimationFrame(() => syncAdifGravitaLayout());
+        requestAnimationFrame(() => {
+          syncAdifGravitaLayout();
+          mountAdifGravitaPanels();
+        });
         return;
       }
       if (!adifTimetableState.rawPayload) {
-        body.innerHTML = `<div class="adif-board">${renderAdifBoardHeader()}${renderAdifBoardState(adifTimetableState.error || "No se pudieron cargar los horarios para esta estacion.", true)}</div>`;
+        body.dataset.adifRenderToken = "";
+        body.innerHTML = renderAdifGravitaPanels(adifTimetableState.error || "No se pudieron cargar los horarios para esta estacion.", true);
         repairDomMojibake(body);
+        requestAnimationFrame(() => syncAdifGravitaLayout());
         return;
       }
       const renderToken = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -10733,7 +10829,14 @@
 
     let rutasInfo, rutasInfoTS;
     async function cargarRuta() { rutasInfo = await fetchRenfeJson("/renfe-visor/trenesConEstacionesLD.json", { cacheKey: "routesLD", cacheTtlMs: CACHE_TTL_ROUTES, timeoutMs: 15000 }); rutasInfoTS = Date.now(); return rutasInfo }
-    function renderTrainTimeline(c) { seguirTren = c; document.getElementById("qrInput").value = c; updateQRButtons(); renderTimeline() }
+    function renderTrainTimeline(c) {
+      seguirTren = c;
+      const input = document.getElementById("qrInput");
+      if (input) input.value = c;
+      updateQRButtons();
+      closeModal(".modal-tren,.modal-tren-movil,.modal-info,.modal-info-train-movil");
+      renderTimeline();
+    }
 
     async function renderTimeline() {
       if (!rutasInfo || !rutasInfoTS || Date.now() - rutasInfoTS > 3e5) { try { await cargarRuta() } catch (e) { showPopupMessage("No se pudo cargar la ruta."); return } }
@@ -10744,8 +10847,10 @@
       var frenchNames = resolveFrenchLetterCodes(tr.estaciones) || {};
       $("#modal-timeline").addClass("show").removeClass("collapse");
       var c = $(".timeline-content"); c.empty();
-      c.append('<div><span class="title-menu">Tren ' + feat.get("codComercial") + ' (' + getTypeByCode(feat.get("codProduct")).desProduct + ')</span></div>');
-      c.append('<div class="lineas pt-2"><div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span class="text-line-train-modal">' + (frenchNames[0] || getStationNameByCode(tr.estaciones[0].p)) + ' â†’ ' + (frenchNames[tr.estaciones.length - 1] || getStationNameByCode(tr.estaciones[tr.estaciones.length - 1].p)) + '</span></div></div><br>');
+      const typeInfo = getTypeByCode(feat.get("codProduct")) || {};
+      const typeName = typeInfo.desProduct || "-";
+      c.append('<div><span class="title-menu">Tren ' + (feat.get("codComercial") || seguirTren || "-") + ' (' + typeName + ')</span></div>');
+      c.append('<div class="lineas pt-2"><div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span class="text-line-train-modal">' + (frenchNames[0] || getStationNameByCode(tr.estaciones[0].p)) + ' &rarr; ' + (frenchNames[tr.estaciones.length - 1] || getStationNameByCode(tr.estaciones[tr.estaciones.length - 1].p)) + '</span></div></div><br>');
       routeStationMap(tr, feat.get("ultRetraso"));
       let isPast = true, html = "";
       tr.estaciones.forEach((st, i) => {
