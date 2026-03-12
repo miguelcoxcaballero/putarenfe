@@ -1203,9 +1203,15 @@
       overflow: auto;
       overscroll-behavior: contain;
     }
+    .adif-canvas-stage.arrivals {
+      background: #d6ecd8;
+    }
 
     .adif-canvas-shell {
       background: #101723;
+    }
+    .adif-canvas-shell.arrivals {
+      background: #d6ecd8;
     }
 
     .adif-canvas-container {
@@ -1217,12 +1223,18 @@
       box-shadow: none;
       background: #172338;
     }
+    .adif-canvas-container.arrivals {
+      background: #d6ecd8;
+    }
 
     .adif-canvas-board {
       display: block;
       width: 100%;
       height: auto;
       background: #172338;
+    }
+    .adif-canvas-board.arrivals {
+      background: #d6ecd8;
     }
 
     /* ===== ADIF BOARD ===== */
@@ -2128,6 +2140,7 @@
         max-height: none;
         flex-shrink: 0;
       }
+
     }
 
     /* ===== MODAL HEADERS ===== */
@@ -8902,6 +8915,7 @@
         const lineBadge = row.querySelector(".col-tren span.lineColored");
         const fallbackTrain = row.querySelector(".col-tren > div > span:last-child span");
         const viaSpan = row.querySelector(".col-via span");
+        const destinoSpansText = destinoNode ? Array.from(destinoNode.querySelectorAll("span")).map(node => stripHtml(node.textContent || "")).filter(Boolean) : [];
         const parsedRow = {
           kind: "row",
           hora: stripHtml(horaSpans[0] && horaSpans[0].textContent),
@@ -8918,12 +8932,14 @@
           cercaniasColour: lineBadge && lineBadge.style && lineBadge.style.backgroundColor ? lineBadge.style.backgroundColor.replace(/^#/, "") : "",
           markupColor: row.className,
           trafficType: forcedTrafficType || (row.classList.contains("cercanias") ? "cercanias" : "avldmd"),
-          searchType: typeKey === "salidas" ? "proximasSalidas" : "proximasLlegadas"
+          searchType: typeKey === "salidas" ? "proximasSalidas" : "proximasLlegadas",
+          paradas: []
         };
         if (!forcedTrafficType) {
           parsedRow.trafficType = inferAdifTrafficType(parsedRow);
           parsedRow.isCercanias = parsedRow.trafficType === "cercanias";
         }
+        parsedRow.paradas = extractAdifIntermediateStopsFromRow({ ...parsedRow, paradas: destinoSpansText }, [parsedRow.estacion]);
         rows.push(parsedRow);
       });
       return rows;
@@ -8944,14 +8960,11 @@
       const cacheKey = buildAdifCacheKey("page", code);
       const override = ADIF_STATION_CONFIG_OVERRIDES[code];
       if (override) {
-        const embeddedFallback = ADIF_TIMETABLE_HTML_FALLBACKS[code];
         return {
           ...override,
           stationCode: code,
-          htmlFallback: embeddedFallback ? {
-            salidas: parseAdifHtmlTable(embeddedFallback.salidas || "", "salidas"),
-            llegadas: parseAdifHtmlTable(embeddedFallback.llegadas || "", "llegadas")
-          } : { salidas: [], llegadas: [] }
+          // Never pin API mode to static embedded snapshots: they become stale.
+          htmlFallback: { salidas: [], llegadas: [] }
         };
       }
       if (!forceFresh) {
@@ -9025,22 +9038,68 @@
       url.searchParams.set("_servicios_estacion_ServiciosEstacionPortlet_stationCode", config.stationCode);
       return url.toString();
     }
+    function normalizeCercaniasColorInput(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      return normalizeCssColor(/^rgb/i.test(raw) ? raw : `#${raw.replace(/^#/, "")}`) || "";
+    }
+    function resolveAdifConfigNucleo(config) {
+      const fromConfig = getCercaniasNucleoId(config?.commuterNetwork || "");
+      if (fromConfig) return fromConfig;
+      const feature = getStationFeatureByCode(config?.stationCode || adifTimetableState?.stationCode || "");
+      const fromFeature = getCercaniasNucleoId(getFeatureCercaniasNetwork(feature));
+      return fromFeature || "";
+    }
+    function hydrateAdifCercaniasRowVisuals(row, config = null) {
+      const output = row && typeof row === "object" ? { ...row } : row;
+      if (!output || typeof output !== "object") return output;
+      if (!(output.isCercanias || output.trafficType === "cercanias")) return output;
+      const resolvedNucleo = getCercaniasNucleoId(output.cercaniasNucleo || output.nucleo || output.core || "")
+        || resolveAdifConfigNucleo(config);
+      if (resolvedNucleo) output.cercaniasNucleo = resolvedNucleo;
+      const lineCode = normalizeFallbackCercaniasLineCode(output.cercaniasLine || output.tren || "");
+      if (lineCode) output.cercaniasLine = lineCode;
+      const fromRow = normalizeCercaniasColorInput(output.cercaniasColour);
+      const fromNucleo = getFallbackCercaniasLineColor(lineCode, output.cercaniasNucleo || config?.commuterNetwork || "");
+      const finalColor = fromNucleo || fromRow;
+      if (finalColor) output.cercaniasColour = finalColor.replace(/^#/, "");
+      return output;
+    }
     function normalizeAdifHorarioRow(row, trafficType, searchType) {
+      const stationValue = row?.estacion || row?.station || row?.destination || row?.destino || row?.to || "";
+      const stationStateValue = row?.estacionEstado || row?.estacion_estado || row?.stationStatus || row?.station_status || row?.destinationStatus || row?.destination_status || row?.destinoEstado || "";
+      const trainOperatorValue = row?.trenDatosOp || row?.operator || row?.company || row?.product || "";
+      const trainValue = row?.tren || row?.trainNumber || row?.train_number || row?.commercialNumber || row?.commercial_number || row?.technicalTrainNumber || row?.technical_train_number || row?.line || row?.linea || row?.train || row?.trainLine || row?.train_line || "";
+      const trackValue = row?.via || row?.platform || row?.track || row?.platformNumber || row?.platform_number || "";
+      const normalizedEndpoint = sanitizeStationDisplayName(stationValue);
+      const stationAlternatives = buildStationDisplayCandidates(normalizedEndpoint, [row?.destinations, row?.destination, row?.origins, row?.origin]);
+      const cercaniasLine = normalizeFallbackCercaniasLineCode(
+        row?.cercaniasLine
+        || row?.lineaCercanias
+        || row?.cercaniasLineCode
+        || row?.line
+        || row?.linea
+        || (trafficType === "cercanias" ? extractAdifCercaniasLineLabel(row?.line || row?.linea || row?.tren || "") : "")
+      );
       return {
         kind: row.observation ? "observation" : "row",
         observation: row.observation || "",
         hora: row.hora || "",
         horaEstado: row.horaEstado || "",
-        estacion: row.estacion || "",
+        estacion: stationValue || "",
+        estacionAlternativas: stationAlternatives,
         estacionLink: row.estacionLink || "",
-        estacionEstado: row.estacionEstado || "",
-        trenDatosOp: row.trenDatosOp || "",
-        tren: row.tren || "",
-        via: row.via || "",
+        estacionEstado: stationStateValue || "",
+        trenDatosOp: trainOperatorValue || "",
+        tren: trainValue || "",
+        via: trackValue || "",
         immediate: !!row.immediate,
         accesible: !!row.accesible,
         isCercanias: !!row.isCercanias || trafficType === "cercanias",
-        cercaniasColour: row.cercaniasColour || "",
+        cercaniasColour: normalizeCercaniasColorInput(row.cercaniasColour).replace(/^#/, ""),
+        cercaniasNucleo: String(row.cercaniasNucleo || row.nucleo || row.core || "").trim(),
+        cercaniasLine,
+        paradas: extractAdifIntermediateStopsFromRow(row, stationAlternatives.length ? stationAlternatives : [normalizedEndpoint]),
         markupColor: row.markupColor || "",
         trafficType,
         searchType
@@ -9050,7 +9109,12 @@
       const rows = [];
       const seen = new Set();
       for (let numPage = 0; numPage < 12; numPage++) {
-        const result = await fetchRemoteJsonUrl(buildAdifHorarioUrl(config, searchType, trafficType, numPage), { directOriginUrl: B_ADIF, timeoutMs: 15000, cacheBust: false });
+        const result = await fetchRemoteJsonUrl(buildAdifHorarioUrl(config, searchType, trafficType, numPage), {
+          directOriginUrl: B_ADIF,
+          timeoutMs: 15000,
+          // Force fresh API responses to avoid stale proxy caches.
+          cacheBust: true
+        });
         if (!result || typeof result !== "object" || result.error) {
           throw new Error(result && result.error ? "ADIF devolvio error" : "respuesta ADIF invalida");
         }
@@ -9058,7 +9122,7 @@
         if (!horarios.length) break;
         let newCount = 0;
         horarios.forEach(item => {
-          const normalized = normalizeAdifHorarioRow(item, trafficType, searchType);
+          const normalized = hydrateAdifCercaniasRowVisuals(normalizeAdifHorarioRow(item, trafficType, searchType), config);
           const dedupeKey = [searchType, trafficType, normalized.kind, normalized.hora, normalized.horaEstado, normalized.estacion, normalized.trenDatosOp, normalized.tren, normalized.via, normalized.observation].join("|");
           if (seen.has(dedupeKey)) return;
           seen.add(dedupeKey);
@@ -9080,7 +9144,6 @@
       }
       const availableTraffic = config.trafficFilters && config.trafficFilters.length ? config.trafficFilters : ["cercanias", "avldmd"];
       for (const searchType of ["proximasSalidas", "proximasLlegadas"]) {
-        const errorCountBefore = errors.length;
         for (const trafficType of availableTraffic) {
           try {
             rowsByType[searchType].push(...await fetchAdifHorarioSeries(config, searchType, trafficType));
@@ -9089,8 +9152,7 @@
           }
         }
         const fallbackRows = getAdifFallbackRows(config, searchType, "all");
-        const hadErrors = errors.length > errorCountBefore;
-        if (fallbackRows.length && (!rowsByType[searchType].length || (hadErrors && fallbackRows.length > rowsByType[searchType].length))) {
+        if (fallbackRows.length && !rowsByType[searchType].length) {
           rowsByType[searchType] = fallbackRows;
         }
       }
@@ -9163,7 +9225,19 @@
       return (source || []).filter(row => {
         if (row.kind === "observation" || trafficType === "all") return true;
         return row.trafficType === trafficType || (trafficType === "cercanias" && row.isCercanias) || (trafficType === "avldmd" && !row.isCercanias);
-      }).map(row => ({ ...row, searchType }));
+      }).map(row => hydrateAdifCercaniasRowVisuals({ ...row, searchType }, config));
+    }
+    function normalizeAdifRowsByTypeVisuals(rowsByType, config = null) {
+      const salidas = Array.isArray(rowsByType?.proximasSalidas) ? rowsByType.proximasSalidas : [];
+      const llegadas = Array.isArray(rowsByType?.proximasLlegadas) ? rowsByType.proximasLlegadas : [];
+      const normalizeList = list => list.map(row => {
+        if (!row || row.kind === "observation") return row;
+        return hydrateAdifCercaniasRowVisuals(row, config);
+      });
+      return {
+        proximasSalidas: normalizeList(salidas),
+        proximasLlegadas: normalizeList(llegadas)
+      };
     }
     async function loadAdifTimetableData(feature, forceFresh = false) {
       const code = String(feature.get("stationCodeRaw") || feature.get("stationCode") || "").trim();
@@ -9172,16 +9246,25 @@
         const cached = getCachedJson(cacheKey, CACHE_TTL_ADIF_TIMETABLE);
         const cachedSalidas = cached && cached.rowsByType && Array.isArray(cached.rowsByType.proximasSalidas) ? cached.rowsByType.proximasSalidas.length : 0;
         const cachedLlegadas = cached && cached.rowsByType && Array.isArray(cached.rowsByType.proximasLlegadas) ? cached.rowsByType.proximasLlegadas.length : 0;
-        if (cached && cached.rowsByType && (cachedSalidas || cachedLlegadas)) return cached;
+        if (cached && cached.rowsByType && (cachedSalidas || cachedLlegadas)) {
+          return {
+            ...cached,
+            rowsByType: normalizeAdifRowsByTypeVisuals(cached.rowsByType, {
+              stationCode: code,
+              commuterNetwork: cached.commuterNetwork || getFeatureCercaniasNetwork(feature) || ""
+            })
+          };
+        }
       }
       let config = await resolveAdifStationConfig(feature, forceFresh);
       let { rowsByType, errors } = await collectAdifRowsByType(config);
+      rowsByType = normalizeAdifRowsByTypeVisuals(rowsByType, config);
       let totalRows = countAdifRows(rowsByType);
       if (!totalRows && !forceFresh) {
         try {
           config = await resolveAdifStationConfig(feature, true);
           const retry = await collectAdifRowsByType(config);
-          rowsByType = retry.rowsByType;
+          rowsByType = normalizeAdifRowsByTypeVisuals(retry.rowsByType, config);
           errors = retry.errors.length ? errors.concat(retry.errors.map(msg => `retry: ${msg}`)) : errors;
           totalRows = countAdifRows(rowsByType);
         } catch (error) {
@@ -9191,6 +9274,7 @@
       const payload = {
         stationCode: code,
         pageUrl: config.pageUrl || "",
+        commuterNetwork: config.commuterNetwork || getFeatureCercaniasNetwork(feature) || "",
         resolvedAt: new Date().toISOString(),
         rowsByType,
         errors
@@ -9476,6 +9560,8 @@
     function getFallbackCercaniasLineColor(lineCode, networkName = "") {
       const code = normalizeFallbackCercaniasLineCode(lineCode);
       if (!code) return "";
+      const networkId = getCercaniasNucleoId(networkName);
+      if ((code === "C3" || code === "C-3") && networkId === "40") return "#b21f86";
       const map = getCercaniasLineColorMap();
       const networkKeys = getCercaniasNetworkKeys(networkName);
       for (const networkKey of networkKeys) {
@@ -9548,13 +9634,40 @@
         .replace(/\best\.?\b/g, "estacio")
         .replace(/\bterm\.?\b/g, "terminal")
         .replace(/\bpg\.?\b/g, "passeig")
+        .replace(/-/g, " ")
         .replace(/[^a-z0-9\s-]/g, " ")
         .replace(/\s+/g, " ")
         .trim();
       if (!compact) return [];
       const stopWords = new Set(["de", "del", "la", "las", "l", "el", "els", "les", "d", "i", "y", "da", "do", "dos", "das", "estacio"]);
-      const tokens = compact.split(" ").map(token => token.trim()).filter(token => token && token.length >= 2 && !stopWords.has(token));
+      const rawTokens = compact.split(" ").map(token => token.trim()).filter(token => token && token.length >= 2 && !stopWords.has(token));
+      const tokens = [];
+      rawTokens.forEach(token => {
+        if (/^ss[a-z]/.test(token) && token.length > 2) {
+          tokens.push("san", "sebastian");
+          const remainder = token.slice(2).trim();
+          if (remainder.length >= 2 && !stopWords.has(remainder)) tokens.push(remainder);
+          return;
+        }
+        if (token === "ss") {
+          tokens.push("san", "sebastian");
+          return;
+        }
+        tokens.push(token);
+      });
       return Array.from(new Set(tokens));
+    }
+    function areComparableStationTokens(a, b) {
+      const left = String(a || "").trim();
+      const right = String(b || "").trim();
+      if (!left || !right) return false;
+      if (left === right) return true;
+      if (left.length >= 6 && right.length >= 6 && (left.startsWith(right) || right.startsWith(left))) return true;
+      if (left.length >= 4 && right.length >= 4) {
+        if (left.endsWith("s") && left.slice(0, -1) === right) return true;
+        if (right.endsWith("s") && right.slice(0, -1) === left) return true;
+      }
+      return false;
     }
     function areStationDisplayNamesEquivalent(a, b) {
       const aNorm = normalizeStationName(a);
@@ -9564,12 +9677,19 @@
       const aTokens = getStationNameComparableTokens(a);
       const bTokens = getStationNameComparableTokens(b);
       if (!aTokens.length || !bTokens.length) return aNorm.length >= 6 && bNorm.length >= 6 && (aNorm.startsWith(bNorm) || bNorm.startsWith(aNorm));
-      const aSet = new Set(aTokens);
-      const bSet = new Set(bTokens);
+      const aSet = Array.from(new Set(aTokens));
+      const bSet = Array.from(new Set(bTokens));
       let overlap = 0;
-      aSet.forEach(token => { if (bSet.has(token)) overlap++; });
-      const minLen = Math.min(aSet.size, bSet.size);
-      const maxLen = Math.max(aSet.size, bSet.size);
+      const used = new Set();
+      aSet.forEach(token => {
+        const idx = bSet.findIndex((candidate, i) => !used.has(i) && areComparableStationTokens(token, candidate));
+        if (idx >= 0) {
+          used.add(idx);
+          overlap++;
+        }
+      });
+      const minLen = Math.min(aSet.length, bSet.length);
+      const maxLen = Math.max(aSet.length, bSet.length);
       if (!minLen) return false;
       if (overlap === minLen) return true;
       if (minLen >= 2 && overlap >= minLen - 1 && maxLen - overlap <= 1) return true;
@@ -9589,15 +9709,57 @@
       });
       return unique;
     }
+    function dedupeStationDisplayNamesPreferShortest(values) {
+      const unique = [];
+      (values || []).forEach(value => {
+        const token = normalizeStationDisplayToken(value);
+        if (!token) return;
+        for (let i = 0; i < unique.length; i++) {
+          if (!areStationDisplayNamesEquivalent(unique[i], token)) continue;
+          if (normalizeStationName(token).length < normalizeStationName(unique[i]).length) unique[i] = token;
+          return;
+        }
+        unique.push(token);
+      });
+      return unique;
+    }
     function sanitizeStationDisplayName(value) {
       const text = normalizeStationDisplayToken(value);
       if (!text) return "";
       if (!/[,\u00b7;|]/.test(text)) return text;
       const parts = text.split(/\s*(?:,|;|\||\u00b7)\s*/).map(normalizeStationDisplayToken).filter(Boolean);
       if (parts.length < 2) return text;
-      const unique = dedupeStationDisplayNames(parts);
+      const unique = [];
+      const seen = new Set();
+      parts.forEach(part => {
+        const key = part.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+        unique.push(part);
+      });
       if (unique.length === parts.length) return text;
       return unique.join(" \u00b7 ");
+    }
+    function sanitizeStationDisplayListPreserveVariants(values) {
+      const expanded = [];
+      (Array.isArray(values) ? values : [values]).forEach(value => {
+        const raw = repairMojibake(String(value ?? ""));
+        if (!raw.trim()) return;
+        raw
+          .split(/\s*(?:,|;|\||\u00b7)\s*/)
+          .map(normalizeStationDisplayToken)
+          .filter(Boolean)
+          .forEach(token => expanded.push(token));
+      });
+      const out = [];
+      const seen = new Set();
+      expanded.forEach(token => {
+        const key = token.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+        out.push(token);
+      });
+      return out;
     }
     function sanitizeStationDisplayList(values) {
       const expanded = [];
@@ -9607,6 +9769,374 @@
         cleaned.split(/\s*\u00b7\s*/).map(normalizeStationDisplayToken).filter(Boolean).forEach(token => expanded.push(token));
       });
       return dedupeStationDisplayNames(expanded);
+    }
+    function collectStationNamesFromUnknown(value, out, seen = new WeakSet()) {
+      if (value == null) return out;
+      if (typeof value === "string") {
+        const cleaned = sanitizeStationDisplayName(value);
+        if (!cleaned) return out;
+        cleaned.split(/\s*\u00b7\s*/).map(normalizeStationDisplayToken).filter(Boolean).forEach(token => out.push(token));
+        return out;
+      }
+      if (typeof value === "number") {
+        const numeric = String(value).trim();
+        if (numeric) collectStationNameFromCodeCandidate(numeric, out);
+        return out;
+      }
+      if (Array.isArray(value)) {
+        value.forEach(item => collectStationNamesFromUnknown(item, out, seen));
+        return out;
+      }
+      if (typeof value !== "object") return out;
+      if (seen.has(value)) return out;
+      seen.add(value);
+      const directKeys = ["name", "stationName", "station_name", "longName", "long_name", "shortName", "short_name", "displayName", "display_name", "estacion", "estacionNombre", "destino", "origen", "nombre", "destinationName", "destination_name", "originName", "origin_name"];
+      directKeys.forEach(key => {
+        const current = value[key];
+        if (typeof current === "string") collectStationNamesFromUnknown(current, out, seen);
+      });
+      const codeKeys = ["code", "stationCode", "station_code", "stationId", "station_id", "cod", "codigo", "codigoEstacion", "codigo_estacion", "p"];
+      codeKeys.forEach(key => {
+        if (!Object.prototype.hasOwnProperty.call(value, key)) return;
+        collectStationNameFromCodeCandidate(value[key], out);
+      });
+      const nestedKeys = [
+        "stops", "allStops", "commercialStops", "commercial_stops", "intermediateStops", "intermediate_stops", "intermediate",
+        "route", "itinerary", "stations", "stationsBetween", "stations_between", "viaStations", "via_stations",
+        "paradas", "paradasIntermedias", "paradas_intermedias", "estaciones", "estacionesIntermedias", "estaciones_intermedias",
+        "nextStops", "next_stops", "previousStops", "previous_stops",
+        "destinations", "destination", "origins", "origin",
+        "data", "trainData", "train_data"
+      ];
+      nestedKeys.forEach(key => {
+        if (!Object.prototype.hasOwnProperty.call(value, key)) return;
+        const current = value[key];
+        if (current == null) return;
+        if (typeof current === "string" || Array.isArray(current) || typeof current === "object") collectStationNamesFromUnknown(current, out, seen);
+      });
+      return out;
+    }
+    function collectStationNameFromCodeCandidate(codeValue, out) {
+      const normalized = normalizeStationCode(codeValue);
+      if (!normalized) return;
+      const candidates = Array.from(new Set([
+        normalized,
+        normalized.padStart(5, "0"),
+        normalized.padStart(7, "0"),
+        String(parseInt(normalized, 10))
+      ].filter(Boolean)));
+      for (const candidate of candidates) {
+        const resolved = sanitizeStationDisplayName(getStationNameByCode(candidate));
+        if (!resolved) continue;
+        if (normalizeStationCode(resolved) === normalized) continue;
+        if (/^\d+$/.test(resolved)) continue;
+        out.push(resolved);
+        return;
+      }
+    }
+    function filterStationDisplayNames(values, excluded) {
+      const list = sanitizeStationDisplayList(values);
+      const excludedList = sanitizeStationDisplayList(excluded);
+      if (!excludedList.length) return list;
+      return list.filter(name => !excludedList.some(blocked => areStationDisplayNamesEquivalent(name, blocked)));
+    }
+    function buildStationDisplayCandidates(primaryValue, alternatives = []) {
+      const splitRaw = value => repairMojibake(String(value || ""))
+        .split(/\s*(?:,|;|\||\u00b7)\s*/)
+        .map(normalizeStationDisplayToken)
+        .filter(Boolean);
+      const collected = [];
+      const pushCandidate = value => {
+        if (value == null) return;
+        if (typeof value === "string" || typeof value === "number") {
+          splitRaw(value).forEach(name => collected.push(name));
+          return;
+        }
+        if (Array.isArray(value)) {
+          value.forEach(pushCandidate);
+          return;
+        }
+        if (typeof value === "object") {
+          const names = [];
+          collectStationNamesFromUnknown(value, names);
+          names.forEach(name => splitRaw(name).forEach(part => collected.push(part)));
+        }
+      };
+      pushCandidate(primaryValue);
+      pushCandidate(alternatives);
+      const primaryParts = splitRaw(primaryValue);
+      const primary = primaryParts[0] || "";
+      const ordered = [];
+      const seen = new Set();
+      const addUnique = value => {
+        const token = normalizeStationDisplayToken(value);
+        if (!token) return;
+        const key = token.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+        ordered.push(token);
+      };
+      if (primaryParts.length) primaryParts.forEach(addUnique);
+      else if (primary) addUnique(primary);
+      collected.forEach(addUnique);
+      if (!ordered.length && primary) addUnique(primary);
+      if (!primary) return ordered;
+      const primaryIndex = ordered.findIndex(name => areStationDisplayNamesEquivalent(name, primary));
+      if (primaryIndex > 0) {
+        const [main] = ordered.splice(primaryIndex, 1);
+        ordered.unshift(main);
+      }
+      return ordered;
+    }
+    function chooseStationDisplayNameForWidth(candidates, maxWidth, ctx) {
+      const list = (Array.isArray(candidates) ? candidates : [candidates])
+        .map(normalizeStationDisplayToken)
+        .filter(Boolean);
+      if (!list.length) return "";
+      const exactUnique = [];
+      const seen = new Set();
+      list.forEach(name => {
+        const key = name.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+        exactUnique.push(name);
+      });
+      const sortedByLength = exactUnique.slice().sort((a, b) => normalizeStationName(b).length - normalizeStationName(a).length);
+      const fit = sortedByLength.find(name => ctx.measureText(name).width <= maxWidth);
+      return fit || sortedByLength[0] || exactUnique[0];
+    }
+    function extractAdifIntermediateStopsFromRow(row, endpointNames = []) {
+      const names = [];
+      const stationStatusText = String(
+        row?.estacionEstado
+        || row?.estacion_estado
+        || row?.stationStatus
+        || row?.station_status
+        || row?.destinationStatus
+        || row?.destination_status
+        || row?.destinoEstado
+        || ""
+      ).trim();
+      const sources = [
+        row?.paradas,
+        row?.paradasIntermedias,
+        row?.paradas_intermedias,
+        row?.estacionesIntermedias,
+        row?.estaciones_intermedias,
+        row?.stops,
+        row?.allStops,
+        row?.commercialStops,
+        row?.all_stops,
+        row?.commercial_stops,
+        row?.route,
+        row?.itinerary,
+        row?.estaciones,
+        row?.stations,
+        row?.stationsBetween,
+        row?.stations_between,
+        row?.viaEstaciones,
+        row?.viaStations,
+        row?.via_stations,
+        row?.origins,
+        row?.origin,
+        row?.destinations,
+        row?.destination,
+        row?.previousStops,
+        row?.previous_stops,
+        row?.nextStops,
+        row?.next_stops
+      ];
+      if (/[,\u00b7;|]/.test(stationStatusText)) sources.push(stationStatusText);
+      sources.forEach(source => collectStationNamesFromUnknown(source, names));
+      const excluded = [];
+      if (Array.isArray(endpointNames)) excluded.push(...endpointNames);
+      else excluded.push(endpointNames);
+      excluded.push(row?.estacion, row?.destination, row?.origin, row?.destino, row?.origen);
+      return filterStationDisplayNames(names, excluded);
+    }
+    function collectCercaniasEndpointNames(value, out, seen = new WeakSet(), depth = 0) {
+      if (value == null || depth > 5) return out;
+      if (typeof value === "string" || typeof value === "number") {
+        collectStationNamesFromUnknown(value, out);
+        return out;
+      }
+      if (Array.isArray(value)) {
+        const maxItems = Math.min(value.length, 20);
+        for (let i = 0; i < maxItems; i++) collectCercaniasEndpointNames(value[i], out, seen, depth + 1);
+        return out;
+      }
+      if (typeof value !== "object") return out;
+      if (seen.has(value)) return out;
+      seen.add(value);
+      const directKeys = [
+        "name", "stationName", "station_name", "longName", "long_name", "shortName", "short_name", "displayName", "display_name",
+        "estacion", "estacionNombre", "destino", "origen", "nombre", "destinationName", "destination_name", "originName", "origin_name",
+        "label", "title"
+      ];
+      directKeys.forEach(key => {
+        if (typeof value[key] === "string" || typeof value[key] === "number") collectStationNamesFromUnknown(value[key], out);
+      });
+      const codeKeys = ["code", "stationCode", "station_code", "stationId", "station_id", "cod", "codigo", "codigoEstacion", "codigo_estacion", "p"];
+      codeKeys.forEach(key => {
+        if (Object.prototype.hasOwnProperty.call(value, key)) collectStationNameFromCodeCandidate(value[key], out);
+      });
+      const blockedNestedPattern = /(stop|route|itiner|via|between|intermediate|next|previous|all|commercial|parad|estacionesintermedias)/i;
+      const nestedKeys = ["station", "stationData", "station_data", "value", "endpoint", "main", "destination", "destinations", "origin", "origins", "to", "from", "data"];
+      nestedKeys.forEach(key => {
+        if (!Object.prototype.hasOwnProperty.call(value, key)) return;
+        if (blockedNestedPattern.test(key)) return;
+        const current = value[key];
+        if (current == null) return;
+        if (Array.isArray(current) && current.length > 6) return;
+        collectCercaniasEndpointNames(current, out, seen, depth + 1);
+      });
+      return out;
+    }
+    function extractCercaniasEndpointNames(item, endpoint = "destination", fallbackNames = []) {
+      const key = endpoint === "origin" ? "origin" : "destination";
+      const names = [];
+      const sources = key === "origin"
+        ? [
+          item?.stations?.origins,
+          item?.stations?.origin,
+          item?.route?.origins,
+          item?.route?.origin,
+          item?.trainData?.origins,
+          item?.trainData?.origin,
+          item?.train_data?.origins,
+          item?.train_data?.origin,
+          item?.origins,
+          item?.origin,
+          item?.from
+        ]
+        : [
+          item?.stations?.destinations,
+          item?.stations?.destination,
+          item?.route?.destinations,
+          item?.route?.destination,
+          item?.trainData?.destinations,
+          item?.trainData?.destination,
+          item?.train_data?.destinations,
+          item?.train_data?.destination,
+          item?.destinations,
+          item?.destination,
+          item?.to
+        ];
+      sources.forEach(source => collectCercaniasEndpointNames(source, names));
+      const fallbackList = sanitizeStationDisplayListPreserveVariants(Array.isArray(fallbackNames) ? fallbackNames : [fallbackNames]);
+      const primaryFallback = fallbackList[0] || "";
+      let filteredNames = sanitizeStationDisplayListPreserveVariants(names);
+      if (primaryFallback) {
+        const equivalent = filteredNames.filter(name => areStationDisplayNamesEquivalent(name, primaryFallback));
+        if (equivalent.length) filteredNames = equivalent;
+      }
+      return buildStationDisplayCandidates(primaryFallback, [fallbackList.slice(1), filteredNames]);
+    }
+    function getCercaniasEndpointFallbackName(item, endpoint = "destination", fallbackValue = "-") {
+      const key = endpoint === "origin" ? "origin" : "destination";
+      const pickName = (value, seen = new WeakSet(), depth = 0) => {
+        if (value == null || depth > 5) return "";
+        if (typeof value === "string" || typeof value === "number") return sanitizeStationDisplayName(value);
+        if (Array.isArray(value)) {
+          if (!value.length) return "";
+          const ordered = key === "origin" ? value : value.slice().reverse();
+          for (const itemValue of ordered) {
+            const candidate = pickName(itemValue, seen, depth + 1);
+            if (candidate) return candidate;
+          }
+          return "";
+        }
+        if (typeof value !== "object") return "";
+        if (seen.has(value)) return "";
+        seen.add(value);
+        const direct = [
+          value.shortName, value.short_name, value.longName, value.long_name,
+          value.stationName, value.station_name, value.name, value.displayName, value.display_name,
+          value.estacion, value.nombre, value.destino, value.origen,
+          key === "origin" ? value.originName : value.destinationName,
+          key === "origin" ? value.origin_name : value.destination_name
+        ].map(sanitizeStationDisplayName).find(Boolean);
+        if (direct) return direct;
+        const nestedKeys = key === "origin"
+          ? ["origin", "origins", "from", "station", "value", "data"]
+          : ["destination", "destinations", "to", "station", "value", "data"];
+        for (const nestedKey of nestedKeys) {
+          if (!Object.prototype.hasOwnProperty.call(value, nestedKey)) continue;
+          const candidate = pickName(value[nestedKey], seen, depth + 1);
+          if (candidate) return candidate;
+        }
+        return "";
+      };
+      const sourceCandidates = key === "origin"
+        ? [item?.stations?.origin, item?.stations?.origins, item?.trainData?.origin, item?.train_data?.origin, item?.origin, item?.from, item?.route?.origin, item?.route?.origins]
+        : [item?.stations?.destination, item?.stations?.destinations, item?.trainData?.destination, item?.train_data?.destination, item?.destination, item?.to, item?.route?.destination, item?.route?.destinations];
+      for (const source of sourceCandidates) {
+        const candidate = pickName(source);
+        if (candidate) return candidate;
+      }
+      return getCercaniasStationName(fallbackValue, key === "origin" ? "" : "-");
+    }
+    function extractCercaniasIntermediateStops(item, excludedNames = []) {
+      const collectFiltered = sources => {
+        const names = [];
+        sources.forEach(source => collectStationNamesFromUnknown(source, names));
+        return filterStationDisplayNames(names, excludedNames);
+      };
+      const stopSources = [
+        item?.stations?.intermediate,
+        item?.stations?.stops,
+        item?.stations?.allStops,
+        item?.stations?.all_stops,
+        item?.stations?.commercialStops,
+        item?.stations?.commercial_stops,
+        item?.stations?.intermediateStops,
+        item?.stations?.intermediate_stops,
+        item?.stations?.previousStops,
+        item?.stations?.previous_stops,
+        item?.stations?.nextStops,
+        item?.stations?.next_stops,
+        item?.stations?.viaStations,
+        item?.stations?.via_stations,
+        item?.route?.stops,
+        item?.route?.stations,
+        item?.route?.intermediateStops,
+        item?.route?.intermediate_stops,
+        item?.route?.commercialStops,
+        item?.route?.commercial_stops,
+        item?.route?.allStops,
+        item?.route?.all_stops,
+        item?.route?.previousStops,
+        item?.route?.previous_stops,
+        item?.route?.nextStops,
+        item?.route?.next_stops,
+        Array.isArray(item?.trainData?.route) ? item.trainData.route : null,
+        item?.trainData?.stops,
+        item?.trainData?.allStops,
+        item?.trainData?.all_stops,
+        item?.trainData?.commercialStops,
+        item?.trainData?.commercial_stops,
+        item?.trainData?.intermediateStops,
+        item?.trainData?.intermediate_stops,
+        Array.isArray(item?.train_data?.route) ? item.train_data.route : null,
+        item?.train_data?.stops,
+        item?.train_data?.allStops,
+        item?.train_data?.all_stops,
+        item?.train_data?.intermediateStops,
+        item?.train_data?.intermediate_stops,
+        item?.intermediateStops,
+        item?.intermediate_stops,
+        item?.stops,
+        item?.allStops,
+        item?.all_stops,
+        item?.commercialStops,
+        item?.commercial_stops,
+        item?.paradas,
+        item?.paradasIntermedias,
+        item?.paradas_intermedias
+      ];
+      const directStops = collectFiltered(stopSources);
+      if (directStops.length) return directStops;
+      return collectFiltered([item?.stations, item?.route, item?.trainData, item?.train_data, item]);
     }
     function getCercaniasStationName(value, fallback = "-") {
       if (!value) return fallback;
@@ -9631,47 +10161,121 @@
         || ""
       ).trim();
     }
+    function isCercaniasTrainLike(item) {
+      if (!item || typeof item !== "object") return false;
+      const hasTrainRef = !!(
+        item.trainData || item.train_data || item.trainNumber || item.technicalTrainNumber
+        || item.commercialNumber || item.commercial_number || item.identifier || item.trainId
+        || item.codTren || item.codComercial
+      );
+      const hasTiming = !!(item.time || item.departureTime || item.arrivalTime || item.plannedTime || item.horaLlegadaSigEst || item.horaLlegada);
+      const hasStationRef = !!(
+        item.stations || item.route || item.destination || item.destinations || item.origin
+        || item.origins || item.to || item.from || item.codEstSig || item.codEstAct || item.codDestino || item.codOrigen
+      );
+      const hasLineRef = !!(item.line || item.cercaniasLine || item.platform || item.track || item.codLinea);
+      return (hasTrainRef && (hasTiming || hasStationRef)) || (hasTiming && hasStationRef && hasLineRef);
+    }
+    function getCercaniasItemIdentity(item) {
+      if (!item || typeof item !== "object") return "";
+      const trainDigits = normalizeTrainIdentifier(
+        getCercaniasTrainNumber(item)
+        || item?.technicalTrainNumber
+        || item?.commercialNumber
+        || item?.commercial_number
+        || item?.trainNumber
+        || item?.identifier
+        || item?.trainId
+        || item?.codTren
+        || item?.codComercial
+        || ""
+      ).digits;
+      const lineCode = normalizeFallbackCercaniasLineCode(item?.line || item?.trainData?.cercaniasLine || item?.train_data?.cercaniasLine || item?.codLinea || "");
+      const ts = getCercaniasTimestamp(item?.time?.plannedTime || item?.departureTime || item?.arrivalTime || item?.time || item?.horaLlegadaSigEst || item?.horaLlegada);
+      const timeBucket = Number.isFinite(ts) ? Math.round(ts / 60000) : "";
+      const destination = normalizeStationName(getCercaniasStationName(item?.stations?.destination || item?.route?.destination || item?.destination || item?.to || item?.codDestino || ""));
+      const origin = normalizeStationName(getCercaniasStationName(item?.stations?.origin || item?.route?.origin || item?.origin || item?.from || item?.codOrigen || ""));
+      const platform = normalizeStationName(item?.platform ?? item?.track ?? item?.arrivalPlatform ?? item?.via ?? item?.nextVia ?? "");
+      return [trainDigits, lineCode, timeBucket, destination, origin, platform].filter(Boolean).join("|");
+    }
     function getCercaniasDepartureItems(payload) {
-      if (Array.isArray(payload)) return payload;
-      if (Array.isArray(payload?.d)) return payload.d;
-      if (Array.isArray(payload?.departures)) return payload.departures;
-      if (Array.isArray(payload?.trains)) return payload.trains;
-      if (Array.isArray(payload?.items)) return payload.items;
-      if (Array.isArray(payload?.data)) return payload.data;
-      if (Array.isArray(payload?.data?.trains)) return payload.data.trains;
-      if (Array.isArray(payload?.data?.items)) return payload.data.items;
-      if (Array.isArray(payload?.station?.trains)) return payload.station.trains;
-      if (Array.isArray(payload?.station?.departures)) return payload.station.departures;
-      if (payload?.currentExistingTrains && typeof payload.currentExistingTrains === "object") {
-        const values = Object.values(payload.currentExistingTrains).filter(Boolean);
-        if (values.length && values.every(item => typeof item === "object")) return values;
-      }
-      return [];
+      const out = [];
+      const seenObjects = new WeakSet();
+      const seenItems = new WeakSet();
+      const seenKeys = new Set();
+      const relevantKey = key => {
+        const k = String(key || "").toLowerCase();
+        if (!k) return false;
+        if (["d", "data", "payload", "result", "results", "response", "station", "stations", "list", "items"].includes(k)) return true;
+        if ([
+          "departures", "departure", "trains", "train", "arrivals", "arrival",
+          "scheduled", "scheduledtrains", "upcoming", "upcomingtrains", "future",
+          "futuretrains", "nextdepartures", "nexttrains", "currentexistingtrains"
+        ].includes(k)) return true;
+        return /(depart|arrival|train|item|salid|scheduled|upcoming|future|existing|next)/i.test(k);
+      };
+      const addCandidate = item => {
+        if (!isCercaniasTrainLike(item)) return;
+        if (typeof item === "object" && item) {
+          if (seenItems.has(item)) return;
+          seenItems.add(item);
+        }
+        const identity = getCercaniasItemIdentity(item);
+        if (identity && seenKeys.has(identity)) return;
+        if (identity) seenKeys.add(identity);
+        out.push(item);
+      };
+      const walk = (value, depth = 0) => {
+        if (value == null || depth > 6) return;
+        if (Array.isArray(value)) {
+          const maxItems = Math.min(value.length, 400);
+          for (let i = 0; i < maxItems; i++) addCandidate(value[i]);
+          for (let i = 0; i < maxItems; i++) {
+            const item = value[i];
+            if (item && typeof item === "object" && !isCercaniasTrainLike(item)) walk(item, depth + 1);
+          }
+          return;
+        }
+        if (typeof value !== "object") return;
+        if (seenObjects.has(value)) return;
+        seenObjects.add(value);
+        addCandidate(value);
+        if (value.currentExistingTrains && typeof value.currentExistingTrains === "object") {
+          Object.values(value.currentExistingTrains).forEach(addCandidate);
+        }
+        Object.entries(value).forEach(([key, child]) => {
+          if (child == null) return;
+          if (depth > 0 && !relevantKey(key)) return;
+          walk(child, depth + 1);
+        });
+      };
+      walk(payload, 0);
+      return out;
     }
     function getCercaniasBetweenItems(payload) {
-      if (Array.isArray(payload)) return payload;
-      if (Array.isArray(payload?.data)) return payload.data;
-      if (Array.isArray(payload?.d)) return payload.d;
-      if (Array.isArray(payload?.trains)) return payload.trains;
-      if (Array.isArray(payload?.items)) return payload.items;
-      if (Array.isArray(payload?.data?.trains)) return payload.data.trains;
-      if (Array.isArray(payload?.data?.items)) return payload.data.items;
-      return [];
+      return getCercaniasDepartureItems(payload);
     }
     function mapCercaniasDepartureRow(item, station) {
       const lineCode = normalizeFallbackCercaniasLineCode(item?.trainData?.cercaniasLine || item?.line || "");
       const trainNumber = getCercaniasTrainNumber(item);
+      const identity = getCercaniasItemIdentity(item);
       const plannedTs = getCercaniasTimestamp(item?.time?.plannedTime || item?.departureTime || item?.time);
       const hora = formatCercaniasTime(plannedTs);
       const delayMinutes = parseCercaniasDelayMinutes(item?.time?.delay ?? item?.delay);
-      const destination = getCercaniasStationName(item?.stations?.destination || item?.route?.destination || item?.destination, "-");
+      const destinationFallback = getCercaniasEndpointFallbackName(item, "destination", "-");
+      const originFallback = getCercaniasEndpointFallbackName(item, "origin", station);
+      const destinationCandidates = extractCercaniasEndpointNames(item, "destination", [destinationFallback]);
+      const originCandidates = extractCercaniasEndpointNames(item, "origin", [originFallback]);
+      const destination = destinationCandidates[0] || destinationFallback || "-";
+      const origin = originCandidates[0] || originFallback || "";
       const via = String(item?.platform ?? item?.track ?? "").trim();
       const rawNetwork = item?.core || item?.trainData?.commuterNetwork || station?.fallbackNucleoId || station?.commuterNetwork || "";
       const resolvedNucleo = getCercaniasNucleoId(rawNetwork) || getCercaniasNucleoId(station?.fallbackNucleoId) || "";
       const lineColor = getFallbackCercaniasLineColor(lineCode, resolvedNucleo || rawNetwork);
       const cercaniasNucleo = String(resolvedNucleo || station?.fallbackNucleoId || rawNetwork || "").trim();
-      const badge = lineCode || trainNumber || "C";
+      const badge = trainNumber || "-";
       const operator = trainNumber ? `Tren ${trainNumber}` : "Cercanias";
+      const paradas = extractCercaniasIntermediateStops(item, [...destinationCandidates, ...originCandidates, station?.longName, station?.shortName, station?.name, station?.stationName]);
       return {
         kind: "train",
         trafficType: "cercanias",
@@ -9679,6 +10283,7 @@
         hora: hora || "-",
         horaEstado: applyDelayToTimeLabel(hora, delayMinutes),
         estacion: destination || "-",
+        estacionAlternativas: destinationCandidates,
         estacionEstado: "",
         estacionLink: "",
         trenDatosOp: operator,
@@ -9688,26 +10293,36 @@
         immediate: isCercaniasImmediate(plannedTs),
         cercaniasColour: lineColor.replace(/^#/, ""),
         cercaniasNucleo,
-        paradas: [],
+        cercaniasLine: lineCode,
+        paradas,
         _sort: Number.isFinite(plannedTs) ? plannedTs : Number.MAX_SAFE_INTEGER,
         _lineCode: lineCode,
-        _trainNumber: trainNumber
+        _trainNumber: trainNumber,
+        _direction: "departure",
+        _identity: identity
       };
     }
     function mapCercaniasArrivalRow(item, destinationStation, originStation) {
       const lineCode = normalizeFallbackCercaniasLineCode(item?.line || item?.trainData?.cercaniasLine || "");
       const trainNumber = String(item?.technicalTrainNumber || getCercaniasTrainNumber(item)).trim();
+      const identity = getCercaniasItemIdentity(item);
       const arrivalTs = getCercaniasTimestamp(item?.arrivalTime || item?.time?.plannedTime || item?.time);
       const hora = formatCercaniasTime(arrivalTs);
       const delayMinutes = parseCercaniasDelayMinutes(item?.delay ?? item?.time?.delay);
-      const origin = getCercaniasStationName(item?.stations?.origin || item?.route?.origin || originStation, "-");
+      const originFallback = getCercaniasEndpointFallbackName(item, "origin", originStation || "-");
+      const destinationFallback = getCercaniasEndpointFallbackName(item, "destination", destinationStation || "");
+      const originCandidates = extractCercaniasEndpointNames(item, "origin", [originFallback]);
+      const destinationCandidates = extractCercaniasEndpointNames(item, "destination", [destinationFallback]);
+      const origin = originCandidates[0] || originFallback || "-";
+      const destination = destinationCandidates[0] || destinationFallback || "";
       const via = String(item?.platform ?? item?.arrivalPlatform ?? "").trim();
       const rawNetwork = item?.core || item?.trainData?.commuterNetwork || destinationStation?.fallbackNucleoId || destinationStation?.commuterNetwork || "";
       const resolvedNucleo = getCercaniasNucleoId(rawNetwork) || getCercaniasNucleoId(destinationStation?.fallbackNucleoId) || "";
       const lineColor = getFallbackCercaniasLineColor(lineCode, resolvedNucleo || rawNetwork);
       const cercaniasNucleo = String(resolvedNucleo || destinationStation?.fallbackNucleoId || rawNetwork || "").trim();
-      const badge = lineCode || trainNumber || "C";
+      const badge = trainNumber || "-";
       const operator = trainNumber ? `Tren ${trainNumber}` : "Cercanias";
+      const paradas = extractCercaniasIntermediateStops(item, [...originCandidates, ...destinationCandidates, originStation?.longName, originStation?.shortName, originStation?.name, destinationStation?.longName, destinationStation?.shortName, destinationStation?.name]);
       return {
         kind: "train",
         trafficType: "cercanias",
@@ -9715,6 +10330,7 @@
         hora: hora || "-",
         horaEstado: applyDelayToTimeLabel(hora, delayMinutes),
         estacion: origin || "-",
+        estacionAlternativas: originCandidates,
         estacionEstado: "",
         estacionLink: "",
         trenDatosOp: operator,
@@ -9724,10 +10340,13 @@
         immediate: isCercaniasImmediate(arrivalTs),
         cercaniasColour: lineColor.replace(/^#/, ""),
         cercaniasNucleo,
-        paradas: [],
+        cercaniasLine: lineCode,
+        paradas,
         _sort: Number.isFinite(arrivalTs) ? arrivalTs : Number.MAX_SAFE_INTEGER,
         _lineCode: lineCode,
-        _trainNumber: trainNumber
+        _trainNumber: trainNumber,
+        _direction: "arrival",
+        _identity: identity
       };
     }
     function getCercaniasFeatureCodeCandidates(feature) {
@@ -9749,14 +10368,21 @@
     function buildCercaniasLiveArrivalRow(props) {
       const lineCode = normalizeFallbackCercaniasLineCode(props?.codLinea || props?.line || "");
       const trainNumber = String(props?.codTren || props?.codComercial || "").trim();
+      const identity = getCercaniasItemIdentity(props);
       const arrivalTs = getCercaniasTimestamp(props?.horaLlegadaSigEst || props?.horaLlegada || props?.time);
       const hora = formatCercaniasTime(arrivalTs) || getAdifHubTimeLabel(props?.horaLlegadaSigEst || props?.horaLlegada || "");
       const delayMinutes = parseCercaniasDelayMinutes(props?.retrasoMin ?? props?.delay);
-      const origin = getStationNameByCode(props?.codEstAct || props?.codOrigen || "") || "-";
+      const originFallback = getStationNameByCode(props?.codEstAct || props?.codOrigen || "") || "-";
+      const destinationFallback = getStationNameByCode(props?.codEstSig || props?.codDestino || "") || "";
+      const originCandidates = extractCercaniasEndpointNames(props, "origin", [originFallback]);
+      const destinationCandidates = extractCercaniasEndpointNames(props, "destination", [destinationFallback]);
+      const origin = originCandidates[0] || originFallback || "-";
+      const destination = destinationCandidates[0] || destinationFallback || "";
       const via = String(props?.nextVia || props?.via || "").trim();
       const lineColor = getFallbackCercaniasLineColor(lineCode, props?.nucleo || props?.core || "");
       const cercaniasNucleo = String(props?.nucleo || props?.core || "").trim();
-      const badge = lineCode || trainNumber || "C";
+      const badge = trainNumber || "-";
+      const paradas = extractCercaniasIntermediateStops(props, [...originCandidates, ...destinationCandidates]);
       return {
         kind: "train",
         trafficType: "cercanias",
@@ -9764,6 +10390,7 @@
         hora: hora || "-",
         horaEstado: applyDelayToTimeLabel(hora, delayMinutes),
         estacion: origin,
+        estacionAlternativas: originCandidates,
         estacionEstado: "",
         estacionLink: "",
         trenDatosOp: trainNumber ? `Tren ${trainNumber}` : "Cercanias",
@@ -9773,23 +10400,33 @@
         immediate: isCercaniasImmediate(arrivalTs),
         cercaniasColour: lineColor.replace(/^#/, ""),
         cercaniasNucleo,
-        paradas: [],
+        cercaniasLine: lineCode,
+        paradas,
         _sort: Number.isFinite(arrivalTs) ? arrivalTs : Number.MAX_SAFE_INTEGER,
         _lineCode: lineCode,
-        _trainNumber: trainNumber
+        _trainNumber: trainNumber,
+        _direction: "arrival",
+        _identity: identity
       };
     }
     function buildCercaniasLiveDepartureRow(props) {
       const lineCode = normalizeFallbackCercaniasLineCode(props?.codLinea || props?.line || "");
       const trainNumber = String(props?.codTren || props?.codComercial || "").trim();
+      const identity = getCercaniasItemIdentity(props);
       const nextTs = getCercaniasTimestamp(props?.horaLlegadaSigEst || props?.horaLlegada || props?.time);
       const hora = formatCercaniasTime(nextTs) || getAdifHubTimeLabel(props?.horaLlegadaSigEst || props?.horaLlegada || "");
       const delayMinutes = parseCercaniasDelayMinutes(props?.retrasoMin ?? props?.delay);
-      const destination = getStationNameByCode(props?.codEstSig || props?.codDestino || "") || "-";
+      const destinationFallback = getStationNameByCode(props?.codEstSig || props?.codDestino || "") || "-";
+      const originFallback = getStationNameByCode(props?.codEstAct || props?.codOrigen || "") || "";
+      const destinationCandidates = extractCercaniasEndpointNames(props, "destination", [destinationFallback]);
+      const originCandidates = extractCercaniasEndpointNames(props, "origin", [originFallback]);
+      const destination = destinationCandidates[0] || destinationFallback || "-";
+      const origin = originCandidates[0] || originFallback || "";
       const via = String(props?.via || props?.nextVia || "").trim();
       const lineColor = getFallbackCercaniasLineColor(lineCode, props?.nucleo || props?.core || "");
       const cercaniasNucleo = String(props?.nucleo || props?.core || "").trim();
-      const badge = lineCode || trainNumber || "C";
+      const badge = trainNumber || "-";
+      const paradas = extractCercaniasIntermediateStops(props, [...destinationCandidates, ...originCandidates]);
       return {
         kind: "train",
         trafficType: "cercanias",
@@ -9797,6 +10434,7 @@
         hora: hora || "-",
         horaEstado: applyDelayToTimeLabel(hora, delayMinutes),
         estacion: destination,
+        estacionAlternativas: destinationCandidates,
         estacionEstado: "",
         estacionLink: "",
         trenDatosOp: trainNumber ? `Tren ${trainNumber}` : "Cercanias",
@@ -9806,10 +10444,13 @@
         immediate: isCercaniasImmediate(nextTs),
         cercaniasColour: lineColor.replace(/^#/, ""),
         cercaniasNucleo,
-        paradas: [],
+        cercaniasLine: lineCode,
+        paradas,
         _sort: Number.isFinite(nextTs) ? nextTs : Number.MAX_SAFE_INTEGER,
         _lineCode: lineCode,
-        _trainNumber: trainNumber
+        _trainNumber: trainNumber,
+        _direction: "departure",
+        _identity: identity
       };
     }
     function buildCercaniasLiveMapFallbackPayload(feature, fallbackReason) {
@@ -9848,19 +10489,95 @@
     }
     function dedupeCercaniasRows(rows) {
       const out = [];
-      const seen = new Set();
+      const seen = new Map();
+      const getTimeBucket = row => {
+        const sort = Number(row?._sort);
+        if (Number.isFinite(sort)) return Math.round(sort / 60000);
+        const label = String(row?.horaEstado || row?.hora || "").trim();
+        const match = label.match(/^(\d{2}):(\d{2})$/);
+        if (!match) return "";
+        return (parseInt(match[1], 10) * 60) + parseInt(match[2], 10);
+      };
+      const mergeRows = (base, incoming, direction) => {
+        const dedupeExactNames = values => {
+          const list = [];
+          const seenExact = new Set();
+          (values || []).forEach(value => {
+            const token = normalizeStationDisplayToken(value);
+            if (!token) return;
+            const key = token.toLowerCase();
+            if (seenExact.has(key)) return;
+            seenExact.add(key);
+            list.push(token);
+          });
+          return list;
+        };
+        const mergedStops = dedupeStationDisplayNames([...(base.paradas || []), ...(incoming.paradas || [])]);
+        if (mergedStops.length) base.paradas = mergedStops;
+        if (!base.horaEstado && incoming.horaEstado) base.horaEstado = incoming.horaEstado;
+        if (!base.via && incoming.via) base.via = incoming.via;
+        const baseSort = Number(base?._sort);
+        const incomingSort = Number(incoming?._sort);
+        if (Number.isFinite(incomingSort) && (!Number.isFinite(baseSort) || incomingSort < baseSort)) base._sort = incomingSort;
+        const mergedAlternatives = dedupeExactNames([...(base.estacionAlternativas || []), ...(incoming.estacionAlternativas || [])]);
+        if (direction === "arrival") {
+          const baseStation = normalizeStationDisplayToken(base.estacion || "");
+          const incomingStation = normalizeStationDisplayToken(incoming.estacion || "");
+          const baseStops = sanitizeStationDisplayList(base.paradas || []);
+          const incomingStops = sanitizeStationDisplayList(incoming.paradas || []);
+          let chosenStation = baseStation;
+          if (!chosenStation && incomingStation) {
+            chosenStation = incomingStation;
+          } else if (incomingStation) {
+            const equivalent = areStationDisplayNamesEquivalent(chosenStation, incomingStation);
+            if (equivalent && normalizeStationName(incomingStation).length > normalizeStationName(chosenStation).length) {
+              chosenStation = incomingStation;
+            } else if (!equivalent) {
+              const baseAppearsAsStop = incomingStops.some(stop => areStationDisplayNamesEquivalent(stop, chosenStation));
+              const incomingAppearsAsStop = baseStops.some(stop => areStationDisplayNamesEquivalent(stop, incomingStation));
+              if (baseAppearsAsStop && !incomingAppearsAsStop) chosenStation = incomingStation;
+            }
+          }
+          if (chosenStation) base.estacion = chosenStation;
+          const anchor = normalizeStationDisplayToken(base.estacion || chosenStation || "");
+          if (anchor) {
+            const equivalentAlternatives = dedupeExactNames(
+              mergedAlternatives.filter(name => areStationDisplayNamesEquivalent(name, anchor))
+            );
+            base.estacionAlternativas = buildStationDisplayCandidates(anchor, equivalentAlternatives);
+          } else if (mergedAlternatives.length) {
+            base.estacionAlternativas = mergedAlternatives;
+          }
+        } else if (mergedAlternatives.length) {
+          base.estacionAlternativas = dedupeStationDisplayNames(mergedAlternatives);
+        }
+      };
       (rows || []).forEach(row => {
-        const trainKey = normalizeTrainIdentifier(row?._trainNumber || row?.tren || "").digits || normalizeStationName(row?.tren || "");
-        const key = `${trainKey}|${row?.hora || ""}|${normalizeStationName(row?.estacion || "")}|${row?._lineCode || ""}`;
-        if (seen.has(key)) return;
-        seen.add(key);
-        out.push(row);
+        const direction = row?._direction === "arrival" ? "arrival" : "departure";
+        const identityKey = normalizeStationName(row?._identity || "");
+        const trainDigits = normalizeTrainIdentifier(row?._trainNumber || row?.tren || "").digits;
+        const lineKey = normalizeFallbackCercaniasLineCode(row?._lineCode || row?.tren || "");
+        const stationKey = normalizeStationName(row?.estacion || "");
+        const viaKey = normalizeStationName(row?.via || "");
+        const timeBucket = getTimeBucket(row);
+        const stopsKey = sanitizeStationDisplayList(row?.paradas || []).map(normalizeStationName).slice(0, 4).join(",");
+        const key = direction === "arrival"
+          ? (trainDigits ? `arr-tr|${trainDigits}|${lineKey}|${timeBucket}` : (identityKey ? `arr-id|${identityKey}|${timeBucket}` : `arr-fb|${lineKey}|${timeBucket}|${viaKey}|${stopsKey}`))
+          : (identityKey ? `dep-id|${identityKey}|${timeBucket}|${stationKey}|${viaKey}` : (trainDigits ? `dep-tr|${trainDigits}|${lineKey}|${timeBucket}|${stationKey}|${viaKey}` : `dep-fb|${lineKey}|${timeBucket}|${stationKey}|${viaKey}|${stopsKey}`));
+        const existingIndex = seen.get(key);
+        if (existingIndex != null) {
+          mergeRows(out[existingIndex], row, direction);
+          return;
+        }
+        seen.set(key, out.length);
+        out.push({ ...row });
       });
       out.sort((a, b) => (a?._sort || Number.MAX_SAFE_INTEGER) - (b?._sort || Number.MAX_SAFE_INTEGER));
       out.forEach(row => {
-        delete row._sort;
         delete row._lineCode;
         delete row._trainNumber;
+        delete row._direction;
+        delete row._identity;
       });
       return out;
     }
@@ -9870,9 +10587,13 @@
       const label = String(row?.hora || "").trim();
       const match = label.match(/^(\d{2}):(\d{2})$/);
       if (!match) return Number.MAX_SAFE_INTEGER;
-      const date = new Date();
+      const now = new Date();
+      const date = new Date(now);
       date.setSeconds(0, 0);
       date.setHours(parseInt(match[1], 10), parseInt(match[2], 10), 0, 0);
+      // Si estamos cerca de medianoche y llega un tren a 00:xx, pertenece al siguiente día operativo.
+      const delta = date.getTime() - now.getTime();
+      if (delta < -6 * 60 * 60 * 1000) date.setDate(date.getDate() + 1);
       return date.getTime();
     }
     function normalizeAdifAvldmdFallbackRows(rows) {
@@ -10450,6 +11171,43 @@
       try { cercaniasFallbackClient.close() } catch { }
       cercaniasFallbackClient = null;
     }
+    function getCercaniasCatalogStationCode(station) {
+      if (!station || typeof station !== "object") return "";
+      const raw = station.stationCode
+        ?? station.station_code
+        ?? station.code
+        ?? station.stationId
+        ?? station.station_id
+        ?? station.id
+        ?? "";
+      return normalizeStationCode(raw);
+    }
+    function scoreCercaniasCatalogStationMatch(station, targetName, targetNetwork, targetNucleoId, targetLines) {
+      if (!station || typeof station !== "object") return -Infinity;
+      const stationLongName = normalizeStationName(station?.longName || station?.name || "");
+      const stationShortName = normalizeStationName(station?.shortName || "");
+      const stationNucleoId = getCercaniasNucleoId(station?.core || station?.nucleo || station?.idNucleo || station?.commuterNetwork || "");
+      const stationLines = new Set(parseCercaniasLineList(station?.lines));
+      let score = 0;
+      if (targetName) {
+        if (stationLongName === targetName || stationShortName === targetName) score += 240;
+        else if (
+          (stationLongName && (stationLongName.includes(targetName) || targetName.includes(stationLongName)))
+          || (stationShortName && (stationShortName.includes(targetName) || targetName.includes(stationShortName)))
+        ) {
+          score += 120;
+        }
+      }
+      if (targetNucleoId && stationNucleoId) {
+        if (targetNucleoId === stationNucleoId) score += 320;
+        else score -= 220;
+      }
+      if (targetNetwork && isSameCercaniasNetwork(targetNetwork, station?.commuterNetwork)) score += 80;
+      let overlap = 0;
+      targetLines.forEach(line => { if (stationLines.has(line)) overlap++; });
+      score += overlap * 20;
+      return score;
+    }
     function resolveCercaniasFallbackStation(feature, catalog) {
       const targetCode = normalizeStationCode(feature?.get("stationCodeRaw") || feature?.get("stationCode") || "");
       const targetName = normalizeStationName(feature?.get("displayName") || feature?.get("cercProps")?.NOMBRE_ESTACION || "");
@@ -10458,36 +11216,27 @@
       const targetLines = new Set(getFeatureCercaniasLines(feature));
       let best = null;
       let bestScore = -Infinity;
-      (Array.isArray(catalog) ? catalog : []).forEach(station => {
-        const stationCode = normalizeStationCode(station?.stationCode || station?.code || "");
-        const stationLongName = normalizeStationName(station?.longName || station?.name || "");
-        const stationShortName = normalizeStationName(station?.shortName || "");
+      const stationList = Array.isArray(catalog) ? catalog : [];
+      const exactCodeCandidates = targetCode
+        ? stationList.filter(station => getCercaniasCatalogStationCode(station) === targetCode)
+        : [];
+      const scoringPool = exactCodeCandidates.length ? exactCodeCandidates : stationList;
+      scoringPool.forEach(station => {
+        const stationCode = getCercaniasCatalogStationCode(station);
         const stationNucleoId = getCercaniasNucleoId(station?.core || station?.nucleo || station?.idNucleo || station?.commuterNetwork || "");
-        const stationLines = new Set(parseCercaniasLineList(station?.lines));
-        let score = 0;
+        let score = scoreCercaniasCatalogStationMatch(station, targetName, targetNetwork, targetNucleoId, targetLines);
         if (targetCode && stationCode && targetCode === stationCode) score += 1000;
-        if (targetName) {
-          if (stationLongName === targetName || stationShortName === targetName) score += 240;
-          else if (
-            (stationLongName && (stationLongName.includes(targetName) || targetName.includes(stationLongName)))
-            || (stationShortName && (stationShortName.includes(targetName) || targetName.includes(stationShortName)))
-          ) {
-            score += 120;
-          }
-        }
-        if (targetNucleoId && stationNucleoId) {
-          if (targetNucleoId === stationNucleoId) score += 320;
-          else score -= 220;
-        }
-        if (targetNetwork && isSameCercaniasNetwork(targetNetwork, station?.commuterNetwork)) score += 80;
-        let overlap = 0;
-        targetLines.forEach(line => { if (stationLines.has(line)) overlap++; });
-        score += overlap * 20;
         if (score > bestScore) {
-          best = { ...station, fallbackNucleoId: stationNucleoId || targetNucleoId || "" };
+          const outputCode = String(station?.stationCode || station?.station_code || station?.code || stationCode || "").trim();
+          best = {
+            ...station,
+            stationCode: outputCode || stationCode || targetCode || "",
+            fallbackNucleoId: stationNucleoId || targetNucleoId || ""
+          };
           bestScore = score;
         }
       });
+      if (targetCode && !exactCodeCandidates.length) return null;
       return bestScore > 0 ? best : null;
     }
     async function estimateCercaniasArrivalsAggressive(client, catalog, destinationStation, feature, departureRows, requestId) {
@@ -10558,8 +11307,13 @@
       const targetNucleoId = getCercaniasNucleoId(getFeatureCercaniasNetwork(feature));
       const station = resolveCercaniasFallbackStation(feature, catalog);
       if (!station) throw new Error("fallback_not_eligible");
+      const targetCode = normalizeStationCode(feature?.get("stationCodeRaw") || feature?.get("stationCode") || "");
+      const resolvedCode = getCercaniasCatalogStationCode(station);
+      if (targetCode && resolvedCode && targetCode !== resolvedCode) throw new Error("fallback_station_code_mismatch");
       const stationWithNucleo = { ...station, fallbackNucleoId: station?.fallbackNucleoId || targetNucleoId || "" };
-      const departuresPayload = await client.requestStationDepartures(station.stationCode, CERCANIAS_DIRECTO_DEFAULT_TIMEOUT_MS);
+      const departureStationCode = String(stationWithNucleo?.stationCode || station?.code || resolvedCode || targetCode || "").trim();
+      if (!departureStationCode) throw new Error("fallback_station_code_missing");
+      const departuresPayload = await client.requestStationDepartures(departureStationCode, CERCANIAS_DIRECTO_DEFAULT_TIMEOUT_MS);
       if (requestId !== adifTimetableRequestSeq) throw new Error("cancelled");
       const departureRows = getCercaniasDepartureItems(departuresPayload).map(item => mapCercaniasDepartureRow(item, stationWithNucleo));
       const nonCercaniasRowsPromise = fetchAdifNonCercaniasFallbackRows(feature, requestId, stationWithNucleo);
@@ -10656,7 +11410,9 @@
       cleaned = cleaned.replace(/\b([A-Z])0+([1-9]\d*)\b/g, "$1$2");
       return cleaned;
     }
-    function getAdifHubLineColor(payload, rawLine, lineLabel) {
+    function getAdifHubLineColor(payload, rawLine, lineLabel, networkName = "") {
+      const fallbackByNetwork = getFallbackCercaniasLineColor(lineLabel || rawLine, networkName);
+      if (fallbackByNetwork) return fallbackByNetwork;
       const lineColors = payload?.multimedia_info?.line_colors || {};
       const candidates = [];
       const pushCandidate = value => {
@@ -10988,12 +11744,13 @@
         : [train?.platform, train?.platform_preview, train?.platform_out, train?.platform_preview_out];
       return values.map(value => String(value || "").trim()).find(Boolean) || "";
     }
-    function getAdifHubIntermediateStops(payload, train) {
+    function getAdifHubIntermediateStops(payload, train, excludedNames = []) {
       const keys = ["commercial_stops", "all_stops", "stops", "route", "itinerary"];
       for (const key of keys) {
         if (!Array.isArray(train[key]) || !train[key].length) continue;
         const names = train[key].filter(s => s && typeof s === "object").map(s => getAdifHubStationName(payload, s)).filter(n => n && n !== "-");
-        if (names.length) return names;
+        const filtered = filterStationDisplayNames(names, excludedNames);
+        if (filtered.length) return filtered;
       }
       for (const key of Object.keys(train)) {
         if (keys.includes(key)) continue;
@@ -11002,14 +11759,26 @@
         const stops = val.filter(s => s && typeof s === "object" && (s.code || s.station_code || s.name));
         if (stops.length < 2) continue;
         const names = stops.map(s => getAdifHubStationName(payload, s)).filter(n => n && n !== "-");
-        if (names.length) return names;
+        const filtered = filterStationDisplayNames(names, excludedNames);
+        if (filtered.length) return filtered;
       }
       return [];
+    }
+    function getAdifHubEndpointNames(payload, train, endpoint = "destination") {
+      const isOrigin = endpoint === "origin";
+      const refs = getAdifTrainStopGroup(train, isOrigin ? "origins" : "destinations", isOrigin ? "origin" : "destination");
+      const resolved = getAdifResolvedStopNamesForRender(payload, train, refs, !isOrigin);
+      if (resolved.length) return dedupeStationDisplayNames(resolved);
+      const names = refs.map(stop => normalizeAdifName(getAdifHubStationName(payload, stop))).filter(name => name && name !== "-");
+      return dedupeStationDisplayNames(names);
     }
     function buildAdifHubRows(payload) {
       const rowsByType = { proximasSalidas: [], proximasLlegadas: [] };
       const trains = Array.isArray(payload?.trains) ? payload.trains : [];
       const stations = payload?.stations && typeof payload.stations === "object" ? payload.stations : (payload.stations = {});
+      const stationFeature = getStationFeatureByCode(adifTimetableState?.stationCode || "");
+      const stationNetworkRaw = getFeatureCercaniasNetwork(stationFeature);
+      const stationNetwork = getCercaniasNucleoId(stationNetworkRaw) || String(stationNetworkRaw || "").trim();
       trains.forEach(train => {
         if (!train) return;
         patchFrenchTrainStationNames(train, stations);
@@ -11020,16 +11789,19 @@
         const trafficType = isCercanias ? "cercanias" : "avldmd";
         const origin = Array.isArray(train.origins) ? train.origins[0] || null : (train?.origin && typeof train.origin === "object" ? train.origin : null);
         const destination = Array.isArray(train.destinations) ? train.destinations[0] || null : (train?.destination && typeof train.destination === "object" ? train.destination : null);
+        const destinationNames = getAdifHubEndpointNames(payload, train, "destination");
+        const originNames = getAdifHubEndpointNames(payload, train, "origin");
         const rawLine = (destination && destination.line) || (origin && origin.line) || "";
         const lineLabel = isCercanias ? extractAdifCercaniasLineLabel(rawLine) : "";
-        const lineColor = isCercanias ? getAdifHubLineColor(payload, rawLine, lineLabel) : "";
-        const badge = isCercanias ? (lineLabel || "C") : (getAdifHubTrainNumber(train) || getAdifHubProductLabel(train) || "-");
+        const lineColor = isCercanias ? getAdifHubLineColor(payload, rawLine, lineLabel, stationNetwork) : "";
+        const trainNumber = getAdifHubTrainNumber(train) || "";
+        const badge = isCercanias ? (trainNumber || "-") : (trainNumber || getAdifHubProductLabel(train) || "-");
         const operatorLabel = getAdifHubProductLabel(train);
         const isAccessible = !!(train.accessible || train.accesible || train.pmr || train.reduced_mobility);
         const countdown = Number(train.countdown);
         const departureTime = getAdifHubTimeLabel(train.departure_time);
         const arrivalTime = getAdifHubTimeLabel(train.arrival_time);
-        const paradas = getAdifHubIntermediateStops(payload, train);
+        const paradas = getAdifHubIntermediateStops(payload, train, [...destinationNames, ...originNames]);
         if (departureTime && String(train.class_stop || "").toLowerCase() !== "destination") {
           rowsByType.proximasSalidas.push({
             kind: "train",
@@ -11037,7 +11809,8 @@
             isCercanias,
             hora: departureTime,
             horaEstado: getAdifHubPredictedTime(train.departure_time, train.delay_out),
-            estacion: getAdifHubStationName(payload, destination),
+            estacion: destinationNames[0] || getAdifHubStationName(payload, destination),
+            estacionAlternativas: destinationNames,
             estacionEstado: "",
             estacionLink: "",
             trenDatosOp: operatorLabel,
@@ -11046,6 +11819,8 @@
             via: getAdifHubPlatform(train, false),
             immediate: !!(train.immediate_out || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
             cercaniasColour: lineColor.replace(/^#/, ""),
+            cercaniasNucleo: stationNetwork,
+            cercaniasLine: lineLabel,
             paradas,
             _sort: getAdifHubSortValue(train.departure_time)
           });
@@ -11057,7 +11832,8 @@
             isCercanias,
             hora: arrivalTime,
             horaEstado: getAdifHubPredictedTime(train.arrival_time, train.delay_in),
-            estacion: getAdifHubStationName(payload, origin),
+            estacion: originNames[0] || getAdifHubStationName(payload, origin),
+            estacionAlternativas: originNames,
             estacionEstado: "",
             estacionLink: "",
             trenDatosOp: operatorLabel,
@@ -11066,6 +11842,8 @@
             via: getAdifHubPlatform(train, true),
             immediate: !!(train.immediate_in || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
             cercaniasColour: lineColor.replace(/^#/, ""),
+            cercaniasNucleo: stationNetwork,
+            cercaniasLine: lineLabel,
             paradas,
             _sort: getAdifHubSortValue(train.arrival_time)
           });
@@ -11300,7 +12078,7 @@
       adifTimetableState.loadingPhase = "api";
       renderAdifTimetableModal();
       try {
-        const payload = await loadAdifTimetableData(feature, forceFresh);
+        const payload = await loadAdifTimetableData(feature, true);
         if (requestId !== adifTimetableRequestSeq) return;
         adifTimetableState.stationCode = String(feature.get("stationCodeRaw") || feature.get("stationCode") || payload?.stationCode || "");
         adifTimetableState.stationName = feature.get("displayName") || adifTimetableState.stationCode || "-";
@@ -11565,7 +12343,8 @@
         const rawLine = (destination && destination.line) || (origin && origin.line) || "";
         const lineLabel = isCercanias ? extractAdifCercaniasLineLabel(rawLine) : "";
         const lineColor = isCercanias ? getAdifHubLineColor(payload, rawLine, lineLabel) : "";
-        const badge = isCercanias ? (lineLabel || "C") : (getAdifHubTrainNumber(train) || getAdifHubProductLabel(train) || "-");
+        const trainNumber = getAdifHubTrainNumber(train) || "";
+        const badge = isCercanias ? (trainNumber || "-") : (trainNumber || getAdifHubProductLabel(train) || "-");
         const operatorLabel = getAdifHubProductLabel(train);
         const isAccessible = !!(train.accessible || train.accesible || train.pmr || train.reduced_mobility);
         const countdown = Number(train.countdown);
@@ -11583,6 +12362,7 @@
             via: getAdifHubPlatform(train, true),
             immediate: !!(train.immediate_in || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
             cercaniasColour: lineColor.replace(/^#/, ""),
+            cercaniasLine: lineLabel,
             mainName: getAdifResolvedEndpointNameForRender(payload, train, origin, false),
             stopNames: getAdifGravitaStopNames(payload, train, origin, false),
             _sort: getAdifHubSortValue(train.arrival_time)
@@ -11608,6 +12388,7 @@
           via: getAdifHubPlatform(train, false),
           immediate: !!(train.immediate_out || (Number.isFinite(countdown) && countdown >= 0 && countdown <= 5)),
           cercaniasColour: lineColor.replace(/^#/, ""),
+          cercaniasLine: lineLabel,
           mainName: getAdifResolvedEndpointNameForRender(payload, train, destination, true),
           stopNames: getAdifGravitaStopNames(payload, train, destination, true),
           _sort: getAdifHubSortValue(train.departure_time)
@@ -11634,7 +12415,7 @@
       const fontSizeValue = getAdifIframeFontSizeValue();
       const fontScale = Math.max(.9, Number(fontSizeValue) / 18);
       const bodyRows = rows.map(row => {
-        const badgeColor = row.isCercanias ? (normalizeCssColor("#" + String(row.cercaniasColour || "").replace(/^#/, "")) || "#8ab26f") : "#ffffff";
+        const badgeColor = row.isCercanias ? (normalizeCercaniasColorInput(row.cercaniasColour) || "#8ab26f") : "#ffffff";
         const badgeTextColor = row.isCercanias ? (useWhiteAccesibility(badgeColor) ? "#fff" : "#132147") : "#1a2750";
         const stopText = row.stopNames && row.stopNames.length > 1 ? row.stopNames.join(" " + String.fromCharCode(183) + " ") : "";
         return `<div class="board-row board-row-${escapeHtml(row.trafficType || "all")}">
@@ -11681,6 +12462,7 @@
     .board-row:nth-child(odd) { background: #263865; }
     .board-row:nth-child(even) { background: #192855; }
     .board-row-empty { opacity: .34; }
+    .board-screen-arrivals .board-row-empty { background: #d6ecd8 !important; opacity: 1; }
     .board-time { min-width: 0; }
     .board-time-main { font-size: calc(clamp(20px, 3vw, 46px) * var(--board-font-scale)); font-weight: 700; line-height: .95; }
     .board-time-sub { margin-top: .22vh; color: #7ce4ad; font-size: calc(clamp(11px, 1.6vw, 22px) * var(--board-font-scale)); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -11705,7 +12487,7 @@
   </style>
 </head>
 <body>
-  <div class="board-shell">
+  <div class="board-shell board-screen-${screen === "arrivals" ? "arrivals" : "departures"}">
     <div class="board-header">
       <div class="board-brand">
         ${renderAdifBoardLogo("board-logo")}
@@ -12088,20 +12870,36 @@
       const iframeHtml = hideIframe ? "" : `<iframe data-src="${escapeHtml(iframeUrl)}" title="${screen === "arrivals" ? "Llegadas" : "Salidas"} ADIF"></iframe>`;
       return `<div class="adif-gravita-stage"><div class="adif-gravita-container"><div class="loader-container"><div class="loader-content">${renderAdifWordmarkLogo("loader-logo")}<span class="loader-text">${escapeHtml(message)}</span></div></div>${iframeHtml}</div></div>`;
     }
+    function getTrainDisplayLabel(row) {
+      const base = sanitizeStationDisplayName(row?.tren || "");
+      if (!(row?.isCercanias || row?.trafficType === "cercanias")) return base || "-";
+      const baseIsLine = /^(?:C-?\d+[A-Z]?|R(?:G|L|T)?-?\d+[A-Z]?)$/i.test(base);
+      if (base && !baseIsLine) return base;
+      const fromOperator = String(row?.trenDatosOp || "").match(/\b(?:tren|train)\s*([0-9]{3,7})\b/i);
+      if (fromOperator?.[1]) return fromOperator[1];
+      const explicit = String(row?.trainNumber || row?.technicalTrainNumber || row?.commercialNumber || "").trim();
+      if (/^\d{3,7}$/.test(explicit)) return explicit;
+      return baseIsLine ? "-" : (base || "-");
+    }
     function formatAdifBadge(row) {
-      const lineLabel = sanitizeStationDisplayName(extractAdifCercaniasLineLabel(row?.tren) || row?.tren || "");
+      const lineLabel = sanitizeStationDisplayName(
+        normalizeFallbackCercaniasLineCode(row?.cercaniasLine || "")
+        || extractAdifCercaniasLineLabel(row?.tren || "")
+        || row?.tren
+        || ""
+      );
       const shouldUseCercaniasLogo = !!(lineLabel && (/^(?:C-?\d|R(?:G|L|T)?\d)/i.test(lineLabel) || row.isCercanias));
       if (shouldUseCercaniasLogo) {
-        const color = normalizeCssColor(row.cercaniasColour ? "#" + row.cercaniasColour.replace(/^#/, "") : "") || "#830065";
+        const color = normalizeCercaniasColorInput(row.cercaniasColour) || "#830065";
         const badgeHtml = renderCercaniasLineBadges(String(row?.cercaniasNucleo || "").trim(), lineLabel, color);
         if (badgeHtml) return `<span class="adif-cercanias-line-badge">${badgeHtml}</span>`;
       }
       if (row.isCercanias) {
-        const color = normalizeCssColor(row.cercaniasColour ? "#" + row.cercaniasColour.replace(/^#/, "") : "") || "#830065";
+        const color = normalizeCercaniasColorInput(row.cercaniasColour) || "#830065";
         const textColor = useWhiteAccesibility(color) ? "#fff" : "#000";
-        return `<span class="adif-train-badge" style="background:${color};color:${textColor}">${escapeHtml(row.tren || "-")}</span>`;
+        return `<span class="adif-train-badge" style="background:${color};color:${textColor}">${escapeHtml(getTrainDisplayLabel(row))}</span>`;
       }
-      return `<span class="adif-train-badge">${escapeHtml(row.tren || "-")}</span>`;
+      return `<span class="adif-train-badge">${escapeHtml(getTrainDisplayLabel(row))}</span>`;
     }
     function renderAdifBoardLogo(className) {
       const maskId = `adifBoardTrainMask${++adifBoardLogoSeq}`;
@@ -12120,8 +12918,9 @@
         if (row.kind === "observation") {
           return `<tr class="adif-observation"><td colspan="4"><div class="adif-observation-text">${escapeHtml(row.observation)}</div></td></tr>`;
         }
-        const stationName = sanitizeStationDisplayName(row.estacion || "-") || "-";
-        const stopNames = sanitizeStationDisplayList(row.paradas || []).filter(name => !areStationDisplayNamesEquivalent(name, stationName));
+        const stationCandidates = buildStationDisplayCandidates(row.estacion || "-", row.estacionAlternativas || []);
+        const stationName = stationCandidates[0] || sanitizeStationDisplayName(row.estacion || "-") || "-";
+        const stopNames = sanitizeStationDisplayList(row.paradas || []).filter(name => !stationCandidates.some(candidate => areStationDisplayNamesEquivalent(name, candidate)));
         const stationCell = row.estacionLink ? `<a href="${escapeHtml(row.estacionLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(stationName)}</a>` : `<span>${escapeHtml(stationName)}</span>`;
         return `<tr class="adif-row-${escapeHtml(row.trafficType || "all")}">
           <td class="adif-col-time"><span class="adif-time-main">${escapeHtml(row.hora || "-")}</span>${row.horaEstado ? `<span class="adif-time-sub">${escapeHtml(row.horaEstado)}</span>` : ""}</td>
@@ -12204,8 +13003,90 @@
     const adifCanvasLineLogoCache = new Map();
     function stopAdifBoardCanvas() {
       if (!adifBoardCanvasTimer) return;
+      try { cancelAnimationFrame(adifBoardCanvasTimer); } catch { }
       clearInterval(adifBoardCanvasTimer);
       adifBoardCanvasTimer = null;
+    }
+    function drawAdifCanvasScrollingText(ctx, text, x, y, maxWidth, timestamp, timeOffset = 0, options = null) {
+      const value = String(text || "");
+      if (!value || maxWidth <= 0) return;
+      const textWidth = ctx.measureText(value).width;
+      if (textWidth <= maxWidth) {
+        ctx.fillText(value, x, y);
+        return;
+      }
+      const opts = options && typeof options === "object" ? options : {};
+      const fadeInMs = Number.isFinite(opts.fadeInMs) ? opts.fadeInMs : 500;
+      const pauseStartMs = Number.isFinite(opts.pauseStartMs) ? opts.pauseStartMs : 4000;
+      const maxVelocity = Number.isFinite(opts.maxVelocity) ? opts.maxVelocity : 0.08;
+      const easeMs = Number.isFinite(opts.easeMs) ? opts.easeMs : 500;
+      const easeDistance = 0.5 * maxVelocity * easeMs;
+      const distance = textWidth - maxWidth + 20;
+      let moveMs;
+      if (distance <= 2 * easeDistance) moveMs = distance > 0 ? distance / (maxVelocity / 2) : 0;
+      else moveMs = (2 * easeMs) + ((distance - (2 * easeDistance)) / maxVelocity);
+      const pauseEndMs = Number.isFinite(opts.pauseEndMs) ? opts.pauseEndMs : 2000;
+      const fadeOutMs = Number.isFinite(opts.fadeOutMs) ? opts.fadeOutMs : 500;
+      const waitMs = Number.isFinite(opts.waitMs) ? opts.waitMs : 1000;
+      const totalMs = fadeInMs + pauseStartMs + moveMs + pauseEndMs + fadeOutMs + waitMs;
+      const t = (timestamp + timeOffset) % totalMs;
+      let alpha = 1;
+      let offset = 0;
+      if (t < fadeInMs) {
+        alpha = t / fadeInMs;
+      } else if (t < fadeInMs + pauseStartMs) {
+        alpha = 1;
+      } else if (t < fadeInMs + pauseStartMs + moveMs) {
+        alpha = 1;
+        const tm = t - (fadeInMs + pauseStartMs);
+        if (distance <= 2 * easeDistance) {
+          const p = moveMs > 0 ? (tm / moveMs) : 1;
+          const smooth = p * p * (3 - (2 * p));
+          offset = distance * smooth;
+        } else if (tm < easeMs) {
+          offset = 0.5 * (maxVelocity / easeMs) * tm * tm;
+        } else if (tm < easeMs + ((distance - (2 * easeDistance)) / maxVelocity)) {
+          const steady = tm - easeMs;
+          offset = easeDistance + (maxVelocity * steady);
+        } else {
+          const out = tm - easeMs - ((distance - (2 * easeDistance)) / maxVelocity);
+          offset = easeDistance + (distance - (2 * easeDistance)) + (maxVelocity * out) - (0.5 * (maxVelocity / easeMs) * out * out);
+        }
+      } else if (t < fadeInMs + pauseStartMs + moveMs + pauseEndMs) {
+        alpha = 1;
+        offset = distance;
+      } else if (t < fadeInMs + pauseStartMs + moveMs + pauseEndMs + fadeOutMs) {
+        const tf = t - (fadeInMs + pauseStartMs + moveMs + pauseEndMs);
+        alpha = 1 - (tf / fadeOutMs);
+        offset = distance;
+      } else {
+        alpha = 0;
+      }
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      const clipTop = Number.isFinite(opts.clipTop) ? opts.clipTop : 25;
+      const clipHeight = Number.isFinite(opts.clipHeight) ? opts.clipHeight : 35;
+      ctx.rect(x, y - clipTop, maxWidth, clipHeight);
+      ctx.clip();
+      ctx.fillText(value, x - offset, y);
+      ctx.restore();
+    }
+    function getAdifCanvasBlinkAlpha(timestamp) {
+      const cycle = timestamp % 1000;
+      if (cycle < 150) return 1;
+      if (cycle < 575) return 1 - (((cycle - 150) / 425) * 0.85);
+      return 0.15 + (((cycle - 575) / 425) * 0.85);
+    }
+    function shouldBlinkAdifCanvasTime(data, nowDate) {
+      const targetText = String(data?.estimatedTime || data?.time || "");
+      const match = targetText.match(/^(\d{2}):(\d{2})$/);
+      if (!match) return false;
+      const targetMinutes = (Number(match[1]) * 60) + Number(match[2]);
+      const nowMinutes = (nowDate.getHours() * 60) + nowDate.getMinutes();
+      let diffMins = targetMinutes - nowMinutes;
+      if (diffMins < -720) diffMins += 1440;
+      return diffMins >= 0 && diffMins <= 3;
     }
     function getAdifBoardClockParts(date = new Date()) {
       return {
@@ -12224,6 +13105,8 @@
     }
     function getCanvasLineLabelFromRow(row) {
       if (!row?.isCercanias) return "";
+      const fromField = normalizeCanvasLineLabel(row?.cercaniasLine || "");
+      if (/^(?:C-\d+[A-Z]?|R\d+[A-Z]?|RG\d+[A-Z]?|RT\d+[A-Z]?|RL\d+[A-Z]?)$/i.test(fromField)) return fromField;
       const fromTrain = normalizeCanvasLineLabel(extractAdifCercaniasLineLabel(row?.tren || ""));
       if (/^(?:C-\d+[A-Z]?|R\d+[A-Z]?|RG\d+[A-Z]?|RT\d+[A-Z]?|RL\d+[A-Z]?)$/i.test(fromTrain)) return fromTrain;
       const direct = normalizeCanvasLineLabel(row?.tren || "");
@@ -12247,22 +13130,26 @@
       return "Renfe";
     }
     function mapAdifRowToCanvasData(row) {
-      const stationName = sanitizeStationDisplayName(row?.estacion || "-") || "-";
-      const stopNames = sanitizeStationDisplayList(row?.paradas || []).filter(name => !areStationDisplayNamesEquivalent(name, stationName));
+      const stationCandidates = buildStationDisplayCandidates(row?.estacion || "-", row?.estacionAlternativas || []);
+      const stationName = stationCandidates[0] || sanitizeStationDisplayName(row?.estacion || "-") || "-";
+      const stopNames = sanitizeStationDisplayList(row?.paradas || []).filter(name => !stationCandidates.some(candidate => areStationDisplayNamesEquivalent(name, candidate)));
       const lineLabel = getCanvasLineLabelFromRow(row);
-      const lineColor = normalizeCssColor(row?.cercaniasColour ? "#" + String(row.cercaniasColour).replace(/^#/, "") : "") || ADIF_CANVAS_LINE_COLORS[lineLabel] || "";
+      const lineColor = normalizeCercaniasColorInput(row?.cercaniasColour) || ADIF_CANVAS_LINE_COLORS[lineLabel] || "";
       const operator = inferCanvasOperator(row);
+      const infoRaw = sanitizeStationDisplayName(row?.horaEstado || row?.estacionEstado || "");
+      const estimatedTime = /^\d{2}:\d{2}$/.test(infoRaw) ? infoRaw : "";
       return {
         time: sanitizeStationDisplayName(row?.hora || "--:--"),
         line: lineLabel,
-        lineColor: lineColor,
+        lineColor,
         cercaniasNucleo: String(row?.cercaniasNucleo || "").trim(),
-        dest: stationName,
-        stops: stopNames.join(" · "),
-        train: sanitizeStationDisplayName(row?.tren || "-"),
+        dest: stationCandidates.length > 1 ? stationCandidates : stationName,
+        stops: stopNames.join(" " + String.fromCharCode(183) + " "),
+        train: getTrainDisplayLabel(row),
         track: sanitizeStationDisplayName(row?.via || ""),
-        info: sanitizeStationDisplayName(row?.horaEstado || row?.estacionEstado || ""),
-        operator: operator,
+        info: estimatedTime ? "" : infoRaw,
+        estimatedTime,
+        operator,
         renfeType: inferCanvasRenfeType(row, lineLabel)
       };
     }
@@ -12332,12 +13219,14 @@
       });
       ctx.restore();
     }
-    function drawAdifCanvasPanel(canvas, state) {
+    function drawAdifCanvasPanel(canvas, state, timestamp = 0) {
       if (!canvas || !state) return;
       const rows = Array.isArray(state.rows) ? state.rows : [];
       const screen = state.screen === "arrivals" ? "arrivals" : "departures";
       const colors = ADIF_CANVAS_COLORS[screen];
-      const logicalHeight = ADIF_CANVAS_HEADER_HEIGHT + (rows.length * ADIF_CANVAS_ROW_HEIGHT);
+      const minVisualRows = screen === "arrivals" ? 8 : 1;
+      const visualRows = Math.max(rows.length, minVisualRows);
+      const logicalHeight = ADIF_CANVAS_HEADER_HEIGHT + (visualRows * ADIF_CANVAS_ROW_HEIGHT);
       const dpr = window.devicePixelRatio || 1;
       canvas.width = ADIF_CANVAS_BASE_WIDTH * dpr;
       canvas.height = Math.max(ADIF_CANVAS_HEADER_HEIGHT + ADIF_CANVAS_ROW_HEIGHT, logicalHeight) * dpr;
@@ -12346,7 +13235,8 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, ADIF_CANVAS_BASE_WIDTH, canvas.height / dpr);
 
-      const clock = getAdifBoardClockParts(new Date());
+      const nowDate = new Date();
+      const clock = getAdifBoardClockParts(nowDate);
       ctx.fillStyle = colors.headerBg;
       ctx.fillRect(0, 0, ADIF_CANVAS_BASE_WIDTH, ADIF_CANVAS_HEADER_HEIGHT);
       ctx.fillStyle = screen === "arrivals" ? "rgba(255,255,255,0.28)" : "#b5d1ca";
@@ -12354,35 +13244,49 @@
       drawAdifWordmarkCanvas(ctx, colors.headerText);
       ctx.fillStyle = colors.headerText;
       ctx.textAlign = "left";
-      ctx.font = "700 44px Roboto, sans-serif";
-      ctx.fillText(screen === "arrivals" ? "Llegadas" : "Salidas", 135, 58);
-      ctx.font = "500 22px Roboto, sans-serif";
-      ctx.fillText("Estacion de", 330, 36);
-      ctx.fillText(state.stationName || "-", 330, 64);
+      ctx.font = "700 50px Roboto, sans-serif";
+      const boardTitle = screen === "arrivals" ? "Llegadas" : "Salidas";
+      const titleWidth = ctx.measureText(boardTitle).width;
+      ctx.fillText(boardTitle, 126, 58);
+      ctx.font = "500 25px Roboto, sans-serif";
+      const stationX = screen === "arrivals" ? Math.max(320, 126 + titleWidth + 44) : 320;
+      ctx.fillText("Estacion de", stationX, 36);
+      ctx.fillText(state.stationName || "-", stationX, 64);
       ctx.textAlign = "right";
-      ctx.font = "22px Roboto, sans-serif";
+      ctx.font = "25px Roboto, sans-serif";
       const secText = ":" + clock.sec;
       const secWidth = ctx.measureText(secText).width;
       ctx.fillText(secText, 980, 48);
-      ctx.font = "42px Roboto, sans-serif";
+      ctx.font = "48px Roboto, sans-serif";
       ctx.fillText(clock.main, 980 - secWidth, 48);
-      ctx.font = "700 16px Roboto, sans-serif";
+      ctx.font = "700 19px Roboto, sans-serif";
       ctx.fillText("Via", 980, 74);
 
-      rows.forEach((data, index) => {
+      for (let index = 0; index < rows.length; index++) {
         const y = ADIF_CANVAS_HEADER_HEIGHT + (index * ADIF_CANVAS_ROW_HEIGHT);
         const upperBaseline = y + 36;
         const lowerBaseline = y + 64;
         ctx.fillStyle = (index % 2 === 0) ? colors.rowOdd : colors.rowEven;
         ctx.fillRect(0, y, ADIF_CANVAS_BASE_WIDTH, ADIF_CANVAS_ROW_HEIGHT);
+        const data = rows[index];
+        if (!data) continue;
 
+        const blinkTime = shouldBlinkAdifCanvasTime(data, nowDate);
+        ctx.save();
+        ctx.globalAlpha = blinkTime ? getAdifCanvasBlinkAlpha(timestamp) : 1;
         ctx.fillStyle = colors.textWhite;
-        ctx.font = "500 34px Roboto, sans-serif";
+        ctx.font = "500 41px Roboto, sans-serif";
         ctx.textAlign = "left";
-        ctx.fillText(data.time || "--:--", 20, y + 49);
+        ctx.fillText(data.time || "--:--", 14, upperBaseline + 2);
+        if (data.estimatedTime) {
+          ctx.fillStyle = colors.textGreen;
+          ctx.font = "500 26px Roboto, sans-serif";
+          ctx.fillText(data.estimatedTime, 14, lowerBaseline);
+        }
+        ctx.restore();
 
-        ctx.font = "700 20px Roboto, sans-serif";
-        const badgeX = 135;
+        ctx.font = "700 24px Roboto, sans-serif";
+        const badgeX = 126;
         const badgeY = y + 10;
         let destX = badgeX;
         if (data.line) {
@@ -12391,7 +13295,7 @@
             const badgeHeight = 31;
             const badgeWidth = Math.max(31, badgeHeight * Math.max(0.8, logoEntry.aspectRatio || 1));
             ctx.drawImage(logoEntry.image, badgeX, badgeY, badgeWidth, badgeHeight);
-            destX = badgeX + badgeWidth + 12;
+            destX = badgeX + badgeWidth + 8;
           } else {
             const badgeWidth = Math.max(55, ctx.measureText(data.line).width + 20);
             ctx.fillStyle = data.lineColor || ADIF_CANVAS_LINE_COLORS[data.line] || "#830065";
@@ -12399,37 +13303,109 @@
             ctx.fillStyle = "#fff";
             ctx.textAlign = "center";
             ctx.fillText(data.line, badgeX + (badgeWidth / 2), badgeY + 22);
-            destX = badgeX + badgeWidth + 12;
+            destX = badgeX + badgeWidth + 8;
           }
         }
 
         ctx.fillStyle = colors.textWhite;
         ctx.textAlign = "left";
-        ctx.font = "500 30px Roboto, sans-serif";
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(destX, y + 8, 545 - (destX - 135), 30);
-        ctx.clip();
-        ctx.fillText(data.dest || "-", destX, upperBaseline);
-        ctx.restore();
+        ctx.font = "500 37px Roboto, sans-serif";
+        const destClipWidth = Math.max(120, 680 - destX);
+        const destinationListRaw = (Array.isArray(data.dest) ? data.dest : [data.dest]).map(normalizeStationDisplayToken).filter(Boolean);
+        const destinationPrimary = destinationListRaw[0] || "-";
+        let destinationList = destinationListRaw;
+        if (screen === "arrivals" && destinationPrimary) {
+          const equivalentOrigins = destinationListRaw.filter(name => areStationDisplayNamesEquivalent(name, destinationPrimary));
+          if (equivalentOrigins.length) destinationList = equivalentOrigins;
+        }
+        let destinationGroups = [];
+        destinationList.forEach(name => {
+          const group = destinationGroups.find(items => items.some(item => areStationDisplayNamesEquivalent(item, name)));
+          if (group) group.push(name);
+          else destinationGroups.push([name]);
+        });
+        if (screen === "arrivals" && destinationGroups.length > 1) {
+          const primaryGroup = destinationGroups.find(group => group.some(name => areStationDisplayNamesEquivalent(name, destinationPrimary))) || destinationGroups[0];
+          destinationGroups = primaryGroup ? [primaryGroup] : [];
+        }
+        const destinationVariants = destinationGroups.map(group => chooseStationDisplayNameForWidth(group, destClipWidth, ctx)).filter(Boolean);
+        let currentDest = destinationVariants[0] || destinationList[0] || destinationPrimary || "-";
+        let nextDest = null;
+        let isFlipping = false;
+        let flipProgress = 0;
+        if (destinationVariants.length > 1 && screen !== "arrivals") {
+          const cycleTime = 4000;
+          const transitionTime = 400;
+          const totalTime = destinationVariants.length * cycleTime;
+          const localTime = timestamp % totalTime;
+          const currentIndex = Math.floor(localTime / cycleTime);
+          currentDest = destinationVariants[currentIndex];
+          const timeInSlice = localTime % cycleTime;
+          if (timeInSlice > cycleTime - transitionTime) {
+            isFlipping = true;
+            flipProgress = (timeInSlice - (cycleTime - transitionTime)) / transitionTime;
+            nextDest = destinationVariants[(currentIndex + 1) % destinationVariants.length];
+          }
+        }
+        const fallbackDestText = destinationVariants[0] || destinationList[0] || destinationPrimary || "-";
+        const destinationText = String(currentDest || fallbackDestText || "-");
+        if (isFlipping) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(destX, y + 5, destClipWidth, 38);
+          ctx.clip();
+          let scaleY = 1;
+          let textToDraw = currentDest;
+          if (flipProgress < 0.5) {
+            scaleY = 1 - (flipProgress * 2);
+            textToDraw = currentDest;
+          } else {
+            scaleY = (flipProgress - 0.5) * 2;
+            textToDraw = nextDest;
+          }
+          ctx.save();
+          ctx.translate(destX, upperBaseline - 12);
+          ctx.scale(1, scaleY);
+          ctx.fillText(textToDraw || "-", 0, 12);
+          ctx.restore();
+          ctx.restore();
+        } else {
+          const destinationWidth = ctx.measureText(destinationText).width;
+          if (destinationWidth > destClipWidth) {
+            drawAdifCanvasScrollingText(ctx, destinationText, destX, upperBaseline, destClipWidth, timestamp, (index * 2711) + 901, {
+              maxVelocity: 0.056,
+              pauseStartMs: 4200,
+              pauseEndMs: 1700,
+              easeMs: 500,
+              waitMs: 900,
+              clipTop: 31,
+              clipHeight: 44
+            });
+          } else {
+            ctx.fillText(destinationText, destX, upperBaseline);
+          }
+        }
 
-        let stopsClipWidth = 745;
-        if (data.info) stopsClipWidth = 540;
-        ctx.fillStyle = colors.textGray;
-        ctx.font = "17px Roboto, sans-serif";
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(135, y + 45, stopsClipWidth, 28);
-        ctx.clip();
-        ctx.fillText(data.stops || "", 135, lowerBaseline);
-        ctx.restore();
+        const stopsX = 126;
+        const stopsClipWidth = 554;
+        ctx.fillStyle = colors.textWhite;
+        ctx.font = "700 24px Roboto, sans-serif";
+        drawAdifCanvasScrollingText(ctx, data.stops || "", stopsX, lowerBaseline, stopsClipWidth, timestamp, index * 4127, {
+          maxVelocity: 0.052,
+          pauseStartMs: 5200,
+          pauseEndMs: 2400,
+          easeMs: 550,
+          waitMs: 1200,
+          clipTop: 29,
+          clipHeight: 44
+        });
 
         const renfeX = 690;
         if (data.info) {
           ctx.fillStyle = colors.textGreen;
-          ctx.font = "500 19px Roboto, sans-serif";
+          ctx.font = "500 22px Roboto, sans-serif";
           ctx.textAlign = "left";
-          ctx.fillText(data.info, renfeX, lowerBaseline);
+          drawAdifCanvasScrollingText(ctx, data.info, renfeX, lowerBaseline, 980 - renfeX, timestamp, (index * 3719) + 2500);
         }
 
         const renfeY = y + 8;
@@ -12440,30 +13416,30 @@
         ctx.fillStyle = "#fff";
         if (data.operator === "ouigo") {
           ctx.textAlign = "center";
-          ctx.font = "700 20px Roboto, sans-serif";
+          ctx.font = "700 21px Roboto, sans-serif";
           ctx.fillText("OUIGO", renfeX + (renfeW / 2), renfeY + 24);
         } else if (data.operator === "iryo") {
           ctx.textAlign = "center";
-          ctx.font = "700 22px Roboto, sans-serif";
+          ctx.font = "700 23px Roboto, sans-serif";
           ctx.fillText("iryo", renfeX + (renfeW / 2), renfeY + 26);
         } else {
           ctx.textAlign = "left";
-          ctx.font = "italic 700 14px Roboto, sans-serif";
+          ctx.font = "italic 700 15px Roboto, sans-serif";
           ctx.fillText("renfe", renfeX + 8, renfeY + 14);
           if (data.renfeType === "AVE") {
-            ctx.font = "italic 700 18px Roboto, sans-serif";
+            ctx.font = "italic 700 19px Roboto, sans-serif";
             ctx.fillText("AVE", renfeX + 8, renfeY + 31);
           } else if (data.renfeType === "avlo") {
-            ctx.font = "700 18px Roboto, sans-serif";
+            ctx.font = "700 19px Roboto, sans-serif";
             ctx.fillText("avlo", renfeX + 8, renfeY + 31);
           } else {
-            ctx.font = data.renfeType === "Intercity" ? "italic 13px Roboto, sans-serif" : "13px Roboto, sans-serif";
+            ctx.font = data.renfeType === "Intercity" ? "italic 14px Roboto, sans-serif" : "14px Roboto, sans-serif";
             ctx.fillText(data.renfeType || "Cercanias", renfeX + 8, renfeY + 30);
           }
         }
 
         ctx.textAlign = "right";
-        ctx.font = "500 24px Roboto, sans-serif";
+        ctx.font = "600 30px Roboto, sans-serif";
         ctx.fillStyle = colors.textWhite;
         ctx.fillText(data.train || "-", 880, upperBaseline);
         const trackLabel = String(data.track || "").trim();
@@ -12481,10 +13457,16 @@
           ctx.stroke(ADIF_CANVAS_BUS_ICON_PATH);
           ctx.restore();
         } else {
-          ctx.fillStyle = colors.textTrack;
+          ctx.fillStyle = colors.textWhite;
           ctx.fillText(trackLabel, 980, upperBaseline);
         }
-      });
+      }
+      if (visualRows > rows.length) {
+        const emptyStartY = ADIF_CANVAS_HEADER_HEIGHT + (rows.length * ADIF_CANVAS_ROW_HEIGHT);
+        const emptyHeight = (visualRows - rows.length) * ADIF_CANVAS_ROW_HEIGHT;
+        ctx.fillStyle = screen === "arrivals" ? colors.rowOdd : colors.rowEven;
+        ctx.fillRect(0, emptyStartY, ADIF_CANVAS_BASE_WIDTH, emptyHeight);
+      }
     }
     function mountAdifBoardCanvas(rows, screen) {
       const canvas = document.getElementById("adifCanvasBoard");
@@ -12495,17 +13477,22 @@
         screen: screen === "arrivals" ? "arrivals" : "departures",
         stationName: sanitizeStationDisplayName(adifTimetableState.stationName || adifTimetableState.stationCode || "-")
       };
-      const draw = () => drawAdifCanvasPanel(canvas, state);
-      if (document.fonts?.ready) document.fonts.ready.then(draw).catch(draw);
-      else draw();
       stopAdifBoardCanvas();
-      adifBoardCanvasTimer = setInterval(() => {
-        if (!$(".modal-adif-timetable").is(":visible")) {
+      const renderFrame = (timestamp) => {
+        if (!canvas.isConnected || !$(".modal-adif-timetable").is(":visible")) {
           stopAdifBoardCanvas();
           return;
         }
-        draw();
-      }, 1000);
+        drawAdifCanvasPanel(canvas, state, timestamp || performance.now());
+        adifBoardCanvasTimer = requestAnimationFrame(renderFrame);
+      };
+      const start = () => {
+        if (!canvas.isConnected || !$(".modal-adif-timetable").is(":visible")) return;
+        drawAdifCanvasPanel(canvas, state, performance.now());
+        adifBoardCanvasTimer = requestAnimationFrame(renderFrame);
+      };
+      if (document.fonts?.ready) document.fonts.ready.then(start).catch(start);
+      else start();
     }
     function filterAdifRowsByTraffic(rows, filter) {
       if (!Array.isArray(rows)) return [];
@@ -12579,7 +13566,8 @@
           syncAdifTimetableAutoRefresh();
           return;
         }
-        body.innerHTML = `<div class="adif-gravita-stage adif-board-stage"><div class="adif-gravita-container adif-canvas-shell"><div class="adif-canvas-stage"><div class="adif-canvas-container"><canvas id="adifCanvasBoard" class="adif-canvas-board" aria-label="Panel ADIF"></canvas></div></div></div></div>`;
+        const arrivalCanvasClass = screen === "arrivals" ? " arrivals" : "";
+        body.innerHTML = `<div class="adif-gravita-stage adif-board-stage"><div class="adif-gravita-container adif-canvas-shell${arrivalCanvasClass}"><div class="adif-canvas-stage${arrivalCanvasClass}"><div class="adif-canvas-container${arrivalCanvasClass}"><canvas id="adifCanvasBoard" class="adif-canvas-board${arrivalCanvasClass}" aria-label="Panel ADIF"></canvas></div></div></div></div>`;
         repairDomMojibake(body);
         requestAnimationFrame(() => {
           syncAdifGravitaLayout();
@@ -13116,10 +14104,17 @@
       const fallbackHex = normalizeCssColor(fallbackColor) || "#830065";
       return String(lineasCsv || "").split(",").map(l => l.trim()).filter(Boolean).map(linea => {
         const lineFeature = findCercaniasLineFeature(nucleo, linea);
-        const color = (lineFeature && normalizeCssColor(lineFeature.get("COLOR"))) || fallbackHex;
         const rawLabel = String(linea || "").trim().replace(/\s+/g, " ");
         const compactLabel = rawLabel.toUpperCase();
         const nucleoName = String(lineFeature && lineFeature.get("NUCLEO") || "");
+        const nucleoId = getCercaniasNucleoId((lineFeature && lineFeature.get("IDNUCLEO")) || nucleoName || nucleo || "");
+        const nucleoNorm = normalizeStationName(`${nucleoName} ${String(nucleo || "")}`);
+        const isValenciaNucleo = nucleoId === "40" || nucleoNorm.includes("valencia");
+        const isValenciaC2 = /^C-?2$/i.test(compactLabel) && isValenciaNucleo;
+        const isValenciaC3 = /^C-?3$/i.test(compactLabel) && isValenciaNucleo;
+        const color = isValenciaC2
+          ? "#e0ad1f"
+          : (isValenciaC3 ? "#c2188f" : ((lineFeature && normalizeCssColor(lineFeature.get("COLOR"))) || fallbackHex));
         const isRodalies = /rodalies/i.test(nucleoName) || String(nucleo) === "50" || /^(R|RG|RT|RL)/i.test(compactLabel);
         if (isRodalies) {
           const split = splitRodaliesBadgeLabel(lineFeature && lineFeature.get("NOMBRE") ? lineFeature.get("NOMBRE") : rawLabel);
@@ -13128,7 +14123,7 @@
         }
         if (/^C-?\d/i.test(compactLabel)) {
           const mainLabel = normalizeCercaniasBadgeCode(rawLabel) || compactLabel;
-          const textColor = getCercaniasBadgeTextColor(color);
+          const textColor = isValenciaC2 ? "#636062" : getCercaniasBadgeTextColor(color);
           return renderWideLineBadgeSvg(mainLabel, color, textColor, "Cercanias " + mainLabel, true);
         }
         const textColor = getCercaniasBadgeTextColor(color);
@@ -13507,5 +14502,7 @@
 </body>
 
 </html>
+
+
 
 
