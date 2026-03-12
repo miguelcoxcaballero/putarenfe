@@ -789,6 +789,10 @@
       animation: adifModalIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
+    .modal-adif-timetable > .d-flex.flex-column.h-100 {
+      min-height: 0;
+    }
+
     .modal-adif-timetable .section-header-modal {
       padding-bottom: 0.8rem;
       border-bottom: 1px solid #e8edf3;
@@ -1082,6 +1086,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      overscroll-behavior: contain;
     }
 
     .adif-gravita-container {
@@ -1870,17 +1875,45 @@
         max-height: var(--app-vh, 100dvh);
         border-radius: 0;
         padding:
-          calc(0.75rem + env(safe-area-inset-top, 0px))
-          0.85rem
-          calc(0.95rem + env(safe-area-inset-bottom, 0px));
+          calc(0.45rem + env(safe-area-inset-top, 0px))
+          0.55rem
+          calc(0.55rem + env(safe-area-inset-bottom, 0px));
+      }
+
+      .modal-adif-timetable .section-header-modal {
+        padding-bottom: 0.42rem;
+      }
+
+      .adif-modal-header-copy {
+        gap: 0.14rem;
+      }
+
+      .modal-adif-timetable .title-menu {
+        font-size: 0.63rem;
+        line-height: 1;
+      }
+
+      .adif-modal-title {
+        font-size: 1.03rem;
+        line-height: 1.02;
+      }
+
+      .adif-modal-meta {
+        display: none;
+      }
+
+      .modal-adif-timetable .button-close-modal {
+        width: 2rem;
+        height: 2rem;
       }
 
       .adif-modal-body {
-        padding-top: 0.75rem;
+        padding-top: 0.35rem;
+        margin-top: 0;
       }
 
       .adif-modal-body.panel-mode {
-        padding-top: 0.4rem;
+        padding-top: 0.2rem;
       }
 
       .adif-board-topbar {
@@ -1973,50 +2006,127 @@
       }
 
       .adif-modal-toolbar {
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        grid-template-areas:
+          "source source source"
+          "filter screen lang";
+        align-items: center;
+        column-gap: 0.38rem;
+        row-gap: 0.32rem;
+        padding: 0.42rem 0 0.5rem;
+        overflow: visible;
       }
 
       .adif-source-group,
       .adif-filter-group,
       .adif-screen-group,
       .adif-language-group {
-        width: 100%;
+        width: auto;
+        flex: 0 0 auto;
+        min-width: 0;
       }
 
       .adif-source-group .adif-source-btn {
-        padding: 0.4rem 0.3rem;
-        font-size: 0.75rem;
+        padding: 0.36rem 0.5rem;
+        font-size: 0.79rem;
       }
 
       .adif-source-label {
         display: none;
       }
 
-      .adif-filter-group > *,
-      .adif-screen-group > * {
-        flex: 1 1 0;
-        text-align: center;
+      .adif-source-group {
+        grid-area: source;
+        width: 100%;
+        padding: 0.2rem;
+        white-space: nowrap;
+      }
+
+      .adif-filter-group {
+        grid-area: filter;
+        width: 100%;
+      }
+
+      .adif-screen-group {
+        grid-area: screen;
       }
 
       .adif-language-group {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
+        grid-area: lang;
+        justify-self: end;
+      }
+
+      .adif-source-group,
+      .adif-filter-group,
+      .adif-screen-group {
+        padding: 0.18rem;
+        white-space: nowrap;
+      }
+
+      .adif-filter-btn,
+      .adif-screen-btn {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 0.34rem 0.44rem;
+        font-size: 0.72rem;
+      }
+
+      .adif-language-group {
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+      }
+
+      .adif-language-label {
+        display: none;
       }
 
       .adif-language-shell {
-        width: 100%;
-        min-width: 0;
+        position: relative;
+        width: 2.15rem;
+        min-width: 2.15rem;
+        height: 2.15rem;
+        min-height: 2.15rem;
+        border-radius: 999px;
+        padding: 0;
       }
 
       .adif-language-select {
+        position: absolute;
+        inset: 0;
         width: 100%;
+        height: 100%;
+        padding: 0;
+        opacity: 0;
+        color: transparent;
+        font-size: 16px;
+        border-radius: 999px;
+      }
+
+      .adif-language-icon {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+      }
+
+      .adif-language-chevron {
+        display: none;
+      }
+
+      .adif-gravita-stage {
+        align-items: flex-start;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
 
       .adif-gravita-container {
         width: 100%;
         min-height: 0;
         max-height: none;
+        flex-shrink: 0;
       }
     }
 
@@ -11907,11 +12017,8 @@
       if (adifTimetableResizeTimer) clearTimeout(adifTimetableResizeTimer);
       adifTimetableResizeTimer = setTimeout(() => {
         if (!$(".modal-adif-timetable").is(":visible")) return;
-        if (adifTimetableState.rawPayload || countAdifRows(adifTimetableState.rowsByType) > 0 || adifTimetableState.meta?.source === "CERCANIAS_DIRECTO") {
-          renderAdifTimetableModal();
-        } else {
-          syncAdifGravitaLayout();
-        }
+        renderAdifTimetableModal();
+        requestAnimationFrame(() => syncAdifGravitaLayout());
       }, 160);
     }
     async function mountAdifGravitaPanels(renderToken = "") {
@@ -12083,6 +12190,17 @@
       "M343.4,32h-14.3c-2.3,0-3.7,1.9-3.7,3.7v26.9c-6.3-2.2-13.2-3.3-20.4-3.3c-11.7,0-21.7,2.6-30,7.9 c-8.2,5.2-12.4,11.4-12.4,18.7c0,7.3,4.2,13.6,12.5,18.9c8.3,5.2,18.3,7.7,30.1,7.7c11.6,0,21.5-2.6,29.6-7.7 c8.2-5.2,12.3-11.4,12.3-18.9V35.7C347.1,34,345.9,32,343.4,32 M320.7,99.9c-4.2,3.7-9.4,5.6-15.4,5.6c-6,0-11.2-1.9-15.5-5.6 c-4.2-3.8-6.4-8.4-6.4-13.7c0-5.3,2.1-9.9,6.4-13.6c4.3-3.8,9.4-5.7,15.4-5.7c6,0,11.2,1.9,15.4,5.7c4.3,3.7,6.5,8.3,6.5,13.6 C327.1,91.5,325,96.1,320.7,99.9z",
       "M78,18.4c1.9,1.4,25.6,20.6,60.2,63.9c4.6,5.8,9.1,12.8,9.4,17c0.6,7.1-6.7,13.1-19.4,17.7 c-8.4,3-41.8,15.5-65.1,23.9c6.5-8.7,13.1-18.6,19.2-29.4c21.5-38,23.7-49.3,20.7-58c-2.8-8.2-8.8-7.9-10.8-7.5 c1.8-0.3,7.9,0.6,9.1,8.9c1.5,10.4-4.7,19.7-35.7,59.6c-10.1,13-20.4,24.9-30,35c-10.1,1.3-30.9,0.8-19.1-31.7 c0.8-2.1,1.6-4.3,2.4-6.5c12.5-8.2,35.2-24.2,54.6-40.6c28.8-24.4,15.7-25,15.7-25s11.4,2.2-19.6,23.5C54.3,79.8,37.8,89,25,95.7 c13.5-33.6,30.2-68.5,32.8-72.8C62.5,15.5,69.6,12.3,78,18.4"
     ];
+    const ADIF_CANVAS_BUS_ICON_PATH = new Path2D(
+      "M 6 2 Q 4 2 4 4 L 4 18 L 22 18 L 22 4 Q 22 2 20 2 Z " +
+      "M 4 11 L 22 11 " +
+      "M 13 2 L 13 11 " +
+      "M 4 5 L 1 5 L 1 10 " +
+      "M 22 5 L 25 5 L 25 10 " +
+      "M 7 15 L 9 15 " +
+      "M 17 15 L 19 15 " +
+      "M 6 18 L 6 21 L 9 21 L 9 18 " +
+      "M 17 18 L 17 21 L 20 21 L 20 18"
+    );
     const adifCanvasLineLogoCache = new Map();
     function stopAdifBoardCanvas() {
       if (!adifBoardCanvasTimer) return;
@@ -12105,10 +12223,11 @@
       return raw;
     }
     function getCanvasLineLabelFromRow(row) {
+      if (!row?.isCercanias) return "";
       const fromTrain = normalizeCanvasLineLabel(extractAdifCercaniasLineLabel(row?.tren || ""));
-      if (fromTrain) return fromTrain;
+      if (/^(?:C-\d+[A-Z]?|R\d+[A-Z]?|RG\d+[A-Z]?|RT\d+[A-Z]?|RL\d+[A-Z]?)$/i.test(fromTrain)) return fromTrain;
       const direct = normalizeCanvasLineLabel(row?.tren || "");
-      if (/^(?:C-\d+|R\d+|RG\d+|RT\d+)$/.test(direct)) return direct;
+      if (/^(?:C-\d+[A-Z]?|R\d+[A-Z]?|RG\d+[A-Z]?|RT\d+[A-Z]?|RL\d+[A-Z]?)$/i.test(direct)) return direct;
       return "";
     }
     function inferCanvasOperator(row) {
@@ -12146,6 +12265,11 @@
         operator: operator,
         renfeType: inferCanvasRenfeType(row, lineLabel)
       };
+    }
+    function isAdifCanvasBusTrack(value) {
+      const text = String(value || "").toUpperCase().trim();
+      if (!text) return false;
+      return /\bBUS\b/.test(text) || /AUTOBUS/.test(text);
     }
     function getAdifCanvasLogoEntry(lineLabel, nucleo, fallbackColor) {
       const line = String(lineLabel || "").trim();
@@ -12342,8 +12466,24 @@
         ctx.font = "500 24px Roboto, sans-serif";
         ctx.fillStyle = colors.textWhite;
         ctx.fillText(data.train || "-", 880, upperBaseline);
-        ctx.fillStyle = colors.textTrack;
-        ctx.fillText(data.track || "", 980, upperBaseline);
+        const trackLabel = String(data.track || "").trim();
+        if (isAdifCanvasBusTrack(trackLabel)) {
+          const busText = trackLabel.toUpperCase();
+          ctx.fillStyle = colors.textWhite;
+          ctx.fillText(busText, 980, upperBaseline);
+          const busTextWidth = ctx.measureText(busText).width;
+          ctx.save();
+          ctx.translate(980 - busTextWidth - 34, upperBaseline - 21);
+          ctx.strokeStyle = colors.textWhite;
+          ctx.lineWidth = 2;
+          ctx.lineJoin = "round";
+          ctx.lineCap = "round";
+          ctx.stroke(ADIF_CANVAS_BUS_ICON_PATH);
+          ctx.restore();
+        } else {
+          ctx.fillStyle = colors.textTrack;
+          ctx.fillText(trackLabel, 980, upperBaseline);
+        }
       });
     }
     function mountAdifBoardCanvas(rows, screen) {
@@ -12495,8 +12635,10 @@
         rawPayload: null
       };
       $(".modal-tren,.modal-estacion,.modal-tren-movil,.modal-estacion-movil").hide();
+      syncDynamicViewportHeight();
       $(".modal-adif-timetable").show();
       renderAdifTimetableModal();
+      requestAnimationFrame(() => syncAdifGravitaLayout());
       dispatchAdifTimetableFetch(feature, requestId, false);
     }
     async function refreshAdifTimetable() {
@@ -12525,6 +12667,9 @@
         const height = vv && Number.isFinite(vv.height) ? vv.height : window.innerHeight;
         if (!Number.isFinite(height) || height <= 0) return;
         document.documentElement.style.setProperty("--app-vh", `${Math.round(height)}px`);
+        if ($(".modal-adif-timetable").is(":visible")) {
+          scheduleAdifTimetableResizeRefresh();
+        }
       } catch { }
     }
 
