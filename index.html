@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,700&display=swap" rel="stylesheet">
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -67,6 +67,7 @@
       --app-vh: 100vh;
       
       --font: 'Inter', system-ui, -apple-system, sans-serif;
+      --adif-display-font: "Roboto", "AdifHauss", "Inter", sans-serif;
     }
 
     *, *::before, *::after {
@@ -734,7 +735,9 @@
     @font-face {
       font-family: "AdifHauss";
       src: url("./pantallas-estaciones-main/public/fonts/AdifHauss-Medium.woff2") format("woff2"),
-        url("./pantallas-estaciones-main/public/fonts/AdifHauss-Medium.woff") format("woff");
+        url("./pantallas-estaciones-main/public/fonts/AdifHauss-Medium.woff") format("woff"),
+        url("https://info.adif.es/assets/gravita/fonts/WOFF2/AdifHauss-Medium.woff2") format("woff2"),
+        url("https://info.adif.es/assets/gravita/fonts/WOFF/AdifHauss-Medium.woff") format("woff");
       font-weight: 400;
       font-style: normal;
       font-display: swap;
@@ -742,7 +745,9 @@
 
     @font-face {
       font-family: "AdifHauss";
-      src: url("./pantallas-estaciones-main/public/fonts/AdifHauss-Bold.woff2") format("woff2");
+      src: url("./pantallas-estaciones-main/public/fonts/AdifHauss-Bold.woff2") format("woff2"),
+        url("https://info.adif.es/assets/gravita/fonts/WOFF2/AdifHauss-Bold.woff2") format("woff2"),
+        url("https://info.adif.es/assets/gravita/fonts/WOFF/AdifHauss-Bold.woff") format("woff");
       font-weight: 700;
       font-style: normal;
       font-display: swap;
@@ -750,11 +755,17 @@
 
     /* ===== ADIF TIMETABLE MODAL ===== */
     .modal-adif-timetable {
-      --adif-blue: #0A1930;
-      --adif-dark-blue: #050B14;
-      --adif-light-blue: #1A3054;
-      --adif-light-green: #D4F4E4;
-      --adif-dark-green: #90CBAE;
+      --adif-blue: #172338;
+      --adif-dark-blue: #0f2439;
+      --adif-light-blue: #20314a;
+      --adif-light-green: #d6ecd8;
+      --adif-dark-green: #c3dfca;
+      --adif-accent-green: #8ad3a6;
+      --adif-arrival-status: #2a496f;
+      --adif-row-odd: #20314a;
+      --adif-row-even: #172338;
+      --adif-track: #96c4f0;
+      --adif-muted: #c8d2de;
       background: var(--surface);
       backdrop-filter: blur(40px) saturate(200%);
       -webkit-backdrop-filter: blur(40px) saturate(200%);
@@ -855,6 +866,54 @@
       justify-content: space-between;
       padding: 0.9rem 0 1rem;
       border-bottom: 1px solid #e8edf3;
+    }
+
+    .adif-source-group {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 0.25rem;
+      border: 1px solid var(--border-color);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+      width: 100%;
+    }
+
+    .adif-source-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .adif-source-btn {
+      flex: 1;
+      padding: 0.45rem 0.6rem;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .adif-source-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .adif-source-btn.selected {
+      background: var(--renfe-purple);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
     }
 
     .adif-filter-group,
@@ -1069,7 +1128,7 @@
 
     .adif-gravita-container .loader-text {
       color: #fff;
-      font-family: "AdifHauss", sans-serif;
+      font-family: var(--adif-display-font);
       font-size: 1.1rem;
       font-weight: 500;
       letter-spacing: 0.5px;
@@ -1104,7 +1163,7 @@
     }
 
     .adif-gravita-overlay-main {
-      font-family: "AdifHauss", sans-serif;
+      font-family: var(--adif-display-font);
       font-weight: 700;
       line-height: 0.95;
       white-space: nowrap;
@@ -1113,7 +1172,7 @@
     }
 
     .adif-gravita-overlay-stops {
-      font-family: "AdifHauss", sans-serif;
+      font-family: var(--adif-display-font);
       font-weight: 500;
       line-height: 1.04;
       white-space: nowrap;
@@ -1132,15 +1191,44 @@
       }
     }
 
+    .adif-canvas-stage {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    .adif-canvas-shell {
+      background: #101723;
+    }
+
+    .adif-canvas-container {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      border-radius: 0;
+      overflow: visible;
+      box-shadow: none;
+      background: #172338;
+    }
+
+    .adif-canvas-board {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #172338;
+    }
+
     /* ===== ADIF BOARD ===== */
     .adif-board {
-      font-family: "AdifHauss", sans-serif;
+      font-family: var(--adif-display-font);
       color: #fff;
-      background: radial-gradient(circle at top right, rgba(191, 239, 213, 0.18), transparent 24%), linear-gradient(180deg, var(--adif-blue) 0%, var(--adif-dark-blue) 100%);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(191, 239, 213, 0.14);
+      background: var(--adif-row-even);
+      border-radius: 8px;
+      border: 0;
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(191, 239, 213, 0.06);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       animation: adifBoardFade 0.25s ease-out;
     }
 
@@ -1151,179 +1239,77 @@
     .adif-board-shell {
       overflow-y: auto;
       overscroll-behavior: contain;
-      background: #001b41;
+      background: #101723;
     }
 
     .adif-board-shell .adif-board {
       min-height: 100%;
-      border-radius: inherit;
+      border-radius: 8px;
       border: 0;
-      box-shadow: none;
     }
 
     .adif-board-fallback {
-      background: #162b5e;
-    }
-
-    .adif-board-fallback .adif-board-topbar {
-      background: #bfefd5;
-      border-bottom: 1px solid rgba(10, 25, 48, 0.16);
-    }
-
-    .adif-board-fallback .adif-board-logo-shell {
-      background: rgba(10, 25, 48, 0.08);
-      border-color: rgba(10, 25, 48, 0.18);
-    }
-
-    .adif-board-fallback .adif-board-logo {
-      color: #10264d;
-      stroke: #10264d;
-    }
-
-    .adif-board-fallback .adif-board-station {
-      color: #10264d;
-    }
-
-    .adif-board-fallback .adif-board-subtitle {
-      color: #2f526f;
-    }
-
-    .adif-board-fallback .adif-board-clock {
-      background: #10264d;
-      color: #fff;
-    }
-
-    .adif-board-fallback .adif-board-statusline {
-      color: #2f526f;
-    }
-
-    .adif-board-fallback .adif-schedule-section {
-      background: transparent;
-      border: 0;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .adif-board-fallback .adif-schedule-heading,
-    .adif-board-fallback .adif-schedule-table th {
-      background: #bfefd5;
-      color: #10264d;
-      border-bottom-color: rgba(10, 25, 48, 0.2);
-    }
-
-    .adif-board-fallback .adif-schedule-count {
-      background: #10264d;
-      color: #fff;
-    }
-
-    .adif-board-fallback .adif-schedule-table td {
-      border-bottom-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .adif-board-fallback .adif-schedule-table tbody tr:nth-child(odd) {
-      background: #263865;
-    }
-
-    .adif-board-fallback .adif-schedule-table tbody tr:nth-child(even) {
-      background: #192855;
-    }
-
-    .adif-board-fallback .adif-schedule-table tbody tr:hover {
-      background: #2f4678;
-    }
-
-    .adif-board-fallback .adif-time-sub,
-    .adif-board-fallback .adif-dest-sub,
-    .adif-board-fallback .adif-train-op {
-      color: #7ce4ad;
-    }
-
-    .adif-board-fallback .adif-dest-stops {
-      color: rgba(212, 244, 228, 0.74);
-    }
-
-    .adif-board-fallback .adif-track-pill {
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    .adif-board-fallback .adif-track-live {
-      background: #fff;
-      color: #112650;
-    }
-
-    .adif-board-fallback.adif-board-arrivals .adif-board-topbar,
-    .adif-board-fallback.adif-board-arrivals .adif-schedule-heading,
-    .adif-board-fallback.adif-board-arrivals .adif-schedule-table th {
-      background: #d5ecff;
-      color: #0f284f;
-      border-bottom-color: rgba(15, 40, 79, 0.22);
-    }
-
-    .adif-board-fallback.adif-board-arrivals .adif-board-station,
-    .adif-board-fallback.adif-board-arrivals .adif-board-subtitle,
-    .adif-board-fallback.adif-board-arrivals .adif-board-statusline,
-    .adif-board-fallback.adif-board-arrivals .adif-board-logo {
-      color: #0f284f;
-      stroke: #0f284f;
-    }
-
-    .adif-board-fallback.adif-board-arrivals .adif-board-logo-shell {
-      background: rgba(15, 40, 79, 0.08);
-      border-color: rgba(15, 40, 79, 0.2);
-    }
-
-    .adif-board-fallback.adif-board-arrivals .adif-schedule-count {
-      background: #0f284f;
-      color: #fff;
-    }
-
-    .adif-board-fallback.adif-board-arrivals .adif-time-sub,
-    .adif-board-fallback.adif-board-arrivals .adif-dest-sub,
-    .adif-board-fallback.adif-board-arrivals .adif-train-op {
-      color: #94ddff;
-    }
-
-    .adif-board-fallback.adif-board-arrivals .adif-dest-stops {
-      color: rgba(184, 228, 255, 0.82);
-    }
-
-    .adif-board-fallback.adif-board-arrivals .adif-row-avldmd td:last-child {
-      box-shadow: inset -3px 0 0 #8fd9ff;
+      background: inherit;
     }
 
     .adif-board-topbar {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 1.1rem;
-      background: rgba(191, 239, 213, 0.06);
-      border-bottom: 1px solid rgba(191, 239, 213, 0.12);
+      gap: 0.8rem;
+      min-height: 80px;
+      padding: 0.34rem 1rem 0.34rem 0.95rem;
+      background: var(--adif-light-green);
+      border-bottom: 2px solid #b5d1ca;
+      color: var(--adif-dark-blue);
     }
 
     .adif-board-brandwrap {
-      display: flex;
+      display: contents;
       align-items: center;
-      gap: 0.85rem;
       min-width: 0;
     }
 
     .adif-board-logo-shell {
-      width: 4rem;
-      height: 4rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-      border-radius: 1rem;
-      background: rgba(191, 239, 213, 0.08);
-      border: 1px solid rgba(191, 239, 213, 0.14);
+      justify-content: flex-start;
+      flex: 0 0 auto;
+    }
+
+    .adif-board-wordmark {
+      width: clamp(96px, 11vw, 116px);
+      height: auto;
+      color: currentColor;
+      fill: currentColor;
+      display: block;
+    }
+
+    .adif-board-headcopy {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-content: center;
+      row-gap: 0.02rem;
+      min-width: 0;
+      margin-left: 0.05rem;
+    }
+
+    .adif-board-screen-title {
+      display: block;
+      margin: 0 0 0.02rem;
+      font-size: clamp(2rem, 3.6vw, 2.8rem);
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--adif-dark-blue);
+      text-transform: capitalize;
     }
 
     .adif-board-logo {
-      width: 2.5rem;
-      height: 2.5rem;
-      color: var(--adif-light-green);
-      stroke: var(--adif-light-green);
+      width: 2.1rem;
+      height: 2.1rem;
+      color: var(--adif-dark-blue);
+      stroke: var(--adif-dark-blue);
       fill: none;
       flex: 0 0 auto;
     }
@@ -1345,61 +1331,104 @@
 
     .adif-board-station {
       display: block;
-      margin-top: 0.2rem;
-      font-size: 1.45rem;
-      line-height: 1.05;
-      font-weight: 700;
-      color: #fff;
+      margin-top: 0;
+      font-size: clamp(1.06rem, 1.8vw, 1.32rem);
+      line-height: 1.04;
+      font-weight: 500;
+      color: var(--adif-dark-blue);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .adif-board-subtitle {
       display: block;
-      margin-top: 0.1rem;
-      color: rgba(191, 239, 213, 0.76);
-      font-size: 0.84rem;
+      margin-top: 0;
+      color: rgba(15, 36, 57, 0.78);
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.02;
     }
 
     .adif-board-status {
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.03rem;
       align-items: flex-end;
       text-align: right;
+      min-width: 132px;
     }
 
     .adif-board-clock {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 6.5rem;
-      min-height: 2.5rem;
-      padding: 0.2rem 0.85rem;
-      border-radius: 0.9rem;
-      background: var(--adif-light-green);
-      color: var(--adif-blue);
-      font-size: 1.25rem;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 0;
+      min-width: 0;
+      min-height: 0;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--adif-dark-blue);
+      font-size: 0;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      font-feature-settings: "tnum" 1;
+    }
+
+    .adif-clock-main {
+      font-size: clamp(2rem, 3.1vw, 2.62rem);
+      font-weight: 500;
+      line-height: 0.9;
+      letter-spacing: -0.005em;
+    }
+
+    .adif-clock-sec {
+      font-size: clamp(1.05rem, 1.5vw, 1.34rem);
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0;
+    }
+
+    .adif-board-track-label {
+      color: rgba(15, 36, 57, 0.88);
+      font-size: 0.88rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      line-height: 1;
     }
 
     .adif-board-statusline {
-      color: rgba(191, 239, 213, 0.78);
-      font-size: 0.76rem;
+      color: rgba(15, 36, 57, 0.78);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1;
+      opacity: 0.82;
     }
 
     .adif-board-panels {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      padding: 1rem;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      padding: 0;
     }
 
     .adif-schedule-section {
-      background: rgba(26, 50, 84, 0.78);
-      border: 1px solid rgba(191, 239, 213, 0.14);
-      border-radius: var(--radius-md);
+      background: transparent;
+      border: 0;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(191, 239, 213, 0.06);
+      box-shadow: none;
+    }
+
+    .adif-board .adif-schedule-heading {
+      display: none;
     }
 
     .adif-schedule-heading {
@@ -1407,11 +1436,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.75rem;
-      padding: 0.95rem 1rem;
+      padding: 0.76rem 1rem;
       font-weight: 700;
-      font-size: 0.98rem;
-      color: #fff;
-      background: rgba(191, 239, 213, 0.08);
+      font-size: 1.04rem;
+      color: var(--adif-dark-blue);
+      background: var(--adif-light-green);
+      border-bottom: 1px solid #b5d1ca;
     }
 
     .adif-screen-arrivals .adif-schedule-heading {
@@ -1426,8 +1456,8 @@
       height: 2rem;
       padding: 0 0.55rem;
       border-radius: 999px;
-      background: var(--adif-light-green);
-      color: var(--adif-blue);
+      background: var(--adif-dark-blue);
+      color: #fff;
       font-size: 0.82rem;
       font-weight: 700;
     }
@@ -1438,32 +1468,45 @@
       table-layout: fixed;
     }
 
+    .adif-board .adif-schedule-table thead {
+      display: none;
+    }
+
     .adif-schedule-table th {
       position: sticky;
       top: 0;
       z-index: 2;
-      background: rgba(191, 239, 213, 0.94);
-      font-size: 0.72rem;
-      color: var(--adif-blue);
+      background: var(--adif-light-green);
+      font-size: 0.77rem;
+      color: var(--adif-dark-blue);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(0, 27, 65, 0.12);
+      font-weight: 700;
+      padding: 11px 10px;
+      border-bottom: 1px solid #b5d1ca;
     }
 
     .adif-schedule-table td {
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(191, 239, 213, 0.1);
+      padding: 10px 10px 9px;
+      border-bottom: 1px solid rgba(214, 236, 216, 0.08);
       vertical-align: top;
       color: #fff;
     }
 
+    .adif-schedule-table tbody tr {
+      height: 75px;
+    }
+
+    .adif-schedule-table tbody tr:nth-child(odd) {
+      background: var(--adif-row-odd);
+    }
+
     .adif-schedule-table tbody tr:nth-child(even) {
-      background: rgba(0, 0, 0, 0.08);
+      background: var(--adif-row-even);
     }
 
     .adif-schedule-table tbody tr:hover {
-      background: rgba(191, 239, 213, 0.06);
+      background: #29405f;
     }
 
     .adif-screen-departures .adif-row-cercanias td:first-child {
@@ -1483,19 +1526,21 @@
     }
 
     .adif-col-time {
-      width: 112px;
+      width: 116px;
     }
 
     .adif-col-track {
-      width: 84px;
-      text-align: center;
+      width: 98px;
+      text-align: right;
     }
 
     .adif-time-main {
-      font-weight: 700;
-      font-size: 1.05rem;
+      font-weight: 500;
+      font-size: clamp(1.58rem, 2.25vw, 2.12rem);
       color: #fff;
       letter-spacing: 0.02em;
+      line-height: 1;
+      font-feature-settings: "tnum" 1;
     }
 
     .adif-time-sub,
@@ -1503,13 +1548,18 @@
     .adif-train-op {
       display: block;
       font-size: 0.78rem;
-      color: rgba(191, 239, 213, 0.74);
-      line-height: 1.25;
+      color: var(--adif-accent-green);
+      line-height: 1.18;
     }
 
     .adif-dest-main {
-      font-weight: 600;
+      font-weight: 500;
+      font-size: clamp(1.26rem, 2.1vw, 1.9rem);
       color: #fff;
+      line-height: 1.05;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .adif-dest-main a {
@@ -1523,24 +1573,64 @@
     }
 
     .adif-dest-stops {
-      font-size: 0.72rem;
-      color: rgba(191, 239, 213, 0.55);
-      line-height: 1.2;
-      margin-top: 0.1rem;
+      font-size: 0.82rem;
+      color: var(--adif-muted);
+      line-height: 1.16;
+      margin-top: 0.2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
     }
 
     .adif-train-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 2.7rem;
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      background: rgba(191, 239, 213, 0.12);
-      border: 1px solid rgba(191, 239, 213, 0.18);
-      color: var(--adif-light-green);
+      min-width: 3rem;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(214, 236, 216, 0.12);
+      border: 1px solid rgba(214, 236, 216, 0.22);
+      color: #fff;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.92rem;
+    }
+
+    .adif-schedule-table td:nth-child(3) {
+      width: 210px;
+      text-align: left;
+    }
+
+    .adif-schedule-table td:nth-child(2) {
+      padding-right: 6px;
+    }
+
+    .adif-schedule-table td:nth-child(4) {
+      text-align: right;
+      padding-right: 14px;
+    }
+
+    .adif-schedule-table td:nth-child(3) .adif-train-op {
+      display: block;
+      margin-bottom: 0.22rem;
+      color: var(--adif-accent-green);
+      font-size: 0.84rem;
+      font-weight: 500;
+      line-height: 1.08;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .adif-schedule-table td:nth-child(3) .adif-cercanias-line-badge,
+    .adif-schedule-table td:nth-child(3) .adif-train-badge {
+      margin-top: 0.03rem;
+    }
+
+    .adif-board-arrivals .adif-train-badge {
+      background: rgba(15, 36, 57, 0.08);
+      border-color: rgba(15, 36, 57, 0.24);
+      color: var(--adif-dark-blue);
     }
 
     .adif-cercanias-line-badge {
@@ -1562,11 +1652,11 @@
     }
 
     .adif-cercanias-line-badge .cercanias-line-logo--wide svg {
-      width: 2.9rem;
+      width: 3.02rem;
     }
 
     .adif-cercanias-line-badge .cercanias-line-logo--square svg {
-      width: 2.1rem;
+      width: 2.24rem;
     }
 
     .adif-track-pill,
@@ -1574,21 +1664,106 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 2.2rem;
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
-      font-weight: 700;
+      min-width: 0;
+      padding: 0;
+      border-radius: 0;
+      font-weight: 500;
+      font-size: clamp(1.26rem, 1.95vw, 1.68rem);
+      line-height: 1;
     }
 
     .adif-track-pill {
-      background: rgba(191, 239, 213, 0.12);
-      color: #fff;
+      background: transparent;
+      color: var(--adif-track);
+      border: 0;
     }
 
     .adif-track-live {
+      background: transparent;
+      color: var(--adif-track);
+      border: 0;
+      animation: none;
+    }
+
+    .adif-board-arrivals {
       background: var(--adif-light-green);
-      color: var(--adif-blue);
-      animation: adifTrackBlink 1.05s ease-in-out infinite;
+      color: var(--adif-dark-blue);
+    }
+
+    .adif-board-arrivals .adif-board-topbar,
+    .adif-board-arrivals .adif-schedule-heading,
+    .adif-board-arrivals .adif-schedule-table th {
+      background: var(--adif-dark-blue);
+      color: #fff;
+      border-bottom-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .adif-board-arrivals .adif-board-logo-shell {
+      color: #fff;
+    }
+
+    .adif-board-arrivals .adif-board-wordmark {
+      color: #fff;
+    }
+
+    .adif-board-arrivals .adif-board-screen-title,
+    .adif-board-arrivals .adif-board-track-label,
+    .adif-board-arrivals .adif-clock-main,
+    .adif-board-arrivals .adif-clock-sec {
+      color: #fff;
+    }
+
+    .adif-board-arrivals .adif-board-logo,
+    .adif-board-arrivals .adif-board-station,
+    .adif-board-arrivals .adif-board-subtitle,
+    .adif-board-arrivals .adif-board-statusline {
+      color: #fff;
+      stroke: #fff;
+    }
+
+    .adif-board-arrivals .adif-board-clock {
+      color: #fff;
+    }
+
+    .adif-board-arrivals .adif-schedule-count {
+      background: #fff;
+      color: var(--adif-dark-blue);
+    }
+
+    .adif-board-arrivals .adif-schedule-table td {
+      color: var(--adif-dark-blue);
+      border-bottom-color: rgba(16, 35, 65, 0.16);
+    }
+
+    .adif-board-arrivals .adif-schedule-table tbody tr:nth-child(odd) {
+      background: var(--adif-light-green);
+    }
+
+    .adif-board-arrivals .adif-schedule-table tbody tr:nth-child(even) {
+      background: var(--adif-dark-green);
+    }
+
+    .adif-board-arrivals .adif-schedule-table tbody tr:hover {
+      background: #9fcdb9;
+    }
+
+    .adif-board-arrivals .adif-time-main,
+    .adif-board-arrivals .adif-dest-main,
+    .adif-board-arrivals .adif-dest-main a {
+      color: var(--adif-dark-blue);
+    }
+
+    .adif-board-arrivals .adif-time-sub,
+    .adif-board-arrivals .adif-dest-sub,
+    .adif-board-arrivals .adif-train-op,
+    .adif-board-arrivals .adif-dest-stops {
+      color: var(--adif-arrival-status);
+    }
+
+    .adif-board-arrivals .adif-track-pill,
+    .adif-board-arrivals .adif-track-live {
+      color: #356582;
+      border-color: rgba(53, 101, 130, 0.45);
     }
 
     .adif-observation {
@@ -1598,6 +1773,14 @@
     .adif-observation-text {
       font-size: 0.82rem;
       color: var(--adif-light-green);
+    }
+
+    .adif-board-arrivals .adif-observation {
+      background: rgba(16, 35, 65, 0.06) !important;
+    }
+
+    .adif-board-arrivals .adif-observation-text {
+      color: var(--adif-arrival-status);
     }
 
     .adif-loading,
@@ -1637,7 +1820,8 @@
     }
 
     .adif-loading-text {
-      color: rgba(191, 239, 213, 0.82);
+      color: rgba(214, 236, 216, 0.9);
+      font-family: var(--adif-display-font);
       font-size: 0.95rem;
     }
 
@@ -1699,33 +1883,113 @@
         padding-top: 0.4rem;
       }
 
-      .adif-board-topbar,
-      .adif-board-panels {
-        padding: 0.9rem;
-      }
-
       .adif-board-topbar {
-        flex-direction: column;
-        align-items: stretch;
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+        padding: 0.62rem 0.72rem 0.68rem;
+        min-height: 0;
       }
 
       .adif-board-status {
-        align-items: flex-start;
-        text-align: left;
+        align-items: flex-end;
+        text-align: right;
       }
 
       .adif-board-panels {
         grid-template-columns: 1fr;
+        padding: 0;
+      }
+
+      .adif-schedule-heading {
+        padding: 0.7rem 0.85rem;
+      }
+
+      .adif-schedule-table th,
+      .adif-schedule-table td {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .adif-board-wordmark {
+        width: 82px;
+      }
+
+      .adif-board-screen-title {
+        font-size: 1.62rem;
+      }
+
+      .adif-board-subtitle {
+        font-size: 0.78rem;
+      }
+
+      .adif-board-station {
+        font-size: 0.94rem;
+      }
+
+      .adif-clock-main {
+        font-size: 1.6rem;
+      }
+
+      .adif-clock-sec {
+        font-size: 0.92rem;
+        margin-bottom: 0.14rem;
+      }
+
+      .adif-board-track-label {
+        font-size: 0.8rem;
+      }
+
+      .adif-board-statusline {
+        font-size: 0.56rem;
+      }
+
+      .adif-col-time {
+        width: 82px;
+      }
+
+      .adif-schedule-table td:nth-child(3) {
+        width: 144px;
+      }
+
+      .adif-col-track {
+        width: 64px;
+      }
+
+      .adif-time-main {
+        font-size: 1.18rem;
+      }
+
+      .adif-dest-main {
+        font-size: 0.99rem;
+      }
+
+      .adif-dest-stops {
+        font-size: 0.68rem;
+      }
+
+      .adif-track-pill,
+      .adif-track-live {
+        font-size: 1.04rem;
       }
 
       .adif-modal-toolbar {
         align-items: stretch;
       }
 
+      .adif-source-group,
       .adif-filter-group,
       .adif-screen-group,
       .adif-language-group {
         width: 100%;
+      }
+
+      .adif-source-group .adif-source-btn {
+        padding: 0.4rem 0.3rem;
+        font-size: 0.75rem;
+      }
+
+      .adif-source-label {
+        display: none;
       }
 
       .adif-filter-group > *,
@@ -2780,6 +3044,13 @@
         </div>
       </section>
       <section class="adif-modal-toolbar">
+        <div class="adif-source-group">
+          <span class="adif-source-label">Fuente</span>
+          <button class="adif-source-btn selected" type="button" data-adif-source="auto">Auto</button>
+          <button class="adif-source-btn" type="button" data-adif-source="adif">Pantallas</button>
+          <button class="adif-source-btn" type="button" data-adif-source="cercanias">Cercan&iacute;as</button>
+          <button class="adif-source-btn" type="button" data-adif-source="api">API ADIF</button>
+        </div>
         <div class="adif-filter-group">
           <button class="adif-filter-btn selected" type="button" data-adif-filter="all">Todos</button>
           <button class="adif-filter-btn" type="button" data-adif-filter="cercanias">Cercanias</button>
@@ -7893,7 +8164,7 @@
     const CACHE_TTL_ROUTES = 5 * 60 * 1000;
     const CACHE_TTL_ADIF_PAGE = 24 * 60 * 60 * 1000;
     const CACHE_TTL_ADIF_TIMETABLE = 60 * 1000;
-    const ADIF_CACHE_VERSION = "v6";
+    const ADIF_CACHE_VERSION = "v7";
     const ADIF_STATION_CONFIG_OVERRIDES = {
       "71801": {
         pageUrl: "https://www.adif.es/w/71801-barcelona-sants",
@@ -8037,6 +8308,7 @@
       filter: "all",
       screen: "departures",
       language: "ESP",
+      dataSource: "auto",
       rowsByType: null,
       meta: null,
       panelUrl: "",
@@ -8049,6 +8321,9 @@
     let adifTimetableRequestSeq = 0;
     let adifTimetableSocket = null;
     let adifTimetableResizeTimer = null;
+    let adifBoardCanvasTimer = null;
+    let adifTimetableAutoRefreshTimer = null;
+    let adifTimetableAutoRefreshInFlight = false;
     let adifBoardLogoSeq = 0;
     let adifGravitaShellHtml = "";
     let adifGravitaShellPromise = null;
@@ -8061,6 +8336,7 @@
     const CERCANIAS_DIRECTO_ARRIVAL_TIMEOUT_MS = 4500;
     const CERCANIAS_DIRECTO_ARRIVAL_CONCURRENCY = 4;
     const CERCANIAS_DIRECTO_DEFAULT_TIMEOUT_MS = 3500;
+    const ADIF_TIMETABLE_AUTO_REFRESH_MS = 30000;
     const CERCANIAS_DIRECTO_HMAC_SECRET = "H_@aFL3rUu9a=(JYojtEFBj%H@RR8Qty=CA@S@HCB8aXJR2&gJICnmPeCd[4#Vmc8roEV]&e*F[B*cuy!*DJ7LA]#hPSpQ=QbYsqJ=m#_$E)UXF+pIZC0!M=FJoN1fq$Vj@shHX$kiXoVjejt=im[r1YNSI*#h9THG0-TzDWdG-bR6eOZqM8iVMMOC^T-arNjNvDcExu6JLwDLo+wHRXgpcU_Qtv@X(YpmJdO5O[_VCYE-DpneM%RFVNUA94FQWi^iwNNoAdmrmTKK9AMd%!)NE]!M$Lf6Zlr+!p$]L_YDTJwFKS1#jJBAjm@eKGU=t3938*o)M4wM1d9ANGI*M8]XsroC$0E%VI9CKCll9TEWIvfA@9Oya]QNb=vEI-]pZ9-gHEUEUsovLl-P*_u84F_2sJTYe$YA!NErEqgRU[DBEWpKitlSSbrBLIr0*NJzXi1Es8G2RX2@E+*Ujc2IuEgAU$+]2-ad8KT^w1]DvOCFK%O74]B!Gw-P9i[fh)K(u9ltUPTN5%+SF[I=PQ[XZt1i!s-dF*R8&GFP@PLNym9fmarLixqO*7vcD96J4f7-_3RE2CO^KPN1tvB@sRo)D5nSoec_TD6Id+CRSMtyP=!Y8FS)DC0UWQn47Qz*2HJgtqG&I&YcBNBJExxmc#Cy6Xt^Sn%VPoDqfZ@^@VOmf_Rwg@5(RCom0!nHHNCBqxwQQiyUh(]g)DTgOPPpq26Y)(+SQ-HNLzIBFidPk+bV8HjkH%&zxvQI[nTfQXQyVvMQR&VV_AGZ5A7O(iCW=cdTOT_S5!UHXTQmtTqE!VNRc#O!]%aPT]SXF*A1tEID)yN2!t^!s#Tdp$n!CRwXJ*!#lgslGFECN)%grBAKMOlIp3LN%-iYiR@pDb82U7V1b8Atr-WUo7bAA6FKJNl1%9EPxyQzmB8dTP%V)l]BiqiNR!r7w)MYhNg4(8=g[[@%(JP4Jf$IsY0bY=HGDcLs!+mm5KW$k(N!*RDAZzDDwp3dIFK0J&4pBwrLEkPG%#Lib@!cwY_xbR(aYBq+e[5C^tR+fPdGJUQgVp=gJF%S+)fkVv7QXpuv73kbABLtc4%O=LUz_)5MZLZnV[P)4$9Ijuo-vi^i%jOTW[HP(sPnlKbEUiDNKq1rc[zVIik3jV^s$+NGDz1ZN%eH56wKQyHB7-QBMzT@@iR^!Ut!fiyJ-Hwb99X+d6nOAUI8XNyVLuG8T2SN75Hv3gpRJlD0$]8@9!yN)-yT%=xQE3PBUVXyi4gH%RGEfM!@xF%L8QQmGP12[T@Mqp2T-DELW2OsAI_UZ9W*=5puYOathfGYJHK#dy%Sr0j1BtrmVPgKn$@C7i)Xp!@tE-tY5IuGaRN0m#[CcWDJzOxPhpeh$Ekz7GXWnIVRNdG15IK[$vDytn)yCwmAy&V726(*wjd0NJtMsH)tIE=D-THI]a6-ZovoS6GU[jWLXumFR24Sy46JaKpkwF0sN=Uic3F90aBiYLN**T!Tx83#rN1VIJfq6p]Qv2GBYGwmv0qO2Q776105rst*(efcl6hITCR2x0EX*(c7gU6PZzgYzW68XU^bPu[tBrQnO7I-(=v=SLUb@]KYM5UD+G!kRsLW8bwBDnyo8&+N#_]SBp!D0A'IFYOUCANSEETHISGETAJOB'[vT&jTvSCmqQUL[kNFqDum[vvarQ)6&#EzIe=O+91t_33M%uw^GgPlBHuu0bWoAB1G&cM@NFCZ@RWx6ocbLkVq0h6nzIWuGOJ0T#iNSTEr!)oUQ^mdHEe)C&P%-6TeV(u!FWt=*agZ$NPAWLJ*#!VFJ%BNtS*EzJ8B75VJ(nBG86U-(W-A!hCtE0155N09oW2XlYSC+$04=952Vi1B#l_pUn8uUFL&g@w]2ql!Qg_Oim1=G%(@BG]cUM50Ya_qcM^B7tFgHD&I%X1dT$MW*)Fgx&s*qMyQytsJ%7o2JAKkh[AqDQ6t76kD8E8ZfBF25kT#]3xmwr2LV!J]q+JNxQ$6YXYFqS(sWCX(z3yOoQGiyRDB%97HzdfyI$gj+cLlnw+bQ8Gjiuq*e+4*Zow6^4Hi3@yPAB&-g@ASAuvGQO02&q";
     const CERCANIAS_DIRECTO_EVENTS = {
       FINGERPRINT_REQUIRED: "FINGERPRINT_REQUIRED",
@@ -8323,14 +8599,17 @@
       text = text.replace(/l['\u2019]/g, "l-");
       text = text.replace(/d['\u2019]/g, "d");
       text = text.replace(/[\/(),]/g, " ");
-      text = text.replace(/['\u2019]/g, "");
       text = text.replace(/\s+/g, "-");
-      text = text.replace(/[^a-z0-9\u00e1\u00e9\u00ed\u00f3\u00fa\u00e0\u00e8\u00ec\u00f2\u00f9\u00fc\u00ef\u00e7\u00f1.\-]/g, "");
       text = text.replace(/-+/g, "-").replace(/^-|-$/g, "");
       return text;
     }
     function slugifyAsciiAdifName(value) {
-      return slugifyAdifName(normalizeAdifName(value).normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+      const ascii = normalizeAdifName(value)
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/['`\u2019]/g, "")
+        .replace(/[^a-zA-Z0-9\s\/(),.-]/g, "");
+      return slugifyAdifName(ascii);
     }
     function getAdifNameVariants(name) {
       const raw = normalizeAdifName(name);
@@ -8395,6 +8674,24 @@
         commuterNetwork: commuterMatch ? commuterMatch[1] : "",
         trafficFilters: parseAdifTrafficFilters(html),
         stationCode: String(stationCode || "")
+      };
+    }
+    function buildDirectAdifConfigFromHtml(html, pageUrl, stationCode) {
+      if (!html || !pageUrl) return null;
+      const authMatch = html.match(/Liferay\.authToken\s*=\s*'([^']+)'/);
+      const directUrl = buildDirectAdifEndpoint(pageUrl);
+      if (!directUrl) return null;
+      const url = new URL(directUrl);
+      if (authMatch && authMatch[1]) url.searchParams.set("p_p_auth", authMatch[1]);
+      const assetMatch = html.match(/assetEntryId[=:]\s*["']?(\d+)["']?/);
+      if (assetMatch && assetMatch[1]) url.searchParams.set("assetEntryId", assetMatch[1]);
+      const commuterMatch = html.match(/_servicios_estacion_ServiciosEstacionPortlet_commuterNetwork:\s*"([^"]*)"/);
+      return {
+        endpointUrl: url.toString(),
+        commuterNetwork: commuterMatch ? commuterMatch[1] : "",
+        trafficFilters: parseAdifTrafficFilters(html),
+        stationCode: String(stationCode || ""),
+        _directEndpoint: true
       };
     }
     function inferAdifTrafficType(row) {
@@ -8566,6 +8863,16 @@
             };
             setCachedJson(cacheKey, config);
             return config;
+          }
+          const directConfig = buildDirectAdifConfigFromHtml(html, pageUrl, candidateStationCode);
+          if (directConfig) {
+            directConfig.pageUrl = pageUrl;
+            directConfig.htmlFallback = {
+              salidas: parseAdifHtmlTable(html, "salidas"),
+              llegadas: parseAdifHtmlTable(html, "llegadas")
+            };
+            setCachedJson(cacheKey, directConfig);
+            return directConfig;
           }
           errors.push(`${pageUrl}: sin portlet de horarios`);
         } catch (error) {
@@ -8803,17 +9110,54 @@
       pushName(feature?.get("NOMBRE_ESTACION"));
       return names;
     }
+    function isLikelySameStationFeature(baseFeature, candidateFeature) {
+      if (!baseFeature || !candidateFeature) return false;
+      const baseCode = normalizeStationCode(baseFeature?.get("stationCodeRaw") || baseFeature?.get("stationCode") || baseFeature?.get("CODIGO") || baseFeature?.get("CODIGO_ESTACION") || "");
+      const candidateCode = normalizeStationCode(candidateFeature?.get("stationCodeRaw") || candidateFeature?.get("stationCode") || candidateFeature?.get("CODIGO") || candidateFeature?.get("CODIGO_ESTACION") || "");
+      if (baseCode && candidateCode && baseCode === candidateCode) return true;
+      const baseGeom = baseFeature?.getGeometry?.();
+      const candidateGeom = candidateFeature?.getGeometry?.();
+      if (baseGeom && candidateGeom) {
+        try {
+          const dist = ol.sphere.getDistance(ol.proj.toLonLat(baseGeom.getCoordinates()), ol.proj.toLonLat(candidateGeom.getCoordinates()));
+          if (Number.isFinite(dist) && dist <= 5000) return true;
+        } catch { }
+      }
+      const baseName = normalizeStationName(baseFeature?.get("displayName") || baseFeature?.get("ldProps")?.NOMBRE || baseFeature?.get("cercProps")?.NOMBRE_ESTACION || "");
+      const candidateName = normalizeStationName(candidateFeature?.get("displayName") || candidateFeature?.get("ldProps")?.NOMBRE || candidateFeature?.get("cercProps")?.NOMBRE_ESTACION || "");
+      if (!baseName || !candidateName || baseName !== candidateName) return false;
+      const baseProv = normalizeStationName(baseFeature?.get("ldProps")?.PROV || "");
+      const candidateProv = normalizeStationName(candidateFeature?.get("ldProps")?.PROV || "");
+      const baseLoc = normalizeStationName(baseFeature?.get("ldProps")?.LOCALIDAD || baseFeature?.get("cercProps")?.NOMBRE_NUCLEO || "");
+      const candidateLoc = normalizeStationName(candidateFeature?.get("ldProps")?.LOCALIDAD || candidateFeature?.get("cercProps")?.NOMBRE_NUCLEO || "");
+      if (baseProv && candidateProv && baseProv !== candidateProv) return false;
+      if (baseLoc && candidateLoc && baseLoc !== candidateLoc) return false;
+      return !!(baseProv || baseLoc);
+    }
     function getAdifHubCodeCandidates(feature) {
       const codes = [];
+      const directNormalized = new Set();
       const pushCode = value => {
         getAdifCodeVariants(value).forEach(code => {
           const normalized = String(code || "").trim();
-          if (normalized && !codes.includes(normalized)) codes.push(normalized);
+          if (!normalized || codes.includes(normalized)) return;
+          codes.push(normalized);
+          directNormalized.add(normalizeStationCode(normalized));
         });
       };
-      pushCode(feature?.get("stationCodeRaw") || feature?.get("stationCode") || "");
+      const rawStationCode = feature?.get("stationCodeRaw") || feature?.get("stationCode") || "";
+      pushCode(rawStationCode);
       getAdifHubNameCandidates(feature).forEach(name => {
-        (ADIF_HUB_NAME_TO_CODES[name] || []).forEach(pushCode);
+        (ADIF_HUB_NAME_TO_CODES[name] || []).forEach(mappedCode => {
+          const normalizedMapped = normalizeStationCode(mappedCode);
+          if (!normalizedMapped) return;
+          if (directNormalized.has(normalizedMapped)) {
+            pushCode(mappedCode);
+            return;
+          }
+          const mappedFeature = getStationFeatureByCode(mappedCode);
+          if (mappedFeature && isLikelySameStationFeature(feature, mappedFeature)) pushCode(mappedCode);
+        });
       });
       return codes.slice(0, 12);
     }
@@ -8834,6 +9178,8 @@
         clearTimeout(adifTimetableResizeTimer);
         adifTimetableResizeTimer = null;
       }
+      stopAdifBoardCanvas();
+      stopAdifTimetableAutoRefresh();
       cleanupAdifTimetableSocket();
       cleanupCercaniasFallbackClient();
       document.querySelectorAll(".adif-gravita-container iframe").forEach(iframe => {
@@ -8842,6 +9188,95 @@
         delete iframe.dataset.localBlobUrl;
       });
       $(".modal-adif-timetable").hide();
+    }
+    function stopAdifTimetableAutoRefresh() {
+      if (adifTimetableAutoRefreshTimer) {
+        clearInterval(adifTimetableAutoRefreshTimer);
+        adifTimetableAutoRefreshTimer = null;
+      }
+      adifTimetableAutoRefreshInFlight = false;
+    }
+    function getAdifTimetableAutoRefreshSource() {
+      const selected = String(adifTimetableState.dataSource || "auto");
+      if (selected === "api") return "api";
+      if (selected === "cercanias") return "cercanias";
+      const rendered = String(adifTimetableState.meta?.source || "").toUpperCase();
+      if (rendered === "API_ADIF") return "api";
+      if (rendered === "CERCANIAS_DIRECTO") return "cercanias";
+      return "";
+    }
+    function shouldRunAdifTimetableAutoRefresh() {
+      if (!$(".modal-adif-timetable").is(":visible")) return false;
+      if (!adifTimetableState.stationCode) return false;
+      if (adifTimetableState.loading) return false;
+      if (!countAdifRows(adifTimetableState.rowsByType)) return false;
+      return !!getAdifTimetableAutoRefreshSource();
+    }
+    function syncAdifTimetableAutoRefresh() {
+      if (!shouldRunAdifTimetableAutoRefresh()) {
+        stopAdifTimetableAutoRefresh();
+        return;
+      }
+      if (adifTimetableAutoRefreshTimer) return;
+      adifTimetableAutoRefreshTimer = setInterval(() => {
+        refreshAdifTimetableInBackground();
+      }, ADIF_TIMETABLE_AUTO_REFRESH_MS);
+    }
+    async function refreshAdifTimetableInBackground() {
+      if (adifTimetableAutoRefreshInFlight) return;
+      if (!shouldRunAdifTimetableAutoRefresh()) return;
+      const feature = getStationFeatureByCode(adifTimetableState.stationCode);
+      if (!feature) return;
+      const stationSnapshot = String(adifTimetableState.stationCode || "");
+      const sourceSnapshot = getAdifTimetableAutoRefreshSource();
+      const requestSnapshot = adifTimetableRequestSeq;
+      adifTimetableAutoRefreshInFlight = true;
+      try {
+        if (sourceSnapshot === "api") {
+          const payload = await loadAdifTimetableData(feature, true);
+          if (!payload || !payload.rowsByType || !countAdifRows(payload.rowsByType)) return;
+          if (!$(".modal-adif-timetable").is(":visible")) return;
+          if (stationSnapshot !== String(adifTimetableState.stationCode || "")) return;
+          if (requestSnapshot !== adifTimetableRequestSeq) return;
+          if (getAdifTimetableAutoRefreshSource() !== "api") return;
+          adifTimetableState.stationCode = String(feature.get("stationCodeRaw") || feature.get("stationCode") || payload?.stationCode || "");
+          adifTimetableState.stationName = feature.get("displayName") || adifTimetableState.stationCode || "-";
+          adifTimetableState.rowsByType = payload.rowsByType;
+          adifTimetableState.resolvedCode = payload?.stationCode || adifTimetableState.stationCode || "";
+          adifTimetableState.loading = false;
+          adifTimetableState.loadingPhase = "";
+          adifTimetableState.error = "";
+          adifTimetableState.rawPayload = null;
+          adifTimetableState.meta = {
+            resolvedCode: adifTimetableState.resolvedCode,
+            resolvedAt: payload?.resolvedAt || new Date().toISOString(),
+            fromCache: false,
+            source: "API_ADIF",
+            partial: false,
+            fallbackReason: null
+          };
+          renderAdifTimetableModal();
+          return;
+        }
+        if (sourceSnapshot === "cercanias") {
+          let payload = null;
+          try {
+            payload = await fetchCercaniasFallbackPayload(feature, requestSnapshot, adifTimetableState.meta?.fallbackReason || "manual");
+          } catch {
+            payload = buildCercaniasLiveMapFallbackPayload(feature, adifTimetableState.meta?.fallbackReason || "manual");
+          }
+          if (!payload || !payload.rowsByType || !countAdifRows(payload.rowsByType)) return;
+          if (!$(".modal-adif-timetable").is(":visible")) return;
+          if (stationSnapshot !== String(adifTimetableState.stationCode || "")) return;
+          if (getAdifTimetableAutoRefreshSource() !== "cercanias") return;
+          if (requestSnapshot !== adifTimetableRequestSeq) return;
+          applyCercaniasFallbackPayload(feature, payload, adifTimetableState.meta?.fallbackReason || "manual");
+        }
+      } catch (error) {
+        console.warn("No se pudo actualizar en segundo plano los horarios del modal ADIF.", error);
+      } finally {
+        adifTimetableAutoRefreshInFlight = false;
+      }
     }
     function parseAdifHubFrames(raw) {
       return String(raw || "")
@@ -8875,12 +9310,20 @@
       if (normalized) keys.add(normalized);
       const compact = raw.toLowerCase().replace(/\s+/g, "");
       if (compact) keys.add(compact);
-      const digits = raw.replace(/[^\d]/g, "");
+      const digits = compact.replace(/\D+/g, "");
       if (digits) {
         keys.add(digits);
         keys.add(String(parseInt(digits, 10)));
       }
       return Array.from(keys).filter(Boolean);
+    }
+    function getCercaniasNucleoId(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      if (/^\d+$/.test(raw)) return String(parseInt(raw, 10));
+      const digits = raw.replace(/\D+/g, "");
+      if (digits) return String(parseInt(digits, 10));
+      return "";
     }
     function normalizeCercaniasNetworkName(value) {
       return normalizeStationName(value)
@@ -8977,10 +9420,95 @@
       const delta = ts - Date.now();
       return delta >= 0 && delta <= windowMinutes * 60 * 1000;
     }
+    function normalizeStationDisplayToken(value) {
+      return repairMojibake(String(value || ""))
+        .replace(/\s+/g, " ")
+        .replace(/^[\s,;|\u00b7]+|[\s,;|\u00b7]+$/g, "")
+        .trim();
+    }
+    function getStationNameComparableTokens(value) {
+      const compact = normalizeStationDisplayToken(value)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/['`\u2019]/g, "")
+        .replace(/\bst\.?\b/g, "sant")
+        .replace(/\bsta\.?\b/g, "santa")
+        .replace(/\bestacio(?:n)?\b/g, "estacio")
+        .replace(/\best\.?\b/g, "estacio")
+        .replace(/\bterm\.?\b/g, "terminal")
+        .replace(/\bpg\.?\b/g, "passeig")
+        .replace(/[^a-z0-9\s-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!compact) return [];
+      const stopWords = new Set(["de", "del", "la", "las", "l", "el", "els", "les", "d", "i", "y", "da", "do", "dos", "das", "estacio"]);
+      const tokens = compact.split(" ").map(token => token.trim()).filter(token => token && token.length >= 2 && !stopWords.has(token));
+      return Array.from(new Set(tokens));
+    }
+    function areStationDisplayNamesEquivalent(a, b) {
+      const aNorm = normalizeStationName(a);
+      const bNorm = normalizeStationName(b);
+      if (!aNorm || !bNorm) return false;
+      if (aNorm === bNorm) return true;
+      const aTokens = getStationNameComparableTokens(a);
+      const bTokens = getStationNameComparableTokens(b);
+      if (!aTokens.length || !bTokens.length) return aNorm.length >= 6 && bNorm.length >= 6 && (aNorm.startsWith(bNorm) || bNorm.startsWith(aNorm));
+      const aSet = new Set(aTokens);
+      const bSet = new Set(bTokens);
+      let overlap = 0;
+      aSet.forEach(token => { if (bSet.has(token)) overlap++; });
+      const minLen = Math.min(aSet.size, bSet.size);
+      const maxLen = Math.max(aSet.size, bSet.size);
+      if (!minLen) return false;
+      if (overlap === minLen) return true;
+      if (minLen >= 2 && overlap >= minLen - 1 && maxLen - overlap <= 1) return true;
+      return minLen >= 3 && overlap >= 3;
+    }
+    function dedupeStationDisplayNames(values) {
+      const unique = [];
+      (values || []).forEach(value => {
+        const token = normalizeStationDisplayToken(value);
+        if (!token) return;
+        for (let i = 0; i < unique.length; i++) {
+          if (!areStationDisplayNamesEquivalent(unique[i], token)) continue;
+          if (normalizeStationName(token).length > normalizeStationName(unique[i]).length) unique[i] = token;
+          return;
+        }
+        unique.push(token);
+      });
+      return unique;
+    }
+    function sanitizeStationDisplayName(value) {
+      const text = normalizeStationDisplayToken(value);
+      if (!text) return "";
+      if (!/[,\u00b7;|]/.test(text)) return text;
+      const parts = text.split(/\s*(?:,|;|\||\u00b7)\s*/).map(normalizeStationDisplayToken).filter(Boolean);
+      if (parts.length < 2) return text;
+      const unique = dedupeStationDisplayNames(parts);
+      if (unique.length === parts.length) return text;
+      return unique.join(" \u00b7 ");
+    }
+    function sanitizeStationDisplayList(values) {
+      const expanded = [];
+      (Array.isArray(values) ? values : [values]).forEach(value => {
+        const cleaned = sanitizeStationDisplayName(value);
+        if (!cleaned) return;
+        cleaned.split(/\s*\u00b7\s*/).map(normalizeStationDisplayToken).filter(Boolean).forEach(token => expanded.push(token));
+      });
+      return dedupeStationDisplayNames(expanded);
+    }
     function getCercaniasStationName(value, fallback = "-") {
       if (!value) return fallback;
-      if (typeof value === "string") return String(value || "").trim() || fallback;
-      return String(value.longName || value.shortName || value.name || value.stationName || fallback || "-").trim() || fallback;
+      if (Array.isArray(value)) {
+        const names = sanitizeStationDisplayList(value.map(item => getCercaniasStationName(item, "")).filter(Boolean));
+        return names.length ? names.join(" \u00b7 ") : fallback;
+      }
+      if (typeof value === "string") return sanitizeStationDisplayName(value) || fallback;
+      const candidate = [value.longName, value.shortName, value.name, value.stationName]
+        .map(sanitizeStationDisplayName)
+        .find(Boolean);
+      return candidate || fallback;
     }
     function getCercaniasTrainNumber(item) {
       return String(
@@ -9028,8 +9556,10 @@
       const delayMinutes = parseCercaniasDelayMinutes(item?.time?.delay ?? item?.delay);
       const destination = getCercaniasStationName(item?.stations?.destination || item?.route?.destination || item?.destination, "-");
       const via = String(item?.platform ?? item?.track ?? "").trim();
-      const lineColor = getFallbackCercaniasLineColor(lineCode, item?.trainData?.commuterNetwork || item?.core || station?.commuterNetwork || "");
-      const cercaniasNucleo = String(item?.trainData?.commuterNetwork || item?.core || station?.commuterNetwork || "").trim();
+      const rawNetwork = item?.core || item?.trainData?.commuterNetwork || station?.fallbackNucleoId || station?.commuterNetwork || "";
+      const resolvedNucleo = getCercaniasNucleoId(rawNetwork) || getCercaniasNucleoId(station?.fallbackNucleoId) || "";
+      const lineColor = getFallbackCercaniasLineColor(lineCode, resolvedNucleo || rawNetwork);
+      const cercaniasNucleo = String(resolvedNucleo || station?.fallbackNucleoId || rawNetwork || "").trim();
       const badge = lineCode || trainNumber || "C";
       const operator = trainNumber ? `Tren ${trainNumber}` : "Cercanias";
       return {
@@ -9062,9 +9592,10 @@
       const delayMinutes = parseCercaniasDelayMinutes(item?.delay ?? item?.time?.delay);
       const origin = getCercaniasStationName(item?.stations?.origin || item?.route?.origin || originStation, "-");
       const via = String(item?.platform ?? item?.arrivalPlatform ?? "").trim();
-      const network = item?.core || item?.trainData?.commuterNetwork || destinationStation?.commuterNetwork || "";
-      const lineColor = getFallbackCercaniasLineColor(lineCode, network);
-      const cercaniasNucleo = String(network || "").trim();
+      const rawNetwork = item?.core || item?.trainData?.commuterNetwork || destinationStation?.fallbackNucleoId || destinationStation?.commuterNetwork || "";
+      const resolvedNucleo = getCercaniasNucleoId(rawNetwork) || getCercaniasNucleoId(destinationStation?.fallbackNucleoId) || "";
+      const lineColor = getFallbackCercaniasLineColor(lineCode, resolvedNucleo || rawNetwork);
+      const cercaniasNucleo = String(resolvedNucleo || destinationStation?.fallbackNucleoId || rawNetwork || "").trim();
       const badge = lineCode || trainNumber || "C";
       const operator = trainNumber ? `Tren ${trainNumber}` : "Cercanias";
       return {
@@ -9223,6 +9754,205 @@
       });
       return out;
     }
+    function getFallbackRowSortTimestamp(row) {
+      const explicitSort = Number(row?._sort);
+      if (Number.isFinite(explicitSort)) return explicitSort;
+      const label = String(row?.hora || "").trim();
+      const match = label.match(/^(\d{2}):(\d{2})$/);
+      if (!match) return Number.MAX_SAFE_INTEGER;
+      const date = new Date();
+      date.setSeconds(0, 0);
+      date.setHours(parseInt(match[1], 10), parseInt(match[2], 10), 0, 0);
+      return date.getTime();
+    }
+    function normalizeAdifAvldmdFallbackRows(rows) {
+      return (rows || [])
+        .filter(row => {
+          if (!row || row.kind === "observation") return false;
+          return row.trafficType === "avldmd" || !row.isCercanias;
+        })
+        .map(row => ({
+          ...row,
+          trafficType: "avldmd",
+          isCercanias: false,
+          cercaniasColour: "",
+          _sort: getFallbackRowSortTimestamp(row)
+        }));
+    }
+    function mergeFallbackTimetableRows(primaryRows, secondaryRows) {
+      const seen = new Set();
+      const merged = [];
+      [...(primaryRows || []), ...(secondaryRows || [])].forEach(row => {
+        if (!row) return;
+        const key = [
+          row.kind || "train",
+          String(row.hora || "").trim(),
+          String(row.horaEstado || "").trim(),
+          normalizeStationName(row.estacion || ""),
+          normalizeStationName(row.tren || ""),
+          normalizeStationName(row.via || ""),
+          String(row.trafficType || "")
+        ].join("|");
+        if (seen.has(key)) return;
+        seen.add(key);
+        merged.push({ ...row, _sort: getFallbackRowSortTimestamp(row) });
+      });
+      merged.sort((a, b) => (a?._sort || Number.MAX_SAFE_INTEGER) - (b?._sort || Number.MAX_SAFE_INTEGER));
+      merged.forEach(row => { delete row._sort });
+      return merged;
+    }
+    function buildAdifFallbackFeatureOverride(feature, stationCode) {
+      const code = String(stationCode || "").trim();
+      if (!feature || typeof feature.get !== "function" || !code) return feature;
+      return {
+        get(key) {
+          if (key === "stationCodeRaw" || key === "stationCode") return code;
+          return feature.get(key);
+        }
+      };
+    }
+    function collectAdifCodeHintsForFallback(feature, stationHint) {
+      const hints = [];
+      const seen = new Set();
+      const push = value => {
+        getAdifCodeVariants(value).forEach(code => {
+          const normalized = normalizeStationCode(code);
+          if (!normalized || seen.has(normalized)) return;
+          seen.add(normalized);
+          hints.push(String(code || "").trim());
+        });
+      };
+      push(stationHint?.stationCode || stationHint?.code || "");
+      push(feature?.get?.("stationCodeRaw") || feature?.get?.("stationCode") || "");
+      if (feature && typeof feature.get === "function") {
+        getAdifHubCodeCandidates(feature).forEach(push);
+      }
+      return hints;
+    }
+    async function fetchAdifHubNonCercaniasFallbackRows(feature, requestId, codeHints = []) {
+      const empty = { proximasSalidas: [], proximasLlegadas: [] };
+      if (!feature || typeof feature.get !== "function") return empty;
+      const candidates = [];
+      const seen = new Set();
+      const push = value => {
+        getAdifCodeVariants(value).forEach(code => {
+          const normalized = normalizeStationCode(code);
+          if (!normalized || seen.has(normalized)) return;
+          seen.add(normalized);
+          candidates.push(String(code || "").trim());
+        });
+      };
+      (codeHints || []).forEach(push);
+      getAdifHubCodeCandidates(feature).forEach(push);
+      if (!candidates.length) return empty;
+      let best = empty;
+      let bestCount = 0;
+      try {
+        for (const code of candidates.slice(0, 8)) {
+          if (requestId !== adifTimetableRequestSeq) throw new Error("cancelled");
+          try {
+            const result = await queryAdifHubCodeOnce(code, requestId, 2800);
+            const hubRows = buildAdifHubRows(result?.payload || null);
+            const rowsByType = {
+              proximasSalidas: normalizeAdifAvldmdFallbackRows(hubRows?.proximasSalidas || []),
+              proximasLlegadas: normalizeAdifAvldmdFallbackRows(hubRows?.proximasLlegadas || [])
+            };
+            const total = countAdifRows(rowsByType);
+            if (total > bestCount) {
+              best = rowsByType;
+              bestCount = total;
+            }
+            if (bestCount >= 12) break;
+          } catch { }
+        }
+        return best;
+      } catch (error) {
+        if (error && error.message === "cancelled") throw error;
+        return empty;
+      }
+    }
+    async function fetchAdifPortletNonCercaniasFallbackRows(feature, requestId, codeHints = []) {
+      const empty = { proximasSalidas: [], proximasLlegadas: [] };
+      if (!feature || typeof feature.get !== "function") return empty;
+      const featureCandidates = [feature];
+      (codeHints || []).forEach(code => featureCandidates.push(buildAdifFallbackFeatureOverride(feature, code)));
+      const uniqueCandidates = [];
+      const seenCodes = new Set();
+      featureCandidates.forEach(candidate => {
+        if (!candidate || typeof candidate.get !== "function") return;
+        const rawCode = String(candidate.get("stationCodeRaw") || candidate.get("stationCode") || "").trim();
+        const normalized = normalizeStationCode(rawCode);
+        if (normalized && seenCodes.has(normalized)) return;
+        if (normalized) seenCodes.add(normalized);
+        uniqueCandidates.push(candidate);
+      });
+      const withTimeout = (promise, timeoutMs) => Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout_adif_avldmd")), timeoutMs))
+      ]);
+      let best = empty;
+      let bestCount = 0;
+      for (const candidateFeature of uniqueCandidates.slice(0, 8)) {
+        if (requestId !== adifTimetableRequestSeq) throw new Error("cancelled");
+        try {
+          const config = await withTimeout(resolveAdifStationConfig(candidateFeature, false), 8000);
+          const collectRowsByType = async searchType => {
+            if (!config) return [];
+            const htmlRows = normalizeAdifAvldmdFallbackRows(getAdifFallbackRows(config, searchType, "avldmd"));
+            if (htmlRows.length) return htmlRows;
+            if (!isValidAdifConfig(config)) return [];
+            let rows = [];
+            try {
+              rows = await withTimeout(fetchAdifHorarioSeries(config, searchType, "avldmd"), 6000);
+            } catch { }
+            if (!rows.length) rows = getAdifFallbackRows(config, searchType, "avldmd");
+            return normalizeAdifAvldmdFallbackRows(rows);
+          };
+          const [salidas, llegadas] = await withTimeout(Promise.all([
+            collectRowsByType("proximasSalidas"),
+            collectRowsByType("proximasLlegadas")
+          ]), 9000);
+          const rowsByType = { proximasSalidas: salidas, proximasLlegadas: llegadas };
+          const total = countAdifRows(rowsByType);
+          if (total > bestCount) {
+            best = rowsByType;
+            bestCount = total;
+          }
+          if (bestCount >= 12) break;
+        } catch (error) {
+          if (error && error.message === "cancelled") throw error;
+        }
+      }
+      return best;
+    }
+    async function fetchAdifNonCercaniasFallbackRows(feature, requestId, stationHint = null) {
+      const empty = { proximasSalidas: [], proximasLlegadas: [] };
+      if (!feature || typeof feature.get !== "function") return empty;
+      const codeHints = collectAdifCodeHintsForFallback(feature, stationHint);
+      const withTimeout = (promise, timeoutMs) => Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout_adif_avldmd")), timeoutMs))
+      ]);
+      try {
+        const [hubRows, portletRows] = await Promise.all([
+          withTimeout(fetchAdifHubNonCercaniasFallbackRows(feature, requestId, codeHints), 4200).catch(error => {
+            if (error && error.message === "cancelled") throw error;
+            return empty;
+          }),
+          withTimeout(fetchAdifPortletNonCercaniasFallbackRows(feature, requestId, codeHints), 12000).catch(error => {
+            if (error && error.message === "cancelled") throw error;
+            return empty;
+          })
+        ]);
+        return {
+          proximasSalidas: mergeFallbackTimetableRows(hubRows.proximasSalidas, portletRows.proximasSalidas),
+          proximasLlegadas: mergeFallbackTimetableRows(hubRows.proximasLlegadas, portletRows.proximasLlegadas)
+        };
+      } catch (error) {
+        if (error && error.message === "cancelled") throw error;
+        return empty;
+      }
+    }
     function getCercaniasHaversineDistanceMeters(a, b) {
       if (!a || !b) return Number.POSITIVE_INFINITY;
       const lat1 = Number(a.latitude), lon1 = Number(a.longitude), lat2 = Number(b.latitude), lon2 = Number(b.longitude);
@@ -9244,18 +9974,25 @@
         if (line) destinationLines.add(line);
       });
       const targetNetwork = String(destinationStation?.commuterNetwork || getFeatureCercaniasNetwork(feature) || "").trim();
+      const targetNucleoId = getCercaniasNucleoId(destinationStation?.fallbackNucleoId || targetNetwork || getFeatureCercaniasNetwork(feature));
       return stationList
         .filter(station => normalizeStationCode(station?.stationCode || station?.code || "") !== destinationCode)
         .map(station => {
           const stationLines = new Set(parseCercaniasLineList(station?.lines));
+          const stationNucleoId = getCercaniasNucleoId(station?.fallbackNucleoId || station?.core || station?.nucleo || station?.idNucleo || station?.commuterNetwork || "");
           let overlap = 0;
           destinationLines.forEach(line => { if (stationLines.has(line)) overlap++; });
           if (destinationLines.size && !overlap) return null;
-          if (targetNetwork && !isSameCercaniasNetwork(targetNetwork, station?.commuterNetwork)) return null;
+          if (targetNucleoId && stationNucleoId) {
+            if (targetNucleoId !== stationNucleoId) return null;
+          } else if (targetNetwork && !isSameCercaniasNetwork(targetNetwork, station?.commuterNetwork)) {
+            return null;
+          }
           let score = overlap * 100;
+          if (targetNucleoId && stationNucleoId && targetNucleoId === stationNucleoId) score += 120;
           const distance = getCercaniasHaversineDistanceMeters(destinationStation?.location, station?.location);
           if (Number.isFinite(distance)) score += Math.max(0, 40 - Math.floor(distance / 1000));
-          return { station, score };
+          return { station: { ...station, fallbackNucleoId: stationNucleoId || targetNucleoId || "" }, score };
         })
         .filter(Boolean)
         .sort((a, b) => b.score - a.score)
@@ -9607,6 +10344,7 @@
       const targetCode = normalizeStationCode(feature?.get("stationCodeRaw") || feature?.get("stationCode") || "");
       const targetName = normalizeStationName(feature?.get("displayName") || feature?.get("cercProps")?.NOMBRE_ESTACION || "");
       const targetNetwork = getFeatureCercaniasNetwork(feature);
+      const targetNucleoId = getCercaniasNucleoId(targetNetwork);
       const targetLines = new Set(getFeatureCercaniasLines(feature));
       let best = null;
       let bestScore = -Infinity;
@@ -9614,6 +10352,7 @@
         const stationCode = normalizeStationCode(station?.stationCode || station?.code || "");
         const stationLongName = normalizeStationName(station?.longName || station?.name || "");
         const stationShortName = normalizeStationName(station?.shortName || "");
+        const stationNucleoId = getCercaniasNucleoId(station?.core || station?.nucleo || station?.idNucleo || station?.commuterNetwork || "");
         const stationLines = new Set(parseCercaniasLineList(station?.lines));
         let score = 0;
         if (targetCode && stationCode && targetCode === stationCode) score += 1000;
@@ -9626,12 +10365,16 @@
             score += 120;
           }
         }
+        if (targetNucleoId && stationNucleoId) {
+          if (targetNucleoId === stationNucleoId) score += 320;
+          else score -= 220;
+        }
         if (targetNetwork && isSameCercaniasNetwork(targetNetwork, station?.commuterNetwork)) score += 80;
         let overlap = 0;
         targetLines.forEach(line => { if (stationLines.has(line)) overlap++; });
         score += overlap * 20;
         if (score > bestScore) {
-          best = station;
+          best = { ...station, fallbackNucleoId: stationNucleoId || targetNucleoId || "" };
           bestScore = score;
         }
       });
@@ -9702,15 +10445,22 @@
       await client.waitForFingerprint(1800).catch(() => { });
       const catalog = await client.waitForStationCatalog(3000);
       if (requestId !== adifTimetableRequestSeq) throw new Error("cancelled");
+      const targetNucleoId = getCercaniasNucleoId(getFeatureCercaniasNetwork(feature));
       const station = resolveCercaniasFallbackStation(feature, catalog);
       if (!station) throw new Error("fallback_not_eligible");
+      const stationWithNucleo = { ...station, fallbackNucleoId: station?.fallbackNucleoId || targetNucleoId || "" };
       const departuresPayload = await client.requestStationDepartures(station.stationCode, CERCANIAS_DIRECTO_DEFAULT_TIMEOUT_MS);
       if (requestId !== adifTimetableRequestSeq) throw new Error("cancelled");
-      const departureRows = getCercaniasDepartureItems(departuresPayload).map(item => mapCercaniasDepartureRow(item, station));
-      const arrivalsEstimate = await estimateCercaniasArrivalsAggressive(client, catalog, station, feature, departureRows, requestId);
+      const departureRows = getCercaniasDepartureItems(departuresPayload).map(item => mapCercaniasDepartureRow(item, stationWithNucleo));
+      const nonCercaniasRowsPromise = fetchAdifNonCercaniasFallbackRows(feature, requestId, stationWithNucleo);
+      const arrivalsEstimate = await estimateCercaniasArrivalsAggressive(client, catalog, stationWithNucleo, feature, departureRows, requestId);
+      const nonCercaniasRows = await nonCercaniasRowsPromise;
+      if (requestId !== adifTimetableRequestSeq) throw new Error("cancelled");
+      const cercaniasSalidas = dedupeCercaniasRows(departureRows);
+      const cercaniasLlegadas = Array.isArray(arrivalsEstimate.rows) ? arrivalsEstimate.rows : [];
       const rowsByType = {
-        proximasSalidas: dedupeCercaniasRows(departureRows),
-        proximasLlegadas: arrivalsEstimate.rows
+        proximasSalidas: mergeFallbackTimetableRows(cercaniasSalidas, nonCercaniasRows.proximasSalidas),
+        proximasLlegadas: mergeFallbackTimetableRows(cercaniasLlegadas, nonCercaniasRows.proximasLlegadas)
       };
       if (!countAdifRows(rowsByType)) throw new Error("fallback_empty");
       return {
@@ -10385,6 +11135,95 @@
           console.error("No se pudieron cargar horarios de InfoStation", adifError || new Error("ADIF sin datos"), fallbackError);
         }
       }
+    }
+    async function fetchSourceAdifHubOnly(feature, requestId, forceFresh = false) {
+      const cacheKey = getAdifHubCacheKey(feature);
+      if (!forceFresh && cacheKey) {
+        const cached = getCachedJson(cacheKey, CACHE_TTL_ADIF_TIMETABLE);
+        if (cached?.rowsByType && requestId === adifTimetableRequestSeq) {
+          applyAdifHubPayload(feature, cached, cached.resolvedCode || "", true);
+        }
+      }
+      try {
+        const result = await loadAdifHubPayload(feature, requestId);
+        if (requestId !== adifTimetableRequestSeq) return;
+        const cachePayload = {
+          stationCode: String(feature.get("stationCodeRaw") || feature.get("stationCode") || ""),
+          resolvedCode: result.code,
+          resolvedAt: new Date().toISOString(),
+          rowsByType: buildAdifHubRows(result.payload),
+          rawPayload: result.payload
+        };
+        if (cacheKey) setCachedJson(cacheKey, cachePayload);
+        applyAdifHubPayload(feature, cachePayload, result.code, false);
+      } catch (error) {
+        if (requestId !== adifTimetableRequestSeq) return;
+        adifTimetableState.loading = false;
+        adifTimetableState.loadingPhase = "";
+        adifTimetableState.error = "No se pudieron cargar las pantallas informativas ADIF para esta estacion.";
+        adifTimetableState.meta = null;
+        renderAdifTimetableModal();
+      }
+    }
+    async function fetchSourceCercaniasOnly(feature, requestId) {
+      adifTimetableState.loadingPhase = "fallback";
+      renderAdifTimetableModal();
+      try {
+        const fallbackPayload = await fetchCercaniasFallbackPayload(feature, requestId, "manual");
+        if (requestId !== adifTimetableRequestSeq) return;
+        applyCercaniasFallbackPayload(feature, fallbackPayload, "manual");
+      } catch (error) {
+        if (requestId !== adifTimetableRequestSeq) return;
+        const liveMapPayload = buildCercaniasLiveMapFallbackPayload(feature, "manual");
+        if (liveMapPayload && requestId === adifTimetableRequestSeq) {
+          applyCercaniasFallbackPayload(feature, liveMapPayload, "manual");
+          return;
+        }
+        adifTimetableState.loading = false;
+        adifTimetableState.loadingPhase = "";
+        adifTimetableState.error = "No se pudieron cargar los horarios de Cercanias para esta estacion.";
+        adifTimetableState.meta = null;
+        renderAdifTimetableModal();
+      }
+    }
+    async function fetchSourcePortletApi(feature, requestId, forceFresh = false) {
+      adifTimetableState.loadingPhase = "api";
+      renderAdifTimetableModal();
+      try {
+        const payload = await loadAdifTimetableData(feature, forceFresh);
+        if (requestId !== adifTimetableRequestSeq) return;
+        adifTimetableState.stationCode = String(feature.get("stationCodeRaw") || feature.get("stationCode") || payload?.stationCode || "");
+        adifTimetableState.stationName = feature.get("displayName") || adifTimetableState.stationCode || "-";
+        adifTimetableState.rowsByType = payload?.rowsByType || { proximasSalidas: [], proximasLlegadas: [] };
+        adifTimetableState.resolvedCode = payload?.stationCode || adifTimetableState.stationCode || "";
+        adifTimetableState.loading = false;
+        adifTimetableState.loadingPhase = "";
+        adifTimetableState.error = "";
+        adifTimetableState.rawPayload = null;
+        adifTimetableState.meta = {
+          resolvedCode: adifTimetableState.resolvedCode,
+          resolvedAt: payload?.resolvedAt || new Date().toISOString(),
+          fromCache: false,
+          source: "API_ADIF",
+          partial: false,
+          fallbackReason: null
+        };
+        renderAdifTimetableModal();
+      } catch (error) {
+        if (requestId !== adifTimetableRequestSeq) return;
+        adifTimetableState.loading = false;
+        adifTimetableState.loadingPhase = "";
+        adifTimetableState.error = "No se pudieron cargar los horarios de la API de ADIF para esta estacion.";
+        adifTimetableState.meta = null;
+        renderAdifTimetableModal();
+      }
+    }
+    function dispatchAdifTimetableFetch(feature, requestId, forceFresh = false) {
+      const source = adifTimetableState.dataSource;
+      if (source === "adif") return fetchSourceAdifHubOnly(feature, requestId, forceFresh);
+      if (source === "cercanias") return fetchSourceCercaniasOnly(feature, requestId);
+      if (source === "api") return fetchSourcePortletApi(feature, requestId, forceFresh);
+      return fetchAndRenderAdifHub(feature, requestId, forceFresh);
     }
     function getAdifFilterLabel(filter) {
       if (filter === "cercanias") return "Cercanias";
@@ -11143,13 +11982,15 @@
       return `<div class="adif-gravita-stage"><div class="adif-gravita-container"><div class="loader-container"><div class="loader-content">${renderAdifWordmarkLogo("loader-logo")}<span class="loader-text">${escapeHtml(message)}</span></div></div>${iframeHtml}</div></div>`;
     }
     function formatAdifBadge(row) {
+      const lineLabel = sanitizeStationDisplayName(extractAdifCercaniasLineLabel(row?.tren) || row?.tren || "");
+      const shouldUseCercaniasLogo = !!(lineLabel && (/^(?:C-?\d|R(?:G|L|T)?\d)/i.test(lineLabel) || row.isCercanias));
+      if (shouldUseCercaniasLogo) {
+        const color = normalizeCssColor(row.cercaniasColour ? "#" + row.cercaniasColour.replace(/^#/, "") : "") || "#830065";
+        const badgeHtml = renderCercaniasLineBadges(String(row?.cercaniasNucleo || "").trim(), lineLabel, color);
+        if (badgeHtml) return `<span class="adif-cercanias-line-badge">${badgeHtml}</span>`;
+      }
       if (row.isCercanias) {
         const color = normalizeCssColor(row.cercaniasColour ? "#" + row.cercaniasColour.replace(/^#/, "") : "") || "#830065";
-        if (adifTimetableState.meta?.source === "CERCANIAS_DIRECTO") {
-          const lineLabel = String(row?.tren || "").trim();
-          const badgeHtml = lineLabel ? renderCercaniasLineBadges(String(row?.cercaniasNucleo || "").trim(), lineLabel, color) : "";
-          if (badgeHtml) return `<span class="adif-cercanias-line-badge">${badgeHtml}</span>`;
-        }
         const textColor = useWhiteAccesibility(color) ? "#fff" : "#000";
         return `<span class="adif-train-badge" style="background:${color};color:${textColor}">${escapeHtml(row.tren || "-")}</span>`;
       }
@@ -11172,25 +12013,359 @@
         if (row.kind === "observation") {
           return `<tr class="adif-observation"><td colspan="4"><div class="adif-observation-text">${escapeHtml(row.observation)}</div></td></tr>`;
         }
-        const stationCell = row.estacionLink ? `<a href="${escapeHtml(row.estacionLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(row.estacion || "-")}</a>` : `<span>${escapeHtml(row.estacion || "-")}</span>`;
+        const stationName = sanitizeStationDisplayName(row.estacion || "-") || "-";
+        const stopNames = sanitizeStationDisplayList(row.paradas || []).filter(name => !areStationDisplayNamesEquivalent(name, stationName));
+        const stationCell = row.estacionLink ? `<a href="${escapeHtml(row.estacionLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(stationName)}</a>` : `<span>${escapeHtml(stationName)}</span>`;
         return `<tr class="adif-row-${escapeHtml(row.trafficType || "all")}">
           <td class="adif-col-time"><span class="adif-time-main">${escapeHtml(row.hora || "-")}</span>${row.horaEstado ? `<span class="adif-time-sub">${escapeHtml(row.horaEstado)}</span>` : ""}</td>
-          <td><div class="adif-dest-main">${stationCell}</div>${row.paradas?.length ? `<div class="adif-dest-stops">${row.paradas.map(s => escapeHtml(s)).join(' \u00b7 ')}</div>` : ""}${row.estacionEstado ? `<span class="adif-dest-sub">${escapeHtml(row.estacionEstado)}</span>` : ""}</td>
+          <td><div class="adif-dest-main">${stationCell}</div>${stopNames.length ? `<div class="adif-dest-stops">${stopNames.map(s => escapeHtml(s)).join(' \u00b7 ')}</div>` : ""}${row.estacionEstado ? `<span class="adif-dest-sub">${escapeHtml(row.estacionEstado)}</span>` : ""}</td>
           <td><span class="adif-train-op">${escapeHtml(row.trenDatosOp || "")}</span>${formatAdifBadge(row)}${row.accesible ? ' <span title="Accesible">Acc.</span>' : ""}</td>
           <td class="adif-col-track">${row.via ? `<span class="${row.immediate ? "adif-track-live" : "adif-track-pill"}">${escapeHtml(row.via)}</span>` : "-"}</td>
         </tr>`;
       }).join("");
       return `<table class="adif-schedule-table adif-screen-${escapeHtml(screenType || "panel")}"><thead><tr><th class="adif-col-time">Hora</th><th>Origen / Destino</th><th>Tren / Linea</th><th class="adif-col-track">Via</th></tr></thead><tbody>${body}</tbody></table>`;
     }
-    function renderAdifBoardHeader() {
-      const updatedAt = adifTimetableState.meta?.resolvedAt
-        ? new Date(adifTimetableState.meta.resolvedAt).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })
-        : "--:--";
-      const code = adifTimetableState.meta?.resolvedCode || adifTimetableState.stationCode || "-";
-      const cacheLabel = adifTimetableState.meta?.fromCache ? "CACHE" : "LIVE";
-      const sourceLabel = adifTimetableState.meta?.source === "CERCANIAS_DIRECTO" ? "CERCANIAS_DIRECTO" : "ADIF";
-      const partialLabel = adifTimetableState.meta?.partial ? " | PARCIAL" : "";
-      return `<div class="adif-board-topbar"><div class="adif-board-brandwrap"><div class="adif-board-logo-shell">${renderAdifBoardLogo("adif-board-logo")}</div><div><span class="adif-board-station">${escapeHtml(adifTimetableState.stationName || code)}</span><span class="adif-board-subtitle">Estacion ${escapeHtml(code)}</span></div></div><div class="adif-board-status"><span class="adif-board-clock">${escapeHtml(updatedAt)}</span><span class="adif-board-statusline">${escapeHtml(cacheLabel)} | ${escapeHtml(sourceLabel)}${escapeHtml(partialLabel)} | Datos en tiempo real</span></div></div>`;
+    const ADIF_CANVAS_BASE_WIDTH = 1000;
+    const ADIF_CANVAS_HEADER_HEIGHT = 80;
+    const ADIF_CANVAS_ROW_HEIGHT = 75;
+    const ADIF_CANVAS_COLORS = {
+      departures: {
+        headerBg: "#d6ecd8",
+        headerText: "#0f2439",
+        rowOdd: "#20314a",
+        rowEven: "#172338",
+        textWhite: "#ffffff",
+        textGray: "#c8d2de",
+        textTrack: "#96c4f0",
+        textGreen: "#8ad3a6",
+        renfeBg: "#82155b"
+      },
+      arrivals: {
+        headerBg: "#172338",
+        headerText: "#ffffff",
+        rowOdd: "#d6ecd8",
+        rowEven: "#c3dfca",
+        textWhite: "#0f2439",
+        textGray: "#39566f",
+        textTrack: "#356582",
+        textGreen: "#2a496f",
+        renfeBg: "#82155b"
+      }
+    };
+    const ADIF_CANVAS_LINE_COLORS = {
+      "C-1": "#66a1d2",
+      "C-2": "#579346",
+      "C-3": "#8e1d67",
+      "C-4": "#2a256a",
+      "C-4A": "#2a256a",
+      "C-4B": "#2a256a",
+      "C-5": "#f7941d",
+      "C-6": "#4e3687",
+      "C-7": "#c7332b",
+      "R1": "#66a1d2",
+      "R2": "#d9a427",
+      "R3": "#8e1d67",
+      "R4": "#579346",
+      "R11": "#7c8aa5",
+      "R12": "#7187a5",
+      "R13": "#6c8ca6",
+      "R14": "#4f6f9a",
+      "R15": "#49689a",
+      "R16": "#425f92",
+      "RT1": "#7b5098",
+      "RG1": "#5b9fb8"
+    };
+    const ADIF_CANVAS_WORDMARK_PATHS = [
+      "M211.6,105.9c-5.3,0-10-1.6-14.4-4.8c-5.1-3.6-7.7-8.4-7.7-14.5c0-5.3,2.2-9.8,6.5-13.5 c4.3-3.8,9.5-5.7,15.6-5.7c6.2,0,11.4,1.9,15.6,5.7c4.3,3.8,6.5,8.3,6.5,13.5c0,5.3-2.2,9.9-6.5,13.7 C223,104.1,217.7,105.9,211.6,105.9 M253.3,85.6c-0.1-7.3-4.2-13.5-12.5-18.6c-8.2-5.2-18.1-7.8-29.7-7.8c-11.7,0-21.7,2.6-30,7.9 c-8.3,5.2-12.5,11.4-12.5,18.7c0,7.4,4.1,13.7,12.4,19c8.3,5.2,18.2,7.8,29.9,7.8c7.7,0,14.9-1.2,21.5-3.6v2.3h21V85.6z",
+      "M421.8,73.7h22.9c2,0,3.6,1.7,3.6,3.7v4.1c0,2.4-2,3.7-3.6,3.7h-22.9v22.4c0,2.1-1.7,3.7-3.7,3.7h-13.7 c-2,0-3.7-1.7-3.7-3.7V61c0-9.9,8.3-20,20.3-23.8c5.8-1.8,10.6-1.8,14.3-1.8H455v5.8l-11.9,0c-3.6,0-7.5,1.4-9.8,2.4 c-8.6,4-11.5,9.3-11.5,17.8V73.7",
+      "M362.7,111.2h20.9V63.4c0-2-1.6-3.7-3.7-3.7h-13.5c-1.5,0-3.7,1.2-3.7,3.7V111.2",
+      "M373.3,40.2c-3,0-5.6,0.7-7.7,2.1c-2.1,1.4-3.1,3.1-3.1,5.1c0,2,1,3.7,3.1,5.1c2.1,1.4,4.6,2,7.6,2 c3,0,5.5-0.7,7.6-2.1c2.1-1.4,3.1-3.1,3.1-5c0-2-1-3.7-3.1-5.1C378.7,40.9,376.2,40.2,373.3,40.2",
+      "M343.4,32h-14.3c-2.3,0-3.7,1.9-3.7,3.7v26.9c-6.3-2.2-13.2-3.3-20.4-3.3c-11.7,0-21.7,2.6-30,7.9 c-8.2,5.2-12.4,11.4-12.4,18.7c0,7.3,4.2,13.6,12.5,18.9c8.3,5.2,18.3,7.7,30.1,7.7c11.6,0,21.5-2.6,29.6-7.7 c8.2-5.2,12.3-11.4,12.3-18.9V35.7C347.1,34,345.9,32,343.4,32 M320.7,99.9c-4.2,3.7-9.4,5.6-15.4,5.6c-6,0-11.2-1.9-15.5-5.6 c-4.2-3.8-6.4-8.4-6.4-13.7c0-5.3,2.1-9.9,6.4-13.6c4.3-3.8,9.4-5.7,15.4-5.7c6,0,11.2,1.9,15.4,5.7c4.3,3.7,6.5,8.3,6.5,13.6 C327.1,91.5,325,96.1,320.7,99.9z",
+      "M78,18.4c1.9,1.4,25.6,20.6,60.2,63.9c4.6,5.8,9.1,12.8,9.4,17c0.6,7.1-6.7,13.1-19.4,17.7 c-8.4,3-41.8,15.5-65.1,23.9c6.5-8.7,13.1-18.6,19.2-29.4c21.5-38,23.7-49.3,20.7-58c-2.8-8.2-8.8-7.9-10.8-7.5 c1.8-0.3,7.9,0.6,9.1,8.9c1.5,10.4-4.7,19.7-35.7,59.6c-10.1,13-20.4,24.9-30,35c-10.1,1.3-30.9,0.8-19.1-31.7 c0.8-2.1,1.6-4.3,2.4-6.5c12.5-8.2,35.2-24.2,54.6-40.6c28.8-24.4,15.7-25,15.7-25s11.4,2.2-19.6,23.5C54.3,79.8,37.8,89,25,95.7 c13.5-33.6,30.2-68.5,32.8-72.8C62.5,15.5,69.6,12.3,78,18.4"
+    ];
+    const adifCanvasLineLogoCache = new Map();
+    function stopAdifBoardCanvas() {
+      if (!adifBoardCanvasTimer) return;
+      clearInterval(adifBoardCanvasTimer);
+      adifBoardCanvasTimer = null;
+    }
+    function getAdifBoardClockParts(date = new Date()) {
+      return {
+        main: date.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", hour12: false }),
+        sec: String(date.getSeconds()).padStart(2, "0")
+      };
+    }
+    function normalizeCanvasLineLabel(value) {
+      const raw = sanitizeStationDisplayName(value || "").toUpperCase().replace(/\s+/g, "");
+      if (!raw) return "";
+      if (/^C-?\d+/.test(raw)) return raw.replace(/^C-?(\d+)/, "C-$1");
+      if (/^R-?\d+/.test(raw)) return raw.replace(/^R-?(\d+)/, "R$1");
+      if (/^RG-?\d+/.test(raw)) return raw.replace(/^RG-?(\d+)/, "RG$1");
+      if (/^RT-?\d+/.test(raw)) return raw.replace(/^RT-?(\d+)/, "RT$1");
+      return raw;
+    }
+    function getCanvasLineLabelFromRow(row) {
+      const fromTrain = normalizeCanvasLineLabel(extractAdifCercaniasLineLabel(row?.tren || ""));
+      if (fromTrain) return fromTrain;
+      const direct = normalizeCanvasLineLabel(row?.tren || "");
+      if (/^(?:C-\d+|R\d+|RG\d+|RT\d+)$/.test(direct)) return direct;
+      return "";
+    }
+    function inferCanvasOperator(row) {
+      const op = String(row?.trenDatosOp || "").toLowerCase();
+      if (op.includes("ouigo")) return "ouigo";
+      if (op.includes("iryo")) return "iryo";
+      return "renfe";
+    }
+    function inferCanvasRenfeType(row, lineLabel) {
+      const op = String(row?.trenDatosOp || "").toUpperCase();
+      if (/\bAVLO\b/.test(op)) return "avlo";
+      if (/\bAVE\b/.test(op)) return "AVE";
+      if (/\bINTERCITY\b/.test(op)) return "Intercity";
+      if (/\bRODAL/.test(op)) return "Rodalia";
+      if (/\bREG|REX|MD|MEDIA DISTANCIA|REGIONAL\b/.test(op)) return "Regional";
+      if (lineLabel) return "Cercanias";
+      return "Renfe";
+    }
+    function mapAdifRowToCanvasData(row) {
+      const stationName = sanitizeStationDisplayName(row?.estacion || "-") || "-";
+      const stopNames = sanitizeStationDisplayList(row?.paradas || []).filter(name => !areStationDisplayNamesEquivalent(name, stationName));
+      const lineLabel = getCanvasLineLabelFromRow(row);
+      const lineColor = normalizeCssColor(row?.cercaniasColour ? "#" + String(row.cercaniasColour).replace(/^#/, "") : "") || ADIF_CANVAS_LINE_COLORS[lineLabel] || "";
+      const operator = inferCanvasOperator(row);
+      return {
+        time: sanitizeStationDisplayName(row?.hora || "--:--"),
+        line: lineLabel,
+        lineColor: lineColor,
+        cercaniasNucleo: String(row?.cercaniasNucleo || "").trim(),
+        dest: stationName,
+        stops: stopNames.join(" · "),
+        train: sanitizeStationDisplayName(row?.tren || "-"),
+        track: sanitizeStationDisplayName(row?.via || ""),
+        info: sanitizeStationDisplayName(row?.horaEstado || row?.estacionEstado || ""),
+        operator: operator,
+        renfeType: inferCanvasRenfeType(row, lineLabel)
+      };
+    }
+    function getAdifCanvasLogoEntry(lineLabel, nucleo, fallbackColor) {
+      const line = String(lineLabel || "").trim();
+      if (!line) return null;
+      const cacheKey = `${String(nucleo || "").trim()}|${line}|${String(fallbackColor || "").trim()}`;
+      const cached = adifCanvasLineLogoCache.get(cacheKey);
+      if (cached) return cached;
+      const html = renderCercaniasLineBadges(nucleo, line, fallbackColor);
+      const svgMatch = String(html || "").match(/<svg[\s\S]*?<\/svg>/i);
+      if (!svgMatch) {
+        adifCanvasLineLogoCache.set(cacheKey, null);
+        return null;
+      }
+      const isSquare = /cercanias-line-logo--square/.test(html);
+      let aspectRatio = isSquare ? 1 : (100.1 / 54.6);
+      const viewBoxMatch = svgMatch[0].match(/viewBox=["']([^"']+)["']/i);
+      if (viewBoxMatch) {
+        const values = String(viewBoxMatch[1]).trim().split(/\s+/).map(Number);
+        if (values.length === 4 && Number.isFinite(values[2]) && Number.isFinite(values[3]) && values[3] > 0) {
+          aspectRatio = values[2] / values[3];
+        }
+      }
+      const entry = {
+        image: new Image(),
+        ready: false,
+        failed: false,
+        isSquare,
+        aspectRatio
+      };
+      entry.image.onload = () => { entry.ready = true };
+      entry.image.onerror = () => { entry.failed = true };
+      entry.image.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgMatch[0]);
+      adifCanvasLineLogoCache.set(cacheKey, entry);
+      return entry;
+    }
+    function fillRoundRectCanvas(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      ctx.fill();
+    }
+    function drawAdifWordmarkCanvas(ctx, color) {
+      ctx.save();
+      ctx.translate(20, 25);
+      const scale = 32 / 165;
+      ctx.scale(scale, scale);
+      ctx.fillStyle = color;
+      ADIF_CANVAS_WORDMARK_PATHS.forEach(pathData => {
+        try {
+          ctx.fill(new Path2D(pathData), "evenodd");
+        } catch { }
+      });
+      ctx.restore();
+    }
+    function drawAdifCanvasPanel(canvas, state) {
+      if (!canvas || !state) return;
+      const rows = Array.isArray(state.rows) ? state.rows : [];
+      const screen = state.screen === "arrivals" ? "arrivals" : "departures";
+      const colors = ADIF_CANVAS_COLORS[screen];
+      const logicalHeight = ADIF_CANVAS_HEADER_HEIGHT + (rows.length * ADIF_CANVAS_ROW_HEIGHT);
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = ADIF_CANVAS_BASE_WIDTH * dpr;
+      canvas.height = Math.max(ADIF_CANVAS_HEADER_HEIGHT + ADIF_CANVAS_ROW_HEIGHT, logicalHeight) * dpr;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, ADIF_CANVAS_BASE_WIDTH, canvas.height / dpr);
+
+      const clock = getAdifBoardClockParts(new Date());
+      ctx.fillStyle = colors.headerBg;
+      ctx.fillRect(0, 0, ADIF_CANVAS_BASE_WIDTH, ADIF_CANVAS_HEADER_HEIGHT);
+      ctx.fillStyle = screen === "arrivals" ? "rgba(255,255,255,0.28)" : "#b5d1ca";
+      ctx.fillRect(0, ADIF_CANVAS_HEADER_HEIGHT - 2, ADIF_CANVAS_BASE_WIDTH, 2);
+      drawAdifWordmarkCanvas(ctx, colors.headerText);
+      ctx.fillStyle = colors.headerText;
+      ctx.textAlign = "left";
+      ctx.font = "700 44px Roboto, sans-serif";
+      ctx.fillText(screen === "arrivals" ? "Llegadas" : "Salidas", 135, 58);
+      ctx.font = "500 22px Roboto, sans-serif";
+      ctx.fillText("Estacion de", 330, 36);
+      ctx.fillText(state.stationName || "-", 330, 64);
+      ctx.textAlign = "right";
+      ctx.font = "22px Roboto, sans-serif";
+      const secText = ":" + clock.sec;
+      const secWidth = ctx.measureText(secText).width;
+      ctx.fillText(secText, 980, 48);
+      ctx.font = "42px Roboto, sans-serif";
+      ctx.fillText(clock.main, 980 - secWidth, 48);
+      ctx.font = "700 16px Roboto, sans-serif";
+      ctx.fillText("Via", 980, 74);
+
+      rows.forEach((data, index) => {
+        const y = ADIF_CANVAS_HEADER_HEIGHT + (index * ADIF_CANVAS_ROW_HEIGHT);
+        const upperBaseline = y + 36;
+        const lowerBaseline = y + 64;
+        ctx.fillStyle = (index % 2 === 0) ? colors.rowOdd : colors.rowEven;
+        ctx.fillRect(0, y, ADIF_CANVAS_BASE_WIDTH, ADIF_CANVAS_ROW_HEIGHT);
+
+        ctx.fillStyle = colors.textWhite;
+        ctx.font = "500 34px Roboto, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText(data.time || "--:--", 20, y + 49);
+
+        ctx.font = "700 20px Roboto, sans-serif";
+        const badgeX = 135;
+        const badgeY = y + 10;
+        let destX = badgeX;
+        if (data.line) {
+          const logoEntry = getAdifCanvasLogoEntry(data.line, data.cercaniasNucleo, data.lineColor || ADIF_CANVAS_LINE_COLORS[data.line] || "#830065");
+          if (logoEntry?.ready && !logoEntry.failed) {
+            const badgeHeight = 31;
+            const badgeWidth = Math.max(31, badgeHeight * Math.max(0.8, logoEntry.aspectRatio || 1));
+            ctx.drawImage(logoEntry.image, badgeX, badgeY, badgeWidth, badgeHeight);
+            destX = badgeX + badgeWidth + 12;
+          } else {
+            const badgeWidth = Math.max(55, ctx.measureText(data.line).width + 20);
+            ctx.fillStyle = data.lineColor || ADIF_CANVAS_LINE_COLORS[data.line] || "#830065";
+            fillRoundRectCanvas(ctx, badgeX, badgeY, badgeWidth, 30, 15);
+            ctx.fillStyle = "#fff";
+            ctx.textAlign = "center";
+            ctx.fillText(data.line, badgeX + (badgeWidth / 2), badgeY + 22);
+            destX = badgeX + badgeWidth + 12;
+          }
+        }
+
+        ctx.fillStyle = colors.textWhite;
+        ctx.textAlign = "left";
+        ctx.font = "500 30px Roboto, sans-serif";
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(destX, y + 8, 545 - (destX - 135), 30);
+        ctx.clip();
+        ctx.fillText(data.dest || "-", destX, upperBaseline);
+        ctx.restore();
+
+        let stopsClipWidth = 745;
+        if (data.info) stopsClipWidth = 540;
+        ctx.fillStyle = colors.textGray;
+        ctx.font = "17px Roboto, sans-serif";
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(135, y + 45, stopsClipWidth, 28);
+        ctx.clip();
+        ctx.fillText(data.stops || "", 135, lowerBaseline);
+        ctx.restore();
+
+        const renfeX = 690;
+        if (data.info) {
+          ctx.fillStyle = colors.textGreen;
+          ctx.font = "500 19px Roboto, sans-serif";
+          ctx.textAlign = "left";
+          ctx.fillText(data.info, renfeX, lowerBaseline);
+        }
+
+        const renfeY = y + 8;
+        const renfeW = 100;
+        const renfeH = 36;
+        ctx.fillStyle = data.operator === "ouigo" ? "#6193b5" : (data.operator === "iryo" ? "#db241e" : colors.renfeBg);
+        fillRoundRectCanvas(ctx, renfeX, renfeY, renfeW, renfeH, 4);
+        ctx.fillStyle = "#fff";
+        if (data.operator === "ouigo") {
+          ctx.textAlign = "center";
+          ctx.font = "700 20px Roboto, sans-serif";
+          ctx.fillText("OUIGO", renfeX + (renfeW / 2), renfeY + 24);
+        } else if (data.operator === "iryo") {
+          ctx.textAlign = "center";
+          ctx.font = "700 22px Roboto, sans-serif";
+          ctx.fillText("iryo", renfeX + (renfeW / 2), renfeY + 26);
+        } else {
+          ctx.textAlign = "left";
+          ctx.font = "italic 700 14px Roboto, sans-serif";
+          ctx.fillText("renfe", renfeX + 8, renfeY + 14);
+          if (data.renfeType === "AVE") {
+            ctx.font = "italic 700 18px Roboto, sans-serif";
+            ctx.fillText("AVE", renfeX + 8, renfeY + 31);
+          } else if (data.renfeType === "avlo") {
+            ctx.font = "700 18px Roboto, sans-serif";
+            ctx.fillText("avlo", renfeX + 8, renfeY + 31);
+          } else {
+            ctx.font = data.renfeType === "Intercity" ? "italic 13px Roboto, sans-serif" : "13px Roboto, sans-serif";
+            ctx.fillText(data.renfeType || "Cercanias", renfeX + 8, renfeY + 30);
+          }
+        }
+
+        ctx.textAlign = "right";
+        ctx.font = "500 24px Roboto, sans-serif";
+        ctx.fillStyle = colors.textWhite;
+        ctx.fillText(data.train || "-", 880, upperBaseline);
+        ctx.fillStyle = colors.textTrack;
+        ctx.fillText(data.track || "", 980, upperBaseline);
+      });
+    }
+    function mountAdifBoardCanvas(rows, screen) {
+      const canvas = document.getElementById("adifCanvasBoard");
+      if (!canvas) return;
+      const mappedRows = (rows || []).filter(row => row?.kind !== "observation").map(mapAdifRowToCanvasData);
+      const state = {
+        rows: mappedRows,
+        screen: screen === "arrivals" ? "arrivals" : "departures",
+        stationName: sanitizeStationDisplayName(adifTimetableState.stationName || adifTimetableState.stationCode || "-")
+      };
+      const draw = () => drawAdifCanvasPanel(canvas, state);
+      if (document.fonts?.ready) document.fonts.ready.then(draw).catch(draw);
+      else draw();
+      stopAdifBoardCanvas();
+      adifBoardCanvasTimer = setInterval(() => {
+        if (!$(".modal-adif-timetable").is(":visible")) {
+          stopAdifBoardCanvas();
+          return;
+        }
+        draw();
+      }, 1000);
     }
     function filterAdifRowsByTraffic(rows, filter) {
       if (!Array.isArray(rows)) return [];
@@ -11203,7 +12378,10 @@
       const title = document.getElementById("adifTimetableStationTitle");
       const filterGroup = document.querySelector(".adif-filter-group");
       const languageSelect = document.getElementById("adifLanguageSelect");
-      if (!body || !title || !meta) return;
+      if (!body || !title || !meta) {
+        stopAdifTimetableAutoRefresh();
+        return;
+      }
       body.querySelectorAll?.(".adif-gravita-container iframe").forEach(iframe => {
         if (!iframe?.dataset?.localBlobUrl) return;
         try { URL.revokeObjectURL(iframe.dataset.localBlobUrl) } catch { }
@@ -11214,7 +12392,7 @@
         const updatedAt = adifTimetableState.meta.resolvedAt
           ? new Date(adifTimetableState.meta.resolvedAt).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })
           : "";
-        const sourceLabel = adifTimetableState.meta.source === "CERCANIAS_DIRECTO" ? "CercaniasDirecto" : "ADIF";
+        const sourceLabel = adifTimetableState.meta.source === "CERCANIAS_DIRECTO" ? "Cercanias" : (adifTimetableState.meta.source === "API_ADIF" ? "API ADIF" : "Pantallas ADIF");
         const fallbackLabel = adifTimetableState.meta.fallbackReason === "adif_empty"
           ? "fallback ADIF vacio"
           : (adifTimetableState.meta.fallbackReason === "adif_error" ? "fallback ADIF error" : "");
@@ -11223,41 +12401,51 @@
         meta.textContent = adifTimetableState.error || "";
       }
       if (filterGroup) filterGroup.style.display = "";
+      document.querySelectorAll(".adif-source-btn").forEach(btn => btn.classList.toggle("selected", btn.dataset.adifSource === (adifTimetableState.dataSource || "auto")));
       document.querySelectorAll(".adif-filter-btn").forEach(btn => btn.classList.toggle("selected", btn.dataset.adifFilter === adifTimetableState.filter));
       document.querySelectorAll(".adif-screen-btn").forEach(btn => btn.classList.toggle("selected", btn.dataset.adifScreen === adifTimetableState.screen));
       if (languageSelect) languageSelect.value = normalizeAdifGravitaLanguage(adifTimetableState.language);
       body.classList.remove("panel-mode");
+      stopAdifBoardCanvas();
       const hasRows = countAdifRows(adifTimetableState.rowsByType) > 0;
-      const useBoardMode = adifTimetableState.meta?.source === "CERCANIAS_DIRECTO" || (!adifTimetableState.rawPayload && hasRows);
-      if (adifTimetableState.loading && !adifTimetableState.rawPayload && (!hasRows || adifTimetableState.loadingPhase === "fallback")) {
+      const selectedSource = String(adifTimetableState.dataSource || "auto");
+      const forcePantallasIframe = selectedSource === "adif";
+      const useBoardMode = !forcePantallasIframe && (adifTimetableState.meta?.source === "CERCANIAS_DIRECTO" || adifTimetableState.meta?.source === "API_ADIF");
+      if (adifTimetableState.loading && !adifTimetableState.rawPayload && (forcePantallasIframe || !hasRows || adifTimetableState.loadingPhase === "fallback" || adifTimetableState.loadingPhase === "api")) {
         const loadingMessage = adifTimetableState.loadingPhase === "fallback"
           ? "Cargando horarios de Cercanias..."
-          : "Cargando horarios ADIF...";
+          : (adifTimetableState.loadingPhase === "api" ? "Cargando horarios de API ADIF..." : "Cargando pantallas informativas ADIF...");
         body.dataset.adifRenderToken = "";
         body.innerHTML = renderAdifGravitaPanels(loadingMessage, true);
         repairDomMojibake(body);
         requestAnimationFrame(() => syncAdifGravitaLayout());
+        syncAdifTimetableAutoRefresh();
         return;
       }
       if (useBoardMode) {
         body.dataset.adifRenderToken = "";
-        body.classList.add("panel-mode");
         const rowsByType = adifTimetableState.rowsByType || { proximasSalidas: [], proximasLlegadas: [] };
         const departuresRows = filterAdifRowsByTraffic(rowsByType.proximasSalidas, adifTimetableState.filter);
         const arrivalsRows = filterAdifRowsByTraffic(rowsByType.proximasLlegadas, adifTimetableState.filter);
         const screen = adifTimetableState.screen === "arrivals" ? "arrivals" : "departures";
         const activeRows = screen === "arrivals" ? arrivalsRows : departuresRows;
-        const heading = screen === "arrivals" ? "Llegadas" : "Salidas";
         const emptyLabel = screen === "arrivals"
           ? "No hay llegadas para el filtro seleccionado."
           : "No hay salidas para el filtro seleccionado.";
-        const isFallbackSource = adifTimetableState.meta?.source === "CERCANIAS_DIRECTO";
-        const boardClasses = ["adif-board", `adif-board-${screen}`];
-        if (isFallbackSource) boardClasses.push("adif-board-fallback");
-        boardClasses.push(screen === "arrivals" ? "adif-board-arrivals" : "adif-board-departures");
-        body.innerHTML = `<div class="adif-gravita-stage adif-board-stage"><div class="adif-gravita-container adif-board-shell"><div class="${escapeHtml(boardClasses.join(" "))}">${renderAdifBoardHeader()}<div class="adif-board-panels"><section class="adif-schedule-section adif-screen-${escapeHtml(screen)}"><div class="adif-schedule-heading"><span>${heading}</span><span class="adif-schedule-count">${activeRows.length}</span></div>${renderAdifRows(activeRows, emptyLabel, screen)}</section></div></div></div></div>`;
+        if (!activeRows.length) {
+          body.innerHTML = `<div class="adif-gravita-stage"><div class="adif-gravita-container adif-canvas-shell">${renderAdifBoardState(emptyLabel, true)}</div></div>`;
+          repairDomMojibake(body);
+          requestAnimationFrame(() => syncAdifGravitaLayout());
+          syncAdifTimetableAutoRefresh();
+          return;
+        }
+        body.innerHTML = `<div class="adif-gravita-stage adif-board-stage"><div class="adif-gravita-container adif-canvas-shell"><div class="adif-canvas-stage"><div class="adif-canvas-container"><canvas id="adifCanvasBoard" class="adif-canvas-board" aria-label="Panel ADIF"></canvas></div></div></div></div>`;
         repairDomMojibake(body);
-        requestAnimationFrame(() => syncAdifGravitaLayout());
+        requestAnimationFrame(() => {
+          syncAdifGravitaLayout();
+          mountAdifBoardCanvas(activeRows, screen);
+        });
+        syncAdifTimetableAutoRefresh();
         return;
       }
       if (!adifTimetableState.rawPayload) {
@@ -11265,6 +12453,7 @@
         body.innerHTML = renderAdifGravitaPanels(adifTimetableState.error || "No se pudieron cargar los horarios para esta estacion.", true);
         repairDomMojibake(body);
         requestAnimationFrame(() => syncAdifGravitaLayout());
+        syncAdifTimetableAutoRefresh();
         return;
       }
       const renderToken = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -11276,6 +12465,7 @@
         syncAdifGravitaLayout();
         mountAdifGravitaPanels(renderToken);
       });
+      syncAdifTimetableAutoRefresh();
     }
     async function openAdifTimetable(stationCode) {
       const feature = getStationFeatureByCode(stationCode);
@@ -11287,25 +12477,27 @@
       cleanupCercaniasFallbackClient();
       const requestId = ++adifTimetableRequestSeq;
       const activeLanguage = normalizeAdifGravitaLanguage(adifTimetableState.language);
+      const activeSource = adifTimetableState.dataSource || "auto";
       adifTimetableState = {
         stationCode: String(feature.get("stationCodeRaw") || feature.get("stationCode") || stationCode),
         stationName: feature.get("displayName") || String(stationCode),
         filter: "all",
         screen: "departures",
         language: activeLanguage,
+        dataSource: activeSource,
         rowsByType: null,
         meta: null,
         panelUrl: "",
         resolvedCode: "",
         loading: true,
-        loadingPhase: "adif",
+        loadingPhase: activeSource === "cercanias" ? "fallback" : (activeSource === "api" ? "api" : "adif"),
         error: "",
         rawPayload: null
       };
       $(".modal-tren,.modal-estacion,.modal-tren-movil,.modal-estacion-movil").hide();
       $(".modal-adif-timetable").show();
       renderAdifTimetableModal();
-      fetchAndRenderAdifHub(feature, requestId, false);
+      dispatchAdifTimetableFetch(feature, requestId, false);
     }
     async function refreshAdifTimetable() {
       if (!adifTimetableState.stationCode) return;
@@ -11319,12 +12511,13 @@
       adifTimetableState.meta = null;
       adifTimetableState.panelUrl = "";
       adifTimetableState.resolvedCode = "";
+      const activeSource = adifTimetableState.dataSource || "auto";
       adifTimetableState.loading = true;
-      adifTimetableState.loadingPhase = "adif";
+      adifTimetableState.loadingPhase = activeSource === "cercanias" ? "fallback" : (activeSource === "api" ? "api" : "adif");
       adifTimetableState.error = "";
       adifTimetableState.rawPayload = null;
       renderAdifTimetableModal();
-      fetchAndRenderAdifHub(feature, requestId, true);
+      dispatchAdifTimetableFetch(feature, requestId, true);
     }
     function syncDynamicViewportHeight() {
       try {
@@ -11383,6 +12576,18 @@
         adifTimetableState.screen = btn.dataset.adifScreen === "arrivals" ? "arrivals" : "departures";
         renderAdifTimetableModal();
       }
+      if (e.target.closest(".adif-source-btn")) {
+        const btn = e.target.closest(".adif-source-btn");
+        const newSource = btn.dataset.adifSource || "auto";
+        if (newSource !== adifTimetableState.dataSource) {
+          adifTimetableState.dataSource = newSource;
+          if (adifTimetableState.stationCode) {
+            refreshAdifTimetable();
+          } else {
+            renderAdifTimetableModal();
+          }
+        }
+      }
     });
 
     document.addEventListener("change", function(e) {
@@ -11429,7 +12634,7 @@
     let vectorCercaniasTrenesSource = new ol.source.Vector;
     let clusterCercaniasSource = new ol.source.Cluster({ distance: 63, source: vectorCercaniasTrenesSource });
 
-    function normalizeStationName(v) { return String(v || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/gi, "").toLowerCase() }
+    function normalizeStationName(v) { return String(v || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/['`\u2019]/g, "").replace(/[^a-z0-9]/gi, "").toLowerCase() }
     function normalizeStationCode(v) {
       const s = String(v ?? "").trim();
       if (!s) return "";
