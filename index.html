@@ -13651,8 +13651,8 @@
       let diffMins = targetMinutes - nowMinutes;
       if (diffMins < -720) diffMins += 1440;
       else if (diffMins > 720) diffMins -= 1440;
-      if (!state?.blinkHoldMap || !rowKey) return diffMins >= 0 && diffMins <= 5;
-      if (diffMins > 5) {
+      if (!state?.blinkHoldMap || !rowKey) return diffMins >= 0 && diffMins <= 3;
+      if (diffMins > 3) {
         state.blinkHoldMap.set(rowKey, false);
         return false;
       }
