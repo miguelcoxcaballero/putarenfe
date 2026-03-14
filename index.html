@@ -1200,8 +1200,12 @@
       width: 100%;
       height: 100%;
       min-height: 100%;
-      overflow: auto;
-      overscroll-behavior: contain;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: none;
+      touch-action: auto;
+      -webkit-overflow-scrolling: touch;
+      will-change: scroll-position;
     }
     .adif-canvas-stage.arrivals {
       background: #d6ecd8;
@@ -8480,6 +8484,7 @@
     const ADIF_API_FAST_DEADLINE_MS = 3800;
     const ADIF_API_FAST_TARGET_ROWS = 40;
     const ADIF_HUB_RS = String.fromCharCode(30);
+    const ADIF_TIMETABLE_STALE_GRACE_MINUTES = 2;
     const CERCANIAS_DIRECTO_WS_URL = "wss://cercaniasdirecto.com/ws";
     const CERCANIAS_DIRECTO_MAX_ARRIVAL_QUERIES = 12;
     const CERCANIAS_DIRECTO_ARRIVAL_TIMEOUT_MS = 4500;
@@ -9558,6 +9563,57 @@
         proximasLlegadas: normalizeList(llegadas)
       };
     }
+    function parseTimetableClockToTimestamp(label, nowDate = new Date()) {
+      const text = String(label || "").trim();
+      const match = text.match(/^(\d{2}):(\d{2})$/);
+      if (!match) return NaN;
+      const date = new Date(nowDate);
+      date.setSeconds(0, 0);
+      date.setHours(parseInt(match[1], 10), parseInt(match[2], 10), 0, 0);
+      const delta = date.getTime() - nowDate.getTime();
+      if (delta < -6 * 60 * 60 * 1000) date.setDate(date.getDate() + 1);
+      else if (delta > 18 * 60 * 60 * 1000) date.setDate(date.getDate() - 1);
+      return date.getTime();
+    }
+    function getTimetableRowFreshnessTimestamp(row, nowDate = new Date()) {
+      const sortTs = Number(row?._sort);
+      if (Number.isFinite(sortTs)) return sortTs;
+      const estimatedTs = parseTimetableClockToTimestamp(row?.horaEstado, nowDate);
+      if (Number.isFinite(estimatedTs)) return estimatedTs;
+      return parseTimetableClockToTimestamp(row?.hora, nowDate);
+    }
+    function pruneExpiredTimetableRows(rows, nowDate = new Date(), graceMinutes = ADIF_TIMETABLE_STALE_GRACE_MINUTES) {
+      if (!Array.isArray(rows) || !rows.length) return { rows: Array.isArray(rows) ? rows : [], changed: false };
+      const threshold = nowDate.getTime() - (Math.max(0, Number(graceMinutes) || 0) * 60 * 1000);
+      let changed = false;
+      const filtered = rows.filter(row => {
+        if (!row || row.kind === "observation") return true;
+        const ts = getTimetableRowFreshnessTimestamp(row, nowDate);
+        if (!Number.isFinite(ts)) return true;
+        const keep = ts >= threshold;
+        if (!keep) changed = true;
+        return keep;
+      });
+      if (filtered.length !== rows.length) changed = true;
+      return changed ? { rows: filtered, changed: true } : { rows, changed: false };
+    }
+    function pruneExpiredRowsByType(rowsByType, nowDate = new Date(), graceMinutes = ADIF_TIMETABLE_STALE_GRACE_MINUTES) {
+      const salidas = Array.isArray(rowsByType?.proximasSalidas) ? rowsByType.proximasSalidas : [];
+      const llegadas = Array.isArray(rowsByType?.proximasLlegadas) ? rowsByType.proximasLlegadas : [];
+      const prunedSalidas = pruneExpiredTimetableRows(salidas, nowDate, graceMinutes);
+      const prunedLlegadas = pruneExpiredTimetableRows(llegadas, nowDate, graceMinutes);
+      const changed = prunedSalidas.changed || prunedLlegadas.changed;
+      if (!changed && rowsByType && Array.isArray(rowsByType.proximasSalidas) && Array.isArray(rowsByType.proximasLlegadas)) {
+        return { rowsByType, changed: false };
+      }
+      return {
+        rowsByType: {
+          proximasSalidas: prunedSalidas.rows,
+          proximasLlegadas: prunedLlegadas.rows
+        },
+        changed
+      };
+    }
     async function loadAdifTimetableData(feature, forceFresh = false, options = null) {
       const opts = options && typeof options === "object" ? options : {};
       const fastMode = !!opts.fastMode;
@@ -9762,14 +9818,15 @@
       try {
         if (sourceSnapshot === "api") {
           const payload = await loadAdifTimetableData(feature, true, { fastMode: true });
-          if (!payload || !payload.rowsByType || !countAdifRows(payload.rowsByType)) return;
+          if (!payload || !payload.rowsByType) return;
           if (!$(".modal-adif-timetable").is(":visible")) return;
           if (stationSnapshot !== String(adifTimetableState.stationCode || "")) return;
           if (requestSnapshot !== adifTimetableRequestSeq) return;
           if (getAdifTimetableAutoRefreshSource() !== "api") return;
+          const pruned = pruneExpiredRowsByType(payload.rowsByType);
           adifTimetableState.stationCode = String(feature.get("stationCodeRaw") || feature.get("stationCode") || payload?.stationCode || "");
           adifTimetableState.stationName = feature.get("displayName") || adifTimetableState.stationCode || "-";
-          adifTimetableState.rowsByType = payload.rowsByType;
+          adifTimetableState.rowsByType = pruned.rowsByType;
           adifTimetableState.resolvedCode = payload?.stationCode || adifTimetableState.stationCode || "";
           adifTimetableState.loading = false;
           adifTimetableState.loadingPhase = "";
@@ -9793,15 +9850,28 @@
           } catch {
             payload = buildCercaniasLiveMapFallbackPayload(feature, adifTimetableState.meta?.fallbackReason || "manual");
           }
-          if (!payload || !payload.rowsByType || !countAdifRows(payload.rowsByType)) return;
           if (!$(".modal-adif-timetable").is(":visible")) return;
           if (stationSnapshot !== String(adifTimetableState.stationCode || "")) return;
           if (getAdifTimetableAutoRefreshSource() !== "cercanias") return;
           if (requestSnapshot !== adifTimetableRequestSeq) return;
-          applyCercaniasFallbackPayload(feature, payload, adifTimetableState.meta?.fallbackReason || "manual");
+          if (!payload || !payload.rowsByType) {
+            const prunedCurrent = pruneExpiredRowsByType(adifTimetableState.rowsByType);
+            if (prunedCurrent.changed) {
+              adifTimetableState.rowsByType = prunedCurrent.rowsByType;
+              renderAdifTimetableModal();
+            }
+            return;
+          }
+          const prunedPayload = pruneExpiredRowsByType(payload.rowsByType);
+          applyCercaniasFallbackPayload(feature, { ...payload, rowsByType: prunedPayload.rowsByType }, adifTimetableState.meta?.fallbackReason || "manual");
         }
       } catch (error) {
         console.warn("No se pudo actualizar en segundo plano los horarios del modal ADIF.", error);
+        const prunedCurrent = pruneExpiredRowsByType(adifTimetableState.rowsByType);
+        if (prunedCurrent.changed) {
+          adifTimetableState.rowsByType = prunedCurrent.rowsByType;
+          renderAdifTimetableModal();
+        }
       } finally {
         adifTimetableAutoRefreshInFlight = false;
       }
@@ -10872,7 +10942,7 @@
       const getTimeBucket = row => {
         const sort = Number(row?._sort);
         if (Number.isFinite(sort)) return Math.round(sort / 60000);
-        const label = String(row?.horaEstado || row?.hora || "").trim();
+        const label = String(row?.hora || "").trim();
         const match = label.match(/^(\d{2}):(\d{2})$/);
         if (!match) return "";
         return (parseInt(match[1], 10) * 60) + parseInt(match[2], 10);
@@ -10941,8 +11011,16 @@
         const timeBucket = getTimeBucket(row);
         const stopsKey = sanitizeStationDisplayList(row?.paradas || []).map(normalizeStationName).slice(0, 4).join(",");
         const key = direction === "arrival"
-          ? (trainDigits ? `arr-tr|${trainDigits}|${lineKey}|${timeBucket}` : (identityKey ? `arr-id|${identityKey}|${timeBucket}` : `arr-fb|${lineKey}|${timeBucket}|${viaKey}|${stopsKey}`))
-          : (identityKey ? `dep-id|${identityKey}|${timeBucket}|${stationKey}|${viaKey}` : (trainDigits ? `dep-tr|${trainDigits}|${lineKey}|${timeBucket}|${stationKey}|${viaKey}` : `dep-fb|${lineKey}|${timeBucket}|${stationKey}|${viaKey}|${stopsKey}`));
+          ? (identityKey
+            ? `arr-id|${identityKey}|${timeBucket}|${stationKey}|${viaKey}`
+            : (trainDigits
+              ? `arr-tr|${trainDigits}|${lineKey}|${timeBucket}|${stationKey}|${viaKey}|${stopsKey}`
+              : `arr-fb|${lineKey}|${timeBucket}|${stationKey}|${viaKey}|${stopsKey}`))
+          : (identityKey
+            ? `dep-id|${identityKey}|${timeBucket}|${stationKey}|${viaKey}`
+            : (trainDigits
+              ? `dep-tr|${trainDigits}|${lineKey}|${timeBucket}|${stationKey}|${viaKey}|${stopsKey}`
+              : `dep-fb|${lineKey}|${timeBucket}|${stationKey}|${viaKey}|${stopsKey}`));
         const existingIndex = seen.get(key);
         if (existingIndex != null) {
           mergeRows(out[existingIndex], row, direction);
@@ -13998,14 +14076,14 @@
           ctx.textAlign = "left";
           if (/^Regional Expr\./i.test(serviceRaw)) {
             ctx.font = "500 13px Roboto, sans-serif";
-            ctx.fillText("Regional", serviceX, 18);
-            ctx.fillText("Express", serviceX, 31);
+            ctx.fillText("Regional", serviceX, 19);
+            ctx.fillText("Express", serviceX, 32);
           } else {
             const rodaliesServiceText = /^Regional/i.test(serviceRaw)
               ? "Regional"
               : "Rodalia";
             ctx.font = "500 14px Roboto, sans-serif";
-            ctx.fillText(rodaliesServiceText, serviceX, 25);
+            ctx.fillText(rodaliesServiceText, serviceX, 26);
           }
         } else {
           ctx.textAlign = "left";
@@ -14095,7 +14173,8 @@
       const colors = ADIF_CANVAS_COLORS[screen];
       const minVisualRows = screen === "arrivals" ? 8 : 1;
       const visualRows = Math.max(rows.length, minVisualRows);
-      const lowPowerMode = rows.length > 600;
+      const interactionLowPower = Number(state.interactionBoostUntil || 0) > timestamp;
+      const lowPowerMode = rows.length > 600 || interactionLowPower;
       const logicalHeight = ADIF_CANVAS_HEADER_HEIGHT + (visualRows * ADIF_CANVAS_ROW_HEIGHT);
       const nativeDpr = window.devicePixelRatio || 1;
       const dpr = Math.min(nativeDpr, rows.length > 90 ? 1.2 : 1.5);
@@ -14109,16 +14188,12 @@
         maxViewportTop
       );
       const viewportBottom = Math.min(logicalHeight, viewportTop + viewportHeight);
-      const bufferPx = Math.max(ADIF_CANVAS_ROW_HEIGHT * 12, Math.floor(viewportHeight * 1.15));
+      const bufferPx = Math.max(ADIF_CANVAS_ROW_HEIGHT * 4, Math.floor(viewportHeight * 0.28));
       const clearTop = Math.max(0, viewportTop - bufferPx);
       const clearBottom = Math.min(logicalHeight, viewportBottom + bufferPx);
       const targetWidth = Math.round(ADIF_CANVAS_BASE_WIDTH * dpr);
-      const renderWindow = viewportHeight + 2 * bufferPx;
-      const useVirtualCanvas = logicalHeight > renderWindow * 1.3;
-      const canvasLogicalHeight = useVirtualCanvas
-        ? Math.max(ADIF_CANVAS_HEADER_HEIGHT + ADIF_CANVAS_ROW_HEIGHT, renderWindow)
-        : logicalHeight;
-      const targetHeight = Math.round(Math.max(ADIF_CANVAS_HEADER_HEIGHT + ADIF_CANVAS_ROW_HEIGHT, canvasLogicalHeight) * dpr);
+      const canvasLogicalHeight = Math.max(ADIF_CANVAS_HEADER_HEIGHT + ADIF_CANVAS_ROW_HEIGHT, viewportHeight);
+      const targetHeight = Math.round(canvasLogicalHeight * dpr);
       if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
         canvas.width = targetWidth;
         canvas.height = targetHeight;
@@ -14128,12 +14203,15 @@
       if (!ctx) return;
       state.ctx = ctx;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (useVirtualCanvas) ctx.translate(0, -clearTop);
+      canvas.style.height = `${Math.max(1, Math.round(Number(state.cssViewportHeight) || 0))}px`;
+      ctx.clearRect(0, 0, ADIF_CANVAS_BASE_WIDTH, canvasLogicalHeight);
       ctx.fillStyle = screen === "arrivals" ? colors.rowOdd : colors.rowEven;
-      ctx.fillRect(0, clearTop, ADIF_CANVAS_BASE_WIDTH, Math.max(0, clearBottom - clearTop));
+      ctx.fillRect(0, 0, ADIF_CANVAS_BASE_WIDTH, canvasLogicalHeight);
+      ctx.save();
+      ctx.translate(0, -viewportTop);
 
       const nowDate = new Date();
-      if (clearTop < ADIF_CANVAS_HEADER_HEIGHT) {
+      if (viewportTop < ADIF_CANVAS_HEADER_HEIGHT) {
         const headerBuffer = getAdifCanvasHeaderStaticBuffer(state, colors);
         if (headerBuffer) ctx.drawImage(headerBuffer, 0, 0);
         const clock = getAdifBoardClockParts(nowDate);
@@ -14349,6 +14427,7 @@
           if (!activeBlinkKeys.has(key)) state.blinkHoldMap.delete(key);
         });
       }
+      ctx.restore();
     }
     function mountAdifBoardCanvas(rows, screen) {
       const canvas = document.getElementById("adifCanvasBoard");
@@ -14356,34 +14435,33 @@
       const stage = canvas.closest(".adif-canvas-stage");
       const modal = document.querySelector(".modal-adif-timetable");
       const mappedRows = (rows || []).filter(row => row?.kind !== "observation").map(mapAdifRowToCanvasData);
+      const minVisualRows = screen === "arrivals" ? 8 : 1;
+      const visualRows = Math.max(mappedRows.length, minVisualRows);
+      const totalLogicalH = ADIF_CANVAS_HEADER_HEIGHT + visualRows * ADIF_CANVAS_ROW_HEIGHT;
       const state = {
         rows: mappedRows,
         screen: screen === "arrivals" ? "arrivals" : "departures",
         stationName: sanitizeStationDisplayName(adifTimetableState.stationName || adifTimetableState.stationCode || "-"),
         viewportTop: 0,
         viewportHeight: 0,
+        cssViewportHeight: 0,
+        interactionBoostUntil: 0,
+        scrollDrawPending: false,
         blinkHoldMap: new Map(),
         ctx: null
-      };
-      const isModalVisibleRaw = () => {
-        if (!modal || !modal.isConnected) return false;
-        const style = window.getComputedStyle(modal);
-        if (!style || style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return false;
-        return modal.getClientRects().length > 0;
-      };
-      let _modalVisibleCached = true;
-      let _modalVisibleCacheTs = 0;
-      const isModalVisible = () => {
-        const now = performance.now();
-        if (now - _modalVisibleCacheTs > 300) { _modalVisibleCacheTs = now; _modalVisibleCached = isModalVisibleRaw(); }
-        return _modalVisibleCached;
       };
       const refreshViewport = () => {
         if (!stage) { state.viewportTop = 0; state.viewportHeight = 0; return; }
         const stageW = stage.clientWidth || 1;
         const scale = ADIF_CANVAS_BASE_WIDTH / stageW;
+        const rawViewportHeight = Math.round((stage.clientHeight || 0) * scale);
+        const maxViewportTop = Math.max(0, totalLogicalH - rawViewportHeight);
+        const maxStageScrollTop = Math.max(0, Math.floor(maxViewportTop / Math.max(scale, 0.0001)));
+        if (stage.scrollTop < 0) stage.scrollTop = 0;
+        if (stage.scrollTop > maxStageScrollTop) stage.scrollTop = maxStageScrollTop;
         state.viewportTop = Math.round((stage.scrollTop || 0) * scale);
-        state.viewportHeight = Math.round((stage.clientHeight || 0) * scale);
+        state.viewportHeight = rawViewportHeight;
+        state.cssViewportHeight = stage.clientHeight || 0;
       };
       let _scrollDirty = false;
       const drawNow = (ts = performance.now()) => {
@@ -14399,10 +14477,6 @@
           stopAdifBoardCanvas();
           return;
         }
-        if (!isModalVisible()) {
-          adifBoardCanvasTimer = setTimeout(() => { adifBoardCanvasTimer = requestAnimationFrame(renderFrame); }, 500);
-          return;
-        }
         const ts = timestamp || performance.now();
         if (_scrollDirty || !lastFrameTs || (ts - lastFrameTs) >= 15) {
           lastFrameTs = ts;
@@ -14413,13 +14487,13 @@
       const setupVirtualCanvas = () => {
         const container = canvas.closest(".adif-canvas-container");
         if (!container || !stage) return;
-        const totalLogicalH = ADIF_CANVAS_HEADER_HEIGHT + mappedRows.length * ADIF_CANVAS_ROW_HEIGHT;
         const cssScale = stage.clientWidth / ADIF_CANVAS_BASE_WIDTH;
         if (cssScale > 0 && mappedRows.length > 15) {
           container.style.height = Math.ceil(totalLogicalH * cssScale) + 'px';
           container.style.position = 'relative';
           canvas.style.position = 'sticky';
           canvas.style.top = '0';
+          canvas.style.left = '0';
         }
       };
       const start = () => {
@@ -14430,10 +14504,41 @@
         adifBoardCanvasTimer = requestAnimationFrame(renderFrame);
       };
       if (stage) {
-        const onStageScroll = () => { _scrollDirty = true; };
+        const clampStageScroll = () => {
+          const maxScroll = Math.max(0, (stage.scrollHeight || 0) - (stage.clientHeight || 0));
+          const nextTop = Math.max(0, Math.min(stage.scrollTop || 0, maxScroll));
+          if (nextTop !== (stage.scrollTop || 0)) stage.scrollTop = nextTop;
+        };
+        const scheduleImmediateDraw = () => {
+          if (state.scrollDrawPending) return;
+          state.scrollDrawPending = true;
+          requestAnimationFrame((ts) => {
+            state.scrollDrawPending = false;
+            drawNow(ts || performance.now());
+          });
+        };
+        const onStageScroll = () => {
+          clampStageScroll();
+          state.interactionBoostUntil = performance.now() + 240;
+          _scrollDirty = true;
+          scheduleImmediateDraw();
+        };
+        const onWheel = (event) => {
+          const deltaY = Number(event.deltaY) || 0;
+          if (!deltaY) return;
+          const maxScroll = Math.max(0, (stage.scrollHeight || 0) - (stage.clientHeight || 0));
+          const currentTop = stage.scrollTop || 0;
+          if ((deltaY < 0 && currentTop <= 0) || (deltaY > 0 && currentTop >= (maxScroll - 1))) {
+            event.preventDefault();
+            return;
+          }
+          state.interactionBoostUntil = performance.now() + 260;
+        };
         stage.addEventListener("scroll", onStageScroll, { passive: true });
+        stage.addEventListener("wheel", onWheel, { passive: false });
         adifBoardCanvasCleanup = () => {
           try { stage.removeEventListener("scroll", onStageScroll) } catch { }
+          try { stage.removeEventListener("wheel", onWheel) } catch { }
         };
       }
       start();
@@ -14454,6 +14559,8 @@
         stopAdifTimetableAutoRefresh();
         return;
       }
+      const prunedRows = pruneExpiredRowsByType(adifTimetableState.rowsByType);
+      if (prunedRows.changed) adifTimetableState.rowsByType = prunedRows.rowsByType;
       body.querySelectorAll?.(".adif-gravita-container iframe").forEach(iframe => {
         if (!iframe?.dataset?.localBlobUrl) return;
         try { URL.revokeObjectURL(iframe.dataset.localBlobUrl) } catch { }
