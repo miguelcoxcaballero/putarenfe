@@ -13729,13 +13729,22 @@
       let diffMins = targetMinutes - nowMinutes;
       if (diffMins < -720) diffMins += 1440;
       else if (diffMins > 720) diffMins -= 1440;
-      if (!state?.blinkHoldMap || !rowKey) return diffMins >= 0 && diffMins <= 3;
-      if (diffMins > 3) {
+      const holdGraceMins = Math.max(1, Math.min(3, Number(ADIF_TIMETABLE_STALE_GRACE_MINUTES) || 2));
+      const isActiveWindow = diffMins >= 0 && diffMins <= 3;
+      if (!state?.blinkHoldMap || !rowKey) return isActiveWindow;
+      const wasBlinking = state.blinkHoldMap.get(rowKey) === true;
+      if (isActiveWindow) {
+        state.blinkHoldMap.set(rowKey, true);
+        return true;
+      }
+      if (wasBlinking && diffMins < 0 && diffMins >= -holdGraceMins) {
+        return true;
+      }
+      if (diffMins > 3 || diffMins < -holdGraceMins) {
         state.blinkHoldMap.set(rowKey, false);
         return false;
       }
-      state.blinkHoldMap.set(rowKey, true);
-      return true;
+      return false;
     }
     function getAdifBoardClockParts(date = new Date()) {
       return {
@@ -14124,13 +14133,13 @@
         ctx.fillText(data.train || "-", 880, upperBaseline);
         const trackLabel = String(data.track || "").trim();
         if (isAdifCanvasBusTrack(trackLabel)) {
-          ctx.font = "500 41px Roboto, sans-serif";
+          ctx.font = "500 31px Roboto, sans-serif";
           const busText = trackLabel.toUpperCase();
           ctx.fillStyle = colors.textWhite;
           ctx.fillText(busText, 980, upperBaseline);
           const busTextWidth = ctx.measureText(busText).width;
           ctx.save();
-          ctx.translate(980 - busTextWidth - 34, upperBaseline - 21);
+          ctx.translate(980 - busTextWidth - 30, upperBaseline - 17);
           ctx.strokeStyle = colors.textWhite;
           ctx.lineWidth = 2;
           ctx.lineJoin = "round";
