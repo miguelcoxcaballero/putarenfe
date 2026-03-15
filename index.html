@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -313,6 +313,345 @@
       font-weight: 700;
       line-height: 1;
       opacity: 0.95;
+    }
+
+    .tag-info.info {
+      background: linear-gradient(135deg, #4e7fd6, #3867c0);
+    }
+
+    .tag-info.warning {
+      background: linear-gradient(135deg, #ffba52, #f59d0c);
+    }
+
+    .text-tag-modal-info,
+    .text-tag-modal-warning {
+      color: #fff;
+    }
+
+    /* ===== POPUP LAYOUT ===== */
+    .popup-sheet {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .popup-sheet-grabber {
+      display: none;
+      width: 38px;
+      height: 4px;
+      margin: 0 auto 0.1rem;
+      border-radius: 999px;
+      background: rgba(107, 29, 59, 0.22);
+    }
+
+    .popup-sheet-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.9rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid rgba(107, 29, 59, 0.08);
+    }
+
+    .popup-sheet-header-main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.34rem;
+    }
+
+    .popup-sheet-title {
+      color: var(--text-main);
+      font-size: clamp(1.28rem, 2vw, 1.95rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      overflow-wrap: anywhere;
+    }
+
+    .popup-sheet-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .popup-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      align-items: flex-start;
+    }
+
+    .popup-route-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      min-width: 0;
+    }
+
+    .popup-route-badges,
+    .popup-lineas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .popup-route-badges .cercanias-line-logo,
+    .popup-lineas .cercanias-line-logo {
+      margin: 0;
+    }
+
+    .popup-route-banner {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-width: 0;
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(107, 29, 59, 0.96), rgba(160, 54, 96, 0.88));
+      box-shadow: 0 14px 30px rgba(107, 29, 59, 0.18);
+    }
+
+    .popup-route-title {
+      color: #fff;
+      font-size: 1.28rem;
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      overflow-wrap: anywhere;
+    }
+
+    .popup-route-title img {
+      width: 18px;
+      height: 18px;
+      margin: 0 0.3rem;
+      vertical-align: -2px;
+      filter: brightness(0) invert(1);
+    }
+
+    .popup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      min-width: 0;
+    }
+
+    .popup-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.28rem;
+      min-width: 0;
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(207, 218, 230, 0.88);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 248, 252, 0.96));
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .popup-card-label,
+    .popup-section-title {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .popup-card-value {
+      color: var(--text-main);
+      font-size: 1.06rem;
+      font-weight: 700;
+      line-height: 1.22;
+      overflow-wrap: anywhere;
+    }
+
+    .popup-card-sub {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .popup-metric-card .popup-card-value {
+      font-size: 1.14rem;
+    }
+
+    .popup-station-address .popup-card-value {
+      font-size: 1rem;
+    }
+
+    .popup-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      min-width: 0;
+    }
+
+    .popup-connections {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      min-width: 0;
+    }
+
+    .popup-connection-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
+    .popup-connection-row img {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+
+    .popup-connections-empty {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    .popup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: stretch;
+    }
+
+    .popup-actions .btntool {
+      flex: 1 1 180px;
+      margin-top: 0;
+    }
+
+    .popup-actions--route {
+      margin-bottom: 0.85rem;
+    }
+
+    .popup-actions--route .btntool {
+      flex: 0 0 auto;
+      min-width: 10.5rem;
+    }
+
+    /* ===== TRAIN TYPE BADGE ===== */
+    .popup-train-type-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.18rem 0.55rem;
+      border-radius: 7px;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+      vertical-align: middle;
+      margin-right: 0.3rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    /* ===== DELAY INDICATORS ===== */
+    .popup-delay-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.22rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .popup-delay-indicator--ontime {
+      background: rgba(34, 197, 94, 0.12);
+      color: #16a34a;
+    }
+    .popup-delay-indicator--slight {
+      background: rgba(245, 158, 11, 0.12);
+      color: #d97706;
+    }
+    .popup-delay-indicator--severe {
+      background: rgba(239, 68, 68, 0.12);
+      color: #dc2626;
+    }
+
+    .popup-metric-delay--ontime .popup-card-value { color: #16a34a; }
+    .popup-metric-delay--slight .popup-card-value { color: #d97706; }
+    .popup-metric-delay--severe .popup-card-value { color: #dc2626; }
+
+    .popup-train-grid {
+      gap: 0.65rem;
+    }
+
+    /* ===== IMPROVED POPUP SECTIONS ===== */
+    .popup-train-sheet .popup-route-block {
+      gap: 0.65rem;
+    }
+
+    .popup-train-sheet .popup-actions .btntool:first-child {
+      background: linear-gradient(135deg, var(--renfe-purple), var(--renfe-purple-light));
+      border-color: var(--renfe-purple);
+      box-shadow: 0 6px 18px rgba(107, 29, 59, 0.2);
+    }
+    .popup-train-sheet .popup-actions .btntool:first-child .text-btntool {
+      color: #fff !important;
+    }
+    .popup-train-sheet .popup-actions .btntool:first-child:hover {
+      box-shadow: 0 8px 24px rgba(107, 29, 59, 0.3);
+      transform: translateY(-2px);
+    }
+    .popup-train-sheet .popup-actions .btntool:first-child img {
+      filter: brightness(0) invert(1);
+    }
+
+    .popup-station-header-accent {
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--renfe-purple), var(--renfe-purple-light), transparent);
+      margin-bottom: 0.3rem;
+    }
+
+    .popup-station-code {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .popup-station-name {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .popup-lineas {
+      padding: 0.5rem 0;
+    }
+
+    .popup-connections-section {
+      padding: 0.7rem 0.85rem;
+      border-radius: var(--radius-sm);
+      background: rgba(245, 248, 252, 0.8);
+      border: 1px solid rgba(207, 218, 230, 0.6);
+    }
+
+    .popup-section-title {
+      margin-bottom: 0.4rem;
     }
 
     /* ===== TABS ===== */
@@ -729,6 +1068,10 @@
     @keyframes adifModalIn {
       from { opacity: 0; transform: scale(0.985); }
       to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes adifModalOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.985); }
     }
 
     /* ===== ADIF FONTS ===== */
@@ -1941,12 +2284,19 @@
       }
 
       .adif-modal-body {
-        padding-top: 0.35rem;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding-top: 0.2rem;
         margin-top: 0;
       }
 
       .adif-modal-body.panel-mode {
-        padding-top: 0.2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding-top: 0.1rem;
+        overflow: hidden;
       }
 
       .adif-board-topbar {
@@ -2040,13 +2390,14 @@
 
       .adif-modal-toolbar {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto auto;
+        grid-template-columns: minmax(0, 1fr) auto;
         grid-template-areas:
-          "source source source"
-          "filter screen lang";
-        align-items: center;
+          "source source"
+          "filter filter"
+          "screen lang";
+        align-items: start;
         column-gap: 0.38rem;
-        row-gap: 0.32rem;
+        row-gap: 0.42rem;
         padding: 0.42rem 0 0.5rem;
         overflow: visible;
       }
@@ -2055,8 +2406,8 @@
       .adif-filter-group,
       .adif-screen-group,
       .adif-language-group {
-        width: auto;
-        flex: 0 0 auto;
+        width: 100%;
+        flex: 1 1 auto;
         min-width: 0;
       }
 
@@ -2074,20 +2425,28 @@
         width: 100%;
         padding: 0.2rem;
         white-space: nowrap;
+        overflow: hidden;
+        scrollbar-width: none;
       }
 
       .adif-filter-group {
         grid-area: filter;
         width: 100%;
+        overflow: hidden;
+        scrollbar-width: none;
       }
 
       .adif-screen-group {
         grid-area: screen;
+        justify-self: stretch;
+        width: 100%;
       }
 
       .adif-language-group {
         grid-area: lang;
         justify-self: end;
+        width: auto;
+        flex: 0 0 auto;
       }
 
       .adif-source-group,
@@ -2097,11 +2456,21 @@
         white-space: nowrap;
       }
 
+      .adif-source-group::-webkit-scrollbar,
+      .adif-filter-group::-webkit-scrollbar {
+        display: none;
+      }
+
+      .adif-source-btn,
       .adif-filter-btn,
       .adif-screen-btn {
-        flex: 1 1 auto;
+        flex: 1 1 0;
+      }
+
+      .adif-filter-btn,
+      .adif-screen-btn {
         min-width: 0;
-        padding: 0.34rem 0.44rem;
+        padding: 0.36rem 0.42rem;
         font-size: 0.72rem;
       }
 
@@ -2150,6 +2519,7 @@
       }
 
       .adif-gravita-stage {
+        flex: 1 1 auto;
         align-items: flex-start;
         overflow-y: auto;
         overflow-x: hidden;
@@ -2294,15 +2664,15 @@
       background: var(--surface);
       backdrop-filter: blur(40px) saturate(200%);
       -webkit-backdrop-filter: blur(40px) saturate(200%);
-      width: min(96vw, 640px);
+      width: min(calc(100vw - 0.75rem), 42rem);
       border-radius: var(--radius-lg);
       left: 0;
       right: 0;
-      bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+      bottom: calc(0.35rem + env(safe-area-inset-bottom, 0px));
       position: fixed;
       z-index: 1200;
-      padding: 1.5rem 1.5rem 2.5rem;
-      max-height: calc(var(--app-vh, 100dvh) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 1rem);
+      padding: 0.8rem 0.95rem calc(1rem + env(safe-area-inset-bottom, 0px));
+      max-height: calc(var(--app-vh, 100dvh) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 0.5rem);
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
@@ -2315,15 +2685,15 @@
       background: var(--surface);
       backdrop-filter: blur(40px) saturate(200%);
       -webkit-backdrop-filter: blur(40px) saturate(200%);
-      width: min(96vw, 640px);
+      width: min(calc(100vw - 0.75rem), 42rem);
       border-radius: var(--radius-lg);
       left: 0;
       right: 0;
-      bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+      bottom: calc(0.35rem + env(safe-area-inset-bottom, 0px));
       position: fixed;
       z-index: 1200;
-      padding: 1.5rem 1.5rem 2.5rem;
-      max-height: calc(var(--app-vh, 100dvh) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 1rem);
+      padding: 0.8rem 0.95rem calc(1rem + env(safe-area-inset-bottom, 0px));
+      max-height: calc(var(--app-vh, 100dvh) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 0.5rem);
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
@@ -2426,14 +2796,67 @@
 
       .modal-info-movil,
       .modal-info-train-movil {
-        width: min(96vw, 640px);
-        max-height: calc(var(--app-vh, 100dvh) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 1rem);
-        padding: 1rem 1rem calc(1.4rem + env(safe-area-inset-bottom, 0px));
+        width: min(calc(100vw - 0.75rem), 42rem);
+        max-height: calc(var(--app-vh, 100dvh) - 0.5rem);
+        padding: 0.7rem 0.85rem calc(1rem + env(safe-area-inset-bottom, 0px));
       }
 
       .modal-info-movil [style*="max-height:40vh"],
       .modal-info-train-movil [style*="max-height:40vh"] {
         max-height: none !important;
+      }
+
+      .modal-info-movil .section-header-modal-station,
+      .modal-info-train-movil .section-header-modal {
+        position: sticky;
+        top: -0.2rem;
+        z-index: 3;
+        background: linear-gradient(180deg, rgba(250, 247, 249, 0.98) 0%, rgba(250, 247, 249, 0.95) 88%, rgba(250, 247, 249, 0) 100%);
+        padding-top: 0.1rem;
+      }
+
+      .popup-sheet-grabber {
+        display: block;
+      }
+
+      .popup-sheet {
+        gap: 0.85rem;
+      }
+
+      .popup-sheet-header {
+        gap: 0.7rem;
+        padding-bottom: 0.7rem;
+      }
+
+      .popup-sheet-title {
+        font-size: clamp(1.12rem, 5vw, 1.5rem);
+      }
+
+      .popup-route-title {
+        font-size: 1.04rem;
+      }
+
+      .popup-route-banner,
+      .popup-card {
+        border-radius: 16px;
+        padding: 0.82rem 0.85rem;
+      }
+
+      .popup-grid {
+        grid-template-columns: 1fr;
+        gap: 0.68rem;
+      }
+
+      .popup-actions {
+        gap: 0.55rem;
+      }
+
+      .popup-actions .btntool {
+        flex-basis: 100%;
+      }
+
+      .popup-connection-row {
+        font-size: 0.9rem;
       }
 
       .tabs-modal-tren {
@@ -2740,6 +3163,133 @@
       box-shadow: var(--shadow-sm);
     }
 
+    .timeline-summary {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+      padding: 0.9rem 1rem;
+      background: linear-gradient(135deg, #f7edf1, #ffffff);
+      border: 1px solid rgba(107, 29, 59, 0.12);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .timeline-summary-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .timeline-summary-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .timeline-stop-card {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.55rem;
+    }
+
+    .timeline-stop-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .timeline-stop-state {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 6.3rem;
+      padding: 0.24rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: #eef0f5;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .timeline-stop-state--past {
+      background: #ececec;
+      color: #6c6c6c;
+    }
+
+    .timeline-stop-state--current {
+      background: rgba(107, 29, 59, 0.12);
+      color: var(--renfe-purple);
+    }
+
+    .timeline-stop-state--next {
+      background: rgba(18, 88, 171, 0.12);
+      color: #1258ab;
+    }
+
+    .timeline-stop-times {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .timeline-stop-time {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+
+    .timeline-stop-time-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .timeline-stop-time-value {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .timeline-stop-time-value--delayed {
+      color: #dc2626;
+      font-weight: 700;
+    }
+
+    .timeline-scroll {
+      max-height: calc(100vh - 16rem);
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    @media (max-width: 767px) {
+      .timeline-stop-head {
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+
+      .timeline-stop-state {
+        min-width: 0;
+        align-self: flex-start;
+      }
+
+      .timeline-stop-times {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-scroll {
+        max-height: calc(100vh - 13.5rem);
+        padding-right: 4px;
+      }
+    }
+
     .station-name {
       font-weight: 600;
       color: var(--text-main);
@@ -2789,10 +3339,326 @@
     }
 
 
+
+    /* ===== MODAL BACKDROP ===== */
+    .modal-backdrop-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(6px) saturate(140%);
+      -webkit-backdrop-filter: blur(6px) saturate(140%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .modal-backdrop-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ===== ENHANCED MODAL ANIMATIONS ===== */
+    @keyframes modalSlideOut {
+      from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      to   { opacity: 0; transform: translate(-50%, -48%) scale(0.97); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(30px); }
+    }
+
+    @keyframes slideUpSmooth {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes toastSlideIn {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    @keyframes toastSlideOut {
+      from { opacity: 1; transform: translate(-50%, 0); }
+      to   { opacity: 0; transform: translate(-50%, 20px); }
+    }
+
+    @keyframes slideInRightSmooth {
+      from { transform: translateX(100%); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOutRight {
+      from { transform: translateX(0); opacity: 1; }
+      to   { transform: translateX(100%); opacity: 0; }
+    }
+
+    .modal-closing {
+      animation: modalSlideOut 0.25s cubic-bezier(0.4, 0, 0.6, 1) forwards !important;
+    }
+
+    .adif-modal-closing {
+      animation: adifModalOut 0.2s cubic-bezier(0.4, 0, 0.6, 1) forwards !important;
+    }
+
+    .mobile-modal-closing {
+      animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.6, 1) forwards !important;
+    }
+
+    .side-panel-closing {
+      animation: slideOutRight 0.25s cubic-bezier(0.4, 0, 0.6, 1) forwards !important;
+    }
+
+    /* ===== ENHANCED DESKTOP MODAL ===== */
+    .modal-info {
+      z-index: 1200;
+      padding: 1.75rem 2rem;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 32px 64px rgba(15, 23, 42, 0.18), 0 12px 24px rgba(15, 23, 42, 0.08);
+      animation: modalSlideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-info .section-header-modal,
+    .modal-info .section-header-modal-station {
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(107, 29, 59, 0.08);
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-info .title-menu {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-info .name-line-train-modal {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .modal-info .section-footer-modal,
+    .modal-info .section-footer-modal-station {
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .modal-info .section-footer-modal span,
+    .modal-info .section-footer-modal-station span {
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+    }
+
+    .modal-info .section-footer-modal b,
+    .modal-info .section-footer-modal-station b {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .modal-info .btntool {
+      margin-top: 0;
+    }
+
+    .modal-info .d-flex.mt-4.justify-content-end {
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .modal-info .correspondencias {
+      padding-top: 0.5rem;
+    }
+
+    .modal-info .separator-tag-modal-station {
+      margin: 0.5rem 0;
+    }
+
+    /* ===== ENHANCED MOBILE BOTTOM SHEETS ===== */
+    .modal-info-movil,
+    .modal-info-train-movil {
+      z-index: 1200;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      padding: 0.5rem 0.95rem calc(1rem + env(safe-area-inset-bottom, 0px));
+      box-shadow: 0 -16px 48px rgba(15, 23, 42, 0.2), 0 -4px 16px rgba(15, 23, 42, 0.08);
+      animation: slideUpSmooth 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* ===== ENHANCED SIDE PANELS ===== */
+    .modal-leyend,
+    .modal-station,
+    .modal-timeline {
+      animation: slideInRightSmooth 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: -16px 0 48px rgba(15, 23, 42, 0.12), -4px 0 16px rgba(15, 23, 42, 0.06);
+    }
+
+    .section-header-leyenda,
+    .section-header-station,
+    .section-header-timeline {
+      padding: 1.25rem 1rem 0.75rem;
+      height: auto;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-leyenda,
+    .section-timeline {
+      position: relative;
+    }
+
+    /* Scroll fade mask for side panels */
+    .modal-leyend .section-leyenda::after,
+    .modal-timeline .section-timeline::after {
+      content: '';
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 32px;
+      background: linear-gradient(to top, var(--surface) 0%, transparent 100%);
+      pointer-events: none;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    /* ===== ENHANCED TOAST ===== */
+    #customToast.show {
+      animation: toastSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #customToast.toast-hiding {
+      animation: toastSlideOut 0.3s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+    }
+
+    /* ===== ENHANCED OFFCANVAS ===== */
+    .offcanvas {
+      border-left: 1px solid var(--border-color) !important;
+      box-shadow: -16px 0 48px rgba(15, 23, 42, 0.1) !important;
+    }
+
+    .offcanvas-backdrop {
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .offcanvas-body .menu-section {
+      padding: 0.25rem 0;
+    }
+
+    .offcanvas-body .menu-section > span:first-child {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .offcanvas-body .menu-section > span:first-child::before {
+      content: '';
+      width: 3px;
+      height: 1.1em;
+      background: var(--renfe-purple);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ===== MICRO-INTERACTIONS ===== */
+    .btntool:active,
+    .button-info:active,
+    .button-close-modal:active,
+    .button-close-movil:active {
+      transform: scale(0.95) !important;
+      transition: transform 0.1s ease !important;
+    }
+
+    .station-trains-cta:active {
+      transform: translateY(0) scale(0.98) !important;
+      transition: transform 0.1s ease !important;
+    }
+
+    .tag-info {
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .tag-info:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .form-switch .form-check-input {
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .form-switch .form-check-input:active {
+      transform: scaleX(1.1);
+    }
+
+    /* ===== ENHANCED NAVIGATION PANEL ===== */
+    .navigation-menu-movil {
+      animation: slideUpSmooth 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @media(max-width:768px) {
+      .modal-info-movil,
+      .modal-info-train-movil {
+        border-radius: 28px 28px 0 0;
+        max-height: calc(var(--app-vh, 100dvh) - 0.5rem);
+      }
+
+      .modal-leyend,
+      .modal-station,
+      .modal-timeline {
+        animation: slideInRightSmooth 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .navigation-menu-movil {
+        padding: 16px 14px;
+      }
+
+      .btntool {
+        padding: 12px 16px;
+      }
+
+      .modal-adif-timetable {
+        z-index: 10020;
+      }
+    }
+
+    /* ===== SMOOTH SCROLL ===== */
+    .section-leyenda,
+    .section-timeline,
+    .modal-info-movil,
+    .modal-info-train-movil {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ===== SKELETON SHIMMER ===== */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .loading-shimmer {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease infinite;
+      border-radius: var(--radius-sm);
+    }
+
   </style>
 </head>
 
 <body>
+  <div class="modal-backdrop-overlay" id="modalBackdrop"></div>
   <svg id="renfe-brand-symbols" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
     <g id="renfe-brand-mark">
       <g transform="translate(0,1440) scale(0.1,-0.1)" fill="currentColor" stroke="none">
@@ -5014,3251 +5880,7 @@
 </script>
 
   <script id="embeddedCercaniasTrainsJson" type="application/json">
-{
-  "fechaActualizacion": "2026-03-10T20:05:44",
-  "trenes": [
-    {
-      "tripId": "3065M23657C4",
-      "codTren": "23657",
-      "codLinea": "C4",
-      "retrasoMin": "3",
-      "codEstAct": "51009",
-      "codEstSig": "51009",
-      "horaLlegadaSigEst": "2026-03-10T20:06:08",
-      "codEstDest": "51003",
-      "codEstOrig": "51003",
-      "porAvanc": "A",
-      "latitud": 37.4036,
-      "longitud": -5.936382,
-      "nucleo": "30",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "3065M23735C5",
-      "codTren": "23735",
-      "codLinea": "C5",
-      "retrasoMin": "13",
-      "codEstAct": "43027",
-      "codEstSig": "43027",
-      "horaLlegadaSigEst": "2026-03-10T20:07:06",
-      "codEstDest": "51103",
-      "codEstOrig": "43005",
-      "porAvanc": "A",
-      "latitud": 37.410107,
-      "longitud": -6.0990853,
-      "nucleo": "30",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "3065M23562C1",
-      "codTren": "23562",
-      "codLinea": "C1",
-      "retrasoMin": "31",
-      "codEstAct": "51103",
-      "codEstSig": "51103",
-      "horaLlegadaSigEst": "2026-03-10T20:07:11",
-      "codEstDest": "51200",
-      "codEstOrig": "50600",
-      "porAvanc": "A",
-      "latitud": 37.2873,
-      "longitud": -5.9234986,
-      "nucleo": "30",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "3065M23564C1",
-      "codTren": "23564",
-      "codLinea": "C1",
-      "retrasoMin": "13",
-      "codEstAct": "51100",
-      "codEstSig": "51100",
-      "horaLlegadaSigEst": "2026-03-10T20:06:07",
-      "codEstDest": "51200",
-      "codEstOrig": "50600",
-      "porAvanc": "A",
-      "latitud": 37.377792,
-      "longitud": -5.9795485,
-      "nucleo": "30",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "3065M23566C1",
-      "codTren": "23566",
-      "codLinea": "C1",
-      "retrasoMin": "10",
-      "codEstAct": "50702",
-      "codEstSig": "50702",
-      "horaLlegadaSigEst": "2026-03-10T20:08:17",
-      "codEstDest": "51203",
-      "codEstOrig": "50600",
-      "porAvanc": "A",
-      "latitud": 37.54619,
-      "longitud": -5.8666563,
-      "nucleo": "30",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "3065M23567C1",
-      "codTren": "23567",
-      "codLinea": "C1",
-      "retrasoMin": "5",
-      "codEstAct": "50702",
-      "codEstSig": "50702",
-      "horaLlegadaSigEst": "2026-03-10T20:07:38",
-      "codEstDest": "50600",
-      "codEstOrig": "51200",
-      "porAvanc": "A",
-      "latitud": 37.54619,
-      "longitud": -5.8666563,
-      "nucleo": "30",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "3265M23385C1",
-      "codTren": "23385",
-      "codLinea": "C1",
-      "retrasoMin": "2",
-      "codEstAct": "54512",
-      "codEstSig": "54512",
-      "horaLlegadaSigEst": "2026-03-10T20:05:44",
-      "codEstDest": "54516",
-      "codEstOrig": "54517",
-      "porAvanc": "A",
-      "latitud": 36.582317,
-      "longitud": -4.5670233,
-      "nucleo": "32",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "3265M23389C1",
-      "codTren": "23389",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "54517",
-      "codEstSig": "54517",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "54516",
-      "codEstOrig": "54517",
-      "porAvanc": "A",
-      "latitud": 36.715366,
-      "longitud": -4.4266005,
-      "nucleo": "32",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "3265M23380C1",
-      "codTren": "23380",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "54508",
-      "codEstSig": "54508",
-      "horaLlegadaSigEst": "2026-03-10T20:06:28",
-      "codEstDest": "54517",
-      "codEstOrig": "54516",
-      "porAvanc": "A",
-      "latitud": 36.642017,
-      "longitud": -4.4926896,
-      "nucleo": "32",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "3265M23173C2",
-      "codTren": "23173",
-      "codLinea": "C2",
-      "retrasoMin": "4",
-      "codEstAct": "54408",
-      "codEstSig": "54407",
-      "horaLlegadaSigEst": "2026-03-10T20:09:21",
-      "codEstDest": "54405",
-      "codEstOrig": "54517",
-      "porAvanc": "10.0",
-      "latitud": 36.73218,
-      "longitud": -4.6140356,
-      "nucleo": "32",
-      "accesible": false,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "3265M23384C1",
-      "codTren": "23384",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "54516",
-      "codEstSig": "54516",
-      "horaLlegadaSigEst": "2026-03-10T20:20:00",
-      "codEstDest": "54517",
-      "codEstOrig": "54516",
-      "porAvanc": "A",
-      "latitud": 36.541843,
-      "longitud": -4.6237864,
-      "nucleo": "32",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "4065M76642C3",
-      "codTren": "76642",
-      "codLinea": "C3",
-      "retrasoMin": "1",
-      "codEstAct": "66207",
-      "codEstSig": "66207",
-      "horaLlegadaSigEst": "2026-03-10T20:07:33",
-      "codEstDest": "65002",
-      "codEstOrig": "66206",
-      "porAvanc": "A",
-      "latitud": 39.47113,
-      "longitud": -0.72308433,
-      "nucleo": "40",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "4065M33716C6",
-      "codTren": "14016",
-      "codLinea": "C6",
-      "retrasoMin": "0",
-      "codEstAct": "65000",
-      "codEstSig": "65000",
-      "horaLlegadaSigEst": "2026-03-10T20:15:00",
-      "codEstDest": "65400",
-      "codEstOrig": "65000",
-      "porAvanc": "A",
-      "latitud": 39.465065,
-      "longitud": -0.37811995,
-      "nucleo": "40",
-      "accesible": false,
-      "via": "22",
-      "nextVia": "22"
-    },
-    {
-      "tripId": "4065M24083C2",
-      "codTren": "24083",
-      "codLinea": "C2",
-      "retrasoMin": "2",
-      "codEstAct": "64105",
-      "codEstSig": "64105",
-      "horaLlegadaSigEst": "2026-03-10T20:05:38",
-      "codEstDest": "64006",
-      "codEstOrig": "65000",
-      "porAvanc": "A",
-      "latitud": 39.19323,
-      "longitud": -0.4412666,
-      "nucleo": "40",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "4065M35460C1",
-      "codTren": "35460",
-      "codLinea": "C1",
-      "retrasoMin": "2",
-      "codEstAct": "69107",
-      "codEstSig": "69107",
-      "horaLlegadaSigEst": "2026-03-10T20:07:40",
-      "codEstDest": "65000",
-      "codEstOrig": "69110",
-      "porAvanc": "A",
-      "latitud": 39.02619,
-      "longitud": -0.21494265,
-      "nucleo": "40",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "4065M24086C2",
-      "codTren": "24086",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "64006",
-      "codEstSig": "64006",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "65000",
-      "codEstOrig": "64006",
-      "porAvanc": "A",
-      "latitud": 38.96917,
-      "longitud": -0.5866923,
-      "nucleo": "40",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "3"
-    },
-    {
-      "tripId": "4065M76259C1",
-      "codTren": "76259",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "65000",
-      "codEstSig": "65000",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "69110",
-      "codEstOrig": "65000",
-      "porAvanc": "A",
-      "latitud": 39.46634,
-      "longitud": -0.37753645,
-      "nucleo": "40",
-      "accesible": false,
-      "via": "5",
-      "nextVia": "5"
-    },
-    {
-      "tripId": "5165M35826R4",
-      "codTren": "35826",
-      "codLinea": "R4",
-      "retrasoMin": "51",
-      "codEstAct": "72205",
-      "codEstSig": "72205",
-      "horaLlegadaSigEst": "2026-03-10T20:06:18",
-      "codEstDest": "72207",
-      "codEstOrig": "71600",
-      "porAvanc": "A",
-      "latitud": 41.370678,
-      "longitud": 1.7253983,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "5165M35879R4",
-      "codTren": "35879",
-      "codLinea": "R4",
-      "retrasoMin": "0",
-      "codEstAct": "72207",
-      "codEstSig": "72207",
-      "horaLlegadaSigEst": "2026-03-10T20:20:00",
-      "codEstDest": "71600",
-      "codEstOrig": "72207",
-      "porAvanc": "A",
-      "latitud": 41.41933,
-      "longitud": 1.7952268,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M25554R2S",
-      "codTren": "25554",
-      "codLinea": "R2S",
-      "retrasoMin": "9",
-      "codEstAct": "71701",
-      "codEstSig": "71705",
-      "horaLlegadaSigEst": "2026-03-10T20:21:19",
-      "codEstDest": "79400",
-      "codEstOrig": "71600",
-      "porAvanc": "E",
-      "latitud": 41.23921,
-      "longitud": 1.8097008,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "5165M25553R2S",
-      "codTren": "25553",
-      "codLinea": "R2S",
-      "retrasoMin": "19",
-      "codEstAct": "71604",
-      "codEstSig": "71604",
-      "horaLlegadaSigEst": "2026-03-10T20:08:31",
-      "codEstDest": "71600",
-      "codEstOrig": "79400",
-      "porAvanc": "A",
-      "latitud": 41.20413,
-      "longitud": 1.6760199,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "5165M77126R4",
-      "codTren": "15089",
-      "codLinea": "R4",
-      "retrasoMin": "13",
-      "codEstAct": "78605",
-      "codEstSig": "78605",
-      "horaLlegadaSigEst": "2026-03-10T20:08:07",
-      "codEstDest": "78700",
-      "codEstOrig": "78600",
-      "porAvanc": "A",
-      "latitud": 41.628757,
-      "longitud": 1.8689924,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "5165M25559R2S",
-      "codTren": "25559",
-      "codLinea": "R2S",
-      "retrasoMin": "0",
-      "codEstAct": "79400",
-      "codEstSig": "79400",
-      "horaLlegadaSigEst": "2026-03-10T20:18:00",
-      "codEstDest": "71600",
-      "codEstOrig": "79400",
-      "porAvanc": "A",
-      "latitud": 41.3834,
-      "longitud": 2.1864636,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M28384R2S",
-      "codTren": "28384",
-      "codLinea": "R2S",
-      "retrasoMin": "0",
-      "codEstAct": "71700",
-      "codEstSig": "71700",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "79400",
-      "codEstOrig": "71700",
-      "porAvanc": "A",
-      "latitud": 41.219913,
-      "longitud": 1.7308453,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M25671R1",
-      "codTren": "25671",
-      "codLinea": "R1",
-      "retrasoMin": "1",
-      "codEstAct": "79603",
-      "codEstSig": "79603",
-      "horaLlegadaSigEst": "2026-03-10T20:08:16",
-      "codEstDest": "79606",
-      "codEstOrig": "72305",
-      "porAvanc": "A",
-      "latitud": 41.614597,
-      "longitud": 2.666027,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "4",
-      "nextVia": "4"
-    },
-    {
-      "tripId": "5165M15876R11",
-      "codTren": "15876",
-      "codLinea": "R11",
-      "retrasoMin": "11",
-      "codEstAct": "79004",
-      "codEstSig": "79009",
-      "horaLlegadaSigEst": "2026-03-10T20:10:28",
-      "codEstDest": "71801",
-      "codEstOrig": "79315",
-      "porAvanc": "E",
-      "latitud": 41.43613,
-      "longitud": 2.1936417,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "5165M25840R1",
-      "codTren": "25840",
-      "codLinea": "R1",
-      "retrasoMin": "2",
-      "codEstAct": "71801",
-      "codEstSig": "72305",
-      "horaLlegadaSigEst": "2026-03-10T20:12:35",
-      "codEstDest": "72305",
-      "codEstOrig": "79500",
-      "porAvanc": "2.0",
-      "latitud": 41.379097,
-      "longitud": 2.1403804,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "7",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M77454R4",
-      "codTren": "77454",
-      "codLinea": "R4",
-      "retrasoMin": "3",
-      "codEstAct": "78805",
-      "codEstSig": "78804",
-      "horaLlegadaSigEst": "2026-03-10T20:08:42",
-      "codEstDest": "78700",
-      "codEstOrig": "72209",
-      "porAvanc": "E",
-      "latitud": 41.387875,
-      "longitud": 2.1697214,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "5165M15818R11",
-      "codTren": "15818",
-      "codLinea": "R11",
-      "retrasoMin": "15",
-      "codEstAct": "79312",
-      "codEstSig": "79315",
-      "horaLlegadaSigEst": "2026-03-10T20:13:33",
-      "codEstDest": "79315",
-      "codEstOrig": "71801",
-      "porAvanc": "E",
-      "latitud": 42.366783,
-      "longitud": 3.1488335,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M77762R4",
-      "codTren": "77762",
-      "codLinea": "R4",
-      "retrasoMin": "0",
-      "codEstAct": "78700",
-      "codEstSig": "78700",
-      "horaLlegadaSigEst": "2026-03-10T20:15:00",
-      "codEstDest": "72209",
-      "codEstOrig": "78700",
-      "porAvanc": "A",
-      "latitud": 41.56993,
-      "longitud": 2.0143688,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M15039R15",
-      "codTren": "15039",
-      "codLinea": "R15",
-      "retrasoMin": "2",
-      "codEstAct": "71801",
-      "codEstSig": "71700",
-      "horaLlegadaSigEst": "2026-03-10T20:37:03",
-      "codEstDest": "71400",
-      "codEstOrig": "79400",
-      "porAvanc": "2.0",
-      "latitud": 41.37375,
-      "longitud": 2.133878,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "12",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M25452R2N",
-      "codTren": "25452",
-      "codLinea": "R2N",
-      "retrasoMin": "19",
-      "codEstAct": "79102",
-      "codEstSig": "79102",
-      "horaLlegadaSigEst": "2026-03-10T20:06:54",
-      "codEstDest": "79104",
-      "codEstOrig": "72400",
-      "porAvanc": "A",
-      "latitud": 41.637882,
-      "longitud": 2.4045222,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "5165M78658R8",
-      "codTren": "78658",
-      "codLinea": "R8",
-      "retrasoMin": "13",
-      "codEstAct": "72502",
-      "codEstSig": "72501",
-      "horaLlegadaSigEst": "2026-03-10T20:08:34",
-      "codEstDest": "72501",
-      "codEstOrig": "79100",
-      "porAvanc": "6.0",
-      "latitud": 41.48082,
-      "longitud": 2.0771093,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "5165M28456R2N",
-      "codTren": "28456",
-      "codLinea": "R2N",
-      "retrasoMin": "20",
-      "codEstAct": "71708",
-      "codEstSig": "71707",
-      "horaLlegadaSigEst": "2026-03-10T20:09:09",
-      "codEstDest": "72400",
-      "codEstOrig": "79104",
-      "porAvanc": "15.0",
-      "latitud": 41.348717,
-      "longitud": 2.1151302,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "5165M77758R4",
-      "codTren": "77758",
-      "codLinea": "R4",
-      "retrasoMin": "20",
-      "codEstAct": "78800",
-      "codEstSig": "78801",
-      "horaLlegadaSigEst": "2026-03-10T20:07:26",
-      "codEstDest": "72209",
-      "codEstOrig": "78700",
-      "porAvanc": "E",
-      "latitud": 41.470253,
-      "longitud": 2.1794534,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "5",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "5165M15019R15",
-      "codTren": "15019",
-      "codLinea": "R15",
-      "retrasoMin": "19",
-      "codEstAct": "71600",
-      "codEstSig": "71600",
-      "horaLlegadaSigEst": "2026-03-10T20:06:32",
-      "codEstDest": "71400",
-      "codEstOrig": "79400",
-      "porAvanc": "A",
-      "latitud": 41.185722,
-      "longitud": 1.5248666,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "5165M25684R1",
-      "codTren": "25684",
-      "codLinea": "R1",
-      "retrasoMin": "2",
-      "codEstAct": "79604",
-      "codEstSig": "79603",
-      "horaLlegadaSigEst": "2026-03-10T20:08:23",
-      "codEstDest": "72305",
-      "codEstOrig": "79606",
-      "porAvanc": "E",
-      "latitud": 41.622307,
-      "longitud": 2.693593,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "1",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M25683R1",
-      "codTren": "25683",
-      "codLinea": "R1",
-      "retrasoMin": "0",
-      "codEstAct": "72305",
-      "codEstSig": "72305",
-      "horaLlegadaSigEst": "2026-03-10T20:18:00",
-      "codEstDest": "79606",
-      "codEstOrig": "72305",
-      "porAvanc": "A",
-      "latitud": 41.36431,
-      "longitud": 2.1008937,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M78626R8",
-      "codTren": "78626",
-      "codLinea": "R8",
-      "retrasoMin": "6",
-      "codEstAct": "79006",
-      "codEstSig": "79006",
-      "horaLlegadaSigEst": "2026-03-10T20:05:53",
-      "codEstDest": "79100",
-      "codEstOrig": "72501",
-      "porAvanc": "A",
-      "latitud": 41.533474,
-      "longitud": 2.2177799,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "5165M15055R14",
-      "codTren": "15055",
-      "codLinea": "R14",
-      "retrasoMin": "0",
-      "codEstAct": "79400",
-      "codEstSig": "79400",
-      "horaLlegadaSigEst": "2026-03-10T20:15:00",
-      "codEstDest": "73100",
-      "codEstOrig": "79400",
-      "porAvanc": "A",
-      "latitud": 41.38422,
-      "longitud": 2.1855106,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "5165M25454R2N",
-      "codTren": "25454",
-      "codLinea": "R2N",
-      "retrasoMin": "4",
-      "codEstAct": "79007",
-      "codEstSig": "79100",
-      "horaLlegadaSigEst": "2026-03-10T20:10:09",
-      "codEstDest": "79104",
-      "codEstOrig": "72400",
-      "porAvanc": "E",
-      "latitud": 41.54973,
-      "longitud": 2.2454193,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "3"
-    },
-    {
-      "tripId": "5165M25778R1",
-      "codTren": "25778",
-      "codLinea": "R1",
-      "retrasoMin": "1",
-      "codEstAct": "79404",
-      "codEstSig": "79403",
-      "horaLlegadaSigEst": "2026-03-10T20:08:29",
-      "codEstDest": "72305",
-      "codEstOrig": "79600",
-      "porAvanc": "E",
-      "latitud": 41.445705,
-      "longitud": 2.2490852,
-      "nucleo": "50",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "5165M25458R2N",
-      "codTren": "25458",
-      "codLinea": "R2N",
-      "retrasoMin": "0",
-      "codEstAct": "72400",
-      "codEstSig": "72400",
-      "horaLlegadaSigEst": "2026-03-10T20:15:00",
-      "codEstDest": "79104",
-      "codEstOrig": "72400",
-      "porAvanc": "A",
-      "latitud": 41.30425,
-      "longitud": 2.0733776,
-      "nucleo": "50",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "6065M26076C2",
-      "codTren": "26076",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "13506",
-      "codEstSig": "13506",
-      "horaLlegadaSigEst": "2026-03-10T20:12:00",
-      "codEstDest": "13200",
-      "codEstOrig": "13506",
-      "porAvanc": "A",
-      "latitud": 43.321514,
-      "longitud": -3.1123157,
-      "nucleo": "60",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "6065M26174C1",
-      "codTren": "26174",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "13405",
-      "codEstSig": "13405",
-      "horaLlegadaSigEst": "2026-03-10T20:17:00",
-      "codEstDest": "13200",
-      "codEstOrig": "13405",
-      "porAvanc": "A",
-      "latitud": 43.328575,
-      "longitud": -3.0296164,
-      "nucleo": "60",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "6065M26077C2",
-      "codTren": "26077",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "13200",
-      "codEstSig": "13200",
-      "horaLlegadaSigEst": "2026-03-10T20:12:00",
-      "codEstDest": "13506",
-      "codEstOrig": "13200",
-      "porAvanc": "A",
-      "latitud": 43.260166,
-      "longitud": -2.9285789,
-      "nucleo": "60",
-      "accesible": false,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "6065M26075C2",
-      "codTren": "26075",
-      "codLinea": "C2",
-      "retrasoMin": "3",
-      "codEstAct": "13305",
-      "codEstSig": "13400",
-      "horaLlegadaSigEst": "2026-03-10T20:08:04",
-      "codEstDest": "13506",
-      "codEstOrig": "13200",
-      "porAvanc": "E",
-      "latitud": 43.2878,
-      "longitud": -2.975288,
-      "nucleo": "60",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "3"
-    },
-    {
-      "tripId": "6065M26562C3",
-      "codTren": "26562",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "13200",
-      "codEstSig": "13200",
-      "horaLlegadaSigEst": "2026-03-10T20:20:00",
-      "codEstDest": "13100",
-      "codEstOrig": "13200",
-      "porAvanc": "A",
-      "latitud": 43.260048,
-      "longitud": -2.928512,
-      "nucleo": "60",
-      "accesible": false,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "6065M26629C3",
-      "codTren": "26629",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "13106",
-      "codEstSig": "13106",
-      "horaLlegadaSigEst": "2026-03-10T20:13:00",
-      "codEstDest": "13200",
-      "codEstOrig": "13106",
-      "porAvanc": "A",
-      "latitud": 43.14222,
-      "longitud": -2.960543,
-      "nucleo": "60",
-      "accesible": false,
-      "via": "4",
-      "nextVia": "4"
-    },
-    {
-      "tripId": "6065M71542C4",
-      "codTren": "71542",
-      "codLinea": "C4",
-      "retrasoMin": "3",
-      "codEstAct": "05461",
-      "codEstSig": "05461",
-      "horaLlegadaSigEst": "2026-03-10T20:05:50",
-      "codEstDest": "05485",
-      "codEstOrig": "05451",
-      "porAvanc": "A",
-      "latitud": 43.248436,
-      "longitud": -2.990075,
-      "nucleo": "60",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "6165M32779C1",
-      "codTren": "32779",
-      "codLinea": "C1",
-      "retrasoMin": "1",
-      "codEstAct": "11406",
-      "codEstSig": "11406",
-      "horaLlegadaSigEst": "2026-03-10T20:05:13",
-      "codEstDest": "11505",
-      "codEstOrig": "11400",
-      "porAvanc": "A",
-      "latitud": 43.068367,
-      "longitud": -2.1625364,
-      "nucleo": "61",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "6165M35643C1",
-      "codTren": "35643",
-      "codLinea": "C1",
-      "retrasoMin": "15",
-      "codEstAct": "11501",
-      "codEstSig": "11502",
-      "horaLlegadaSigEst": "2026-03-10T20:07:37",
-      "codEstDest": "11600",
-      "codEstOrig": "11305",
-      "porAvanc": "E",
-      "latitud": 43.139435,
-      "longitud": -2.074181,
-      "nucleo": "61",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "6165M35640C1",
-      "codTren": "35640",
-      "codLinea": "C1",
-      "retrasoMin": "6",
-      "codEstAct": "11508",
-      "codEstSig": "11508",
-      "horaLlegadaSigEst": "2026-03-10T20:06:03",
-      "codEstDest": "11305",
-      "codEstOrig": "11600",
-      "porAvanc": "A",
-      "latitud": 43.27241,
-      "longitud": -1.9637448,
-      "nucleo": "61",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "6265M71132C2",
-      "codTren": "71132",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "14223",
-      "codEstSig": "14223",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "05623",
-      "codEstOrig": "14223",
-      "porAvanc": "A",
-      "latitud": 43.45811,
-      "longitud": -3.8111749,
-      "nucleo": "62",
-      "accesible": true,
-      "via": "8AM",
-      "nextVia": "8AM"
-    },
-    {
-      "tripId": "6265M71379C3",
-      "codTren": "71379",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "14223",
-      "codEstSig": "14223",
-      "horaLlegadaSigEst": "2026-03-10T20:15:00",
-      "codEstDest": "05671",
-      "codEstOrig": "14223",
-      "porAvanc": "A",
-      "latitud": 43.45811,
-      "longitud": -3.8111749,
-      "nucleo": "62",
-      "accesible": true,
-      "via": "1AM",
-      "nextVia": "1AM"
-    },
-    {
-      "tripId": "6265M71177C2",
-      "codTren": "71177",
-      "codLinea": "C2",
-      "retrasoMin": "1",
-      "codEstAct": "05604",
-      "codEstSig": "05604",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "14223",
-      "codEstOrig": "05637",
-      "porAvanc": "A",
-      "latitud": 43.45333,
-      "longitud": -3.855874,
-      "nucleo": "62",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "6265M71226C3",
-      "codTren": "71226",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "05658",
-      "codEstSig": "05658",
-      "horaLlegadaSigEst": "2026-03-10T20:18:00",
-      "codEstDest": "14223",
-      "codEstOrig": "05658",
-      "porAvanc": "A",
-      "latitud": 43.39739,
-      "longitud": -3.8149183,
-      "nucleo": "62",
-      "accesible": true,
-      "via": "",
-      "nextVia": ""
-    },
-    {
-      "tripId": "6265M71179C2",
-      "codTren": "71179",
-      "codLinea": "C2",
-      "retrasoMin": "7",
-      "codEstAct": "05637",
-      "codEstSig": "05635",
-      "horaLlegadaSigEst": "2026-03-10T20:07:30",
-      "codEstDest": "14223",
-      "codEstOrig": "05637",
-      "porAvanc": "12.0",
-      "latitud": 43.308605,
-      "longitud": -4.2298703,
-      "nucleo": "62",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "6265M26938C1",
-      "codTren": "26938",
-      "codLinea": "C1",
-      "retrasoMin": "2",
-      "codEstAct": "14218",
-      "codEstSig": "14217",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "14210",
-      "codEstOrig": "14223",
-      "porAvanc": "25.0",
-      "latitud": 43.38707,
-      "longitud": -3.8679357,
-      "nucleo": "62",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M22351C3",
-      "codTren": "22351",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "15218",
-      "codEstSig": "15211",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "16403",
-      "codEstOrig": "15218",
-      "porAvanc": "E",
-      "latitud": 43.3588,
-      "longitud": -5.8573804,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70529C7",
-      "codTren": "70529",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "05325",
-      "codEstSig": "05323",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "15211",
-      "codEstOrig": "05329",
-      "porAvanc": "E",
-      "latitud": 43.490948,
-      "longitud": -6.1104946,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70923C8",
-      "codTren": "70923",
-      "codLinea": "C8",
-      "retrasoMin": "0",
-      "codEstAct": "05371",
-      "codEstSig": "05369",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "15205",
-      "codEstOrig": "05389",
-      "porAvanc": "E",
-      "latitud": 43.228245,
-      "longitud": -5.7828298,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "4"
-    },
-    {
-      "tripId": "2065M70527C7",
-      "codTren": "70527",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "05311",
-      "codEstSig": "05306",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "15211",
-      "codEstOrig": "05329",
-      "porAvanc": "E",
-      "latitud": 43.34864,
-      "longitud": -5.9676714,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70229C4",
-      "codTren": "70229",
-      "codLinea": "C4",
-      "retrasoMin": "0",
-      "codEstAct": "05217",
-      "codEstSig": "05217",
-      "horaLlegadaSigEst": "2026-03-10T20:04:00",
-      "codEstDest": "15410",
-      "codEstOrig": "16403",
-      "porAvanc": "A",
-      "latitud": 43.551903,
-      "longitud": -5.8741975,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "3"
-    },
-    {
-      "tripId": "2065M70925C8",
-      "codTren": "70925",
-      "codLinea": "C8",
-      "retrasoMin": "0",
-      "codEstAct": "05389",
-      "codEstSig": "05387",
-      "horaLlegadaSigEst": "2026-03-10T20:29:00",
-      "codEstDest": "05361",
-      "codEstOrig": "05389",
-      "porAvanc": "E",
-      "latitud": 43.124065,
-      "longitud": -5.5663133,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70429C5",
-      "codTren": "70429",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "05403",
-      "codEstSig": "05405",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "05443",
-      "codEstOrig": "15410",
-      "porAvanc": "53.0",
-      "latitud": 43.5131,
-      "longitud": -5.71051,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M70924C8",
-      "codTren": "70924",
-      "codLinea": "C8",
-      "retrasoMin": "0",
-      "codEstAct": "05384",
-      "codEstSig": "05385",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "05389",
-      "codEstOrig": "15205",
-      "porAvanc": "E",
-      "latitud": 43.16476,
-      "longitud": -5.646091,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70255C4",
-      "codTren": "70255",
-      "codLinea": "C4",
-      "retrasoMin": "0",
-      "codEstAct": "05232",
-      "codEstSig": "05232",
-      "horaLlegadaSigEst": "2026-03-10T20:06:00",
-      "codEstDest": "15410",
-      "codEstOrig": "05325",
-      "porAvanc": "A",
-      "latitud": 43.535175,
-      "longitud": -6.0705996,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M70530C7",
-      "codTren": "70530",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "05325",
-      "codEstSig": "05325",
-      "horaLlegadaSigEst": "2026-03-10T20:06:00",
-      "codEstDest": "05329",
-      "codEstOrig": "15211",
-      "porAvanc": "A",
-      "latitud": 43.490948,
-      "longitud": -6.1104946,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M70430C5",
-      "codTren": "70430",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "05443",
-      "codEstSig": "05441",
-      "horaLlegadaSigEst": "2026-03-10T20:30:00",
-      "codEstDest": "15410",
-      "codEstOrig": "05443",
-      "porAvanc": "E",
-      "latitud": 43.250706,
-      "longitud": -5.5648093,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70532C7",
-      "codTren": "70532",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "05311",
-      "codEstSig": "05313",
-      "horaLlegadaSigEst": "2026-03-10T20:17:00",
-      "codEstDest": "05329",
-      "codEstOrig": "15211",
-      "porAvanc": "E",
-      "latitud": 43.34864,
-      "longitud": -5.9676714,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M70531C7",
-      "codTren": "70531",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "05329",
-      "codEstSig": "05327",
-      "horaLlegadaSigEst": "2026-03-10T20:31:00",
-      "codEstDest": "15211",
-      "codEstOrig": "05329",
-      "porAvanc": "E",
-      "latitud": 43.55206,
-      "longitud": -6.087154,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M22228C2",
-      "codTren": "22228",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "16009",
-      "codEstSig": "16010",
-      "horaLlegadaSigEst": "2026-03-10T20:01:00",
-      "codEstDest": "16011",
-      "codEstOrig": "15211",
-      "porAvanc": "S",
-      "latitud": 43.296474,
-      "longitud": -5.6862473,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M22353C3",
-      "codTren": "22353",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "15211",
-      "codEstSig": "15217",
-      "horaLlegadaSigEst": "2026-03-10T20:31:00",
-      "codEstDest": "16403",
-      "codEstOrig": "15211",
-      "porAvanc": "E",
-      "latitud": 43.36655,
-      "longitud": -5.854991,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M22232C2",
-      "codTren": "22232",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "15211",
-      "codEstSig": "15218",
-      "horaLlegadaSigEst": "2026-03-10T20:27:00",
-      "codEstDest": "16011",
-      "codEstOrig": "15211",
-      "porAvanc": "E",
-      "latitud": 43.366478,
-      "longitud": -5.855087,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M22038C1",
-      "codTren": "22038",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "15200",
-      "codEstSig": "15200",
-      "horaLlegadaSigEst": "2026-03-10T20:04:00",
-      "codEstDest": "15122",
-      "codEstOrig": "15410",
-      "porAvanc": "A",
-      "latitud": 43.20475,
-      "longitud": -5.7924085,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M22130C1",
-      "codTren": "22130",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "15410",
-      "codEstSig": "15401",
-      "horaLlegadaSigEst": "2026-03-10T20:21:00",
-      "codEstDest": "15122",
-      "codEstOrig": "15410",
-      "porAvanc": "E",
-      "latitud": 43.537712,
-      "longitud": -5.676047,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M22349C3",
-      "codTren": "22349",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "16400",
-      "codEstSig": "16408",
-      "horaLlegadaSigEst": "2026-03-10T19:59:00",
-      "codEstDest": "16403",
-      "codEstOrig": "15211",
-      "porAvanc": "S",
-      "latitud": 43.52352,
-      "longitud": -5.8701725,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70866C6",
-      "codTren": "70866",
-      "codLinea": "C6",
-      "retrasoMin": "0",
-      "codEstAct": "05534",
-      "codEstSig": "05533",
-      "horaLlegadaSigEst": "2026-03-10T20:26:00",
-      "codEstDest": "15211",
-      "codEstOrig": "05534",
-      "porAvanc": "E",
-      "latitud": 43.344013,
-      "longitud": -5.3606467,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M70326C4",
-      "codTren": "70326",
-      "codLinea": "C4",
-      "retrasoMin": "0",
-      "codEstAct": "05217",
-      "codEstSig": "05217",
-      "horaLlegadaSigEst": "2026-03-10T20:03:00",
-      "codEstDest": "05245",
-      "codEstOrig": "15410",
-      "porAvanc": "A",
-      "latitud": 43.551903,
-      "longitud": -5.8741975,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M22227C2",
-      "codTren": "22227",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "16005",
-      "codEstSig": "16002",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "16403",
-      "codEstOrig": "16011",
-      "porAvanc": "75.0",
-      "latitud": 43.334396,
-      "longitud": -5.76199,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M70321C4",
-      "codTren": "70321",
-      "codLinea": "C4",
-      "retrasoMin": "0",
-      "codEstAct": "05209",
-      "codEstSig": "05208",
-      "horaLlegadaSigEst": "2026-03-10T20:01:00",
-      "codEstDest": "15410",
-      "codEstOrig": "05245",
-      "porAvanc": "S",
-      "latitud": 43.58092,
-      "longitud": -5.7540984,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M22044C1",
-      "codTren": "22044",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "15410",
-      "codEstSig": "15401",
-      "horaLlegadaSigEst": "2026-03-10T20:33:00",
-      "codEstDest": "15122",
-      "codEstOrig": "15410",
-      "porAvanc": "E",
-      "latitud": 43.537712,
-      "longitud": -5.676047,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M22040C1",
-      "codTren": "22040",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "15217",
-      "codEstSig": "15211",
-      "horaLlegadaSigEst": "2026-03-10T20:03:00",
-      "codEstDest": "15122",
-      "codEstOrig": "15410",
-      "porAvanc": "S",
-      "latitud": 43.38812,
-      "longitud": -5.8272715,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M22346C3",
-      "codTren": "22346",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "16301",
-      "codEstSig": "15301",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "16011",
-      "codEstOrig": "16405",
-      "porAvanc": "E",
-      "latitud": 43.476093,
-      "longitud": -5.8615694,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "6"
-    },
-    {
-      "tripId": "2065M22348C3",
-      "codTren": "22348",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "16403",
-      "codEstSig": "16402",
-      "horaLlegadaSigEst": "2026-03-10T20:18:00",
-      "codEstDest": "15218",
-      "codEstOrig": "16403",
-      "porAvanc": "E",
-      "latitud": 43.56141,
-      "longitud": -5.922727,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M22041C1",
-      "codTren": "22041",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "15305",
-      "codEstSig": "15302",
-      "horaLlegadaSigEst": "2026-03-10T19:54:00",
-      "codEstDest": "15410",
-      "codEstOrig": "15122",
-      "porAvanc": "S",
-      "latitud": 43.474197,
-      "longitud": -5.8000646,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "2065M22042C1",
-      "codTren": "22042",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "15401",
-      "codEstSig": "15400",
-      "horaLlegadaSigEst": "2026-03-10T20:06:00",
-      "codEstDest": "15118",
-      "codEstOrig": "15410",
-      "porAvanc": "E",
-      "latitud": 43.535202,
-      "longitud": -5.6971354,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "2065M22043C1",
-      "codTren": "22043",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "15122",
-      "codEstSig": "15123",
-      "horaLlegadaSigEst": "2026-03-10T20:13:00",
-      "codEstDest": "15410",
-      "codEstOrig": "15122",
-      "porAvanc": "E",
-      "latitud": 43.15869,
-      "longitud": -5.8311706,
-      "nucleo": "20",
-      "accesible": false,
-      "via": "7",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "4165M32824C3",
-      "codTren": "32824",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "60913",
-      "codEstSig": "60914",
-      "horaLlegadaSigEst": "2026-03-10T20:29:00",
-      "codEstDest": "60911",
-      "codEstOrig": "60913",
-      "porAvanc": "E",
-      "latitud": 38.39458,
-      "longitud": -0.5287673,
-      "nucleo": "41",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "4165M24718C1",
-      "codTren": "24718",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "62100",
-      "codEstSig": "62101",
-      "horaLlegadaSigEst": "2026-03-10T19:55:00",
-      "codEstDest": "60911",
-      "codEstOrig": "61200",
-      "porAvanc": "S",
-      "latitud": 38.16702,
-      "longitud": -0.83807987,
-      "nucleo": "41",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "3"
-    },
-    {
-      "tripId": "4165M24756C1",
-      "codTren": "24756",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "62104",
-      "codEstSig": "62109",
-      "horaLlegadaSigEst": "2026-03-10T19:43:00",
-      "codEstDest": "60911",
-      "codEstOrig": "62003",
-      "porAvanc": "S",
-      "latitud": 38.289753,
-      "longitud": -0.58249927,
-      "nucleo": "41",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "7065M31538C1",
-      "codTren": "31538",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "70800",
-      "codEstSig": "70801",
-      "horaLlegadaSigEst": "2026-03-10T20:16:00",
-      "codEstDest": "71100",
-      "codEstOrig": "70800",
-      "porAvanc": "E",
-      "latitud": 41.722748,
-      "longitud": -1.020138,
-      "nucleo": "70",
-      "accesible": false,
-      "via": "31",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "7065M31539C1",
-      "codTren": "31539",
-      "codLinea": "C1",
-      "retrasoMin": "22",
-      "codEstAct": "71100",
-      "codEstSig": "70807",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "70800",
-      "codEstOrig": "71100",
-      "porAvanc": "E",
-      "latitud": 41.633057,
-      "longitud": -0.86840355,
-      "nucleo": "70",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "7065M31553C1",
-      "codTren": "31553",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "71100",
-      "codEstSig": "70807",
-      "horaLlegadaSigEst": "2026-03-10T20:28:00",
-      "codEstDest": "70800",
-      "codEstOrig": "71100",
-      "porAvanc": "E",
-      "latitud": 41.633057,
-      "longitud": -0.86840355,
-      "nucleo": "70",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75637C2",
-      "codTren": "75637",
-      "codLinea": "C2",
-      "retrasoMin": "5",
-      "codEstAct": "18001",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "12006",
-      "codEstOrig": "70200",
-      "porAvanc": "E",
-      "latitud": 40.42352,
-      "longitud": -3.6912522,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75358C10",
-      "codTren": "75358",
-      "codLinea": "C10",
-      "retrasoMin": "0",
-      "codEstAct": "17000",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:22:00",
-      "codEstDest": "10100",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.470848,
-      "longitud": -3.682503,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "8",
-      "nextVia": "4"
-    },
-    {
-      "tripId": "1065M75254C10",
-      "codTren": "75254",
-      "codLinea": "C10",
-      "retrasoMin": "6",
-      "codEstAct": "10000",
-      "codEstSig": "10001",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "10200",
-      "codEstOrig": "17000",
-      "porAvanc": "43.0",
-      "latitud": 40.437378,
-      "longitud": -3.7453392,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75632C2",
-      "codTren": "75632",
-      "codLinea": "C2",
-      "retrasoMin": "5",
-      "codEstAct": "70003",
-      "codEstSig": "70005",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "70200",
-      "codEstOrig": "17000",
-      "porAvanc": "S",
-      "latitud": 40.37616,
-      "longitud": -3.6561291,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20305C4a",
-      "codTren": "20305",
-      "codLinea": "C4a",
-      "retrasoMin": "7",
-      "codEstAct": "17001",
-      "codEstSig": "17009",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "19003",
-      "codEstOrig": "37012",
-      "porAvanc": "E",
-      "latitud": 40.501648,
-      "longitud": -3.6821797,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75252C10",
-      "codTren": "75252",
-      "codLinea": "C10",
-      "retrasoMin": "4",
-      "codEstAct": "10103",
-      "codEstSig": "10104",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "10200",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.574413,
-      "longitud": -3.9567041,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20303C4a",
-      "codTren": "20303",
-      "codLinea": "C4a",
-      "retrasoMin": "12",
-      "codEstAct": "19002",
-      "codEstSig": "19003",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "19003",
-      "codEstOrig": "37012",
-      "porAvanc": "E",
-      "latitud": 40.54745,
-      "longitud": -3.6543186,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M76970C1",
-      "codTren": "76970",
-      "codLinea": "C1",
-      "retrasoMin": "1",
-      "codEstAct": "17000",
-      "codEstSig": "98003",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "98305",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.47102,
-      "longitud": -3.6825693,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "12",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M27634C8b",
-      "codTren": "27634",
-      "codLinea": "C8b",
-      "retrasoMin": "0",
-      "codEstAct": "10103",
-      "codEstSig": "10101",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "70200",
-      "codEstOrig": "12006",
-      "porAvanc": "55.0",
-      "latitud": 40.562977,
-      "longitud": -3.9221585,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M76971C1",
-      "codTren": "76971",
-      "codLinea": "C1",
-      "retrasoMin": "3",
-      "codEstAct": "98304",
-      "codEstSig": "98003",
-      "horaLlegadaSigEst": "2026-03-10T20:11:00",
-      "codEstDest": "17000",
-      "codEstOrig": "98305",
-      "porAvanc": "12.0",
-      "latitud": 40.481865,
-      "longitud": -3.6220105,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M76972C1",
-      "codTren": "76972",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "17000",
-      "codEstSig": "98003",
-      "horaLlegadaSigEst": "2026-03-10T20:33:00",
-      "codEstDest": "98305",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.47102,
-      "longitud": -3.6825693,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "12",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M76973C1",
-      "codTren": "76973",
-      "codLinea": "C1",
-      "retrasoMin": "0",
-      "codEstAct": "98305",
-      "codEstSig": "98304",
-      "horaLlegadaSigEst": "2026-03-10T20:27:00",
-      "codEstDest": "17000",
-      "codEstOrig": "98305",
-      "porAvanc": "E",
-      "latitud": 40.4924,
-      "longitud": -3.593483,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75356C10",
-      "codTren": "75356",
-      "codLinea": "C10",
-      "retrasoMin": "3",
-      "codEstAct": "18003",
-      "codEstSig": "18004",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "10100",
-      "codEstOrig": "17000",
-      "porAvanc": "S",
-      "latitud": 40.395943,
-      "longitud": -3.677964,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M27633C8b",
-      "codTren": "27633",
-      "codLinea": "C8b",
-      "retrasoMin": "0",
-      "codEstAct": "12004",
-      "codEstSig": "12004",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "12006",
-      "codEstOrig": "17000",
-      "porAvanc": "A",
-      "latitud": 40.69257,
-      "longitud": -4.035974,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M27638C8b",
-      "codTren": "27638",
-      "codLinea": "C8b",
-      "retrasoMin": "0",
-      "codEstAct": "12006",
-      "codEstSig": "12005",
-      "horaLlegadaSigEst": "2026-03-10T20:35:00",
-      "codEstDest": "70200",
-      "codEstOrig": "12006",
-      "porAvanc": "E",
-      "latitud": 40.737614,
-      "longitud": -4.0662985,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M76852C7",
-      "codTren": "76852",
-      "codLinea": "C7",
-      "retrasoMin": "1",
-      "codEstAct": "70105",
-      "codEstSig": "70200",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "70200",
-      "codEstOrig": "10000",
-      "porAvanc": "77.0",
-      "latitud": 40.4889,
-      "longitud": -3.3666708,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M76854C7",
-      "codTren": "76854",
-      "codLinea": "C7",
-      "retrasoMin": "8",
-      "codEstAct": "70101",
-      "codEstSig": "70102",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "70200",
-      "codEstOrig": "10000",
-      "porAvanc": "E",
-      "latitud": 40.44277,
-      "longitud": -3.5339844,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M19766C5",
-      "codTren": "19766",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35607",
-      "codEstSig": "35606",
-      "horaLlegadaSigEst": "2026-03-10T20:28:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.330883,
-      "longitud": -3.8823783,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19760C5",
-      "codTren": "19760",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35607",
-      "codEstSig": "35606",
-      "horaLlegadaSigEst": "2026-03-10T20:14:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.330883,
-      "longitud": -3.8823783,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75353C10",
-      "codTren": "75353",
-      "codLinea": "C10",
-      "retrasoMin": "8",
-      "codEstAct": "10002",
-      "codEstSig": "10001",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "17000",
-      "codEstOrig": "10100",
-      "porAvanc": "S",
-      "latitud": 40.447617,
-      "longitud": -3.8001926,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75351C10",
-      "codTren": "75351",
-      "codLinea": "C10",
-      "retrasoMin": "7",
-      "codEstAct": "18002",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "17000",
-      "codEstOrig": "10100",
-      "porAvanc": "A",
-      "latitud": 40.44655,
-      "longitud": -3.691473,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M27637C8b",
-      "codTren": "27637",
-      "codLinea": "C8b",
-      "retrasoMin": "0",
-      "codEstAct": "17000",
-      "codEstSig": "97201",
-      "horaLlegadaSigEst": "2026-03-10T20:17:00",
-      "codEstDest": "12006",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.47113,
-      "longitud": -3.6828332,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "11",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19739C5",
-      "codTren": "19739",
-      "codLinea": "C5",
-      "retrasoMin": "4",
-      "codEstAct": "35605",
-      "codEstSig": "35605",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "A",
-      "latitud": 40.3503,
-      "longitud": -3.8317595,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20094C3",
-      "codTren": "20094",
-      "codLinea": "C3",
-      "retrasoMin": "9",
-      "codEstAct": "17000",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "60200",
-      "codEstOrig": "17000",
-      "porAvanc": "18.0",
-      "latitud": 40.46643,
-      "longitud": -3.6836433,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "8"
-    },
-    {
-      "tripId": "1065M76867C7",
-      "codTren": "76867",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "70103",
-      "codEstSig": "70111",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "10000",
-      "codEstOrig": "70200",
-      "porAvanc": "E",
-      "latitud": 40.4889,
-      "longitud": -3.3666708,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "5",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20093C3",
-      "codTren": "20093",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "60104",
-      "codEstSig": "60104",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "17000",
-      "codEstOrig": "60200",
-      "porAvanc": "A",
-      "latitud": 40.196156,
-      "longitud": -3.6648214,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19735C5",
-      "codTren": "19735",
-      "codLinea": "C5",
-      "retrasoMin": "18",
-      "codEstAct": "35605",
-      "codEstSig": "35610",
-      "horaLlegadaSigEst": "2026-03-10T20:06:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "87.0",
-      "latitud": 40.343037,
-      "longitud": -3.840959,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M19736C5",
-      "codTren": "19736",
-      "codLinea": "C5",
-      "retrasoMin": "15",
-      "codEstAct": "35009",
-      "codEstSig": "35009",
-      "horaLlegadaSigEst": "2026-03-10T20:03:00",
-      "codEstDest": "35002",
-      "codEstOrig": "35607",
-      "porAvanc": "A",
-      "latitud": 40.34086,
-      "longitud": -3.7482634,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20498C4b",
-      "codTren": "20498",
-      "codLinea": "C4b",
-      "retrasoMin": "0",
-      "codEstAct": "18002",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "37012",
-      "codEstOrig": "17005",
-      "porAvanc": "A",
-      "latitud": 40.4466,
-      "longitud": -3.6920877,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "8",
-      "nextVia": "8"
-    },
-    {
-      "tripId": "1065M75526C2",
-      "codTren": "75526",
-      "codLinea": "C2",
-      "retrasoMin": "0",
-      "codEstAct": "17000",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:12:00",
-      "codEstDest": "70200",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.47097,
-      "longitud": -3.68245,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "12",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20091C3",
-      "codTren": "20091",
-      "codLinea": "C3",
-      "retrasoMin": "2",
-      "codEstAct": "60109",
-      "codEstSig": "60101",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "17000",
-      "codEstOrig": "60200",
-      "porAvanc": "25.0",
-      "latitud": 40.323204,
-      "longitud": -3.7094269,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20090C3",
-      "codTren": "20090",
-      "codLinea": "C3",
-      "retrasoMin": "3",
-      "codEstAct": "60109",
-      "codEstSig": "60102",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "60200",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.318535,
-      "longitud": -3.7097142,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75258C10",
-      "codTren": "75258",
-      "codLinea": "C10",
-      "retrasoMin": "0",
-      "codEstAct": "17000",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:37:00",
-      "codEstDest": "10200",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.470848,
-      "longitud": -3.682503,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "8",
-      "nextVia": "4"
-    },
-    {
-      "tripId": "1065M20309C4a",
-      "codTren": "20309",
-      "codLinea": "C4a",
-      "retrasoMin": "6",
-      "codEstAct": "37002",
-      "codEstSig": "37010",
-      "horaLlegadaSigEst": "2026-03-10T20:06:00",
-      "codEstDest": "19003",
-      "codEstOrig": "37012",
-      "porAvanc": "E",
-      "latitud": 40.309868,
-      "longitud": -3.733689,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20308C4a",
-      "codTren": "20308",
-      "codLinea": "C4a",
-      "retrasoMin": "4",
-      "codEstAct": "37002",
-      "codEstSig": "37011",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "37012",
-      "codEstOrig": "19003",
-      "porAvanc": "E",
-      "latitud": 40.309868,
-      "longitud": -3.733689,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20307C4a",
-      "codTren": "20307",
-      "codLinea": "C4a",
-      "retrasoMin": "3",
-      "codEstAct": "18101",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "19003",
-      "codEstOrig": "37012",
-      "porAvanc": "E",
-      "latitud": 40.417023,
-      "longitud": -3.7031636,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "6"
-    },
-    {
-      "tripId": "1065M20496C4b",
-      "codTren": "20496",
-      "codLinea": "C4b",
-      "retrasoMin": "2",
-      "codEstAct": "60100",
-      "codEstSig": "37001",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "37012",
-      "codEstOrig": "17005",
-      "porAvanc": "18.0",
-      "latitud": 40.347736,
-      "longitud": -3.6866763,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20098C3",
-      "codTren": "20098",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "17000",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:32:00",
-      "codEstDest": "60200",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.471382,
-      "longitud": -3.6834786,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "8"
-    },
-    {
-      "tripId": "1065M20907C5",
-      "codTren": "20907",
-      "codLinea": "C5",
-      "retrasoMin": "15",
-      "codEstAct": "35607",
-      "codEstSig": "35607",
-      "horaLlegadaSigEst": "2026-03-10T20:04:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35002",
-      "porAvanc": "A",
-      "latitud": 40.330883,
-      "longitud": -3.8823783,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20906C5",
-      "codTren": "20906",
-      "codLinea": "C5",
-      "retrasoMin": "12",
-      "codEstAct": "35607",
-      "codEstSig": "35606",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "35002",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.330883,
-      "longitud": -3.8823783,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75524C2",
-      "codTren": "75524",
-      "codLinea": "C2",
-      "retrasoMin": "15",
-      "codEstAct": "70102",
-      "codEstSig": "70112",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "70200",
-      "codEstOrig": "17000",
-      "porAvanc": "18.0",
-      "latitud": 40.456142,
-      "longitud": -3.4727604,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20509C4b",
-      "codTren": "20509",
-      "codLinea": "C4b",
-      "retrasoMin": "7",
-      "codEstAct": "18002",
-      "codEstSig": "17000",
-      "horaLlegadaSigEst": "2026-03-10T20:13:00",
-      "codEstDest": "17005",
-      "codEstOrig": "37012",
-      "porAvanc": "S",
-      "latitud": 40.4466,
-      "longitud": -3.6920877,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "6",
-      "nextVia": "5"
-    },
-    {
-      "tripId": "1065M75523C2",
-      "codTren": "75523",
-      "codLinea": "C2",
-      "retrasoMin": "-2",
-      "codEstAct": "70200",
-      "codEstSig": "70105",
-      "horaLlegadaSigEst": "2026-03-10T20:33:00",
-      "codEstDest": "10203",
-      "codEstOrig": "70200",
-      "porAvanc": "E",
-      "latitud": 40.644257,
-      "longitud": -3.1823237,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19767C5",
-      "codTren": "19767",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35012",
-      "codEstSig": "35002",
-      "horaLlegadaSigEst": "2026-03-10T20:25:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "E",
-      "latitud": 40.25559,
-      "longitud": -3.8284667,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19769C5",
-      "codTren": "19769",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35012",
-      "codEstSig": "35002",
-      "horaLlegadaSigEst": "2026-03-10T20:34:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "E",
-      "latitud": 40.25559,
-      "longitud": -3.8284667,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20089C3",
-      "codTren": "20089",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "18000",
-      "codEstSig": "18101",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "17000",
-      "codEstOrig": "60200",
-      "porAvanc": "E",
-      "latitud": 40.40654,
-      "longitud": -3.6895106,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "5",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20088C3",
-      "codTren": "20088",
-      "codLinea": "C3",
-      "retrasoMin": "2",
-      "codEstAct": "60103",
-      "codEstSig": "60103",
-      "horaLlegadaSigEst": "2026-03-10T20:04:00",
-      "codEstDest": "60200",
-      "codEstOrig": "17000",
-      "porAvanc": "A",
-      "latitud": 40.242844,
-      "longitud": -3.7038615,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20087C3",
-      "codTren": "20087",
-      "codLinea": "C3",
-      "retrasoMin": "9",
-      "codEstAct": "18002",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "17000",
-      "codEstOrig": "60200",
-      "porAvanc": "A",
-      "latitud": 40.4466,
-      "longitud": -3.6920877,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "6",
-      "nextVia": "6"
-    },
-    {
-      "tripId": "1065M75158C10",
-      "codTren": "75158",
-      "codLinea": "C10",
-      "retrasoMin": "4",
-      "codEstAct": "10005",
-      "codEstSig": "10007",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "17000",
-      "codEstOrig": "10200",
-      "porAvanc": "E",
-      "latitud": 40.494404,
-      "longitud": -3.8680208,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20923C5",
-      "codTren": "20923",
-      "codLinea": "C5",
-      "retrasoMin": "9",
-      "codEstAct": "35009",
-      "codEstSig": "37001",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35002",
-      "porAvanc": "E",
-      "latitud": 40.34086,
-      "longitud": -3.7482634,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "4"
-    },
-    {
-      "tripId": "1065M75521C2",
-      "codTren": "75521",
-      "codLinea": "C2",
-      "retrasoMin": "2",
-      "codEstAct": "70108",
-      "codEstSig": "70100",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "10203",
-      "codEstOrig": "70200",
-      "porAvanc": "18.0",
-      "latitud": 40.418766,
-      "longitud": -3.5670235,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M76863C7",
-      "codTren": "76863",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "97201",
-      "codEstSig": "97201",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "10000",
-      "codEstOrig": "70200",
-      "porAvanc": "A",
-      "latitud": 40.488266,
-      "longitud": -3.6947744,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20096C3",
-      "codTren": "20096",
-      "codLinea": "C3",
-      "retrasoMin": "0",
-      "codEstAct": "17000",
-      "codEstSig": "18002",
-      "horaLlegadaSigEst": "2026-03-10T20:18:00",
-      "codEstDest": "60200",
-      "codEstOrig": "17000",
-      "porAvanc": "E",
-      "latitud": 40.471382,
-      "longitud": -3.6834786,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "8"
-    },
-    {
-      "tripId": "1065M76865C7",
-      "codTren": "76865",
-      "codLinea": "C7",
-      "retrasoMin": "22",
-      "codEstAct": "70112",
-      "codEstSig": "70102",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "97100",
-      "codEstOrig": "70200",
-      "porAvanc": "E",
-      "latitud": 40.464172,
-      "longitud": -3.4414766,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19744C5",
-      "codTren": "19744",
-      "codLinea": "C5",
-      "retrasoMin": "6",
-      "codEstAct": "37001",
-      "codEstSig": "35009",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.34132,
-      "longitud": -3.7123663,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "6",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75156C10",
-      "codTren": "75156",
-      "codLinea": "C10",
-      "retrasoMin": "15",
-      "codEstAct": "10001",
-      "codEstSig": "10000",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "17000",
-      "codEstOrig": "10200",
-      "porAvanc": "62.0",
-      "latitud": 40.434906,
-      "longitud": -3.7425206,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19743C5",
-      "codTren": "19743",
-      "codLinea": "C5",
-      "retrasoMin": "34",
-      "codEstAct": "35011",
-      "codEstSig": "35001",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "25.0",
-      "latitud": 40.316864,
-      "longitud": -3.7808166,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75030C8a",
-      "codTren": "75030",
-      "codLinea": "C8a",
-      "retrasoMin": "0",
-      "codEstAct": "10203",
-      "codEstSig": "10202",
-      "horaLlegadaSigEst": "2026-03-10T20:16:00",
-      "codEstDest": "70200",
-      "codEstOrig": "10203",
-      "porAvanc": "E",
-      "latitud": 40.58532,
-      "longitud": -4.1321955,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M19740C5",
-      "codTren": "19740",
-      "codLinea": "C5",
-      "retrasoMin": "7",
-      "codEstAct": "35001",
-      "codEstSig": "35011",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.328766,
-      "longitud": -3.7714624,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75160C10",
-      "codTren": "75160",
-      "codLinea": "C10",
-      "retrasoMin": "0",
-      "codEstAct": "10200",
-      "codEstSig": "10104",
-      "horaLlegadaSigEst": "2026-03-10T20:15:00",
-      "codEstDest": "17000",
-      "codEstOrig": "10200",
-      "porAvanc": "E",
-      "latitud": 40.62599,
-      "longitud": -4.0081153,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "4",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20919C5",
-      "codTren": "20919",
-      "codLinea": "C5",
-      "retrasoMin": "12",
-      "codEstAct": "35702",
-      "codEstSig": "18003",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35002",
-      "porAvanc": "18.0",
-      "latitud": 40.381607,
-      "longitud": -3.694593,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19748C5",
-      "codTren": "19748",
-      "codLinea": "C5",
-      "retrasoMin": "9",
-      "codEstAct": "18003",
-      "codEstSig": "35702",
-      "horaLlegadaSigEst": "2026-03-10T20:08:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "25.0",
-      "latitud": 40.39263,
-      "longitud": -3.6838303,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M19762C5",
-      "codTren": "19762",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35607",
-      "codEstSig": "35606",
-      "horaLlegadaSigEst": "2026-03-10T20:21:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.330883,
-      "longitud": -3.8823783,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19747C5",
-      "codTren": "19747",
-      "codLinea": "C5",
-      "retrasoMin": "11",
-      "codEstAct": "37001",
-      "codEstSig": "35704",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "E",
-      "latitud": 40.34132,
-      "longitud": -3.7123663,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "4",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19761C5",
-      "codTren": "19761",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35012",
-      "codEstSig": "35002",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "E",
-      "latitud": 40.25559,
-      "longitud": -3.8284667,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19753C5",
-      "codTren": "19753",
-      "codLinea": "C5",
-      "retrasoMin": "9",
-      "codEstAct": "35010",
-      "codEstSig": "35011",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35012",
-      "porAvanc": "37.0",
-      "latitud": 40.302555,
-      "longitud": -3.7890904,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75028C8a",
-      "codTren": "75028",
-      "codLinea": "C8a",
-      "retrasoMin": "5",
-      "codEstAct": "97201",
-      "codEstSig": "17000",
-      "horaLlegadaSigEst": "2026-03-10T20:11:00",
-      "codEstDest": "70200",
-      "codEstOrig": "10203",
-      "porAvanc": "25.0",
-      "latitud": 40.487045,
-      "longitud": -3.6879022,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "9"
-    },
-    {
-      "tripId": "1065M20500C4b",
-      "codTren": "20500",
-      "codLinea": "C4b",
-      "retrasoMin": "1",
-      "codEstAct": "17003",
-      "codEstSig": "17009",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "37012",
-      "codEstOrig": "17005",
-      "porAvanc": "E",
-      "latitud": 40.558834,
-      "longitud": -3.7141593,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75027C8a",
-      "codTren": "75027",
-      "codLinea": "C8a",
-      "retrasoMin": "0",
-      "codEstAct": "10100",
-      "codEstSig": "10100",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "10203",
-      "codEstOrig": "17000",
-      "porAvanc": "A",
-      "latitud": 40.522522,
-      "longitud": -3.8817465,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "3"
-    },
-    {
-      "tripId": "1065M19752C5",
-      "codTren": "19752",
-      "codLinea": "C5",
-      "retrasoMin": "3",
-      "codEstAct": "35601",
-      "codEstSig": "35601",
-      "horaLlegadaSigEst": "2026-03-10T20:04:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "A",
-      "latitud": 40.38357,
-      "longitud": -3.7686734,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20915C5",
-      "codTren": "20915",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35604",
-      "codEstSig": "35604",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35002",
-      "porAvanc": "A",
-      "latitud": 40.356674,
-      "longitud": -3.8156087,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75856C7",
-      "codTren": "75856",
-      "codLinea": "C7",
-      "retrasoMin": "0",
-      "codEstAct": "18000",
-      "codEstSig": "70002",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "70103",
-      "codEstOrig": "10000",
-      "porAvanc": "E",
-      "latitud": 40.40667,
-      "longitud": -3.6893938,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "3",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20914C5",
-      "codTren": "20914",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35607",
-      "codEstSig": "35606",
-      "horaLlegadaSigEst": "2026-03-10T20:35:00",
-      "codEstDest": "35002",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.330883,
-      "longitud": -3.8823783,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M20911C5",
-      "codTren": "20911",
-      "codLinea": "C5",
-      "retrasoMin": "7",
-      "codEstAct": "35606",
-      "codEstSig": "35607",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "35607",
-      "codEstOrig": "35002",
-      "porAvanc": "E",
-      "latitud": 40.32875,
-      "longitud": -3.8636916,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20910C5",
-      "codTren": "20910",
-      "codLinea": "C5",
-      "retrasoMin": "0",
-      "codEstAct": "35607",
-      "codEstSig": "35606",
-      "horaLlegadaSigEst": "2026-03-10T20:07:00",
-      "codEstDest": "35002",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.330883,
-      "longitud": -3.8823783,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M19750C5",
-      "codTren": "19750",
-      "codLinea": "C5",
-      "retrasoMin": "1",
-      "codEstAct": "35609",
-      "codEstSig": "18000",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "35012",
-      "codEstOrig": "35607",
-      "porAvanc": "18.0",
-      "latitud": 40.40569,
-      "longitud": -3.7003217,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "10"
-    },
-    {
-      "tripId": "1065M20507C4b",
-      "codTren": "20507",
-      "codLinea": "C4b",
-      "retrasoMin": "5",
-      "codEstAct": "17003",
-      "codEstSig": "17004",
-      "horaLlegadaSigEst": "2026-03-10T20:09:00",
-      "codEstDest": "17005",
-      "codEstOrig": "37012",
-      "porAvanc": "E",
-      "latitud": 40.558834,
-      "longitud": -3.7141593,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20902C5",
-      "codTren": "20902",
-      "codLinea": "C5",
-      "retrasoMin": "4",
-      "codEstAct": "18000",
-      "codEstSig": "18003",
-      "horaLlegadaSigEst": "2026-03-10T20:06:00",
-      "codEstDest": "35002",
-      "codEstOrig": "35607",
-      "porAvanc": "E",
-      "latitud": 40.406326,
-      "longitud": -3.6896772,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "10",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20502C4b",
-      "codTren": "20502",
-      "codLinea": "C4b",
-      "retrasoMin": "-1",
-      "codEstAct": "17005",
-      "codEstSig": "17004",
-      "horaLlegadaSigEst": "2026-03-10T20:19:00",
-      "codEstDest": "37012",
-      "codEstOrig": "17005",
-      "porAvanc": "E",
-      "latitud": 40.644844,
-      "longitud": -3.7762609,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "3",
-      "nextVia": "3"
-    },
-    {
-      "tripId": "1065M20312C4a",
-      "codTren": "20312",
-      "codLinea": "C4a",
-      "retrasoMin": "2",
-      "codEstAct": "17001",
-      "codEstSig": "17000",
-      "horaLlegadaSigEst": "2026-03-10T20:14:00",
-      "codEstDest": "37012",
-      "codEstOrig": "19003",
-      "porAvanc": "S",
-      "latitud": 40.501648,
-      "longitud": -3.6821797,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75861C7",
-      "codTren": "75861",
-      "codLinea": "C7",
-      "retrasoMin": "8",
-      "codEstAct": "10010",
-      "codEstSig": "10002",
-      "horaLlegadaSigEst": "2026-03-10T20:10:00",
-      "codEstDest": "10000",
-      "codEstOrig": "70103",
-      "porAvanc": "S",
-      "latitud": 40.46547,
-      "longitud": -3.8076725,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "1",
-      "nextVia": "1"
-    },
-    {
-      "tripId": "1065M75860C7",
-      "codTren": "75860",
-      "codLinea": "C7",
-      "retrasoMin": "-1",
-      "codEstAct": "10000",
-      "codEstSig": "10001",
-      "horaLlegadaSigEst": "2026-03-10T20:12:00",
-      "codEstDest": "70103",
-      "codEstOrig": "10000",
-      "porAvanc": "E",
-      "latitud": 40.42163,
-      "longitud": -3.7193205,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20316C4a",
-      "codTren": "20316",
-      "codLinea": "C4a",
-      "retrasoMin": "0",
-      "codEstAct": "19003",
-      "codEstSig": "19002",
-      "horaLlegadaSigEst": "2026-03-10T20:34:00",
-      "codEstDest": "37012",
-      "codEstOrig": "19003",
-      "porAvanc": "E",
-      "latitud": 40.546417,
-      "longitud": -3.6351175,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M20314C4a",
-      "codTren": "20314",
-      "codLinea": "C4a",
-      "retrasoMin": "0",
-      "codEstAct": "19003",
-      "codEstSig": "19002",
-      "horaLlegadaSigEst": "2026-03-10T20:14:00",
-      "codEstDest": "37012",
-      "codEstOrig": "19003",
-      "porAvanc": "E",
-      "latitud": 40.546417,
-      "longitud": -3.6351175,
-      "nucleo": "10",
-      "accesible": true,
-      "via": "2",
-      "nextVia": "2"
-    },
-    {
-      "tripId": "1065M75639C2",
-      "codTren": "75639",
-      "codLinea": "C2",
-      "retrasoMin": "1",
-      "codEstAct": "70105",
-      "codEstSig": "70105",
-      "horaLlegadaSigEst": "2026-03-10T20:05:00",
-      "codEstDest": "12006",
-      "codEstOrig": "70200",
-      "porAvanc": "A",
-      "latitud": 40.56094,
-      "longitud": -3.2652874,
-      "nucleo": "10",
-      "accesible": false,
-      "via": "1",
-      "nextVia": "1"
-    }
-  ]
-}
+{"fechaActualizacion":"","trenes":[]}
 </script>
 
   <script>
@@ -8305,7 +5927,7 @@
     const STORAGE_PREFIX = "renfeStandalone.v2.";
     const CACHE_TTL_STATIONS = 7 * 24 * 60 * 60 * 1000;
     const CACHE_TTL_TRAINS = 45 * 1000;
-    const CACHE_TTL_ROUTES = 5 * 60 * 1000;
+    const CACHE_TTL_ROUTES = 10 * 60 * 1000;
     const CACHE_TTL_ADIF_PAGE = 24 * 60 * 60 * 1000;
     const CACHE_TTL_ADIF_TIMETABLE = 60 * 1000;
     const ADIF_CACHE_VERSION = "v8";
@@ -8445,7 +6067,7 @@
       });
     }
     let translations = { es: { lineasPanel: { capas: "Informacion de capas", estaciones: "Estaciones" }, popup: { tren: { cerrar: "Cerrar", flecha: "->", trenaccesible: "Tren accesible", antparada: "Parada anterior", proxparada: "Proxima parada", llegadaprev: "Llegada prevista", varhoraria: "Variacion horaria" }, estacion: { estacion: "Estacion", cerrar: "Cerrar", accesible: "Estacion accesible", correspondencias: "Correspondencias" } }, leyenda: { capas: "Capas", cerrar: "Cerrar", trenescluster: "Agrupacion de trenes", trenes: "Trenes en tiempo real", estaciones: "Estaciones", accesible: "Accesible", capasbase: "Capas base del mapa", estandar: "Estandar", satelite: "Satelite" }, tools: { refreshtrain: "Refrescar trenes", geolocalizar: "Geolocalizar", pausar: "Pausar trenes", sincobertura: "Sin cobertura" }, js: { estaccercana: "Estacion mas cercana", noestaccercana: "No hay estacion a menos de 100 km.", enhora: "En hora" } } };
-    let currentLang = "es", pauseTrains = false, ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), dataTrenes, popuptren, popupestacion, seguirTren;
+    let currentLang = "es", pauseTrains = false, ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), dataTrenes, popuptren, popupestacion, seguirTren, rutaTren = null;
     let adifTimetableState = {
       stationCode: null,
       stationName: "",
@@ -8489,7 +6111,7 @@
     const CERCANIAS_DIRECTO_MAX_ARRIVAL_QUERIES = 12;
     const CERCANIAS_DIRECTO_ARRIVAL_TIMEOUT_MS = 4500;
     const CERCANIAS_DIRECTO_ARRIVAL_CONCURRENCY = 4;
-    const CERCANIAS_DIRECTO_DEFAULT_TIMEOUT_MS = 3500;
+    const CERCANIAS_DIRECTO_DEFAULT_TIMEOUT_MS = 5000;
     const CERCANIAS_DIRECTO_FAST_DEFAULT_TIMEOUT_MS = 1900;
     const CERCANIAS_DIRECTO_FAST_ARRIVAL_TIMEOUT_MS = 2200;
     const CERCANIAS_DIRECTO_FAST_MAX_ARRIVAL_QUERIES = 6;
@@ -8497,6 +6119,7 @@
     const REMOTE_FETCH_FAST_HEDGE_DELAY_MS = 500;
     const ADIF_TIMETABLE_AUTO_REFRESH_MS = 30000;
     const CERCANIAS_DIRECTO_HMAC_SECRET = "H_@aFL3rUu9a=(JYojtEFBj%H@RR8Qty=CA@S@HCB8aXJR2&gJICnmPeCd[4#Vmc8roEV]&e*F[B*cuy!*DJ7LA]#hPSpQ=QbYsqJ=m#_$E)UXF+pIZC0!M=FJoN1fq$Vj@shHX$kiXoVjejt=im[r1YNSI*#h9THG0-TzDWdG-bR6eOZqM8iVMMOC^T-arNjNvDcExu6JLwDLo+wHRXgpcU_Qtv@X(YpmJdO5O[_VCYE-DpneM%RFVNUA94FQWi^iwNNoAdmrmTKK9AMd%!)NE]!M$Lf6Zlr+!p$]L_YDTJwFKS1#jJBAjm@eKGU=t3938*o)M4wM1d9ANGI*M8]XsroC$0E%VI9CKCll9TEWIvfA@9Oya]QNb=vEI-]pZ9-gHEUEUsovLl-P*_u84F_2sJTYe$YA!NErEqgRU[DBEWpKitlSSbrBLIr0*NJzXi1Es8G2RX2@E+*Ujc2IuEgAU$+]2-ad8KT^w1]DvOCFK%O74]B!Gw-P9i[fh)K(u9ltUPTN5%+SF[I=PQ[XZt1i!s-dF*R8&GFP@PLNym9fmarLixqO*7vcD96J4f7-_3RE2CO^KPN1tvB@sRo)D5nSoec_TD6Id+CRSMtyP=!Y8FS)DC0UWQn47Qz*2HJgtqG&I&YcBNBJExxmc#Cy6Xt^Sn%VPoDqfZ@^@VOmf_Rwg@5(RCom0!nHHNCBqxwQQiyUh(]g)DTgOPPpq26Y)(+SQ-HNLzIBFidPk+bV8HjkH%&zxvQI[nTfQXQyVvMQR&VV_AGZ5A7O(iCW=cdTOT_S5!UHXTQmtTqE!VNRc#O!]%aPT]SXF*A1tEID)yN2!t^!s#Tdp$n!CRwXJ*!#lgslGFECN)%grBAKMOlIp3LN%-iYiR@pDb82U7V1b8Atr-WUo7bAA6FKJNl1%9EPxyQzmB8dTP%V)l]BiqiNR!r7w)MYhNg4(8=g[[@%(JP4Jf$IsY0bY=HGDcLs!+mm5KW$k(N!*RDAZzDDwp3dIFK0J&4pBwrLEkPG%#Lib@!cwY_xbR(aYBq+e[5C^tR+fPdGJUQgVp=gJF%S+)fkVv7QXpuv73kbABLtc4%O=LUz_)5MZLZnV[P)4$9Ijuo-vi^i%jOTW[HP(sPnlKbEUiDNKq1rc[zVIik3jV^s$+NGDz1ZN%eH56wKQyHB7-QBMzT@@iR^!Ut!fiyJ-Hwb99X+d6nOAUI8XNyVLuG8T2SN75Hv3gpRJlD0$]8@9!yN)-yT%=xQE3PBUVXyi4gH%RGEfM!@xF%L8QQmGP12[T@Mqp2T-DELW2OsAI_UZ9W*=5puYOathfGYJHK#dy%Sr0j1BtrmVPgKn$@C7i)Xp!@tE-tY5IuGaRN0m#[CcWDJzOxPhpeh$Ekz7GXWnIVRNdG15IK[$vDytn)yCwmAy&V726(*wjd0NJtMsH)tIE=D-THI]a6-ZovoS6GU[jWLXumFR24Sy46JaKpkwF0sN=Uic3F90aBiYLN**T!Tx83#rN1VIJfq6p]Qv2GBYGwmv0qO2Q776105rst*(efcl6hITCR2x0EX*(c7gU6PZzgYzW68XU^bPu[tBrQnO7I-(=v=SLUb@]KYM5UD+G!kRsLW8bwBDnyo8&+N#_]SBp!D0A'IFYOUCANSEETHISGETAJOB'[vT&jTvSCmqQUL[kNFqDum[vvarQ)6&#EzIe=O+91t_33M%uw^GgPlBHuu0bWoAB1G&cM@NFCZ@RWx6ocbLkVq0h6nzIWuGOJ0T#iNSTEr!)oUQ^mdHEe)C&P%-6TeV(u!FWt=*agZ$NPAWLJ*#!VFJ%BNtS*EzJ8B75VJ(nBG86U-(W-A!hCtE0155N09oW2XlYSC+$04=952Vi1B#l_pUn8uUFL&g@w]2ql!Qg_Oim1=G%(@BG]cUM50Ya_qcM^B7tFgHD&I%X1dT$MW*)Fgx&s*qMyQytsJ%7o2JAKkh[AqDQ6t76kD8E8ZfBF25kT#]3xmwr2LV!J]q+JNxQ$6YXYFqS(sWCX(z3yOoQGiyRDB%97HzdfyI$gj+cLlnw+bQ8Gjiuq*e+4*Zow6^4Hi3@yPAB&-g@ASAuvGQO02&q";
+    const CERCANIAS_TRAIN_DETAIL_CACHE_TTL_MS = 2 * 60 * 1000;
     const CERCANIAS_DIRECTO_EVENTS = {
       FINGERPRINT_REQUIRED: "FINGERPRINT_REQUIRED",
       FINGERPRINT_GRANT: "FINGERPRINT_GRANT",
@@ -8506,7 +6129,11 @@
       STATION_ACKNOWLEDGE: "STATION_ACKNOWLEDGE",
       REQUEST_ACK: "REQUEST_ACK",
       REQUEST_STATION_DEPARTURES: "REQUEST_STATION_DEPARTURES",
-      REQUEST_STATION_DEPARTURES_BETWEEN_STATIONS: "REQUEST_STATION_DEPARTURES_BETWEEN_STATIONS"
+      REQUEST_STATION_DEPARTURES_BETWEEN_STATIONS: "REQUEST_STATION_DEPARTURES_BETWEEN_STATIONS",
+      LOOK_FOR_SPECIFIC_TRAIN: "LOOK_FOR_SPECIFIC_TRAIN",
+      REQUEST_TRAIN_DATA: "REQUEST_TRAIN_DATA",
+      TRAIN_DATA: "TRAIN_DATA",
+      STOP_SENDING_TRAIN_DATA: "STOP_SENDING_TRAIN_DATA"
     };
     function t(e) { let o = translations[currentLang]; for (var p of e.split(".")) { if (!(o = o?.[p])) return e } return o }
     function applyTranslations() { document.querySelectorAll("[i18n]").forEach(a => { let o = t(a.getAttribute("i18n")); var e = a.getAttribute("i18n-attr"); e ? e.split(",").map(s => s.trim()).forEach(s => a.setAttribute(s, o)) : a.textContent = o }) }
@@ -8807,6 +6434,14 @@
           const repaired = repairMojibake(current);
           if (repaired && repaired !== current) el.setAttribute(attr, repaired);
         });
+      });
+    }
+    function repairDomMojibakeDeferred(root) {
+      if (!root) return;
+      const text = String(root.textContent || "");
+      if (!looksLikeMojibake(text)) return;
+      requestAnimationFrame(() => {
+        try { repairDomMojibake(root); } catch { }
       });
     }
     function stripHtml(value) {
@@ -9771,7 +7406,15 @@
         try { URL.revokeObjectURL(iframe.dataset.localBlobUrl) } catch { }
         delete iframe.dataset.localBlobUrl;
       });
-      $(".modal-adif-timetable").hide();
+      var adifModal = document.querySelector('.modal-adif-timetable');
+      _hideBackdrop();
+      if (adifModal) {
+        adifModal.classList.add('adif-modal-closing');
+        setTimeout(function() {
+          adifModal.style.display = 'none';
+          adifModal.classList.remove('adif-modal-closing');
+        }, 210);
+      }
     }
     function stopAdifTimetableAutoRefresh() {
       if (adifTimetableAutoRefreshTimer) {
@@ -11617,6 +9260,34 @@
             }
           }
         );
+      }
+      async requestTrainData(trainId, timeoutMs = CERCANIAS_DIRECTO_DEFAULT_TIMEOUT_MS) {
+        const normalizedId = String(trainId || "").trim();
+        if (!normalizedId) throw new Error("trainId vacio");
+        await this.connect(Math.min(2500, timeoutMs));
+        try {
+          const signed = await this.buildSignedPayload({ trainId: normalizedId });
+          this.sendRaw({ event: CERCANIAS_DIRECTO_EVENTS.LOOK_FOR_SPECIFIC_TRAIN, d: signed });
+        } catch { }
+        return this.requestEvent(
+          CERCANIAS_DIRECTO_EVENTS.REQUEST_TRAIN_DATA,
+          { trainId: normalizedId },
+          CERCANIAS_DIRECTO_EVENTS.TRAIN_DATA,
+          timeoutMs,
+          {
+            match: payload => {
+              const payloadId = String(payload?.trainId || payload?.data?.trainId || payload?.data?.trainData?.tripId || "").trim();
+              return payloadId === normalizedId;
+            }
+          }
+        );
+      }
+      stopTrainData(trainId) {
+        const normalizedId = String(trainId || "").trim();
+        if (!normalizedId || !this.socket || this.socket.readyState !== WebSocket.OPEN) return;
+        try {
+          this.sendRaw({ event: CERCANIAS_DIRECTO_EVENTS.STOP_SENDING_TRAIN_DATA, d: { trainId: normalizedId } });
+        } catch { }
       }
     }
     function getCercaniasFallbackClient() {
@@ -14182,8 +11853,7 @@
       const colors = ADIF_CANVAS_COLORS[screen];
       const minVisualRows = screen === "arrivals" ? 8 : 1;
       const visualRows = Math.max(rows.length, minVisualRows);
-      const interactionLowPower = Number(state.interactionBoostUntil || 0) > timestamp;
-      const lowPowerMode = rows.length > 600 || interactionLowPower;
+      const lowPowerMode = rows.length > 600;
       const logicalHeight = ADIF_CANVAS_HEADER_HEIGHT + (visualRows * ADIF_CANVAS_ROW_HEIGHT);
       const nativeDpr = window.devicePixelRatio || 1;
       const dpr = Math.min(nativeDpr, rows.length > 90 ? 1.2 : 1.5);
@@ -14600,6 +12270,7 @@
       const forcePantallasIframe = selectedSource === "adif";
       const useBoardMode = !forcePantallasIframe && (adifTimetableState.meta?.source === "CERCANIAS_DIRECTO" || adifTimetableState.meta?.source === "API_ADIF");
       if (adifTimetableState.loading && !adifTimetableState.rawPayload && (forcePantallasIframe || !hasRows || adifTimetableState.loadingPhase === "fallback" || adifTimetableState.loadingPhase === "api")) {
+        body.classList.add("panel-mode");
         const loadingMessage = adifTimetableState.loadingPhase === "fallback"
           ? "Cargando horarios de Cercanias..."
           : (adifTimetableState.loadingPhase === "api" ? "Cargando horarios de API ADIF..." : "Cargando pantallas informativas ADIF...");
@@ -14611,6 +12282,7 @@
         return;
       }
       if (useBoardMode) {
+        body.classList.add("panel-mode");
         body.dataset.adifRenderToken = "";
         const rowsByType = adifTimetableState.rowsByType || { proximasSalidas: [], proximasLlegadas: [] };
         const departuresRows = filterAdifRowsByTraffic(rowsByType.proximasSalidas, adifTimetableState.filter);
@@ -14638,6 +12310,7 @@
         return;
       }
       if (!adifTimetableState.rawPayload) {
+        body.classList.add("panel-mode");
         body.dataset.adifRenderToken = "";
         body.innerHTML = renderAdifGravitaPanels(adifTimetableState.error || "No se pudieron cargar los horarios para esta estacion.", true);
         repairDomMojibake(body);
@@ -14646,6 +12319,7 @@
         return;
       }
       const renderToken = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      body.classList.add("panel-mode");
       body.dataset.adifRenderToken = renderToken;
       body.innerHTML = renderAdifGravitaPanels();
       repairDomMojibake(body);
@@ -14739,6 +12413,7 @@
         window.visualViewport.addEventListener("resize", syncDynamicViewportHeight);
         window.visualViewport.addEventListener("scroll", syncDynamicViewportHeight);
       }
+      setTimeout(() => { cargarRuta().catch(() => false); }, 50);
       var e = $(".leyend-content").html(); $(".leyend-content-movil").html(e);
       repairDomMojibake(document.body);
     };
@@ -14755,8 +12430,43 @@
     function getColorByDelay(d) { return !d || isNaN(d) ? "black" : d <= 15 ? "#008000" : d <= 60 ? "#FFDE21" : "#FF0000" }
     function retrasoDesc(e) { if (e == null || isNaN(e)) return "NO DISPONIBLE"; if (e == 0) return t("js.enhora"); if (e < 0) return "-" + e + "m."; if (e >= 60) { var m = e % 60, h = "+" + Math.floor(e / 60) + "h"; if (m > 0) h += " " + m + "m."; return h } return "+" + e + "m." }
     function formatHour(e) { if (!e) return "-"; var m = e.match(/T(\d{2}:\d{2})/); return m ? m[1] + "h" : e }
-    function closeModal(s) { $(s).hide() }
-    function openModal(s) { $(s).show() }
+    function _showBackdrop() {
+      var bd = document.getElementById('modalBackdrop');
+      if (bd) bd.classList.add('active');
+    }
+    function _hideBackdrop() {
+      var bd = document.getElementById('modalBackdrop');
+      if (bd) bd.classList.remove('active');
+    }
+    function closeModal(s) {
+      var els = document.querySelectorAll(s);
+      if (!els.length) return;
+      if (String(s || "").includes("modal-infopopup")) {
+        rutaTren = null;
+        deleteMapRoute();
+      }
+      var isMobileSheet = false, isDesktopCenter = false;
+      els.forEach(function(el) {
+        if (el.style.display === 'none' || getComputedStyle(el).display === 'none') return;
+        isMobileSheet = el.classList.contains('modal-info-movil') || el.classList.contains('modal-info-train-movil') || el.classList.contains('modal-tren-movil') || el.classList.contains('modal-estacion-movil');
+        isDesktopCenter = el.classList.contains('modal-info') && !isMobileSheet;
+        var animClass = isMobileSheet ? 'mobile-modal-closing' : (isDesktopCenter ? 'modal-closing' : '');
+        if (animClass) {
+          el.classList.add(animClass);
+          setTimeout(function() { el.style.display = 'none'; el.classList.remove(animClass); }, 250);
+        } else {
+          el.style.display = 'none';
+        }
+      });
+      _hideBackdrop();
+    }
+    function openModal(s) { $(s).show(); _showBackdrop(); }
+    // Backdrop click-to-close
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.id === 'modalBackdrop') {
+        closeModal('.modal-infopopup');
+      }
+    });
 
     // Use event delegation for ADIF Timetable modal buttons because its DOM is repeatedly destroyed and recreated.
     document.addEventListener("click", function(e) {
@@ -14801,7 +12511,6 @@
     const EMBEDDED_STATIONS = repairMojibakeDeep(JSON.parse(document.getElementById("embeddedStationsJson").textContent));
     const EMBEDDED_CERCANIAS_LINES = repairMojibakeDeep(JSON.parse(document.getElementById("embeddedCercaniasLinesJson").textContent));
     const EMBEDDED_CERCANIAS_STATIONS = repairMojibakeDeep(JSON.parse(document.getElementById("embeddedCercaniasStationsJson").textContent));
-    const EMBEDDED_CERCANIAS_TRAINS = repairMojibakeDeep(JSON.parse(document.getElementById("embeddedCercaniasTrainsJson").textContent));
     let mergedStationsReady = false;
     function renderStations(data) {
       const repairedData = repairMojibakeDeep(data);
@@ -14820,6 +12529,8 @@
     let vectorCercaniasEstacionesSource = new ol.source.Vector;
     vectorCercaniasEstacionesSource.addFeatures((new ol.format.GeoJSON).readFeatures(EMBEDDED_CERCANIAS_STATIONS, { featureProjection: "EPSG:3857" }).filter(f => f.get("MOSTRAR") !== "N"));
     let vectorMergedEstacionesSource = new ol.source.Vector;
+    const stationFeatureByCodeCache = new Map();
+    const stationNameByCodeCache = new Map();
     mergedStationsReady = true;
     rebuildMergedStations();
 
@@ -14844,6 +12555,17 @@
         return a;
       }
       return cercName || ldName || "-";
+    }
+    function rebuildStationLookupCaches() {
+      stationFeatureByCodeCache.clear();
+      stationNameByCodeCache.clear();
+      vectorMergedEstacionesSource.getFeatures().forEach(feature => {
+        const code = normalizeStationCode(feature.get("stationCode") || feature.get("stationCodeRaw") || "");
+        if (!code) return;
+        const name = normalizeAdifName(feature.get("displayName") || (feature.get("ldProps") && feature.get("ldProps").NOMBRE) || (feature.get("cercProps") && feature.get("cercProps").NOMBRE_ESTACION) || feature.get("NOMBRE") || feature.get("NOMBRE_ESTACION") || "");
+        stationFeatureByCodeCache.set(code, feature);
+        if (name) stationNameByCodeCache.set(code, name);
+      });
     }
     function rebuildMergedStations() {
       const entries = [];
@@ -14898,18 +12620,31 @@
           cercProps: entry.cerc || null
         }));
       });
+      rebuildStationLookupCaches();
     }
     function getStationFeatureByCode(c) {
       const code = normalizeStationCode(c);
-      return vectorMergedEstacionesSource.getFeatures().find(e => normalizeStationCode(e.get("stationCode")) === code) || vectorEstaciones.getFeatures().find(e => normalizeStationCode(e.get("CODIGO")) === code) || vectorCercaniasEstacionesSource.getFeatures().find(e => normalizeStationCode(e.get("CODIGO_ESTACION")) === code) || null;
+      if (!code) return null;
+      const cached = stationFeatureByCodeCache.get(code);
+      if (cached) return cached;
+      const found = vectorMergedEstacionesSource.getFeatures().find(e => normalizeStationCode(e.get("stationCode")) === code) || vectorEstaciones.getFeatures().find(e => normalizeStationCode(e.get("CODIGO")) === code) || vectorCercaniasEstacionesSource.getFeatures().find(e => normalizeStationCode(e.get("CODIGO_ESTACION")) === code) || null;
+      if (found) stationFeatureByCodeCache.set(code, found);
+      return found;
     }
     function getStationNameByCode(c) {
+      const code = normalizeStationCode(c);
+      const cached = stationNameByCodeCache.get(code);
+      if (cached) return cached;
       var f = getStationFeatureByCode(c);
       if (!f) {
         var override = getAdifStationNameOverride(c);
-        return normalizeAdifName(override || c);
+        const resolved = normalizeAdifName(override || c);
+        if (code && resolved) stationNameByCodeCache.set(code, resolved);
+        return resolved;
       }
-      return normalizeAdifName(f.get("displayName") || (f.get("ldProps") && f.get("ldProps").NOMBRE) || (f.get("cercProps") && f.get("cercProps").NOMBRE_ESTACION) || f.get("NOMBRE") || f.get("NOMBRE_ESTACION") || c);
+      const resolved = normalizeAdifName(f.get("displayName") || (f.get("ldProps") && f.get("ldProps").NOMBRE) || (f.get("cercProps") && f.get("cercProps").NOMBRE_ESTACION) || f.get("NOMBRE") || f.get("NOMBRE_ESTACION") || c);
+      if (code && resolved) stationNameByCodeCache.set(code, resolved);
+      return resolved;
     }
     function getStationGeometryByCode(c) { var f = getStationFeatureByCode(c); return f ? f.getGeometry() : null }
     function zoomToStation(c) { var f = getStationFeatureByCode(c); if (f) map.getView().animate({ center: f.getGeometry().getCoordinates(), zoom: 9, duration: 100 }) }
@@ -14918,6 +12653,47 @@
       var normalized = normalizeTrainIdentifier(c);
       if (!normalized.raw) return null;
       return vectorTrenesSource.getFeatures().find(e => trainCodesMatch(e.get("codComercial"), normalized.raw)) || null;
+    }
+    function getFeatCercaniasTrainByCode(c) {
+      const raw = String(c || "").trim();
+      if (!raw || !vectorCercaniasTrenesSource || typeof vectorCercaniasTrenesSource.getFeatures !== "function") return null;
+      const byId = vectorCercaniasTrenesSource.getFeatureById(raw);
+      if (byId) return byId;
+      const normalized = normalizeTrainIdentifier(raw);
+      return vectorCercaniasTrenesSource.getFeatures().find(feature => {
+        return String(feature.getId() || "").trim() === raw
+          || trainCodesMatch(feature.get("codTren"), normalized.raw)
+          || trainCodesMatch(feature.get("codComercial"), normalized.raw)
+          || trainCodesMatch(feature.get("tripId"), normalized.raw);
+      }) || null;
+    }
+    function getTrainRouteContext(code, sourceHint = "") {
+      const raw = String(code || "").trim();
+      const hint = String(sourceHint || "").trim().toLowerCase();
+      if (!raw) return null;
+      if (hint === "cercanias") {
+        const feature = getFeatCercaniasTrainByCode(raw);
+        if (!feature) return null;
+        return {
+          source: "cercanias",
+          feature,
+          requestId: String(feature.getId() || feature.get("tripId") || raw).trim(),
+          displayCode: String(feature.get("codTren") || raw).trim() || raw,
+          backCode: String(feature.getId() || feature.get("tripId") || feature.get("codTren") || raw).trim() || raw
+        };
+      }
+      if (hint === "ld") {
+        const feature = getFeatTrainByCode(raw);
+        if (!feature) return null;
+        return {
+          source: "ld",
+          feature,
+          requestId: String(feature.get("codComercial") || raw).trim() || raw,
+          displayCode: String(feature.get("codComercial") || raw).trim() || raw,
+          backCode: String(feature.get("codComercial") || raw).trim() || raw
+        };
+      }
+      return getTrainRouteContext(raw, "ld") || getTrainRouteContext(raw, "cercanias");
     }
     function existsTrainWithCode(c) { return !!getFeatTrainByCode(c) }
     function ispopupShown() { return $(".modal-tren").is(":visible") || $(".modal-tren-movil").is(":visible") || $(".modal-estacion").is(":visible") || $(".modal-estacion-movil").is(":visible") }
@@ -15313,6 +13089,7 @@
         if (navigator.onLine && !pauseTrains) {
           const dataCercanias = await fetchRenfeJson("/renfe-visor/" + file, { baseUrl: B_CERCA, cacheKey: "trains.cercanias." + file, forceFresh: true, timeoutMs: 9000 });
           updateCercaniasTrains(dataCercanias);
+          try { getCercaniasFallbackClient().connect(3000).catch(() => {}); } catch {}
         }
       } catch (e) {
         if (vectorCercaniasTrenesSource.getFeatures().length === 0) notifyLoadError("cercaniasTrains", "No se pudieron cargar los trenes de Cercanias.", e);
@@ -15348,9 +13125,8 @@
 
     const cachedTrains = getCachedJson("trains.flotaLD.json", CACHE_TTL_TRAINS);
     if (cachedTrains) { dataTrenes = cachedTrains; updateTrains(cachedTrains) }
-    updateCercaniasTrains(EMBEDDED_CERCANIAS_TRAINS);
     const cachedCercaniasTrains = getCachedJson("trains.cercanias.flota.json", CACHE_TTL_TRAINS);
-    if (cachedCercaniasTrains) updateCercaniasTrains(cachedCercaniasTrains);
+    if (cachedCercaniasTrains && Array.isArray(cachedCercaniasTrains.trenes) && cachedCercaniasTrains.trenes.length) updateCercaniasTrains(cachedCercaniasTrains);
     cargarTrenes();
     cargarTrenesCercanias();
     setInterval(() => cargarTrenes(), 15000);
@@ -15369,18 +13145,70 @@
       if (String(e.get("codEstAct") || "") && String(e.get("codEstAct")) === String(e.get("codEstSig") || "")) return '<div class="tag-info warning"><span class="text-tag-modal-warning">Estacionado</span></div>';
       return '<div class="tag-info info"><span class="text-tag-modal-info">En marcha</span></div>';
     }
+    function getDelayClass(delay) {
+      const d = parseInt(delay, 10);
+      if (isNaN(d) || d <= 0) return "ontime";
+      if (d <= 15) return "slight";
+      return "severe";
+    }
+    function getDelayIndicatorHtml(delay) {
+      const d = parseInt(delay, 10);
+      if (isNaN(d)) return "";
+      const cls = getDelayClass(d);
+      const text = d <= 0 ? "En hora" : ("+" + d + " min");
+      return `<div class="popup-delay-indicator popup-delay-indicator--${cls}">${escapeHtml(text)}</div>`;
+    }
+    function buildPopupInfoCard(label, value, detail = "", extraClass = "") {
+      const cls = ["popup-card", extraClass].filter(Boolean).join(" ");
+      return `<article class="${cls}"><span class="popup-card-label">${escapeHtml(label || "-")}</span><span class="popup-card-value">${escapeHtml(value || "-")}</span>${detail ? `<span class="popup-card-sub">${escapeHtml(detail)}</span>` : ""}</article>`;
+    }
+    function buildPopupMetricCard(label, value, detail = "", extraClass = "") {
+      const cls = ["popup-card", "popup-metric-card", extraClass].filter(Boolean).join(" ");
+      return `<article class="${cls}"><span class="popup-card-label">${escapeHtml(label || "-")}</span><span class="popup-card-value">${escapeHtml(value || "-")}</span>${detail ? `<span class="popup-card-sub">${escapeHtml(detail)}</span>` : ""}</article>`;
+    }
+    function buildPopupConnectionRow(iconSrc, text, alt = "", extraClass = "") {
+      if (!text) return "";
+      const cls = ["popup-connection-row", extraClass].filter(Boolean).join(" ");
+      return `<div class="${cls}"><img src="${iconSrc}" alt="${escapeHtml(alt || text)}"><span>${escapeHtml(text)}</span></div>`;
+    }
+    function buildStationPopupHtml({ code, name, closeIconBase, tagsHtml = "", trainsButtonHtml = "", addressPrimary = "", addressSecondary = "", lineasHtml = "", connectionsHtml = "" }) {
+      const hasAddress = !!(addressPrimary || addressSecondary);
+      const hasConnections = !!(String(lineasHtml || "").trim() || String(connectionsHtml || "").trim());
+      return `<div class="popup-sheet popup-sheet-station">${ismobile ? '<div class="popup-sheet-grabber"></div>' : ""}<section class="section-header-modal-station popup-sheet-header"><div class="popup-sheet-header-main"><div class="popup-station-header-accent"></div><span class="popup-station-code">Estacion ${escapeHtml(code || "-")}</span><span class="popup-station-name">${escapeHtml(name || "-")}</span></div><div><div role="button" class="button-close-modal" onclick="closeModal('.modal-estacion,.modal-estacion-movil')"><img src="${closeIconBase}/imgs/tool/close.svg" alt="Cerrar"></div></div></section><section class="popup-sheet-body">${tagsHtml ? `<div class="popup-chip-row">${tagsHtml}</div>` : ""}${trainsButtonHtml || ""}${hasAddress ? `<article class="popup-card popup-station-address"><span class="popup-card-label">Ubicacion</span>${addressPrimary ? `<span class="popup-card-value">${escapeHtml(addressPrimary)}</span>` : ""}${addressSecondary ? `<span class="popup-card-sub">${escapeHtml(addressSecondary)}</span>` : ""}</article>` : ""}${hasConnections ? `<section class="popup-section popup-connections-section"><span class="popup-section-title">Correspondencias</span>${lineasHtml ? `<div class="popup-lineas">${lineasHtml}</div>` : ""}<div class="popup-connections">${connectionsHtml || '<span class="popup-connections-empty">Sin correspondencias registradas.</span>'}</div></section>` : ""}</section></div>`;
+    }
     function getCercaniasPopupTrainHtml(e) {
-      const linea = e.get("codLinea") || "-", origen = getStationNameByCode(e.get("codEstOrig")) || "-", destino = getStationNameByCode(e.get("codEstDest")) || "-", actual = getStationNameByCode(e.get("codEstAct")) || "-", siguiente = getStationNameByCode(e.get("codEstSig")) || "-", retraso = retrasoDesc(parseInt(e.get("retrasoMin"), 10) || 0), llegada = e.get("horaLlegadaSigEst") ? formatHour(e.get("horaLlegadaSigEst")) : "-", via = e.get("via") || "-", nextVia = e.get("nextVia") || "-", acc = e.get("accesible"), lineBadge = renderCercaniasLineBadges(e.get("nucleo"), linea, getCercaniasLineColor(e.get("nucleo"), linea));
-      return '<section class="section-mid-modal row pt-3"><div class="d-flex"><div class="lineas">' + lineBadge + '</div></div><div class="pt-2"><span class="name-line-train-modal">' + origen + ' <img src="' + B_CERCA + '/imgs/symbol/arrow.svg" alt="->"> ' + destino + '</span></div><section class="section-tag-mid-modal pt-1"><div class="d-flex gap-2">' + getCercaniasStatusTag(e) + (acc ? '<div class="tag-info accessible"><img class="icon-accessible" src="' + B_CERCA + '/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Tren accesible</span></div>' : '') + '</div></section></section><section class="section-footer-modal pt-3 row"><div class="d-flex"><div class="d-flex flex-column" style="min-width:50%;padding-right:2em"><span class="act-station"><div class="d-flex flex-column"><span>Parada actual</span><span><b>' + actual + '</b> (Via: <b>' + via + '</b>)</span></div></span><span class="next-station flex-column"><div class="d-flex flex-column"><span>Proxima parada</span><span><b>' + siguiente + '</b> (Via: <b>' + nextVia + '</b>)</span></div></span></div></div><div class="p-0 pt-1 row"><span class="time-next-station col-6 d-flex flex-column align-items-start"><span>Llegada prevista</span><b>' + llegada + '</b></span><span class="time-next-station col-6 d-flex flex-column align-items-start"><span>Variacion horaria</span><span><b>' + retraso + '</b></span></span></div></section>';
+      const linea = e.get("codLinea") || "-";
+      const tripId = String(e.getId() || e.get("tripId") || "").trim();
+      const trainCode = String(e.get("codTren") || "").trim();
+      const origen = getStationNameByCode(e.get("codEstOrig")) || "-";
+      const destino = getStationNameByCode(e.get("codEstDest")) || "-";
+      const actual = getStationNameByCode(e.get("codEstAct")) || "-";
+      const siguiente = getStationNameByCode(e.get("codEstSig")) || "-";
+      const rawDelay = parseInt(e.get("retrasoMin"), 10) || 0;
+      const retraso = retrasoDesc(rawDelay);
+      const delayCls = getDelayClass(rawDelay);
+      const delayIndicator = getDelayIndicatorHtml(rawDelay);
+      const llegada = e.get("horaLlegadaSigEst") ? formatHour(e.get("horaLlegadaSigEst")) : "-";
+      const via = e.get("via") || "-";
+      const nextVia = e.get("nextVia") || "-";
+      const acc = e.get("accesible");
+      const seg = trainCode && trainCode === seguirTren;
+      const lineBadge = renderCercaniasLineBadges(e.get("nucleo"), linea, getCercaniasLineColor(e.get("nucleo"), linea));
+      const tags = `${getCercaniasStatusTag(e)}${acc ? `<div class="tag-info accessible"><img class="icon-accessible" src="${B_CERCA}/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Tren accesible</span></div>` : ""}${delayIndicator}`;
+      const routeButton = tripId ? `<div class="btntool" role="button" onclick="renderTrainTimeline('${escapeHtml(tripId)}','cercanias')"><div class="text-btntool"><img src="${B}/imgs/tool/route24.svg" alt="Ruta"><span>Consultar ruta</span></div></div>` : "";
+      const followButton = trainCode ? (seg ? `<div class="btntool" role="button" onclick="setSeguirTren('')"><div class="text-btntool"><img src="${B}/imgs/tool/locatec24.svg" alt="Anular"><span>Anular seguimiento</span></div></div>` : `<div class="btntool" role="button" onclick="setSeguirTren('${escapeHtml(trainCode)}')"><div class="text-btntool segtren"><img src="${B}/imgs/tool/locate24.svg" alt="Seguir"><span>Seguimiento</span></div></div>`) : "";
+      return `<section class="popup-sheet-body popup-train-sheet"><div class="popup-route-block"><div class="popup-route-badges">${lineBadge}</div><div class="popup-route-banner"><span class="popup-route-title">${escapeHtml(origen)} <img src="${B_CERCA}/imgs/symbol/arrow.svg" alt="->"> ${escapeHtml(destino)}</span></div><div class="popup-chip-row">${tags}</div></div><div class="popup-grid popup-train-grid">${buildPopupInfoCard("Parada actual", actual, via && via !== "-" ? `Via ${via}` : "Via pendiente")}${buildPopupInfoCard("Proxima parada", siguiente, nextVia && nextVia !== "-" ? `Via ${nextVia}` : "Via pendiente")}${buildPopupMetricCard("Llegada prevista", llegada)}${buildPopupMetricCard("Variacion horaria", retraso, "", `popup-metric-delay--${delayCls}`)}</div>${routeButton || followButton ? `<div class="popup-actions">${routeButton}${followButton}</div>` : ""}</section>`;
     }
     function popupInfoTrenCercanias(e) {
       $(".tabs").html('<div class="row"><span class="title-menu">Cercanias - ' + (e.get("codTren") || "-") + '</span></div>');
       $(".modal-tren-content").html(getCercaniasPopupTrainHtml(e));
       const modal = ismobile ? $(".modal-tren-movil") : $(".modal-tren");
-      repairDomMojibake(modal.get(0));
-      modal.show();
+      modal.show(); _showBackdrop();
+      repairDomMojibakeDeferred(modal.get(0));
+      prefetchCercaniasTrainRoute(e);
     }
     function popupInfoTren(e) {
+      cargarRuta().catch(() => false);
       e = Array.isArray(e) ? e : [e];
       if (e.length > 1) {
         let tabs = '<ul class="nav nav-tabs" style="flex-wrap:nowrap;overflow-x:auto;display:flex">', content = '<div class="tab-content">';
@@ -15389,27 +13217,210 @@
       }
       else { $(".modal-tren-content").html(getPopupTrainHtml(e[0])); $(".tabs").html($(".title-menu-content").html()); $(".title-menu-content").html("") }
       const modal = ismobile ? $(".modal-tren-movil") : $(".modal-tren");
-      if (!$(".modal-tren-content").html().includes("$")) modal.show();
+      if (!$(".modal-tren-content").html().includes("$")) { modal.show(); _showBackdrop(); }
       applyTranslations();
-      repairDomMojibake(modal.get(0));
+      repairDomMojibakeDeferred(modal.get(0));
     }
     function getPopupTrainHtml(e) {
-      var d = retrasoDesc(e.get("ultRetraso")), tp = e.get("codProduct") ? getTypeByCode(e.get("codProduct")).desProduct : "-", seg = e.get("codComercial") === seguirTren;
-      return popuptren.replace("${TIPOTREN}", tp).replace("${CODTREN}", e.get("codComercial") || "-").replace("${SHOWANT}", e.get("codEstAnt") == e.get("codEstSig") ? "d-none" : "").replace("${SHOWACC}", e.get("accesible") ? "" : "d-none").replace("${PARADAANTERIOR}", e.get("codEstAnt") ? getStationNameByCode(e.get("codEstAnt")) : "-").replace("${PARADASIGUIENTE}", e.get("codEstSig") ? getStationNameByCode(e.get("codEstSig")) : "-").replace("${ORIGEN}", e.get("codOrigen") ? getStationNameByCode(e.get("codOrigen")) : "-").replace("${DESTINO}", e.get("codDestino") ? getStationNameByCode(e.get("codDestino")) : "-").replace("${IDTREN}", e.get("codComercial") || "-").replace("${IDTRENRUTA}", e.get("codComercial") || "-").replace("${SHOWSEG}", seg ? "d-none" : "").replace("${SHOWSEGCANC}", seg ? "" : "d-none").replace("${HORAPREV}", e.get("horaLlegadaSigEst") ? formatHour(e.get("horaLlegadaSigEst")) : "-").replace("${RETRASO}", d)
+      const rawDelay = parseInt(e.get("ultRetraso"), 10) || 0;
+      const retraso = retrasoDesc(rawDelay);
+      const tipoTren = e.get("codProduct") ? getTypeByCode(e.get("codProduct")).desProduct : "-";
+      const tipoInfo = e.get("codProduct") ? getTypeByCode(e.get("codProduct")) : null;
+      const tipoConf = tipoInfo ? getConfTypeByCode(tipoInfo.type) : null;
+      const siglas = tipoInfo ? tipoInfo.siglas : "";
+      const trainColor = tipoConf ? tipoConf.color : "#6B1D3B";
+      const codigo = e.get("codComercial") || "-";
+      const origen = e.get("codOrigen") ? getStationNameByCode(e.get("codOrigen")) : "-";
+      const destino = e.get("codDestino") ? getStationNameByCode(e.get("codDestino")) : "-";
+      const paradaAnterior = e.get("codEstAnt") ? getStationNameByCode(e.get("codEstAnt")) : "-";
+      const paradaSiguiente = e.get("codEstSig") ? getStationNameByCode(e.get("codEstSig")) : "-";
+      const horaPrevista = e.get("horaLlegadaSigEst") ? formatHour(e.get("horaLlegadaSigEst")) : "-";
+      const accesible = !!e.get("accesible");
+      const seg = codigo === seguirTren;
+      const delayCls = getDelayClass(rawDelay);
+      const delayIndicator = getDelayIndicatorHtml(rawDelay);
+      const typeBadge = siglas ? `<span class="popup-train-type-badge" style="background:${trainColor}">${escapeHtml(siglas)}</span>` : "";
+      const chips = [accesible ? `<div class="tag-info accessible"><img class="icon-accessible" src="${B}/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Tren accesible</span></div>` : "", delayIndicator].filter(Boolean).join("");
+      const cards = [
+        e.get("codEstAnt") == e.get("codEstSig") ? "" : buildPopupInfoCard("Parada anterior", paradaAnterior),
+        buildPopupInfoCard("Proxima parada", paradaSiguiente),
+        buildPopupMetricCard("Llegada prevista", horaPrevista),
+        buildPopupMetricCard("Variacion horaria", retraso, "", `popup-metric-delay--${delayCls}`)
+      ].filter(Boolean).join("");
+      return `<section><div class="row title-menu-content"><span class="title-menu">${typeBadge}<span>${escapeHtml(tipoTren)}</span> - <span>${escapeHtml(codigo)}</span></span></div></section><section class="popup-sheet-body popup-train-sheet"><div class="popup-route-block"><div class="popup-route-banner"><span class="popup-route-title">${escapeHtml(origen)} <img src="${B}/imgs/symbol/arrow.svg" alt="->"> ${escapeHtml(destino)}</span></div>${chips ? `<div class="popup-chip-row">${chips}</div>` : ""}</div><div class="popup-grid popup-train-grid">${cards}</div><div class="popup-actions"><div class="btntool" role="button" onclick="renderTrainTimeline('${escapeHtml(codigo)}','ld')"><div class="text-btntool"><img src="${B}/imgs/tool/route24.svg" alt="Ruta"><span>Consultar ruta</span></div></div>${seg ? `<div class="btntool" role="button" onclick="setSeguirTren('')"><div class="text-btntool"><img src="${B}/imgs/tool/locatec24.svg" alt="Anular"><span>Anular seguimiento</span></div></div>` : `<div class="btntool" role="button" onclick="setSeguirTren('${escapeHtml(codigo)}')"><div class="text-btntool segtren"><img src="${B}/imgs/tool/locate24.svg" alt="Seguir"><span>Seguimiento</span></div></div>`}</div></section>`;
     }
     function popupInfoEstacion(e) {
-      const ld = e.get("ldProps"), cerc = e.get("cercProps"), acc = (ld && isAccesibleCriteria(ld.ACCESIBLE)) || (cerc && isCercaniasStationAccesible(cerc.ACCESIBILIDAD)), at = ld && ld.ATENDO == "1", parking = cerc && isCercaniasStationParking(cerc.PARKING_BICIS), code = e.get("stationCode") || "-", name = e.get("displayName") || "-", dir1 = ld && ld.DIR ? ld.DIR : "-", dir2 = ld && ld.PROV && ld.LOCALIDAD ? ld.LOCALIDAD + " (" + ld.PROV + ")" : "-", lineas = cerc ? renderCercaniasLineBadges(cerc.NUCLEO, cerc.LINEAS, cerc.COLOR) : "", bus = cerc && cerc.COR_BUS ? '<div class="pt-1 cor_bus_container"><img src="' + B_CERCA + '/imgs/lyrbutton/bus.svg" alt="Bus"><span>' + cerc.COR_BUS + '</span></div>' : "", metro = cerc && cerc.COR_METRO ? '<div class="pt-2 cor_metro_container"><img src="' + B_CERCA + '/imgs/tool/metro.svg" alt="Metro"><span>' + cerc.COR_METRO + '</span></div>' : "", trainsButton = code && code !== "-" ? `<div class="station-trains-cta-wrap"><button type="button" class="btntool station-trains-cta" onclick="openAdifTimetable('${escapeHtml(code)}')" aria-label="Ver salidas y llegadas en tiempo real"><div class="text-btntool"><span class="station-trains-cta-icon"><img src="${B}/imgs/tool/train.svg" alt=""></span><span class="station-trains-cta-copy"><span class="station-trains-cta-eyebrow">Tiempo real</span><span class="station-trains-cta-title">Ver trenes</span><span class="station-trains-cta-subtitle">Salidas y llegadas de esta estacion</span></span><span class="station-trains-cta-arrow" aria-hidden="true">&rarr;</span></div></button></div>` : "", html = '<div class="d-flex flex-column"><section class="section-header-modal-station"><div class="d-flex justify-content-between"><div class="row"><span class="title-menu">Estacion - ' + code + '</span></div><div><div role="button" class="button-close-modal" onclick="closeModal(\'.modal-estacion,.modal-estacion-movil\')"><img src="' + B + '/imgs/tool/close.svg" alt="Cerrar"></div></div></div></section><div class="d-flex flex-column"><section class="section-mid-modal-station"><div class="row pt-3"><span class="name-line-train-modal">' + name + '</span></div><section class="section-tag-mid-modal-station row pt-1"><div class="d-flex flex-wrap gap-2">' + (acc ? '<div class="estaccessible"><div class="tag-info accessible"><img class="icon-accessible" src="' + B + '/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Estacion accesible</span></div></div>' : '') + (at ? '<div class="estatendo"><div class="tag-info atendo"><img class="icon-accessible" src="' + B + '/imgs/tool/accessible.svg" alt="Acerca"><span class="text-tag-modal-accessible">Acerca</span></div></div>' : '') + (parking ? '<div class="estparking"><div class="tag-info" style="background:#33A85C"><img class="icon-parking" src="' + B_CERCA + '/imgs/tool/parking.svg" alt="Aparcabicis"><span class="text-tag-modal-accessible">Aparcabicis</span></div></div>' : '') + '</div>' + trainsButton + '<div class="d-flex flex-column overflow-auto" style="max-height:40vh"><section class="section-footer-modal-station"><div class="row cor_container"><div class="pt-2 ps-1"><img src="' + B + '/imgs/symbol/dir.svg" alt="Dir"><span>' + dir1 + '</span></div><div class="pt-2 ps-5"><span>' + dir2 + '</span></div></div></section></div><div class="row p-3 correspondencias"><div class="separator-tag-modal-station"></div></div></section></section></div><div class="d-flex flex-column overflow-auto" style="max-height:40vh"><section class="section-footer-modal-station"><div class="row cor_container"><span class="correspondences">Correspondencias</span><div class="linecorresp d-flex flex-wrap">' + lineas + '</div>' + metro + bus + (cerc ? '<div class="pt-2 cor_ld_container"><img src="' + B_CERCA + '/imgs/symbol/cercanias.svg" alt="Cercanias"><span>Cercanias</span></div>' : '') + '</div></section></div></div>';
+      const ld = e.get("ldProps");
+      const cerc = e.get("cercProps");
+      const acc = (ld && isAccesibleCriteria(ld.ACCESIBLE)) || (cerc && isCercaniasStationAccesible(cerc.ACCESIBILIDAD));
+      const at = ld && ld.ATENDO == "1";
+      const parking = cerc && isCercaniasStationParking(cerc.PARKING_BICIS);
+      const code = e.get("stationCode") || "-";
+      const name = e.get("displayName") || "-";
+      const dir1 = ld && ld.DIR ? ld.DIR : "";
+      const dir2 = ld && ld.PROV && ld.LOCALIDAD ? ld.LOCALIDAD + " (" + ld.PROV + ")" : "";
+      const lineas = cerc ? renderCercaniasLineBadges(cerc.NUCLEO, cerc.LINEAS, cerc.COLOR) : "";
+      const tags = `${acc ? `<div class="tag-info accessible"><img class="icon-accessible" src="${B}/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Estacion accesible</span></div>` : ""}${at ? `<div class="tag-info atendo"><img class="icon-accessible" src="${B}/imgs/tool/accessible.svg" alt="Acerca"><span class="text-tag-modal-accessible">Acerca</span></div>` : ""}${parking ? `<div class="tag-info" style="background:#33A85C"><img class="icon-parking" src="${B_CERCA}/imgs/tool/parking.svg" alt="Aparcabicis"><span class="text-tag-modal-accessible">Aparcabicis</span></div>` : ""}`;
+      const connections = [
+        cerc && cerc.COR_METRO ? buildPopupConnectionRow(`${B_CERCA}/imgs/tool/metro.svg`, cerc.COR_METRO, "Metro") : "",
+        cerc && cerc.COR_BUS ? buildPopupConnectionRow(`${B_CERCA}/imgs/lyrbutton/bus.svg`, cerc.COR_BUS, "Bus") : "",
+        cerc ? buildPopupConnectionRow(`${B_CERCA}/imgs/symbol/cercanias.svg`, "Cercanias", "Cercanias") : ""
+      ].filter(Boolean).join("");
+      const trainsButton = code && code !== "-" ? `<div class="station-trains-cta-wrap"><button type="button" class="btntool station-trains-cta" onclick="openAdifTimetable('${escapeHtml(code)}')" aria-label="Ver salidas y llegadas en tiempo real"><div class="text-btntool"><span class="station-trains-cta-icon"><img src="${B}/imgs/tool/train.svg" alt=""></span><span class="station-trains-cta-copy"><span class="station-trains-cta-eyebrow">Tiempo real</span><span class="station-trains-cta-title">Ver trenes</span><span class="station-trains-cta-subtitle">Salidas y llegadas de esta estacion</span></span><span class="station-trains-cta-arrow" aria-hidden="true">&rarr;</span></div></button></div>` : "";
+      const html = buildStationPopupHtml({ code, name, closeIconBase: B, tagsHtml: tags, trainsButtonHtml: trainsButton, addressPrimary: dir1, addressSecondary: dir2, lineasHtml: lineas, connectionsHtml: connections });
       const modal = ismobile ? $(".modal-estacion-movil") : $(".modal-estacion");
       modal.html(html);
-      repairDomMojibake(modal.get(0));
-      modal.show();
+      modal.show(); _showBackdrop();
+      repairDomMojibakeDeferred(modal.get(0));
     }
     function popupInfoEstacionCercanias(e) {
-      const p = e.getProperties(), acc = isCercaniasStationAccesible(p.ACCESIBILIDAD), parking = isCercaniasStationParking(p.PARKING_BICIS), bus = p.COR_BUS || "", metro = p.COR_METRO || "", lineas = renderCercaniasLineBadges(p.NUCLEO, p.LINEAS, p.COLOR), html = '<div class="d-flex flex-column"><section class="section-header-modal-station"><div class="d-flex justify-content-between"><div class="row"><span class="title-menu">Estacion - ' + (p.CODIGO_ESTACION || "-") + '</span></div><div><div role="button" class="button-close-modal" onclick="closeModal(\'.modal-estacion,.modal-estacion-movil\')"><img src="' + B_CERCA + '/imgs/tool/close.svg" alt="Cerrar"></div></div></div></section><div class="d-flex flex-column"><section class="section-mid-modal-station"><div class="row pt-3"><span class="name-line-train-modal">' + (p.NOMBRE_ESTACION || "-") + '</span></div><section class="section-tag-mid-modal-station row pt-1"><div class="d-flex flex-wrap gap-2">' + (acc ? '<div class="estaccessible"><div class="tag-info accessible"><img class="icon-accessible" src="' + B_CERCA + '/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Estacion accesible</span></div></div>' : '') + (parking ? '<div class="estparking"><div class="tag-info" style="background:#33A85C"><img class="icon-parking" src="' + B_CERCA + '/imgs/tool/parking.svg" alt="Aparcabicis"><span class="text-tag-modal-accessible">Aparcabicis</span></div></div>' : '') + '</div><div class="row p-3"><div class="separator-tag-modal-station"></div></div></section></section></div><div class="d-flex flex-column overflow-auto" style="max-height:40vh"><section class="section-footer-modal-station"><div class="row cor_container"><span class="correspondences">Correspondencias</span><div class="linecorresp d-flex flex-wrap">' + lineas + '</div>' + (metro ? '<div class="pt-2 cor_metro_container"><img src="' + B_CERCA + '/imgs/tool/metro.svg" alt="Metro"><span>' + metro + '</span></div>' : '') + (bus ? '<div class="pt-1 cor_bus_container"><img src="' + B_CERCA + '/imgs/lyrbutton/bus.svg" alt="Bus"><span>' + bus + '</span></div>' : '') + '</div></section></div></div>';
+      const p = e.getProperties();
+      const acc = isCercaniasStationAccesible(p.ACCESIBILIDAD);
+      const parking = isCercaniasStationParking(p.PARKING_BICIS);
+      const code = p.CODIGO_ESTACION || "-";
+      const tags = `${acc ? `<div class="tag-info accessible"><img class="icon-accessible" src="${B_CERCA}/imgs/tool/accessible.svg" alt="Accesible"><span class="text-tag-modal-accessible">Estacion accesible</span></div>` : ""}${parking ? `<div class="tag-info" style="background:#33A85C"><img class="icon-parking" src="${B_CERCA}/imgs/tool/parking.svg" alt="Aparcabicis"><span class="text-tag-modal-accessible">Aparcabicis</span></div>` : ""}`;
+      const trainsButton = code && code !== "-" ? `<div class="station-trains-cta-wrap"><button type="button" class="btntool station-trains-cta" onclick="openAdifTimetable('${escapeHtml(code)}')" aria-label="Ver salidas y llegadas en tiempo real"><div class="text-btntool"><span class="station-trains-cta-icon"><img src="${B}/imgs/tool/train.svg" alt=""></span><span class="station-trains-cta-copy"><span class="station-trains-cta-eyebrow">Tiempo real</span><span class="station-trains-cta-title">Ver trenes</span><span class="station-trains-cta-subtitle">Salidas y llegadas de esta estacion</span></span><span class="station-trains-cta-arrow" aria-hidden="true">&rarr;</span></div></button></div>` : "";
+      const lineas = renderCercaniasLineBadges(p.NUCLEO, p.LINEAS, p.COLOR);
+      const connections = [
+        p.COR_METRO ? buildPopupConnectionRow(`${B_CERCA}/imgs/tool/metro.svg`, p.COR_METRO, "Metro") : "",
+        p.COR_BUS ? buildPopupConnectionRow(`${B_CERCA}/imgs/lyrbutton/bus.svg`, p.COR_BUS, "Bus") : ""
+      ].filter(Boolean).join("");
+      const html = buildStationPopupHtml({ code, name: p.NOMBRE_ESTACION || "-", closeIconBase: B_CERCA, tagsHtml: tags, trainsButtonHtml: trainsButton, lineasHtml: lineas, connectionsHtml: connections });
       const modal = ismobile ? $(".modal-estacion-movil") : $(".modal-estacion");
       modal.html(html);
-      repairDomMojibake(modal.get(0));
+      modal.show(); _showBackdrop();
+      repairDomMojibakeDeferred(modal.get(0));
+    }
+    function showTrainModalContent(html, tabsHtml = "") {
+      $(".tabs").html(tabsHtml || "");
+      $(".modal-tren-content").html(html || "");
+      const modal = ismobile ? $(".modal-tren-movil") : $(".modal-tren");
       modal.show();
+      _showBackdrop();
+      applyTranslations();
+      repairDomMojibakeDeferred(modal.get(0));
+    }
+    function renderTrainRouteLoading(context) {
+      const displayCode = String(context?.displayCode || context?.requestId || "-").trim() || "-";
+      const backCode = String(context?.backCode || context?.requestId || "").trim();
+      const backSource = String(context?.source || "").trim();
+      const tabsHtml = '<div class="row"><span class="title-menu">Ruta - ' + escapeHtml(displayCode) + '</span></div>';
+      const html = '<section class="popup-sheet-body popup-train-sheet"><div class="popup-actions popup-actions--route"><div class="btntool" role="button" onclick="renderTrainPopupByCode(\'' + escapeHtml(backCode) + '\',\'' + escapeHtml(backSource) + '\')"><div class="text-btntool"><span>Volver al tren</span></div></div></div><div class="timeline-summary"><span class="timeline-summary-title">Cargando ruta...</span><div class="loading-shimmer" style="height:1rem;width:72%"></div><div class="loading-shimmer" style="height:0.95rem;width:54%"></div></div><div class="loading-shimmer" style="height:4.8rem;width:100%;margin-bottom:0.65rem"></div><div class="loading-shimmer" style="height:4.8rem;width:100%;margin-bottom:0.65rem"></div><div class="loading-shimmer" style="height:4.8rem;width:100%"></div></section>';
+      showTrainModalContent(html, tabsHtml);
+    }
+    function renderTrainPopupByCode(code, sourceHint = "") {
+      const context = getTrainRouteContext(code, sourceHint);
+      rutaTren = null;
+      rutaTrenContext = null;
+      deleteMapRoute();
+      if (!context || !context.feature) {
+        showPopupMessage("No se pudo recuperar la informacion del tren.");
+        return;
+      }
+      if (context.source === "cercanias") popupInfoTrenCercanias(context.feature);
+      else popupInfoTren(context.feature);
+    }
+    function failTrainRouteView(message, context) {
+      renderTrainPopupByCode(context?.backCode || context?.requestId || "", context?.source || "");
+      showPopupMessage(message);
+    }
+    function buildTrainRoutePopupHtml(tr, feat, frenchNames, context) {
+      const typeInfo = getTypeByCode(feat.get("codProduct")) || {};
+      const typeName = typeInfo.desProduct || "-";
+      const currentDelay = parseInt(feat.get("ultRetraso"), 10) || 0;
+      const currentStopName = tr.locEstacion ? getStationNameByCode(tr.locEstacion) : "-";
+      const previousStopName = tr.locEstacionAnt ? getStationNameByCode(tr.locEstacionAnt) : "-";
+      const currentIndex = tr.estaciones.findIndex(e => e.p === tr.locEstacion);
+      let html = '<section class="popup-sheet-body popup-train-sheet"><div class="popup-actions popup-actions--route"><div class="btntool" role="button" onclick="renderTrainPopupByCode(\'' + escapeHtml(context?.backCode || rutaTren || feat.get("codComercial") || "") + '\',\'' + escapeHtml(context?.source || "ld") + '\')"><div class="text-btntool"><span>Volver al tren</span></div></div></div>';
+      const delayCls = getDelayClass(currentDelay);
+      const tipoConf = typeInfo ? getConfTypeByCode(typeInfo.type) : null;
+      const trainColor = tipoConf ? tipoConf.color : "#6B1D3B";
+      const siglas = typeInfo.siglas || "";
+      const typeBadgeHtml = siglas ? '<span class="popup-train-type-badge" style="background:' + trainColor + '">' + escapeHtml(siglas) + '</span> ' : '';
+      html += '<div class="timeline-summary"><span class="timeline-summary-title">' + typeBadgeHtml + 'Tren ' + escapeHtml(feat.get("codComercial") || rutaTren || "-") + ' (' + escapeHtml(typeName) + ')</span><div class="lineas"><div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span class="text-line-train-modal">' + escapeHtml(frenchNames[0] || getStationNameByCode(tr.estaciones[0].p)) + ' &rarr; ' + escapeHtml(frenchNames[tr.estaciones.length - 1] || getStationNameByCode(tr.estaciones[tr.estaciones.length - 1].p)) + '</span></div></div><div class="timeline-summary-meta">' + buildPopupMetricCard("Posicion", previousStopName && previousStopName !== currentStopName ? (previousStopName + ' -> ' + currentStopName) : currentStopName, previousStopName && previousStopName !== currentStopName ? "Entre ultima y proxima parada" : "Detenido en estacion", "popup-metric-card") + buildPopupMetricCard("Variacion horaria", retrasoDesc(currentDelay), currentDelay ? "Sobre horario teorico" : "Sin retraso registrado", "popup-metric-card popup-metric-delay--" + delayCls) + '</div></div><div class="timeline-scroll"><ul>';
+      tr.estaciones.forEach((st, i) => {
+        const status = getRouteStopStatus(tr, i);
+        let dur = "";
+        if (i < tr.estaciones.length - 1 && currentIndex <= i) {
+          let bd = null, doff = 0, h1 = st.h, h2 = tr.estaciones[i + 1].h;
+          if (/^\d{2}:\d{2}$/.test(h1) && /^\d{2}:\d{2}$/.test(h2)) {
+            bd = new Date();
+            bd.setHours(0, 0, 0, 0);
+            var [a, b] = h1.split(":").map(Number), [d, e] = h2.split(":").map(Number);
+            if (d < a || (d === a && e <= b)) doff = 1;
+          }
+          var t1 = parseFecha(h1, currentDelay, bd, 0), t2 = parseFecha(h2, currentDelay, bd, doff);
+          if (!isNaN(t1) && !isNaN(t2)) dur = '<div class="duration-badge">' + Math.round((t2 - t1) / 6e4) + ' min</div>';
+        }
+        const dayOffset = getRouteStopDayOffset(tr.estaciones, i);
+        const scheduleTime = getHora(st.h, 0, null, dayOffset);
+        const estimatedTime = getHora(st.h, currentDelay, null, dayOffset);
+        const stationName = frenchNames[i] || getStationNameByCode(st.p);
+        const estimatedClass = scheduleTime !== estimatedTime ? " timeline-stop-time-value--delayed" : "";
+        html += '<li class="station-item' + (status.itemClass ? (' ' + status.itemClass) : '') + '"><div class="dot"></div>' + dur + '<div class="card timeline-stop-card" role="button" onclick="zoomToStation(\'' + st.p + '\')"><div class="timeline-stop-head"><span class="station-name">' + escapeHtml(stationName) + '</span><span class="timeline-stop-state ' + status.badgeClass + '">' + escapeHtml(status.label) + '</span></div><div class="timeline-stop-times"><div class="timeline-stop-time"><span class="timeline-stop-time-label">Horario</span><span class="timeline-stop-time-value">' + escapeHtml((scheduleTime || "-") + (scheduleTime ? "h" : "")) + '</span></div><div class="timeline-stop-time"><span class="timeline-stop-time-label">Prevista</span><span class="timeline-stop-time-value' + estimatedClass + '">' + escapeHtml((estimatedTime || "-") + (estimatedTime ? "h" : "")) + '</span></div></div></div></li>';
+      });
+      html += '</ul></div></section>';
+      return html;
+    }
+    function getCercaniasDetailStationCode(stop) {
+      return normalizeStationCode(stop?.station?.stationCode || stop?.station?.station_code || stop?.station?.code || stop?.stationCode || stop?.station_code || stop?.code || "");
+    }
+    function getCercaniasTrainRouteStatus(stop, index, currentIndex) {
+      const state = String(stop?.circulationState || "").trim().toUpperCase();
+      if (state === "ALREADY_PASSED") return { itemClass: "past", badgeClass: "timeline-stop-state--past", label: "Pasada" };
+      if (currentIndex !== -1 && index === currentIndex) return { itemClass: "current", badgeClass: "timeline-stop-state--current", label: "Actual" };
+      if (currentIndex !== -1 && index === currentIndex + 1) return { itemClass: "", badgeClass: "timeline-stop-state--next", label: "Siguiente" };
+      if (state === "PENDING_TO_CIRCULATE") return { itemClass: "", badgeClass: "", label: "Pendiente" };
+      return { itemClass: "", badgeClass: "", label: "En marcha" };
+    }
+    function buildCercaniasTrainRoutePopupHtml(payload, feat, context) {
+      const data = payload?.data || {};
+      const stops = Array.isArray(data?.stations) ? data.stations : [];
+      const lineCode = String(feat.get("codLinea") || "").trim();
+      const nucleo = String(feat.get("nucleo") || "").trim();
+      const lineBadge = renderCercaniasLineBadges(nucleo, lineCode, getCercaniasLineColor(nucleo, lineCode));
+      const origin = getStationNameByCode(feat.get("codEstOrig")) || "-";
+      const destination = getStationNameByCode(feat.get("codEstDest")) || "-";
+      const currentDelay = parseCercaniasDelayMinutes(feat.get("retrasoMin") ?? data?.trainData?.delay ?? 0);
+      const currentIndex = stops.findIndex(stop => {
+        const state = String(stop?.circulationState || "").trim().toUpperCase();
+        return state !== "ALREADY_PASSED" && state !== "PENDING_TO_CIRCULATE";
+      });
+      const previousIndex = currentIndex > 0
+        ? currentIndex - 1
+        : (() => {
+          for (let i = stops.length - 1; i >= 0; i--) {
+            if (String(stops[i]?.circulationState || "").trim().toUpperCase() === "ALREADY_PASSED") return i;
+          }
+          return -1;
+        })();
+      const nextIndex = currentIndex !== -1 ? Math.min(stops.length - 1, currentIndex + 1) : stops.findIndex(stop => String(stop?.circulationState || "").trim().toUpperCase() === "PENDING_TO_CIRCULATE");
+      const previousName = previousIndex >= 0 ? normalizeAdifName(stops[previousIndex]?.station?.longName || getStationNameByCode(getCercaniasDetailStationCode(stops[previousIndex])) || "-") : "";
+      const currentName = currentIndex >= 0 ? normalizeAdifName(stops[currentIndex]?.station?.longName || getStationNameByCode(getCercaniasDetailStationCode(stops[currentIndex])) || "-") : "";
+      const nextName = nextIndex >= 0 ? normalizeAdifName(stops[nextIndex]?.station?.longName || getStationNameByCode(getCercaniasDetailStationCode(stops[nextIndex])) || "-") : "";
+      const positionValue = previousName && currentName && previousName !== currentName ? `${previousName} -> ${currentName}` : (currentName || (previousName && nextName ? `${previousName} -> ${nextName}` : (nextName || "-")));
+      const positionSub = previousName && currentName && previousName !== currentName ? "Entre ultima y proxima parada" : (currentName ? "En parada actual" : "En circulacion");
+      let html = '<section class="popup-sheet-body popup-train-sheet"><div class="popup-actions popup-actions--route"><div class="btntool" role="button" onclick="renderTrainPopupByCode(\'' + escapeHtml(context?.backCode || context?.requestId || "") + '\',\'cercanias\')"><div class="text-btntool"><span>Volver al tren</span></div></div></div>';
+      html += '<div class="timeline-summary"><span class="timeline-summary-title">Tren ' + escapeHtml(context?.displayCode || feat.get("codTren") || "-") + ' (Cercanias)</span><div class="popup-route-badges">' + lineBadge + '</div><div class="lineas"><div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span class="text-line-train-modal">' + escapeHtml(origin) + ' &rarr; ' + escapeHtml(destination) + '</span></div></div>';
+      if (String(data?.trainData?.observation || "").trim()) html += '<div class="popup-card-sub" style="margin-top:0.45rem">' + escapeHtml(String(data.trainData.observation).trim()) + '</div>';
+      const cercDelayCls = getDelayClass(currentDelay);
+      html += '<div class="timeline-summary-meta">' + buildPopupMetricCard("Posicion", positionValue, positionSub, "popup-metric-card") + buildPopupMetricCard("Variacion horaria", retrasoDesc(currentDelay), currentDelay ? "Sobre horario teorico" : "Sin retraso registrado", "popup-metric-card popup-metric-delay--" + cercDelayCls) + '</div></div><div class="timeline-scroll"><ul>';
+      stops.forEach((stop, index) => {
+        const status = getCercaniasTrainRouteStatus(stop, index, currentIndex);
+        const stationCode = getCercaniasDetailStationCode(stop);
+        const stationName = normalizeAdifName(stop?.station?.longName || stop?.station?.name || getStationNameByCode(stationCode) || stationCode || "-");
+        const baseTs = getCercaniasTimestamp(stop?.time);
+        const delaySeconds = Number(stop?.delay) || 0;
+        const scheduleTime = Number.isFinite(baseTs) ? formatCercaniasTime(baseTs) : "-";
+        const estimatedTime = Number.isFinite(baseTs) ? formatCercaniasTime(baseTs + delaySeconds * 1000) : scheduleTime;
+        const platform = String(stop?.confirmedByCtcPlatform || stop?.plannedPlatform || stop?.platform || "").trim();
+        const delayText = Math.abs(delaySeconds) >= 60 ? `${delaySeconds > 0 ? "+" : ""}${parseCercaniasDelayMinutes(delaySeconds)} min` : "";
+        const estimatedClass = scheduleTime !== estimatedTime ? " timeline-stop-time-value--delayed" : "";
+        const obs = String(stop?.observation || "").trim();
+        html += '<li class="station-item' + (status.itemClass ? (' ' + status.itemClass) : '') + '"><div class="dot"></div><div class="card timeline-stop-card"' + (stationCode ? ' role="button" onclick="zoomToStation(\'' + escapeHtml(stationCode) + '\')"' : "") + '><div class="timeline-stop-head"><span class="station-name">' + escapeHtml(stationName) + '</span><span class="timeline-stop-state ' + status.badgeClass + '">' + escapeHtml(status.label) + '</span></div><div class="timeline-stop-times"><div class="timeline-stop-time"><span class="timeline-stop-time-label">Horario</span><span class="timeline-stop-time-value">' + escapeHtml(scheduleTime + (scheduleTime !== "-" ? "h" : "")) + '</span></div><div class="timeline-stop-time"><span class="timeline-stop-time-label">Prevista</span><span class="timeline-stop-time-value' + estimatedClass + '">' + escapeHtml(estimatedTime + (estimatedTime !== "-" ? "h" : "")) + '</span></div></div><div class="station-details">' + (platform ? '<span class="platform">Via ' + escapeHtml(platform) + '</span>' : "") + (delayText ? '<span class="delay ' + (delaySeconds > 0 ? 'delay-positive' : 'delay-negative') + '">' + escapeHtml(delayText) + '</span>' : '') + (obs ? '<span class="observation">' + escapeHtml(obs) + '</span>' : '') + '</div></div></li>';
+      });
+      html += '</ul></div></section>';
+      return html;
     }
 
     function setSeguirTren(code, doZoom = true) {
@@ -15417,8 +13428,8 @@
       else { if (code === "") { if (seguirTren != null) showPopupMessage("Anulado seguimiento."); document.getElementById("qrInput").value = "" } seguirTren = null; $("#trainIDicon").attr("src", B + "/imgs/tool/train.svg") }
       closeModal(".modal-info"); clearRoute()
     }
-    function clearRoute() { deleteMapRoute(); $("#modal-timeline").addClass("collapse").removeClass("show") }
-    function clearRouteAndSeguirTren() { clearRoute(); setSeguirTren("") }
+    function clearRoute() { deleteMapRoute(); $("#modal-timeline").addClass("collapse").removeClass("show"); $(".timeline-content").empty() }
+    function clearRouteAndSeguirTren() { rutaTren = null; rutaTrenContext = null; clearRoute(); setSeguirTren("") }
 
     let _toastTO; function showPopupMessage(m) {
       const toast = document.getElementById("customToast");
@@ -15430,8 +13441,11 @@
       toast.classList.add("show");
       if (_toastTO) clearTimeout(_toastTO);
       _toastTO = setTimeout(() => {
-        toast.classList.remove("show");
-        toast.classList.add("d-none");
+        toast.classList.add('toast-hiding');
+        setTimeout(function() {
+          toast.classList.remove('show', 'toast-hiding');
+          toast.classList.add('d-none');
+        }, 300);
       }, 5e3)
     }
 
@@ -15516,53 +13530,163 @@
       $("#clearQRInput").on("click", () => clearRouteAndSeguirTren());
     }
 
-    let rutasInfo, rutasInfoTS;
-    async function cargarRuta() { rutasInfo = await fetchRenfeJson("/renfe-visor/trenesConEstacionesLD.json", { cacheKey: "routesLD", cacheTtlMs: CACHE_TTL_ROUTES, timeoutMs: 15000 }); rutasInfoTS = Date.now(); return rutasInfo }
-    function renderTrainTimeline(c) {
-      seguirTren = String(c || "").trim();
-      if (!seguirTren) {
+    let rutasInfo, rutasInfoTS, rutasInfoPromise = null;
+    let rutaTrenContext = null;
+    const cercaniasTrainDetailCache = new Map();
+    const cercaniasTrainDetailPromiseCache = new Map();
+    function getCachedCercaniasTrainDetail(trainId) {
+      const key = String(trainId || "").trim();
+      if (!key) return null;
+      const cached = cercaniasTrainDetailCache.get(key);
+      if (!cached) return null;
+      if (Date.now() - cached.ts > CERCANIAS_TRAIN_DETAIL_CACHE_TTL_MS) {
+        cercaniasTrainDetailCache.delete(key);
+        return null;
+      }
+      return cached.data;
+    }
+    function setCachedCercaniasTrainDetail(trainId, data) {
+      const key = String(trainId || "").trim();
+      if (!key || !data) return;
+      cercaniasTrainDetailCache.set(key, { ts: Date.now(), data });
+    }
+    async function fetchCercaniasTrainDetail(trainId, timeoutMs = 8000) {
+      const key = String(trainId || "").trim();
+      if (!key) throw new Error("trainId vacio");
+      const cached = getCachedCercaniasTrainDetail(key);
+      if (cached) return cached;
+      if (cercaniasTrainDetailPromiseCache.has(key)) return cercaniasTrainDetailPromiseCache.get(key);
+      const client = getCercaniasFallbackClient();
+      const pending = client.requestTrainData(key, timeoutMs)
+        .then(payload => {
+          setCachedCercaniasTrainDetail(key, payload);
+          setTimeout(() => {
+            try { client.stopTrainData(key); } catch { }
+          }, 0);
+          return payload;
+        })
+        .finally(() => {
+          cercaniasTrainDetailPromiseCache.delete(key);
+        });
+      cercaniasTrainDetailPromiseCache.set(key, pending);
+      return pending;
+    }
+    function prefetchCercaniasTrainRoute(feature) {
+      const trainId = String(feature?.getId() || feature?.get("tripId") || "").trim();
+      if (!trainId || getCachedCercaniasTrainDetail(trainId)) return;
+      fetchCercaniasTrainDetail(trainId, 6000).catch(() => { });
+    }
+    async function cargarRuta() {
+      if (rutasInfoPromise) return rutasInfoPromise;
+      rutasInfoPromise = fetchRenfeJson("/renfe-visor/trenesConEstacionesLD.json", { cacheKey: "routesLD", cacheTtlMs: CACHE_TTL_ROUTES, timeoutMs: 12000, maxParallelAttempts: 2, hedgeDelayMs: 400 }).then(data => {
+        rutasInfo = data;
+        rutasInfoTS = Date.now();
+        return rutasInfo;
+      }).finally(() => { rutasInfoPromise = null });
+      return rutasInfoPromise;
+    }
+    function getRouteStopDayOffset(stops, index) {
+      let dayOffset = 0;
+      for (let i = 1; i <= index; i++) {
+        const prev = stops[i - 1] && stops[i - 1].h;
+        const current = stops[i] && stops[i].h;
+        if (!/^\d{2}:\d{2}$/.test(prev) || !/^\d{2}:\d{2}$/.test(current)) continue;
+        const [prevHour, prevMinute] = prev.split(":").map(Number);
+        const [currHour, currMinute] = current.split(":").map(Number);
+        if (currHour < prevHour || (currHour === prevHour && currMinute <= prevMinute)) dayOffset++;
+      }
+      return dayOffset;
+    }
+    function getRouteStopStatus(route, index) {
+      const currentCode = String(route && route.locEstacion || "").trim();
+      const previousCode = String(route && route.locEstacionAnt || "").trim();
+      const stopCode = String(route && route.estaciones && route.estaciones[index] && route.estaciones[index].p || "").trim();
+      const currentIndex = Array.isArray(route && route.estaciones) ? route.estaciones.findIndex(stop => String(stop && stop.p || "").trim() === currentCode) : -1;
+      const previousIndex = Array.isArray(route && route.estaciones) ? route.estaciones.findIndex(stop => String(stop && stop.p || "").trim() === previousCode) : -1;
+      if (!currentCode || currentIndex === -1) return { itemClass: "", badgeClass: "", label: "Pendiente" };
+      if (!previousCode || previousCode === currentCode || previousIndex === -1) {
+        if (index < currentIndex) return { itemClass: "past", badgeClass: "timeline-stop-state--past", label: "Pasada" };
+        if (index === currentIndex) return { itemClass: "current", badgeClass: "timeline-stop-state--current", label: "Actual" };
+        if (index === currentIndex + 1) return { itemClass: "", badgeClass: "timeline-stop-state--next", label: "Siguiente" };
+        return { itemClass: "", badgeClass: "", label: "Pendiente" };
+      }
+      if (stopCode === previousCode) return { itemClass: "past", badgeClass: "timeline-stop-state--past", label: "Ultima" };
+      if (stopCode === currentCode) return { itemClass: "current", badgeClass: "timeline-stop-state--current", label: "Proxima" };
+      if (index < previousIndex) return { itemClass: "past", badgeClass: "timeline-stop-state--past", label: "Pasada" };
+      if (index > currentIndex) return { itemClass: "", badgeClass: "", label: "Pendiente" };
+      return { itemClass: "", badgeClass: "", label: "En tramo" };
+    }
+    function getTimelineCurrentItem(container) {
+      return container.find("li.current").get(0) || container.find(".timeline-stop-state--next").closest("li").get(0) || null;
+    }
+    function renderTrainTimeline(c, sourceHint = "") {
+      const context = getTrainRouteContext(c, sourceHint);
+      rutaTrenContext = context;
+      rutaTren = String(context?.displayCode || c || "").trim();
+      if (!context || !rutaTren) {
         showPopupMessage("No hay codigo de tren para consultar la ruta.");
         return;
       }
-      const input = document.getElementById("qrInput");
-      if (input) input.value = seguirTren;
-      updateQRButtons();
-      closeModal(".modal-tren,.modal-tren-movil,.modal-info,.modal-info-train-movil");
+      renderTrainRouteLoading(context);
       renderTimeline();
     }
 
     async function renderTimeline() {
-      if (!rutasInfo || !rutasInfoTS || Date.now() - rutasInfoTS > 3e5) { try { await cargarRuta() } catch (e) { showPopupMessage("No se pudo cargar la ruta."); return } }
-      if (!rutasInfo || !rutasInfo.trenes || rutasInfo.trenes.length === 0) { showPopupMessage("No hay info de rutas."); return }
-      let tr = getRouteInfoTrainById(seguirTren); if (!tr) { showPopupMessage("No hay info del tren."); return }
-      let feat = getFeatTrainByCode(seguirTren); if (!feat) { showPopupMessage("Tren no encontrado en mapa."); return }
-      if (!Array.isArray(tr.estaciones) || !tr.estaciones.length) { showPopupMessage("No hay paradas disponibles para este tren."); return }
-      seguirTren = String(feat.get("codComercial") || seguirTren || "").trim();
+      const context = rutaTrenContext || getTrainRouteContext(rutaTren || "");
+      if (!context) {
+        showPopupMessage("No se pudo resolver la ruta del tren.");
+        return;
+      }
+      if (context.source === "cercanias") {
+        let payload = getCachedCercaniasTrainDetail(context.requestId);
+        if (!payload) {
+          try {
+            payload = await fetchCercaniasTrainDetail(context.requestId);
+          } catch (error) {
+            try {
+              payload = await fetchCercaniasTrainDetail(context.requestId, 12000);
+            } catch (error2) {
+              failTrainRouteView("No se pudo cargar la ruta de Cercanias.", context);
+              return;
+            }
+          }
+        }
+        const stops = Array.isArray(payload?.data?.stations) ? payload.data.stations : [];
+        if (!stops.length) {
+          failTrainRouteView("No hay paradas disponibles para este tren.", context);
+          return;
+        }
+        const tabsHtml = '<div class="row"><span class="title-menu">Ruta - ' + escapeHtml(context.displayCode || "-") + '</span></div>';
+        showTrainModalContent(buildCercaniasTrainRoutePopupHtml(payload, context.feature, context), tabsHtml);
+        setTimeout(() => {
+          var c = $(".modal-tren-content"), s = c.find(".timeline-scroll").get(0), cur = s ? getTimelineCurrentItem(c) : null;
+          if (s && cur) s.scrollTop += cur.getBoundingClientRect().top - s.getBoundingClientRect().top;
+        }, 0);
+        return;
+      }
+      const hasUsableRoutes = !!(rutasInfo && Array.isArray(rutasInfo.trenes) && rutasInfo.trenes.length);
+      if (!hasUsableRoutes) {
+        try { await cargarRuta() } catch (e) { try { await cargarRuta() } catch (e2) { failTrainRouteView("No se pudo cargar la ruta.", context); return } }
+      } else if (!rutasInfoTS || Date.now() - rutasInfoTS > 3e5) {
+        cargarRuta().catch(() => false);
+      }
+      if (!rutasInfo || !rutasInfo.trenes || rutasInfo.trenes.length === 0) { failTrainRouteView("No hay info de rutas.", context); return }
+      const routeCode = String(context.requestId || rutaTren || "").trim();
+      let tr = getRouteInfoTrainById(routeCode);
+      if (!tr) { try { await fetchRenfeJson("/renfe-visor/trenesConEstacionesLD.json", { cacheKey: "routesLD", cacheTtlMs: CACHE_TTL_ROUTES, timeoutMs: 10000, maxParallelAttempts: 2, hedgeDelayMs: 300, forceFresh: true }).then(data => { rutasInfo = data; rutasInfoTS = Date.now(); }); tr = getRouteInfoTrainById(routeCode); } catch {} }
+      if (!tr) { failTrainRouteView("No hay info del tren.", context); return }
+      let feat = context.feature || getFeatTrainByCode(routeCode); if (!feat) { failTrainRouteView("Tren no encontrado en mapa.", context); return }
+      if (!Array.isArray(tr.estaciones) || !tr.estaciones.length) { failTrainRouteView("No hay paradas disponibles para este tren.", context); return }
+      rutaTren = String(feat.get("codComercial") || routeCode || "").trim();
       tr.locEstacion = feat.get("codEstSig"); tr.locEstacionAnt = feat.get("codEstAnt");
       var frenchNames = resolveFrenchLetterCodes(tr.estaciones) || {};
-      $("#modal-timeline").addClass("show").removeClass("collapse");
-      var c = $(".timeline-content"); c.empty();
-      const typeInfo = getTypeByCode(feat.get("codProduct")) || {};
-      const typeName = typeInfo.desProduct || "-";
-      c.append('<div><span class="title-menu">Tren ' + (feat.get("codComercial") || seguirTren || "-") + ' (' + typeName + ')</span></div>');
-      c.append('<div class="lineas pt-2"><div class="line-train-modal d-flex flex-wrap justify-content-center align-items-center"><span class="text-line-train-modal">' + (frenchNames[0] || getStationNameByCode(tr.estaciones[0].p)) + ' &rarr; ' + (frenchNames[tr.estaciones.length - 1] || getStationNameByCode(tr.estaciones[tr.estaciones.length - 1].p)) + '</span></div></div><br>');
       routeStationMap(tr, feat.get("ultRetraso"));
-      let isPast = true, html = "";
-      tr.estaciones.forEach((st, i) => {
-        var li = $("<li>").addClass("station-item"); if (st.p === tr.locEstacion) { isPast = false; li.addClass("current") } else if (isPast) li.addClass("past");
-        let dur = ""; if (i < tr.estaciones.length - 1 && tr.estaciones.findIndex(e => e.p === tr.locEstacion) <= i) {
-          let dl = parseInt(feat.get("ultRetraso"), 10) || 0, bd = null, doff = 0, h1 = st.h, h2 = tr.estaciones[i + 1].h;
-          if (/^\d{2}:\d{2}$/.test(h1) && /^\d{2}:\d{2}$/.test(h2)) { bd = new Date(); bd.setHours(0, 0, 0, 0); var [a, b] = h1.split(":").map(Number), [d, e] = h2.split(":").map(Number); if (d < a || (d === a && e <= b)) doff = 1 }
-          var t1 = parseFecha(h1, dl, bd, 0), t2 = parseFecha(h2, dl, bd, doff); if (!isNaN(t1) && !isNaN(t2)) dur = '<div class="duration-badge">' + Math.round((t2 - t1) / 6e4) + ' min</div>'
-        }
-        let dl2 = parseInt(feat.get("ultRetraso"), 10) || 0, bd2 = null, do2 = 0;
-        if (/^\d{2}:\d{2}$/.test(st.h) && i > 0) { var ph = tr.estaciones[i - 1].h; if (/^\d{2}:\d{2}$/.test(ph)) { var [x, y] = ph.split(":").map(Number), [w, z] = st.h.split(":").map(Number); if (w < x || (w === x && z <= y)) do2 = 1 } bd2 = new Date(); bd2.setHours(0, 0, 0, 0) }
-        var tm = getHora(st.h, dl2, bd2, do2), show = !li.hasClass("past");
-        li.html('<div class="dot"></div>' + dur + '<div class="card" role="button" onclick="zoomToStation(\'' + st.p + '\')">' + (show ? '<span class="times">' + tm + 'h</span>' : '') + ' <span class="station-name">' + (frenchNames[i] || getStationNameByCode(st.p)) + '</span></div>');
-        html += li.prop("outerHTML")
-      });
-      c.append('<div style="max-height:calc(100vh - 16rem);overflow-y:auto;padding-right:10px"><ul>' + html + '</ul></div>');
-      setTimeout(() => { var s = c.find('div[style*="overflow-y"]').get(0), cur = s ? s.querySelector("li.current") : null; if (s && cur) { s.scrollTop += cur.getBoundingClientRect().top - s.getBoundingClientRect().top } }, 0)
+      const tabsHtml = '<div class="row"><span class="title-menu">Ruta - ' + escapeHtml(rutaTren || "-") + '</span></div>';
+      showTrainModalContent(buildTrainRoutePopupHtml(tr, feat, frenchNames, context), tabsHtml);
+      setTimeout(() => {
+        var c = $(".modal-tren-content"), s = c.find(".timeline-scroll").get(0), cur = s ? getTimelineCurrentItem(c) : null;
+        if (s && cur) s.scrollTop += cur.getBoundingClientRect().top - s.getBoundingClientRect().top;
+      }, 0)
     }
 
     let recLine = null, recPts = null;
@@ -15601,6 +13725,8 @@
 </body>
 
 </html>
+
+
 
 
 
