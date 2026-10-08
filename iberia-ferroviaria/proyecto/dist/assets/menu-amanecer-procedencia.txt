@@ -1,0 +1,5 @@
+Ilustración de portada «Amanecer ferroviario», generada con image_gen el 7 de octubre de 2026.
+Petición: panorama pictórico de una estación española al amanecer, un tren blanco de alta velocidad, viaducto, catenaria, pueblo y colinas. Sin texto, marcas ni interfaz.
+Original preservado en investigacion/portada/menu-amanecer-original.png (fuente de la generación: exec-09bd1cee-bf23-4de7-849f-ae30090914b3.png).
+Derivado: menu-amanecer.jpg, conversión RGB a JPEG progresivo con calidad 89; sin cambios de composición.
+La ilustración se incrusta en el HTML mediante el empaquetador para permitir juego sin conexión.

@@ -1,0 +1,6218 @@
+[
+ {
+  "id": "1dmisv8",
+  "person": "minister",
+  "raw": "Los alcaldes quieren sus trenes.",
+  "text": "Los alcaldes quieren sus trenes.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 0
+ },
+ {
+  "id": "1gfxzzn",
+  "person": "minister",
+  "raw": "Hacienda quiere su dinero.",
+  "text": "Hacienda quiere su dinero.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 0
+ },
+ {
+  "id": "m5s6oq",
+  "person": "minister",
+  "raw": "Y yo quiero un titular para el telediario de las tres.",
+  "text": "Y yo quiero un titular para el telediario de las tres.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 0
+ },
+ {
+  "id": "1ov1ihy",
+  "person": "minister",
+  "raw": "¿Qué ponemos primero?",
+  "text": "¿Qué ponemos primero?",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 0
+ },
+ {
+  "id": "1w1bmyp",
+  "person": "minister",
+  "raw": "Piénsalo rápido, que tengo una inauguración.",
+  "text": "Piénsalo rápido, que tengo una inauguración.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 0
+ },
+ {
+  "id": "ypw4g6",
+  "person": "minister",
+  "raw": "Elige qué protegerás primero: la caja, la cobertura o ambas.",
+  "text": "Elige qué protegerás primero: la caja, la cobertura o ambas.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "ycu5c0",
+  "person": "minister",
+  "raw": "Enero de 2022; soy Raquel Sanz y tú diriges la empresa.",
+  "text": "Enero de 2022; soy Raquel Sanz y tú diriges la empresa.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "5j26ue",
+  "person": "minister",
+  "raw": "Después prepararemos una jornada real, decisión por decisión.",
+  "text": "Después prepararemos una jornada real, decisión por decisión.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "759150",
+  "person": "minister",
+  "raw": "La inauguración absurda puede esperar; yo tengo experiencia.",
+  "text": "La inauguración absurda puede esperar; yo tengo experiencia.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "108nc1g",
+  "person": "rival",
+  "raw": "Tu prioridad está elegida; la caja sigue igual.",
+  "text": "Tu prioridad está elegida; la caja sigue igual.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1vqa7a5",
+  "person": "rival",
+  "raw": "Antes de abrir servicios, comprueba qué tren admite la vía.",
+  "text": "Antes de abrir servicios, comprueba qué tren admite la vía.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "ipnm5i",
+  "person": "rival",
+  "raw": "Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren.",
+  "text": "Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "uy87os",
+  "person": "president",
+  "raw": "Pedro Sancho, presidente.",
+  "text": "Pedro Sancho, presidente.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1aujwrd",
+  "person": "president",
+  "raw": "Quiero trenes útiles y cuentas defendibles.",
+  "text": "Quiero trenes útiles y cuentas defendibles.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1982wd8",
+  "person": "president",
+  "raw": "La foto ya la pongo yo.",
+  "text": "La foto ya la pongo yo.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "ww08v0",
+  "person": "president",
+  "raw": "Tu reto es decidir qué merece dinero y comprobar después si ha funcionado; prometerlo todo es mi especialidad, no la tuya.",
+  "text": "Tu reto es decidir qué merece dinero y comprobar después si ha funcionado; prometerlo todo es mi especialidad, no la tuya.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "67rf1u",
+  "person": "treasury",
+  "raw": "Charo Tijera.",
+  "text": "Charo Tijera.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "12tkj0",
+  "person": "treasury",
+  "raw": "La caja paga inversiones, pero las frecuencias y las políticas también generan costes cada mes.",
+  "text": "La caja paga inversiones, pero las frecuencias y las políticas también generan costes cada mes.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "10osfab",
+  "person": "treasury",
+  "raw": "Una línea rentable puede financiar otra necesaria.",
+  "text": "Una línea rentable puede financiar otra necesaria.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "3fhgn2",
+  "person": "treasury",
+  "raw": "Antes de tocar nada, elige qué vas a proteger en este primer turno.",
+  "text": "Antes de tocar nada, elige qué vas a proteger en este primer turno.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "11bbl4t",
+  "person": "adif",
+  "raw": "Abre Madrid–Salamanca y lee «Qué puede circular».",
+  "text": "Abre Madrid, Salamanca y lee Qué puede circular.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "tq5zav",
+  "person": "adif",
+  "raw": "Consulta también sus anchos y electricidad.",
+  "text": "Consulta también sus anchos y electricidad.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1yqoa12",
+  "person": "adif",
+  "raw": "Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido.",
+  "text": "Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "14axzeg",
+  "person": "adif",
+  "raw": "Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde.",
+  "text": "Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "18bb9ha",
+  "person": "mayor",
+  "raw": "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar.",
+  "text": "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "p10xo3",
+  "person": "mayor",
+  "raw": "Soy Paco Terruño, alcalde.",
+  "text": "Soy Paco Terruño, alcalde.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1wtcu1",
+  "person": "mayor",
+  "raw": "Antes de prometer otro túnel, asigne un tren compatible.",
+  "text": "Antes de prometer otro túnel, asigne un tren compatible.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "89oiob",
+  "person": "mayor",
+  "raw": "Nos ahorraríamos veinte años y una colección de ministros con tijeras.",
+  "text": "Nos ahorraríamos veinte años y una colección de ministros con tijeras.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "wfxoa0",
+  "person": "riders",
+  "raw": "Marisa Andén, viajeros.",
+  "text": "Marisa Andén, viajeros.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "x31h1",
+  "person": "riders",
+  "raw": "A Salamanca queremos llegar, no escuchar un discurso sobre el futuro.",
+  "text": "A Salamanca queremos llegar, no escuchar un discurso sobre el futuro.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1t68n8i",
+  "person": "riders",
+  "raw": "Si un servicio está cerrado, averigua si faltan trenes, horario o infraestructura.",
+  "text": "Si un servicio está cerrado, averigua si faltan trenes, horario o infraestructura.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1wzfdzn",
+  "person": "riders",
+  "raw": "Son problemas distintos, aunque vuestra megafonía los llame «causas ajenas».",
+  "text": "Son problemas distintos, aunque vuestra megafonía los llame causas ajenas.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1czrd4l",
+  "person": "workshop",
+  "raw": "Fermín Bogie, talleres.",
+  "text": "Fermín Bogie, talleres.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "tvnwz4",
+  "person": "workshop",
+  "raw": "El AVE tiene ancho estándar fijo y necesita catenaria.",
+  "text": "El Ave tiene ancho estándar fijo y necesita catenaria.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "p4c2uu",
+  "person": "workshop",
+  "raw": "Un Alvia de ancho variable cambia en instalaciones preparadas.",
+  "text": "Un Alvia de ancho variable cambia en instalaciones preparadas.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "wd3ehp",
+  "person": "workshop",
+  "raw": "El S130 sigue necesitando electricidad; el S730 híbrido puede usar diésel.",
+  "text": "El ese 130 sigue necesitando electricidad; el ese 730 híbrido puede usar diésel.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "2jbi6",
+  "person": "workshop",
+  "raw": "«Alvia» no significa magia, carajo.",
+  "text": "Alvia no significa magia, carajo.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1t5kghr",
+  "person": "treasury",
+  "raw": "En Madrid–València, aumenta al menos una salida por sentido y cambia la tarifa.",
+  "text": "En Madrid, València, aumenta al menos una salida por sentido y cambia la tarifa.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "atpkjo",
+  "person": "treasury",
+  "raw": "Mira beneficio, ocupación y unidades antes de aplicar el plan.",
+  "text": "Mira beneficio, ocupación y unidades antes de aplicar el plan.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "lhjn47",
+  "person": "treasury",
+  "raw": "Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia.",
+  "text": "Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "u56fk1",
+  "person": "minister",
+  "raw": "El nuevo plan está aplicado.",
+  "text": "El nuevo plan está aplicado.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1g4l6bl",
+  "person": "minister",
+  "raw": "Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular.",
+  "text": "Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "16ei67b",
+  "person": "minister",
+  "raw": "La previsión orienta, no garantiza beneficios.",
+  "text": "La previsión orienta, no garantiza beneficios.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "174hr9",
+  "person": "minister",
+  "raw": "Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces.",
+  "text": "Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1sh01of",
+  "person": "rival",
+  "raw": "En Madrid–València mi autobús también vende billetes.",
+  "text": "En Madrid, València mi autobús también vende billetes.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "cqs66r",
+  "person": "rival",
+  "raw": "Más frecuencia te hace atractivo; una tarifa menor también.",
+  "text": "Más frecuencia te hace atractivo; una tarifa menor también.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1ajrjir",
+  "person": "rival",
+  "raw": "Pero si añades trenes vacíos y regalas el billete, no me derrotas: te haces mi becario financiero.",
+  "text": "Pero si añades trenes vacíos y regalas el billete, no me derrotas: te haces mi becario financiero.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "fvew1f",
+  "person": "riders",
+  "raw": "No queremos doce trenes saliendo a la misma hora ni un precio de atraco.",
+  "text": "No queremos doce trenes saliendo a la misma hora ni un precio de atraco.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "54nnrc",
+  "person": "riders",
+  "raw": "Ajusta la oferta pensando en quién viaja.",
+  "text": "Ajusta la oferta pensando en quién viaja.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1ggvdqb",
+  "person": "riders",
+  "raw": "Un tren lleno no siempre pide una rebaja; a veces pide otra salida y menos codazos.",
+  "text": "Un tren lleno no siempre pide una rebaja; a veces pide otra salida y menos codazos.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "spgfc3",
+  "person": "workshop",
+  "raw": "Compara maquinistas disponibles y necesarios.",
+  "text": "Compara maquinistas disponibles y necesarios.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1pi0388",
+  "person": "workshop",
+  "raw": "Hoy sobra cobertura: no necesitas contratar.",
+  "text": "Hoy sobra cobertura: no necesitas contratar.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1s63e0b",
+  "person": "workshop",
+  "raw": "Si una ampliación supera la reserva, forma personal tres meses antes.",
+  "text": "Si una ampliación supera la reserva, forma personal tres meses antes.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "jymx0o",
+  "person": "workshop",
+  "raw": "Contratar veinte cuesta 0,3 M€; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina.",
+  "text": "Contratar veinte cuesta 0,3 millones de euros; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1xay0bn",
+  "person": "treasury",
+  "raw": "Mantener la reserva actual cubre estos servicios.",
+  "text": "Mantener la reserva actual cubre estos servicios.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "13rtr6j",
+  "person": "treasury",
+  "raw": "Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales.",
+  "text": "Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "pi6i8v",
+  "person": "treasury",
+  "raw": "La regla es cubrir lo que falta con antelación.",
+  "text": "La regla es cubrir lo que falta con antelación.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1xnaqa7",
+  "person": "treasury",
+  "raw": "Una plantilla enorme sin plan solo me da más gastos que recortar.",
+  "text": "Una plantilla enorme sin plan solo me da más gastos que recortar.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1hncv35",
+  "person": "president",
+  "raw": "Si amplías dentro de tres meses, planifica hoy.",
+  "text": "Si amplías dentro de tres meses, planifica hoy.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "mlhdsb",
+  "person": "president",
+  "raw": "Los alumnos no conducen mañana: prometer horarios antes de disponer de personal produce cancelaciones.",
+  "text": "Los alumnos no conducen mañana: prometer horarios antes de disponer de personal produce cancelaciones.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "r7sirh",
+  "person": "president",
+  "raw": "Las promesas sin recursos me las dejas a mí, que llevo más años practicando.",
+  "text": "Las promesas sin recursos me las dejas a mí, que llevo más años practicando.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "n86xrp",
+  "person": "mayor",
+  "raw": "Pues apunte el plazo y mire también la flota.",
+  "text": "Pues apunte el plazo y mire también la flota.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "untxrb",
+  "person": "mayor",
+  "raw": "A mi pueblo no le vale un horario de mentira.",
+  "text": "A mi pueblo no le vale un horario de mentira.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "7bafox",
+  "person": "mayor",
+  "raw": "Puede tener cien conductores y ningún tren libre, o cien trenes y nadie que los conduzca.",
+  "text": "Puede tener cien conductores y ningún tren libre, o cien trenes y nadie que los conduzca.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1jximnr",
+  "person": "mayor",
+  "raw": "Dos formas caras de hacer el imbécil.",
+  "text": "Dos formas caras de hacer el imbécil.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1d4kwdk",
+  "person": "successor",
+  "raw": "Compara competencia, políticas e investigación antes de gastar.",
+  "text": "Compara competencia, políticas e investigación antes de gastar.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1tiytmw",
+  "person": "successor",
+  "raw": "Soy Óscar del Puente, hoy alcalde consultado.",
+  "text": "Soy Óscar del Puente, hoy alcalde consultado.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "enokia",
+  "person": "successor",
+  "raw": "Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda.",
+  "text": "Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "pv5hjc",
+  "person": "successor",
+  "raw": "Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas.",
+  "text": "Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1pkclv4",
+  "person": "successor",
+  "raw": "Ya has comparado coste, efecto y plazo.",
+  "text": "Ya has comparado coste, efecto y plazo.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "5wnq3v",
+  "person": "successor",
+  "raw": "Invierte cuando resuelva un problema concreto; esperar también es una decisión.",
+  "text": "Invierte cuando resuelva un problema concreto; esperar también es una decisión.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1yey5gu",
+  "person": "successor",
+  "raw": "El wifi no arregla la catenaria y ERTMS no cambia el ancho.",
+  "text": "El wifi no arregla la catenaria y e erre te eme ese no cambia el ancho.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1sbczoy",
+  "person": "successor",
+  "raw": "Las siglas son ingeniería, no un conjuro para tapar chapuzas.",
+  "text": "Las siglas son ingeniería, no un conjuro para tapar chapuzas.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "dlbnbh",
+  "person": "rival",
+  "raw": "Abre «Competencia» y compara una relación donde ya haya rival ferroviario.",
+  "text": "Abre Competencia y compara una relación donde ya haya rival ferroviario.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "14yxpyn",
+  "person": "rival",
+  "raw": "Lowgo aprieta precios; Rossa vende calidad.",
+  "text": "Lowgo aprieta precios; Rossa vende calidad.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1qg8l9t",
+  "person": "rival",
+  "raw": "En 2022 no han entrado todos en todas partes.",
+  "text": "En 2022 no han entrado todos en todas partes.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "3dxb4v",
+  "person": "rival",
+  "raw": "No rebajes toda tu red para responder a un enemigo que todavía no está.",
+  "text": "No rebajes toda tu red para responder a un enemigo que todavía no está.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "lpfncm",
+  "person": "minister",
+  "raw": "Después abre «Investigación».",
+  "text": "Después abre Investigación.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1o5r20x",
+  "person": "minister",
+  "raw": "Venta online cuesta diez millones y tarda cuatro meses; ERTMS, treinta y cinco y doce meses.",
+  "text": "Venta online cuesta diez millones y tarda cuatro meses; e erre te eme ese, treinta y cinco y doce meses.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1554pv8",
+  "person": "minister",
+  "raw": "La primera atrae demanda; la segunda mejora tiempos y puntualidad.",
+  "text": "La primera atrae demanda; la segunda mejora tiempos y puntualidad.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "15rri2g",
+  "person": "minister",
+  "raw": "Puedes financiar un proyecto o esperar.",
+  "text": "Puedes financiar un proyecto o esperar.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "8tq7m",
+  "person": "minister",
+  "raw": "Solo cabe una investigación en curso.",
+  "text": "Solo cabe una investigación en curso.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1eza6v",
+  "person": "mayor",
+  "raw": "Abra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba–Soria.",
+  "text": "Abra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba, Soria.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "18edtbt",
+  "person": "mayor",
+  "raw": "No adjudique esa obra todavía: basta leer precio y plazo.",
+  "text": "No adjudique esa obra todavía: basta leer precio y plazo.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "m13r68",
+  "person": "mayor",
+  "raw": "Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto.",
+  "text": "Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "3l5ajl",
+  "person": "riders",
+  "raw": "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar.",
+  "text": "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "3avgpa",
+  "person": "riders",
+  "raw": "Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico.",
+  "text": "Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "sqkzon",
+  "person": "riders",
+  "raw": "Has separado abrir trenes de construir vías.",
+  "text": "Has separado abrir trenes de construir vías.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1y4fx9m",
+  "person": "riders",
+  "raw": "Mucho más útil que prometer un AVE en una carretera, como ciertos lumbreras.",
+  "text": "Mucho más útil que prometer un Ave en una carretera, como ciertos lumbreras.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1vttgaw",
+  "person": "adif",
+  "raw": "Ahora usa tu diagnóstico: abre Madrid–Salamanca con un Alvia compatible.",
+  "text": "Ahora usa tu diagnóstico: abre Madrid, Salamanca con un Alvia compatible.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1rc6b3y",
+  "person": "adif",
+  "raw": "Luego inspecciona la falta de catenaria del ramal hacia Soria y pide presupuesto de electrificación.",
+  "text": "Luego inspecciona la falta de catenaria del ramal hacia Soria y pide presupuesto de electrificación.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "v9b5gj",
+  "person": "adif",
+  "raw": "Son dos encargos distintos: operar hoy y preparar una inversión para mañana.",
+  "text": "Son dos encargos distintos: operar hoy y preparar una inversión para mañana.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1w7d83z",
+  "person": "workshop",
+  "raw": "Para Salamanca comprueba el lote y sus unidades libres; abrir cuesta cuatro millones.",
+  "text": "Para Salamanca comprueba el lote y sus unidades libres; abrir cuesta cuatro millones.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1i05dfj",
+  "person": "workshop",
+  "raw": "Para una vía sin catenaria solo sirve hoy nuestro Alvia híbrido S730, si también cumple el ancho.",
+  "text": "Para una vía sin catenaria solo sirve hoy nuestro Alvia híbrido ese 730, si también cumple el ancho.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "pi1iin",
+  "person": "workshop",
+  "raw": "Un S130 eléctrico no vive de buenas intenciones, coño.",
+  "text": "Un ese 130 eléctrico no vive de buenas intenciones, coño.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1gq56dm",
+  "person": "workshop",
+  "raw": "Comienza la jornada y atiende la avería.",
+  "text": "Comienza la jornada y atiende la avería.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "kjl9tw",
+  "person": "workshop",
+  "raw": "El equipo cuesta 18.000 euros y reduce la demora; el autobús cuesta 9.000 y protege al viajero; esperar ahorra ahora y conserva el retraso.",
+  "text": "El equipo cuesta 18000 euros y reduce la demora; el autobús cuesta 9000 y protege al viajero; esperar ahorra ahora y conserva el retraso.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1ip7xco",
+  "person": "workshop",
+  "raw": "Elige qué importa más.",
+  "text": "Elige qué importa más.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "hk6cei",
+  "person": "workshop",
+  "raw": "La avería no se arregla soplando, coño.",
+  "text": "La avería no se arregla soplando, coño.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1fivxbe",
+  "person": "president",
+  "raw": "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso.",
+  "text": "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "r0e9bm",
+  "person": "president",
+  "raw": "Revisa el parte para comprobarlo.",
+  "text": "Revisa el parte para comprobarlo.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "ogcvxj",
+  "person": "president",
+  "raw": "Una consecuencia medida vale más que decir «todo controlado»; esa frase ya la rellena mi gabinete.",
+  "text": "Una consecuencia medida vale más que decir todo controlado; esa frase ya la rellena mi gabinete.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1map941",
+  "person": "adif",
+  "raw": "Movilizar el equipo reduce la demora al treinta por ciento y cuesta 18.000 euros.",
+  "text": "Movilizar el equipo reduce la demora al treinta por ciento y cuesta 18000 euros.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1fqdejm",
+  "person": "adif",
+  "raw": "El plan alternativo cuesta 9.000 y protege la satisfacción; esperar evita el pago inmediato y conserva toda la demora.",
+  "text": "El plan alternativo cuesta 9000 y protege la satisfacción; esperar evita el pago inmediato y conserva toda la demora.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "14hdyh3",
+  "person": "adif",
+  "raw": "Son efectos distintos, no tres botones decorativos.",
+  "text": "Son efectos distintos, no tres botones decorativos.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1strkdy",
+  "person": "successor",
+  "raw": "Pon pausa si hace falta, decide y reanuda.",
+  "text": "Pon pausa si hace falta, decide y reanuda.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "3snhj8",
+  "person": "successor",
+  "raw": "Primero confirma qué ocurre y a qué circulación afecta.",
+  "text": "Primero confirma qué ocurre y a qué circulación afecta.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "18sdrwx",
+  "person": "successor",
+  "raw": "Después elige: puntualidad, atención al viajero o caja.",
+  "text": "Después elige: puntualidad, atención al viajero o caja.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1k1985m",
+  "person": "successor",
+  "raw": "Si contestas «todo controlado» sin leer el parte, te bloqueo yo antes de que lo hagan los pasajeros.",
+  "text": "Si contestas todo controlado sin leer el parte, te bloqueo yo antes de que lo hagan los pasajeros.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "6vl873",
+  "person": "riders",
+  "raw": "Termina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente.",
+  "text": "Termina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1sb7lal",
+  "person": "riders",
+  "raw": "Es un resultado diario; las cuentas completas se liquidan al cerrar el mes.",
+  "text": "Es un resultado diario; las cuentas completas se liquidan al cerrar el mes.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "ywitdr",
+  "person": "riders",
+  "raw": "Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares.",
+  "text": "Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "yykqv",
+  "person": "adif",
+  "raw": "Ya has preparado, ejecutado y comprobado un turno.",
+  "text": "Ya has preparado, ejecutado y comprobado un turno.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "oxfz3t",
+  "person": "adif",
+  "raw": "Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario.",
+  "text": "Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "16a6szi",
+  "person": "adif",
+  "raw": "Las obras no terminan porque el alcalde proteste tres veces.",
+  "text": "Las obras no terminan porque el alcalde proteste tres veces.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1g6wixl",
+  "person": "adif",
+  "raw": "Lo he comprobado: protesta muchísimo y siguen ahí.",
+  "text": "Lo he comprobado: protesta muchísimo y siguen ahí.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1xcu7a6",
+  "person": "treasury",
+  "raw": "Cada jornada avanza un día.",
+  "text": "Cada jornada avanza un día.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "32fw84",
+  "person": "treasury",
+  "raw": "Al cerrar el mes llegan el balance, las entregas, las obras, la formación y la investigación que hayan vencido.",
+  "text": "Al cerrar el mes llegan el balance, las entregas, las obras, la formación y la investigación que hayan vencido.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "b73s05",
+  "person": "treasury",
+  "raw": "Si contrataste alumnos, seguirán esperando su plazo: terminar hoy no lo convierte en tres meses.",
+  "text": "Si contrataste alumnos, seguirán esperando su plazo: terminar hoy no lo convierte en tres meses.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1yi9dni",
+  "person": "mayor",
+  "raw": "Antes de pasar a la siguiente jornada, mira si tu refuerzo ayudó y qué quedó pendiente.",
+  "text": "Antes de pasar a la siguiente jornada, mira si tu refuerzo ayudó y qué quedó pendiente.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1a1l6e5",
+  "person": "mayor",
+  "raw": "Si hay un pico de demanda, puede pedir más frecuencia dentro de un plazo.",
+  "text": "Si hay un pico de demanda, puede pedir más frecuencia dentro de un plazo.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "ebkw24",
+  "person": "mayor",
+  "raw": "Los viajeros no te premian por haber pulsado un botón; te premian por llegar.",
+  "text": "Los viajeros no te premian por haber pulsado un botón; te premian por llegar.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1j45rpq",
+  "person": "president",
+  "raw": "Lee el encargo de Agenda y acepta la rama que puedas cumplir.",
+  "text": "Lee el encargo de Agenda y acepta la rama que puedas cumplir.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "uzswm8",
+  "person": "president",
+  "raw": "Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional.",
+  "text": "Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1jgav89",
+  "person": "president",
+  "raw": "El plazo es de dieciocho meses.",
+  "text": "El plazo es de dieciocho meses.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "wyvjj2",
+  "person": "president",
+  "raw": "El premio llega al cumplir, no al prometer; una crueldad que en política evitamos.",
+  "text": "El premio llega al cumplir, no al prometer; una crueldad que en política evitamos.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1rsimd2",
+  "person": "rival",
+  "raw": "El encargo tiene fecha y tu plan sigue en la partida.",
+  "text": "El encargo tiene fecha y tu plan sigue en la partida.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "b1iz13",
+  "person": "rival",
+  "raw": "Revisa demanda, recursos y confianza antes de ampliar.",
+  "text": "Revisa demanda, recursos y confianza antes de ampliar.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "1jwf4hb",
+  "person": "rival",
+  "raw": "Nos veremos en los precios y en los titulares.",
+  "text": "Nos veremos en los precios y en los titulares.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "16ug6hz",
+  "person": "rival",
+  "raw": "Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+  "text": "Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 1
+ },
+ {
+  "id": "m3uig9",
+  "person": "minister",
+  "raw": "Servicio público paga dieciocho millones si cumples y favorece a Territorio.",
+  "text": "Servicio público paga dieciocho millones si cumples y favorece a Territorio.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "69lejx",
+  "person": "minister",
+  "raw": "La apuesta comercial paga veintiséis, exige un veinticinco por ciento más y favorece a Hacienda.",
+  "text": "La apuesta comercial paga veintiséis, exige un veinticinco por ciento más y favorece a Hacienda.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1oskirs",
+  "person": "minister",
+  "raw": "El premio se cobra al cumplir; el botón de aceptar no imprime billetes.",
+  "text": "El premio se cobra al cumplir; el botón de aceptar no imprime billetes.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "13cqovk",
+  "person": "successor",
+  "raw": "Acepta la rama que puedas sostener, con un plan que use oferta, personal e inversiones.",
+  "text": "Acepta la rama que puedas sostener, con un plan que use oferta, personal e inversiones.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "ugmduq",
+  "person": "successor",
+  "raw": "Luego el mando es tuyo.",
+  "text": "Luego el mando es tuyo.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "wmmo8v",
+  "person": "successor",
+  "raw": "Los rivales cambiarán precios, las ciudades pedirán servicios y llegarán decisiones nuevas.",
+  "text": "Los rivales cambiarán precios, las ciudades pedirán servicios y llegarán decisiones nuevas.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "xok47l",
+  "person": "successor",
+  "raw": "Gobernar exige revisar, no resolver una lista una sola vez.",
+  "text": "Gobernar exige revisar, no resolver una lista una sola vez.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 2
+ },
+ {
+  "id": "1wrsne0",
+  "person": "minister",
+  "raw": "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura.",
+  "text": "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1b38tkm",
+  "person": "minister",
+  "raw": "Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números.",
+  "text": "Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1gc5z0d",
+  "person": "minister",
+  "raw": "Es una estrategia legítima de servicio público.",
+  "text": "Es una estrategia legítima de servicio público.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "kkwjca",
+  "person": "minister",
+  "raw": "Necesita financiación: abrir cuesta 4 M€ y después hay operación mensual.",
+  "text": "Necesita financiación: abrir cuesta 4 millones de euros y después hay operación mensual.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "15wytpb",
+  "person": "minister",
+  "raw": "No confundas una necesidad social con una inversión gratuita.",
+  "text": "No confundas una necesidad social con una inversión gratuita.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "mxtg8k",
+  "person": "minister",
+  "raw": "Protege las cuentas y permite invertir después.",
+  "text": "Protege las cuentas y permite invertir después.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1hcmsfl",
+  "person": "minister",
+  "raw": "Su coste es político y territorial: las ciudades abandonadas siguen reclamando trenes y la confianza de sus representantes importa.",
+  "text": "Su coste es político y territorial: las ciudades abandonadas siguen reclamando trenes y la confianza de sus representantes importa.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1lpl69o",
+  "person": "adif",
+  "raw": "El primer tramo no basta: el AVE de ancho fijo no puede seguir por vía ibérica.",
+  "text": "El primer tramo no basta: el Ave de ancho fijo no puede seguir por vía ibérica.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "poluds",
+  "person": "adif",
+  "raw": "Debes comprobar el recorrido completo, incluidos los cambios de ancho.",
+  "text": "Debes comprobar el recorrido completo, incluidos los cambios de ancho.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "sl3qh3",
+  "person": "adif",
+  "raw": "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria.",
+  "text": "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "19i1h2h",
+  "person": "adif",
+  "raw": "Aún debes comprobar unidades disponibles y frecuencia antes de abrir.",
+  "text": "Aún debes comprobar unidades disponibles y frecuencia antes de abrir.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "15tp9v1",
+  "person": "adif",
+  "raw": "Has diagnosticado material, no comprado una obra.",
+  "text": "Has diagnosticado material, no comprado una obra.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "5w95o7",
+  "person": "adif",
+  "raw": "El motor y el ancho son requisitos independientes.",
+  "text": "El motor y el ancho son requisitos independientes.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "2890nk",
+  "person": "adif",
+  "raw": "El S730 funciona aquí porque también es de ancho variable, no porque queme diésel.",
+  "text": "El ese 730 funciona aquí porque también es de ancho variable, no porque queme diésel.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "85yscz",
+  "person": "adif",
+  "raw": "Reserva su capacidad híbrida para recorridos donde hace falta.",
+  "text": "Reserva su capacidad híbrida para recorridos donde hace falta.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1b0qp5m",
+  "person": "workshop",
+  "raw": "La contratación abre formación, no una cabina lista.",
+  "text": "La contratación abre formación, no una cabina lista.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1e31px5",
+  "person": "workshop",
+  "raw": "El plazo es de tres meses; ampliar sin cobertura provoca cancelaciones aunque tengas trenes y dinero.",
+  "text": "El plazo es de tres meses; ampliar sin cobertura provoca cancelaciones aunque tengas trenes y dinero.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1sj7esi",
+  "person": "workshop",
+  "raw": "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura.",
+  "text": "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "16hr3sm",
+  "person": "workshop",
+  "raw": "Si tu reserva ya cubre la ampliación, no necesitas contratar.",
+  "text": "Si tu reserva ya cubre la ampliación, no necesitas contratar.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1eqtjuq",
+  "person": "workshop",
+  "raw": "Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes.",
+  "text": "Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "bmnk3o",
+  "person": "workshop",
+  "raw": "La plantilla extra cobra cada mes y no crea trenes ni electrifica vías.",
+  "text": "La plantilla extra cobra cada mes y no crea trenes ni electrifica vías.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "uz2oh9",
+  "person": "workshop",
+  "raw": "Una reserva razonable ayuda; una contratación masiva sin plan reduce el dinero disponible para resolver otros límites.",
+  "text": "Una reserva razonable ayuda; una contratación masiva sin plan reduce el dinero disponible para resolver otros límites.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1yibg7b",
+  "person": "mayor",
+  "raw": "La catenaria resuelve la alimentación, no el ancho.",
+  "text": "La catenaria resuelve la alimentación, no el ancho.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1sq0z1a",
+  "person": "mayor",
+  "raw": "El AVE sigue necesitando ancho estándar o mixto en todo su recorrido, además de electricidad.",
+  "text": "El Ave sigue necesitando ancho estándar o mixto en todo su recorrido, además de electricidad.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "j536zg",
+  "person": "mayor",
+  "raw": "Correcto: electrificar no cambia las ruedas ni el ancho.",
+  "text": "Correcto: electrificar no cambia las ruedas ni el ancho.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1s4fdfm",
+  "person": "mayor",
+  "raw": "Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles.",
+  "text": "Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "ntmja2",
+  "person": "mayor",
+  "raw": "Ni la catenaria ni cambiar el ancho garantizan 300 km/h.",
+  "text": "Ni la catenaria ni cambiar el ancho garantizan 300 km/h.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "g7zjox",
+  "person": "mayor",
+  "raw": "La velocidad depende del trazado, los límites de infraestructura y el material.",
+  "text": "La velocidad depende del trazado, los límites de infraestructura y el material.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1gqx1in",
+  "person": "mayor",
+  "raw": "Una renovación tiene su propio efecto y presupuesto.",
+  "text": "Una renovación tiene su propio efecto y presupuesto.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "o84eyx",
+  "person": "president",
+  "raw": "Es el compromiso más accesible de las dos ramas.",
+  "text": "Es el compromiso más accesible de las dos ramas.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "ncjpdf",
+  "person": "president",
+  "raw": "El apoyo territorial también tiene valor: no solo importa el premio.",
+  "text": "El apoyo territorial también tiene valor: no solo importa el premio.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "itos6h",
+  "person": "president",
+  "raw": "Tu firma ya está en el encargo.",
+  "text": "Tu firma ya está en el encargo.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1r4gw0j",
+  "person": "president",
+  "raw": "Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer.",
+  "text": "Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "2po82g",
+  "person": "president",
+  "raw": "Ofrece un premio mayor a cambio de exigir más dentro del mismo plazo.",
+  "text": "Ofrece un premio mayor a cambio de exigir más dentro del mismo plazo.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "amzek4",
+  "person": "president",
+  "raw": "El encargo ya está firmado.",
+  "text": "El encargo ya está firmado.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1svflk2",
+  "person": "president",
+  "raw": "Comprueba que la capacidad, la demanda y tu caja sostienen el esfuerzo antes de gastar para cumplirlo.",
+  "text": "Comprueba que la capacidad, la demanda y tu caja sostienen el esfuerzo antes de gastar para cumplirlo.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 3
+ },
+ {
+  "id": "1to431s",
+  "person": "minister",
+  "raw": "Enhorabuena por el cargo, que es precioso: todo el mundo sabe hacerlo mejor que tú.",
+  "text": "Enhorabuena por el cargo, que es precioso: todo el mundo sabe hacerlo mejor que tú.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "68qy0",
+  "person": "minister",
+  "raw": "Te dejo media flota parada y dos anchos de vía que no se hablan desde mil ochocientos cuarenta y ocho.",
+  "text": "Te dejo media flota parada y dos anchos de vía que no se hablan desde mil ochocientos cuarenta y ocho.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "mcz2k",
+  "person": "minister",
+  "raw": "Pon trenes, atiende a los alcaldes, que llamarán, y encarga material sin vaciar la caja.",
+  "text": "Pon trenes, atiende a los alcaldes, que llamarán, y encarga material sin vaciar la caja.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "boq74y",
+  "person": "minister",
+  "raw": "Yo lo venderé en rueda de prensa como un éxito.",
+  "text": "Yo lo venderé en rueda de prensa como un éxito.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1jlm734",
+  "person": "minister",
+  "raw": "Tú encárgate de que lo sea, que para eso cobras.",
+  "text": "Tú encárgate de que lo sea, que para eso cobras.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "132i8f",
+  "person": "president",
+  "raw": "Querido presidente de Renfe: hoy España elige.",
+  "text": "Querido presidente de Renfe: hoy España elige.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1titeqz",
+  "person": "president",
+  "raw": "Elige Rossa, elige Lowgo, elige el autobús con un wifi que no funciona.",
+  "text": "Elige Rossa, elige Lowgo, elige el autobús con un wifi que no funciona.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1l7zihl",
+  "person": "president",
+  "raw": "Y yo quiero que elija Renfe, porque Renfe es España, y España, modestamente, soy yo.",
+  "text": "Y yo quiero que elija Renfe, porque Renfe es España, y España, modestamente, soy yo.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1pdj11t",
+  "person": "president",
+  "raw": "Pon más trenes, construye algún cambiador de ancho y deja de perder viajeros, que da mala imagen.",
+  "text": "Pon más trenes, construye algún cambiador de ancho y deja de perder viajeros, que da mala imagen.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "ar0xdk",
+  "person": "president",
+  "raw": "Si sale bien, lo anuncio yo.",
+  "text": "Si sale bien, lo anuncio yo.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "rw0kd1",
+  "person": "president",
+  "raw": "Si sale mal, ya sabes dónde está la puerta.",
+  "text": "Si sale mal, ya sabes dónde está la puerta.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1lmlp5p",
+  "person": "successor",
+  "raw": "Te lo resumo en un tuit: corredor mediterráneo, ya.",
+  "text": "Te lo resumo en un tuit: corredor mediterráneo, ya.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1v9qii1",
+  "person": "successor",
+  "raw": "Bueno, ese «ya» lo llevamos diciendo treinta años.",
+  "text": "Bueno, ese ya lo llevamos diciendo treinta años.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1o77qvn",
+  "person": "successor",
+  "raw": "La demanda no entiende de anchos de vía; la vía, por desgracia, sí.",
+  "text": "La demanda no entiende de anchos de vía; la vía, por desgracia, sí.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "lbnejj",
+  "person": "successor",
+  "raw": "Quiero un AVE de València a Barcelona y la alta velocidad en Almería.",
+  "text": "Quiero un Ave de València a Barcelona y la alta velocidad en Almería.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "97g1r",
+  "person": "successor",
+  "raw": "Pon tercer carril donde haga falta y no me cortes una cinta sin catenaria, que luego salen memes.",
+  "text": "Pon tercer carril donde haga falta y no me cortes una cinta sin catenaria, que luego salen memes.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "bwd3cf",
+  "person": "successor",
+  "raw": "Y si alguien te dice que esto se hace en dos años, bloquéalo.",
+  "text": "Y si alguien te dice que esto se hace en dos años, bloquéalo.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1apdcko",
+  "person": "successor",
+  "raw": "Ha vuelto la España vaciada a los telediarios, así que toca acordarse de ella.",
+  "text": "Ha vuelto la España vaciada a los telediarios, así que toca acordarse de ella.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1f51ima",
+  "person": "successor",
+  "raw": "Que sí, que Madrid y Barcelona dan dinero, pero Soria, Teruel y Extremadura también tienen urnas.",
+  "text": "Que sí, que Madrid y Barcelona dan dinero, pero Soria, Teruel y Extremadura también tienen urnas.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1996d8m",
+  "person": "successor",
+  "raw": "Electrifica lo que siga con gasóleo, lleva el AVE a más ciudades y termina alguna línea nueva antes de que me jubile.",
+  "text": "Electrifica lo que siga con gasóleo, lleva el Ave a más ciudades y termina alguna línea nueva antes de que me jubile.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "d9j9dw",
+  "person": "successor",
+  "raw": "Rentabilidad y servicio público pueden convivir, como los cuñados en Nochebuena: con esfuerzo y sin hablar de política.",
+  "text": "Rentabilidad y servicio público pueden convivir, como los cuñados en Nochebuena: con esfuerzo y sin hablar de política.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "170lgzn",
+  "person": "president",
+  "raw": "Llega la hora del legado, que es como llamamos los políticos a la foto final.",
+  "text": "Llega la hora del legado, que es como llamamos los políticos a la foto final.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "58iqrx",
+  "person": "president",
+  "raw": "Quiero AVE hasta en el último rincón con estación, trenes llenos y unas cuentas que no den vergüenza.",
+  "text": "Quiero Ave hasta en el último rincón con estación, trenes llenos y unas cuentas que no den vergüenza.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "om3vil",
+  "person": "president",
+  "raw": "A ti te juzgarán por la red que dejes.",
+  "text": "A ti te juzgarán por la red que dejes.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1wku6h",
+  "person": "president",
+  "raw": "A mí me juzgará la Historia, que ya me la he leído y salgo estupendamente.",
+  "text": "A mí me juzgará la Historia, que ya me la he leído y salgo estupendamente.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "d52kpq",
+  "person": "rival",
+  "raw": "Que Lowgo venda billetes a precio de pipas no te obliga a regalar el tren.",
+  "text": "Que Lowgo venda billetes a precio de pipas no te obliga a regalar el tren.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "19r424i",
+  "person": "rival",
+  "raw": "Elige cómo plantarles cara.",
+  "text": "Elige cómo plantarles cara.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1jii1pu",
+  "person": "adif",
+  "raw": "El túnel está.",
+  "text": "El túnel está.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1w9k0nj",
+  "person": "adif",
+  "raw": "Ahora faltan trenes, viajeros y alguien que deje de cortar cintas.",
+  "text": "Ahora faltan trenes, viajeros y alguien que deje de cortar cintas.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "4vixun",
+  "person": "minister",
+  "raw": "Deja de unir capitales en los discursos.",
+  "text": "Deja de unir capitales en los discursos.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "8lhc4n",
+  "person": "minister",
+  "raw": "Une estaciones en el mapa.",
+  "text": "Une estaciones en el mapa.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "b4yile",
+  "person": "mayor",
+  "raw": "Aquí también pagamos impuestos.",
+  "text": "Aquí también pagamos impuestos.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "zwu2q7",
+  "person": "mayor",
+  "raw": "El autobús de las seis ya nos conoce demasiado.",
+  "text": "El autobús de las seis ya nos conoce demasiado.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "z6hxk8",
+  "person": "president",
+  "raw": "Se acercan las elecciones.",
+  "text": "Se acercan las elecciones.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "1yz13ti",
+  "person": "president",
+  "raw": "Necesito resultados, no otra maqueta con luces.",
+  "text": "Necesito resultados, no otra maqueta con luces.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 4
+ },
+ {
+  "id": "ovfifr",
+  "person": "treasury",
+  "raw": "La factura eléctrica de este año trae más ceros que un fichaje de verano.",
+  "text": "La factura eléctrica de este año trae más ceros que un fichaje de verano.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1vx8q4u",
+  "person": "treasury",
+  "raw": "O pagamos un seguro de precio, o rezamos.",
+  "text": "O pagamos un seguro de precio, o rezamos.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "b5le8r",
+  "person": "treasury",
+  "raw": "Te adelanto el final: las dos opciones duelen, y la segunda, más.",
+  "text": "Te adelanto el final: las dos opciones duelen, y la segunda, más.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "z96f1d",
+  "person": "minister",
+  "raw": "Julio de dos mil veintidós: abre la alta velocidad de Venta de Baños a Burgos, con su cambiador de ancho incluido.",
+  "text": "Julio de dos mil veintidós: abre la alta velocidad de Venta de Baños a Burgos, con su cambiador de ancho incluido.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "bno58r",
+  "person": "minister",
+  "raw": "Ya puedes llevar el AVE a Burgos, y los Alvia del norte cambiarán de ancho allí.",
+  "text": "Ya puedes llevar el Ave a Burgos, y los Alvia del norte cambiarán de ancho allí.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "l32ljn",
+  "person": "minister",
+  "raw": "Yo me encargo de la foto.",
+  "text": "Yo me encargo de la foto.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1j0k0u",
+  "person": "minister",
+  "raw": "Tú, de que haya trenes en la foto.",
+  "text": "Tú, de que haya trenes en la foto.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1gu4gnd",
+  "person": "minister",
+  "raw": "El Gobierno regala descuentos para viajar en tren y media España ha descubierto que existe el Alvia.",
+  "text": "El Gobierno regala descuentos para viajar en tren y media España ha descubierto que existe el Alvia.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "qun952",
+  "person": "minister",
+  "raw": "Puedes reforzar el servicio con ayuda extraordinaria, o encomendarte a la Virgen del Pilar y que los viajeros vayan de pie.",
+  "text": "Puedes reforzar el servicio con ayuda extraordinaria, o encomendarte a la Virgen del Pilar y que los viajeros vayan de pie.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "11frpl2",
+  "person": "president",
+  "raw": "En noviembre llega Rossa, con trenes rojos y mucha sonrisa.",
+  "text": "En noviembre llega Rossa, con trenes rojos y mucha sonrisa.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "svxna",
+  "person": "president",
+  "raw": "Ya no hay viajeros cautivos, presidente: hay viajeros con una aplicación para comparar precios.",
+  "text": "Ya no hay viajeros cautivos, presidente: hay viajeros con una aplicación para comparar precios.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "rviul2",
+  "person": "president",
+  "raw": "Yo celebro la competencia.",
+  "text": "Yo celebro la competencia.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1co9byn",
+  "person": "president",
+  "raw": "En público.",
+  "text": "En público.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "4vavss",
+  "person": "president",
+  "raw": "En privado, espabila.",
+  "text": "En privado, espabila.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1us1qlq",
+  "person": "minister",
+  "raw": "Veinte de diciembre de dos mil veintidós: el AVE llega a Murcia.",
+  "text": "Veinte de diciembre de dos mil veintidós: el Ave llega a Murcia.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "15v6dz5",
+  "person": "minister",
+  "raw": "Veinte años de promesas y tres ministros después, pero llega.",
+  "text": "Veinte años de promesas y tres ministros después, pero llega.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "epx85s",
+  "person": "minister",
+  "raw": "Los murcianos no se lo creen; yo tampoco, sinceramente.",
+  "text": "Los murcianos no se lo creen; yo tampoco, sinceramente.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "lkv2yp",
+  "person": "minister",
+  "raw": "Unos trenes nuevos de vía estrecha no caben por los túneles del norte.",
+  "text": "Unos trenes nuevos de vía estrecha no caben por los túneles del norte.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "10q64my",
+  "person": "minister",
+  "raw": "No son nuestros, pero el titular sí.",
+  "text": "No son nuestros, pero el titular sí.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "k6i0ak",
+  "person": "minister",
+  "raw": "Que no cunda el pánico: no hay ningún tren atascado en un túnel, digan lo que digan los memes.",
+  "text": "Que no cunda el pánico: no hay ningún tren atascado en un túnel, digan lo que digan los memes.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "17n12qk",
+  "person": "minister",
+  "raw": "Aun así, esto huele a dimisión.",
+  "text": "Aun así, esto huele a dimisión.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "ub40z4",
+  "person": "minister",
+  "raw": "Tú, por si acaso, revisa lo tuyo.",
+  "text": "Tú, por si acaso, revisa lo tuyo.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "12y8oca",
+  "person": "successor",
+  "raw": "Veintinueve de noviembre de dos mil veintitrés: se abre la variante de Pajares, en ancho mixto, con cambiador en Pola de Lena.",
+  "text": "Veintinueve de noviembre de dos mil veintitrés: se abre la variante de Pajares, en ancho mixto, con cambiador en Pola de Lena.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "16ndw8f",
+  "person": "successor",
+  "raw": "Casi veinte años de obras y cincuenta kilómetros de túneles: una obra española de las de toda la vida.",
+  "text": "Casi veinte años de obras y cincuenta kilómetros de túneles: una obra española de las de toda la vida.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1r3ybmo",
+  "person": "successor",
+  "raw": "Asturias, por fin, a tiro de tren.",
+  "text": "Asturias, por fin, a tiro de tren.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "ezk9d6",
+  "person": "successor",
+  "raw": "Lástima que tu flota siga siendo la que es.",
+  "text": "Lástima que tu flota siga siendo la que es.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "bvt8nk",
+  "person": "successor",
+  "raw": "Plasencia, Cáceres, Mérida y Badajoz ya tienen catenaria.",
+  "text": "Plasencia, Cáceres, Mérida y Badajoz ya tienen catenaria.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "q5aliq",
+  "person": "successor",
+  "raw": "Lo que no tienen es catenaria hasta Madrid, porque de Talavera a Plasencia seguimos con gasóleo como en los ochenta.",
+  "text": "Lo que no tienen es catenaria hasta Madrid, porque de Talavera a Plasencia seguimos con gasóleo como en los ochenta.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "d68fvb",
+  "person": "successor",
+  "raw": "Ya no hay excusa para el tren de museo.",
+  "text": "Ya no hay excusa para el tren de museo.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "i3hxr7",
+  "person": "successor",
+  "raw": "O electrificas lo que falta, o al menos pones Alvia decentes.",
+  "text": "O electrificas lo que falta, o al menos pones Alvia decentes.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "xql4ef",
+  "person": "successor",
+  "raw": "Mayo de dos mil veinticuatro: el S106 entra en servicio.",
+  "text": "Mayo de dos mil veinticuatro: el ese 106 entra en servicio.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "ohbaj0",
+  "person": "successor",
+  "raw": "Treinta trenes contratados que no llegan todos de golpe, que esto no es un pedido por internet.",
+  "text": "Treinta trenes contratados que no llegan todos de golpe, que esto no es un pedido por internet.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1di3bws",
+  "person": "successor",
+  "raw": "Ya lo he tuiteado tres veces.",
+  "text": "Ya lo he tuiteado tres veces.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1rdwg3b",
+  "person": "successor",
+  "raw": "¿Lo celebramos o nos ponemos a trabajar, que también se puede?",
+  "text": "¿Lo celebramos o nos ponemos a trabajar, que también se puede?",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "jdiy2t",
+  "person": "successor",
+  "raw": "Renfe licita treinta trenes de alta velocidad y diez opcionales.",
+  "text": "Renfe licita treinta trenes de alta velocidad y diez opcionales.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "cxggdd",
+  "person": "successor",
+  "raw": "Ojo, licitar no es comprar: es como mirar pisos en el portal inmobiliario un domingo por la tarde.",
+  "text": "Ojo, licitar no es comprar: es como mirar pisos en el portal inmobiliario un domingo por la tarde.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "15xwslf",
+  "person": "successor",
+  "raw": "Se abre el catálogo de la nueva generación, con entregas largas.",
+  "text": "Se abre el catálogo de la nueva generación, con entregas largas.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "rje53f",
+  "person": "president",
+  "raw": "Cuarenta y cinco grados en Córdoba, lo que allí llaman una tarde fresquita.",
+  "text": "Cuarenta y cinco grados en Córdoba, lo que allí llaman una tarde fresquita.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "g2urtg",
+  "person": "president",
+  "raw": "La vía se dilata, la catenaria se descuelga y los viajeros se derriten.",
+  "text": "La vía se dilata, la catenaria se descuelga y los viajeros se derriten.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1veofqi",
+  "person": "president",
+  "raw": "Hay que reforzar el mantenimiento.",
+  "text": "Hay que reforzar el mantenimiento.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "14x2u9l",
+  "person": "president",
+  "raw": "Ahorrar ahora puede salir carísimo luego, y luego me toca a mí dar explicaciones.",
+  "text": "Ahorrar ahora puede salir carísimo luego, y luego me toca a mí dar explicaciones.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "kulvcl",
+  "person": "mayor",
+  "raw": "Señor presidente de Renfe, le habla el alcalde de Villanueva del Andén, cuatrocientos doce habitantes y una estación preciosa sin trenes.",
+  "text": "Señor presidente de Renfe, le habla el alcalde de Villanueva del Andén, cuatrocientos doce habitantes y una estación preciosa sin trenes.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1d20h9r",
+  "person": "mayor",
+  "raw": "Varias comarcas pagamos parte del servicio si no nos dejan sin tren.",
+  "text": "Varias comarcas pagamos parte del servicio si no nos dejan sin tren.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1iy4od9",
+  "person": "mayor",
+  "raw": "Es un contrato a cinco años, que en política es la eternidad.",
+  "text": "Es un contrato a cinco años, que en política es la eternidad.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1xkda8t",
+  "person": "workshop",
+  "raw": "Toda Europa compra trenes a la vez y las fábricas van con dieciocho meses de cola, como el ambulatorio.",
+  "text": "Toda Europa compra trenes a la vez y las fábricas van con dieciocho meses de cola, como el ambulatorio.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1r5l2rw",
+  "person": "workshop",
+  "raw": "Podemos pagar para colarnos, con elegancia.",
+  "text": "Podemos pagar para colarnos, con elegancia.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "160fe37",
+  "person": "workshop",
+  "raw": "O esperar, y que mis mecánicos sigan haciendo milagros con cinta americana.",
+  "text": "O esperar, y que mis mecánicos sigan haciendo milagros con cinta americana.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1gw0vkv",
+  "person": "president",
+  "raw": "Quedan cuatro años.",
+  "text": "Quedan cuatro años.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "fcwphn",
+  "person": "president",
+  "raw": "El Parlamento pide una red para todos y unas cuentas claras, dos cosas que en mi experiencia rara vez van juntas.",
+  "text": "El Parlamento pide una red para todos y unas cuentas claras, dos cosas que en mi experiencia rara vez van juntas.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1wkaocq",
+  "person": "president",
+  "raw": "¿Qué comprometes para la recta final?",
+  "text": "¿Qué comprometes para la recta final?",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "17mt2ni",
+  "person": "adif",
+  "raw": "Esta noche se han llevado tres kilómetros de cable de señalización.",
+  "text": "Esta noche se han llevado tres kilómetros de cable de señalización.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "13b8ax",
+  "person": "adif",
+  "raw": "Profesionales, oiga: ni una pieza de más.",
+  "text": "Profesionales, oiga: ni una pieza de más.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1851oag",
+  "person": "adif",
+  "raw": "Podemos reponerlo deprisa y pagar el doble, o hacerlo a nuestro ritmo, que ya sabe usted cuál es.",
+  "text": "Podemos reponerlo deprisa y pagar el doble, o hacerlo a nuestro ritmo, que ya sabe usted cuál es.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "2m36fq",
+  "person": "workshop",
+  "raw": "Los maquinistas han convocado huelga.",
+  "text": "Los maquinistas han convocado huelga.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1wbifeh",
+  "person": "workshop",
+  "raw": "Dicen que llevan diez años esperando el convenio.",
+  "text": "Dicen que llevan diez años esperando el convenio.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1mzb0ss",
+  "person": "workshop",
+  "raw": "Yo llevo treinta esperando una llave inglesa que no esté doblada, y aquí sigo.",
+  "text": "Yo llevo treinta esperando una llave inglesa que no esté doblada, y aquí sigo.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1jfntrt",
+  "person": "workshop",
+  "raw": "Usted verá si negocia o si aguanta.",
+  "text": "Usted verá si negocia o si aguanta.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "17oohnm",
+  "person": "riders",
+  "raw": "Le habla Marisa Andén, de los viajeros.",
+  "text": "Le habla Marisa Andén, de los viajeros.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1njugvv",
+  "person": "riders",
+  "raw": "El wifi de sus trenes va a la velocidad de un burro cansado, y los enchufes, cuando funcionan, dan calambre.",
+  "text": "El wifi de sus trenes va a la velocidad de un burro cansado, y los enchufes, cuando funcionan, dan calambre.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "qvr5h4",
+  "person": "riders",
+  "raw": "Un influencer con dos millones de seguidores lo ha grabado.",
+  "text": "Un influencer con dos millones de seguidores lo ha grabado.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1lp0zs",
+  "person": "riders",
+  "raw": "Enhorabuena: es usted tendencia.",
+  "text": "Enhorabuena: es usted tendencia.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1k63jbs",
+  "person": "treasury",
+  "raw": "Bruselas manda dinero para electrificar y modernizar vías, y hay que gastarlo antes de que se den cuenta de que no tenemos proyectos.",
+  "text": "Bruselas manda dinero para electrificar y modernizar vías, y hay que gastarlo antes de que se den cuenta de que no tenemos proyectos.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "64ly7j",
+  "person": "treasury",
+  "raw": "Durante dos años, tus obras de catenaria y de ancho saldrán un cuarenta por ciento más baratas.",
+  "text": "Durante dos años, tus obras de catenaria y de ancho saldrán un cuarenta por ciento más baratas.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "13upoy8",
+  "person": "treasury",
+  "raw": "No te acostumbres.",
+  "text": "No te acostumbres.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "fb20bv",
+  "person": "treasury",
+  "raw": "Mala noticia: este año no hay presupuestos, y sin presupuestos no hay alegrías.",
+  "text": "Mala noticia: este año no hay presupuestos, y sin presupuestos no hay alegrías.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1vea61w",
+  "person": "treasury",
+  "raw": "Te retengo una parte de las transferencias.",
+  "text": "Te retengo una parte de las transferencias.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1bw1irv",
+  "person": "treasury",
+  "raw": "No me mires así, que yo solo soy la de la tijera.",
+  "text": "No me mires así, que yo solo soy la de la tijera.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "16ta9oe",
+  "person": "mayor",
+  "raw": "Me he encadenado a la vía de mi pueblo y de aquí no me muevo hasta que llegue el AVE.",
+  "text": "Me he encadenado a la vía de mi pueblo y de aquí no me muevo hasta que llegue el Ave.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "n57z1w",
+  "person": "mayor",
+  "raw": "Bueno, me muevo para comer, que tengo una edad.",
+  "text": "Bueno, me muevo para comer, que tengo una edad.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1ri3t32",
+  "person": "mayor",
+  "raw": "Pero vuelvo.",
+  "text": "Pero vuelvo.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "c0fx7e",
+  "person": "mayor",
+  "raw": "¿Qué va a hacer usted?",
+  "text": "¿Qué va a hacer usted?",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "eu6fyc",
+  "person": "rival",
+  "raw": "Buenos días, competidor.",
+  "text": "Buenos días, competidor.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "17o8i4f",
+  "person": "rival",
+  "raw": "Le aviso por cortesía: Autocares Meseta saca billetes a cinco euros a todas sus ciudades.",
+  "text": "Le aviso por cortesía: Autocares Meseta saca billetes a cinco euros a todas sus ciudades.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "151p6hh",
+  "person": "rival",
+  "raw": "Con wifi que funciona, por cierto.",
+  "text": "Con wifi que funciona, por cierto.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "6m32p6",
+  "person": "rival",
+  "raw": "Que tenga usted un buen día, si puede.",
+  "text": "Que tenga usted un buen día, si puede.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "piyj3k",
+  "person": "adif",
+  "raw": "Los carriles están a sesenta grados y se dilatan más que el presupuesto de una obra.",
+  "text": "Los carriles están a sesenta grados y se dilatan más que el presupuesto de una obra.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "179wxjd",
+  "person": "adif",
+  "raw": "Hay que limitar velocidades o arriesgarse a que la vía haga una ese.",
+  "text": "Hay que limitar velocidades o arriesgarse a que la vía haga una ese.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "pznufo",
+  "person": "adif",
+  "raw": "Usted decide.",
+  "text": "Usted decide.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "dhpar6",
+  "person": "adif",
+  "raw": "Yo, por si acaso, me pongo el casco.",
+  "text": "Yo, por si acaso, me pongo el casco.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1akqy1c",
+  "person": "adif",
+  "raw": "Ha nevado en la meseta como no se recuerda, y la catenaria se ha congelado en tres puertos.",
+  "text": "Ha nevado en la meseta como no se recuerda, y la catenaria se ha congelado en tres puertos.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1qm69gp",
+  "person": "adif",
+  "raw": "Las máquinas quitanieves están en camino.",
+  "text": "Las máquinas quitanieves están en camino.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "18u7srs",
+  "person": "adif",
+  "raw": "Una de ellas lleva desde el año pasado en camino, pero esa es otra historia.",
+  "text": "Una de ellas lleva desde el año pasado en camino, pero esa es otra historia.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "b9fbze",
+  "person": "adif",
+  "raw": "Un rebaño de vacas ha decidido pastar en la vía.",
+  "text": "Un rebaño de vacas ha decidido pastar en la vía.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "qaugqb",
+  "person": "adif",
+  "raw": "Llevan media hora mirando al Alvia y el Alvia las mira a ellas.",
+  "text": "Llevan media hora mirando al Alvia y el Alvia las mira a ellas.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "bsig4d",
+  "person": "adif",
+  "raw": "Nadie cede.",
+  "text": "Nadie cede.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1iepagr",
+  "person": "adif",
+  "raw": "Yo propongo esperar, que las vacas tienen más paciencia que nosotros.",
+  "text": "Yo propongo esperar, que las vacas tienen más paciencia que nosotros.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "14hmcoj",
+  "person": "workshop",
+  "raw": "Un operador extranjero se deshace de unos trenes de alta velocidad casi nuevos.",
+  "text": "Un operador extranjero se deshace de unos trenes de alta velocidad casi nuevos.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "glkszf",
+  "person": "workshop",
+  "raw": "Bueno, casi nuevos: tienen algún arañazo y huelen a queso.",
+  "text": "Bueno, casi nuevos: tienen algún arañazo y huelen a queso.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "16lmvij",
+  "person": "workshop",
+  "raw": "Si los quiere, son suyos a buen precio.",
+  "text": "Si los quiere, son suyos a buen precio.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1tjnlyu",
+  "person": "workshop",
+  "raw": "Yo los arreglo.",
+  "text": "Yo los arreglo.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "9p562a",
+  "person": "workshop",
+  "raw": "Se ha quemado una nave del taller.",
+  "text": "Se ha quemado una nave del taller.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "wnwt2c",
+  "person": "workshop",
+  "raw": "No ha habido heridos, solo un bocadillo de chorizo y mi orgullo.",
+  "text": "No ha habido heridos, solo un bocadillo de chorizo y mi orgullo.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "oapkfn",
+  "person": "workshop",
+  "raw": "Necesito dinero para arreglarlo, o tendremos los trenes peor cuidados unos meses.",
+  "text": "Necesito dinero para arreglarlo, o tendremos los trenes peor cuidados unos meses.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "vhjygj",
+  "person": "riders",
+  "raw": "Un tren suyo ha llegado puntual y un viajero lo ha grabado: lleva tres millones de visitas.",
+  "text": "Un tren suyo ha llegado puntual y un viajero lo ha grabado: lleva tres millones de visitas.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "13imgbl",
+  "person": "riders",
+  "raw": "Es lo más visto del día, por delante de un perro que habla.",
+  "text": "Es lo más visto del día, por delante de un perro que habla.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "wpkb1b",
+  "person": "riders",
+  "raw": "No sé si felicitarle o preocuparme.",
+  "text": "No sé si felicitarle o preocuparme.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "oxrt5q",
+  "person": "mayor",
+  "raw": "Este verano hay fiestas, ferias, conciertos y romerías en media España.",
+  "text": "Este verano hay fiestas, ferias, conciertos y romerías en media España.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "18r7vd9",
+  "person": "mayor",
+  "raw": "Bueno, como todos los veranos, pero este año la gente viaja más.",
+  "text": "Bueno, como todos los veranos, pero este año la gente viaja más.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "ziwxuu",
+  "person": "mayor",
+  "raw": "Si pone trenes, se llenan.",
+  "text": "Si pone trenes, se llenan.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1oynx2q",
+  "person": "mayor",
+  "raw": "Si no, se llenan los autobuses de ese señor tan simpático del asfalto.",
+  "text": "Si no, se llenan los autobuses de ese señor tan simpático del asfalto.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "f4eku8",
+  "person": "treasury",
+  "raw": "El Tribunal de Cuentas quiere revisar tus gastos.",
+  "text": "El Tribunal de Cuentas quiere revisar tus gastos.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "193cwqr",
+  "person": "treasury",
+  "raw": "Todo en orden, ¿verdad?",
+  "text": "Todo en orden, ¿verdad?",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1bfohy2",
+  "person": "treasury",
+  "raw": "Claro que sí.",
+  "text": "Claro que sí.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1ja4vtp",
+  "person": "treasury",
+  "raw": "Por si acaso, pon un abogado bueno o paga una consultora que nos diga lo que queremos oír.",
+  "text": "Por si acaso, pon un abogado bueno o paga una consultora que nos diga lo que queremos oír.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1gmoz7j",
+  "person": "adif",
+  "raw": "En una de sus obras han aparecido restos romanos.",
+  "text": "En una de sus obras han aparecido restos romanos.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1o5zyv6",
+  "person": "adif",
+  "raw": "Una calzada, un mosaico y lo que parece una moneda de Trajano.",
+  "text": "Una calzada, un mosaico y lo que parece una moneda de Trajano.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1cs1oxr",
+  "person": "adif",
+  "raw": "Precioso, pero los arqueólogos tienen prioridad.",
+  "text": "Precioso, pero los arqueólogos tienen prioridad.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "16t75oh",
+  "person": "adif",
+  "raw": "Calcule unos meses de retraso.",
+  "text": "Calcule unos meses de retraso.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1tq1tzm",
+  "person": "adif",
+  "raw": "O pague y lo hacemos de noche, con linternas.",
+  "text": "O pague y lo hacemos de noche, con linternas.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "vjd9qt",
+  "person": "adif",
+  "raw": "No se lo va a creer, pero una de sus obras va adelantada.",
+  "text": "No se lo va a creer, pero una de sus obras va adelantada.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1uuvcwv",
+  "person": "adif",
+  "raw": "Lo he comprobado tres veces.",
+  "text": "Lo he comprobado tres veces.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "egvryy",
+  "person": "adif",
+  "raw": "Si pone un poco más de dinero, terminamos antes y nos hacemos una foto, que no pasa todos los días.",
+  "text": "Si pone un poco más de dinero, terminamos antes y nos hacemos una foto, que no pasa todos los días.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "fkxn1i",
+  "person": "president",
+  "raw": "Viene un jefe de Estado extranjero y quiere viajar en AVE.",
+  "text": "Viene un jefe de Estado extranjero y quiere viajar en Ave.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "yf5ouy",
+  "person": "president",
+  "raw": "Que vea lo mejor que tenemos, y que no vea lo demás.",
+  "text": "Que vea lo mejor que tenemos, y que no vea lo demás.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1vt1rvq",
+  "person": "president",
+  "raw": "Si todo sale bien, la foto es mía.",
+  "text": "Si todo sale bien, la foto es mía.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "13synbc",
+  "person": "president",
+  "raw": "Si sale mal, la culpa es tuya, como siempre.",
+  "text": "Si sale mal, la culpa es tuya, como siempre.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1wsphq5",
+  "person": "president",
+  "raw": "He convocado elecciones, que me apetecía.",
+  "text": "He convocado elecciones, que me apetecía.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "c623f0",
+  "person": "president",
+  "raw": "Necesito inaugurar algo ya, lo que sea, aunque sea un apeadero o una máquina de café.",
+  "text": "Necesito inaugurar algo ya, lo que sea, aunque sea un apeadero o una máquina de café.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "f99il4",
+  "person": "president",
+  "raw": "Dame algo que cortar con unas tijeras grandes.",
+  "text": "Dame algo que cortar con unas tijeras grandes.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1j8lkof",
+  "person": "successor",
+  "raw": "Anoche le contesté a un señor que se quejaba de un retraso.",
+  "text": "Anoche le contesté a un señor que se quejaba de un retraso.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1ibdd9r",
+  "person": "successor",
+  "raw": "Y luego a otro.",
+  "text": "Y luego a otro.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1fyrbg",
+  "person": "successor",
+  "raw": "Y luego a su cuñado.",
+  "text": "Y luego a su cuñado.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "5f0w6r",
+  "person": "successor",
+  "raw": "Ahora todo el país habla de nuestros trenes.",
+  "text": "Ahora todo el país habla de nuestros trenes.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "11c4omi",
+  "person": "successor",
+  "raw": "Bien o mal, no lo sé, pero hablan.",
+  "text": "Bien o mal, no lo sé, pero hablan.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "u0bysf",
+  "person": "successor",
+  "raw": "Necesito que esta semana todo funcione.",
+  "text": "Necesito que esta semana todo funcione.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "lxz5u0",
+  "person": "mayor",
+  "raw": "Le recuerdo, por si se le había olvidado, que Teruel existe.",
+  "text": "Le recuerdo, por si se le había olvidado, que Teruel existe.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "rc9q4",
+  "person": "mayor",
+  "raw": "Y Soria.",
+  "text": "Y Soria.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "102nk9a",
+  "person": "mayor",
+  "raw": "Y mi pueblo, aunque eso lo sabemos los de siempre.",
+  "text": "Y mi pueblo, aunque eso lo sabemos los de siempre.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "maqpts",
+  "person": "mayor",
+  "raw": "Queremos tren decente, con catenaria y sin gasóleo.",
+  "text": "Queremos tren decente, con catenaria y sin gasóleo.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1ib5wy3",
+  "person": "mayor",
+  "raw": "¿Lo pone usted o se lo pido a los Reyes Magos?",
+  "text": "¿Lo pone usted o se lo pido a los Reyes Magos?",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "13kpzkh",
+  "person": "riders",
+  "raw": "Los viajeros ya no saben dónde meter las maletas.",
+  "text": "Los viajeros ya no saben dónde meter las maletas.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "1gfl99z",
+  "person": "riders",
+  "raw": "Hay maletas en los pasillos, en los baños y una en el techo, no me pregunte cómo.",
+  "text": "Hay maletas en los pasillos, en los baños y una en el techo, no me pregunte cómo.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "n31q9u",
+  "person": "riders",
+  "raw": "Podría reformar los coches, o seguir jugando al tetris.",
+  "text": "Podría reformar los coches, o seguir jugando al tetris.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 5
+ },
+ {
+  "id": "y9dp79",
+  "person": "president",
+  "raw": "Hoy hasta los sondeos sonríen.",
+  "text": "Hoy hasta los sondeos sonríen.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1hkco44",
+  "person": "president",
+  "raw": "No lo jodas.",
+  "text": "No lo jodas.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "185zovh",
+  "person": "president",
+  "raw": "Quiero más salidas en hora punta.",
+  "text": "Quiero más salidas en hora punta.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "yctp4b",
+  "person": "president",
+  "raw": "Y maquinistas, no asesores fingiendo conducir.",
+  "text": "Y maquinistas, no asesores fingiendo conducir.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "7ypr58",
+  "person": "president",
+  "raw": "Lowgo se está llevando la foto.",
+  "text": "Lowgo se está llevando la foto.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "emxnzq",
+  "person": "president",
+  "raw": "Elige si peleamos el precio o protegemos la caja.",
+  "text": "Elige si peleamos el precio o protegemos la caja.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "c5tmwm",
+  "person": "president",
+  "raw": "No puedo inaugurar un tren que se queda tirado antes del primer canapé.",
+  "text": "No puedo inaugurar un tren que se queda tirado antes del primer canapé.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "ru4pc4",
+  "person": "president",
+  "raw": "En esa comarca también hay urnas.",
+  "text": "En esa comarca también hay urnas.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "173kvh",
+  "person": "president",
+  "raw": "Pon servicios antes de que vayan a votar en autobús.",
+  "text": "Pon servicios antes de que vayan a votar en autobús.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "11bnawv",
+  "person": "president",
+  "raw": "Necesito una mejora que funcione antes de ponerle mi nombre.",
+  "text": "Necesito una mejora que funcione antes de ponerle mi nombre.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "snfd45",
+  "person": "president",
+  "raw": "Director, he vendido los retrasos como una redistribución del tiempo libre.",
+  "text": "Director, he vendido los retrasos como una redistribución del tiempo libre.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "6ueuav",
+  "person": "president",
+  "raw": "No me obligues a defender otra gilipollez.",
+  "text": "No me obligues a defender otra gilipollez.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1ugoxta",
+  "person": "president",
+  "raw": "Como esto reviente, no pienso salir yo en la foto.",
+  "text": "Como esto reviente, no pienso salir yo en la foto.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "mau70d",
+  "person": "president",
+  "raw": "He vuelto a demostrar que soy imprescindible.",
+  "text": "He vuelto a demostrar que soy imprescindible.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1ujcvay",
+  "person": "president",
+  "raw": "De nada.",
+  "text": "De nada.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "bysh6m",
+  "person": "president",
+  "raw": "¿Eso lo habéis conseguido sin una comisión?",
+  "text": "¿Eso lo habéis conseguido sin una comisión?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "13ytbl2",
+  "person": "president",
+  "raw": "Me dejas tieso.",
+  "text": "Me dejas tieso.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "bj8bdf",
+  "person": "president",
+  "raw": "Confié en ti.",
+  "text": "Confié en ti.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "qz1unp",
+  "person": "president",
+  "raw": "Tampoco era mi primera mala decisión.",
+  "text": "Tampoco era mi primera mala decisión.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "18eod8u",
+  "person": "president",
+  "raw": "Vamos a sacarlo adelante aunque tenga que arrastrar a medio gabinete.",
+  "text": "Vamos a sacarlo adelante aunque tenga que arrastrar a medio gabinete.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "r80h5a",
+  "person": "minister",
+  "raw": "Mira qué bien: una mañana sin ruedas de prensa de mierda.",
+  "text": "Mira qué bien: una mañana sin ruedas de prensa de mierda.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "dakutw",
+  "person": "minister",
+  "raw": "La nueva oferta necesita turnos.",
+  "text": "La nueva oferta necesita turnos.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "93rm2y",
+  "person": "minister",
+  "raw": "No pienso explicar que vendimos asientos sin conductor.",
+  "text": "No pienso explicar que vendimos asientos sin conductor.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "13j1avy",
+  "person": "minister",
+  "raw": "Bajar precios queda estupendo hasta que Charo te tira la calculadora a la cabeza.",
+  "text": "Bajar precios queda estupendo hasta que Charo te tira la calculadora a la cabeza.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1p6nhx2",
+  "person": "minister",
+  "raw": "El taller pide una revisión extra.",
+  "text": "El taller pide una revisión extra.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1mgxffu",
+  "person": "minister",
+  "raw": "El tren no se arregla por real decreto.",
+  "text": "El tren no se arregla por real decreto.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "w3dg5",
+  "person": "minister",
+  "raw": "Podemos reforzar la atención de esa estación o mandar otro cartel.",
+  "text": "Podemos reforzar la atención de esa estación o mandar otro cartel.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "11emrcc",
+  "person": "minister",
+  "raw": "Adivina cuál molesta menos.",
+  "text": "Adivina cuál molesta menos.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1t59wie",
+  "person": "minister",
+  "raw": "Los técnicos tienen un piloto listo.",
+  "text": "Los técnicos tienen un piloto listo.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "wuhdig",
+  "person": "minister",
+  "raw": "Esta vez no es un primo con una presentación.",
+  "text": "Esta vez no es un primo con una presentación.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1yb0m1x",
+  "person": "minister",
+  "raw": "¡Estoy hasta el moño de inaugurar tus excusas!",
+  "text": "¡Estoy hasta el moño de inaugurar tus excusas!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1lhpqt9",
+  "person": "minister",
+  "raw": "Me están llamando de Moncloa.",
+  "text": "Me están llamando de Moncloa.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "ab2k1a",
+  "person": "minister",
+  "raw": "Coge tú, valiente.",
+  "text": "Coge tú, valiente.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "14mfl84",
+  "person": "minister",
+  "raw": "Esto lo he peleado yo mientras tú calentabas la silla.",
+  "text": "Esto lo he peleado yo mientras tú calentabas la silla.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "ce5hol",
+  "person": "minister",
+  "raw": "No me jodas, ¿ha salido a la primera?",
+  "text": "No me jodas, ¿ha salido a la primera?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "qo1wed",
+  "person": "minister",
+  "raw": "Tanto plan estratégico para acabar haciendo el canelo.",
+  "text": "Tanto plan estratégico para acabar haciendo el canelo.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "13hp256",
+  "person": "minister",
+  "raw": "Se acabó marear expedientes.",
+  "text": "Se acabó marear expedientes.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "ctgvgr",
+  "person": "minister",
+  "raw": "Hoy se firma y se trabaja.",
+  "text": "Hoy se firma y se trabaja.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1t495ds",
+  "person": "successor",
+  "raw": "Hoy el tren corre más que mis respuestas en redes.",
+  "text": "Hoy el tren corre más que mis respuestas en redes.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "sbxe5o",
+  "person": "successor",
+  "raw": "El horario está inflado.",
+  "text": "El horario está inflado.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "19iv0oc",
+  "person": "successor",
+  "raw": "O pagamos refuerzos o dejamos de vender humo en ventanilla.",
+  "text": "O pagamos refuerzos o dejamos de vender humo en ventanilla.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "garc5i",
+  "person": "successor",
+  "raw": "Rossa ha anunciado promoción.",
+  "text": "Rossa ha anunciado promoción.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "mspap",
+  "person": "successor",
+  "raw": "Como respondas con una nota de prensa, te la comes.",
+  "text": "Como respondas con una nota de prensa, te la comes.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "21qa2n",
+  "person": "successor",
+  "raw": "Otro vídeo del aire acondicionado muerto y nos conocen hasta en Saturno.",
+  "text": "Otro vídeo del aire acondicionado muerto y nos conocen hasta en Saturno.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "qx97oe",
+  "person": "successor",
+  "raw": "El alcalde amenaza con plantarse en el ministerio.",
+  "text": "El alcalde amenaza con plantarse en el ministerio.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "tz6ehe",
+  "person": "successor",
+  "raw": "Y ese no se va con una pegatina.",
+  "text": "Y ese no se va con una pegatina.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1w4lwqa",
+  "person": "successor",
+  "raw": "Quiero datos de verdad.",
+  "text": "Quiero datos de verdad.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "u3zb3t",
+  "person": "successor",
+  "raw": "La hoja de cálculo de tu cuñado cuenta como arma, no como herramienta.",
+  "text": "La hoja de cálculo de tu cuñado cuenta como arma, no como herramienta.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1qahikl",
+  "person": "successor",
+  "raw": "¡El siguiente que diga incidencia puntual se va andando!",
+  "text": "¡El siguiente que diga incidencia puntual se va andando!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "nsqnfy",
+  "person": "successor",
+  "raw": "Como esto se filtre, mañana desayuno titulares.",
+  "text": "Como esto se filtre, mañana desayuno titulares.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "7v5qda",
+  "person": "successor",
+  "raw": "Me guardo esta victoria para restregársela al de enfrente.",
+  "text": "Me guardo esta victoria para restregársela al de enfrente.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "15dgcaf",
+  "person": "successor",
+  "raw": "¿Cómo que funciona?",
+  "text": "¿Cómo que funciona?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1efbh6i",
+  "person": "successor",
+  "raw": "Mira otra vez, que me estás asustando.",
+  "text": "Mira otra vez, que me estás asustando.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1xb2m0a",
+  "person": "successor",
+  "raw": "No has gestionado una red: has aparcado problemas.",
+  "text": "No has gestionado una red: has aparcado problemas.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "ot2d7s",
+  "person": "successor",
+  "raw": "Vamos a poner orden.",
+  "text": "Vamos a poner orden.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "xpyst0",
+  "person": "successor",
+  "raw": "Y al que estorbe, que se aparte.",
+  "text": "Y al que estorbe, que se aparte.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1sg6idu",
+  "person": "treasury",
+  "raw": "Soy Charo.",
+  "text": "Soy Charo.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1xiwzf0",
+  "person": "treasury",
+  "raw": "Hoy no he traído la tijera grande.",
+  "text": "Hoy no he traído la tijera grande.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "fvn6s3",
+  "person": "treasury",
+  "raw": "Aprovecha.",
+  "text": "Aprovecha.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1wm5x87",
+  "person": "treasury",
+  "raw": "Las horas extra no se pagan con entusiasmo.",
+  "text": "Las horas extra no se pagan con entusiasmo.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "12ipdao",
+  "person": "treasury",
+  "raw": "Saca la cartera o ajusta la oferta.",
+  "text": "Saca la cartera o ajusta la oferta.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "xyc855",
+  "person": "treasury",
+  "raw": "Cada descuento tiene que salir de algún sitio.",
+  "text": "Cada descuento tiene que salir de algún sitio.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "hha9hy",
+  "person": "treasury",
+  "raw": "A ser posible, no de mi paciencia.",
+  "text": "A ser posible, no de mi paciencia.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "t9javd",
+  "person": "treasury",
+  "raw": "La revisión cuesta menos que el rescate, lumbreras.",
+  "text": "La revisión cuesta menos que el rescate, lumbreras.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "embn2v",
+  "person": "treasury",
+  "raw": "Pero hay que pagarla hoy.",
+  "text": "Pero hay que pagarla hoy.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "12p9cmd",
+  "person": "treasury",
+  "raw": "Ese pueblo necesita atención, no otra escultura delante del apeadero.",
+  "text": "Ese pueblo necesita atención, no otra escultura delante del apeadero.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1pj78li",
+  "person": "treasury",
+  "raw": "El piloto tiene presupuesto.",
+  "text": "El piloto tiene presupuesto.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "m4wl9k",
+  "person": "treasury",
+  "raw": "Si lo conviertes en un agujero, te meto dentro.",
+  "text": "Si lo conviertes en un agujero, te meto dentro.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "dcd34d",
+  "person": "treasury",
+  "raw": "¡No sale, pedazo de manirroto!",
+  "text": "¡No sale, pedazo de manirroto!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "15us8m",
+  "person": "treasury",
+  "raw": "Sumar no es una ideología.",
+  "text": "Sumar no es una ideología.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1fi3ydb",
+  "person": "treasury",
+  "raw": "He visto la caja y se me ha cortado hasta el café.",
+  "text": "He visto la caja y se me ha cortado hasta el café.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1ffl0px",
+  "person": "treasury",
+  "raw": "He cuadrado tus cuentas.",
+  "text": "He cuadrado tus cuentas.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "105s7fv",
+  "person": "treasury",
+  "raw": "Un milagro y dos úlceras.",
+  "text": "Un milagro y dos úlceras.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "uqk42v",
+  "person": "treasury",
+  "raw": "¿Dinero sin gastar?",
+  "text": "¿Dinero sin gastar?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "pwzwqy",
+  "person": "treasury",
+  "raw": "¿Estás enfermo o se te ha roto el boli?",
+  "text": "¿Estás enfermo o se te ha roto el boli?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "2tsdk5",
+  "person": "treasury",
+  "raw": "Te di un presupuesto, no una licencia para hacer el gilipollas.",
+  "text": "Te di un presupuesto, no una licencia para hacer el gilipollas.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1dl4tpk",
+  "person": "treasury",
+  "raw": "Aquí se paga lo que toca.",
+  "text": "Aquí se paga lo que toca.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1l529h8",
+  "person": "treasury",
+  "raw": "El confeti te lo compras tú.",
+  "text": "El confeti te lo compras tú.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "61alsr",
+  "person": "adif",
+  "raw": "La cuadrilla ha terminado y nadie ha soltado una estupidez.",
+  "text": "La cuadrilla ha terminado y nadie ha soltado una estupidez.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "bk9qa6",
+  "person": "adif",
+  "raw": "Récord.",
+  "text": "Récord.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1g4gugn",
+  "person": "adif",
+  "raw": "Sin cuadrilla de guardia, la incidencia de las seis la arregla el Espíritu Santo.",
+  "text": "Sin cuadrilla de guardia, la incidencia de las seis la arregla el Espíritu Santo.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "905314",
+  "person": "adif",
+  "raw": "Si llenas el tren de ofertas y no refuerzas el andén, el atasco te lo comes tú.",
+  "text": "Si llenas el tren de ofertas y no refuerzas el andén, el atasco te lo comes tú.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1hz1qj8",
+  "person": "adif",
+  "raw": "Puedo inspeccionar la vía ahora o escuchar después que nadie lo había previsto.",
+  "text": "Puedo inspeccionar la vía ahora o escuchar después que nadie lo había previsto.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1pk8uo9",
+  "person": "adif",
+  "raw": "La estación necesita acceso y personal.",
+  "text": "La estación necesita acceso y personal.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "nkrteh",
+  "person": "adif",
+  "raw": "Las palomas no informan de las salidas.",
+  "text": "Las palomas no informan de las salidas.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "hx8gnn",
+  "person": "adif",
+  "raw": "Tenemos sensores para detectar fallos.",
+  "text": "Tenemos sensores para detectar fallos.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "orcibj",
+  "person": "adif",
+  "raw": "Detectar gilipolleces aún se hace a mano.",
+  "text": "Detectar gilipolleces aún se hace a mano.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1cvrw5k",
+  "person": "adif",
+  "raw": "¡Baja al tajo a decir esa gilipollez sin zapatos de charol!",
+  "text": "¡Baja al tajo a decir esa gilipollez sin zapatos de charol!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "17q9a9r",
+  "person": "adif",
+  "raw": "He visto el terreno.",
+  "text": "He visto el terreno.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1lyqz87",
+  "person": "adif",
+  "raw": "El terreno no ha leído tu calendario.",
+  "text": "El terreno no ha leído tu calendario.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "6fpbo8",
+  "person": "adif",
+  "raw": "Esto está bien hecho.",
+  "text": "Esto está bien hecho.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "m6nomm",
+  "person": "adif",
+  "raw": "Puedes sacar la cinta sin hacer el ridículo.",
+  "text": "Puedes sacar la cinta sin hacer el ridículo.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "15h4eqv",
+  "person": "adif",
+  "raw": "¿El plano coincide con la obra?",
+  "text": "¿El plano coincide con la obra?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "uvm03e",
+  "person": "adif",
+  "raw": "Hoy viene algo gordo.",
+  "text": "Hoy viene algo gordo.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "14lcn2u",
+  "person": "adif",
+  "raw": "Otra promesa encima del barro.",
+  "text": "Otra promesa encima del barro.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1f97y8a",
+  "person": "adif",
+  "raw": "Me cago en el folleto.",
+  "text": "Me cago en el folleto.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "cjexho",
+  "person": "adif",
+  "raw": "Las vías no se ponen con discursos.",
+  "text": "Las vías no se ponen con discursos.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1b1c0wt",
+  "person": "adif",
+  "raw": "Dame medios y aparta.",
+  "text": "Dame medios y aparta.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "10zgg0r",
+  "person": "workshop",
+  "raw": "Hoy los trenes suenan a tren, no a cubo de tornillos.",
+  "text": "Hoy los trenes suenan a tren, no a cubo de tornillos.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "xsz0dk",
+  "person": "workshop",
+  "raw": "Necesito manos en el turno de noche.",
+  "text": "Necesito manos en el turno de noche.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1uus0m",
+  "person": "workshop",
+  "raw": "Los trenes no se revisan con besos.",
+  "text": "Los trenes no se revisan con besos.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "2c0di3",
+  "person": "workshop",
+  "raw": "Los billetes baratos llenan los coches y vacían el almacén de repuestos.",
+  "text": "Los billetes baratos llenan los coches y vacían el almacén de repuestos.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "915zf1",
+  "person": "workshop",
+  "raw": "Haz números.",
+  "text": "Haz números.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1wvh3tf",
+  "person": "workshop",
+  "raw": "O cambiamos la pieza ahora o la pieza decide dónde termina el viaje.",
+  "text": "O cambiamos la pieza ahora o la pieza decide dónde termina el viaje.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "yw6fnj",
+  "person": "workshop",
+  "raw": "El material de reserva también llega a provincias.",
+  "text": "El material de reserva también llega a provincias.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1cxu8e",
+  "person": "workshop",
+  "raw": "No todo va a ser mimar al AVE de la foto.",
+  "text": "No todo va a ser mimar al Ave de la foto.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1iu7g54",
+  "person": "workshop",
+  "raw": "La diagnosis nueva ve la avería antes que tu contable.",
+  "text": "La diagnosis nueva ve la avería antes que tu contable.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "xvtdzb",
+  "person": "workshop",
+  "raw": "Déjala probar.",
+  "text": "Déjala probar.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1ml4rde",
+  "person": "workshop",
+  "raw": "¡Ese cacharro no sale del taller, aunque te pongas como un energúmeno!",
+  "text": "¡Ese cacharro no sale del taller, aunque te pongas como un energúmeno!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "fp68ae",
+  "person": "workshop",
+  "raw": "Ese ruido no me gusta un pelo.",
+  "text": "Ese ruido no me gusta un pelo.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "5doo7f",
+  "person": "workshop",
+  "raw": "Y mira los que me quedan.",
+  "text": "Y mira los que me quedan.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1kd81o0",
+  "person": "workshop",
+  "raw": "Lo hemos dejado fino.",
+  "text": "Lo hemos dejado fino.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "o46q40",
+  "person": "workshop",
+  "raw": "Ya puedes colgarte tú la medalla.",
+  "text": "Ya puedes colgarte tú la medalla.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "kzyh5j",
+  "person": "workshop",
+  "raw": "¿Repuestos antes de la avería?",
+  "text": "¿Repuestos antes de la avería?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1o9weyh",
+  "person": "workshop",
+  "raw": "¿Quién eres y qué has hecho con el director?",
+  "text": "¿Quién eres y qué has hecho con el director?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1gfx32x",
+  "person": "workshop",
+  "raw": "Te avisé.",
+  "text": "Te avisé.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "z79v8t",
+  "person": "workshop",
+  "raw": "Pero claro, qué sabrá el del mono de grasa.",
+  "text": "Pero claro, qué sabrá el del mono de grasa.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1po7v6c",
+  "person": "workshop",
+  "raw": "Se acabaron las chapuzas.",
+  "text": "Se acabaron las chapuzas.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1vdja8n",
+  "person": "workshop",
+  "raw": "O se arregla bien o no se mueve.",
+  "text": "O se arregla bien o no se mueve.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "u14bru",
+  "person": "riders",
+  "raw": "Hoy he llegado a mi hora.",
+  "text": "Hoy he llegado a mi hora.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1ogbz06",
+  "person": "riders",
+  "raw": "Casi me da un pasmo.",
+  "text": "Casi me da un pasmo.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1umt0ut",
+  "person": "riders",
+  "raw": "El primer tren nos deja tirados si no hay relevo.",
+  "text": "El primer tren nos deja tirados si no hay relevo.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1dqi2o0",
+  "person": "riders",
+  "raw": "No somos figurantes de tu horario.",
+  "text": "No somos figurantes de tu horario.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "vhaq1w",
+  "person": "riders",
+  "raw": "El precio de ayer no se parece al de hoy.",
+  "text": "El precio de ayer no se parece al de hoy.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1syt19z",
+  "person": "riders",
+  "raw": "¿Vendéis billetes o apuestas?",
+  "text": "¿Vendéis billetes o apuestas?",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1iggbnr",
+  "person": "riders",
+  "raw": "Un baño averiado no es una experiencia de viaje.",
+  "text": "Un baño averiado no es una experiencia de viaje.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1awomb4",
+  "person": "riders",
+  "raw": "Es una puta vergüenza.",
+  "text": "Es una puta vergüenza.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1cyizw3",
+  "person": "riders",
+  "raw": "La estación está vacía de personal.",
+  "text": "La estación está vacía de personal.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1cwuz5f",
+  "person": "riders",
+  "raw": "Para hablar con una pared me quedo en casa.",
+  "text": "Para hablar con una pared me quedo en casa.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "2zsb2f",
+  "person": "riders",
+  "raw": "Si la aplicación vuelve a perder el billete, os llevo la impresora al despacho.",
+  "text": "Si la aplicación vuelve a perder el billete, os llevo la impresora al despacho.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "7w1x7s",
+  "person": "riders",
+  "raw": "¡Vete tú a esperar tres horas de pie, caradura!",
+  "text": "¡Vete tú a esperar tres horas de pie, caradura!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1kwrumd",
+  "person": "riders",
+  "raw": "No me prometas nada que luego tengo que explicárselo a mi jefe.",
+  "text": "No me prometas nada que luego tengo que explicárselo a mi jefe.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "12y50q9",
+  "person": "riders",
+  "raw": "Os hemos hecho escuchar.",
+  "text": "Os hemos hecho escuchar.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "2hh3c2",
+  "person": "riders",
+  "raw": "A base de protestar, porque por educación ni caso.",
+  "text": "A base de protestar, porque por educación ni caso.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "17ypv1",
+  "person": "riders",
+  "raw": "¿Una solución de verdad?",
+  "text": "¿Una solución de verdad?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "41uaoh",
+  "person": "riders",
+  "raw": "Espera, que le hago una foto.",
+  "text": "Espera, que le hago una foto.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "vaxvfe",
+  "person": "riders",
+  "raw": "Otra vez nos tomáis por gilipollas con billete.",
+  "text": "Otra vez nos tomáis por gilipollas con billete.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "3qjs0z",
+  "person": "riders",
+  "raw": "No nos movemos de aquí hasta tener una respuesta decente.",
+  "text": "No nos movemos de aquí hasta tener una respuesta decente.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1nmmdp2",
+  "person": "mayor",
+  "raw": "Ha venido gente al pueblo y no era para cerrar algo.",
+  "text": "Ha venido gente al pueblo y no era para cerrar algo.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "15ojo3w",
+  "person": "mayor",
+  "raw": "El tren de primera hora es el que lleva a la gente al trabajo, no el de tu visita oficial.",
+  "text": "El tren de primera hora es el que lleva a la gente al trabajo, no el de tu visita oficial.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1owssvq",
+  "person": "mayor",
+  "raw": "Un billete de ida cuesta una compra semanal.",
+  "text": "Un billete de ida cuesta una compra semanal.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "dqdslo",
+  "person": "mayor",
+  "raw": "Luego te extraña que no suba nadie.",
+  "text": "Luego te extraña que no suba nadie.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "uiztn1",
+  "person": "mayor",
+  "raw": "Aquí también se estropean trenes.",
+  "text": "Aquí también se estropean trenes.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "17lntfa",
+  "person": "mayor",
+  "raw": "Manda mantenimiento, no un ramo de disculpas.",
+  "text": "Manda mantenimiento, no un ramo de disculpas.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1ugpo0z",
+  "person": "mayor",
+  "raw": "Quiero atención en la estación.",
+  "text": "Quiero atención en la estación.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "z1tn9n",
+  "person": "mayor",
+  "raw": "Y no, el bar de mi cuñado no es un punto de información.",
+  "text": "Y no, el bar de mi cuñado no es un punto de información.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1pc35gk",
+  "person": "mayor",
+  "raw": "Si el sistema funciona aquí, funciona en cualquier sitio.",
+  "text": "Si el sistema funciona aquí, funciona en cualquier sitio.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1yo0faq",
+  "person": "mayor",
+  "raw": "No tenemos cobertura ni para discutir.",
+  "text": "No tenemos cobertura ni para discutir.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "x2xmqs",
+  "person": "mayor",
+  "raw": "¡Al pueblo no lo borras del mapa, listillo de despacho!",
+  "text": "¡Al pueblo no lo borras del mapa, listillo de despacho!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1cmmciw",
+  "person": "mayor",
+  "raw": "Como pierda este tren, el pueblo se me queda sin la poca vida que tiene.",
+  "text": "Como pierda este tren, el pueblo se me queda sin la poca vida que tiene.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1k6ss85",
+  "person": "mayor",
+  "raw": "Nos llamaban cuatro gatos.",
+  "text": "Nos llamaban cuatro gatos.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "lmzz2r",
+  "person": "mayor",
+  "raw": "Pues los gatos ya tienen estación.",
+  "text": "Pues los gatos ya tienen estación.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "71b6t0",
+  "person": "mayor",
+  "raw": "¿Vienes sin fotógrafo?",
+  "text": "¿Vienes sin fotógrafo?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "zjo1i9",
+  "person": "mayor",
+  "raw": "Entonces igual hasta trabajas.",
+  "text": "Entonces igual hasta trabajas.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1k2ne5w",
+  "person": "mayor",
+  "raw": "Nos prometiste futuro.",
+  "text": "Nos prometiste futuro.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "3diro2",
+  "person": "mayor",
+  "raw": "Nos has dejado una marquesina y dos goteras.",
+  "text": "Nos has dejado una marquesina y dos goteras.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "14g9l81",
+  "person": "mayor",
+  "raw": "Yo de aquí no me voy.",
+  "text": "Yo de aquí no me voy.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "demzpn",
+  "person": "mayor",
+  "raw": "Trae una silla, que vas a necesitarla.",
+  "text": "Trae una silla, que vas a necesitarla.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1cndk1r",
+  "person": "rival",
+  "raw": "Qué gusto da ver cómo trabajas para mi cuenta de resultados.",
+  "text": "Qué gusto da ver cómo trabajas para mi cuenta de resultados.",
+  "mood": "happy",
+  "moods": [
+   "happy"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "k9ufx3",
+  "person": "rival",
+  "raw": "Refuerza turnos, hombre.",
+  "text": "Refuerza turnos, hombre.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "25g184",
+  "person": "rival",
+  "raw": "Así mis conductores dejan de recoger a tus viajeros abandonados.",
+  "text": "Así mis conductores dejan de recoger a tus viajeros abandonados.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "nm7pm6",
+  "person": "rival",
+  "raw": "He puesto una oferta obscena.",
+  "text": "He puesto una oferta obscena.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1gx4m6",
+  "person": "rival",
+  "raw": "Responde o sigue regalándome clientes, fenómeno.",
+  "text": "Responde o sigue regalándome clientes, fenómeno.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1do3h9l",
+  "person": "rival",
+  "raw": "Cada avería tuya me paga una rueda.",
+  "text": "Cada avería tuya me paga una rueda.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1fgfckj",
+  "person": "rival",
+  "raw": "¿Seguro que quieres ahorrar en esa pieza?",
+  "text": "¿Seguro que quieres ahorrar en esa pieza?",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "16scbu2",
+  "person": "rival",
+  "raw": "Donde tú ves cuatro vecinos, yo veo cuatro billetes.",
+  "text": "Donde tú ves cuatro vecinos, yo veo cuatro billetes.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1vlhb17",
+  "person": "rival",
+  "raw": "Por eso me llaman empresario.",
+  "text": "Por eso me llaman empresario.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "11oner1",
+  "person": "rival",
+  "raw": "Si tú no pruebas esa mejora, la pruebo yo.",
+  "text": "Si tú no pruebas esa mejora, la pruebo yo.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "jpmq7t",
+  "person": "rival",
+  "raw": "Y luego te cobro por explicártela.",
+  "text": "Y luego te cobro por explicártela.",
+  "mood": "happy",
+  "moods": [
+   "happy",
+   "angry",
+   "worried",
+   "proud",
+   "surprised",
+   "disappointed",
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "m1pbss",
+  "person": "rival",
+  "raw": "¡Eso es competencia desleal!",
+  "text": "¡Eso es competencia desleal!",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "e6q2yv",
+  "person": "rival",
+  "raw": "Lo mío era espíritu emprendedor.",
+  "text": "Lo mío era espíritu emprendedor.",
+  "mood": "angry",
+  "moods": [
+   "angry"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "ql430y",
+  "person": "rival",
+  "raw": "Me has hecho mirar las cuentas dos veces.",
+  "text": "Me has hecho mirar las cuentas dos veces.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "v55tvn",
+  "person": "rival",
+  "raw": "Cabronazo, casi te respeto.",
+  "text": "Cabronazo, casi te respeto.",
+  "mood": "worried",
+  "moods": [
+   "worried"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "58vslc",
+  "person": "rival",
+  "raw": "He vendido hasta el asiento del conductor.",
+  "text": "He vendido hasta el asiento del conductor.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1tmb4bw",
+  "person": "rival",
+  "raw": "Aprende, figura.",
+  "text": "Aprende, figura.",
+  "mood": "proud",
+  "moods": [
+   "proud"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "d6f2t7",
+  "person": "rival",
+  "raw": "¿Has aprendido a competir?",
+  "text": "¿Has aprendido a competir?",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1be4nkn",
+  "person": "rival",
+  "raw": "Vaya putada para mis previsiones.",
+  "text": "Vaya putada para mis previsiones.",
+  "mood": "surprised",
+  "moods": [
+   "surprised"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "wvd7cn",
+  "person": "rival",
+  "raw": "Esperaba más de ti.",
+  "text": "Esperaba más de ti.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1se97o1",
+  "person": "rival",
+  "raw": "Bueno, tampoco muchísimo.",
+  "text": "Bueno, tampoco muchísimo.",
+  "mood": "disappointed",
+  "moods": [
+   "disappointed"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "1fzkgsk",
+  "person": "rival",
+  "raw": "Voy a por tus viajeros.",
+  "text": "Voy a por tus viajeros.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ },
+ {
+  "id": "9ad0v8",
+  "person": "rival",
+  "raw": "Tú sigue redactando memorias.",
+  "text": "Tú sigue redactando memorias.",
+  "mood": "determined",
+  "moods": [
+   "determined"
+  ],
+  "priority": 6
+ }
+]

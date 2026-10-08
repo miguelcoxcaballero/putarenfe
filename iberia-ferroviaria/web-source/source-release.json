@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "version": "3.6.3",
+  "expectedWholeDialogues": 412,
+  "gameSourceSHA256": "96c153146a586428091566c5e4580fd21069f63d0deec86eeb63f4158dabe2c7",
+  "listeningSourceSHA256": "f6d24efbf716cbdafcaae81194d061092b0be61df68f2667ec2ad475da2e886b",
+  "manifestSourceSHA256": "035a3fd8239fcddf9ac1a697f826f9e744a50bb4d1735c1cd74727f8f981c767",
+  "sourceFrozenWholeDialogues": 261,
+  "sourceCreatedAt": "2026-10-08T16:26:19.105Z",
+  "sourceCatalogueSHA256": "bcb87414e1558252847bd9ed2be87999f0a71c2be69f046f089d58af06f0800b",
+  "referencePackSHA256": "46ba5d81fc8a6f657f5f1cdab3951a39956bfd86a7fcc0798006ea8fa9c470bd",
+  "modelFingerprint": "3db3533efbdebdb25290007f64a4ec50b67c1661c0e4c1191db644b43803aeff",
+  "labels": {
+    "game": [
+      {
+        "filename": "game-script-0.js",
+        "token": "__WEB_GAME_SCRIPT_0__"
+      },
+      {
+        "filename": "game-script-1.js",
+        "token": "__WEB_GAME_SCRIPT_1__"
+      },
+      {
+        "filename": "game-script-2.js",
+        "token": "__WEB_GAME_SCRIPT_2__"
+      },
+      {
+        "filename": "game-script-3.js",
+        "token": "__WEB_GAME_SCRIPT_3__"
+      },
+      {
+        "filename": "game-script-4.js",
+        "token": "__WEB_GAME_SCRIPT_4__"
+      },
+      {
+        "filename": "game-script-5.js",
+        "token": "__WEB_GAME_SCRIPT_5__"
+      }
+    ],
+    "listening": [
+      {
+        "filename": "listening-script-0.js",
+        "token": "__WEB_LISTENING_SCRIPT_0__"
+      }
+    ],
+    "gameStyles": [
+      {
+        "filename": "game-style-0.css",
+        "token": "__WEB_GAME_STYLE_0__"
+      }
+    ],
+    "listeningStyles": [
+      {
+        "filename": "listening-style-0.css",
+        "token": "__WEB_LISTENING_STYLE_0__"
+      }
+    ]
+  }
+}

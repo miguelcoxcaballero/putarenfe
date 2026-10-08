@@ -1,0 +1,76 @@
+// Chromium: decisiones y feedback de Dirección, enlaces a acciones reales y menús sin desbordar.
+// GAME_URL permite probar dist/index.html o el HTML autónomo; ui-test.mjs cubre además los mapas en movimiento.
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import * as E from './dist/engine.js';
+import * as T from './dist/tycoon.js';
+import * as O from './dist/operations.js';
+import {MODEL} from './dist/data.js';
+const root=path.dirname(fileURLToPath(import.meta.url));
+const module=process.argv[2]||process.env.PLAYWRIGHT_MODULE||'playwright';
+const {chromium}=await import(module.startsWith('/')?pathToFileURL(module).href:module);
+const out=path.resolve(process.env.UI_TEST_OUT||path.join(root,'../investigacion/verificacion-3.5-interfaz'));fs.mkdirSync(out,{recursive:true});
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
+const errors=[],checks=[];
+const page=await browser.newPage({viewport:{width:1440,height:900}});page.on('pageerror',e=>errors.push(e.message));
+page.setDefaultTimeout(Number(process.env.UI_TEST_TIMEOUT||60000));
+const game=(fn,arg)=>page.evaluate(fn,arg);
+const tab=async id=>{await page.click(`.tycoon-tabs [data-id=${id}]`);};
+const shot=name=>page.screenshot({path:path.join(out,name+'.png'),animations:'disabled',timeout:60000});
+const noOverflow=async()=>assert(await page.locator('#drawer .body').evaluate(el=>el.scrollWidth<=el.clientWidth+1),'el contenido del menú cabe en su ventana');
+async function loadFixture(s){await game(value=>{const g=window.railwayGame;Object.assign(g.state(),value);g.operations.ensureOps(g.state());g.render();},s);await game(()=>{const g=window.railwayGame;g.navigate('story');});if(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')))await game(()=>window.railwayGame.navigate('story'));await page.click('[data-action=office-tab][data-id=tycoon]');await tab('agenda');}
+try{
+ await page.goto(process.env.GAME_URL||pathToFileURL(path.join(root,'../outputs/Iberia-Ferroviaria.html')).href);
+ await page.click('[data-action=free-setup]');await page.selectOption('#freeCash','5000');await page.click('[data-action=free-begin]');
+ await game(()=>{const g=window.railwayGame;g.voices.enabled=false;g.music.enabled=false;g.sfx.enabled=false;});
+ await page.waitForFunction(()=>window.railwayGame.map.lastFrame>0);
+ await game(()=>{const g=window.railwayGame;g.map.opts.isVisible=()=>false;g.navigate('story');});
+ await page.waitForTimeout(250);
+ assert(await game(()=>{const c=document.querySelector('.tycoon-contract'),p=document.querySelector('.pressure-grid');return !!(c.compareDocumentPosition(p)&Node.DOCUMENT_POSITION_FOLLOWING);}), 'los compromisos preceden las presiones políticas');
+ assert.equal(await page.locator('.pressure-card').count(),5);assert.equal(await page.locator('.calendar-plan [data-action=skip-month]').count(),1);
+ assert(/premio se cobra al cumplirlo/.test(await page.locator('.offer-explainer').textContent()));
+ await page.click('[data-action=tycoon-public]');assert.equal(await game(()=>window.railwayGame.state().tycoon.contracts[0].status),'active');
+ assert(/Compromiso aceptado/.test(await page.locator('#toast').textContent()));checks.push('Primer encargo y ritmo mensual visibles, aceptar produce confirmación.');
+ await page.click('[data-action=close-drawer]');assert(/18 meses restantes/.test(await page.locator('.mandate-card').textContent()));
+ await shot('01-mapa-y-compromiso');await page.locator('.mandate-card [data-action=tycoon-tab]').click();assert(await page.locator('#drawer').isVisible());
+ await tab('people');const cashBefore=await game(()=>window.railwayGame.state().cash);await page.click('[data-action=tycoon-hire]');
+ assert.equal(await game(()=>window.railwayGame.state().tycoon.training.at(-1).count),20);assert(Math.abs(await game(()=>window.railwayGame.state().cash)-(cashBefore-.3))<.00001);
+ assert(/abril de 2022/.test(await page.locator('.training-queue').textContent()));assert(/formación/.test(await page.locator('#toast').textContent()));
+ await page.click('[data-action=tycoon-policy][data-id=wifi]');assert.equal(await page.locator('[data-action=tycoon-policy][data-id=wifi]').getAttribute('aria-pressed'),'true');
+ assert(/activada/.test(await page.locator('#toast').textContent()));checks.push('Contratación paga y muestra su entrega; política muestra estado y confirmación.');
+ await game(()=>{document.querySelector('#drawer .body').scrollTop=999;});await tab('research');assert.equal(await page.locator('#drawer .body').evaluate(el=>el.scrollTop),0);
+ assert(await page.locator('[data-action=tycoon-research][data-id=loyalty]').isDisabled());assert(/Completa antes/.test(await page.locator('.research-grid').textContent()));
+ await page.click('[data-action=tycoon-research][data-id=online]');assert.equal(await game(()=>window.railwayGame.state().tycoon.research.id),'online');
+ assert(/mayo de 2022/.test(await page.locator('.in-progress').textContent()));assert(await page.locator('[data-action=tycoon-research][data-id=ertms]').isDisabled());checks.push('Investigación muestra requisitos, fechas, progreso y equipo ocupado; pestañas vuelven al comienzo.');
+ await tab('market');assert(/Madrid.*Barcelona/.test(await page.locator('.market-row h3').first().textContent()));assert(/Ocupación/.test(await page.locator('.market-figures').first().textContent()));
+ await page.locator('.market-row [data-action=route]').first().click();assert(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')));assert(await page.locator('#inspector').isVisible());
+ const originalQty=await game(()=>{const s=window.railwayGame.state(),f=s.fleet.find(f=>f.id===document.querySelector('#routeFleet').value);const qty=f.qty;f.qty=0;return qty;});
+ await page.locator('#frequency').dispatchEvent('input');assert(await page.locator('#routeForm [type=submit]').isDisabled());assert(/Faltan/.test(await page.locator('#routePreview').textContent()));
+ await game(qty=>{const s=window.railwayGame.state();s.fleet.find(f=>f.id===document.querySelector('#routeFleet').value).qty=qty;},originalQty);await page.locator('#frequency').dispatchEvent('input');
+ assert(!(await page.locator('#routeForm [type=submit]').isDisabled()));assert(/ocupación/.test(await page.locator('#routePreview').textContent()));checks.push('Competencia compara ciudades y métricas reales; revisión abre una sola ventana y bloquea un plan sin trenes.');
+ const offered=E.initialState();offered.started=true;offered.cash=5000;offered.tycoon.mode='free';offered.tutorial={done:true};offered.tycoon.contracts[0].status='won';T.offer(offered);O.ensureOps(offered);const q=offered.tycoon.contracts[0];assert.equal(q.goal,'project');
+ await loadFixture(offered);assert.equal(await page.locator('.contract-branches>section').count(),2);assert(/Premio 24 M€/.test(await page.locator('.contract-branches>section').first().textContent()));assert(/Premio 34 M€/.test(await page.locator('.contract-branches>section').nth(1).textContent()));
+ assert(/98 %/.test(await page.locator('.contract-branches').textContent()));assert(/14,3 €/.test(await page.locator('.contract-branches').textContent()));assert(/24 meses desde la firma/.test(await page.locator('.contract-branches').textContent()));
+ assert.equal(await page.locator('.material-readiness').count(),2);assert(/Material disponible/.test(await page.locator('.material-readiness').first().textContent()));
+ assert.equal(await page.locator('.tycoon-contract [data-say]').getAttribute('data-say'),T.ARCS[q.arc][2]);await shot('05-proyecto-desktop');
+ const workshop=structuredClone(offered);workshop.fleet.forEach(f=>f.condition=20);await loadFixture(workshop);assert(/Revisa material operativo antes de firmar/.test(await page.locator('.material-readiness').first().textContent()));assert(await page.locator('.material-readiness [data-screen=fleet]').count()>0);
+ const prepared=structuredClone(offered);T.accept(prepared,q.id,'public');const d=T.contractDetails(prepared,prepared.tycoon.contracts[0],'public',r=>E.metrics(prepared,r));const r=prepared.routes.find(r=>r.id===d.route);const frequency=d.requirements.find(x=>x.kind==='frequency').target,fare=d.requirements.find(x=>x.kind==='fare').target;
+ const f=prepared.fleet.find(f=>E.canRun(prepared,r,MODEL[f.model])&&E.available(prepared,f,r.id)>=E.requiredUnits(prepared,r,MODEL[f.model],frequency));assert(f);E.configureRoute(prepared,r.id,f.id,frequency,fare);
+ assert(T.contractDetails(prepared,prepared.tycoon.contracts[0],null,r=>E.metrics(prepared,r)).requirements.every(x=>x.done));
+ await loadFixture(prepared);assert(/Servicio preparado/.test(await page.locator('.contract-next').textContent()));const cashMonthly=prepared.cash;
+ await page.locator('.contract-next [data-action=skip-month]').click();assert.equal(await game(()=>window.railwayGame.state().month),1);assert.equal(await game(()=>window.railwayGame.state().tycoon.contracts[0].project.streak),1);assert.notEqual(await game(()=>window.railwayGame.state().cash),cashMonthly);
+ assert(/1 \/ 3/.test(await page.locator('.goal-progress').textContent()));checks.push('Proyecto: dos planes con premio real, unidades claras y catálogo hablado intacto; preparar y delegar mes aumenta continuidad y liquida caja.');
+ const monthBefore=await game(()=>window.railwayGame.state().month);await game(()=>{const g=window.railwayGame;g.state().tycoon.encounter='scene-treasury-happy-0';g.render();});assert(/decisión pendiente/.test(await page.locator('#daybar [data-action=skip-month]').getAttribute('title')));
+ await page.locator('.calendar-plan [data-action=skip-month]').click();assert(await page.locator('#modal').evaluate(el=>el.open));assert.equal(await game(()=>window.railwayGame.state().month),monthBefore);await page.locator('#modal .choice').first().click();checks.push('Delegar con una decisión pendiente la abre y conserva el mes hasta resolverla.');
+ await game(()=>{const g=window.railwayGame;const s=g.state();s.cash=7;s.tycoon.groups.government=96;g.render();});assert(await page.locator('[data-action=tycoon-lobby][data-id=government]').isDisabled());assert(/ya está convencido/.test(await page.locator('.pressure-grid').textContent()));assert(await page.locator('[data-action=tycoon-lobby][data-id=treasury]').isDisabled());
+ await game(()=>{const g=window.railwayGame;g.state().tycoon.drivers=0;g.navigate('ops');});await page.locator('#drawer [data-action=tycoon-tab][data-id=people]').click();assert(/Personal para sostener/.test(await page.locator('#drawer .body').textContent()));assert(/Faltan/.test(await page.locator('#drawer .callout').textContent()));checks.push('Bloqueos de negociación y acceso directo a plantilla desde Jornada.');
+ await loadFixture(offered);
+ const loss=structuredClone(offered);loss.routes.forEach(r=>{if(r.active)r.fare=1.5;});assert(E.balance(loss).net<0);await loadFixture(loss);assert(await page.locator('.calendar-loss').isVisible());await page.locator('.calendar-plan [data-screen=finance]').click();assert(/Resultado mensual/.test(await page.locator('#drawer .body').textContent()));await loadFixture(offered);checks.push('La delegación muestra pérdidas generales y enlaza a cuentas antes de avanzar.');
+ for(const width of [390,320]){await page.setViewportSize({width,height:844});for(const id of ['agenda','people','research','market','paper']){await tab(id);await noOverflow();}await tab('agenda');await shot('06-proyecto-'+width);}
+ await game(()=>window.railwayGame.navigate('network'));await page.locator('[data-action=net-view][data-id=routes]').click();await noOverflow();
+ assert(await page.locator('.table-scroll').evaluate(el=>el.scrollWidth>el.clientWidth));await page.locator('.route-link').first().focus();await page.keyboard.press('Enter');assert(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')));assert(await page.locator('#inspector').isVisible());
+ checks.push('Cinco secciones sin desbordar a390/320; tabla desplazable y apertura de relación por teclado.');
+ assert.deepEqual(errors,[]);const result={passed:true,checks,errors};fs.writeFileSync(path.join(out,'gameplay-ui-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));
+}finally{await browser.close();}

@@ -1,0 +1,248 @@
+{
+  "schema": 1,
+  "person": "mayor",
+  "character": "Paco Terruño",
+  "source_speaker": "José Luis Torrente, played by Santiago Segura in Torrente 5",
+  "casting_status": "real_torrente_in_character_ROOT_technical_selected",
+  "ref_audio": "./mayor.wav",
+  "ref_text": "Vamos a preparar un grupo de gente defrandados por el sistema, pero con expedientes limpios y con trayectorias intachables dentro de los cuerpos de seguridad.",
+  "sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+  "duration_seconds": 8.28,
+  "sample_rate": 24000,
+  "channels": 1,
+  "wav_subtype": "PCM_16",
+  "source_page": "https://www.rtve.es/play/videos/dias-de-cine/torrente-5/2788205/",
+  "source_media_url": "https://rtve-mediavod-lote3.rtve.es/resources/TE_SECDCES/mp4/0/0/1412314734400.mp4?idasset=2788205",
+  "date_declared_by_source": "2014-10-03",
+  "source_video_sha256": "147498684b0203fcf7dc5d278f5e7177220e4342d95aaa2a476e10bf47f71b54",
+  "source_interval_seconds": [
+    81.8,
+    90.08
+  ],
+  "source_wave_sha256": "1d720796f0f859efe68fb2e17b906a5ccd7140a4e70e67f0f60103ab2bdb5f0c",
+  "processing": "continuous trim from decoded downmixed/resampled original; no EQ, denoise, fade, pitch, tempo, compression or speech joins; followed by approved rounded PCM16 sample-representation conversion only",
+  "ROOT_reference_file_copied_without_reencoding": true,
+  "source_samples_exact": false,
+  "native_validation": {
+    "sample_rate": 24000,
+    "channels": 1,
+    "frames": 198720,
+    "duration_seconds": 8.28,
+    "subtype": "PCM_16",
+    "finite": true,
+    "peak_absolute": 0.49896240234375,
+    "RMS": 0.0962560919642045,
+    "sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+    "native_wave_compression": "NONE",
+    "native_wave_bytes_per_sample": 2,
+    "human_listening": false
+  },
+  "technical_selection": {
+    "decision": "ROOT technical reference selection; not human listening approval",
+    "accepted_at": "2026-10-08T12:28:32.225379+00:00",
+    "proof": "./provenance/mayor/ROOT-ACCEPTED-TORRENTE-REFERENCE.json",
+    "proof_sha256": "ec3bb55a83cc2637533e0d80b425e590c80dc0777586bded95396f069aeacb95"
+  },
+  "speaker_evidence": "RTVE cinema report; Torrente film scene at81.8-83 with actor speaking, followed by cast montage during same recruitment utterance. Excludes actor interview before scene, narrator and following actor. Root viewed coarse and dense scene frames. ASR is not diarization.",
+  "selected_frames": [
+    "./provenance/mayor/film80-91-frames.jpg",
+    "./provenance/mayor/onset81.6-81.96-frames.jpg"
+  ],
+  "ASR_coverage": "Full BASE source; independent SMALL crop82-89.8 and context81.6-90.4 contain this utterance; expanded accepted8.28s has no exact-SHA standalone ASR, accurately covered by context crop. SMALL context end timestamp beyond physical duration is invalid as a boundary.",
+  "exact_accepted_WAV_SHA_standalone_ASR": false,
+  "source_ASR_variants_complete": [
+    {
+      "provider": "BASE full source,75–100s",
+      "model_sha256": "07cadb9f25677c8d50df603e66a98fbd842cce45047139baeb16e6219a1e807b",
+      "recognized": " y el director de fotografía también se ha salido, o sea que estoy muy contento de los aspectos técnicos. Vamos a preparar un grupo de gente de frados por el sistema, pero con expedientes limpios y con trayectoria intachables dentro de los cuerpos de seguridad. Y ahí tengo que estar yo, esa es como si a torrente. Pero si tú está contra hecho, algo que no está bien acabado, está desventuoso. Torrente, acuerde ser que yo soy el número uno alomío. Ya, pero es que nadie sabe lo que lo tuyo.",
+      "timestamp_offsets_complete": [
+        {
+          "text": " y el director de fotografía también se ha salido,",
+          "timestamp": [
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "text": " o sea que estoy muy contento de los aspectos técnicos.",
+          "timestamp": [
+            3.0,
+            7.0
+          ]
+        },
+        {
+          "text": " Vamos a preparar un grupo de gente de frados por el sistema,",
+          "timestamp": [
+            7.0,
+            10.0
+          ]
+        },
+        {
+          "text": " pero con expedientes limpios y con trayectoria intachables",
+          "timestamp": [
+            10.0,
+            13.0
+          ]
+        },
+        {
+          "text": " dentro de los cuerpos de seguridad.",
+          "timestamp": [
+            13.0,
+            15.0
+          ]
+        },
+        {
+          "text": " Y ahí tengo que estar yo, esa es como si a torrente.",
+          "timestamp": [
+            15.0,
+            17.0
+          ]
+        },
+        {
+          "text": " Pero si tú está contra hecho,",
+          "timestamp": [
+            17.0,
+            18.0
+          ]
+        },
+        {
+          "text": " algo que no está bien acabado, está desventuoso.",
+          "timestamp": [
+            18.0,
+            20.0
+          ]
+        },
+        {
+          "text": " Torrente, acuerde ser que yo soy el número uno alomío.",
+          "timestamp": [
+            20.0,
+            23.0
+          ]
+        },
+        {
+          "text": " Ya, pero es que nadie sabe lo que lo tuyo.",
+          "timestamp": [
+            23.0,
+            25.0
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "SMALL selected crop82–89.8",
+      "model_sha256": "1d7734884874f1a1513ed9aa760a4f8e97aaa02fd6d93a3a85d27b2ae9ca596b",
+      "recognized": " vamos a preparar un grupo de gente defrandados por el sistema, pero con expedientes limpios y trayectorias intachables dentro de los cuerpos de seguridad.",
+      "timestamp_offsets_complete": [
+        {
+          "text": " vamos a preparar un grupo de gente defrandados por el sistema,",
+          "timestamp": [
+            0.0,
+            3.24
+          ]
+        },
+        {
+          "text": " pero con expedientes limpios y trayectorias intachables",
+          "timestamp": [
+            3.3200000000000003,
+            6.16
+          ]
+        },
+        {
+          "text": " dentro de los cuerpos de seguridad.",
+          "timestamp": [
+            6.24,
+            7.76
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "SMALL context81.6–90.4",
+      "model_sha256": "1d7734884874f1a1513ed9aa760a4f8e97aaa02fd6d93a3a85d27b2ae9ca596b",
+      "recognized": " vamos a preparar un grupo de gente defrandados por el sistema pero con expedientes limpios y con trayectorias intachables dentro de los cuerpos de seguridad",
+      "timestamp_offsets_complete": [
+        {
+          "text": " vamos a preparar un grupo de gente defrandados por el sistema pero con",
+          "timestamp": [
+            0.0,
+            3.92
+          ]
+        },
+        {
+          "text": " expedientes limpios y con trayectorias intachables dentro de los cuerpos de",
+          "timestamp": [
+            3.92,
+            7.640000000000001
+          ]
+        },
+        {
+          "text": " seguridad",
+          "timestamp": [
+            7.640000000000001,
+            10.040000000000001
+          ]
+        }
+      ]
+    }
+  ],
+  "unresolved_lexical_items": [
+    {
+      "word": "defrandados",
+      "readings": "Full BASE: de frados; both SMALL crops: defrandados. Defraudados/defraudada and grammatical gender are not independently resolved.",
+      "acceptance": "Unresolved; do not silently repair the phonetic label."
+    },
+    {
+      "word": "y con",
+      "readings": "Selected SMALL crop says y trayectorias; SMALL context says y con trayectorias; full BASE says y con trayectoria intachables.",
+      "acceptance": "Proposed label retains the context reading; candidate omission and singular/plural discrepancy are preserved."
+    }
+  ],
+  "reference_label_policy": "Proposed ICL text uses honest SMALL phonetic defrandados, context/BASE y con, and preserves all disagreements; not verified official subtitles or a perfect transcript.",
+  "lexical_limits": "Both SMALL crops recognize phonetic defrandados; standard defraudados and grammatical gender remain uncertain. The annotation preserves the machine phonetic label instead of claiming an official transcript. Context SMALL and BASE include y con; short SMALL omits con. All original recognitions retained.",
+  "invalid_context_timestamps": [
+    {
+      "crop": "context81.6-90.4",
+      "recognized": " seguridad",
+      "raw_start_seconds": 7.640000000000001,
+      "raw_end_seconds": 10.040000000000001,
+      "physical_duration_seconds": 8.8,
+      "warning": "Estimated ASR timestamp exceeds the physical crop; not a valid acoustic boundary"
+    }
+  ],
+  "source_BASE_report_cache": "/workspace/tools/voice-torrente-candidates/retrieve-2026-10-08-rtve-player/source-ASR-base-segments.json",
+  "source_BASE_report_sha256": "f3d3615e176a00291008b423463a2a75cc2bf9bb6b9bb150fb6751d8f11d397d",
+  "source_BASE_report_cache_is_historical_not_runtime_dependency": true,
+  "source_SMALL_report": "./provenance/mayor/source-focal-small.json",
+  "all_full_source_segments_retained": true,
+  "source_BASE_transcript_limits": "All11input chunks covered, but many words were omitted or misrecognized, notably52.88–75s; all original tokens/segments retained.",
+  "signal_limits": "Finite, unclipped, broad source; film background may remain. Metrics and scene evidence do not establish naturalness, absence of music or subjective likeness.",
+  "human_listening": false,
+  "speaker_diarization_guaranteed": false,
+  "music_absence_guaranteed": false,
+  "perfect_transcript_guaranteed": false,
+  "prior_synthetic_reference_superseded_in_this_pack": "85372805acbd8b2ecc857f266d7912b88eacb759191a01c491732d965e5a7f84",
+  "historical_proposal_header_note": "Agent proposal a22eeb75 and ROOT accepted1d23f626 float have identical PCM but different headers. The historical3cc pack preserves ROOT FLOAT1d23. This production pack copies the ROOT approved PCM16 candidate26667538 with documented quantization only.",
+  "source_sample_frame_count_exact": true,
+  "source_float_trim_PCM_exact_before_quantization": true,
+  "supported_format_conversion": {
+    "source_ROOT_float_sha256": "1d23f62631fbbed89a84cd8ae3f9aa9fb480a6fb172a6cbd2180f027d59a4fed",
+    "production_ROOT_PCM16_sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+    "conversion": "Sample representation only: rounded PCM16, same198720 continuous sample frames; no added trim, filter, gain, pitch, tempo, fade, compression or joins.",
+    "reason": "Unchanged native PCM reference validator requires supported integer PCM; IEEE_FLOAT format3 was rejected.",
+    "source_interval_seconds": [
+      81.8,
+      90.08
+    ],
+    "sample_frame_count_unchanged": true,
+    "max_abs_quantization_error": 1.52587890625e-05,
+    "rms_quantization_error": 8.805819577982437e-06,
+    "snr_db": 80.77316750069323,
+    "root_proof": "./provenance/mayor/ROOT-ACCEPTED-TORRENTE-PCM16-FORMAT-PROOF.json",
+    "root_proof_sha256": "3a13ffd039785fb7a240ebe3e9bb264ad9fa0e2d1e0190b1925a76a189753938",
+    "historical_FLOAT_pack_sha256": "3cc751f0c1b09d98e0aa54bf1946a0a6f06734fff27b18e9a5fb8b4fc8a63ced",
+    "historical_FLOAT_pack": "../reparto-3.6.3/reference-pack-3cc-before-pcm16/prompts.json",
+    "ROOT_authorization": "ROOT GO adopt exact PCM16 candidate after independent native/quantization verification;2026-10-08",
+    "human_listening": false,
+    "new_ASR": false
+  }
+}

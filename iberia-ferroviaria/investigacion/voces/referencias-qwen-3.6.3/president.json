@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "person": "president",
+  "ref_audio": "./president.wav",
+  "ref_text": "Hemos tenido que trabajar también con un Congreso muy bronco en el que, absurdamente, muchos confunden pactar con traicionar y bloquear con vencer.",
+  "sha256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4",
+  "duration_seconds": 11.12,
+  "sample_rate": 24000,
+  "channels": 1,
+  "pcm_bits": 16,
+  "source_speaker": "Pedro Sánchez",
+  "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/presidente/Paginas/2026/051026-sanchez-convocatoria-elecciones.aspx",
+  "date_declared_by_source": "2026-10-05",
+  "master_url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20261005-Declaracion_Presidente_Gobierno.smil/playlist.m3u8",
+  "source_interval_seconds": [
+    65.42,
+    76.54
+  ],
+  "official_text_url": "https://www.lamoncloa.gob.es/multimedia/videos/presidente/Documents/2026/20261005-Declaracion_Presidente_Gobierno.vtt",
+  "speaker_verified_by_source": true,
+  "human_listening": false,
+  "processing": "Decode/downmix/resample/continuous PCM crop only; no synthetic source, pitch, tempo, EQ or denoising.",
+  "source_parent_sha256": "55b7d32aa85d20eb38afb2a57b56098b710416136cf2e491b7707ca90fb14827",
+  "boundary_note": "Whisper base word timestamps on decoded source waveform, then cropped at interphrase pauses; official captions provide text, not exact cut timing.",
+  "asr_base_screening": {
+    "person": "president",
+    "expected": "Hemos tenido que trabajar también con un Congreso muy bronco en el que, absurdamente, muchos confunden pactar con traicionar y bloquear con vencer.",
+    "recognized": "Hemos tenido que trabajar también con un congreso muy bronco, en el que absolutamente muchos confunden, pactar, contradicionar y bloquear, convencer.",
+    "normalized_equal": false,
+    "expected_normalized": "hemos tenido que trabajar tambien con un congreso muy bronco en el que absurdamente muchos confunden pactar con traicionar y bloquear con vencer",
+    "recognized_normalized": "hemos tenido que trabajar tambien con un congreso muy bronco en el que absolutamente muchos confunden pactar contradicionar y bloquear convencer",
+    "differences": [
+      {
+        "kind": "replace",
+        "expected": "absurdamente",
+        "recognized": "absolutamente"
+      },
+      {
+        "kind": "replace",
+        "expected": "con traicionar",
+        "recognized": "contradicionar"
+      },
+      {
+        "kind": "replace",
+        "expected": "con vencer",
+        "recognized": "convencer"
+      }
+    ],
+    "repetition_notices": [],
+    "review_prompts": [
+      "ASR differs from the script; this may be a recognition error."
+    ]
+  },
+  "asr_limits": "Official source wording is retained. Whisper base can mishear real speech; word boundaries and identities are source/crop evidence, not human phonetic/naturalness approval.",
+  "official_segment_provenance": [
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20261005-Declaracion_Presidente_Gobierno.smil/media_w604445226_b4400000_t64MTA4MHA=_5.ts",
+      "start": 58.96,
+      "duration": 10.0,
+      "sha256": "fb1b5db70f2fceac6c405d577947c078efafad034cafc4b1541fa718c94c52b3"
+    },
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20261005-Declaracion_Presidente_Gobierno.smil/media_w604445226_b4400000_t64MTA4MHA=_6.ts",
+      "start": 68.96000000000001,
+      "duration": 10.0,
+      "sha256": "7e3c0899ad637c5ad398f171ca53ff7352c8ae6d29f0333d2de12d3eeb2aeffc"
+    }
+  ],
+  "asr_model": {
+    "repository": "openai/whisper-base",
+    "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "weights_sha256": "07cadb9f25677c8d50df603e66a98fbd842cce45047139baeb16e6219a1e807b",
+    "threads": 1
+  }
+}

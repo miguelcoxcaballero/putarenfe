@@ -1,0 +1,294 @@
+{
+  "schema": 1,
+  "prompts": {
+    "president": {
+      "ref_audio": "./president.wav",
+      "ref_text": "Hemos tenido que trabajar también con un Congreso muy bronco en el que, absurdamente, muchos confunden pactar con traicionar y bloquear con vencer.",
+      "sha256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4",
+      "duration_seconds": 11.12,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./president.json",
+        "speaker": "Pedro Sánchez",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/presidente/Paginas/2026/051026-sanchez-convocatoria-elecciones.aspx",
+        "date_declared_by_source": "2026-10-05",
+        "source_interval_seconds": [
+          65.42,
+          76.54
+        ],
+        "human_listening": false
+      }
+    },
+    "successor": {
+      "ref_audio": "./successor.wav",
+      "ref_text": "Por tanto, cuando hablamos de transporte, no hablamos de un sector más, hablamos de un sector básico, de un pilar de nuestro modelo productivo y de nuestra cohesión territorial.",
+      "sha256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b",
+      "duration_seconds": 9.98,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./successor.json",
+        "speaker": "Óscar Puente",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/paginas/2026/140426-rueda-prensa-ministros.aspx",
+        "date_declared_by_source": "2026-04-14",
+        "source_interval_seconds": [
+          1703.14,
+          1713.12
+        ],
+        "human_listening": false
+      }
+    },
+    "minister": {
+      "ref_audio": "./minister.wav",
+      "ref_text": "Como saben todos ustedes, el presidente del Gobierno viaja esta misma tarde a los Países Bajos para participar en la cumbre de la OTAN. Una cita que, por supuesto, es de gran trascendencia.",
+      "sha256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575",
+      "duration_seconds": 11.26,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./minister.json",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/240625-consejo-ministros.aspx",
+        "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/Paginas/2025/20250624-transcripcion-rdp-consejo-ministros.aspx",
+        "date_declared_by_source": "2025-06-24",
+        "human_listening": false,
+        "speaker": "Pilar Alegría",
+        "source_interval_seconds": [
+          74.44,
+          85.7
+        ]
+      }
+    },
+    "riders": {
+      "ref_audio": "./riders.wav",
+      "ref_text": "Es un gran placer comparecer ante todos ustedes y poder explicar dos hitos tan importantes para nuestro país y para nuestro tejido productivo.",
+      "sha256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf",
+      "duration_seconds": 8.680000000000001,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./riders.json",
+        "speaker": "Elma Saiz",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/270525-rueda-de-prensa-ministros.aspx",
+        "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/Paginas/2025/20250527-transcripcion-rdp-consejo-ministros.aspx",
+        "source_interval_seconds": [
+          712.26,
+          720.94
+        ],
+        "date_declared_by_source": "2025-05-27",
+        "human_listening": false
+      }
+    },
+    "treasury": {
+      "ref_audio": "./treasury.wav",
+      "ref_text": "Nunca antes las comunidades habían tenido tantos recursos como con los gobiernos de Pedro Sánchez.",
+      "sha256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188",
+      "duration_seconds": 7.540041666666666,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./treasury.json",
+        "speaker": "María Jesús Montero",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/020925-rueda-de-prensa-ministros.aspx",
+        "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/Paginas/2025/20250902-transcripcion-rdp-consejo-ministros.aspx",
+        "caption_url": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Documents/2025/20250902-CMIN.vtt",
+        "source_interval_seconds": [
+          473.84,
+          481.38
+        ],
+        "date_declared_by_source": "2025-09-02",
+        "human_listening": false
+      }
+    },
+    "adif": {
+      "ref_audio": "./adif.wav",
+      "ref_text": "Y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto.",
+      "sha256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0",
+      "duration_seconds": 7.74,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./adif.json",
+        "speaker": "Fernando Grande-Marlaska",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/paginas/2026/200126-rueda-de-prensa-ministros.aspx",
+        "date_declared_by_source": "2026-01-20",
+        "source_interval_seconds": [
+          683.28,
+          691.02
+        ],
+        "official_text_source": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Documents/2026/20260120-CMIN.vtt",
+        "machine_screening": {
+          "person": "adif",
+          "expected": "Y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto.",
+          "recognized": "y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto.",
+          "normalized_equal": true,
+          "expected_normalized": "y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto",
+          "recognized_normalized": "y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto",
+          "differences": [],
+          "repetition_notices": [],
+          "review_prompts": []
+        },
+        "human_listening": false
+      }
+    },
+    "workshop": {
+      "ref_audio": "./workshop.wav",
+      "ref_text": "El primero se refiere al proyecto de Ley de Control, de Inspección y Régimen Sancionador de la Pesca.",
+      "sha256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763",
+      "duration_seconds": 7.33,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./workshop.json",
+        "speaker": "Luis Planas",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/211025-rueda-de-prensa-ministros.aspx",
+        "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/Paginas/2025/20251021-rueda-prensa-consejo-ministros.aspx",
+        "source_interval_seconds": [
+          911.09,
+          918.42
+        ],
+        "date_declared_by_source": "2025-10-21",
+        "human_listening": false,
+        "asr_difference_note": "The official edited transcript omits de before Inspección. Both independent cropped BASE and full-probe BASE recognize de; the ICL reference follows the two matching machine transcriptions. This is not a human listening claim."
+      }
+    },
+    "rival": {
+      "ref_audio": "./rival.wav",
+      "ref_text": "El segundo objetivo, criterio de interés general a proteger, es, por supuesto, el relativo a los trabajadores, la protección de las plantillas. El tercero, la cohesión territorial.",
+      "sha256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c",
+      "duration_seconds": 10.36,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./rival.json",
+        "speaker": "Carlos Cuerpo",
+        "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/240625-consejo-ministros.aspx",
+        "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/paginas/2025/20250624-transcripcion-rdp-consejo-ministros.aspx",
+        "source_interval_seconds": [
+          1468.9,
+          1479.26
+        ],
+        "date_declared_by_source": "2025-06-24",
+        "human_listening": false,
+        "asr_difference_note": "The official transcript includes de between criterio and interés. Independent cropped BASE and full-probe BASE omit that short preposition; the ICL reference preserves the official text and records this unresolved ASR difference. Complete beginning and final territorial are recognized."
+      }
+    },
+    "mayor": {
+      "ref_audio": "./mayor.wav",
+      "ref_text": "Vamos a preparar un grupo de gente defrandados por el sistema, pero con expedientes limpios y con trayectorias intachables dentro de los cuerpos de seguridad.",
+      "sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+      "duration_seconds": 8.28,
+      "sample_rate": 24000,
+      "channels": 1,
+      "provenance": {
+        "metadata": "./mayor.json",
+        "speaker": "José Luis Torrente, played by Santiago Segura in Torrente 5",
+        "source_page": "https://www.rtve.es/play/videos/dias-de-cine/torrente-5/2788205/",
+        "date_declared_by_source": "2014-10-03",
+        "source_interval_seconds": [
+          81.8,
+          90.08
+        ],
+        "casting_status": "real_torrente_in_character_ROOT_technical_selected",
+        "human_listening": false,
+        "ASR_coverage": "Full source BASE and SMALL inner/context crops; accepted8.28s has no exact-SHA standalone ASR.",
+        "lexical_limits": "Both SMALL crops recognize phonetic defrandados; standard defraudados and grammatical gender remain uncertain. The annotation preserves the machine phonetic label instead of claiming an official transcript. Context SMALL and BASE include y con; short SMALL omits con. All original recognitions retained.",
+        "signal_limits": "Finite, unclipped, broad source; film background may remain. Metrics and scene evidence do not establish naturalness, absence of music or subjective likeness.",
+        "supported_format_conversion": {
+          "source_ROOT_float_sha256": "1d23f62631fbbed89a84cd8ae3f9aa9fb480a6fb172a6cbd2180f027d59a4fed",
+          "production_ROOT_PCM16_sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+          "conversion": "Sample representation only: rounded PCM16, same198720 continuous sample frames; no added trim, filter, gain, pitch, tempo, fade, compression or joins.",
+          "reason": "Unchanged native PCM reference validator requires supported integer PCM; IEEE_FLOAT format3 was rejected.",
+          "source_interval_seconds": [
+            81.8,
+            90.08
+          ],
+          "sample_frame_count_unchanged": true,
+          "max_abs_quantization_error": 1.52587890625e-05,
+          "rms_quantization_error": 8.805819577982437e-06,
+          "snr_db": 80.77316750069323,
+          "root_proof": "./provenance/mayor/ROOT-ACCEPTED-TORRENTE-PCM16-FORMAT-PROOF.json",
+          "root_proof_sha256": "3a13ffd039785fb7a240ebe3e9bb264ad9fa0e2d1e0190b1925a76a189753938",
+          "historical_FLOAT_pack_sha256": "3cc751f0c1b09d98e0aa54bf1946a0a6f06734fff27b18e9a5fb8b4fc8a63ced",
+          "historical_FLOAT_pack": "../reparto-3.6.3/reference-pack-3cc-before-pcm16/prompts.json",
+          "ROOT_authorization": "ROOT GO adopt exact PCM16 candidate after independent native/quantization verification;2026-10-08",
+          "human_listening": false,
+          "new_ASR": false
+        }
+      }
+    }
+  },
+  "status": "ROOT technical source selection for subsequent production planning. Eight public speech references are unchanged; Paco uses actual in-character José Luis Torrente movie dialogue from RTVE. This is not human listening approval or a guarantee of naturalness, diarization, music absence or perfect transcription.",
+  "processing": "Eight parent references copied byte-for-byte. Mayor uses exact ROOT approved PCM16 candidate copied byte-for-byte,24kmono/198720samples/8.28s, quantization only from original ROOT accepted continuous FLOAT trim; no additional trim, fade, denoise, EQ, pitch, tempo, gain, compression or speech joins.",
+  "human_listening": false,
+  "reference_qa_model": {
+    "repository": "openai/whisper-base",
+    "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "weights_sha256": "07cadb9f25677c8d50df603e66a98fbd842cce45047139baeb16e6219a1e807b",
+    "threads": 1
+  },
+  "casting_status": {
+    "mayor": "real_torrente_in_character_ROOT_technical_selected",
+    "minister": "official_source_june2025_base_exact_long_audition",
+    "treasury": "selected_by_root_after_technical_long_audition_review_not_human_listening",
+    "workshop": "selected_by_root_after_technical_long_audition_review_not_human_listening",
+    "rival": "selected_by_root_after_technical_long_audition_review_not_human_listening",
+    "riders": "selected_by_root_after_technical_long_audition_review_not_human_listening"
+  },
+  "source_pack_sha256": "fc7d8d14b404d3c782e4878660fd4c3a968d969791545fcb9a0a43d00804cb40",
+  "source_pack": "../referencias-qwen-3.6.2/prompts.json",
+  "lineage": {
+    "parent_pack_sha256": "fc7d8d14b404d3c782e4878660fd4c3a968d969791545fcb9a0a43d00804cb40",
+    "copied_unchanged_roles": [
+      "president",
+      "successor",
+      "minister",
+      "riders",
+      "treasury",
+      "adif",
+      "workshop",
+      "rival"
+    ],
+    "changed_role": "mayor",
+    "ROOT_accepted_mayor_sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+    "Pedro_immutable_sha256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4",
+    "ROOT_accepted_source_float_sha256": "1d23f62631fbbed89a84cd8ae3f9aa9fb480a6fb172a6cbd2180f027d59a4fed",
+    "historical_pre_PCM16_pack_sha256": "3cc751f0c1b09d98e0aa54bf1946a0a6f06734fff27b18e9a5fb8b4fc8a63ced"
+  },
+  "reference_qa_models": {
+    "BASE": {
+      "repository": "openai/whisper-base",
+      "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+      "weights_sha256": "07cadb9f25677c8d50df603e66a98fbd842cce45047139baeb16e6219a1e807b",
+      "mayor_scope": "Full source11chunks,3threads; omissions retained"
+    },
+    "SMALL": {
+      "repository": "openai/whisper-small",
+      "revision": "973afd24965f72e36ca33b3055d56a652f456b4d",
+      "weights_sha256": "1d7734884874f1a1513ed9aa760a4f8e97aaa02fd6d93a3a85d27b2ae9ca596b",
+      "scope": "Only the two mayor source-selection crops;3threads; no expected-text hints"
+    }
+  },
+  "production_pin_status": "awaiting_ROOT_independent_new_pack_SHA_check",
+  "supported_mayor_format_conversion": {
+    "source_ROOT_float_sha256": "1d23f62631fbbed89a84cd8ae3f9aa9fb480a6fb172a6cbd2180f027d59a4fed",
+    "production_ROOT_PCM16_sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+    "conversion": "Sample representation only: rounded PCM16, same198720 continuous sample frames; no added trim, filter, gain, pitch, tempo, fade, compression or joins.",
+    "reason": "Unchanged native PCM reference validator requires supported integer PCM; IEEE_FLOAT format3 was rejected.",
+    "source_interval_seconds": [
+      81.8,
+      90.08
+    ],
+    "sample_frame_count_unchanged": true,
+    "max_abs_quantization_error": 1.52587890625e-05,
+    "rms_quantization_error": 8.805819577982437e-06,
+    "snr_db": 80.77316750069323,
+    "root_proof": "./provenance/mayor/ROOT-ACCEPTED-TORRENTE-PCM16-FORMAT-PROOF.json",
+    "root_proof_sha256": "3a13ffd039785fb7a240ebe3e9bb264ad9fa0e2d1e0190b1925a76a189753938",
+    "historical_FLOAT_pack_sha256": "3cc751f0c1b09d98e0aa54bf1946a0a6f06734fff27b18e9a5fb8b4fc8a63ced",
+    "historical_FLOAT_pack": "../reparto-3.6.3/reference-pack-3cc-before-pcm16/prompts.json",
+    "ROOT_authorization": "ROOT GO adopt exact PCM16 candidate after independent native/quantization verification;2026-10-08",
+    "human_listening": false,
+    "new_ASR": false
+  }
+}

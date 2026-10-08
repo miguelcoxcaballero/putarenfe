@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "person": "successor",
+  "ref_audio": "./successor.wav",
+  "ref_text": "Por tanto, cuando hablamos de transporte, no hablamos de un sector más, hablamos de un sector básico, de un pilar de nuestro modelo productivo y de nuestra cohesión territorial.",
+  "sha256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b",
+  "duration_seconds": 9.98,
+  "sample_rate": 24000,
+  "channels": 1,
+  "pcm_bits": 16,
+  "source_speaker": "Óscar Puente",
+  "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/paginas/2026/140426-rueda-prensa-ministros.aspx",
+  "date_declared_by_source": "2026-04-14",
+  "master_url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260414-CMIN.smil/playlist.m3u8",
+  "source_interval_seconds": [
+    1703.14,
+    1713.12
+  ],
+  "official_text_url": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Documents/2026/20260414-CMIN.vtt",
+  "speaker_verified_by_source": true,
+  "human_listening": false,
+  "processing": "Decode/downmix/resample/continuous PCM crop only; no synthetic source, pitch, tempo, EQ or denoising.",
+  "source_parent_sha256": "f2ec7970a5ceb8de0d40c5468659476bfcbeb6dabed22821b2e698b605d3abda",
+  "boundary_note": "Whisper base word timestamps on decoded source waveform, then cropped at interphrase pauses; official captions provide text, not exact cut timing.",
+  "asr_base_screening": {
+    "person": "successor",
+    "expected": "Por tanto, cuando hablamos de transporte, no hablamos de un sector más, hablamos de un sector básico, de un pilar de nuestro modelo productivo y de nuestra cohesión territorial.",
+    "recognized": "Por tanto, cuando hablamos de transporte, no hablamos de un sector más, hablamos de un sector básico, de un pilar de nuestro modelo productivo y de nuestra cohesión territorial.",
+    "normalized_equal": true,
+    "expected_normalized": "por tanto cuando hablamos de transporte no hablamos de un sector mas hablamos de un sector basico de un pilar de nuestro modelo productivo y de nuestra cohesion territorial",
+    "recognized_normalized": "por tanto cuando hablamos de transporte no hablamos de un sector mas hablamos de un sector basico de un pilar de nuestro modelo productivo y de nuestra cohesion territorial",
+    "differences": [],
+    "repetition_notices": [],
+    "review_prompts": []
+  },
+  "asr_limits": "Official source wording is retained. Whisper base can mishear real speech; word boundaries and identities are source/crop evidence, not human phonetic/naturalness approval.",
+  "official_segment_provenance": [
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260414-CMIN.smil/media_w1579019393_b4400000_t64MTA4MHA=_161.ts",
+      "start": 1682.84,
+      "duration": 10.0,
+      "sha256": "dd48c4b73da59b16df2e86ea16e79c15b53f7ffcc8103764a4e282338cc472f7"
+    },
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260414-CMIN.smil/media_w1579019393_b4400000_t64MTA4MHA=_162.ts",
+      "start": 1692.84,
+      "duration": 10.0,
+      "sha256": "88e8f5bbd7f325ee7c65e7f774fcda504e9a288d151776eaa0b2aac9880bc0fc"
+    },
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260414-CMIN.smil/media_w1579019393_b4400000_t64MTA4MHA=_163.ts",
+      "start": 1702.84,
+      "duration": 10.0,
+      "sha256": "3bef78fd66ec0320c7499b43fcbc632f88c92a1101949d1d2eab9a9c6941d2ab"
+    },
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260414-CMIN.smil/media_w1579019393_b4400000_t64MTA4MHA=_164.ts",
+      "start": 1712.84,
+      "duration": 10.0,
+      "sha256": "c43450a45b9f4a888ca7ddab8f0ecfc1e2f3a310de021738662bb86319082b7a"
+    }
+  ],
+  "asr_model": {
+    "repository": "openai/whisper-base",
+    "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "weights_sha256": "07cadb9f25677c8d50df603e66a98fbd842cce45047139baeb16e6219a1e807b",
+    "threads": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "iberia-ferroviaria",
+  "version": "3.6.3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node test.mjs && node campaign-test.mjs",
+    "ui": "node ui-test.mjs",
+    "music-test": "node music-test.mjs",
+    "onboarding-ui": "node onboarding-ui-test.mjs",
+    "infra": "python3 tools/build_infra.py",
+    "timetable": "python3 tools/build_timetable.py",
+    "samples": "python3 tools/build_samples.py",
+    "voice-catalogue": "node tools/voice_lines.mjs > ../investigacion/voces/frases.json",
+    "voices": "python3 tools/build_qwen_voices.py",
+    "voice-dialogue-catalogue": "node tools/voice_dialogues.mjs > ../investigacion/voces/dialogos-3.6.3.json",
+    "voice-dialogues": "python3 tools/build_qwen_dialogues.py",
+    "voice-conversations": "node voice-conversation-ui-test.mjs",
+    "voice-listening": "node voice-listening-ui-test.mjs"
+  }
+}

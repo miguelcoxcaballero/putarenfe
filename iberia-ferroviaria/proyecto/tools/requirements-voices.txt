@@ -1,0 +1,4 @@
+# Instalar antes torch==2.6.0 y torchaudio==2.6.0 desde el índice oficial CPU.
+coqui-tts==0.27.4
+transformers==4.57.6
+Pillow==12.3.0

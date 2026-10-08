@@ -1,0 +1,89 @@
+{
+  "person": "minister",
+  "speaker": "Pilar Alegría",
+  "ref_audio": "./minister.wav",
+  "ref_text": "Como saben todos ustedes, el presidente del Gobierno viaja esta misma tarde a los Países Bajos para participar en la cumbre de la OTAN. Una cita que, por supuesto, es de gran trascendencia.",
+  "sha256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575",
+  "duration_seconds": 11.26,
+  "samples": 270240,
+  "sample_rate": 24000,
+  "channels": 1,
+  "sample_format": "PCM16",
+  "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/240625-consejo-ministros.aspx",
+  "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/Paginas/2025/20250624-transcripcion-rdp-consejo-ministros.aspx",
+  "master_url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250624-CMIN.smil/playlist.m3u8",
+  "date_declared_by_source": "2025-06-24",
+  "source_interval_seconds": [
+    74.44,
+    85.7
+  ],
+  "published_variant": {
+    "name": "1080p",
+    "bandwidth": 4400000,
+    "source": "EXT-X-STREAM-INF of the official published master playlist",
+    "nominal_video_resolution": [
+      1920,
+      1080
+    ]
+  },
+  "source_audio_probe": {
+    "codec": "AAC",
+    "sample_rate": 44100,
+    "channels": 2,
+    "packet_bitrate_bits_per_second": 67641.0359653132,
+    "method": "Sum of AAC packet sizes times8 divided by sum of packet duration_time from first cached source TS. Not a synthesis-quality claim."
+  },
+  "segments": [
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250624-CMIN.smil/media_w566182055_b4400000_t64MTA4MHA=_3.ts",
+      "start": 42.44,
+      "duration": 17.32,
+      "bytes": 7984736,
+      "sha256": "f483c82d6910bc3be12422e16884bb305148ec55e20c040b41da275c6631827d"
+    },
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250624-CMIN.smil/media_w566182055_b4400000_t64MTA4MHA=_4.ts",
+      "start": 59.76,
+      "duration": 10.0,
+      "bytes": 4778584,
+      "sha256": "1de29f8b19266232febea7c54a99e72d3936d3c49cced7543f1eafbdc26ca72a"
+    },
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250624-CMIN.smil/media_w566182055_b4400000_t64MTA4MHA=_5.ts",
+      "start": 69.75999999999999,
+      "duration": 10.0,
+      "bytes": 4490944,
+      "sha256": "cc8b49075ab4a8341690297097aad8d6e813f00b79d542a85877791b8c91d7d8"
+    },
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250624-CMIN.smil/media_w566182055_b4400000_t64MTA4MHA=_6.ts",
+      "start": 79.75999999999999,
+      "duration": 10.0,
+      "bytes": 4515948,
+      "sha256": "1bf5989ef2464880b7bcc6d33f44b679f9a5448a627a60b91c11991bf35b8b47"
+    }
+  ],
+  "source_frame_interval_seconds": 75.44,
+  "speaker_verified": true,
+  "speaker_verification_method": "Official first turn names Pilar Alegría; literal source passage matches BASE and the depicted public speaker in the continuous podium segment. No biometric identification.",
+  "human_listening": false,
+  "processing": "Direct decode/downmix/resample to PCM16mono24k and continuous trim; no EQ, denoising, pitch, tempo or silence insertion.",
+  "crop_chain": {
+    "cached_transport_stream_sha256": "af7c2e2ad1993991c872f1f67ffe656c12ffb4b4958c0c23c82099ff4ffb3285",
+    "cached_transport_stream_first_segment_start_seconds": 42.44,
+    "trim_seconds_relative_to_stream_start": 32,
+    "duration_seconds": 11.26
+  },
+  "boundary_note": "Word-time estimates from BASE guided the crop; independent BASE transcription contains all expected words. This does not certify phonetic boundaries or perceived timbral fidelity.",
+  "asr": {
+    "model_repository": "openai/whisper-base",
+    "model_revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "model_sha256": "07cadb9f25677c8d50df603e66a98fbd842cce45047139baeb16e6219a1e807b",
+    "recognized": "Como saben, todos ustedes el presidente del Gobierno viaja esta misma tarde a los países bajos para participar en la cumbre de la OTAN, una cita que, por supuesto, es de gran trascendencia.",
+    "normalized_equal": true,
+    "differences": []
+  },
+  "status": "Closed production reference, selected after independent BASE matched the full long audition script. No human-listening or perceptual-quality verdict.",
+  "source_frame_capture_sha256": "c6d133c0a91cab4141139788194c6bd7e357ac240a863a17ad60d5deffee7865",
+  "source_frame_capture_note": "Public video frame at 75.44s verified with the official named speaker turn; image cache not required for portable voice generation."
+}

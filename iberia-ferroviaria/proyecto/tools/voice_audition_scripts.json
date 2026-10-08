@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "language": "es-ES",
+  "paragraphs_per_sample": 2,
+  "purpose": "Diálogos originales de ficción para comparar claridad, acento, ironía y cambios de entonación en una audición larga.",
+  "samples": [
+    {
+      "person": "president",
+      "label": "Pedro Sancho",
+      "mood": "proud",
+      "paragraphs": [
+        "Buenos días. Hoy presentamos un plan ambicioso: más trenes, mejores conexiones y horarios que se cumplan. Primero revisa la flota; después refuerza las líneas con viajeros esperando. Quiero resultados concretos. Las estaciones vacías no se llenan con una rueda de prensa.",
+        "Aunque la rueda de prensa me ha quedado magnífica... todo hay que decirlo. ¿Que el tren lleva veinte minutos de retraso? ¡Qué curioso: mi discurso ha llegado puntual! Haz que circule de una vez, por favor. El éxito será de todos... el marrón ya lleva tu nombre."
+      ],
+      "id": "audition-president-long-qwen-v2",
+      "text": "Buenos días. Hoy presentamos un plan ambicioso: más trenes, mejores conexiones y horarios que se cumplan. Primero revisa la flota; después refuerza las líneas con viajeros esperando. Quiero resultados concretos. Las estaciones vacías no se llenan con una rueda de prensa.\n\nAunque la rueda de prensa me ha quedado magnífica... todo hay que decirlo. ¿Que el tren lleva veinte minutos de retraso? ¡Qué curioso: mi discurso ha llegado puntual! Haz que circule de una vez, por favor. El éxito será de todos... el marrón ya lleva tu nombre."
+    },
+    {
+      "person": "successor",
+      "label": "Óscar del Puente",
+      "mood": "angry",
+      "paragraphs": [
+        "A ver, vamos por partes. Tienes viajeros en el andén, trenes en el taller y una línea que pide más frecuencias. Revisa qué material puedes sacar hoy y calcula cuánto cuesta. Luego decides. Comprar por impulso sale caro, incluso cuando lo firma un ministro.",
+        "Y no me vendas otra inauguración sin trenes, joder. ¿Qué vamos a enseñar, el aparcamiento? Precioso. Le ponemos un lazo y decimos que es movilidad contemplativa. Arregla el servicio y después hacemos la foto. Si queda tiempo, hasta podemos responder una queja sin montar una guerra."
+      ],
+      "id": "audition-successor-long-qwen-v1",
+      "text": "A ver, vamos por partes. Tienes viajeros en el andén, trenes en el taller y una línea que pide más frecuencias. Revisa qué material puedes sacar hoy y calcula cuánto cuesta. Luego decides. Comprar por impulso sale caro, incluso cuando lo firma un ministro.\n\nY no me vendas otra inauguración sin trenes, joder. ¿Qué vamos a enseñar, el aparcamiento? Precioso. Le ponemos un lazo y decimos que es movilidad contemplativa. Arregla el servicio y después hacemos la foto. Si queda tiempo, hasta podemos responder una queja sin montar una guerra."
+    },
+    {
+      "person": "minister",
+      "label": "Raquel Sanz",
+      "mood": "determined",
+      "paragraphs": [
+        "Escúchame un momento. No necesitas resolver toda la red esta mañana. Elige una línea, revisa su demanda y añade un servicio que puedas mantener. Mira la previsión antes de confirmarlo. Si consumes toda la caja en el primer pedido, mañana no podrás pagar las reparaciones.",
+        "Sí, ya sé que comprar un tren nuevo luce muchísimo. También luce un bolso carísimo, y no por eso transporta trescientos pasajeros. ¿Has mirado las cuentas? Qué detalle tan revolucionario. Venga, menos catálogo y más gestión. Cuando funcione, prometo poner cara de que lo tenía previsto."
+      ],
+      "id": "audition-minister-long-qwen-v1",
+      "text": "Escúchame un momento. No necesitas resolver toda la red esta mañana. Elige una línea, revisa su demanda y añade un servicio que puedas mantener. Mira la previsión antes de confirmarlo. Si consumes toda la caja en el primer pedido, mañana no podrás pagar las reparaciones.\n\nSí, ya sé que comprar un tren nuevo luce muchísimo. También luce un bolso carísimo, y no por eso transporta trescientos pasajeros. ¿Has mirado las cuentas? Qué detalle tan revolucionario. Venga, menos catálogo y más gestión. Cuando funcione, prometo poner cara de que lo tenía previsto."
+    },
+    {
+      "person": "treasury",
+      "label": "Charo Tijera",
+      "mood": "disappointed",
+      "paragraphs": [
+        "He revisado tu presupuesto. Puedes ampliar el servicio, pero reserva dinero para energía, nóminas y mantenimiento. Compara el gasto mensual con los ingresos previstos. Un préstamo sirve para una inversión que puedas devolver; no sirve para esconder pérdidas debajo de una alfombra cada vez más cara.",
+        "Ah, tu plan financiero es que venga alguien y lo pague. Estupendo, ¿y ese alguien ha nacido ya? No me pongas esa cara: los números no se ofenden. Tú sí, por lo que veo. Si quieres otra subvención, tráeme resultados. Un PowerPoint con flechitas verdes me lo hace mi sobrino."
+      ],
+      "id": "audition-treasury-long-qwen-v1",
+      "text": "He revisado tu presupuesto. Puedes ampliar el servicio, pero reserva dinero para energía, nóminas y mantenimiento. Compara el gasto mensual con los ingresos previstos. Un préstamo sirve para una inversión que puedas devolver; no sirve para esconder pérdidas debajo de una alfombra cada vez más cara.\n\nAh, tu plan financiero es que venga alguien y lo pague. Estupendo, ¿y ese alguien ha nacido ya? No me pongas esa cara: los números no se ofenden. Tú sí, por lo que veo. Si quieres otra subvención, tráeme resultados. Un PowerPoint con flechitas verdes me lo hace mi sobrino."
+    },
+    {
+      "person": "adif",
+      "label": "Benito Balasto",
+      "mood": "worried",
+      "paragraphs": [
+        "Presidente, el tramo está saturado. Puedes meter más trenes, pero acabarán esperando señal y arrastrando el retraso al resto de la línea. Revisa la capacidad antes de tocar el horario. Una mejora de vía tarda meses: encárgala pronto y guarda dinero para terminarla.",
+        "Claro que podemos correr más. También podemos pintar la señal de verde y cerrar los ojos, pero el informe del accidente queda bastante feo. ¿Lo quieres para ayer? Pues haber llamado anteayer, fenómeno. Dame un plazo sensato y te hago una vía; para los milagros tienes una parroquia al lado."
+      ],
+      "id": "audition-adif-long-qwen-v1",
+      "text": "Presidente, el tramo está saturado. Puedes meter más trenes, pero acabarán esperando señal y arrastrando el retraso al resto de la línea. Revisa la capacidad antes de tocar el horario. Una mejora de vía tarda meses: encárgala pronto y guarda dinero para terminarla.\n\nClaro que podemos correr más. También podemos pintar la señal de verde y cerrar los ojos, pero el informe del accidente queda bastante feo. ¿Lo quieres para ayer? Pues haber llamado anteayer, fenómeno. Dame un plazo sensato y te hago una vía; para los milagros tienes una parroquia al lado."
+    },
+    {
+      "person": "workshop",
+      "label": "Fermín Bogie",
+      "mood": "determined",
+      "paragraphs": [
+        "Ven, que te enseño el problema. Este tren lleva los frenos gastados y el mantenimiento pendiente. Sácalo del servicio, paga la revisión y espera a que termine. Mientras tanto, usa otro que esté en condiciones. Si exprimes toda la flota, la avería acaba eligiendo el horario por ti.",
+        "¿Que todavía anda? Tu cuñado también anda después de cuatro vinos y no le das un tren. ¡Mira ese ruido! Parece una cubertería cayendo por una escalera. Vamos a arreglarlo ahora, hombre. El mantenimiento cuesta dinero; la ocurrencia de ahorrárselo cuesta dinero, viajeros y una bronca de las buenas."
+      ],
+      "id": "audition-workshop-long-qwen-v2",
+      "text": "Ven, que te enseño el problema. Este tren lleva los frenos gastados y el mantenimiento pendiente. Sácalo del servicio, paga la revisión y espera a que termine. Mientras tanto, usa otro que esté en condiciones. Si exprimes toda la flota, la avería acaba eligiendo el horario por ti.\n\n¿Que todavía anda? Tu cuñado también anda después de cuatro vinos y no le das un tren. ¡Mira ese ruido! Parece una cubertería cayendo por una escalera. Vamos a arreglarlo ahora, hombre. El mantenimiento cuesta dinero; la ocurrencia de ahorrárselo cuesta dinero, viajeros y una bronca de las buenas."
+    },
+    {
+      "person": "riders",
+      "label": "Marisa Andén",
+      "mood": "angry",
+      "paragraphs": [
+        "Perdona, necesito una respuesta clara. Hay gente esperando y nadie sabe cuándo sale el tren. Consulta la incidencia, informa del retraso y ofrece una alternativa. Después revisa si faltan plazas en esta línea. Los viajeros tenemos trabajo, citas y conexiones; el andén no es nuestra segunda residencia.",
+        "¿Otra vez nos dais las gracias por nuestra paciencia? ¡Qué generosos! Lleváis una hora gastándola como si fuera vuestra. Y ese anuncio de servicio excelente, ¿va con subtítulos de ciencia ficción? Pon un tren que llegue y deja el eslogan para las servilletas. Mira qué petición tan extravagante: viajar."
+      ],
+      "id": "audition-riders-long-qwen-v1",
+      "text": "Perdona, necesito una respuesta clara. Hay gente esperando y nadie sabe cuándo sale el tren. Consulta la incidencia, informa del retraso y ofrece una alternativa. Después revisa si faltan plazas en esta línea. Los viajeros tenemos trabajo, citas y conexiones; el andén no es nuestra segunda residencia.\n\n¿Otra vez nos dais las gracias por nuestra paciencia? ¡Qué generosos! Lleváis una hora gastándola como si fuera vuestra. Y ese anuncio de servicio excelente, ¿va con subtítulos de ciencia ficción? Pon un tren que llegue y deja el eslogan para las servilletas. Mira qué petición tan extravagante: viajar."
+    },
+    {
+      "person": "mayor",
+      "label": "Paco Terruño",
+      "mood": "proud",
+      "paragraphs": [
+        "Vamos a entendernos, presidente. Mi pueblo necesita un tren por la mañana y otro para volver por la tarde. Mira la demanda y calcula el coste antes de firmar el convenio. Podemos aportar dinero, pero queremos horarios útiles. Un tren que pasa mientras todos duermen no nos arregla nada.",
+        "Ahora, si quieres inaugurar una estación sin servicio, avisa y saco al concejal a hacer de locomotora. Resoplar ya resopla bastante. ¿Qué pasa, que no hay presupuesto? Para el canapé de la presentación sí había, leche. Pon los trenes y yo pongo la banda. Y las tijeras te las presto, que luego desaparecen."
+      ],
+      "id": "audition-mayor-long-qwen-v1",
+      "text": "Vamos a entendernos, presidente. Mi pueblo necesita un tren por la mañana y otro para volver por la tarde. Mira la demanda y calcula el coste antes de firmar el convenio. Podemos aportar dinero, pero queremos horarios útiles. Un tren que pasa mientras todos duermen no nos arregla nada.\n\nAhora, si quieres inaugurar una estación sin servicio, avisa y saco al concejal a hacer de locomotora. Resoplar ya resopla bastante. ¿Qué pasa, que no hay presupuesto? Para el canapé de la presentación sí había, leche. Pon los trenes y yo pongo la banda. Y las tijeras te las presto, que luego desaparecen."
+    },
+    {
+      "person": "rival",
+      "label": "Íñigo Asfalto",
+      "mood": "happy",
+      "paragraphs": [
+        "Buenos días. Mi empresa acaba de abrir otra ruta y tus viajeros están comparando precios. Revisa tus tarifas, la frecuencia y el tiempo de viaje. Puedes competir con un servicio mejor, pero debes cubrir los gastos. Regalar billetes mientras pierdes dinero es una forma bastante refinada de cerrar.",
+        "En casa siempre hemos llamado a eso tener visión, sobre todo cuando la factura la paga otro. ¿Mi autobús es menos elegante? Será, oye, pero sale. Tú sigue prometiendo velocidad y yo seguiré vendiendo asientos. Cuando termines la presentación, me llamas: igual te guardo una plaza, por deferencia entre empresarios."
+      ],
+      "id": "audition-rival-long-qwen-v1",
+      "text": "Buenos días. Mi empresa acaba de abrir otra ruta y tus viajeros están comparando precios. Revisa tus tarifas, la frecuencia y el tiempo de viaje. Puedes competir con un servicio mejor, pero debes cubrir los gastos. Regalar billetes mientras pierdes dinero es una forma bastante refinada de cerrar.\n\nEn casa siempre hemos llamado a eso tener visión, sobre todo cuando la factura la paga otro. ¿Mi autobús es menos elegante? Será, oye, pero sale. Tú sigue prometiendo velocidad y yo seguiré vendiendo asientos. Cuando termines la presentación, me llamas: igual te guardo una plaza, por deferencia entre empresarios."
+    }
+  ]
+}

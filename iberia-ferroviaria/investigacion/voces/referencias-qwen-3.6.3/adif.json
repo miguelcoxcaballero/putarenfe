@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "person": "adif",
+  "speaker_candidate": "Fernando Grande-Marlaska",
+  "ref_audio": "./adif.wav",
+  "ref_text": "Y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto.",
+  "duration_seconds": 7.74,
+  "sample_rate": 24000,
+  "channels": 1,
+  "sha256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0",
+  "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/paginas/2026/200126-rueda-de-prensa-ministros.aspx",
+  "date_declared_by_source": "2026-01-20",
+  "master_url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260120-CMIN.smil/playlist.m3u8",
+  "source_interval_seconds": [
+    683.28,
+    691.02
+  ],
+  "official_text_source": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Documents/2026/20260120-CMIN.vtt",
+  "transcription_source": "Official literal source wording, Whisper base word estimates, cropped-ASR comparison is recorded below.",
+  "source_chain": [
+    {
+      "operation": "Original public HLS -> PCM mono24k parent WAV",
+      "parent_reference_name": "marlaska-b.wav",
+      "parent_sha256": "bf7e13600151bcc951f0e6a03d2da90b43d8270b07d9d612a1070df471e03969",
+      "source_interval_seconds": [
+        680.0,
+        705.0
+      ],
+      "original_segments": [
+        {
+          "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260120-CMIN.smil/media_w305617122_b4400000_t64MTA4MHA=_66.ts",
+          "start": 678.2,
+          "duration": 10.0,
+          "bytes": 5473056,
+          "sha256": "3196ae19e3dd66015c898e6169ce553edbc3710c3b99dc29ddc4f17b747f2163"
+        },
+        {
+          "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260120-CMIN.smil/media_w305617122_b4400000_t64MTA4MHA=_67.ts",
+          "start": 688.2,
+          "duration": 10.0,
+          "bytes": 5394284,
+          "sha256": "6d69133b87b013b3a84122a3de3b433f5bc1391f773319f5dfde5dc751e50e40"
+        },
+        {
+          "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:20260120-CMIN.smil/media_w305617122_b4400000_t64MTA4MHA=_68.ts",
+          "start": 698.2,
+          "duration": 10.0,
+          "bytes": 5493548,
+          "sha256": "c98cce61a93f50361a8de0370a536818ef65cb34f2158904a7e3e390c098dd98"
+        }
+      ],
+      "processing": "Decode/downmix/resample only."
+    },
+    {
+      "operation": "Direct PCM frame crop from immutable source3.4 WAV",
+      "crop_offset_seconds": [
+        3.28,
+        11.02
+      ],
+      "frame_interval": [
+        78720,
+        264480
+      ],
+      "processing": "No resampling, pitch/tempo/EQ/denoising, silence insertion or synthetic speech."
+    }
+  ],
+  "rms_dbfs": -26.798853998800347,
+  "peak_dbfs": -5.184749527891127,
+  "near_fullscale_samples": 0,
+  "edge_audio_rms_dbfs": [
+    -55.38319310448456,
+    -57.29294363168413
+  ],
+  "machine_screening": {
+    "person": "adif",
+    "expected": "Y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto.",
+    "recognized": "y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto.",
+    "normalized_equal": true,
+    "expected_normalized": "y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto",
+    "recognized_normalized": "y va a realizar inspecciones en la rodadura de otros trenes que circularon antes por ese mismo punto",
+    "differences": [],
+    "repetition_notices": [],
+    "review_prompts": []
+  },
+  "asr_model": "openai/whisper-base",
+  "speaker_evidence": "Official source speaker attribution and reviewed continuous intervention. Machine transcript and waveform boundary checks are recorded; no human listening approval.",
+  "background_music": "Continuous official podium speech with no music indicated; not a perceptual approval.",
+  "human_listening": false,
+  "perceptual_approval": false
+}

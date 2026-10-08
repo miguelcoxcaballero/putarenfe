@@ -1,0 +1,734 @@
+{
+  "schema": 1,
+  "sourceCommit": "273343e021ef022c1ba6f6ae7df38ac74f96264e",
+  "sourceWorkingTree": "includes current uncommitted game/runtime improvements",
+  "files": [
+    {
+      "file": "investigacion/voces/dialogos-3.6.3.json",
+      "sha256": "bcb87414e1558252847bd9ed2be87999f0a71c2be69f046f089d58af06f0800b",
+      "bytes": 285132
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/COPY-VERIFICATION.json",
+      "sha256": "c6929e9a37a4bae5cfc856ddfa08a48edeb9b1bf726916699982d9e24a07292c",
+      "bytes": 17339
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/README.md",
+      "sha256": "e46eae94eff04045809f2267bcab6c4e21aff96ae36872871d007d90e84063dc",
+      "bytes": 1734
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/adif.json",
+      "sha256": "64f8f37718ee916973bce44f66df2a8dfe334f56f9b24eea2bcdfabd8eedb034",
+      "bytes": 3992
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/adif.wav",
+      "sha256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0",
+      "bytes": 371564
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/mayor.json",
+      "sha256": "3971714e2fa3298840623b7103d371aeef0f916f1a69d22341553b420807cf5f",
+      "bytes": 11421
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/mayor.wav",
+      "sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+      "bytes": 397484
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/minister.json",
+      "sha256": "d756ecf80ab48a48e395d4098ca0b1af1b355e7ed863a0bf40fb545a6bb7b245",
+      "bytes": 4633
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/minister.wav",
+      "sha256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575",
+      "bytes": 540558
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/president.json",
+      "sha256": "02512284f0a2027913dcd03116bb2872e1ab64625d16ed463e5e40f1a95f3534",
+      "bytes": 3811
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/president.wav",
+      "sha256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4",
+      "bytes": 533804
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/prompts.json",
+      "sha256": "46ba5d81fc8a6f657f5f1cdab3951a39956bfd86a7fcc0798006ea8fa9c470bd",
+      "bytes": 16141
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/riders.json",
+      "sha256": "6f2d98bec43338ca45c293c7849ffcac0f39643fc81d9a247e7cd6a1ff4748a9",
+      "bytes": 3425
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/riders.wav",
+      "sha256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf",
+      "bytes": 416684
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/rival.json",
+      "sha256": "59124309b7f1c9799e5cdc6e7c0b14b7a68f178f5762487880bbef2183ff5f01",
+      "bytes": 9216
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/rival.wav",
+      "sha256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c",
+      "bytes": 497324
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/successor.json",
+      "sha256": "b4c46b6099298be2b4a488ffff3f50892475e2be5649326527e7269d948b431b",
+      "bytes": 4007
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/successor.wav",
+      "sha256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b",
+      "bytes": 479084
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/treasury.json",
+      "sha256": "abecdbd62714f6800814a6410e586ecb3cad85ca27e13f6b98ad04a931c40a97",
+      "bytes": 4265
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/treasury.wav",
+      "sha256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188",
+      "bytes": 362000
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/workshop.json",
+      "sha256": "585d940af23be8a8944af342c264110c1b6193690519b71712bd9fe6d861d772",
+      "bytes": 9147
+    },
+    {
+      "file": "investigacion/voces/referencias-qwen-3.6.3/workshop.wav",
+      "sha256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763",
+      "bytes": 351884
+    },
+    {
+      "file": "investigacion/voces/registro-261/manifest.json",
+      "sha256": "035a3fd8239fcddf9ac1a697f826f9e744a50bb4d1735c1cd74727f8f981c767",
+      "bytes": 3199927
+    },
+    {
+      "file": "proyecto/LEEME.txt",
+      "sha256": "e906df6297b8000ff993ea64315a6f9504d37f7939a6421f0c97f2d5ff5132e1",
+      "bytes": 42899
+    },
+    {
+      "file": "proyecto/LICENSE-GEODATA.txt",
+      "sha256": "0074204b2c84d6bc968a4e13eddc211bc3c8988701aaf0334e167f4311106799",
+      "bytes": 35555,
+      "normalization": "removed extra trailing blank line, license text preserved"
+    },
+    {
+      "file": "proyecto/LICENSE-OSM.txt",
+      "sha256": "f325c0209837e066c8893a0b84ae1e69ab9beedc94d917d17f5cb5a2b6572ce1",
+      "bytes": 1431
+    },
+    {
+      "file": "proyecto/PLAN.txt",
+      "sha256": "afcf8e9132a14ad39e93bea0b73a809d82064a60965ca7d341f5b45cc646b688",
+      "bytes": 28117
+    },
+    {
+      "file": "proyecto/SOURCES-CARTOGRAFIA.json",
+      "sha256": "536c5e3d3613105ccdb4c2d11029514ca95262d8976b1c639286cb1a2ce5fbc1",
+      "bytes": 24673
+    },
+    {
+      "file": "proyecto/VERIFICACION.txt",
+      "sha256": "0bc8f8c1de795929ffed1de1ed2a8c1c797979322620a89e23ec9abe39645a04",
+      "bytes": 50755
+    },
+    {
+      "file": "proyecto/build.mjs",
+      "sha256": "c40af0736ce873c9a987b3e889b2e4e91f2f543b829481778de9e0d66f08dd94",
+      "bytes": 5768
+    },
+    {
+      "file": "proyecto/campaign-test.mjs",
+      "sha256": "626b06dd3594e8cf3cb0e5692eed451e5456cea950b24afd473feb7d4daabb1c",
+      "bytes": 10251
+    },
+    {
+      "file": "proyecto/contract-progression-ui-test.mjs",
+      "sha256": "7f225c0bb4b98d9cbc78fca9793bf6845c3f3a2383ccb391ac73113e7848a87d",
+      "bytes": 21599
+    },
+    {
+      "file": "proyecto/current-voice-pack-test.mjs",
+      "sha256": "52054dd2ee2f9e33c89dd0ded87a589300828f1ca2f3bd947be036ab2710717f",
+      "bytes": 5477
+    },
+    {
+      "file": "proyecto/dialogue-presentation-test.mjs",
+      "sha256": "2f6c1fe36288cc837d25d21e2a1d8b1187e6eb35093026fb3b59ee9ff705f113",
+      "bytes": 2643
+    },
+    {
+      "file": "proyecto/dist/app.js",
+      "sha256": "02f8965517a72e954469d092b37a60b7d861cb34af1cad16508cc70502de5fc0",
+      "bytes": 151092
+    },
+    {
+      "file": "proyecto/dist/assets/LICENSE-three.txt",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "bytes": 1081
+    },
+    {
+      "file": "proyecto/dist/assets/fonts/LICENSE-Figtree-OFL.txt",
+      "sha256": "ee23e6c84000126692e112ff067b456470493349f993ceaa8b4d3766dd6fad5d",
+      "bytes": 4498
+    },
+    {
+      "file": "proyecto/dist/assets/fonts/LICENSE-Fraunces-OFL.txt",
+      "sha256": "cd3384cafac6f2bddc3955273958a2e029f97027c8037ac539ef5744a77b579e",
+      "bytes": 4504
+    },
+    {
+      "file": "proyecto/dist/assets/fonts/LICENSE-IBMPlexMono-OFL.txt",
+      "sha256": "23b0a9d0c6d3f140a0b77e483c5cfa6bba574325ef5cb189ed9f2fec4884533f",
+      "bytes": 5299
+    },
+    {
+      "file": "proyecto/dist/assets/fonts/figtree.woff2",
+      "sha256": "4ba7d3d096695818fe0686be4f1e82c6b05134e18a22260336130335027462dd",
+      "bytes": 20156
+    },
+    {
+      "file": "proyecto/dist/assets/fonts/fraunces.woff2",
+      "sha256": "7234ed860a9cc83045413c4faee63c960a8f2d1917adcf728119307d56e0d783",
+      "bytes": 67304
+    },
+    {
+      "file": "proyecto/dist/assets/fonts/plexmono.woff2",
+      "sha256": "01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22",
+      "bytes": 14888
+    },
+    {
+      "file": "proyecto/dist/assets/geography.js",
+      "sha256": "eb1920e798886db9a960c8099c4e02b10f618584d494a7802415901a35f2a0f6",
+      "bytes": 130942
+    },
+    {
+      "file": "proyecto/dist/assets/infra.js",
+      "sha256": "6fcc3aa6d6cc6ac3fa4cd99e1b12ba263e8f8e7a54d62db1fdc1a3d60aa01422",
+      "bytes": 72158
+    },
+    {
+      "file": "proyecto/dist/assets/menu-amanecer-procedencia.txt",
+      "sha256": "35ae778f6317747152e532865012eac93bdb516f502c02b20d6469c7a696969c",
+      "bytes": 627
+    },
+    {
+      "file": "proyecto/dist/assets/menu-amanecer.jpg",
+      "sha256": "a5f08b2676adfcdad44f973c5004fa932753d25e9b34181c66be638dad73aceb",
+      "bytes": 458003
+    },
+    {
+      "file": "proyecto/dist/assets/muestras-orquesta.js",
+      "sha256": "397fff6465d2f6ee73712e95f09a7fa8299387be3ac7fa8070997a9e6b45a57f",
+      "bytes": 10101747
+    },
+    {
+      "file": "proyecto/dist/assets/muestras-percusion.js",
+      "sha256": "9719b93313905010404c634e1e0acf18dbbe4fc94d6d83c74dae19a51382eb02",
+      "bytes": 590644
+    },
+    {
+      "file": "proyecto/dist/assets/muestras-teclas.js",
+      "sha256": "5601f8b783fe70e33b31590a7e8de02fcdbd7be1de4f20a5a033b1f47e1eab2f",
+      "bytes": 4246756
+    },
+    {
+      "file": "proyecto/dist/assets/muestras-ui.js",
+      "sha256": "71d400cecb3450a9fb12a42409b2e0b2273aec586bfc33fc7d8d172ad910eaf0",
+      "bytes": 455233
+    },
+    {
+      "file": "proyecto/dist/assets/portraits.js",
+      "sha256": "7604a024ccc21cfc1de6a743d6e068a3d7b87cf12799819490ade8c53ca370e6",
+      "bytes": 7687359
+    },
+    {
+      "file": "proyecto/dist/assets/rail-art.jpg",
+      "sha256": "f4c798855d3aae3a7c71d2fcde5087e2251bce275234a5bfe6010c836717a7b4",
+      "bytes": 423971
+    },
+    {
+      "file": "proyecto/dist/assets/railways.js",
+      "sha256": "8e8c40e6339558a8434855adaa427ab381a25aef8ad12d471cdb5b9e8d5bb3ea",
+      "bytes": 2544025
+    },
+    {
+      "file": "proyecto/dist/assets/samples-index.js",
+      "sha256": "efbac14532aade475151e87936f0877eeb5a71b918a31b93f406e7386e53fe4c",
+      "bytes": 1526
+    },
+    {
+      "file": "proyecto/dist/assets/three.min.js",
+      "sha256": "7b1c5d75b28d9de15042e2b374f83566d8c7146697af8fdeb4558b0fb528a585",
+      "bytes": 668024
+    },
+    {
+      "file": "proyecto/dist/assets/timetable.js",
+      "sha256": "b1b63a9788ed884a47b4cebc7f597c67cf2ed384cc516d6eb3123139ef31bf2b",
+      "bytes": 208461
+    },
+    {
+      "file": "proyecto/dist/assets/voice-dialogues.js",
+      "sha256": "33f94a7a1fdcecb181aa106a258b724bc88cb5a78e9823032eb4bd179e212b6d",
+      "bytes": 29
+    },
+    {
+      "file": "proyecto/dist/assets/voices.js",
+      "sha256": "8883f5910f7e8ab09c473bfb606363a15bd268c1f38deaac9210dda627cdfe99",
+      "bytes": 25
+    },
+    {
+      "file": "proyecto/dist/city-art.js",
+      "sha256": "885055062c2bede652a55bdc9e0f613e687aba2406b1ba487fbaab72f79be49f",
+      "bytes": 12755
+    },
+    {
+      "file": "proyecto/dist/data.js",
+      "sha256": "e445b24c1783a6fa08b0b557cd27c7610020b5c8cd330bd7bb1b413fd72b9348",
+      "bytes": 11754
+    },
+    {
+      "file": "proyecto/dist/dialogue-presentation.js",
+      "sha256": "f7b57b5cb2293eb7ccb18a792d65deb62a48a90efbd25e9854f602db198919d3",
+      "bytes": 2109
+    },
+    {
+      "file": "proyecto/dist/encounters.js",
+      "sha256": "f7c847d3e85e39ebc48bd52684b0cc79ce18f1c3a34eb661432a607255c9f349",
+      "bytes": 9953
+    },
+    {
+      "file": "proyecto/dist/engine.js",
+      "sha256": "684098960730780117a8117a67f87ace5ab5ef48b8d61830ba85e4631b92fb3f",
+      "bytes": 37003
+    },
+    {
+      "file": "proyecto/dist/faces.js",
+      "sha256": "93195dab3c70d9c7f23f4a9e656afea676834521922892628bb06cb0e3ff8ffb",
+      "bytes": 28500
+    },
+    {
+      "file": "proyecto/dist/index.html",
+      "sha256": "98fc9c8500374a262e17947bf83e2b01ce1f6c7de97a0e0a67856144e8f283da",
+      "bytes": 2772
+    },
+    {
+      "file": "proyecto/dist/induction-runtime.js",
+      "sha256": "d26de38f1cd2454ba1f9c3a8ac0448ad4eaa43397407b987454d40fb85789682",
+      "bytes": 7436
+    },
+    {
+      "file": "proyecto/dist/induction-task-ui.js",
+      "sha256": "6b8b81c93c5fc90726b2ce4344cc1f2cbbb58412ad830c84796e4f0d2ff030d7",
+      "bytes": 15798
+    },
+    {
+      "file": "proyecto/dist/induction.css",
+      "sha256": "4aaaace7c0c68b477d35e16adbfda988d71b8051a09c5e2b1afd10047f37ab7c",
+      "bytes": 7044
+    },
+    {
+      "file": "proyecto/dist/induction.js",
+      "sha256": "3f79864a30882b8da0e1aa9e62b76e3eafb7d19b4615a9b57eccc86354e5f8fd",
+      "bytes": 22625
+    },
+    {
+      "file": "proyecto/dist/infra.js",
+      "sha256": "19edfebfd3ab88e8a6ffa9dc8e0413f2a5236ace2b127f4cc6970362928b9209",
+      "bytes": 14418
+    },
+    {
+      "file": "proyecto/dist/main-menu.css",
+      "sha256": "da1d7ee65c3c94979b0c1732821f09574e587934656186b143cbd366d5dee6ae",
+      "bytes": 12037
+    },
+    {
+      "file": "proyecto/dist/main-menu.js",
+      "sha256": "3a32075e68209cae3f13389c44e49c4def97d60bcf1d84016b1890424b4765d4",
+      "bytes": 6071
+    },
+    {
+      "file": "proyecto/dist/map-v3.js",
+      "sha256": "4499fec9aa975853f471490f6979557fb0c519486819e94e97794181ce67e4f6",
+      "bytes": 51764
+    },
+    {
+      "file": "proyecto/dist/music.js",
+      "sha256": "0ee3ec252d7cae0faf1091c18c59334f3c4ffab5adf4e67432864b8731b7ad0c",
+      "bytes": 94272
+    },
+    {
+      "file": "proyecto/dist/network.js",
+      "sha256": "18dadebd60e023eb78e6ac9e742ff01b51152294058bee9d159e4d26d3f63fd8",
+      "bytes": 3581
+    },
+    {
+      "file": "proyecto/dist/operations.js",
+      "sha256": "94f312b4bea88f28780ba638d872cda8ddb31b58f99fb619675d3bcf682e0c8a",
+      "bytes": 18971
+    },
+    {
+      "file": "proyecto/dist/render-music.html",
+      "sha256": "d33765bbf09a05413bc69c69f888931eba6987ca41adf25c4e06572ba9b5684a",
+      "bytes": 3430
+    },
+    {
+      "file": "proyecto/dist/schedule.js",
+      "sha256": "58659504e8ec2af16b8f425d392a6c03b6f25c7effead87b2eb0cba9b38a7b6e",
+      "bytes": 9502
+    },
+    {
+      "file": "proyecto/dist/sfx.js",
+      "sha256": "e97406fc9281ca7c8641b3d52b6435777d55121b990ddaffe959a7d897451bf1",
+      "bytes": 28095
+    },
+    {
+      "file": "proyecto/dist/story.js",
+      "sha256": "595fe9f5ae1ce7432bc959c11c142eed3f14acf0e6515ebc9855feecedf55068",
+      "bytes": 24270
+    },
+    {
+      "file": "proyecto/dist/style-v3.css",
+      "sha256": "e6bd4f3d45d23793127a1402bb53d1c1b6ac5bd26634f8857540b69028900ced",
+      "bytes": 61657
+    },
+    {
+      "file": "proyecto/dist/train-art.js",
+      "sha256": "4d95bd12aed240daada2e7bd9a76b6c0819c82c7f0b89005512d77184ccea0be",
+      "bytes": 16830
+    },
+    {
+      "file": "proyecto/dist/train3d-preview.html",
+      "sha256": "548eb5aae15a1330c80ea53389cc9a4531d2a95409d928f242faf7f0aa78bf4e",
+      "bytes": 594
+    },
+    {
+      "file": "proyecto/dist/train3d.js",
+      "sha256": "8718de1d8841b8113573de467a0dbf1e7100f38f19a75b028a9fa8413936f14a",
+      "bytes": 25927
+    },
+    {
+      "file": "proyecto/dist/tycoon-ui.js",
+      "sha256": "e8f74c858790fd391d82739558ba0b335d7dde486f87a1bc69d8913a46d646de",
+      "bytes": 21057
+    },
+    {
+      "file": "proyecto/dist/tycoon.js",
+      "sha256": "a7fb9a88c4e2ae19324b57afc31316e70ef60f1b08eaabef6570346a68791232",
+      "bytes": 30403
+    },
+    {
+      "file": "proyecto/dist/voice.js",
+      "sha256": "19c82f1ef5c94b99e4a71095c2526575f0363bb858340608d5a650d575829ab5",
+      "bytes": 13355
+    },
+    {
+      "file": "proyecto/gameplay-ui-test.mjs",
+      "sha256": "92d15fbe13b959145c4a9caae76e7168b2e18717de2c2cecd2b9441086897987",
+      "bytes": 12507
+    },
+    {
+      "file": "proyecto/induction-test.mjs",
+      "sha256": "daf541f368e962592c5ce68b2e34ce38847a7ad9fffe8a036376abb0f97e957f",
+      "bytes": 16729
+    },
+    {
+      "file": "proyecto/music-test.mjs",
+      "sha256": "dc825f8d19ebce700e3cd00bfe9c730309c0e578f4aa63644bad93ab4294a452",
+      "bytes": 7179
+    },
+    {
+      "file": "proyecto/observer-runtime-test.mjs",
+      "sha256": "8f637c64772f4042291c072dcef6d8c47627452de64dc348175bd21411c05bb0",
+      "bytes": 5304
+    },
+    {
+      "file": "proyecto/onboarding-ui-test.mjs",
+      "sha256": "a55ebaad76ccfa02d178745a3f227c2ab2f3724671fd0b5e30e59d145114e08b",
+      "bytes": 36714
+    },
+    {
+      "file": "proyecto/operations-calendar-test.mjs",
+      "sha256": "823eec21c0f076788777ffcecf72ef8bba83c1bac57a808f16a52e1884c7c639",
+      "bytes": 1025
+    },
+    {
+      "file": "proyecto/package.json",
+      "sha256": "8bdecfa8ebff5a97f8acd1410bdac913acffabe19c6756895215e14ba69251df",
+      "bytes": 913
+    },
+    {
+      "file": "proyecto/test.mjs",
+      "sha256": "5ee8f614c084055d2e0c7af240c43370279bcf69b866b73f0bf2636f18466636",
+      "bytes": 13439
+    },
+    {
+      "file": "proyecto/tools/VOICE-DIRECTION.md",
+      "sha256": "c063f57508e366abc429e7e3b198953c21274b954b7af86afd755cedc2f42415",
+      "bytes": 57588
+    },
+    {
+      "file": "proyecto/tools/archive_qwen_takes.py",
+      "sha256": "e4cfe272e003eea79002110eba1705bdf155d4192201d231b0f6f07c5de288f7",
+      "bytes": 24193
+    },
+    {
+      "file": "proyecto/tools/audit_voice_stage.py",
+      "sha256": "7ba00579881d13df2e31c538be1e630ebbbeea3371d184b2e102e40e98943fcb",
+      "bytes": 7749
+    },
+    {
+      "file": "proyecto/tools/build_dialogue_listening.mjs",
+      "sha256": "9b241e80aeec77bf2f69707b412ad93d1527689e1dadaf8472c0fddd3529a67c",
+      "bytes": 20229
+    },
+    {
+      "file": "proyecto/tools/build_infra.py",
+      "sha256": "df5cbc182c731495d76c6a363c514b9141316ac8e6920e3ce86d3d23bd5d4692",
+      "bytes": 26982
+    },
+    {
+      "file": "proyecto/tools/build_playable_preview.mjs",
+      "sha256": "8eb793bb4e92e513be95757e99026bb4590d06cf6d3f60f5fa79a42028a816c6",
+      "bytes": 11165
+    },
+    {
+      "file": "proyecto/tools/build_portraits.py",
+      "sha256": "ddc208242ff50a6d00f5eba3aa69f41f121d65351d81022baa9fdd0d84793697",
+      "bytes": 1502
+    },
+    {
+      "file": "proyecto/tools/build_qwen_auditions.py",
+      "sha256": "df6ca89512733752d0f9b783c110f60076877f58a28c0fdaef22fe170c078725",
+      "bytes": 35964
+    },
+    {
+      "file": "proyecto/tools/build_qwen_dialogues.py",
+      "sha256": "7fb9501ea8ebf63d9dd7475d7f15209ed2caf555d032cc2d055e15d28fbebc92",
+      "bytes": 21772
+    },
+    {
+      "file": "proyecto/tools/build_qwen_voices.py",
+      "sha256": "b29a050151b81068100b0fc09d25aa751f774a6064ecd0fff7cbd633599ac8c6",
+      "bytes": 40035
+    },
+    {
+      "file": "proyecto/tools/build_samples.py",
+      "sha256": "01ebd8d8beff41267625d0f404ccbb5e4a3fc60bd5d822ac9aa48e2b60485149",
+      "bytes": 32584
+    },
+    {
+      "file": "proyecto/tools/build_timetable.py",
+      "sha256": "73a35c34fdce02265d484d036f4491ca3fbec1e6edb3b7034ff5957b057c8ca4",
+      "bytes": 30072
+    },
+    {
+      "file": "proyecto/tools/build_voice_auditions.mjs",
+      "sha256": "b21de38da7ea718e5c4aee6d5cc08b89d199286d3685483bf5073294b7b4e7e5",
+      "bytes": 19809
+    },
+    {
+      "file": "proyecto/tools/build_voice_continuity_preview.mjs",
+      "sha256": "1581886d102bba939a28e11aef1fbab2ab45652d5c92bfe56cc7be6a407628ba",
+      "bytes": 23725
+    },
+    {
+      "file": "proyecto/tools/build_voices.py",
+      "sha256": "bfd6b82021a0686b362e812bae815120e3293d3a77304ab95fdf30bb839db108",
+      "bytes": 32581
+    },
+    {
+      "file": "proyecto/tools/check_voice_transcripts.py",
+      "sha256": "e22e3a4caaceca507fccc9ccdaa71e6a1c6272a9428674389834d191ae64fe4e",
+      "bytes": 22266
+    },
+    {
+      "file": "proyecto/tools/current_voice_pack.mjs",
+      "sha256": "a2462b1b80ccb1cc05aa495d0eb77625689ff5bd4715c03fabc7fb59a5517f2f",
+      "bytes": 6671
+    },
+    {
+      "file": "proyecto/tools/master-qwen-auditions-test.py",
+      "sha256": "1fb1a03e611189eee9f0f6972de85b13a194a673b8365ecfa73dbe1fdbb5c10a",
+      "bytes": 16286
+    },
+    {
+      "file": "proyecto/tools/master_qwen_auditions.py",
+      "sha256": "8ed59a21a12f7ae9347a1154b3115ef70b88daef1327f62add516401440e8342",
+      "bytes": 10747
+    },
+    {
+      "file": "proyecto/tools/migrate_qwen_dialogues.py",
+      "sha256": "ce8d5a713996db12fbff40adcd89c52af34a11aaf27b125fa23f49265fe97d61",
+      "bytes": 23471
+    },
+    {
+      "file": "proyecto/tools/qwen_dialogue_mixed.py",
+      "sha256": "40c67902560e7f04f64d20a417be41f812dd6ab9faee9030762b3ef8ddb48c9e",
+      "bytes": 18841
+    },
+    {
+      "file": "proyecto/tools/requirements-qwen-voices.txt",
+      "sha256": "c65672d7063dbd1038f4c3d1cf86f881f448cff5cfcec708a3c6856b45f35a46",
+      "bytes": 514
+    },
+    {
+      "file": "proyecto/tools/requirements-voices.txt",
+      "sha256": "cdafa176076fac05a6553ea066a17f7b5496354fc0a4563621b9967307d3c452",
+      "bytes": 134
+    },
+    {
+      "file": "proyecto/tools/test_archive_qwen_takes.py",
+      "sha256": "e6ef5947b64b55d3c08b0e461e537fd0abc1df4bd42e07989230b8c1afea6ed5",
+      "bytes": 28472
+    },
+    {
+      "file": "proyecto/tools/test_audit_voice_stage.py",
+      "sha256": "243535033d9b54d509b3bbb919f47285d3a697c8323d927ac5f233aed0cb55a9",
+      "bytes": 10078
+    },
+    {
+      "file": "proyecto/tools/test_build_qwen_auditions.py",
+      "sha256": "51ec2d532a2d4bf0cdc0df11dae629f13e31cea66ba714a62085933c94b13295",
+      "bytes": 28978
+    },
+    {
+      "file": "proyecto/tools/test_build_qwen_dialogues.py",
+      "sha256": "ece7d7da2b1968688c99e64849d58c8f517f29e9bf6cf1e29abec17d82edd56a",
+      "bytes": 26655
+    },
+    {
+      "file": "proyecto/tools/test_build_qwen_voices.py",
+      "sha256": "7a821647a78342ceb78dd033a3672f62038c7245bc853e278d1bcda6d02309c6",
+      "bytes": 31089
+    },
+    {
+      "file": "proyecto/tools/test_migrate_qwen_dialogues.py",
+      "sha256": "f0fa0d8b2c806c867921de0d25d67ab45c57b5c4355619dcb273725a13b57d21",
+      "bytes": 19662
+    },
+    {
+      "file": "proyecto/tools/test_voice_transcripts.py",
+      "sha256": "5f9cd75c8c97fb0d6a25a411f8d5f38355b99fd87571043d3a38c5714eb7f056",
+      "bytes": 11296
+    },
+    {
+      "file": "proyecto/tools/voice-generation-test.py",
+      "sha256": "7f6a6c1a097ec7284e060a72fb9f4392ea77a66a167bb37b4b1e9c05eb1045da",
+      "bytes": 36319
+    },
+    {
+      "file": "proyecto/tools/voice_accent.py",
+      "sha256": "66add84a4cc3931f7131bfed8d65d68d9de198aecc63803a230e3a7f479d5ad9",
+      "bytes": 2942
+    },
+    {
+      "file": "proyecto/tools/voice_audition_scripts.json",
+      "sha256": "2227e739cd8a2122bb8b6feeb7cced1f9569894f9f2a11ddadf2115159f5ddf8",
+      "bytes": 12685
+    },
+    {
+      "file": "proyecto/tools/voice_dialogues.mjs",
+      "sha256": "231086db390dceb52218c8cc058f341e39ca837a7161a0fb2eb25d6c8668a570",
+      "bytes": 2664
+    },
+    {
+      "file": "proyecto/tools/voice_direction.json",
+      "sha256": "01585baf80963f2fe0664d7a6877844a03a5af6b9e3357c7c8b543dd1348812f",
+      "bytes": 7505
+    },
+    {
+      "file": "proyecto/tools/voice_lines.mjs",
+      "sha256": "8685e1c51e6cc819a361b26f3a771289b7f2c92023a7ccdeebe430101b9dc1e9",
+      "bytes": 1655
+    },
+    {
+      "file": "proyecto/tools/voice_xtts_speakers.py",
+      "sha256": "8a33683dcac8044fa0a36284987b6d068aa81b37d6b4b06db4b06840f679426f",
+      "bytes": 1402
+    },
+    {
+      "file": "proyecto/tycoon-contract-test.mjs",
+      "sha256": "b4c41d5be97c10d11730f8411ce39f4630fd540b06566d3e9ac75d5809aefd27",
+      "bytes": 12415
+    },
+    {
+      "file": "proyecto/tycoon-test.mjs",
+      "sha256": "d222428b53541028d5f0aac5450c9ef97e2cce499d3861cca487ccede3c3d91d",
+      "bytes": 4775
+    },
+    {
+      "file": "proyecto/ui-test.mjs",
+      "sha256": "35301b24402b1e80e26f1a4195569df07b38315f5510426a9cdec611f42461ad",
+      "bytes": 14398
+    },
+    {
+      "file": "proyecto/voice-audition-ui-test.mjs",
+      "sha256": "fa4e4f304001aedb6efc8921cca36ba3e8bd12af575e68d1cac8bd3d73c06d56",
+      "bytes": 10929
+    },
+    {
+      "file": "proyecto/voice-continuity-preview-ui-test.mjs",
+      "sha256": "a64a18c27a40a00046e2e3bd489cbb1858b2d1df51dda3ff74efa00f60259b0a",
+      "bytes": 13300
+    },
+    {
+      "file": "proyecto/voice-conversation-ui-test.mjs",
+      "sha256": "d22c8274d79f865aebdb351a66da9dbd407fa2a9713d25ad50100d640b8e67f4",
+      "bytes": 25076
+    },
+    {
+      "file": "proyecto/voice-game-ui-test.mjs",
+      "sha256": "e551a2e8020cebbc0e439f226545d0a83c577e79b7485039cd0877f7adbebcbf",
+      "bytes": 24305
+    },
+    {
+      "file": "proyecto/voice-listening-ui-test.mjs",
+      "sha256": "346beb87ecdcb6340c1da7fe6587fce826b371562748f7386c8908627d9b4133",
+      "bytes": 22733
+    },
+    {
+      "file": "proyecto/voice-playable-advance-ui-test.mjs",
+      "sha256": "3b1ffb14a5d0c36df46158bbaba8978e2445ebfddfc591a23e20855b5fa97d92",
+      "bytes": 9646
+    },
+    {
+      "file": "proyecto/voice-runtime-test.mjs",
+      "sha256": "84e5905f01d90b8cc79becff85145553852958dac28267d36e05b0945e6260b2",
+      "bytes": 15921,
+      "adaptation": "regression test now supports current paragraph presentation and absence of old sentence recordings"
+    },
+    {
+      "file": "proyecto/voice-text-test.mjs",
+      "sha256": "878194b4ab735dc561e607a127454bead3b9ee0f8cc310da8d6e03c7fd2f280d",
+      "bytes": 3467,
+      "adaptation": "regression test now supports current paragraph presentation and absence of old sentence recordings"
+    },
+    {
+      "file": "investigacion/voces/frases.json",
+      "bytes": 139778,
+      "sha256": "4956813c933960bd6ba6809a662e384b0e0e523d2906ae83fe1c37341732ad72"
+    }
+  ],
+  "sentenceClipsExcluded": true,
+  "productionCachesExcluded": true,
+  "officialSourceBuildGuard": "dist/assets/voice-dialogues.js remains empty until complete strict412 package",
+  "textCatalogueRetainedForRegressionTests": true
+}

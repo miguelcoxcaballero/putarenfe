@@ -1,0 +1,7 @@
+
+# Generated local downloads and temporary build files
+codex-downloads/
+**/__pycache__/
+*.pyc
+**/node_modules/
+iberia-ferroviaria/**/*.tmp

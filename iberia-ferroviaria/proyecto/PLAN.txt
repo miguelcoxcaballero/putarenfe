@@ -1,0 +1,171 @@
+IBERIA FERROVIARIA — DISEÑO ACTUAL DE PROGRESIÓN
+8 de octubre de 2026. Reparación 3.6.3 en curso; guardados de formato 4.
+
+REPARACIÓN ACTIVA 3.6.3
+El usuario percibe que la voz cambia después del primer mensaje. Se comprobó la procedencia de las 522 frases Qwen y se reprodujeron 24 mensajes completos del HTML 3.6.2, mediante nueve tareas reales y 86 fuentes nativas: no se observó una mezcla con XTTS ni síntesis del navegador. Sí se encontró una causa concreta de pérdida de interpretación: los identificadores de fragmento omitían emoción y contexto; 79 fragmentos compartidos se reutilizan 553 veces después de la primera frase de los encuentros, 474 de ellas con una emoción distinta a la grabada. La verificación anterior recortaba cada cuerpo a una frase y no cubría esa continuidad. Las tomas enteras distinguen los 412 cuerpos y mantienen su emoción y contexto durante la intervención.
+La reparación prepara 412 grabaciones completas, con 11.796 palabras y nueve personajes. Añade 31 introducciones habladas originales: 21 briefings, nueve respuestas y el arco del Mediterráneo; sus párrafos principales conservan el texto literal. Las otras 381 intervenciones siguen idénticas, incluidos los 315 encuentros. La presentación destaca la entrada antes del principal dentro del mismo diálogo, sin ventanas adicionales ni recortar el audio. La estructura se contrastó con escenas reales de Tropico; los parlamentos siguen siendo sátira original de este juego.
+El reproductor admite una sola fuente por cuerpo, elimina la síntesis del sistema y muestra los errores sin sustituir la voz. El build impide sobrescribir el HTML si falta alguna de las 412 tomas actuales y vacía CLIPS en el paquete nuevo. Un guardado antiguo con feedback pendiente recupera la respuesta canónica de su opción. La confirmación final del tutorial respeta la rama realmente firmada, corrige contradicciones guardadas y no inventa una firma cuando el historial ya no la identifica. «Solo mirar los trenes» usa un reloj independiente, sin avanzar calendario, contratos ni economía. Pasan las regresiones puras de estas correcciones; su recorrido final de navegador sigue pendiente.
+El pack actual referencias-qwen-3.6.3 conserva byte por byte las ocho referencias españolas anteriores, incluida la aceptada de Pedro. Paco incorpora una muestra real de Torrente interpretado por Santiago Segura en Torrente 5, seleccionada del vídeo público de RTVE: 81,8–90,08 segundos, PCM16 mono a 24 kHz. El acceso al vídeo ya funcionó mediante el proxy y TLS habituales. La referencia y sus límites técnicos están documentados; no se afirma aprobación humana de la actuación nueva.
+La producción del catálogo actual arrancó el 8 de octubre a las 13:07:52 UTC, en generadas-qwen-dialogos-3.6.3-torrente: 123 lotes estables de hasta cuatro cuerpos, mixed-bf16-talker y semilla 424242. La migración conservó 84 WAV y 84 MP3 exactos, con sus registros originales y ocho condicionamientos; ninguna toma anterior de Paco se admitió. Al arranque quedaban 328 cuerpos por regenerar. Los nueve condicionamientos FP32 y las precisiones reales pasaron un gate independiente antes de iniciar BASE a las 13:11:11 UTC. Las 137 transcripciones del catálogo anterior quedan archivadas y no se copian como revisión del catálogo actual.
+Antes del cierre falta completar las 412 tomas, revisar sus transcripciones actuales y las discrepancias importantes, empaquetar y ejecutar las pruebas nativas del HTML nuevo y del auditorio, con conversaciones completas, controles, móviles y reproducción sin conexión. El HTML principal conserva aún la versión 3.6.2. El ensayo de Raquel e Íñigo permite comparar la continuidad; no sustituye el cierre del reparto.
+El avance jugable outputs/Iberia-Ferroviaria-avance-3.6.3.html y el auditorio outputs/Iberia-Ferroviaria-dialogos-nuevos.html se actualizaron el 8 de octubre a las 15:40 UTC desde un único manifiesto congelado: ambos tienen 206/412 grabaciones, las 50 de la guía, veinte de Paco con la referencia real de Torrente y los 412 textos actuales. El juego integra presentación y correcciones de confirmación del encargo y reloj de observación. Pasan integridad y controles estáticos; sus recorridos nativos siguen pendientes. Las copias anteriores se conservan intactas y de solo lectura en sus snapshots. La prueba nativa corta del juego de 72 voces corresponde solo a esa copia histórica. El auditorio histórico de 112 voces pasó nueve cuerpos completos, controles y móviles 320/390 sin conexión; su resultado tampoco certifica las copias actuales de 206 voces. La revisión visual parcial del juego histórico 133 obtuvo siete capturas legibles, pero falló antes de certificar la tarea. El HTML principal permanece idéntico en 3.6.2. Las copias actuales son parciales, sin validación nativa de todo el catálogo; cada actualización se identifica mediante snapshot, recuento y SHA propios.
+
+CIERRE HISTÓRICO 3.6.2 Y CORRECCIÓN DE SU ALCANCE
+La producción Qwen de las 522 frases canónicas terminó a las 06:42 UTC, con WAV, MP3 y transcripciones vigentes para todas las tomas, sin fallos de generación. La auditoría y revisión semántica están cerradas, conservando las diferencias de ASR para escucha. El empaquetado estricto integró las 522 frases, sin clips antiguos ni ausencias, en el HTML construido. También están listas las nueve audiciones largas de dos párrafos. npm test pasó sobre esa revisión, incluida la campaña legal de 348 meses. Las cuatro suites de navegador pasaron en serie, pero la de voces recortaba cada diálogo a una frase: no comprobaba conversaciones completas. Las otras verificaron tareas restauradas, cuatro recuperaciones de jornada, costes y plazos reales, controles móviles y audiciones largas. Su alcance exacto y el nuevo recorrido íntegro figuran en VERIFICACION.txt.
+En aquella entrega, Pedro conservó la referencia cuyo parecido aceptó el usuario y la muestra ajustó pausas y puntuación buscando más intención. Paco utilizaba una referencia sintética provisional; el acceso a RTVE estaba pendiente entonces. El pack actual 3.6.3 ya contiene la muestra real de Torrente. No hay aceptación humana de todo el reparto.
+
+OBJETIVO Y ALCANCE
+El juego combina gestionar jornadas concretas con desarrollar una compañía entre 2022 y 2050. El crecimiento utiliza la red, los trenes, la plantilla y el presupuesto reales de la partida. Las mejoras añaden decisiones y consecuencias comprobables; ninguna prueba automática demuestra cuántas horas entretendrá a una persona.
+
+PROGRESIÓN QUE YA FUNCIONA
+- Primer turno de nueve etapas, una tarea visible y una persona hablando cada vez. El primer contrato de 250.000 viajes conserva las recompensas de 18/26 M€ y los 18 meses explicados en la guía; es un cierre de aprendizaje deliberadamente sencillo.
+- Después, programas de corredor con tres etapas: poner un servicio en marcha, invertir en su calidad y conectarlo con su entorno. Si no existe una conexión nueva factible, la última etapa exige otra estación o un nivel de servicio pendiente y se presenta como consolidación.
+- Cada etapa exige tres cierres mensuales consecutivos con todos sus requisitos cumplidos. Reducir una frecuencia comprometida, cerrar una relación o perder la cobertura necesaria interrumpe la racha. El motor observa lo realmente prestado antes de aplicar las entregas y obras del mes siguiente.
+- El siguiente encargo aparece al cumplir el anterior. Un encargo no aceptado caduca a los doce meses sin multa; uno aceptado dispone de veinticuatro meses desde la firma. Rechazar o perder conserva la renovación semestral de propuestas.
+- Las propuestas priorizan corredores incompletos que caben en la flota actual. Una única fórmula calcula unidades necesarias tanto para la oferta como para configurar el servicio. La ficha informa del material compatible, las unidades libres, su estado y la posible reasignación; una compra con entrega posterior al plazo no se presenta como una apertura preparada.
+- El arco de Pajares sólo aparece tras la apertura histórica del 29 de noviembre de 2023. Continúan las obras históricas y las nueve grandes líneas de campaña, con sus plazos mínimos. Los cinco capítulos conservan sus objetivos y fechas.
+
+DOS PLANES CON CONSECUENCIAS DISTINTAS
+Servicio público exige oferta, una tarifa máxima y cobertura de personal. Favorece Territorio; puede asumir un servicio que no alcance el margen de una apuesta comercial. La opción comercial exige capacidad, ocupación y margen sostenidos, y favorece Hacienda. En la segunda etapa el plan público suele invertir en estación y el comercial en calidad del servicio. En una expansión de la última etapa, las dos relaciones deben cumplir los requisitos; el plan comercial debe cubrir juntas sus costes directos.
+El margen mostrado incluye ingresos por servicio público y excluye los gastos generales de la compañía: cumplir un contrato comercial no garantiza que toda la empresa sea rentable. Las políticas, la investigación, la reserva de trenes, la formación de tres meses y el mantenimiento continúan siendo decisiones paralelas, con costes y efectos permanentes.
+El panel conserva el signo de los márgenes negativos y consulta los requisitos de la rama activa. Una reproducción legal con el motor y la función de interfaz confirmó el margen negativo, sin navegador: ../investigacion/jugabilidad/negative-margin-ui-3.6.2.json. Esta evidencia comprueba el cálculo y el texto generado; no se presenta como una captura del navegador.
+
+PAGOS Y PROTECCIÓN FRENTE A PREMIOS SIN INVERSIÓN
+- Expansión pública: 24, 34 y 44 M€ por etapa; expansión comercial: 34, 46 y 60 M€. Son financiación de desarrollo, no únicamente beneficio por billetes. Las inversiones y los costes de explotación se pagan con las reglas normales.
+- Bonificaciones opcionales: inversión adicional o mejor resultado operativo; sólo se pagan una vez al cumplir. Incumplir una expansión penaliza con 5/8 M€ y confianza gubernamental; premio y multa no se repiten al recargar o cerrar otra vez.
+- Una etapa final sin enlace nuevo exige inversión pendiente distinta. Una estación al máximo nunca recibe un objetivo de nivel 4.
+- Un corredor sin desarrollo tangible pendiente se trata como un acuerdo de operación: tres meses de servicio fiable, 4/6 M€ de pago, penalización de 2/3 M€, sin bonificación y sin reiniciar una cadena de grandes premios. Los corredores incompletos factibles tienen prioridad sobre estos acuerdos.
+- Historial y La Gaceta registran los resultados reales. Una victoria no vuelve a publicarse como noticia nueva todos los meses; formación e investigación terminadas producen noticias concretas.
+
+LAS CINCO DECISIONES SIGUIENTES, COMPROBADAS
+Recorrido automático con acciones legales, 500 M€ iniciales (620 M€ tras la decisión inaugural), siguiendo la rama pública y sin completar la red por fuera del contrato. El informe conserva la revisión previa al último ajuste; estos cinco casos siguen requiriendo las mismas inversiones. Los beneficios previstos son los de toda la compañía:
+1. València–Alicante: abrir, aumentar frecuencia y ajustar tarifa. Apertura 4 M€; beneficio mensual previsto 2,23 M€ al preparar la oferta; premio 24 M€ en el mes 4.
+2. Mejorar la estación de València: inversión 18 M€; beneficio previsto 2,43 M€; premio 34 M€ en el mes 7.
+3. Conectar València–Barcelona: apertura 4 M€; beneficio previsto 2,64 M€; premio 44 M€ en el mes 10.
+4. Granada–Almería: nueva apertura, frecuencia y tarifa. Apertura 4 M€; beneficio previsto 2,73 M€; premio 24 M€ en el mes 13.
+5. Mejorar Granada: inversión 12 M€; beneficio previsto 2,31 M€; premio 34 M€ en el mes 16.
+Resultado del recorrido: 732,07 M€ de caja, deuda 0 y beneficio previsto 2,35 M€/mes. Los sucesos, decisiones y explotación explican la diferencia entre caja y premios menos inversión. Este ejemplo confirma acciones distintas y financiación de expansión; no prueba todavía el equilibrio de todas las estrategias a largo plazo. Informe de QA: ../investigacion/jugabilidad/primeros-cinco-contratos-3.6.json.
+
+COMPETENCIA Y RITMO
+Lowgo y Rossa revisan su oferta cada seis meses. Sus respuestas acotadas distinguen precio, capacidad y calidad; bajar tu propia tarifa no hace desaparecer rivales. El precio de los rivales no cambia durante una previsualización de tarifa: se conserva su revisión semestral.
+Jugar un día permite atender incidencias y demanda puntual. Delegar un mes liquida las mismas cuentas, plazos y decisiones para avanzar proyectos sin reproducir cada jornada. A 3×, la jornada inicial de 964 minutos de juego consume aproximadamente 161 segundos de reloj antes de interrupciones; dos horas de reproducción continua avanzarían sólo unos 42 días. Por eso Dirección muestra delegación cuando el servicio está preparado y sólo faltan cierres. Estos cálculos son de ritmo del reloj, no una prueba humana de dos horas de juego.
+
+CAMPAÑA, MODO LIBRE Y GUARDADOS
+- Campaña: 348 meses y cierre en diciembre de 2050; posibles cese e insolvencia conservados. Los cinco capítulos siguen siendo obligatorios para el legado completo.
+- Modo libre: continúa después de 2050, con calendario real, años bisiestos, propuestas, noticias, rivales e imprevistos. Sin capítulos obligatorios ni cese político; la insolvencia sigue siendo posible. Los índices de costes y precios de compra se limitan a los de 2050 para que el postgame no crezca indefinidamente por inflación.
+- Límite técnico de carga en modo libre: 12.000 meses; campaña admite hasta 348. También se conservan los límites de relaciones, flota y obras del formato 4. Continuar después de 2050 no supone que exista contenido histórico nuevo para todos los años posteriores.
+- Se conservan guardados anteriores de formato 4 sin los campos nuevos. Los programas, rachas, planes, mercados y referencias a rutas se validan; se rechazan referencias inexistentes, objetivos imposibles por encima del máximo y progreso situado en el futuro.
+- Continuar o importar respeta la pausa guardada de la guía; Ayuda permite reanudarla expresamente. Si el primer encargo ya caducó, la tarea final explica la propuesta actual con sus costes y plazo reales. Los guardados posteriores al primer turno no recuperan instrucciones de una oferta antigua, y el resumen del menú admite fechas del modo libre posteriores a 2050.
+- Se mantienen 315 situaciones y 63 retratos. La reparación cambia 522 fragmentos por 412 tomas completas y añade las 31 entradas originales descritas arriba. Las cinco situaciones de cada emoción utilizan cinco tipos de conflicto compartidos, con texto y consecuencias por personaje; no son 315 mecánicas diferentes.
+
+VERIFICACIÓN Y LÍMITES
+- node test.mjs: reglas, infraestructura, 315 escenas, guardado, personal, competencia, contratos, inducción, música y calendario.
+- tycoon-contract-test.mjs: tres etapas con acciones reales, ramas pública y comercial, interrupción y recuperación de la racha, bonificación y multa únicas, flota compatible, corredor sin enlace, acuerdo de operación saturado, apertura histórica de Pajares y modo libre posterior a 2050.
+- campaign-test.mjs: campaña legal completa hasta el mes 348, cinco capítulos y red solvente. La revisión económica final terminó con 146 M€ de caja, deuda 0, 115 servicios, 838 circulaciones, 65 ciudades con AVE y puntuación 87.
+- QA de estrategias con guardado/carga cada cuatro meses: los recorridos público, comercial y pasivo produjeron resultados diferentes. La prueba de 380 meses del modo libre detectó y permitió corregir la propuesta de Ferrol sin material disponible. Su resultado previo al ajuste final fue 124 encargos cumplidos y ninguna multa; no equivale a una prueba de escucha o diversión humana.
+- Recorrido público limitado a la Agenda, sobre la revisión económica final: 500 M€ iniciales, 348 meses, 113 encargos cumplidos, ninguna multa, 178 acciones, 38 servicios, caja final 85,55 M€ y deuda 0. No reclamó capítulos ni invirtió en mantenimiento fuera de los requisitos. Su beneficio mensual final fue −22,25 M€: cumplir promesas no sustituye revisar explotación, tarifas y flota. La caja del mes 72 bajó de 1.075,18 a 883,94 M€ tras corregir el premio sin inversión. Informe con fuentes y guardado/carga cada cuatro meses: ../investigacion/jugabilidad/campana-publica-348-meses-500M-3.6.json.
+- Las pruebas del motor no certifican la interfaz HTML generada, la naturalidad de las voces ni diversión humana. Estado de interfaz y de voces: pruebas de navegador, LEEME.txt y tools/VOICE-DIRECTION.md; las incidencias de red del historial siguiente no describen el entorno actual.
+
+HISTORIAL DE VERSIONES
+Los registros siguientes conservan decisiones y resultados de versiones anteriores. Las cifras, limitaciones de red y afirmaciones sobre voces son históricas y no sustituyen el estado actual ni la escucha humana.
+
+REGISTRO HISTÓRICO V3.2
+
+HECHO EN 3.2
+- Portada ilustrada propia con campaña, modo libre, guía, ajustes, continuación y resumen del guardado.
+- Confirmación de sustitución y cancelación que preserva la partida. El modo libre restablece las vistas al iniciar.
+- Turno de nueve etapas en una sola mesa: 18 intervenciones principales (dos por personaje) y 18 consejos opcionales, con objetivos reales y errores explicados.
+- Formación recuperable tras cerrar, pausar, recargar o importar; validación del progreso y comprobación de acciones para avanzar.
+- Una tarea y sus controles; resto de paneles ocultos, formulario sin perder cambios al consultar consejos, parte integrado y móvil.
+- Arreglos renovados de las 14 piezas: melodías conservadas, instrumentación más natural, guitarra/palmas/cajón y música por momento de la jornada; partituras y audio verificados.
+- Pruebas específicas del primer turno, además de reglas y campaña existentes.
+
+HECHO EN 3.0
+- 63 retratos fotográficos generados con IA: nueve identidades y siete expresiones; Charo Tijera, Íñigo diferenciado de Pedro y Benito con parecido sutil.
+- 315 intervenciones jugables con opciones y efectos, en siete estados emocionales y cinco conflictos por personaje.
+- Competencia Lowgo/Rossa por corredores, políticas, investigación encadenada, formación de maquinistas y cancelaciones reales por falta de personal.
+- Grupos de presión, negociación, consecuencias, encargos continuos por capítulo con elección de enfoque, periódico y logros.
+- Modo libre configurable, renovación a 220 km/h y líneas nuevas seleccionando dos ciudades sobre el mapa.
+- Guardado formato 4, validación de gestión y rechazo explícito de partidas antiguas.
+- Pruebas de reglas, campaña y recorrido de interfaz ampliadas; HTML autónomo y web.
+
+BLOQUEOS REGISTRADOS EN 3.2 (HISTÓRICOS; NO ESTADO ACTUAL)
+- Regenerar y escuchar las voces neuronales de los nueve personajes. XTTS y sus dependencias se han instalado, pero faltan los pesos del modelo: su servidor oficial us.aws.cdn.hf.co devuelve CONNECT 403. Configuración y vocabulario sí descargan. Las nueve fuentes políticas candidatas están documentadas, pero su audio en smultimedia.lamoncloa.gob.es también devuelve CONNECT 403. Los permisos necesarios se han guardado en el borrador del entorno. Con acceso al modelo, generar nuevas tomas y hacer escucha humana antes de afirmar calidad más realista o burlesca.
+- El motor conserva los clips existentes y ofrece síntesis del navegador para las frases nuevas. La mejora de mezcla y dirección no sustituye esa regeneración.
+
+No se han cambiado los proyectos Android del repositorio.
+
+HISTORIAL ANTERIOR
+IBERIA FERROVIARIA — PLAN Y ESTADO V2.0
+7 de octubre de 2026.
+
+HECHO EN 2.0
+- Solo alta velocidad: el horario oficial se filtra a AVE, AVLO y Alvia (393 circulaciones en laborable, 91 relaciones) y el catálogo a 9 modelos AVE y Alvia. Fuera Media Distancia, Regionales, Avant, Intercity y el atlas de series.
+- Red de infraestructura nueva (tools/build_infra.py): 90 nodos y 125 tramos trazados sobre OSM con ancho (estándar, ibérico o mixto), electrificación (25 kV, 3 kV o ninguna) y velocidad; 11 cambiadores en 2022; obras históricas en su fecha (Burgos y Plasencia — Badajoz en 2022, Murcia en 2022, Pajares en 2023, catenaria de Extremadura en 2023) y 1.189 km proyectados.
+- Recorridos por producto sobre la red de cada momento (AVE fijo estándar, Alvia eléctrico con cambiadores, Alvia híbrido sin catenaria), con lo que falta explicado tramo a tramo y regla contra desvíos absurdos.
+- Obras de tramo (electrificar, tercer carril, ancho estándar que corta la línea) y cambiadores; mapas «Anchos» y «Electrificación»; fichas de tramo y de nodo; relación nueva entre dos ciudades.
+- Nueve personajes con retrato ilustrado propio y tres expresiones; seis voces nuevas; 22 imprevistos aleatorios con decisión (algunos son apuestas).
+- Diálogos reescritos en tono faltón; fuera los avisos de ficción, los enlaces externos y el texto que sobraba.
+- Interfaz: cinco secciones (Jornada, Red, Trenes, Obras, Despacho) con pestañas cortas; paneles de papel con doble filete dorado, cabeceras esmaltadas con divisoria de vía, ventanas con retrato y placa, tutorial que señala y desplaza hasta cada botón.
+- Equilibrio: los costes suben un 1,2 % al año; una campaña completa jugada por un jugador automático supera los cinco capítulos yendo justa de caja (campaign-test.mjs).
+- Pruebas nuevas: reglas (test.mjs), campaña completa (campaign-test.mjs) e interfaz con capturas (ui-test.mjs).
+
+HECHO EN 1.1
+- Efectos de sonido en todos los botones y clics: 60 efectos de una misma familia (madera, papel, metal, campanas de mano y vibráfono, muestras CC0) asignados a las 73 acciones del juego y al mapa, capas, zoom, línea de tiempo, controles de formulario y atajos de teclado; éxito o error según el resultado de la acción; afinados con la pieza que suena; prioridades para no amontonarse y volumen propio en «Música».
+
+HECHO EN 1.0
+- Banda sonora rehecha con orquesta de verdad: secciones de cuerda (sostenido, spiccato, pizzicato y trémolo) y violín solista con capas piano/forte, maderas, metales, timbales, piano de cola estéreo, Rhodes, saxo, batería multimicrófono y percusión española; 45 instrumentos en tres ficheros de muestras.
+- Motor de audio nuevo: capas dinámicas, sostenidos encadenados, legato, expresión en notas largas, panorama de orquesta, buses por familia con ecualización, sala de concierto y sala pequeña generadas, máster con compresión suave y limitador. Sintetizadores analógicos solo en dos piezas, pregrabados al cargar para no gastar CPU. Render sin conexión unas 10 veces más rápido (programación por tramos).
+- Arreglista nuevo: orquestación por capas según la intensidad de cada parte, cuerdas a cuatro o cinco voces bajo la melodía, contracantos con notas guía, doblajes, maderas en terceras, transiciones con timbal, platillo y arpa, anticipaciones, ritardando final y notas que rozan la melodía omitidas. Melodías intactas (test).
+- Dos piezas españolas nuevas: Despeñaperros (bulería) y Expreso de Andalucía (pasodoble).
+- Mezcla calibrada por pistas en las 14 piezas y versión web con las muestras en ficheros aparte, cargadas al sonar.
+
+HECHO EN 0.9
+- Banda sonora más adulta: tempos un 10–20 % más lentos; fuera marimba, glockenspiel, pandereta, palmas sintéticas, arpegiador y subida de tono; guitarra española, cuerdas, clarinete y trompeta con sordina como voces principales según la sección.
+- Rasgos españoles discretos en cuatro piezas: cadencias andaluza y frigia, falsetas, rasgueados, palmas sordas y una rumba suave. Melodías intactas (test).
+
+HECHO EN 0.8
+- Banda sonora con instrumentos reales muestreados (piano de cola, cuerdas, arpa, maderas, láminas, guitarra, contrabajo y percusión acústica) y arreglos más ricos: conducción de voces, segunda voz, respuestas, redobles y subida de tono final. Melodías intactas (comprobado por test).
+- Voces recomprimidas a 40 kbps para dejar sitio al banco de muestras.
+
+HECHO EN 0.7
+- Voces definitivas: XTTS-v2 con una grabación real de España y voces castellanas verificadas con un medidor de acento; cada toma comprobada.
+
+HECHO EN 0.6
+- Voces pregrabadas para los 32 diálogos con cortinillas, subtítulos resaltados y música atenuada; respaldo con la voz del sistema.
+- Diálogos de capítulos, decisiones y tutorial reescritos con ironía y expresiones castizas.
+
+HECHO EN 0.5
+- Modelos 3D de los trenes (three.js): 15 familias (Talgo pato, Velaro, AVRIL, Pendolino, Alvia 120, TGV, MD 449/480, 599, TRD, Camello, ancho métrico, locomotora…) con miniaturas y visor giratorio.
+- Fuera el material de Cercanías del catálogo y de los pedidos históricos.
+- Banda sonora original de 12 piezas generada con Web Audio, reproductor y cambio automático según el momento del juego.
+
+HECHO EN 0.4
+- Sin Cercanías ni Rodalies: el juego se centra en AV/LD/MD (217 relaciones).
+- Interacción por ciudades: menú visual con ilustración, conexiones con +/−, estación mejorable y salidas.
+- Peticiones de ciudades con plazo y recompensa; momentos del día ⚡; cambios de servicio en plena jornada.
+- Viajeros e ingresos visibles al llegar cada tren; contadores de «Hoy»; trenes llenos en el mapa.
+- Tutorial guiado de 15 pasos.
+- Campaña desde el lunes 3 de enero de 2022; economía más ajustada.
+
+HECHO EN 0.3
+1. Horario oficial completo integrado: GTFS Renfe de Cercanías/Rodalies y AV/LD/MD, tres días tipo, todas las líneas, números de tren, paradas y autobuses por obras. Pipeline reproducible (tools/build_timetable.py).
+2. Trazados realistas: 2.740 tramos entre paradas, 369 con shapes GTFS y 2.048 calculados sobre OSM; sin rectas entre ciudades salvo 201 tramos sin continuidad (marcados) y 122 recorridos por carretera.
+3. Jornadas por turnos: de la primera salida a la última llegada con trenes reales; incidencias con decisiones; parte del día.
+4. Luz solar calculada por fecha, hora oficial y longitud; luces urbanas y faros.
+5. Zoom hasta nivel de estación; fichas de tren, estación (panel de salidas), línea (histograma de salidas, oferta sobre el horario oficial) y obra (fases y frente sobre el trazado).
+6. Interfaz nueva: mapa a pantalla completa, paneles planos sin cajas anidadas, tipografías Fraunces/Figtree/IBM Plex Mono, ilustraciones de trenes, relieve y ríos, modo noche y móvil.
+7. 288 relaciones jugables (56 corredores + 72 líneas de Cercanías + relaciones AV/LD/MD del horario). Unidades necesarias según el pico simultáneo del horario. Economía reequilibrada por tren-km, canon y obligación de servicio público.
+8. Partidas v0.2 importables.
+
+SIGUIENTES PASOS PROPUESTOS
+- Velocidades por tramo según obra (renovación de vía a 220 km/h, variantes) y limitaciones temporales de velocidad.
+- Cambiadores de ancho con capacidad y averías propias por modelo (Talgo, CAF BRAVA), y conversión del Corredor Mediterráneo por fases reales.
+- Voces: grabar referencias con actores reales de España (10–15 s por personaje, con permiso) para clonar timbre e interpretación más burlescos.
+- Modelos 3D modelados a mano (glTF) por serie, con interiores, para sustituir la reconstrucción procedural.
+- Banda sonora: escucha humana y ajuste fino de la mezcla pieza a pieza; castañuelas grabadas de verdad si aparece una biblioteca libre.
+- Horarios históricos: reconstruir 2022–2026 con versiones archivadas del GTFS (el archivo público conserva copias diarias desde marzo de 2026; harían falta otras fuentes para 2022).
+- Asignación de material por circulación y rotaciones (diagramas de turnos) con depósitos reales.
+- Demanda por estación con datos públicos de viajeros (Renfe Data, Consorcios) en lugar de parámetros por línea.
+- Festivos autonómicos y locales; horarios de verano y Navidad.
+- Competidores ferroviarios (iryo, Ouigo) con sus horarios y efecto en la cuota por corredor.

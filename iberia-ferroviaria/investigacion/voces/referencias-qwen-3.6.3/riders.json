@@ -1,0 +1,69 @@
+{
+  "person_candidate": "riders",
+  "speaker": "Elma Saiz",
+  "ref_audio": "./riders.wav",
+  "ref_text": "Es un gran placer comparecer ante todos ustedes y poder explicar dos hitos tan importantes para nuestro país y para nuestro tejido productivo.",
+  "sha256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf",
+  "duration_seconds": 8.680000000000001,
+  "sample_rate": 24000,
+  "channels": 1,
+  "sample_format": "PCM16",
+  "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/270525-rueda-de-prensa-ministros.aspx",
+  "master_url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250527-Rueda_Prensa_CMIN.smil/playlist.m3u8",
+  "date_declared_by_source": "2025-05-27",
+  "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/Paginas/2025/20250527-transcripcion-rdp-consejo-ministros.aspx",
+  "source_interval_seconds": [
+    712.26,
+    720.94
+  ],
+  "source_frame_interval_seconds": 713.26,
+  "crop_chain": {
+    "parent_wav_sha256": "8391afd71da77c51141bbc52113eaf0ea648ace6cfc213d895daadad7478e6a5",
+    "parent_source_interval_seconds": [
+      700,
+      730
+    ],
+    "trim_seconds_relative_to_parent": 12.26,
+    "duration_seconds": 8.680000000000001
+  },
+  "published_variant": {
+    "name": "1080p",
+    "declared_bandwidth": 4400000,
+    "source": "Official master playlist"
+  },
+  "speaker_verified": true,
+  "human_listening": false,
+  "processing": "Continuous PCM frame crop only; no EQ, pitch, tempo, denoising or synthetic replacement.",
+  "status": "Closed alternative-casting reference candidate for a long audition; not selected as the active production reference. No human listening or perceptual approval.",
+  "asr": {
+    "model_repository": "openai/whisper-base",
+    "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "recognized": "Es un gran placer comparecer ante todos ustedes y poder explicar dos sitos tan importantes para nuestro país y para nuestro tejido productivo.",
+    "normalized_equal": false,
+    "expected_normalized": "es un gran placer comparecer ante todos ustedes y poder explicar dos hitos tan importantes para nuestro pais y para nuestro tejido productivo",
+    "recognized_normalized": "es un gran placer comparecer ante todos ustedes y poder explicar dos sitos tan importantes para nuestro pais y para nuestro tejido productivo",
+    "differences": [
+      {
+        "kind": "replace",
+        "expected": "hitos",
+        "recognized": "sitos",
+        "expected_range": [
+          12,
+          13
+        ],
+        "recognized_range": [
+          12,
+          13
+        ]
+      }
+    ],
+    "repetition_notices": [],
+    "review_prompts": [
+      "ASR differs from the script; this may be a recognition error."
+    ]
+  },
+  "speaker_verification_method": "Official named Elma Saiz turn, matching full passage and continuous female podium/table segment after the handoff. No biometric identification or human listening.",
+  "boundary_note": "BASE word-time estimates guided the crop; independent BASE recognizes all words with one hitos/sitos substitution. No phonetic-boundary certification.",
+  "source_frame_capture_sha256": "2b37fb245fb314c82e2e894184a8d7675ef52c9912ba801eabc28d34bc4e934d",
+  "source_frame_capture_note": "Reviewed public source/crop frame retained in the external source cache; voice generation requires only this WAV and JSON."
+}

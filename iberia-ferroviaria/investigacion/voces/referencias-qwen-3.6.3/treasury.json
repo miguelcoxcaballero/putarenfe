@@ -1,0 +1,90 @@
+{
+  "speaker_candidate": "María Jesús Montero",
+  "source_page": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Paginas/2025/020925-rueda-de-prensa-ministros.aspx",
+  "date_declared_by_source": "2025-09-02",
+  "master_url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250902-CMIN.smil/playlist.m3u8",
+  "source_interval_seconds": [
+    473.84,
+    481.38
+  ],
+  "segments": [
+    {
+      "url": "https://smultimedia.lamoncloa.gob.es/presidencia/smil/videos/smil:25/20250902-CMIN.smil/media_w605463968_b4400000_t64MTA4MHA=_44.ts",
+      "start": 472.64,
+      "duration": 10.0,
+      "bytes": 5042160,
+      "sha256": "ddbe817eee4299a2af292d972680d8860094e9eee333a4e2ae4af1273556eb8b"
+    }
+  ],
+  "duration_seconds": 7.540041666666666,
+  "channels": 1,
+  "sample_rate": 24000,
+  "sha256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188",
+  "rms_dbfs": -26.83879389182826,
+  "peak_dbfs": -7.822827646881319,
+  "speaker_verified": true,
+  "human_listening": false,
+  "processing": "Decode/downmix/resample only; no pitch/tempo/EQ/denoising changes.",
+  "access": "Inherited proxy and normal TLS certificate verification.",
+  "person_candidate": "treasury",
+  "speaker": "María Jesús Montero",
+  "ref_audio": "./treasury.wav",
+  "ref_text": "Nunca antes las comunidades habían tenido tantos recursos como con los gobiernos de Pedro Sánchez.",
+  "transcript_url": "https://www.lamoncloa.gob.es/consejodeministros/ruedas/Paginas/2025/20250902-transcripcion-rdp-consejo-ministros.aspx",
+  "caption_url": "https://www.lamoncloa.gob.es/multimedia/videos/consejoministros/Documents/2025/20250902-CMIN.vtt",
+  "official_caption_intervals": [
+    {
+      "start": 473.96,
+      "end": 478.68,
+      "text": "Nunca antes las comunidades habían tenido tantos recursos"
+    },
+    {
+      "start": 478.76,
+      "end": 481.32,
+      "text": "como con los gobiernos de Pedro Sánchez."
+    }
+  ],
+  "published_variant": {
+    "name": "1080p",
+    "declared_bandwidth": 4400000,
+    "source": "Official master EXT-X-STREAM-INF"
+  },
+  "source_frame_interval_seconds": 474.84,
+  "source_frame_sha256": "f14e5d6bc36037700f4b224aab596aaad80f90f8f8afe41e5d34d202c0ca8a2f",
+  "speaker_verification_method": "Official named María Jesús Montero turn, matching full caption passage and continuous female podium segment. No biometric identification.",
+  "asr": {
+    "person": "treasury",
+    "ref_text": "Nunca antes las comunidades habían tenido tantos recursos como con los gobiernos de Pedro Sánchez.",
+    "recognized": "Nunca antes, las comunidades habían tenido tanto recurso como con los gobiernos de Pedro Sánchez.",
+    "audio_sha256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188",
+    "model_repository": "openai/whisper-base",
+    "model_revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "human_listening": false,
+    "normalized_equal": false,
+    "expected_normalized": "nunca antes las comunidades habian tenido tantos recursos como con los gobiernos de pedro sanchez",
+    "recognized_normalized": "nunca antes las comunidades habian tenido tanto recurso como con los gobiernos de pedro sanchez",
+    "differences": [
+      {
+        "kind": "replace",
+        "expected": "tantos recursos",
+        "recognized": "tanto recurso",
+        "expected_range": [
+          6,
+          8
+        ],
+        "recognized_range": [
+          6,
+          8
+        ]
+      }
+    ],
+    "repetition_notices": [],
+    "review_prompts": [
+      "ASR differs from the script; this may be a recognition error."
+    ]
+  },
+  "boundary_note": "Independent BASE covers the full sentence and final words, with tantos recursos→tanto recurso preserved as an unresolved difference. No phonetic boundary, accent or timbral fidelity certification.",
+  "status": "Closed alternative-casting reference candidate for a long audition; not selected as the active production reference. No human listening or perceptual approval.",
+  "source_frame_capture_sha256": "f14e5d6bc36037700f4b224aab596aaad80f90f8f8afe41e5d34d202c0ca8a2f",
+  "source_frame_capture_note": "Reviewed public source/crop frame retained in the external source cache; voice generation requires only this WAV and JSON."
+}
