@@ -7,6 +7,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {refreshGameSource} from './extract-game-source.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = new Map();
@@ -127,9 +128,14 @@ if (gameInput) {
     modelFingerprint:manifest.model.fingerprint,labels},null,2)+'\n');
 }
 
+const editableProject=path.resolve(args.get('project')||path.join(root,'proyecto'));
+if(args.has('project'))assert(fs.existsSync(editableProject),'the explicitly selected editable project exists');
+if(fs.existsSync(editableProject))await refreshGameSource({project:editableProject,source});
 const sourceRelease=JSON.parse(read(path.join(source,'source-release.json')));
 const manifestPath=path.resolve(args.get('manifest') || path.join(source,'manifest-source.json'));
 const manifestBytes=fs.readFileSync(manifestPath),manifest=JSON.parse(manifestBytes);
+if(!args.has('manifest'))assert.equal(sha(manifestBytes),sourceRelease.currentManifestSHA256||sourceRelease.manifestSourceSHA256,
+  'default rebuild uses the last accepted frozen manifest');
 const catalogue=JSON.parse(read(path.join(source,'dialogue-catalogue.json')));
 const canonicalBytes=fs.readFileSync(path.join(source,'canonical-catalogue.json'));
 const canonical=JSON.parse(canonicalBytes),canonicalRows=new Map(canonical.map(row=>[row.id,row]));
@@ -214,8 +220,25 @@ const release={schema:1,version:'3.6.3',status:partial?'partial-preview':'comple
   listening:{url:'dialogos.html',bytes:Buffer.byteLength(listeningHTML),sha256:sha(listeningHTML)},
   assets,recordings,validation:{physicalMP3Hashes:true,pairedFrozenHTMLHashes:true,registeredEOS:true,
     javascriptSyntax:true,relativeURLs:true,browserTested:false,humanListening:false}};
-write('release.json',JSON.stringify(release,null,2)+'\n');
+// Keep the previous published URLs through a rollout. Rebuilding the same web
+// release must keep that previous set too, rather than immediately deleting it.
 const keep=new Set([...assets.map(row=>row.url),...recordings.map(row=>row.url)]);
+const samePublishedContent=priorRelease?.game?.sha256===release.game.sha256
+  && priorRelease?.listening?.sha256===release.listening.sha256;
+const previousAssets=priorRelease?[...(priorRelease.assets||[]),...(priorRelease.recordings||[]),
+  ...(samePublishedContent?(priorRelease.retainedAssets||[]):[])]:[];
+const retainedAssets=[];
+for(const row of previousAssets){
+  if(keep.has(row.url))continue;
+  assert(row.url.startsWith('assets/')&&!row.url.split('/').includes('..'),'previous asset remains within publication');
+  const file=path.join(output,row.url);
+  assert(!fs.lstatSync(file).isSymbolicLink(),'previous published asset is a physical file');
+  const bytes=fs.readFileSync(file);
+  assert.equal(sha(bytes),row.sha256,'previous published asset hash');
+  retainedAssets.push({url:row.url,bytes:bytes.length,sha256:row.sha256});keep.add(row.url);
+}
+if(retainedAssets.length)release.retainedAssets=retainedAssets;
+write('release.json',JSON.stringify(release,null,2)+'\n');
 function cleanAssets(dir){
   if(!fs.existsSync(dir))return;
   for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
@@ -225,7 +248,15 @@ function cleanAssets(dir){
   }
 }
 cleanAssets(path.join(output,'assets'));
-for(const row of [...assets,...recordings])assert(row.bytes<100*1024*1024,'every asset fits GitHub file limit');
+for(const row of [...assets,...recordings,...retainedAssets])assert(row.bytes<100*1024*1024,'every asset fits GitHub file limit');
+// Accept an external manifest only after the whole publication succeeds. The
+// next default rebuild follows it while keeping the original HTML provenance.
+if(args.has('manifest')){
+  fs.writeFileSync(path.join(source,'manifest-source.json'),manifestBytes);
+  sourceRelease.currentManifestSHA256=sha(manifestBytes);
+  sourceRelease.currentWholeDialogues=available;
+  fs.writeFileSync(path.join(source,'source-release.json'),JSON.stringify(sourceRelease,null,2)+'\n');
+}
 console.log(JSON.stringify({output,status:release.status,availableWholeDialogues:available,pacoWholeDialogues:pacoCount,
   bytes:[...assets,...recordings].reduce((sum,row)=>sum+row.bytes,0)+release.game.bytes+release.listening.bytes,
   releaseSHA256:sha(fs.readFileSync(path.join(output,'release.json'))),gameSHA256:release.game.sha256,

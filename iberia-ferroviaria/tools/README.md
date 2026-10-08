@@ -6,13 +6,15 @@ Desde la carpeta `iberia-ferroviaria`, reconstruir la versión ya guardada sin l
 node tools/build-web.mjs
 ```
 
+El constructor lee los módulos, estilos y recursos editables de `proyecto/dist`. También puedes ejecutar `npm run web:build` desde `proyecto`. Si cambias un diálogo, el constructor se detiene hasta que exista una nueva grabación completa validada; los cambios de interfaz y estilos se reflejan al reconstruir.
+
 Incorporar una nueva captura física del mismo catálogo y reparto:
 
 ```sh
 node tools/build-web.mjs --manifest /ruta/captura/manifest.json --audio-stage /ruta/captura
 ```
 
-El script comprueba el catálogo pronunciado, el modelo, las nueve referencias, el texto completo, EOS y el SHA de cada MP3 antes de publicar el mapa compartido. Los archivos llevan el hash en el nombre para que una actualización no reutilice audio de la caché anterior. Las plantillas y los recursos de `web-source/` permiten reconstruir la web sin un archivo HTML de más de 100 MiB. No contienen las tomas antiguas, modelos ni audio RAW.
+El script comprueba el catálogo pronunciado, el modelo, las nueve referencias, el texto completo, EOS y el SHA de cada MP3 antes de publicar el mapa compartido. Un manifiesto aceptado queda guardado para las siguientes reconstrucciones. Los archivos llevan el hash en el nombre para que una actualización no reutilice audio de la caché anterior; conserva también los archivos de la versión anterior durante la actualización. Las plantillas y los recursos de `web-source/` permiten reconstruir la web sin un archivo HTML de más de 100 MiB. No contienen las tomas antiguas, modelos ni audio RAW.
 
 Para crear las plantillas desde otra pareja de HTML congelados y verificados:
 

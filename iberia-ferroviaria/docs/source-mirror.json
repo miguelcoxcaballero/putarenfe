@@ -471,8 +471,9 @@
     },
     {
       "file": "proyecto/package.json",
-      "sha256": "8bdecfa8ebff5a97f8acd1410bdac913acffabe19c6756895215e14ba69251df",
-      "bytes": 913
+      "sha256": "30df56d9cc36b23c841bf89a0c27aea153187f03e7480af1935a8bf60f62f06c",
+      "bytes": 961,
+      "adaptation": "add web:build for the reproducible Pages builder"
     },
     {
       "file": "proyecto/test.mjs",

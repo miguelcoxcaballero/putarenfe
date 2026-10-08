@@ -55,5 +55,237 @@
         "token": "__WEB_LISTENING_STYLE_0__"
       }
     ]
-  }
+  },
+  "editableProjectSources": [
+    {
+      "file": "assets/geography.js",
+      "bytes": 130942,
+      "sha256": "eb1920e798886db9a960c8099c4e02b10f618584d494a7802415901a35f2a0f6"
+    },
+    {
+      "file": "assets/railways.js",
+      "bytes": 2544025,
+      "sha256": "8e8c40e6339558a8434855adaa427ab381a25aef8ad12d471cdb5b9e8d5bb3ea"
+    },
+    {
+      "file": "assets/timetable.js",
+      "bytes": 208461,
+      "sha256": "b1b63a9788ed884a47b4cebc7f597c67cf2ed384cc516d6eb3123139ef31bf2b"
+    },
+    {
+      "file": "assets/infra.js",
+      "bytes": 72158,
+      "sha256": "6fcc3aa6d6cc6ac3fa4cd99e1b12ba263e8f8e7a54d62db1fdc1a3d60aa01422"
+    },
+    {
+      "file": "data.js",
+      "bytes": 11754,
+      "sha256": "e445b24c1783a6fa08b0b557cd27c7610020b5c8cd330bd7bb1b413fd72b9348"
+    },
+    {
+      "file": "story.js",
+      "bytes": 24270,
+      "sha256": "595fe9f5ae1ce7432bc959c11c142eed3f14acf0e6515ebc9855feecedf55068"
+    },
+    {
+      "file": "schedule.js",
+      "bytes": 9502,
+      "sha256": "58659504e8ec2af16b8f425d392a6c03b6f25c7effead87b2eb0cba9b38a7b6e"
+    },
+    {
+      "file": "infra.js",
+      "bytes": 14418,
+      "sha256": "19edfebfd3ab88e8a6ffa9dc8e0413f2a5236ace2b127f4cc6970362928b9209"
+    },
+    {
+      "file": "network.js",
+      "bytes": 3581,
+      "sha256": "18dadebd60e023eb78e6ac9e742ff01b51152294058bee9d159e4d26d3f63fd8"
+    },
+    {
+      "file": "induction.js",
+      "bytes": 22625,
+      "sha256": "3f79864a30882b8da0e1aa9e62b76e3eafb7d19b4615a9b57eccc86354e5f8fd"
+    },
+    {
+      "file": "induction-runtime.js",
+      "bytes": 7436,
+      "sha256": "d26de38f1cd2454ba1f9c3a8ac0448ad4eaa43397407b987454d40fb85789682"
+    },
+    {
+      "file": "encounters.js",
+      "bytes": 9953,
+      "sha256": "f7c847d3e85e39ebc48bd52684b0cc79ce18f1c3a34eb661432a607255c9f349"
+    },
+    {
+      "file": "tycoon.js",
+      "bytes": 30403,
+      "sha256": "a7fb9a88c4e2ae19324b57afc31316e70ef60f1b08eaabef6570346a68791232"
+    },
+    {
+      "file": "engine.js",
+      "bytes": 37003,
+      "sha256": "684098960730780117a8117a67f87ace5ab5ef48b8d61830ba85e4631b92fb3f"
+    },
+    {
+      "file": "operations.js",
+      "bytes": 18971,
+      "sha256": "94f312b4bea88f28780ba638d872cda8ddb31b58f99fb619675d3bcf682e0c8a"
+    },
+    {
+      "file": "map-v3.js",
+      "bytes": 51764,
+      "sha256": "4499fec9aa975853f471490f6979557fb0c519486819e94e97794181ce67e4f6"
+    },
+    {
+      "file": "train-art.js",
+      "bytes": 16830,
+      "sha256": "4d95bd12aed240daada2e7bd9a76b6c0819c82c7f0b89005512d77184ccea0be"
+    },
+    {
+      "file": "train3d.js",
+      "bytes": 25927,
+      "sha256": "8718de1d8841b8113573de467a0dbf1e7100f38f19a75b028a9fa8413936f14a"
+    },
+    {
+      "file": "city-art.js",
+      "bytes": 12755,
+      "sha256": "885055062c2bede652a55bdc9e0f613e687aba2406b1ba487fbaab72f79be49f"
+    },
+    {
+      "file": "assets/samples-index.js",
+      "bytes": 1526,
+      "sha256": "efbac14532aade475151e87936f0877eeb5a71b918a31b93f406e7386e53fe4c"
+    },
+    {
+      "file": "music.js",
+      "bytes": 94272,
+      "sha256": "0ee3ec252d7cae0faf1091c18c59334f3c4ffab5adf4e67432864b8731b7ad0c"
+    },
+    {
+      "file": "voice.js",
+      "bytes": 13355,
+      "sha256": "19c82f1ef5c94b99e4a71095c2526575f0363bb858340608d5a650d575829ab5"
+    },
+    {
+      "file": "dialogue-presentation.js",
+      "bytes": 2109,
+      "sha256": "f7b57b5cb2293eb7ccb18a792d65deb62a48a90efbd25e9854f602db198919d3"
+    },
+    {
+      "file": "sfx.js",
+      "bytes": 28095,
+      "sha256": "e97406fc9281ca7c8641b3d52b6435777d55121b990ddaffe959a7d897451bf1"
+    },
+    {
+      "file": "assets/portraits.js",
+      "bytes": 7687359,
+      "sha256": "7604a024ccc21cfc1de6a743d6e068a3d7b87cf12799819490ade8c53ca370e6"
+    },
+    {
+      "file": "faces.js",
+      "bytes": 28500,
+      "sha256": "93195dab3c70d9c7f23f4a9e656afea676834521922892628bb06cb0e3ff8ffb"
+    },
+    {
+      "file": "tycoon-ui.js",
+      "bytes": 21057,
+      "sha256": "e8f74c858790fd391d82739558ba0b335d7dde486f87a1bc69d8913a46d646de"
+    },
+    {
+      "file": "main-menu.js",
+      "bytes": 6071,
+      "sha256": "3a32075e68209cae3f13389c44e49c4def97d60bcf1d84016b1890424b4765d4"
+    },
+    {
+      "file": "induction-task-ui.js",
+      "bytes": 15798,
+      "sha256": "6b8b81c93c5fc90726b2ce4344cc1f2cbbb58412ad830c84796e4f0d2ff030d7"
+    },
+    {
+      "file": "app.js",
+      "bytes": 151092,
+      "sha256": "02f8965517a72e954469d092b37a60b7d861cb34af1cad16508cc70502de5fc0"
+    },
+    {
+      "file": "style-v3.css",
+      "bytes": 61657,
+      "sha256": "e6bd4f3d45d23793127a1402bb53d1c1b6ac5bd26634f8857540b69028900ced"
+    },
+    {
+      "file": "main-menu.css",
+      "bytes": 12037,
+      "sha256": "da1d7ee65c3c94979b0c1732821f09574e587934656186b143cbd366d5dee6ae"
+    },
+    {
+      "file": "induction.css",
+      "bytes": 7044,
+      "sha256": "4aaaace7c0c68b477d35e16adbfda988d71b8051a09c5e2b1afd10047f37ab7c"
+    },
+    {
+      "file": "assets/fonts/fraunces.woff2",
+      "bytes": 67304,
+      "sha256": "7234ed860a9cc83045413c4faee63c960a8f2d1917adcf728119307d56e0d783"
+    },
+    {
+      "file": "assets/fonts/figtree.woff2",
+      "bytes": 20156,
+      "sha256": "4ba7d3d096695818fe0686be4f1e82c6b05134e18a22260336130335027462dd"
+    },
+    {
+      "file": "assets/fonts/plexmono.woff2",
+      "bytes": 14888,
+      "sha256": "01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22"
+    },
+    {
+      "file": "assets/rail-art.jpg",
+      "bytes": 423971,
+      "sha256": "f4c798855d3aae3a7c71d2fcde5087e2251bce275234a5bfe6010c836717a7b4"
+    },
+    {
+      "file": "assets/menu-amanecer.jpg",
+      "bytes": 458003,
+      "sha256": "a5f08b2676adfcdad44f973c5004fa932753d25e9b34181c66be638dad73aceb"
+    },
+    {
+      "file": "assets/menu-amanecer.jpg",
+      "bytes": 458003,
+      "sha256": "a5f08b2676adfcdad44f973c5004fa932753d25e9b34181c66be638dad73aceb"
+    },
+    {
+      "file": "assets/muestras-ui.js",
+      "bytes": 455233,
+      "sha256": "71d400cecb3450a9fb12a42409b2e0b2273aec586bfc33fc7d8d172ad910eaf0"
+    },
+    {
+      "file": "assets/muestras-orquesta.js",
+      "bytes": 10101747,
+      "sha256": "397fff6465d2f6ee73712e95f09a7fa8299387be3ac7fa8070997a9e6b45a57f"
+    },
+    {
+      "file": "assets/muestras-teclas.js",
+      "bytes": 4246756,
+      "sha256": "5601f8b783fe70e33b31590a7e8de02fcdbd7be1de4f20a5a033b1f47e1eab2f"
+    },
+    {
+      "file": "assets/muestras-percusion.js",
+      "bytes": 590644,
+      "sha256": "9719b93313905010404c634e1e0acf18dbbe4fc94d6d83c74dae19a51382eb02"
+    },
+    {
+      "file": "assets/three.min.js",
+      "bytes": 668024,
+      "sha256": "7b1c5d75b28d9de15042e2b374f83566d8c7146697af8fdeb4558b0fb528a585"
+    },
+    {
+      "file": "index.html",
+      "bytes": 2772,
+      "sha256": "98fc9c8500374a262e17947bf83e2b01ce1f6c7de97a0e0a67856144e8f283da"
+    },
+    {
+      "file": "LICENSE-GEODATA.txt",
+      "bytes": 35555,
+      "sha256": "0074204b2c84d6bc968a4e13eddc211bc3c8988701aaf0334e167f4311106799"
+    }
+  ]
 }
