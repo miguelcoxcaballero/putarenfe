@@ -1,0 +1,375 @@
+{
+  "schema": 1,
+  "status": "CURRENT412_NATIVE_ACCEPTED_PUBLIC_HTTPS_PENDING",
+  "version": "3.6.3",
+  "releaseScope": "current C6 complete 412, latest ownfolder source and final paired pages",
+  "ROOTReviewAndAdoptionPending": false,
+  "publication": {
+    "status": "pending",
+    "commit": null,
+    "cacheBuster": null,
+    "publishedAt": null,
+    "base": "https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/",
+    "HTTPSProof": {
+      "path": null,
+      "sha256": null,
+      "status": null,
+      "actualVerifiedRouteCount": null,
+      "initialFailureRetained": null,
+      "targetedRetries": null
+    }
+  },
+  "catalogue": {
+    "wholeBodies": 412,
+    "recordedWholeBodies": 412,
+    "pendingWholeBodies": 0,
+    "characters": 9,
+    "tutorialWholeBodies": 50,
+    "pacoWholeBodies": 47,
+    "durationSeconds": 4097.976,
+    "durationRounded": "68m18s",
+    "playableSituationInterventions": 315,
+    "emotionsPerCharacter": 7,
+    "situationsPerEmotion": 5,
+    "situationCountsDoNotMeanDistinctMechanics": true,
+    "campaignChapters": 5,
+    "campaignYears": [
+      2022,
+      2050
+    ],
+    "generatedTrainPhotos": 25,
+    "manufacturerLogos": 6,
+    "originalMelodies": 14,
+    "preservedScoreNotes": 2285
+  },
+  "playbackContract": {
+    "sameWholeRecordingsOnGameAndListeningPages": true,
+    "sentenceClips": 0,
+    "systemVoiceFallback": false,
+    "originalPlaybackRate": 1,
+    "detune": 0,
+    "fullProductBrowserAcceptancePending": false
+  },
+  "sourcePins": {
+    "manifest": {
+      "path": "/workspace/onboarding/spoken-brand-final-c6-stage/manifest.json",
+      "sha256": "c88ba4b445d5d474060035fc7453c76b495dc42854d6d889a72733bdbca49cac"
+    },
+    "catalogue": {
+      "path": "/workspace/onboarding/spoken-brand-final-c6-prepared/dialogos-c6.json",
+      "sha256": "6348984c61499234ecf0965f976591250f106948968b600bc4325c514884098f"
+    },
+    "referencePack": {
+      "path": "/workspace/putarenfe/iberia-ferroviaria/investigacion/voces/referencias-qwen-3.6.3/prompts.json",
+      "sha256": "46ba5d81fc8a6f657f5f1cdab3951a39956bfd86a7fcc0798006ea8fa9c470bd"
+    },
+    "physical412": {
+      "path": "/tmp/onboarding/final-release-runtime-001/full412-physical-accepted.json",
+      "sha256": "8dd23e3e7e0aff58b287e76ab0fd789cdeafa9212d7ca812665ddcde21bffd62"
+    },
+    "ROOTSemanticDecision": {
+      "path": "/tmp/onboarding/final-release-runtime-001/ROOT-semantic-accepted.json",
+      "sha256": "1bd917b7d8eee3175f8c7403d03898e91eab2314ef97db0ebff6635380a0f154"
+    },
+    "ROOTNativeAuthority": {
+      "path": "/tmp/onboarding/final-release-runtime-001/ROOT-native-authority.json",
+      "sha256": "ed94d77dae1b7a5d73dd5eeaf1c0851ed83138d555dbd4ff9d7c872fccc4b1dc"
+    },
+    "ROOTCurrentASR": {
+      "path": "/tmp/onboarding/final-release-runtime-001/ROOT-current-ASR-accepted.json",
+      "sha256": "da5ace67d43725eb65b9816d7ae13008dd23c7f09a97e54764ee502119cc4c7f"
+    },
+    "strictPublication": {
+      "path": "/workspace/onboarding/spoken-brand-final-c6-stage/publication.json",
+      "sha256": "3396cedda83ba70dd2fd911152c9f02d8c2b21745c98636aaf4058f252d8a701"
+    },
+    "strictDialogueAsset": {
+      "path": "/workspace/onboarding/spoken-brand-final-c6-prepared/future-DIALOGUES.js",
+      "sha256": "3f433cc80efc8f3f2e8e0cc95ee39eb72289adf18ae6697314d8e66043da27b6"
+    },
+    "materialization": {
+      "path": "/tmp/onboarding/final-native-materialization/final412-001/materialization-proof.json",
+      "sha256": "fd700afa112a69dd5ed23eeff6217de7e76a7df6c830115d0683c8671094b14b"
+    },
+    "latestSourceInventory": {
+      "path": "/tmp/onboarding/final-release-runtime-001/latest-mirror-inventory-after-sfx.json",
+      "sha256": "3478432775bf99abff141ce1b36056d4f95f818d4dda62ada3dc8a39b336a7c0"
+    },
+    "listeningProvenance": {
+      "path": "/tmp/onboarding/final-native-materialization/final412-001/investigacion/voces/auditorio-dialogos-3.6.3/latest.json",
+      "sha256": "7db5f61cc086755237b2b6691889727ac42738557d1d771e8200361d1f2a354a"
+    }
+  },
+  "producerProvenance": {
+    "originalTTS": {
+      "actualOwnedWaitExitCode": null,
+      "exitCodeUnknown": true,
+      "acceptedCompletionContract": "orphan observed closed with independent current physical and semantic validation",
+      "equivalentToOwnedWaitZero": false,
+      "observedCompletion": {
+        "path": "/tmp/onboarding/final-release-runtime-001/ROOT-orphan-completion-accepted.json",
+        "sha256": "ee21f5beba7c344f6f7fb6e5f0a1657a56c4190ad88e7823dbd2ac8bda8f4d91"
+      }
+    },
+    "BASE": {
+      "actualOwnedWaitExitCode": 0,
+      "currentTranscriptRows": 412,
+      "report": {
+        "path": "/workspace/onboarding/spoken-brand-final-c6-stage/transcript-qa-base.json",
+        "sha256": "c6a14b4bad4424302d3729ed13c31084cc83a5fea5139d8bea0260ffc9df5155"
+      },
+      "closure": {
+        "path": "/workspace/onboarding/spoken-brand-final-c6-asr-prepared/run-C6-001/closure.json",
+        "sha256": "44dbd38808ec1f7effdd8d5fd8b01a45e5ece65db7c7fcea34d8dad195f16002"
+      }
+    },
+    "SMALL": {
+      "actualOwnedWaitExitCode": 0,
+      "selectedFullBodiesAndDistinctTerminalWindows": 6,
+      "report": {
+        "path": "/workspace/onboarding/C6-SMALL-counterevidence-execution-001/SMALL-report.json",
+        "sha256": "629f68f16afa2cefb843b739289d9dcb0f0c4b5073f0b173bc45763dd59f8208"
+      },
+      "closure": {
+        "path": "/workspace/onboarding/C6-SMALL-counterevidence-execution-001/closure.json",
+        "sha256": "b3fdb786ad5a9baaa69a85626b8634626b1cc463eba34c9df9f9298b604b754b"
+      }
+    },
+    "physicalRAWChecks": 412,
+    "physicalMP3Decodes": 412,
+    "reusedWholeBodies": 340,
+    "newWholeBodies": 72,
+    "ASRDiscrepanciesRetained": true,
+    "humanListening": false,
+    "wordForWordSpeechCertified": false,
+    "voiceLikenessAccentSarcasmOrNaturalnessCertified": false
+  },
+  "materializedProducts": {
+    "buildOwnedChildWaitExitCodes": [
+      0,
+      0
+    ],
+    "game": {
+      "path": "/tmp/onboarding/final-native-materialization/final412-001/outputs/Iberia-Ferroviaria.html",
+      "sha256": "c5242b9ea9b1fd1dd86d7b080af4bc043deb7e34d2af363d74bce73a1ce8cca8",
+      "bytes": 149010698,
+      "outsideGit": true
+    },
+    "listening": {
+      "path": "/tmp/onboarding/final-native-materialization/final412-001/outputs/Iberia-Ferroviaria-dialogos-nuevos.html",
+      "sha256": "d22e77e90392718c1212b386c57fc65b4192675ca04a16b7703e4f7cc7178126",
+      "bytes": 109858234,
+      "outsideGit": true
+    }
+  },
+  "webRelease": {
+    "release": {
+      "path": "/workspace/onboarding/final412-web-stage-001/release.json",
+      "sha256": "37446ca2d267dc3fcc92ce9650fa731f683b12d3762a0508bafca0f1042832e3"
+    },
+    "game": {
+      "path": "/workspace/onboarding/final412-web-stage-001/index.html",
+      "sha256": "adb5deb55865b7766b889868edf5deb3a38fcb3fb259df375bc8c054a810930c",
+      "bytes": 38474
+    },
+    "listening": {
+      "path": "/workspace/onboarding/final412-web-stage-001/dialogos.html",
+      "sha256": "226d6dac2f509bee1d25f0099ed8da9d243238a546e3732488f17f346afb4799",
+      "bytes": 296740
+    },
+    "currentAssets": 39,
+    "wholeRecordings": 412,
+    "retainedAssets": 41,
+    "assetEntries": 492,
+    "builderBrowserTestedIsBuilderScopeOnly": true
+  },
+  "verification": {
+    "unit": {
+      "status": "ROOT-reported actual terminal success",
+      "actualSessionID": 70790,
+      "terminalChunkID": "8e965d",
+      "actualTerminalExitCode": 0,
+      "durableReceipt": {
+        "path": "/tmp/onboarding/final-release-runtime-001/ROOT-observed-unit-terminal.json",
+        "sha256": "935a948c575abb243d979f884ef80ca8944f7792d47cedc8c4c74d599681c480"
+      },
+      "sourceAssertionsUnmodified": true,
+      "temporaryTestOnlyFixtureCopiedByteExactly": true
+    },
+    "legalCampaign": {
+      "status": "ROOT-reported actual terminal success",
+      "actualSessionID": 30570,
+      "terminalChunkID": "fe83d0",
+      "actualTerminalExitCode": 0,
+      "durableReceipt": {
+        "path": "/tmp/onboarding/final-release-runtime-001/ROOT-observed-campaign-terminal.json",
+        "sha256": "760005020454df6bbba8ef7b89ebcd1593d09ce59db11441d1982d2faf23022d"
+      },
+      "months": 348,
+      "years": [
+        2022,
+        2050
+      ],
+      "chapters": 5
+    },
+    "native": {
+      "status": "pass",
+      "ROOTReviewed": true,
+      "officialConfig": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official.GO.json",
+        "sha256": "08e71a75dadb3d22835bcb10a890f0a289cf03d1731cc4eca52799a4983d5e06"
+      },
+      "officialSummary": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/summary.json",
+        "sha256": "760cea1bf8bf3dba18ddb3242a50c3d171aed63a1e59dfa77aab4946572605be",
+        "actualOwnedWaitExitCode": 0,
+        "ownedWaitScope": "actual ROOT resumed supervisor terminal0; combined summary retains previousconversationowned0"
+      },
+      "officialSuites": [
+        {
+          "name": "conversation",
+          "status": "pass",
+          "report": {
+            "path": "/tmp/onboarding/final-release-runtime-001/official-001/conversation/official-output/report.json",
+            "sha256": "f352a5f0dfbb7ceba3f83f360e95f2bcb49bd27134393d8fabdff13f98b7854d"
+          },
+          "closure": {
+            "path": "/tmp/onboarding/final-release-runtime-001/official-001/conversation/actual-execution.json",
+            "sha256": "66799e2c1e4e5da1e107ec9a4a8fd57424932fc36871ecee2073c6ccab7ccf82"
+          },
+          "actualOwnedWaitExitCode": 0
+        },
+        {
+          "name": "game",
+          "status": "pass",
+          "report": {
+            "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/game/official-output/report.json",
+            "sha256": "dd31d14d66c86e65304337bc9371a32b6282f3e3bc2b8a0772f6428906e3dc4c"
+          },
+          "closure": {
+            "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/game/accepted-execution.json",
+            "sha256": "54bc3cf4c5b4758457310126b46cafb8a632317566893e1812686df116d62877"
+          },
+          "actualOwnedWaitExitCode": 0
+        },
+        {
+          "name": "listening",
+          "status": "pass",
+          "report": {
+            "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/listening/official-output/report.json",
+            "sha256": "3601d030b099f4a77ebf5031701c39f057e34d3a1398669193fecf5e26c3820b"
+          },
+          "closure": {
+            "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/listening/accepted-execution.json",
+            "sha256": "d8868ea5a82dc593e02038ef930b8271053fe40f2b593ec53d8e25e77b21edff"
+          },
+          "actualOwnedWaitExitCode": 0
+        }
+      ],
+      "conversationExpectedLegalBodies": 24,
+      "unmodifiedWeb": {
+        "status": "pass",
+        "config": {
+          "path": "/tmp/onboarding/final-release-runtime-001/web-with-outer-guard.GO.json",
+          "sha256": "8e411a88ba66409108015e37869b779f531362994a732b4fd579f175ea2a8109"
+        },
+        "report": {
+          "path": "/tmp/onboarding/final-release-runtime-001/web-002/ui/report.json",
+          "sha256": "c7c8abdd77c2468120fa348d72013f02cfbc7088e07e5cff610dc939ced5bdac"
+        },
+        "closure": {
+          "path": "/tmp/onboarding/final-release-runtime-001/web-002/actual-execution.json",
+          "sha256": "f61bfba38ab9ef49c27312db1e9dbfbeb22f9cab77fea3a6b3e5cb1e1dec9de2"
+        },
+        "actualOwnedWaitExitCode": 0
+      },
+      "trenespop": {
+        "status": "pass",
+        "config": {
+          "path": "/tmp/onboarding/final-release-runtime-001/trenespop-with-outer-guard.GO.json",
+          "sha256": "a375c0b6237ad65745d8c93faff85cfb8f20445976f379bec29fec82cbaf62aa"
+        },
+        "report": {
+          "path": "/tmp/onboarding/final-release-runtime-001/trenespop-001/ui/report.json",
+          "sha256": "5c1c7badc52ec795c9ca0edf43a8570ee042a1b6f41154c0246797b49c6bb39a"
+        },
+        "closure": {
+          "path": "/tmp/onboarding/final-release-runtime-001/trenespop-001/actual-execution.json",
+          "sha256": "daa1a6640dea0da990c291e2139c3bdb53c6445d5ae603b2374c88b1937b06ac"
+        },
+        "actualOwnedWaitExitCode": 0,
+        "all25ImagesSeenInBrowser": false
+      },
+      "ROOTScreenshotsReviewed": true,
+      "serialOneChromeWith20GiBGuard": true,
+      "testSourceAssertionsModified": false,
+      "attemptHistory": [
+        {
+          "status": "failed initial official batch; no successful whole batch claimed",
+          "summary": {
+            "path": "/tmp/onboarding/final-release-runtime-001/official-001/summary.json",
+            "sha256": "371b7e2748846d91ea89321704295cac5d13e4be0f0dea4fd5034889780cdc8e"
+          },
+          "conversation": {
+            "status": "pass",
+            "actualOwnedWaitExitCode": 0,
+            "actualExecution": {
+              "path": "/tmp/onboarding/final-release-runtime-001/official-001/conversation/actual-execution.json",
+              "sha256": "66799e2c1e4e5da1e107ec9a4a8fd57424932fc36871ecee2073c6ccab7ccf82"
+            },
+            "report": {
+              "path": "/tmp/onboarding/final-release-runtime-001/official-001/conversation/official-output/report.json",
+              "sha256": "f352a5f0dfbb7ceba3f83f360e95f2bcb49bd27134393d8fabdff13f98b7854d"
+            },
+            "legalWholeBodies": 24,
+            "taskActions": 57,
+            "characters": 9,
+            "allObservedOwnedChildrenClosed": true,
+            "remainingLiveChrome": []
+          },
+          "game": {
+            "status": "fail before page load",
+            "actualOwnedWaitExitCode": 1,
+            "failureKind": "file:// navigation blocked by environment administrator policy",
+            "report": {
+              "path": "/tmp/onboarding/final-release-runtime-001/official-001/game/official-output/report.json",
+              "sha256": "90abd8e66777d558a6b1217f5d4a68685c73cb62a45d05893262b7e50139ebfa"
+            },
+            "actualExecution": {
+              "path": "/tmp/onboarding/final-release-runtime-001/official-001/game/actual-execution.json",
+              "sha256": "ba5f6f342adaf15c1bfddfd881d1987b80eb33e2740108751768eddeb2b41f17"
+            },
+            "productFunctionFailureEstablished": false,
+            "boundedBuiltInHTTPResumePending": true
+          }
+        },
+        {
+          "status": "outerweb missingguard failed; childwaitunavailable; exactownChrome cleanup; freshguardedweb002 passed",
+          "receipt": {
+            "path": "/tmp/onboarding/final-release-runtime-001/web-001-outer-failure-and-own-Chrome-cleanup.json",
+            "sha256": "7179a1a4b4fbdafa9a975e7afde4b1a9ddf56366c89c5f03a75aaacce63f922f"
+          }
+        }
+      ],
+      "representativeScreensOnly": true,
+      "productAcceptance": {
+        "path": "/tmp/onboarding/final-release-runtime-001/ROOT-native-product-accepted.json",
+        "sha256": "697b0815526c0d0a920f97a4cd99236e203ce8f1596fc42ca892f69b922a1b5e"
+      }
+    }
+  },
+  "adoptionConstraints": [
+    "Native and public HTTPS fields remain pending/null until ROOT reads actual closures and reports.",
+    "Preserve original TTS owned wait null and all ASR and human listening limitations.",
+    "Do not modify frozen release bytes when adding QA metadata; current release SHA pins the already built pages and assets.",
+    "Copy only ownfolder source/build metadata and individual web assets into Git; exclude RAW/models/reference videos and complete embedded HTML/D assets.",
+    "Final public route count must come from actual current preflight/verifier, not historical 389.",
+    "Document whether HTTPS had targeted retries without overwriting initial observations."
+  ],
+  "sourceInventoryDocument": {
+    "file": "docs/current-source-mirror-412.json",
+    "scope": "194 current proyecto files and separately pinned canonical catalogue",
+    "sha256": "b23599d06023665d0abb9204dabe6a4bacfa785ac550f4f33ff5e5cb02743b29",
+    "finalROOTAdoptionPending": false
+  }
+}

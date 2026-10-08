@@ -2,12 +2,12 @@
   "schema": 1,
   "version": "3.6.3",
   "expectedWholeDialogues": 412,
-  "gameSourceSHA256": "96c153146a586428091566c5e4580fd21069f63d0deec86eeb63f4158dabe2c7",
-  "listeningSourceSHA256": "f6d24efbf716cbdafcaae81194d061092b0be61df68f2667ec2ad475da2e886b",
-  "manifestSourceSHA256": "035a3fd8239fcddf9ac1a697f826f9e744a50bb4d1735c1cd74727f8f981c767",
-  "sourceFrozenWholeDialogues": 261,
-  "sourceCreatedAt": "2026-10-08T16:26:19.105Z",
-  "sourceCatalogueSHA256": "bcb87414e1558252847bd9ed2be87999f0a71c2be69f046f089d58af06f0800b",
+  "gameSourceSHA256": "c5242b9ea9b1fd1dd86d7b080af4bc043deb7e34d2af363d74bce73a1ce8cca8",
+  "listeningSourceSHA256": "d22e77e90392718c1212b386c57fc65b4192675ca04a16b7703e4f7cc7178126",
+  "manifestSourceSHA256": "c88ba4b445d5d474060035fc7453c76b495dc42854d6d889a72733bdbca49cac",
+  "sourceFrozenWholeDialogues": 412,
+  "sourceCreatedAt": "2026-10-08T22:02:04.431Z",
+  "sourceCatalogueSHA256": "6348984c61499234ecf0965f976591250f106948968b600bc4325c514884098f",
   "referencePackSHA256": "46ba5d81fc8a6f657f5f1cdab3951a39956bfd86a7fcc0798006ea8fa9c470bd",
   "modelFingerprint": "3db3533efbdebdb25290007f64a4ec50b67c1661c0e4c1191db644b43803aeff",
   "labels": {
@@ -85,8 +85,8 @@
     },
     {
       "file": "story.js",
-      "bytes": 24270,
-      "sha256": "595fe9f5ae1ce7432bc959c11c142eed3f14acf0e6515ebc9855feecedf55068"
+      "bytes": 24273,
+      "sha256": "9b1e2d2436c3d37b28861bc2a05f238472b8530509137af0b2e7b9b2faa1e233"
     },
     {
       "file": "schedule.js",
@@ -105,8 +105,8 @@
     },
     {
       "file": "induction.js",
-      "bytes": 22625,
-      "sha256": "3f79864a30882b8da0e1aa9e62b76e3eafb7d19b4615a9b57eccc86354e5f8fd"
+      "bytes": 22643,
+      "sha256": "6bcaec72f02644eb1a6e5ed678b04e455bda57a964df5d829df984db946ac79b"
     },
     {
       "file": "induction-runtime.js",
@@ -115,8 +115,8 @@
     },
     {
       "file": "encounters.js",
-      "bytes": 9953,
-      "sha256": "f7c847d3e85e39ebc48bd52684b0cc79ce18f1c3a34eb661432a607255c9f349"
+      "bytes": 9955,
+      "sha256": "0036b38a10bcad59cd86a0c631f2c90df464788727d3b4b33b107a0b72351f7a"
     },
     {
       "file": "marketplace.js",
@@ -125,8 +125,8 @@
     },
     {
       "file": "tycoon.js",
-      "bytes": 30466,
-      "sha256": "7ebac0681d04eb47aa37e90c22a1f8e9aaea35100264f32595b5f407fe9c130d"
+      "bytes": 30467,
+      "sha256": "31de36b24ad79df11e918d92070bf05b0976636890f39b254210df63f81dcc62"
     },
     {
       "file": "engine.js",
@@ -185,8 +185,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 28095,
-      "sha256": "e97406fc9281ca7c8641b3d52b6435777d55121b990ddaffe959a7d897451bf1"
+      "bytes": 28225,
+      "sha256": "42c7f10534e60a7efe79758ba03dcf8fc04a3567107cc2fd8f06b9977835d4dd"
     },
     {
       "file": "assets/portraits.js",
@@ -298,7 +298,5 @@
       "bytes": 35555,
       "sha256": "0074204b2c84d6bc968a4e13eddc211bc3c8988701aaf0334e167f4311106799"
     }
-  ],
-  "currentManifestSHA256": "92fd7d13003623a1f6bcdbc1f9031e8ed1e04e00cbabeadcaaa4475123e562a7",
-  "currentWholeDialogues": 339
+  ]
 }

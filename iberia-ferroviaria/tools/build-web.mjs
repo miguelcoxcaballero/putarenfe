@@ -49,6 +49,14 @@ if (gameInput) {
   const data=JSON.parse(listeningMatch[1]);
   assert.equal(data.rows.length,412,'all catalogue texts');
   const ids=Object.keys(manifest.takes||{}).sort();
+  assert.equal(canonical.length,412,'complete canonical catalogue');
+  assert.equal(canonicalRows.size,412,'unique complete canonical IDs');
+  if(ids.length===412){
+    assert.equal(manifest.status,'complete','final full bootstrap uses a closed production stage');
+    assert(manifest.ended_at,'final full bootstrap has an actual registered end');
+    assert(!Object.keys(manifest.failures||{}).length,'no final production failures');
+    assert.deepEqual(ids,[...canonicalRows.keys()].sort(),'all412 current canonical recordings, without aliases');
+  }
   assert.deepEqual(Object.keys(data.audio).sort(),ids,'frozen listening IDs match registered manifest');
   const gameMap=game.match(/const DIALOGUES = (\{[^\n]*\});/);
   assert(gameMap,'unique complete-recording map');
@@ -82,7 +90,13 @@ if (gameInput) {
           "const entry = (kind === 'D' ? DIALOGUES : CLIPS)[id];\n      if (entry?.url) {\n        const response = await fetch(new URL(entry.url, document.baseURI));\n        if (!response.ok) throw new Error('No se ha podido descargar la grabación: HTTP ' + response.status);\n        return this.music.ctx.decodeAudioData(await response.arrayBuffer());\n      }\n      const data = typeof entry === 'string' ? entry : entry?.src;",
           'one web-only URL branch');
         const oldLabel=`Avance en pruebas · ${ids.length}/412 voces completas · resto con subtítulos`;
-        body=oneReplace(body,oldLabel,'__WEB_PREVIEW_LABEL__','one visible game preview label');
+        if(body.includes(oldLabel)){
+          body=oneReplace(body,oldLabel,'__WEB_PREVIEW_LABEL__','one visible game preview label');
+        }else{
+          assert.equal(ids.length,412,'only the strict complete game has no preview label');
+          const anchor='<h2 id="menu-departures-title">¿Adónde vamos?</h2>';
+          body=oneReplace(body,anchor,anchor+'<p class="menu-preview-note" role="status">__WEB_PREVIEW_LABEL__</p>','complete game recording status');
+        }
         body=oneReplace(body,'__WEB_PREVIEW_LABEL__</p>','__WEB_PREVIEW_LABEL__ <a href="dialogos.html">Escuchar los diálogos</a></p>','menu listening link');
         assert(body.includes('const CLIPS = {};'),'no old sentence recordings');
         assert(!/speechSynthesis|SpeechSynthesisUtterance/.test(body),'no system voice fallback');
@@ -178,7 +192,7 @@ recordings.sort((a,b)=>a.id.localeCompare(b.id));
 const available=recordings.length,pending=412-available;
 assert(available>0&&available<=412);
 const partial=available!==412;
-const gameLabel=partial?`Avance en pruebas · ${available}/412 voces completas · resto con subtítulos`:'Catálogo completo · 412/412 diálogos con voz';
+const gameLabel=partial?`Avance en pruebas · ${available}/412 voces completas · resto con subtítulos`:'412/412 diálogos grabados';
 const listeningLabel=`${available}/412 diálogos grabados · ${partial?'el resto está en producción':'catálogo completo'}`;
 catalogue.audio=audio;catalogue.label=listeningLabel;
 const pacoCount=recordings.filter(row=>row.person==='mayor').length;

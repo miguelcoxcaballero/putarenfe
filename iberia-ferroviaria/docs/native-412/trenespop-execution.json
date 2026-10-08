@@ -1,0 +1,179 @@
+{
+  "suite": "trenespop",
+  "startedAt": "2026-10-08T22:31:02.791383+00:00",
+  "argv": [
+    "/workspace/tools/node-v22.23.3-linux-x64/bin/node",
+    "/tmp/onboarding/orphan-c6-final-gate-preparation/native/extras/trenespop-native-final.mjs",
+    "--config",
+    "/tmp/onboarding/final-release-runtime-001/trenespop-with-outer-guard.GO.json",
+    "--config-sha",
+    "a375c0b6237ad65745d8c93faff85cfb8f20445976f379bec29fec82cbaf62aa"
+  ],
+  "sourceSHA256": "e32602d5eb70a316f093e32068f248e47f479ff37f513193789e8cdde3838164",
+  "configSHA256": "a375c0b6237ad65745d8c93faff85cfb8f20445976f379bec29fec82cbaf62aa",
+  "modelsSignalled": false,
+  "signalsToOwnedProcesses": [],
+  "nodePID": 538551,
+  "peakBytes": 9015537664,
+  "actualChildWaitExitCode": 0,
+  "ownedProcessObservations": [
+    {
+      "pid": 538551,
+      "comm": "node",
+      "state": "R",
+      "ppid": 538549,
+      "startTicks": 9186785,
+      "cmdline": "/workspace/tools/node-v22.23.3-linux-x64/bin/node /tmp/onboarding/orphan-c6-final-gate-preparation/native/extras/trenespop-native-final.mjs --config /tmp/onboarding/final-release-runtime-001/trenespop-with-outer-guard.GO.json --config-sha a375c0b6237ad65745d8c93faff85cfb8f20445976f379bec29fec82cbaf62aa ",
+      "firstObservedAt": "2026-10-08T22:31:02.805899+00:00"
+    },
+    {
+      "pid": 538563,
+      "comm": "chromium",
+      "state": "R",
+      "ppid": 538551,
+      "startTicks": 9186912,
+      "cmdline": "/usr/lib/chromium/chromium --show-component-extension-options --enable-gpu-rasterization --no-default-browser-check --disable-pings --media-router=0 --enable-remote-extensions --load-extension= --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --use-gl=angle --use-angle=swiftshader --enable-unsafe-swiftshader --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --remote-debugging-pipe --no-startup-window ",
+      "firstObservedAt": "2026-10-08T22:31:04.124190+00:00"
+    },
+    {
+      "pid": 538584,
+      "comm": "chromium",
+      "state": "S",
+      "ppid": 538563,
+      "startTicks": 9186923,
+      "cmdline": "/usr/lib/chromium/chromium --type=zygote --no-zygote-sandbox --no-sandbox --headless --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --change-stack-guard-on-fork=enable --no-first-run --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl ",
+      "firstObservedAt": "2026-10-08T22:31:04.350367+00:00"
+    },
+    {
+      "pid": 538585,
+      "comm": "chromium",
+      "state": "S",
+      "ppid": 538563,
+      "startTicks": 9186923,
+      "cmdline": "/usr/lib/chromium/chromium --type=zygote --no-sandbox --headless --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --change-stack-guard-on-fork=enable --no-first-run --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl ",
+      "firstObservedAt": "2026-10-08T22:31:04.350388+00:00"
+    },
+    {
+      "pid": 538605,
+      "comm": "chromium",
+      "state": "S",
+      "ppid": 538584,
+      "startTicks": 9186933,
+      "cmdline": "/usr/lib/chromium/chromium --type=gpu-process --no-sandbox --disable-dev-shm-usage --disable-breakpad --enable-gpu-rasterization --headless --ozone-platform=headless --use-angle=swiftshader --enable-unsafe-swiftshader --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --change-stack-guard-on-fork=enable --gpu-preferences=YAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAASAAAAAAAAAABAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAQAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --use-gl=angle --shared-files --field-trial-handle=3,i,15231214896725209118,4596744405118022489,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,7803780047180994052,10685501920625755172,4 --trace-process-track-uuid=3190708988185955192 ",
+      "firstObservedAt": "2026-10-08T22:31:04.350392+00:00"
+    },
+    {
+      "pid": 538608,
+      "comm": "exe",
+      "state": "R",
+      "ppid": 538563,
+      "startTicks": 9186934,
+      "cmdline": "/proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader --use-gl=angle --mute-audio --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,15231214896725209118,4596744405118022489,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,7803780047180994052,10685501920625755172,4 --trace-process-track-uuid=3190708989122997041 ",
+      "firstObservedAt": "2026-10-08T22:31:04.350395+00:00"
+    },
+    {
+      "pid": 538621,
+      "comm": "chromium",
+      "state": "S",
+      "ppid": 538585,
+      "startTicks": 9186938,
+      "cmdline": "/usr/lib/chromium/chromium --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=utility --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader --use-gl=angle --mute-audio --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,15231214896725209118,4596744405118022489,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,7803780047180994052,10685501920625755172,4 --trace-process-track-uuid=3190708990060038890 ",
+      "firstObservedAt": "2026-10-08T22:31:04.350398+00:00"
+    },
+    {
+      "pid": 538652,
+      "comm": "chromium",
+      "state": "R",
+      "ppid": 538585,
+      "startTicks": 9186950,
+      "cmdline": "/usr/lib/chromium/chromium --type=renderer --top-chrome-webui --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --disable-print-preview --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --ozone-platform=headless --lang=en-US --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=5 --time-ticks-at-unix-epoch=-1791406794934081 --launch-time-ticks=91869506589 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,15231214896725209118,4596744405118022489,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,7803780047180994052,10685501920625755172,4 --trace-process-track-uuid=3190708990997080739 ",
+      "firstObservedAt": "2026-10-08T22:31:04.577559+00:00"
+    },
+    {
+      "pid": 538661,
+      "comm": "chromium",
+      "state": "S",
+      "ppid": 538585,
+      "startTicks": 9186955,
+      "cmdline": "/usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --disable-print-preview --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --ozone-platform=headless --lang=en-US --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=7 --time-ticks-at-unix-epoch=-1791406794934081 --launch-time-ticks=91869554499 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,15231214896725209118,4596744405118022489,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,7803780047180994052,10685501920625755172,4 --trace-process-track-uuid=3190708992871164437 ",
+      "firstObservedAt": "2026-10-08T22:31:04.577579+00:00"
+    },
+    {
+      "pid": 538662,
+      "comm": "chromium",
+      "state": "R",
+      "ppid": 538585,
+      "startTicks": 9186956,
+      "cmdline": "/usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --disable-print-preview --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --ozone-platform=headless --lang=en-US --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=6 --time-ticks-at-unix-epoch=-1791406794934081 --launch-time-ticks=91869558425 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,15231214896725209118,4596744405118022489,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,7803780047180994052,10685501920625755172,4 --trace-process-track-uuid=3190708991934122588 ",
+      "firstObservedAt": "2026-10-08T22:31:04.577582+00:00"
+    },
+    {
+      "pid": 538689,
+      "comm": "exe",
+      "state": "R",
+      "ppid": 538563,
+      "startTicks": 9187396,
+      "cmdline": "/proc/self/exe --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=none --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader --use-gl=angle --mute-audio --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-lozraJ --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,15231214896725209118,4596744405118022489,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,7803780047180994052,10685501920625755172,4 --trace-process-track-uuid=3190708993808206286 ",
+      "firstObservedAt": "2026-10-08T22:31:08.937010+00:00"
+    }
+  ],
+  "remainingOwnedLiveChildren": [],
+  "allObservedOwnedChildrenClosed": true,
+  "remainingLiveChrome": [],
+  "finishedAt": "2026-10-08T22:32:35.242536+00:00",
+  "elapsedSeconds": 92.45134883999708,
+  "nativeStatus": "trenespop-native-real-purchase-pass",
+  "nativeReportSHA256": "5c1c7badc52ec795c9ca0edf43a8570ee042a1b6f41154c0246797b49c6bb39a",
+  "guardStatus": "trenespop-native-real-purchase-pass",
+  "guardFailure": null,
+  "guardReportSHA256": "5c1c7badc52ec795c9ca0edf43a8570ee042a1b6f41154c0246797b49c6bb39a",
+  "status": "pass",
+  "initialPhysicalGate": {
+    "at": "2026-10-08T22:31:02.768722+00:00",
+    "memoryBytes": 7771475968,
+    "physical412Hashed": true,
+    "bothModelOwnersActuallyClosed": true,
+    "modelWorkerCompletionContracts": [
+      {
+        "role": "tts",
+        "kind": "orphan_observed_closed_current_412",
+        "actualOwnedWorkerWait": null,
+        "exitCodeUnknown": true,
+        "provenanceEquivalentToOwnedWaitZero": false,
+        "ROOTAuthority": {
+          "path": "/tmp/onboarding/final-release-runtime-001/ROOT-native-authority.json",
+          "sha256": "ed94d77dae1b7a5d73dd5eeaf1c0851ed83138d555dbd4ff9d7c872fccc4b1dc"
+        }
+      },
+      {
+        "role": "base",
+        "kind": "actual_owned_wait_zero",
+        "actualOwnedWorkerWait": 0
+      }
+    ]
+  },
+  "finalPhysicalGate": {
+    "at": "2026-10-08T22:32:36.794550+00:00",
+    "memoryBytes": 7787589632,
+    "physical412Hashed": true,
+    "bothModelOwnersActuallyClosed": true,
+    "modelWorkerCompletionContracts": [
+      {
+        "role": "tts",
+        "kind": "orphan_observed_closed_current_412",
+        "actualOwnedWorkerWait": null,
+        "exitCodeUnknown": true,
+        "provenanceEquivalentToOwnedWaitZero": false,
+        "ROOTAuthority": {
+          "path": "/tmp/onboarding/final-release-runtime-001/ROOT-native-authority.json",
+          "sha256": "ed94d77dae1b7a5d73dd5eeaf1c0851ed83138d555dbd4ff9d7c872fccc4b1dc"
+        }
+      },
+      {
+        "role": "base",
+        "kind": "actual_owned_wait_zero",
+        "actualOwnedWorkerWait": 0
+      }
+    ]
+  }
+}

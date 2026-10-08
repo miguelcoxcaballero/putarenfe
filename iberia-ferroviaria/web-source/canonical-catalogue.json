@@ -228,16 +228,16 @@
   "speech_sha256": "100f67b21fad8f082cc4429c6915f617a02c1d157ecf9c600a3c44c2e47a788d"
  },
  {
-  "id": "outp9u",
+  "id": "2164fg",
   "person": "rival",
-  "raw": "Vamos con la competencia: comprueba que el enemigo está allí antes de declararle una guerra.\n\nAbre «Competencia» y compara una relación donde ya haya rival ferroviario. Lowgo aprieta precios; Rossa vende calidad. En 2022 no han entrado todos en todas partes. No rebajes toda tu red para responder a un enemigo que todavía no está.",
-  "text": "Vamos con la competencia: comprueba que el enemigo está allí antes de declararle una guerra. Abre Competencia y compara una relación donde ya haya rival ferroviario. Lowgo aprieta precios; Rossa vende calidad. En 2022 no han entrado todos en todas partes. No rebajes toda tu red para responder a un enemigo que todavía no está.",
+  "raw": "Vamos con la competencia: comprueba que el enemigo está allí antes de declararle una guerra.\n\nAbre «Competencia» y compara una relación donde ya haya rival ferroviario. OuiOui aprieta precios; YaIré vende calidad. En 2022 no han entrado todos en todas partes. No rebajes toda tu red para responder a un enemigo que todavía no está.",
+  "text": "Vamos con la competencia: comprueba que el enemigo está allí antes de declararle una guerra. Abre Competencia y compara una relación donde ya haya rival ferroviario. OuiOui aprieta precios; YaIré vende calidad. En 2022 no han entrado todos en todas partes. No rebajes toda tu red para responder a un enemigo que todavía no está.",
   "mood": "determined",
   "priority": 2,
   "kind": "induction",
   "source": "induction:competition:briefing:1",
-  "canonical_sha256": "4309c664da5f84f6512aafb352f94c74abd8f689d6d698362cfe72a7cab8c819",
-  "speech_sha256": "8f74d35d748c255dabc855d9555338ffa3df3e7d3fa1c504a2a9d6cc62041c22"
+  "canonical_sha256": "78add96b9bf1af7bdbc4a055ee7beac1f91ab7696f756f31c47f5f87d8dedb6c",
+  "speech_sha256": "7b224c85edbe062d5aaa684dfe14748f63e56fa9491faac838a5b439adb46de1"
  },
  {
   "id": "1ys127l",
@@ -576,16 +576,16 @@
   "speech_sha256": "54fe788d26fc1e35cfc1084c74398930d5b37514e1468d7c5e0958abb806ad01"
  },
  {
-  "id": "9njzoo",
+  "id": "195bbfb",
   "person": "mayor",
-  "raw": "Oiga, ese tren corre lo que permitan la vía y el material, no su discurso.\n\nNi la catenaria ni cambiar el ancho garantizan 300 km/h. La velocidad depende del trazado, los límites de infraestructura y el material. Una renovación tiene su propio efecto y presupuesto.",
-  "text": "Oiga, ese tren corre lo que permitan la vía y el material, no su discurso. Ni la catenaria ni cambiar el ancho garantizan 300 km/h. La velocidad depende del trazado, los límites de infraestructura y el material. Una renovación tiene su propio efecto y presupuesto.",
+  "raw": "Oiga, ese tren corre lo que permitan la vía y el material, no su discurso.\n\nNi la catenaria ni cambiar el ancho garantizan 300 kilómetros por hora. La velocidad depende del trazado, los límites de infraestructura y el material. Una renovación tiene su propio efecto y presupuesto.",
+  "text": "Oiga, ese tren corre lo que permitan la vía y el material, no su discurso. Ni la catenaria ni cambiar el ancho garantizan 300 kilómetros por hora. La velocidad depende del trazado, los límites de infraestructura y el material. Una renovación tiene su propio efecto y presupuesto.",
   "mood": "determined",
   "priority": 3,
   "kind": "feedback",
   "source": "feedback:infrastructure:speed",
-  "canonical_sha256": "d31c95591eae0c7fd01029abb1ddbd2cea39900bdc8251bfcf47f223d29e187d",
-  "speech_sha256": "fce86b3bf52ab6851c151ac835514165fc51224c60d3d84bbc61d25e5354556d"
+  "canonical_sha256": "015c6f7ae1c621c27b3e2a6761fcb777e2cf5c200cab3cbd29c9d5dad7a0fa81",
+  "speech_sha256": "bb4a2b7ff3c79d0dc3abd899961f66728c3c9afcdf1d5b79091dc8230a194e29"
  },
  {
   "id": "obwd05",
@@ -624,16 +624,16 @@
   "speech_sha256": "44685766a3e97ec1317b5dfd7f14a32edf81802ec096243930d4157f1e646829"
  },
  {
-  "id": "odury6",
+  "id": "1cgqqfk",
   "person": "president",
-  "raw": "Querido presidente de Renfe: hoy España elige. Elige Rossa, elige Lowgo, elige el autobús con un wifi que no funciona. Y yo quiero que elija Renfe, porque Renfe es España, y España, modestamente, soy yo. Pon más trenes, construye algún cambiador de ancho y deja de perder viajeros, que da mala imagen. Si sale bien, lo anuncio yo. Si sale mal, ya sabes dónde está la puerta.",
-  "text": "Querido presidente de Renfe: hoy España elige. Elige Rossa, elige Lowgo, elige el autobús con un wifi que no funciona. Y yo quiero que elija Renfe, porque Renfe es España, y España, modestamente, soy yo. Pon más trenes, construye algún cambiador de ancho y deja de perder viajeros, que da mala imagen. Si sale bien, lo anuncio yo. Si sale mal, ya sabes dónde está la puerta.",
+  "raw": "Querido presidente de Tenfe: hoy España elige. Elige YaIré, elige OuiOui, elige el autobús con un wifi que no funciona. Y yo quiero que elija Tenfe, porque Tenfe es España, y España, modestamente, soy yo. Pon más trenes, construye algún cambiador de ancho y deja de perder viajeros, que da mala imagen. Si sale bien, lo anuncio yo. Si sale mal, ya sabes dónde está la puerta.",
+  "text": "Querido presidente de Tenfe: hoy España elige. Elige YaIré, elige OuiOui, elige el autobús con un wifi que no funciona. Y yo quiero que elija Tenfe, porque Tenfe es España, y España, modestamente, soy yo. Pon más trenes, construye algún cambiador de ancho y deja de perder viajeros, que da mala imagen. Si sale bien, lo anuncio yo. Si sale mal, ya sabes dónde está la puerta.",
   "mood": "angry",
   "priority": 4,
   "kind": "chapter",
   "source": "chapter:competition",
-  "canonical_sha256": "cf4f4d632e63d5722380cfb5527e1de1d029a7bf4048368e7ad7bca7898fd55b",
-  "speech_sha256": "cf4f4d632e63d5722380cfb5527e1de1d029a7bf4048368e7ad7bca7898fd55b"
+  "canonical_sha256": "315c3af9760e050464253fa50ec44d8d61b5b78cf1d4cc79ff242d9e737a024a",
+  "speech_sha256": "315c3af9760e050464253fa50ec44d8d61b5b78cf1d4cc79ff242d9e737a024a"
  },
  {
   "id": "d1azr1",
@@ -672,16 +672,16 @@
   "speech_sha256": "fa4ac4feb6ef09285c1c48e9ed4e428f89bcf1636ad67804917bfe8ea91a0665"
  },
  {
-  "id": "wx5gm3",
+  "id": "69951",
   "person": "rival",
-  "raw": "Que Lowgo venda billetes a precio de pipas no te obliga a regalar el tren. Elige cómo plantarles cara.",
-  "text": "Que Lowgo venda billetes a precio de pipas no te obliga a regalar el tren. Elige cómo plantarles cara.",
+  "raw": "Que OuiOui venda billetes a precio de pipas no te obliga a regalar el tren. Elige cómo plantarles cara.",
+  "text": "Que OuiOui venda billetes a precio de pipas no te obliga a regalar el tren. Elige cómo plantarles cara.",
   "mood": "worried",
   "priority": 4,
   "kind": "arc",
   "source": "arc:0",
-  "canonical_sha256": "d0c480b07ba73018cbd1b6ec3fbdb0a2a548b574b835db846ee9ad3dcc17e2b6",
-  "speech_sha256": "d0c480b07ba73018cbd1b6ec3fbdb0a2a548b574b835db846ee9ad3dcc17e2b6"
+  "canonical_sha256": "682979a3b56317510d4a4c3bf5aae1c917868e3d294610003047fb4520824f32",
+  "speech_sha256": "682979a3b56317510d4a4c3bf5aae1c917868e3d294610003047fb4520824f32"
  },
  {
   "id": "1uawxak",
@@ -768,16 +768,16 @@
   "speech_sha256": "4ecbbaa4c49c6cc59d7117e58a7ffe45dfbb06ba89617e59f7deacbef98476be"
  },
  {
-  "id": "cucrcl",
+  "id": "10t4qyt",
   "person": "president",
-  "raw": "En noviembre llega Rossa, con trenes rojos y mucha sonrisa. Ya no hay viajeros cautivos, presidente: hay viajeros con una aplicación para comparar precios. Yo celebro la competencia. En público. En privado, espabila.",
-  "text": "En noviembre llega Rossa, con trenes rojos y mucha sonrisa. Ya no hay viajeros cautivos, presidente: hay viajeros con una aplicación para comparar precios. Yo celebro la competencia. En público. En privado, espabila.",
+  "raw": "En noviembre llega YaIré, con trenes rojos y mucha sonrisa. Ya no hay viajeros cautivos, presidente: hay viajeros con una aplicación para comparar precios. Yo celebro la competencia. En público. En privado, espabila.",
+  "text": "En noviembre llega YaIré, con trenes rojos y mucha sonrisa. Ya no hay viajeros cautivos, presidente: hay viajeros con una aplicación para comparar precios. Yo celebro la competencia. En público. En privado, espabila.",
   "mood": "angry",
   "priority": 5,
   "kind": "decision",
   "source": "decision:Rossa",
-  "canonical_sha256": "58b3f964aedfa29451998bd5110650de2264dd2d06e955d7fc0f4d9b5e387ee5",
-  "speech_sha256": "58b3f964aedfa29451998bd5110650de2264dd2d06e955d7fc0f4d9b5e387ee5"
+  "canonical_sha256": "bd536231f7f840090afc310297b0c2cffbd76c5a830bfec29f24430eeb94096c",
+  "speech_sha256": "bd536231f7f840090afc310297b0c2cffbd76c5a830bfec29f24430eeb94096c"
  },
  {
   "id": "8zz5t7",
@@ -840,16 +840,16 @@
   "speech_sha256": "82f79791d2eb73b1e5e0471e29eb99c3b86c81c3bca4714f96978713c21653db"
  },
  {
-  "id": "kg5bcn",
+  "id": "10y0n69",
   "person": "successor",
-  "raw": "Renfe licita treinta trenes de alta velocidad y diez opcionales. Ojo, licitar no es comprar: es como mirar pisos en el portal inmobiliario un domingo por la tarde. Se abre el catálogo de la nueva generación, con entregas largas.",
-  "text": "Renfe licita treinta trenes de alta velocidad y diez opcionales. Ojo, licitar no es comprar: es como mirar pisos en el portal inmobiliario un domingo por la tarde. Se abre el catálogo de la nueva generación, con entregas largas.",
+  "raw": "Tenfe licita treinta trenes de alta velocidad y diez opcionales. Ojo, licitar no es comprar: es como mirar pisos en el portal inmobiliario un domingo por la tarde. Se abre el catálogo de la nueva generación, con entregas largas.",
+  "text": "Tenfe licita treinta trenes de alta velocidad y diez opcionales. Ojo, licitar no es comprar: es como mirar pisos en el portal inmobiliario un domingo por la tarde. Se abre el catálogo de la nueva generación, con entregas largas.",
   "mood": "happy",
   "priority": 5,
   "kind": "decision",
   "source": "decision:futuretender",
-  "canonical_sha256": "5b1c86aa24f7d6f13f7bde5d5e18bc5e1b39c5e58f81a0be251effe6b8ef9306",
-  "speech_sha256": "5b1c86aa24f7d6f13f7bde5d5e18bc5e1b39c5e58f81a0be251effe6b8ef9306"
+  "canonical_sha256": "13c6ea600e77822f66face53be4bf09326373267d668e967280b49d26b87d0eb",
+  "speech_sha256": "13c6ea600e77822f66face53be4bf09326373267d668e967280b49d26b87d0eb"
  },
  {
   "id": "k5lgc9",
@@ -864,16 +864,16 @@
   "speech_sha256": "d9a31093013a6a633779b44e2cc56f2eb572184348de06e324d593e80e64445d"
  },
  {
-  "id": "bznfkf",
+  "id": "1kwk635",
   "person": "mayor",
-  "raw": "Señor presidente de Renfe, le habla el alcalde de Villanueva del Andén, cuatrocientos doce habitantes y una estación preciosa sin trenes. Varias comarcas pagamos parte del servicio si no nos dejan sin tren. Es un contrato a cinco años, que en política es la eternidad.",
-  "text": "Señor presidente de Renfe, le habla el alcalde de Villanueva del Andén, cuatrocientos doce habitantes y una estación preciosa sin trenes. Varias comarcas pagamos parte del servicio si no nos dejan sin tren. Es un contrato a cinco años, que en política es la eternidad.",
+  "raw": "Señor presidente de Tenfe, le habla el alcalde de Villanueva del Andén, cuatrocientos doce habitantes y una estación preciosa sin trenes. Varias comarcas pagamos parte del servicio si no nos dejan sin tren. Es un contrato a cinco años, que en política es la eternidad.",
+  "text": "Señor presidente de Tenfe, le habla el alcalde de Villanueva del Andén, cuatrocientos doce habitantes y una estación preciosa sin trenes. Varias comarcas pagamos parte del servicio si no nos dejan sin tren. Es un contrato a cinco años, que en política es la eternidad.",
   "mood": "happy",
   "priority": 5,
   "kind": "decision",
   "source": "decision:rural",
-  "canonical_sha256": "1786c78bac9d65660d690e04f1b05ca2ce9a0dfb5a562467d9beead5bcf2761f",
-  "speech_sha256": "1786c78bac9d65660d690e04f1b05ca2ce9a0dfb5a562467d9beead5bcf2761f"
+  "canonical_sha256": "1b7548c57c98a13c1cf171fdc1899b3b9e3476949470a064be8890cf85a63b23",
+  "speech_sha256": "1b7548c57c98a13c1cf171fdc1899b3b9e3476949470a064be8890cf85a63b23"
  },
  {
   "id": "14mdncu",
@@ -1176,16 +1176,16 @@
   "speech_sha256": "e8859ee3bf53decb736f062335432af88eac066da04e7285590a150a2c2604c0"
  },
  {
-  "id": "17zbuys",
+  "id": "j4z1iy",
   "person": "president",
-  "raw": "Hoy hasta los sondeos sonríen. No lo jodas. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
-  "text": "Hoy hasta los sondeos sonríen. No lo jodas. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "raw": "Hoy hasta los sondeos sonríen. No lo jodas. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "text": "Hoy hasta los sondeos sonríen. No lo jodas. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
   "mood": "happy",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-president-happy-1",
-  "canonical_sha256": "70530ba124878199ee30e9bc6c6f22dd2e34de5629ff890b718abf825d15868b",
-  "speech_sha256": "70530ba124878199ee30e9bc6c6f22dd2e34de5629ff890b718abf825d15868b"
+  "canonical_sha256": "316e73deb05f1e1cd3bb7715f1aee2aab6656a132ba12e7ee9689b97eab43c3c",
+  "speech_sha256": "316e73deb05f1e1cd3bb7715f1aee2aab6656a132ba12e7ee9689b97eab43c3c"
  },
  {
   "id": "1muv0i3",
@@ -1236,16 +1236,16 @@
   "speech_sha256": "34f90cc8505ae2323fea71da2a5ae32dfdc5a183655f4b18dde9d97ef1a5f3f5"
  },
  {
-  "id": "v31xmf",
+  "id": "120cfbz",
   "person": "president",
-  "raw": "Director, he vendido los retrasos como una redistribución del tiempo libre. No me obligues a defender otra gilipollez. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
-  "text": "Director, he vendido los retrasos como una redistribución del tiempo libre. No me obligues a defender otra gilipollez. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "raw": "Director, he vendido los retrasos como una redistribución del tiempo libre. No me obligues a defender otra gilipollez. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "text": "Director, he vendido los retrasos como una redistribución del tiempo libre. No me obligues a defender otra gilipollez. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
   "mood": "angry",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-president-angry-1",
-  "canonical_sha256": "6f283a3b2130fc0df5118dd35db7f364b73f939d481f88ecbb1824a3032616f2",
-  "speech_sha256": "6f283a3b2130fc0df5118dd35db7f364b73f939d481f88ecbb1824a3032616f2"
+  "canonical_sha256": "18b75fe1fd398fcd5089c7d06347a4a82bdb279cac81cc488ab42b61ea777cfe",
+  "speech_sha256": "18b75fe1fd398fcd5089c7d06347a4a82bdb279cac81cc488ab42b61ea777cfe"
  },
  {
   "id": "1m8zt5w",
@@ -1296,16 +1296,16 @@
   "speech_sha256": "45bd97f9925d384a230d2adb602c360d52719fe4193559977794b71e4f49697a"
  },
  {
-  "id": "1g5c0jo",
+  "id": "1mvde4a",
   "person": "president",
-  "raw": "Como esto reviente, no pienso salir yo en la foto. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
-  "text": "Como esto reviente, no pienso salir yo en la foto. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "raw": "Como esto reviente, no pienso salir yo en la foto. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "text": "Como esto reviente, no pienso salir yo en la foto. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
   "mood": "worried",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-president-worried-1",
-  "canonical_sha256": "5c2b29f8ef6fe93fad04eefc2af5a721e0a268142a320d66d0d1ca385994355c",
-  "speech_sha256": "5c2b29f8ef6fe93fad04eefc2af5a721e0a268142a320d66d0d1ca385994355c"
+  "canonical_sha256": "7cc0e4a7182cbfae0592299fb33b60a4db3ee5b3eb835796e11fb451ffdccb84",
+  "speech_sha256": "7cc0e4a7182cbfae0592299fb33b60a4db3ee5b3eb835796e11fb451ffdccb84"
  },
  {
   "id": "vfsjyj",
@@ -1356,16 +1356,16 @@
   "speech_sha256": "ba3a766a1ad5b631ff863f7d86d62c9bf9b3cf85a499ddd452fc7939d94a62da"
  },
  {
-  "id": "ndwuui",
+  "id": "jzpvbw",
   "person": "president",
-  "raw": "He vuelto a demostrar que soy imprescindible. De nada. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
-  "text": "He vuelto a demostrar que soy imprescindible. De nada. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "raw": "He vuelto a demostrar que soy imprescindible. De nada. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "text": "He vuelto a demostrar que soy imprescindible. De nada. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
   "mood": "proud",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-president-proud-1",
-  "canonical_sha256": "4660bf7f199bafa28f1d432b73e6fbde56268208e81b050b33a3077b0ecddfea",
-  "speech_sha256": "4660bf7f199bafa28f1d432b73e6fbde56268208e81b050b33a3077b0ecddfea"
+  "canonical_sha256": "1f8b865c5af9458f6aef4857bdbae717a823ebb635d1289b05eb599ff1e6788a",
+  "speech_sha256": "1f8b865c5af9458f6aef4857bdbae717a823ebb635d1289b05eb599ff1e6788a"
  },
  {
   "id": "11vou6l",
@@ -1416,16 +1416,16 @@
   "speech_sha256": "1b56c7948907abfde03f61e62b517985516156354d5da88e01537cd063acef57"
  },
  {
-  "id": "1ftq4r5",
+  "id": "wuwkl9",
   "person": "president",
-  "raw": "¿Eso lo habéis conseguido sin una comisión? Me dejas tieso. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
-  "text": "¿Eso lo habéis conseguido sin una comisión? Me dejas tieso. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "raw": "¿Eso lo habéis conseguido sin una comisión? Me dejas tieso. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "text": "¿Eso lo habéis conseguido sin una comisión? Me dejas tieso. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
   "mood": "surprised",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-president-surprised-1",
-  "canonical_sha256": "3b66f3454f914789b624a5ea8fa8bcaaa17cb635dc224bb415fcd03877326796",
-  "speech_sha256": "3b66f3454f914789b624a5ea8fa8bcaaa17cb635dc224bb415fcd03877326796"
+  "canonical_sha256": "ea05a911a6f6d13eebb929bfbc84be925f489f0dbb2b6a841c9959c3ba3e9e8f",
+  "speech_sha256": "ea05a911a6f6d13eebb929bfbc84be925f489f0dbb2b6a841c9959c3ba3e9e8f"
  },
  {
   "id": "yzbbiy",
@@ -1476,16 +1476,16 @@
   "speech_sha256": "8ca30db11e96cb66f4fc3dcbed4fe9d8f4e16a7e100ef0fffa69edce89b997ce"
  },
  {
-  "id": "6788oz",
+  "id": "1wcw1yz",
   "person": "president",
-  "raw": "Confié en ti. Tampoco era mi primera mala decisión. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
-  "text": "Confié en ti. Tampoco era mi primera mala decisión. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "raw": "Confié en ti. Tampoco era mi primera mala decisión. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "text": "Confié en ti. Tampoco era mi primera mala decisión. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
   "mood": "disappointed",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-president-disappointed-1",
-  "canonical_sha256": "f9f6aeaff298a5055967bdc7ad3d797597d82c69f7d8d55faff3cc67d2223329",
-  "speech_sha256": "f9f6aeaff298a5055967bdc7ad3d797597d82c69f7d8d55faff3cc67d2223329"
+  "canonical_sha256": "19ee53b93434aed7bbfb159e8931803c52d18646533801ccd12ddf47988d7e94",
+  "speech_sha256": "19ee53b93434aed7bbfb159e8931803c52d18646533801ccd12ddf47988d7e94"
  },
  {
   "id": "1xq0osw",
@@ -1536,16 +1536,16 @@
   "speech_sha256": "c5786db9c4612771485aed3288772bc9504a33700877d7818e9816547f6f296a"
  },
  {
-  "id": "g44qhw",
+  "id": "n778be",
   "person": "president",
-  "raw": "Vamos a sacarlo adelante aunque tenga que arrastrar a medio gabinete. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
-  "text": "Vamos a sacarlo adelante aunque tenga que arrastrar a medio gabinete. Lowgo se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "raw": "Vamos a sacarlo adelante aunque tenga que arrastrar a medio gabinete. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
+  "text": "Vamos a sacarlo adelante aunque tenga que arrastrar a medio gabinete. OuiOui se está llevando la foto. Elige si peleamos el precio o protegemos la caja.",
   "mood": "determined",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-president-determined-1",
-  "canonical_sha256": "b53be4c08e4c4c2454f90b69426217dc58cdd823f3dcc6bbb2bc9647c62f42e8",
-  "speech_sha256": "b53be4c08e4c4c2454f90b69426217dc58cdd823f3dcc6bbb2bc9647c62f42e8"
+  "canonical_sha256": "615f39b09511574a643d580c969e76a6b224d463f45647f949f5c4a8af36b33d",
+  "speech_sha256": "615f39b09511574a643d580c969e76a6b224d463f45647f949f5c4a8af36b33d"
  },
  {
   "id": "1c6pwr",
@@ -2016,16 +2016,16 @@
   "speech_sha256": "68caf4c01451d1312980bd046233a46f5c33e64d3d2f3976ef6deef930b57851"
  },
  {
-  "id": "1jvgrlf",
+  "id": "1ypth7r",
   "person": "successor",
-  "raw": "Hoy el tren corre más que mis respuestas en redes. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
-  "text": "Hoy el tren corre más que mis respuestas en redes. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "raw": "Hoy el tren corre más que mis respuestas en redes. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "text": "Hoy el tren corre más que mis respuestas en redes. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
   "mood": "happy",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-successor-happy-1",
-  "canonical_sha256": "78193e5e394c0fea42b3e954cf775c7d8671afa6c6f46017469c71b3671bee1f",
-  "speech_sha256": "78193e5e394c0fea42b3e954cf775c7d8671afa6c6f46017469c71b3671bee1f"
+  "canonical_sha256": "d50aacb98d60ba379d4027a4a037854b1b671753c625db1a6779cd4a9ab6b49e",
+  "speech_sha256": "d50aacb98d60ba379d4027a4a037854b1b671753c625db1a6779cd4a9ab6b49e"
  },
  {
   "id": "1u4wrm4",
@@ -2076,16 +2076,16 @@
   "speech_sha256": "f4874820a36e05c96e3aa3d25a8d4c47e6b658f51e73c143fbc54ffd99082a08"
  },
  {
-  "id": "q5fusu",
+  "id": "1t6kj2u",
   "person": "successor",
-  "raw": "¡El siguiente que diga incidencia puntual se va andando! Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
-  "text": "¡El siguiente que diga incidencia puntual se va andando! Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "raw": "¡El siguiente que diga incidencia puntual se va andando! YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "text": "¡El siguiente que diga incidencia puntual se va andando! YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
   "mood": "angry",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-successor-angry-1",
-  "canonical_sha256": "ff34e1012f06f64bc3de3cceac7dc33ecc339f512745e58b0a3de579c1991f67",
-  "speech_sha256": "ff34e1012f06f64bc3de3cceac7dc33ecc339f512745e58b0a3de579c1991f67"
+  "canonical_sha256": "87667bf72c2510048151f591f6f301244c9787503154da7e64d353779b18825b",
+  "speech_sha256": "87667bf72c2510048151f591f6f301244c9787503154da7e64d353779b18825b"
  },
  {
   "id": "2rocer",
@@ -2136,16 +2136,16 @@
   "speech_sha256": "d8d556d1b2bf948125d72508e0ce91f7514a9eb1c3fa43056e46bc787c160bfe"
  },
  {
-  "id": "sgbk1l",
+  "id": "12jo9z5",
   "person": "successor",
-  "raw": "Como esto se filtre, mañana desayuno titulares. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
-  "text": "Como esto se filtre, mañana desayuno titulares. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "raw": "Como esto se filtre, mañana desayuno titulares. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "text": "Como esto se filtre, mañana desayuno titulares. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
   "mood": "worried",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-successor-worried-1",
-  "canonical_sha256": "daafe26cd736636a86292f971606f6786c309ed134a2507f0d94f32d91eeb86b",
-  "speech_sha256": "daafe26cd736636a86292f971606f6786c309ed134a2507f0d94f32d91eeb86b"
+  "canonical_sha256": "241c0880f56a00aa3ace738a0a645c87f9236d7564f184b14c237508808c2cca",
+  "speech_sha256": "241c0880f56a00aa3ace738a0a645c87f9236d7564f184b14c237508808c2cca"
  },
  {
   "id": "1okucey",
@@ -2196,16 +2196,16 @@
   "speech_sha256": "623c90eb8efe02f307d01b834c0d6687401c6d857d99da114c3f78646a33140b"
  },
  {
-  "id": "19xv3bd",
+  "id": "17e3ws1",
   "person": "successor",
-  "raw": "Me guardo esta victoria para restregársela al de enfrente. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
-  "text": "Me guardo esta victoria para restregársela al de enfrente. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "raw": "Me guardo esta victoria para restregársela al de enfrente. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "text": "Me guardo esta victoria para restregársela al de enfrente. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
   "mood": "proud",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-successor-proud-1",
-  "canonical_sha256": "8d5cac251653d0ee839abafb74b7c5b8be3ba5f278b2e3679b5148e51a922145",
-  "speech_sha256": "8d5cac251653d0ee839abafb74b7c5b8be3ba5f278b2e3679b5148e51a922145"
+  "canonical_sha256": "38bc29db6e0aef34afac83811f8dbb09d7dfa2e39e9b8944046d674ac7fb05c1",
+  "speech_sha256": "38bc29db6e0aef34afac83811f8dbb09d7dfa2e39e9b8944046d674ac7fb05c1"
  },
  {
   "id": "clyu3u",
@@ -2256,16 +2256,16 @@
   "speech_sha256": "09a40723f36ab50245afcfe7447c9d7d7518f38a10d55db30e7294091a0af7e1"
  },
  {
-  "id": "1mhr5z",
+  "id": "yslpzn",
   "person": "successor",
-  "raw": "¿Cómo que funciona? Mira otra vez, que me estás asustando. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
-  "text": "¿Cómo que funciona? Mira otra vez, que me estás asustando. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "raw": "¿Cómo que funciona? Mira otra vez, que me estás asustando. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "text": "¿Cómo que funciona? Mira otra vez, que me estás asustando. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
   "mood": "surprised",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-successor-surprised-1",
-  "canonical_sha256": "59f0a9ac6682d2e8bfeb8f4e5d66dfeb29649c3a26471a0cf6a6d8372eb655fe",
-  "speech_sha256": "59f0a9ac6682d2e8bfeb8f4e5d66dfeb29649c3a26471a0cf6a6d8372eb655fe"
+  "canonical_sha256": "48cebcb3e57b28688df415b368df04455a4d3d878018427d10ec32a9dfe4854b",
+  "speech_sha256": "48cebcb3e57b28688df415b368df04455a4d3d878018427d10ec32a9dfe4854b"
  },
  {
   "id": "15pwts8",
@@ -2316,16 +2316,16 @@
   "speech_sha256": "cfc484b624b46d210615cf01a118f09949b1d660e36b67ade21b254e78287e83"
  },
  {
-  "id": "1coz2il",
+  "id": "1evur0t",
   "person": "successor",
-  "raw": "No has gestionado una red: has aparcado problemas. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
-  "text": "No has gestionado una red: has aparcado problemas. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "raw": "No has gestionado una red: has aparcado problemas. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "text": "No has gestionado una red: has aparcado problemas. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
   "mood": "disappointed",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-successor-disappointed-1",
-  "canonical_sha256": "ec7d017a879f28c75d28926342aef04eae4a65fb3b090f5012fb1b3efcd83e63",
-  "speech_sha256": "ec7d017a879f28c75d28926342aef04eae4a65fb3b090f5012fb1b3efcd83e63"
+  "canonical_sha256": "f7a8d7ce369e28f3fc05b60d87ae8e457c66a2641740136b372198657de93fca",
+  "speech_sha256": "f7a8d7ce369e28f3fc05b60d87ae8e457c66a2641740136b372198657de93fca"
  },
  {
   "id": "1dworfq",
@@ -2376,16 +2376,16 @@
   "speech_sha256": "98d1cc55160e9d8ce4b17dcfe578ac77c7e14152906f5b5f0ac554f8d7b8a2b3"
  },
  {
-  "id": "187dmpc",
+  "id": "1q5cos4",
   "person": "successor",
-  "raw": "Vamos a poner orden. Y al que estorbe, que se aparte. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
-  "text": "Vamos a poner orden. Y al que estorbe, que se aparte. Rossa ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "raw": "Vamos a poner orden. Y al que estorbe, que se aparte. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
+  "text": "Vamos a poner orden. Y al que estorbe, que se aparte. YaIré ha anunciado promoción. Como respondas con una nota de prensa, te la comes.",
   "mood": "determined",
   "priority": 6,
   "kind": "encounter",
   "source": "encounter:scene-successor-determined-1",
-  "canonical_sha256": "f39f2e8566eb5c0b0ab90957a3a9cd66c863c87041b3b441fbb6baa3bbf51edb",
-  "speech_sha256": "f39f2e8566eb5c0b0ab90957a3a9cd66c863c87041b3b441fbb6baa3bbf51edb"
+  "canonical_sha256": "dc81cb0a15044d29dd56ca0d751b59e6c7b6c741213943d1f0e51dc01927339d",
+  "speech_sha256": "dc81cb0a15044d29dd56ca0d751b59e6c7b6c741213943d1f0e51dc01927339d"
  },
  {
   "id": "1e0h0o5",

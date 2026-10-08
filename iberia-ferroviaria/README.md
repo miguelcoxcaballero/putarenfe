@@ -1,29 +1,27 @@
 # Iberia Ferroviaria · Trenespop
 
-La versión publicada incorpora **Trenespop**, la tienda de trenes nuevos y usados: busca anuncios, filtra por fabricante y plazo de entrega, guarda favoritos y revisa tus compras. Las unidades usadas conservan su antigüedad y estado; los pedidos con envío descuentan una señal y cobran el resto cuando llegan.
+Gestiona una compañía ferroviaria española entre inauguraciones, averías, presupuestos y personajes con muy poca paciencia. La campaña recorre **cinco capítulos, de 2022 a 2050**: dirige Tenfe, conecta ciudades, cumple contratos, renueva infraestructura y compite con OuiOui y YaIré. También puedes empezar una partida libre con tus propias prioridades.
 
-Los **seis logotipos de fabricantes renovados ya están publicados**, con imágenes generadas por IA a partir de referencias visuales de Talgo, CAF, Siemens, CRRC y Alstom. Conservan los nombres parodia y ocupan más espacio en las tarjetas para facilitar su lectura. Dörfler comparte ahora la referencia visual de Siemens.
+La entrada incluye un menú ilustrado y una guía de **nueve tareas reales**, con decisiones, costes y consecuencias. Los personajes intervienen de uno en uno y todos participan varias veces. Sus **315 intervenciones de situaciones** cubren nueve personajes, siete emociones y cinco situaciones por emoción; esas combinaciones de diálogo no representan 315 mecánicas diferentes.
 
-El catálogo muestra **25 fotos generadas por IA** en un mismo taller, con las marcas parodia Tardo, KAFKA, Schlimmens, Dörfler, BCBB y Malstom. Las operadoras se llaman Tenfe, OuiOui y YaIré. AVArato tiene su propio logo y su rotulación en la foto del tren. Algunas variantes usan la foto de una familia afín; los [créditos de las referencias](./docs/train-photo-credits.md) detallan las series representadas.
+**Trenespop** es la tienda de trenes nuevos y usados. Filtra por fabricante, condición y plazo de entrega; guarda favoritos y revisa tus pedidos. Los usados conservan su edad y estado. Los envíos cobran una señal del 30 % al reservar y el 70 % restante al llegar. El catálogo utiliza **25 fotos generadas por IA en el mismo taller** y seis logos de fabricantes renovados: Tardo, KAFKA, Schlimmens, Dörfler, BCBB y Malstom. AVArato tiene logo y rotulación propios. Los [créditos](./docs/train-photo-credits.md) detallan las series y variantes representadas.
 
-- **Jugar:** [Iberia Ferroviaria](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/?v=logos339).
-- **Escuchar sin el juego:** [Auditorio de voces](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html?v=logos339).
+Esta construcción reúne **412 grabaciones completas, sin cuerpos pendientes**, y **68 minutos y 18 segundos de audio**. Juego y auditorio utilizan las mismas tomas enteras, incluidos los 50 audios de la guía y **47 diálogos de Paco** generados con la muestra real de José Luis Torrente, interpretado por Santiago Segura, obtenida de RTVE. La banda sonora mantiene las melodías e incorpora guitarra, cajón y palmas. La revisión técnica de voces conserva sus discrepancias de reconocimiento; no equivale a una aprobación humana de parecido, naturalidad o interpretación.
+
+- **Jugar:** [Iberia Ferroviaria](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/?v=v363-412).
+- **Escuchar sin el juego:** [Auditorio de voces](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html?v=v363-412).
 - **Fuente editable y pruebas:** [proyecto](./proyecto/) y [docs/README.md](./docs/README.md).
 
-Esta entrega contiene **339 de las 412 grabaciones completas**, los 50 audios de la guía y 36 diálogos de Paco con la referencia real de Torrente. Los 73 diálogos aún no incorporados a esta entrega conservan texto y decisiones. El juego y el auditorio comparten las mismas tomas completas; no encadenan los antiguos fragmentos ni sustituyen audios ausentes por síntesis del navegador. La producción y la revisión final de las 412 voces siguen en curso.
+**Estado de esta entrega:** validación técnica y pruebas nativas completadas; verificación del despliegue público en curso. La [prueba actual](./docs/final412-qa-index.json) identifica los resultados y su alcance. [release.json](./release.json) conserva las huellas de las páginas, los assets y las 412 grabaciones publicadas.
 
-Los logos renovados están publicados en el [commit `3901721`](https://github.com/miguelcoxcaballero/putarenfe/commit/3901721634b9e37996f0dd75c8bf2e184700986e). La [prueba HTTPS de esta entrega](./docs/pages-manufacturer-logos-339-https-proof.json) verificó sus **389 rutas** con HTTP 200, bytes y SHA coincidentes: 388 comparaciones iniciales y una repetición dirigida del único MP3 que había devuelto un HTTP 503 temporal. Incluye las seis imágenes de marcas, las 25 fotos y los 339 audios, sin afirmar una prueba nativa o una escucha humana de las voces. La [verificación local de los logos](./docs/manufacturer-logos-339-independent-proof.json) conserva la revisión anterior a su publicación.
+El progreso se guarda en el `localStorage` de tu navegador y origen. Otro dispositivo, navegador o dirección local tiene su propio guardado.
 
-Trenespop se publicó inicialmente en el [commit `9a8d587`](https://github.com/miguelcoxcaballero/putarenfe/commit/9a8d587e88ee122503cff23e79dce9ecc671ca7d). Su [prueba HTTPS anterior](./docs/pages-339-https-proof.json) verificó 381 rutas y la [revisión independiente](./docs/trenespop-339-final25-independent-proof.json) comprobó las 25 fotos y AVArato. La [prueba nativa de Trenespop](./docs/trenespop-native-339-proof.json) comprobó filtros, favoritos, compras reales, señales, entregas y guardados en escritorio y móvil sobre la construcción previa con 17 fotos. Estas pruebas corresponden a sus archivos exactos y no certifican los nuevos logos, la reproducción de las 412 voces ni una aprobación humana de su naturalidad.
-
-El progreso se guarda mediante el `localStorage` de tu navegador y origen. Otro dispositivo, navegador o dirección local tiene su propio guardado.
-
-Para probar esta carpeta localmente, ejecuta desde la raíz de `putarenfe`:
+Para probar la carpeta localmente, ejecuta desde la raíz de `putarenfe`:
 
 ```sh
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Abre <http://localhost:8080/iberia-ferroviaria/> o <http://localhost:8080/iberia-ferroviaria/dialogos.html>. Desde `proyecto`, `npm run web:build` reconstruye la web con el manifiesto congelado aceptado; no genera voces. El contenido de cada entrega queda identificado en [release.json](./release.json), y el procedimiento está en [docs/PUBLICACION.md](./docs/PUBLICACION.md).
+Abre <http://localhost:8080/iberia-ferroviaria/> o <http://localhost:8080/iberia-ferroviaria/dialogos.html>. Desde `proyecto`, `npm run web:build` reconstruye la web con sus inputs congelados aceptados; no genera voces. El procedimiento está en [docs/PUBLICACION.md](./docs/PUBLICACION.md). Los HTML autónomos de pruebas, que incluyen todo el audio, se mantienen fuera de Git por su tamaño.
 
-Iberia Ferroviaria ocupa esta carpeta propia; la aplicación de Renfe continúa en la raíz del repositorio.
+Iberia Ferroviaria ocupa esta carpeta propia; la aplicación de Renfe continúa en la raíz del repositorio. Las pruebas de entregas anteriores se conservan como historial y acreditan únicamente los archivos y el alcance que identifican.

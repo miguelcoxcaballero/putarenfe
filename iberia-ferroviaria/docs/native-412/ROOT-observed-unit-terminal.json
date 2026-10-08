@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-08T22:22:14.492579+00:00",
+  "evidenceKind": "ROOT direct observation of actual exec tool terminal response, not manufactured subprocess receipt",
+  "freshRerunPerformedByThisReceipt": false,
+  "ownedPopenWaitClaimedByThisReceipt": false,
+  "sourceInventorySHA256": "3478432775bf99abff141ce1b36056d4f95f818d4dda62ada3dc8a39b336a7c0",
+  "actualToolSessionID": 70790,
+  "terminalChunkID": "8e965d",
+  "actualToolTerminalExitCode": 0,
+  "commandScope": "unchanged test.mjs in final412-001 complete temporary materialization",
+  "materializationProofSHA256": "fd700afa112a69dd5ed23eeff6217de7e76a7df6c830115d0683c8671094b14b",
+  "fixture": "byteexact existing frases.json copied only to temporary investigacion/voces",
+  "assertionsModified": false,
+  "wholeDialogueCount": 412,
+  "runtimeActionsChecked": 106,
+  "humanListening": false,
+  "status": "ROOT-observed-actual-tool-terminal-zero"
+}

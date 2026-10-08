@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-08T22:22:14.492579+00:00",
+  "evidenceKind": "ROOT direct observation of actual exec tool terminal response, not manufactured subprocess receipt",
+  "freshRerunPerformedByThisReceipt": false,
+  "ownedPopenWaitClaimedByThisReceipt": false,
+  "sourceInventorySHA256": "3478432775bf99abff141ce1b36056d4f95f818d4dda62ada3dc8a39b336a7c0",
+  "actualToolSessionID": 30570,
+  "terminalChunkID": "fe83d0",
+  "actualToolTerminalExitCode": 0,
+  "commandScope": "unchanged campaign-test.mjs against current adopted source",
+  "years": [
+    2022,
+    2050
+  ],
+  "months": 348,
+  "chapters": 5,
+  "outcome": {
+    "activeRoutes": 115,
+    "trains": 838,
+    "connectedAVECities": 65,
+    "nationalProjects": 9,
+    "cash": 146,
+    "debt": 0,
+    "score": 87,
+    "satisfaction": 98,
+    "electrifiedKm": 1940,
+    "convertedKm": 3997,
+    "changers": 1
+  },
+  "assertionsModified": false,
+  "status": "ROOT-observed-actual-tool-terminal-zero"
+}

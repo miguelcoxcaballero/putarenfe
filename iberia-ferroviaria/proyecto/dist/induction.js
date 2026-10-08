@@ -84,7 +84,7 @@ export const INDUCTION_STAGES = [
     id: 'competition', title: 'Elegir una ventaja también cuesta',
     briefing: [
       {who: 'successor', mood: 'determined', text: 'Antes de comprar otra ocurrencia, vamos a separar sus costes y sus plazos.\n\nCompara competencia, políticas e investigación antes de gastar. Soy Óscar del Puente, hoy alcalde consultado. Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda. Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas.'},
-      {who: 'rival', mood: 'determined', text: 'Vamos con la competencia: comprueba que el enemigo está allí antes de declararle una guerra.\n\nAbre «Competencia» y compara una relación donde ya haya rival ferroviario. Lowgo aprieta precios; Rossa vende calidad. En 2022 no han entrado todos en todas partes. No rebajes toda tu red para responder a un enemigo que todavía no está.'},
+      {who: 'rival', mood: 'determined', text: 'Vamos con la competencia: comprueba que el enemigo está allí antes de declararle una guerra.\n\nAbre «Competencia» y compara una relación donde ya haya rival ferroviario. OuiOui aprieta precios; YaIré vende calidad. En 2022 no han entrado todos en todas partes. No rebajes toda tu red para responder a un enemigo que todavía no está.'},
       {who: 'minister', mood: 'determined', text: 'Ahora vienen los inventos; financiar una idea no la convierte en servicio mañana.\n\nDespués abre «Investigación». Venta online cuesta diez millones y tarda cuatro meses; ERTMS, treinta y cinco y doce meses. La primera atrae demanda; la segunda mejora tiempos y puntualidad. Puedes financiar un proyecto o esperar. Solo cabe una investigación en curso.'},
     ],
     objective: 'Compara alternativas e invierte o conserva caja.',
@@ -108,7 +108,7 @@ export const INDUCTION_STAGES = [
       options: [
         {id: 'ave', correct: false, title: 'Lo convierte en una vía para AVE', text: 'Al recibir electricidad ya cumple todos los requisitos.', feedback: 'Oiga, ha mezclado enchufes y ruedas; vamos por partes.\n\nLa catenaria resuelve la alimentación, no el ancho. El AVE sigue necesitando ancho estándar o mixto en todo su recorrido, además de electricidad.', effect: {}},
         {id: 'power', correct: true, title: 'Permite usar material eléctrico compatible con el ancho', text: 'El ancho sigue siendo ibérico; el requisito de energía cambia.', feedback: 'Correcto: electrificar no cambia las ruedas ni el ancho. Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles.', effect: {}},
-        {id: 'speed', correct: false, title: 'Garantiza alta velocidad automáticamente', text: 'Todos los trenes podrán circular a 300 km/h.', feedback: 'Oiga, ese tren corre lo que permitan la vía y el material, no su discurso.\n\nNi la catenaria ni cambiar el ancho garantizan 300 km/h. La velocidad depende del trazado, los límites de infraestructura y el material. Una renovación tiene su propio efecto y presupuesto.', effect: {}},
+        {id: 'speed', correct: false, title: 'Garantiza alta velocidad automáticamente', text: 'Todos los trenes podrán circular a 300 km/h.', feedback: 'Oiga, ese tren corre lo que permitan la vía y el material, no su discurso.\n\nNi la catenaria ni cambiar el ancho garantizan 300 kilómetros por hora. La velocidad depende del trazado, los límites de infraestructura y el material. Una renovación tiene su propio efecto y presupuesto.', effect: {}},
       ],
     },
     debrief: [

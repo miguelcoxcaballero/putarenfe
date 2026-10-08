@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "status": "ROOT_CURRENT412_NATIVE_PRODUCT_ACCEPTED",
+  "ROOTReviewed": true,
+  "reviewedAt": "2026-10-08T22:34:03.189253+00:00",
+  "canonical": {
+    "path": "/workspace/onboarding/spoken-brand-final-c6-prepared/dialogos-c6.json",
+    "sha256": "6348984c61499234ecf0965f976591250f106948968b600bc4325c514884098f"
+  },
+  "manifest": {
+    "path": "/workspace/onboarding/spoken-brand-final-c6-stage/manifest.json",
+    "sha256": "c88ba4b445d5d474060035fc7453c76b495dc42854d6d889a72733bdbca49cac"
+  },
+  "release": {
+    "path": "/workspace/onboarding/final412-web-stage-001/release.json",
+    "sha256": "37446ca2d267dc3fcc92ce9650fa731f683b12d3762a0508bafca0f1042832e3"
+  },
+  "physical": {
+    "path": "/tmp/onboarding/final-release-runtime-001/full412-physical-accepted.json",
+    "sha256": "8dd23e3e7e0aff58b287e76ab0fd789cdeafa9212d7ca812665ddcde21bffd62"
+  },
+  "ROOTSemantic": {
+    "path": "/tmp/onboarding/final-release-runtime-001/ROOT-semantic-accepted.json",
+    "sha256": "1bd917b7d8eee3175f8c7403d03898e91eab2314ef97db0ebff6635380a0f154"
+  },
+  "currentASR": {
+    "path": "/tmp/onboarding/final-release-runtime-001/ROOT-current-ASR-accepted.json",
+    "sha256": "da5ace67d43725eb65b9816d7ae13008dd23c7f09a97e54764ee502119cc4c7f"
+  },
+  "inputAuthority": {
+    "path": "/tmp/onboarding/final-release-runtime-001/ROOT-native-authority.json",
+    "sha256": "ed94d77dae1b7a5d73dd5eeaf1c0851ed83138d555dbd4ff9d7c872fccc4b1dc"
+  },
+  "officialConfig": {
+    "path": "/tmp/onboarding/final-release-runtime-001/official.GO.json",
+    "sha256": "08e71a75dadb3d22835bcb10a890f0a289cf03d1731cc4eca52799a4983d5e06"
+  },
+  "officialAggregate": {
+    "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/summary.json",
+    "sha256": "760cea1bf8bf3dba18ddb3242a50c3d171aed63a1e59dfa77aab4946572605be"
+  },
+  "suites": {
+    "conversation": {
+      "execution": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official-001/conversation/actual-execution.json",
+        "sha256": "66799e2c1e4e5da1e107ec9a4a8fd57424932fc36871ecee2073c6ccab7ccf82"
+      },
+      "report": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official-001/conversation/official-output/report.json",
+        "sha256": "f352a5f0dfbb7ceba3f83f360e95f2bcb49bd27134393d8fabdff13f98b7854d"
+      },
+      "actualOwnedChildWaitExitCode": 0,
+      "allOwnedChildrenClosed": true
+    },
+    "game": {
+      "execution": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/game/accepted-execution.json",
+        "sha256": "54bc3cf4c5b4758457310126b46cafb8a632317566893e1812686df116d62877"
+      },
+      "report": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/game/official-output/report.json",
+        "sha256": "dd31d14d66c86e65304337bc9371a32b6282f3e3bc2b8a0772f6428906e3dc4c"
+      },
+      "actualOwnedChildWaitExitCode": 0,
+      "allOwnedChildrenClosed": true
+    },
+    "listening": {
+      "execution": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/listening/accepted-execution.json",
+        "sha256": "d8868ea5a82dc593e02038ef930b8271053fe40f2b593ec53d8e25e77b21edff"
+      },
+      "report": {
+        "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/listening/official-output/report.json",
+        "sha256": "3601d030b099f4a77ebf5031701c39f057e34d3a1398669193fecf5e26c3820b"
+      },
+      "actualOwnedChildWaitExitCode": 0,
+      "allOwnedChildrenClosed": true
+    },
+    "web": {
+      "execution": {
+        "path": "/tmp/onboarding/final-release-runtime-001/web-002/actual-execution.json",
+        "sha256": "f61bfba38ab9ef49c27312db1e9dbfbeb22f9cab77fea3a6b3e5cb1e1dec9de2"
+      },
+      "report": {
+        "path": "/tmp/onboarding/final-release-runtime-001/web-002/ui/report.json",
+        "sha256": "c7c8abdd77c2468120fa348d72013f02cfbc7088e07e5cff610dc939ced5bdac"
+      },
+      "actualOwnedChildWaitExitCode": 0,
+      "allOwnedChildrenClosed": true
+    },
+    "trenespop": {
+      "execution": {
+        "path": "/tmp/onboarding/final-release-runtime-001/trenespop-001/actual-execution.json",
+        "sha256": "daa1a6640dea0da990c291e2139c3bdb53c6445d5ae603b2374c88b1937b06ac"
+      },
+      "report": {
+        "path": "/tmp/onboarding/final-release-runtime-001/trenespop-001/ui/report.json",
+        "sha256": "5c1c7badc52ec795c9ca0edf43a8570ee042a1b6f41154c0246797b49c6bb39a"
+      },
+      "actualOwnedChildWaitExitCode": 0,
+      "allOwnedChildrenClosed": true
+    }
+  },
+  "unit": {
+    "path": "/tmp/onboarding/final-release-runtime-001/ROOT-observed-unit-terminal.json",
+    "sha256": "935a948c575abb243d979f884ef80ca8944f7792d47cedc8c4c74d599681c480"
+  },
+  "campaign": {
+    "path": "/tmp/onboarding/final-release-runtime-001/ROOT-observed-campaign-terminal.json",
+    "sha256": "760005020454df6bbba8ef7b89ebcd1593d09ce59db11441d1982d2faf23022d"
+  },
+  "representativeScreensROOTReviewed": [
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/official-001/conversation/official-output/04-conversacion-consecutiva.png",
+      "sha256": "c09b3e42376b745dde0f3885e6ef2058640da4dabc678707c3ee081d976bec30"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/game/official-output/mobile-320.png",
+      "sha256": "ddae6abdef98c0e1d96fc2077b7da53067d4582749bfb48463d974069bcc8b29"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/game/official-output/desktop-mayor.png",
+      "sha256": "65fe77b2899fc9923df8a57d093af8233dacb309d098c0f3df651adee16fc941"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/official-http-001/listening/official-output/mobile-390.png",
+      "sha256": "6ac4d404020708f21d4a2facf3aa50836b940916ff836dbdb22305986fc55fce"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/web-002/ui/menu-1440.png",
+      "sha256": "cbf8e6ef1860fb14c9592487ce74db28c0159837e83954b918a63b540cad09a7"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/web-002/ui/task-390.png",
+      "sha256": "04f4a2ac7f43d993c35e299c3a3e5132ba49dbe9692d1fd798525ca9b0b9b7b3"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/trenespop-001/ui/catalogue-1440.png",
+      "sha256": "ff5b7dd7bebcdc271c6f938d842c832e391a95f2aa4276560e93149b515e8f4b"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/trenespop-001/ui/detail-390.png",
+      "sha256": "d807b80a2ea195725705c15ba006431292b7675c03b3775c027ff046e989cd72"
+    }
+  ],
+  "allScreensVisuallyReviewed": false,
+  "originalTTSOwnedWaitExitCode": null,
+  "TTSExitUnknown": true,
+  "TTSCompletionEquivalentToOwnedWaitZero": false,
+  "BASEOwnedWaitExitCode": 0,
+  "SMALLOwnedWaitExitCode": 0,
+  "unchangedHarnessProducerStateLabelIsNotWaitEvidence": true,
+  "humanListening": false,
+  "voiceLikenessOrActingCertified": false,
+  "all412NativelyAuditioned": false,
+  "nativeScope": "24 legal tutorial bodies/57 realactions/all9;9whole encounters+repeatstop/mobile;9two-paragraph audition bodies/nativecontrols;untouchedURL-MP3web;realTrenespop purchases/delivery/reload/filter/logo/mobile, all25photo physicalgraph",
+  "preservedFailures": [
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/official-001/summary.json",
+      "sha256": "371b7e2748846d91ea89321704295cac5d13e4be0f0dea4fd5034889780cdc8e"
+    },
+    {
+      "path": "/tmp/onboarding/final-release-runtime-001/web-001-outer-failure-and-own-Chrome-cleanup.json",
+      "sha256": "7179a1a4b4fbdafa9a975e7afde4b1a9ddf56366c89c5f03a75aaacce63f922f"
+    }
+  ],
+  "publicHTTPSPending": true
+}

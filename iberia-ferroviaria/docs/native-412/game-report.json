@@ -1,0 +1,2015 @@
+{
+  "startedAt": "2026-10-08T22:20:37.982Z",
+  "html": "Iberia-Ferroviaria.html",
+  "htmlSHA256": "c5242b9ea9b1fd1dd86d7b080af4bc043deb7e34d2af363d74bce73a1ce8cca8",
+  "catalogSHA256": "6348984c61499234ecf0965f976591250f106948968b600bc4325c514884098f",
+  "manifestSHA256": "c88ba4b445d5d474060035fc7453c76b495dc42854d6d889a72733bdbca49cac",
+  "manifest": "spoken-brand-final-c6-stage",
+  "testSourceSHA256": "e551a2e8020cebbc0e439f226545d0a83c577e79b7485039cd0877f7adbebcbf",
+  "expectedWholeDialogues": 412,
+  "partialRehearsal": false,
+  "transport": "http",
+  "nativeAudio": true,
+  "productionFilesModified": false,
+  "textOrDialogueModified": false,
+  "scenarioStateFixture": true,
+  "scope": "Nueve diálogos canónicos completos, controles reales de escuchar/repetir/parar; móvil 320 y 390.",
+  "limitation": "Comprueba decodificación y reproducción; no evalúa naturalidad, acento ni parecido de la voz.",
+  "samples": [
+    {
+      "person": "president",
+      "raw": "Hoy hasta los sondeos sonríen. No lo jodas. Quiero más salidas en hora punta. Y maquinistas, no asesores fingiendo conducir.",
+      "id": "1c1hpku",
+      "scene": "scene-president-happy-0",
+      "parts": [
+        "Hoy hasta los sondeos sonríen.",
+        "No lo jodas.",
+        "Quiero más salidas en hora punta.",
+        "Y maquinistas, no asesores fingiendo conducir."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "1c1hpku",
+          "kind": "D",
+          "raw": "Hoy hasta los sondeos sonríen. No lo jodas. Quiero más salidas en hora punta. Y maquinistas, no asesores fingiendo conducir.",
+          "sha256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+          "productionSHA256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+          "declaredReferenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4",
+          "declaredDuration": 8.064
+        }
+      ],
+      "label": "desktop-president",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 0,
+          "source": {
+            "id": 32,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1c1hpku",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "president",
+          "at": 12881.90000000596,
+          "duration": 7.999977324263039,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08504305332762802,
+          "peak": 0.5825784802436829,
+          "path": [
+            {
+              "id": 32,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 33,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 161804,
+            "at": 12859.70000000298,
+            "mp3SHA256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+            "duration": 7.999977324263039,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "6a4d3875b7110dae0e45bd55c4d05fb93f399c8703335a8693f60a443d6bee6b",
+          "endedAt": 20976.79999999702,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 1,
+        "source": {
+          "id": 51,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "1c1hpku",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "president",
+        "at": 23453.79999999702,
+        "duration": 7.999977324263039,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.08504305332762802,
+        "peak": 0.5825784802436829,
+        "path": [
+          {
+            "id": 51,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 52,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 161804,
+          "at": 12859.70000000298,
+          "mp3SHA256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+          "duration": 7.999977324263039,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "6a4d3875b7110dae0e45bd55c4d05fb93f399c8703335a8693f60a443d6bee6b",
+        "stoppedAt": 24444.90000000596,
+        "endedAt": 24498,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "minister",
+      "raw": "Mira qué bien: una mañana sin ruedas de prensa de mierda. La nueva oferta necesita turnos. No pienso explicar que vendimos asientos sin conductor.",
+      "id": "1d9v6n4",
+      "scene": "scene-minister-happy-0",
+      "parts": [
+        "Mira qué bien: una mañana sin ruedas de prensa de mierda.",
+        "La nueva oferta necesita turnos.",
+        "No pienso explicar que vendimos asientos sin conductor."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "1d9v6n4",
+          "kind": "D",
+          "raw": "Mira qué bien: una mañana sin ruedas de prensa de mierda. La nueva oferta necesita turnos. No pienso explicar que vendimos asientos sin conductor.",
+          "sha256": "e86a2939760828f28ad1f0e79b616c39f03b02118c8b6d36dc78392537adf4b4",
+          "productionSHA256": "e86a2939760828f28ad1f0e79b616c39f03b02118c8b6d36dc78392537adf4b4",
+          "declaredReferenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575",
+          "declaredDuration": 7.248
+        }
+      ],
+      "label": "desktop-minister",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 2,
+          "source": {
+            "id": 60,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1d9v6n4",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "minister",
+          "at": 30595.10000000894,
+          "duration": 7.2,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09041942548346053,
+          "peak": 0.7951197028160095,
+          "path": [
+            {
+              "id": 60,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 61,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 145484,
+            "at": 30472.5,
+            "mp3SHA256": "e86a2939760828f28ad1f0e79b616c39f03b02118c8b6d36dc78392537adf4b4",
+            "duration": 7.2,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "db38e17de99b9decc06757bdcc4072c430189b3e5f0123cfbdba862c44d2ad90",
+          "endedAt": 38055.79999999702,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 3,
+        "source": {
+          "id": 69,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "1d9v6n4",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "minister",
+        "at": 39500.70000000298,
+        "duration": 7.2,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.09041942548346053,
+        "peak": 0.7951197028160095,
+        "path": [
+          {
+            "id": 69,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 70,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 145484,
+          "at": 30472.5,
+          "mp3SHA256": "e86a2939760828f28ad1f0e79b616c39f03b02118c8b6d36dc78392537adf4b4",
+          "duration": 7.2,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "db38e17de99b9decc06757bdcc4072c430189b3e5f0123cfbdba862c44d2ad90",
+        "stoppedAt": 40593.40000000596,
+        "endedAt": 40645.29999999702,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "successor",
+      "raw": "Hoy el tren corre más que mis respuestas en redes. El horario está inflado. O pagamos refuerzos o dejamos de vender humo en ventanilla.",
+      "id": "83ole",
+      "scene": "scene-successor-happy-0",
+      "parts": [
+        "Hoy el tren corre más que mis respuestas en redes.",
+        "El horario está inflado.",
+        "O pagamos refuerzos o dejamos de vender humo en ventanilla."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "83ole",
+          "kind": "D",
+          "raw": "Hoy el tren corre más que mis respuestas en redes. El horario está inflado. O pagamos refuerzos o dejamos de vender humo en ventanilla.",
+          "sha256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+          "productionSHA256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+          "declaredReferenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b",
+          "declaredDuration": 6.936
+        }
+      ],
+      "label": "desktop-successor",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 4,
+          "source": {
+            "id": 76,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "83ole",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "successor",
+          "at": 45608,
+          "duration": 6.88,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08816115147837174,
+          "peak": 0.7807518839836121,
+          "path": [
+            {
+              "id": 76,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 77,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 139244,
+            "at": 45554.90000000596,
+            "mp3SHA256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+            "duration": 6.88,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "f8705d31f84dd13b412213e3c999b336ed28647777ce35ee24e85277635da48d",
+          "endedAt": 52742.40000000596,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 5,
+        "source": {
+          "id": 83,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "83ole",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "successor",
+        "at": 54049.70000000298,
+        "duration": 6.88,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.08816115147837174,
+        "peak": 0.7807518839836121,
+        "path": [
+          {
+            "id": 83,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 84,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 139244,
+          "at": 45554.90000000596,
+          "mp3SHA256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+          "duration": 6.88,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "f8705d31f84dd13b412213e3c999b336ed28647777ce35ee24e85277635da48d",
+        "stoppedAt": 55244.60000000894,
+        "endedAt": 55298.10000000894,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "treasury",
+      "raw": "Soy Charo. Hoy no he traído la tijera grande. Aprovecha. Las horas extra no se pagan con entusiasmo. Saca la cartera o ajusta la oferta.",
+      "id": "9stspe",
+      "scene": "scene-treasury-happy-0",
+      "parts": [
+        "Soy Charo.",
+        "Hoy no he traído la tijera grande.",
+        "Aprovecha.",
+        "Las horas extra no se pagan con entusiasmo.",
+        "Saca la cartera o ajusta la oferta."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "9stspe",
+          "kind": "D",
+          "raw": "Soy Charo. Hoy no he traído la tijera grande. Aprovecha. Las horas extra no se pagan con entusiasmo. Saca la cartera o ajusta la oferta.",
+          "sha256": "4a4e5db56880febe8da87036504429243f91a342dcd3ea197cf2be0fa186cabc",
+          "productionSHA256": "4a4e5db56880febe8da87036504429243f91a342dcd3ea197cf2be0fa186cabc",
+          "declaredReferenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188",
+          "declaredDuration": 8.688
+        }
+      ],
+      "label": "desktop-treasury",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 6,
+          "source": {
+            "id": 92,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "9stspe",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "treasury",
+          "at": 60293.90000000596,
+          "duration": 8.639977324263038,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08985843817355538,
+          "peak": 0.7754209637641907,
+          "path": [
+            {
+              "id": 92,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 93,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 174284,
+            "at": 60250.79999999702,
+            "mp3SHA256": "4a4e5db56880febe8da87036504429243f91a342dcd3ea197cf2be0fa186cabc",
+            "duration": 8.639977324263038,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "2b5c34799532e1f76e07920fcd8291d2dbd60f7829eff147b1c757012f7d0b35",
+          "endedAt": 69202.10000000894,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 7,
+        "source": {
+          "id": 101,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "9stspe",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "treasury",
+        "at": 70695.70000000298,
+        "duration": 8.639977324263038,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.08985843817355538,
+        "peak": 0.7754209637641907,
+        "path": [
+          {
+            "id": 101,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 102,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 174284,
+          "at": 60250.79999999702,
+          "mp3SHA256": "4a4e5db56880febe8da87036504429243f91a342dcd3ea197cf2be0fa186cabc",
+          "duration": 8.639977324263038,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "2b5c34799532e1f76e07920fcd8291d2dbd60f7829eff147b1c757012f7d0b35",
+        "stoppedAt": 71764.5,
+        "endedAt": 71815.79999999702,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "adif",
+      "raw": "La cuadrilla ha terminado y nadie ha soltado una estupidez. Récord. Sin cuadrilla de guardia, la incidencia de las seis la arregla el Espíritu Santo.",
+      "id": "1qtmawe",
+      "scene": "scene-adif-happy-0",
+      "parts": [
+        "La cuadrilla ha terminado y nadie ha soltado una estupidez.",
+        "Récord.",
+        "Sin cuadrilla de guardia, la incidencia de las seis la arregla el Espíritu Santo."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "1qtmawe",
+          "kind": "D",
+          "raw": "La cuadrilla ha terminado y nadie ha soltado una estupidez. Récord. Sin cuadrilla de guardia, la incidencia de las seis la arregla el Espíritu Santo.",
+          "sha256": "12138cf8a88f5b2c3ad00f9e3945e557a3cef8e2c8d8fb95536cb53e2d51186b",
+          "productionSHA256": "12138cf8a88f5b2c3ad00f9e3945e557a3cef8e2c8d8fb95536cb53e2d51186b",
+          "declaredReferenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0",
+          "declaredDuration": 11.088
+        }
+      ],
+      "label": "desktop-adif",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 8,
+          "source": {
+            "id": 112,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1qtmawe",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "adif",
+          "at": 75153,
+          "duration": 11.039977324263038,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08844193664584284,
+          "peak": 0.750246524810791,
+          "path": [
+            {
+              "id": 112,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 113,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 222284,
+            "at": 75089.40000000596,
+            "mp3SHA256": "12138cf8a88f5b2c3ad00f9e3945e557a3cef8e2c8d8fb95536cb53e2d51186b",
+            "duration": 11.039977324263038,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "042ef00e2a53ac620e38632264e1759e941eab2b7d5bb7154639056a681f3e8b",
+          "endedAt": 86481.60000000894,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 9,
+        "source": {
+          "id": 123,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "1qtmawe",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "adif",
+        "at": 87973.10000000894,
+        "duration": 11.039977324263038,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.08844193664584284,
+        "peak": 0.750246524810791,
+        "path": [
+          {
+            "id": 123,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 124,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 222284,
+          "at": 75089.40000000596,
+          "mp3SHA256": "12138cf8a88f5b2c3ad00f9e3945e557a3cef8e2c8d8fb95536cb53e2d51186b",
+          "duration": 11.039977324263038,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "042ef00e2a53ac620e38632264e1759e941eab2b7d5bb7154639056a681f3e8b",
+        "stoppedAt": 88989.20000000298,
+        "endedAt": 89041.70000000298,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "workshop",
+      "raw": "Hoy los trenes suenan a tren, no a cubo de tornillos. Necesito manos en el turno de noche. Los trenes no se revisan con besos.",
+      "id": "18tl3gr",
+      "scene": "scene-workshop-happy-0",
+      "parts": [
+        "Hoy los trenes suenan a tren, no a cubo de tornillos.",
+        "Necesito manos en el turno de noche.",
+        "Los trenes no se revisan con besos."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "18tl3gr",
+          "kind": "D",
+          "raw": "Hoy los trenes suenan a tren, no a cubo de tornillos. Necesito manos en el turno de noche. Los trenes no se revisan con besos.",
+          "sha256": "13e6fa4e73f6aea78b2d15c96464b6a6a352bc311145fe8591a09525ec9aa1aa",
+          "productionSHA256": "13e6fa4e73f6aea78b2d15c96464b6a6a352bc311145fe8591a09525ec9aa1aa",
+          "declaredReferenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763",
+          "declaredDuration": 7.872
+        }
+      ],
+      "label": "desktop-workshop",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 10,
+          "source": {
+            "id": 134,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "18tl3gr",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "workshop",
+          "at": 92865.29999999702,
+          "duration": 7.8238548752834465,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09629382178068338,
+          "peak": 0.7739425301551819,
+          "path": [
+            {
+              "id": 134,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 135,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 157964,
+            "at": 92798.40000000596,
+            "mp3SHA256": "13e6fa4e73f6aea78b2d15c96464b6a6a352bc311145fe8591a09525ec9aa1aa",
+            "duration": 7.8238548752834465,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "b1539642d83b0c4eebb9e56bf85880d9cb9c51a8038112b6eef02ac4adf5d5ac",
+          "endedAt": 100983.60000000894,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 11,
+        "source": {
+          "id": 145,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "18tl3gr",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "workshop",
+        "at": 102421.60000000894,
+        "duration": 7.8238548752834465,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.09629382178068338,
+        "peak": 0.7739425301551819,
+        "path": [
+          {
+            "id": 145,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 146,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 157964,
+          "at": 92798.40000000596,
+          "mp3SHA256": "13e6fa4e73f6aea78b2d15c96464b6a6a352bc311145fe8591a09525ec9aa1aa",
+          "duration": 7.8238548752834465,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "b1539642d83b0c4eebb9e56bf85880d9cb9c51a8038112b6eef02ac4adf5d5ac",
+        "stoppedAt": 103476.29999999702,
+        "endedAt": 103529.90000000596,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "riders",
+      "raw": "Hoy he llegado a mi hora. Casi me da un pasmo. El primer tren nos deja tirados si no hay relevo. No somos figurantes de tu horario.",
+      "id": "2ey9uf",
+      "scene": "scene-riders-happy-0",
+      "parts": [
+        "Hoy he llegado a mi hora.",
+        "Casi me da un pasmo.",
+        "El primer tren nos deja tirados si no hay relevo.",
+        "No somos figurantes de tu horario."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "2ey9uf",
+          "kind": "D",
+          "raw": "Hoy he llegado a mi hora. Casi me da un pasmo. El primer tren nos deja tirados si no hay relevo. No somos figurantes de tu horario.",
+          "sha256": "ad9b9d796770bb1cad7a9d240ecb50286e1e2ccd228fb3713b7615200e190900",
+          "productionSHA256": "ad9b9d796770bb1cad7a9d240ecb50286e1e2ccd228fb3713b7615200e190900",
+          "declaredReferenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf",
+          "declaredDuration": 7.728
+        }
+      ],
+      "label": "desktop-riders",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 12,
+          "source": {
+            "id": 154,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "2ey9uf",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "riders",
+          "at": 107093.20000000298,
+          "duration": 7.679977324263039,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09167434352855403,
+          "peak": 0.750792384147644,
+          "path": [
+            {
+              "id": 154,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 155,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 155084,
+            "at": 107054.70000000298,
+            "mp3SHA256": "ad9b9d796770bb1cad7a9d240ecb50286e1e2ccd228fb3713b7615200e190900",
+            "duration": 7.679977324263039,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "8fa2b81a69664a12022a32ecac8d096d73097caf0b8e26e54bc9727d9b8f363e",
+          "endedAt": 114992.40000000596,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 13,
+        "source": {
+          "id": 163,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "2ey9uf",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "riders",
+        "at": 116745.90000000596,
+        "duration": 7.679977324263039,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.09167434352855403,
+        "peak": 0.750792384147644,
+        "path": [
+          {
+            "id": 163,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 164,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 155084,
+          "at": 107054.70000000298,
+          "mp3SHA256": "ad9b9d796770bb1cad7a9d240ecb50286e1e2ccd228fb3713b7615200e190900",
+          "duration": 7.679977324263039,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "8fa2b81a69664a12022a32ecac8d096d73097caf0b8e26e54bc9727d9b8f363e",
+        "stoppedAt": 117632,
+        "endedAt": 117683.60000000894,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "mayor",
+      "raw": "Ha venido gente al pueblo y no era para cerrar algo. El tren de primera hora es el que lleva a la gente al trabajo, no el de tu visita oficial.",
+      "id": "j9aj0r",
+      "scene": "scene-mayor-happy-0",
+      "parts": [
+        "Ha venido gente al pueblo y no era para cerrar algo.",
+        "El tren de primera hora es el que lleva a la gente al trabajo, no el de tu visita oficial."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "j9aj0r",
+          "kind": "D",
+          "raw": "Ha venido gente al pueblo y no era para cerrar algo. El tren de primera hora es el que lleva a la gente al trabajo, no el de tu visita oficial.",
+          "sha256": "ad7d74658c4d7af9936f307dd630d0da0906c19542a2cc4cd1bb76e19d9603b7",
+          "productionSHA256": "ad7d74658c4d7af9936f307dd630d0da0906c19542a2cc4cd1bb76e19d9603b7",
+          "declaredReferenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+          "declaredDuration": 7.968
+        }
+      ],
+      "label": "desktop-mayor",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 14,
+          "source": {
+            "id": 174,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "j9aj0r",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "mayor",
+          "at": 121826.79999999702,
+          "duration": 7.919977324263039,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08222817254203955,
+          "peak": 0.5432634353637695,
+          "path": [
+            {
+              "id": 174,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 175,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 159884,
+            "at": 121795.90000000596,
+            "mp3SHA256": "ad7d74658c4d7af9936f307dd630d0da0906c19542a2cc4cd1bb76e19d9603b7",
+            "duration": 7.919977324263039,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "35bd5bbd24b0cc2efc5fd61ce17e453b7ad45b131e963811b369cc2cbc66839c",
+          "endedAt": 129952.70000000298,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 15,
+        "source": {
+          "id": 185,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "j9aj0r",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "mayor",
+        "at": 131938.79999999702,
+        "duration": 7.919977324263039,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.08222817254203955,
+        "peak": 0.5432634353637695,
+        "path": [
+          {
+            "id": 185,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 186,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 159884,
+          "at": 121795.90000000596,
+          "mp3SHA256": "ad7d74658c4d7af9936f307dd630d0da0906c19542a2cc4cd1bb76e19d9603b7",
+          "duration": 7.919977324263039,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "35bd5bbd24b0cc2efc5fd61ce17e453b7ad45b131e963811b369cc2cbc66839c",
+        "stoppedAt": 132942.40000000596,
+        "endedAt": 133011.29999999702,
+        "nativeEnded": true
+      }
+    },
+    {
+      "person": "rival",
+      "raw": "Qué gusto da ver cómo trabajas para mi cuenta de resultados. Refuerza turnos, hombre. Así mis conductores dejan de recoger a tus viajeros abandonados.",
+      "id": "fqerkc",
+      "scene": "scene-rival-happy-0",
+      "parts": [
+        "Qué gusto da ver cómo trabajas para mi cuenta de resultados.",
+        "Refuerza turnos, hombre.",
+        "Así mis conductores dejan de recoger a tus viajeros abandonados."
+      ],
+      "plan": "dialogue",
+      "clips": [
+        {
+          "id": "fqerkc",
+          "kind": "D",
+          "raw": "Qué gusto da ver cómo trabajas para mi cuenta de resultados. Refuerza turnos, hombre. Así mis conductores dejan de recoger a tus viajeros abandonados.",
+          "sha256": "eeef0f376e555fd6bb083e6cc36d13782720c6028765ae4c129467d876754c76",
+          "productionSHA256": "eeef0f376e555fd6bb083e6cc36d13782720c6028765ae4c129467d876754c76",
+          "declaredReferenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c",
+          "declaredDuration": 8.544
+        }
+      ],
+      "label": "desktop-rival",
+      "portrait": {
+        "embedded": true,
+        "width": 600,
+        "height": 900
+      },
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "dialog": 880,
+        "dialogClient": 880
+      },
+      "completed": [
+        {
+          "index": 16,
+          "source": {
+            "id": 192,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "fqerkc",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "rival",
+          "at": 136487.90000000596,
+          "duration": 8.47997732426304,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09319555644550638,
+          "peak": 0.7665883898735046,
+          "path": [
+            {
+              "id": 192,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 193,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 171404,
+            "at": 136450.60000000894,
+            "mp3SHA256": "eeef0f376e555fd6bb083e6cc36d13782720c6028765ae4c129467d876754c76",
+            "duration": 8.47997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "7f1d3a802d51bc6515baeae6620d2e3f7704e5caa907a8792993be0eab0e6380",
+          "endedAt": 145166.5,
+          "nativeEnded": true
+        }
+      ],
+      "replayStopped": {
+        "index": 17,
+        "source": {
+          "id": 199,
+          "type": "AudioBufferSourceNode"
+        },
+        "clipId": "fqerkc",
+        "clipKind": "D",
+        "speakingMode": "dialogue",
+        "person": "rival",
+        "at": 146423.70000000298,
+        "duration": 8.47997732426304,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true,
+        "contextState": "running",
+        "playbackRate": 1,
+        "detune": 0,
+        "rms": 0.09319555644550638,
+        "peak": 0.7665883898735046,
+        "path": [
+          {
+            "id": 199,
+            "type": "AudioBufferSourceNode",
+            "outgoing": 1
+          },
+          {
+            "id": 200,
+            "type": "GainNode",
+            "outgoing": 1,
+            "gain": 0.7300000190734863
+          },
+          {
+            "id": 8,
+            "type": "AudioDestinationNode",
+            "outgoing": 0
+          }
+        ],
+        "volume": 0.73,
+        "decode": {
+          "bytes": 171404,
+          "at": 136450.60000000894,
+          "mp3SHA256": "eeef0f376e555fd6bb083e6cc36d13782720c6028765ae4c129467d876754c76",
+          "duration": 8.47997732426304,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true
+        },
+        "pcmSHA256": "7f1d3a802d51bc6515baeae6620d2e3f7704e5caa907a8792993be0eab0e6380",
+        "stoppedAt": 147467,
+        "endedAt": 147520.29999999702,
+        "nativeEnded": true
+      }
+    }
+  ],
+  "mobile": [
+    {
+      "width": 320,
+      "height": 740,
+      "dimensions": {
+        "viewport": 320,
+        "document": 320,
+        "dialog": 301,
+        "dialogClient": 301
+      },
+      "sample": {
+        "person": "president",
+        "raw": "Hoy hasta los sondeos sonríen. No lo jodas. Quiero más salidas en hora punta. Y maquinistas, no asesores fingiendo conducir.",
+        "id": "1c1hpku",
+        "scene": "scene-president-happy-0",
+        "parts": [
+          "Hoy hasta los sondeos sonríen.",
+          "No lo jodas.",
+          "Quiero más salidas en hora punta.",
+          "Y maquinistas, no asesores fingiendo conducir."
+        ],
+        "plan": "dialogue",
+        "clips": [
+          {
+            "id": "1c1hpku",
+            "kind": "D",
+            "raw": "Hoy hasta los sondeos sonríen. No lo jodas. Quiero más salidas en hora punta. Y maquinistas, no asesores fingiendo conducir.",
+            "sha256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+            "productionSHA256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+            "declaredReferenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4",
+            "declaredDuration": 8.064
+          }
+        ],
+        "label": "mobile-320",
+        "portrait": {
+          "embedded": true,
+          "width": 600,
+          "height": 900
+        },
+        "dimensions": {
+          "viewport": 320,
+          "document": 320,
+          "dialog": 301,
+          "dialogClient": 301
+        },
+        "completed": [
+          {
+            "index": 18,
+            "source": {
+              "id": 218,
+              "type": "AudioBufferSourceNode"
+            },
+            "clipId": "1c1hpku",
+            "clipKind": "D",
+            "speakingMode": "dialogue",
+            "person": "president",
+            "at": 152341.29999999702,
+            "duration": 7.999977324263039,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true,
+            "contextState": "running",
+            "playbackRate": 1,
+            "detune": 0,
+            "rms": 0.08504305332762802,
+            "peak": 0.5825784802436829,
+            "path": [
+              {
+                "id": 218,
+                "type": "AudioBufferSourceNode",
+                "outgoing": 1
+              },
+              {
+                "id": 219,
+                "type": "GainNode",
+                "outgoing": 1,
+                "gain": 0.7300000190734863
+              },
+              {
+                "id": 8,
+                "type": "AudioDestinationNode",
+                "outgoing": 0
+              }
+            ],
+            "volume": 0.73,
+            "decode": {
+              "bytes": 161804,
+              "at": 12859.70000000298,
+              "mp3SHA256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+              "duration": 7.999977324263039,
+              "sampleRate": 44100,
+              "channels": 1,
+              "nativeBuffer": true
+            },
+            "pcmSHA256": "6a4d3875b7110dae0e45bd55c4d05fb93f399c8703335a8693f60a443d6bee6b",
+            "endedAt": 160455.20000000298,
+            "nativeEnded": true
+          }
+        ],
+        "replayStopped": {
+          "index": 19,
+          "source": {
+            "id": 237,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1c1hpku",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "president",
+          "at": 162003,
+          "duration": 7.999977324263039,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08504305332762802,
+          "peak": 0.5825784802436829,
+          "path": [
+            {
+              "id": 237,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 238,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 161804,
+            "at": 12859.70000000298,
+            "mp3SHA256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+            "duration": 7.999977324263039,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "6a4d3875b7110dae0e45bd55c4d05fb93f399c8703335a8693f60a443d6bee6b",
+          "stoppedAt": 162231.79999999702,
+          "endedAt": 162283.90000000596,
+          "nativeEnded": true
+        }
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dimensions": {
+        "viewport": 390,
+        "document": 390,
+        "dialog": 367,
+        "dialogClient": 367
+      },
+      "sample": {
+        "person": "successor",
+        "raw": "Hoy el tren corre más que mis respuestas en redes. El horario está inflado. O pagamos refuerzos o dejamos de vender humo en ventanilla.",
+        "id": "83ole",
+        "scene": "scene-successor-happy-0",
+        "parts": [
+          "Hoy el tren corre más que mis respuestas en redes.",
+          "El horario está inflado.",
+          "O pagamos refuerzos o dejamos de vender humo en ventanilla."
+        ],
+        "plan": "dialogue",
+        "clips": [
+          {
+            "id": "83ole",
+            "kind": "D",
+            "raw": "Hoy el tren corre más que mis respuestas en redes. El horario está inflado. O pagamos refuerzos o dejamos de vender humo en ventanilla.",
+            "sha256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+            "productionSHA256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+            "declaredReferenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b",
+            "declaredDuration": 6.936
+          }
+        ],
+        "label": "mobile-390",
+        "portrait": {
+          "embedded": true,
+          "width": 600,
+          "height": 900
+        },
+        "dimensions": {
+          "viewport": 390,
+          "document": 390,
+          "dialog": 367,
+          "dialogClient": 367
+        },
+        "completed": [
+          {
+            "index": 20,
+            "source": {
+              "id": 244,
+              "type": "AudioBufferSourceNode"
+            },
+            "clipId": "83ole",
+            "clipKind": "D",
+            "speakingMode": "dialogue",
+            "person": "successor",
+            "at": 165489.40000000596,
+            "duration": 6.88,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true,
+            "contextState": "running",
+            "playbackRate": 1,
+            "detune": 0,
+            "rms": 0.08816115147837174,
+            "peak": 0.7807518839836121,
+            "path": [
+              {
+                "id": 244,
+                "type": "AudioBufferSourceNode",
+                "outgoing": 1
+              },
+              {
+                "id": 245,
+                "type": "GainNode",
+                "outgoing": 1,
+                "gain": 0.7300000190734863
+              },
+              {
+                "id": 8,
+                "type": "AudioDestinationNode",
+                "outgoing": 0
+              }
+            ],
+            "volume": 0.73,
+            "decode": {
+              "bytes": 139244,
+              "at": 45554.90000000596,
+              "mp3SHA256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+              "duration": 6.88,
+              "sampleRate": 44100,
+              "channels": 1,
+              "nativeBuffer": true
+            },
+            "pcmSHA256": "f8705d31f84dd13b412213e3c999b336ed28647777ce35ee24e85277635da48d",
+            "endedAt": 172482.79999999702,
+            "nativeEnded": true
+          }
+        ],
+        "replayStopped": {
+          "index": 21,
+          "source": {
+            "id": 251,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "83ole",
+          "clipKind": "D",
+          "speakingMode": "dialogue",
+          "person": "successor",
+          "at": 173148.60000000894,
+          "duration": 6.88,
+          "sampleRate": 44100,
+          "channels": 1,
+          "nativeBuffer": true,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08816115147837174,
+          "peak": 0.7807518839836121,
+          "path": [
+            {
+              "id": 251,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 252,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 8,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 139244,
+            "at": 45554.90000000596,
+            "mp3SHA256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+            "duration": 6.88,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "f8705d31f84dd13b412213e3c999b336ed28647777ce35ee24e85277635da48d",
+          "stoppedAt": 173486.20000000298,
+          "endedAt": 173537.90000000596,
+          "nativeEnded": true
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "unexpectedRequests": [],
+  "status": "pass",
+  "browser": "151.0.7922.173",
+  "offlineDuringAllPlayback": true,
+  "package": {
+    "usesRealVoicesClass": true,
+    "wholeDialogueCount": 412,
+    "sentenceClipCount": 0,
+    "missing": [],
+    "stale": [],
+    "invalid": [],
+    "externalScripts": [],
+    "externalStyles": [],
+    "externalCSS": []
+  },
+  "nativeDecoder": [
+    {
+      "bytes": 3180,
+      "at": 8686.79999999702,
+      "mp3SHA256": "42a3abf83b76ac8a07ff35df668af6322e2e74af0701707c4439e3d20df6af82",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8687.20000000298,
+      "mp3SHA256": "e30a92dcff29978b50a9f6638eb29245a43a4d727591d0ebec7b240eb4d1c98e",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8689.79999999702,
+      "mp3SHA256": "fa3d662f48d16c7a507f1ff8819b6a3aa06c0d82db1fcfe41ed5968102b72711",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3702,
+      "at": 8689.90000000596,
+      "mp3SHA256": "c13d8e26c1a8d34e820a8668aa055abb1e474dad0c8ee79bd8475c98aa571061",
+      "duration": 0.3,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3702,
+      "at": 8690,
+      "mp3SHA256": "3b50c6e8ef1aa6115a85348dc6ceffe54b12edf05a69be04e0125e32823613a5",
+      "duration": 0.3,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3702,
+      "at": 8690.70000000298,
+      "mp3SHA256": "e423627accb8a60f9ac4901f09da4a80bdd3e7ce4be1a8e4b102c16422e6564e",
+      "duration": 0.3,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8692.20000000298,
+      "mp3SHA256": "651da7d5116113f06fd1454ec929d0060960e655f7abada7cfc73fd2f6ca7176",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8692.20000000298,
+      "mp3SHA256": "91a19b9ada2769d2eb18f1ddc60cc547603a9b3762c73b4d7f2d98a407c307be",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5270,
+      "at": 8692.60000000894,
+      "mp3SHA256": "1c53eaecc631749805d2d69bdd4bdc553b85e27a04aea5dfc699ec1040e80471",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5270,
+      "at": 8692.70000000298,
+      "mp3SHA256": "7439c7e4ad723f48a73e5851f4c502815bb54b6e6c8a779f3af193539ebf15fb",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5270,
+      "at": 8692.70000000298,
+      "mp3SHA256": "b60bcd8e5a124ed26901237beba60375eb80a05d4a0a184f6ca5afa29b882b83",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5792,
+      "at": 8694.10000000894,
+      "mp3SHA256": "011ae1372f40ccd0e302acdc0d8e128e5ea105f1f11d9d12fd100fe34d0cc298",
+      "duration": 0.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5792,
+      "at": 8694.10000000894,
+      "mp3SHA256": "362837987d5f5276b2be6b3804e1df91007a22674241492434ef9efb17b1980c",
+      "duration": 0.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 20682,
+      "at": 8694.29999999702,
+      "mp3SHA256": "e52028fc0fb8d75472c0e4f0b5460ef59031c02e0f5355e76dae74419d4e86b0",
+      "duration": 2,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 25645,
+      "at": 8694.40000000596,
+      "mp3SHA256": "2ce9211fd31417eff8dfbfe1f5b684f3c4a0464eb39bc4ab49f5e79a9ab7ed87",
+      "duration": 2.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 25645,
+      "at": 8694.60000000894,
+      "mp3SHA256": "b217d952e2a7461df0d54a8def576fa9a364a176ee6bbed583c01f6788fe4381",
+      "duration": 2.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 12584,
+      "at": 8694.70000000298,
+      "mp3SHA256": "c8afd8ab25b92033421a779865b67383fd9e4dab84b9a459004bf5e0f966e6a1",
+      "duration": 1.2,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 12584,
+      "at": 8694.79999999702,
+      "mp3SHA256": "f113ced849b740857baf47d3591f34d01e0be5b03aed7ba4ca8f821e9fe722ff",
+      "duration": 1.2,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14913,
+      "at": 8695.10000000894,
+      "mp3SHA256": "565a96a8505094b27528d1e9269cf30f522dabf173845141ebb83f233695b9d9",
+      "duration": 2.04,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14661,
+      "at": 8695.20000000298,
+      "mp3SHA256": "1f5cee95bbb6691a7b9a27d6e52cb2d572660e79e5cd966652a7cddeeabe5a6c",
+      "duration": 2.0133125,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14409,
+      "at": 8695.29999999702,
+      "mp3SHA256": "ecca97d9808427f2e444d5aa6f80723e30119dd0cd69be948fd115d7d3c905fa",
+      "duration": 1.96,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14157,
+      "at": 8695.29999999702,
+      "mp3SHA256": "cb62f870a79c6122a77c973ce5cf24700887c9dd047711894e4037e4367ed1ee",
+      "duration": 1.92,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13905,
+      "at": 8695.40000000596,
+      "mp3SHA256": "eeddedf0afe40fe66734dbd51f2b468c2a9119e609dea6487cbf3f3ec0bd1d58",
+      "duration": 1.88,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13653,
+      "at": 8695.5,
+      "mp3SHA256": "107c95cf67c52c0dfdd6d58116ce31dd51dc3cb80131b55d4d981bc7262e2e91",
+      "duration": 1.8533125,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13401,
+      "at": 8695.5,
+      "mp3SHA256": "4ff0fc030225c30b174f6647141561f89f1892e851942a15bdf96b4c001801ae",
+      "duration": 1.82665625,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13149,
+      "at": 8695.60000000894,
+      "mp3SHA256": "d3932b78850789e1cfee27c1af3327721bbfec01d09b6b8a8ec2e047b1d8cbc1",
+      "duration": 1.8,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13149,
+      "at": 8695.70000000298,
+      "mp3SHA256": "857f673bf639064910d9f27c344dd9002aa1736ede8d4a691863453d916bb1f2",
+      "duration": 1.8,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9873,
+      "at": 8695.70000000298,
+      "mp3SHA256": "b56055ee86d1b58e7ecef2d68714512a3fdb75705114442aba9cd946c82d9eb2",
+      "duration": 1.325,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9621,
+      "at": 8695.79999999702,
+      "mp3SHA256": "c8c6c4797a81160d91c99d1d7b47ec6434d545df2753577c14bae6c72986c066",
+      "duration": 1.282125,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9369,
+      "at": 8695.90000000596,
+      "mp3SHA256": "434721174ef83259412186bef1b404ee66270b48335f3d7d5f2adcf73ded7249",
+      "duration": 1.25,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9117,
+      "at": 8695.90000000596,
+      "mp3SHA256": "4e9bd1cde056a538534c9a9d00490e4739ecbae070f2a777315023c6cf9c5480",
+      "duration": 1.21784375,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 8865,
+      "at": 8696,
+      "mp3SHA256": "c476ab53ff3ac14a1be386129233d2fc9cf858544fb953d5f24a329885cf6bdd",
+      "duration": 1.175,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 8613,
+      "at": 8696,
+      "mp3SHA256": "cdea35f525b1ce14c0e4fc804dadd789ebdf50ef12006c694847caa16bcc06c5",
+      "duration": 1.14284375,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 8361,
+      "at": 8696.10000000894,
+      "mp3SHA256": "0b17d5f03b3983de3ca3c49c6afa0ada65d5dcce2b69bbb6eaa1c94984806f8a",
+      "duration": 1.1,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 161804,
+      "at": 12859.70000000298,
+      "mp3SHA256": "3a29d7e80ad6e64c8e788a6042d82e634224a3328e9de79deed82f3f5437aa57",
+      "duration": 7.999977324263039,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 145484,
+      "at": 30472.5,
+      "mp3SHA256": "e86a2939760828f28ad1f0e79b616c39f03b02118c8b6d36dc78392537adf4b4",
+      "duration": 7.2,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 139244,
+      "at": 45554.90000000596,
+      "mp3SHA256": "184e0ba6dcaa28aca9485db5d02c7361f21c1e9d98338bd4b42ed7a1fb8d6de7",
+      "duration": 6.88,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 174284,
+      "at": 60250.79999999702,
+      "mp3SHA256": "4a4e5db56880febe8da87036504429243f91a342dcd3ea197cf2be0fa186cabc",
+      "duration": 8.639977324263038,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 222284,
+      "at": 75089.40000000596,
+      "mp3SHA256": "12138cf8a88f5b2c3ad00f9e3945e557a3cef8e2c8d8fb95536cb53e2d51186b",
+      "duration": 11.039977324263038,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 157964,
+      "at": 92798.40000000596,
+      "mp3SHA256": "13e6fa4e73f6aea78b2d15c96464b6a6a352bc311145fe8591a09525ec9aa1aa",
+      "duration": 7.8238548752834465,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 155084,
+      "at": 107054.70000000298,
+      "mp3SHA256": "ad9b9d796770bb1cad7a9d240ecb50286e1e2ccd228fb3713b7615200e190900",
+      "duration": 7.679977324263039,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 159884,
+      "at": 121795.90000000596,
+      "mp3SHA256": "ad7d74658c4d7af9936f307dd630d0da0906c19542a2cc4cd1bb76e19d9603b7",
+      "duration": 7.919977324263039,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 171404,
+      "at": 136450.60000000894,
+      "mp3SHA256": "eeef0f376e555fd6bb083e6cc36d13782720c6028765ae4c129467d876754c76",
+      "duration": 8.47997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    }
+  ],
+  "speechSynthesisCalls": 0,
+  "finishedAt": "2026-10-08T22:23:33.531Z"
+}

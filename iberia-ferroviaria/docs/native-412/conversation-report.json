@@ -1,0 +1,4024 @@
+{
+  "startedAt": "2026-10-08T22:07:32.093Z",
+  "html": "Iberia-Ferroviaria.html",
+  "htmlSHA256": "c5242b9ea9b1fd1dd86d7b080af4bc043deb7e34d2af363d74bce73a1ce8cca8",
+  "testSourceSHA256": "d22c8274d79f865aebdb351a66da9dbd407fa2a9713d25ad50100d640b8e67f4",
+  "manifestSHA256": "c88ba4b445d5d474060035fc7453c76b495dc42854d6d889a72733bdbca49cac",
+  "nativeAudio": true,
+  "requireWholeDialogues": true,
+  "replayAndStopRequested": true,
+  "expectedWholeDialogueCount": 412,
+  "productionFilesModified": false,
+  "textOrDialogueModified": false,
+  "fixturesUsed": false,
+  "transport": "local HTTP followed by offline playback",
+  "scope": "Campaña nueva: apertura, introducciones, feedback y resultados completos; nueve tareas mediante acciones reales.",
+  "limitation": "La reproducción y procedencia se comprueban técnicamente; la naturalidad, interpretación y parecido requieren escuchar.",
+  "messages": [
+    {
+      "person": "minister",
+      "body": "Los alcaldes quieren sus trenes. Hacienda quiere su dinero. Y yo quiero un titular para el telediario de las tres. ¿Qué ponemos primero? Piénsalo rápido, que tengo una inauguración.",
+      "title": "Tu primera decisión",
+      "kind": "decision",
+      "fragments": [
+        "Los alcaldes quieren sus trenes.",
+        "Hacienda quiere su dinero.",
+        "Y yo quiero un titular para el telediario de las tres.",
+        "¿Qué ponemos primero?",
+        "Piénsalo rápido, que tengo una inauguración."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "1gmofqu",
+          "kind": "D",
+          "raw": "Los alcaldes quieren sus trenes. Hacienda quiere su dinero. Y yo quiero un titular para el telediario de las tres. ¿Qué ponemos primero? Piénsalo rápido, que tengo una inauguración.",
+          "sha256": "9c9ce09cf36416f62da03f1a31cd72139a8f7a32856e67300bd17586e323c14f",
+          "productionSHA256": "9c9ce09cf36416f62da03f1a31cd72139a8f7a32856e67300bd17586e323c14f",
+          "declaredReferenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+        }
+      ],
+      "displayedText": "Los alcaldes quieren sus trenes. Hacienda quiere su dinero. Y yo quiero un titular para el telediario de las tres. ¿Qué ponemos primero? Piénsalo rápido, que tengo una inauguración.",
+      "displayedSentences": [
+        "Los alcaldes quieren sus trenes.",
+        "Hacienda quiere su dinero.",
+        "Y yo quiero un titular para el telediario de las tres.",
+        "¿Qué ponemos primero?",
+        "Piénsalo rápido, que tengo una inauguración."
+      ],
+      "label": "campaign-opening",
+      "actual": [
+        {
+          "index": 0,
+          "source": {
+            "id": 1,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1gmofqu",
+          "clipKind": "D",
+          "person": "minister",
+          "at": 10419,
+          "duration": 8.39997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08653733668654601,
+          "peak": 0.6953879594802856,
+          "path": [
+            {
+              "id": 1,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 2,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 169484,
+            "at": 10391.60000000894,
+            "mp3SHA256": "9c9ce09cf36416f62da03f1a31cd72139a8f7a32856e67300bd17586e323c14f",
+            "duration": 8.39997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "53f061dae7961c3d745b65630e3c6bc4b97731f4d3157be495c0f15c8178bd61",
+          "nativeEnded": true,
+          "endedAt": 19268.20000000298
+        }
+      ],
+      "textSHA256": "ba849567944bd5f00d02b0209b6eac47361f8caf1a8e1c7002c86ddf79a7fae1"
+    },
+    {
+      "person": "minister",
+      "body": "A ver, director: antes de las fotos toca decidir qué vas a proteger.\n\nElige qué protegerás primero: la caja, la cobertura o ambas. Enero de 2022; soy Raquel Sanz y tú diriges la empresa. Después prepararemos una jornada real, decisión por decisión. La inauguración absurda puede esperar; yo tengo experiencia.",
+      "title": "Un despacho, ocho servicios y demasiadas promesas",
+      "stage": "mandate",
+      "kind": "briefing",
+      "fragments": [
+        "A ver, director: antes de las fotos toca decidir qué vas a proteger.",
+        "Elige qué protegerás primero: la caja, la cobertura o ambas.",
+        "Enero de 2022; soy Raquel Sanz y tú diriges la empresa.",
+        "Después prepararemos una jornada real, decisión por decisión.",
+        "La inauguración absurda puede esperar; yo tengo experiencia."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "gud8sg",
+          "kind": "D",
+          "raw": "A ver, director: antes de las fotos toca decidir qué vas a proteger.\n\nElige qué protegerás primero: la caja, la cobertura o ambas. Enero de 2022; soy Raquel Sanz y tú diriges la empresa. Después prepararemos una jornada real, decisión por decisión. La inauguración absurda puede esperar; yo tengo experiencia.",
+          "sha256": "dece74e168d9a03a30304297c2d94e5780ba42aae6f97b29a2e9fb806b1fd0fa",
+          "productionSHA256": "dece74e168d9a03a30304297c2d94e5780ba42aae6f97b29a2e9fb806b1fd0fa",
+          "declaredReferenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+        }
+      ],
+      "displayedText": "A ver, director: antes de las fotos toca decidir qué vas a proteger. Elige qué protegerás primero: la caja, la cobertura o ambas. Enero de 2022; soy Raquel Sanz y tú diriges la empresa. Después prepararemos una jornada real, decisión por decisión. La inauguración absurda puede esperar; yo tengo experiencia.",
+      "displayedSentences": [
+        "A ver, director: antes de las fotos toca decidir qué vas a proteger.",
+        "Elige qué protegerás primero: la caja, la cobertura o ambas.",
+        "Enero de 2022; soy Raquel Sanz y tú diriges la empresa.",
+        "Después prepararemos una jornada real, decisión por decisión.",
+        "La inauguración absurda puede esperar; yo tengo experiencia."
+      ],
+      "label": "mandate-briefing",
+      "actual": [
+        {
+          "index": 1,
+          "source": {
+            "id": 4,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "gud8sg",
+          "clipKind": "D",
+          "person": "minister",
+          "at": 21979,
+          "duration": 17.919977324263037,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08607400564643189,
+          "peak": 0.7723788022994995,
+          "path": [
+            {
+              "id": 4,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 5,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 360044,
+            "at": 21918.40000000596,
+            "mp3SHA256": "dece74e168d9a03a30304297c2d94e5780ba42aae6f97b29a2e9fb806b1fd0fa",
+            "duration": 17.919977324263037,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "ab68a6bcd39984563d33b2e1cd5c13bac70efc8af180682b5ebc64520c1fc0a6",
+          "nativeEnded": true,
+          "endedAt": 40663
+        }
+      ],
+      "textSHA256": "1a758c192f86f98fcaf082cabd48528ea1a4150709720f095ea5ec6a5bbf4b19"
+    },
+    {
+      "person": "minister",
+      "body": "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura. Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números.",
+      "title": "Un despacho, ocho servicios y demasiadas promesas",
+      "stage": "mandate",
+      "kind": "feedback",
+      "fragments": [
+        "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura.",
+        "Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "1mv6adg",
+          "kind": "D",
+          "raw": "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura. Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números.",
+          "sha256": "8df57d0b852b5685b31322356cd1211fb5d2d10c2379e224ac73c424f8479320",
+          "productionSHA256": "8df57d0b852b5685b31322356cd1211fb5d2d10c2379e224ac73c424f8479320",
+          "declaredReferenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+        }
+      ],
+      "displayedText": "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura. Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números.",
+      "displayedSentences": [
+        "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura.",
+        "Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números."
+      ],
+      "label": "mandate-feedback-balanced",
+      "actual": [
+        {
+          "index": 2,
+          "source": {
+            "id": 6,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1mv6adg",
+          "clipKind": "D",
+          "person": "minister",
+          "at": 44567.20000000298,
+          "duration": 10.079977324263039,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08979205496762548,
+          "peak": 0.7720444202423096,
+          "path": [
+            {
+              "id": 6,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 7,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 203084,
+            "at": 44512.90000000596,
+            "mp3SHA256": "8df57d0b852b5685b31322356cd1211fb5d2d10c2379e224ac73c424f8479320",
+            "duration": 10.079977324263039,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "2acf3564e018a4bb06f37ede186792589cc3829d59f67a316e63b61160d95525",
+          "nativeEnded": true,
+          "endedAt": 55098
+        }
+      ],
+      "textSHA256": "5eaf3d3bcac1daf3fd41a23639c7b363f9844cdd5f01ab7730dfde4ab32af809"
+    },
+    {
+      "person": "rival",
+      "body": "Tu prioridad está elegida; la caja sigue igual. Antes de abrir servicios, comprueba qué tren admite la vía. Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren.",
+      "title": "Un despacho, ocho servicios y demasiadas promesas",
+      "stage": "mandate",
+      "kind": "debrief",
+      "fragments": [
+        "Tu prioridad está elegida; la caja sigue igual.",
+        "Antes de abrir servicios, comprueba qué tren admite la vía.",
+        "Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "83575r",
+          "kind": "D",
+          "raw": "Tu prioridad está elegida; la caja sigue igual. Antes de abrir servicios, comprueba qué tren admite la vía. Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren.",
+          "sha256": "686405b1efff1d7668fe8c5cb6e0e5e0edef505b1bae7efdc7f2a0f6cb9905d3",
+          "productionSHA256": "686405b1efff1d7668fe8c5cb6e0e5e0edef505b1bae7efdc7f2a0f6cb9905d3",
+          "declaredReferenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+        }
+      ],
+      "displayedText": "Tu prioridad está elegida; la caja sigue igual. Antes de abrir servicios, comprueba qué tren admite la vía. Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren.",
+      "displayedSentences": [
+        "Tu prioridad está elegida; la caja sigue igual.",
+        "Antes de abrir servicios, comprueba qué tren admite la vía.",
+        "Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren."
+      ],
+      "label": "mandate-debrief-0",
+      "actual": [
+        {
+          "index": 3,
+          "source": {
+            "id": 8,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "83575r",
+          "clipKind": "D",
+          "person": "rival",
+          "at": 57767.90000000596,
+          "duration": 13.44,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09087711565349568,
+          "peak": 0.7803975939750671,
+          "path": [
+            {
+              "id": 8,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 9,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 270284,
+            "at": 57687.70000000298,
+            "mp3SHA256": "686405b1efff1d7668fe8c5cb6e0e5e0edef505b1bae7efdc7f2a0f6cb9905d3",
+            "duration": 13.44,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "112a293b378b7570a235b9599c4323cca835ee0a22a198a04c26976ee9e6ef5c",
+          "nativeEnded": true,
+          "endedAt": 71977.20000000298
+        }
+      ],
+      "textSHA256": "bbf9920cc27ed2f5fcdd885417513ec491456e89c01474588462ba18fbb8d5bd"
+    },
+    {
+      "person": "adif",
+      "body": "Baje al plano, director: Salamanca necesita ruedas compatibles, no otro discurso.\n\nAbre Madrid–Salamanca y lee «Qué puede circular». Consulta también sus anchos y electricidad. Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido. Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde.",
+      "title": "La vía decide qué tren cabe",
+      "stage": "diagnosis",
+      "kind": "briefing",
+      "fragments": [
+        "Baje al plano, director: Salamanca necesita ruedas compatibles, no otro discurso.",
+        "Abre Madrid–Salamanca y lee «Qué puede circular».",
+        "Consulta también sus anchos y electricidad.",
+        "Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido.",
+        "Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "i88dar",
+          "kind": "D",
+          "raw": "Baje al plano, director: Salamanca necesita ruedas compatibles, no otro discurso.\n\nAbre Madrid–Salamanca y lee «Qué puede circular». Consulta también sus anchos y electricidad. Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido. Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde.",
+          "sha256": "4ddd0c4d48b7c00f5e98f35b3fc8e91eb58325b15928fe2ee085742bd29ecbeb",
+          "productionSHA256": "4ddd0c4d48b7c00f5e98f35b3fc8e91eb58325b15928fe2ee085742bd29ecbeb",
+          "declaredReferenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+        }
+      ],
+      "displayedText": "Baje al plano, director: Salamanca necesita ruedas compatibles, no otro discurso. Abre Madrid–Salamanca y lee «Qué puede circular». Consulta también sus anchos y electricidad. Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido. Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde.",
+      "displayedSentences": [
+        "Baje al plano, director: Salamanca necesita ruedas compatibles, no otro discurso.",
+        "Abre Madrid–Salamanca y lee «Qué puede circular».",
+        "Consulta también sus anchos y electricidad.",
+        "Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido.",
+        "Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde."
+      ],
+      "label": "diagnosis-briefing",
+      "actual": [
+        {
+          "index": 4,
+          "source": {
+            "id": 10,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "i88dar",
+          "clipKind": "D",
+          "person": "adif",
+          "at": 74177.29999999702,
+          "duration": 23.35997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08994801129443675,
+          "peak": 0.7742280960083008,
+          "path": [
+            {
+              "id": 10,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 11,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 469004,
+            "at": 73988.20000000298,
+            "mp3SHA256": "4ddd0c4d48b7c00f5e98f35b3fc8e91eb58325b15928fe2ee085742bd29ecbeb",
+            "duration": 23.35997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "4616dcb3faf7408eed6144772c70381ccf7364283082d836e83c335e6a7b2686",
+          "nativeEnded": true,
+          "endedAt": 98710.29999999702
+        }
+      ],
+      "textSHA256": "611ad47abe3f805367bbb1bb1b748abddcb57f643768ad0d2cb9e4f40ef76337"
+    },
+    {
+      "person": "adif",
+      "body": "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria. Aún debes comprobar unidades disponibles y frecuencia antes de abrir. Has diagnosticado material, no comprado una obra.",
+      "title": "La vía decide qué tren cabe",
+      "stage": "diagnosis",
+      "kind": "feedback",
+      "fragments": [
+        "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria.",
+        "Aún debes comprobar unidades disponibles y frecuencia antes de abrir.",
+        "Has diagnosticado material, no comprado una obra."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "wzkb83",
+          "kind": "D",
+          "raw": "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria. Aún debes comprobar unidades disponibles y frecuencia antes de abrir. Has diagnosticado material, no comprado una obra.",
+          "sha256": "a8ecc626dd8e2643c1c4ac609f6740f3ceaecba6aec2035fc6c4d5798453b33e",
+          "productionSHA256": "a8ecc626dd8e2643c1c4ac609f6740f3ceaecba6aec2035fc6c4d5798453b33e",
+          "declaredReferenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+        }
+      ],
+      "displayedText": "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria. Aún debes comprobar unidades disponibles y frecuencia antes de abrir. Has diagnosticado material, no comprado una obra.",
+      "displayedSentences": [
+        "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria.",
+        "Aún debes comprobar unidades disponibles y frecuencia antes de abrir.",
+        "Has diagnosticado material, no comprado una obra."
+      ],
+      "label": "diagnosis-feedback-variable",
+      "actual": [
+        {
+          "index": 5,
+          "source": {
+            "id": 12,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "wzkb83",
+          "clipKind": "D",
+          "person": "adif",
+          "at": 105362.29999999702,
+          "duration": 12,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09186041759815008,
+          "peak": 0.7749793529510498,
+          "path": [
+            {
+              "id": 12,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 13,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 241484,
+            "at": 105283.5,
+            "mp3SHA256": "a8ecc626dd8e2643c1c4ac609f6740f3ceaecba6aec2035fc6c4d5798453b33e",
+            "duration": 12,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "0a190734833b881b8f3c40fffa816be76828d5dbb0036def3145b062e3559f23",
+          "nativeEnded": true,
+          "endedAt": 117966.5
+        }
+      ],
+      "textSHA256": "e3f74c58a9903139e07cdb06df697f7ab8f3caaa1f767b1d64a461344609518f"
+    },
+    {
+      "person": "mayor",
+      "body": "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar. Soy Paco Terruño, alcalde. Antes de prometer otro túnel, asigne un tren compatible. Nos ahorraríamos veinte años y una colección de ministros con tijeras.",
+      "title": "La vía decide qué tren cabe",
+      "stage": "diagnosis",
+      "kind": "debrief",
+      "fragments": [
+        "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar.",
+        "Soy Paco Terruño, alcalde.",
+        "Antes de prometer otro túnel, asigne un tren compatible.",
+        "Nos ahorraríamos veinte años y una colección de ministros con tijeras."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "dxgk4a",
+          "kind": "D",
+          "raw": "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar. Soy Paco Terruño, alcalde. Antes de prometer otro túnel, asigne un tren compatible. Nos ahorraríamos veinte años y una colección de ministros con tijeras.",
+          "sha256": "006b280c9159c0c0e08f47576c5ecde35bd8aad603e1430b8f95ff8e777b8c79",
+          "productionSHA256": "006b280c9159c0c0e08f47576c5ecde35bd8aad603e1430b8f95ff8e777b8c79",
+          "declaredReferenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+        }
+      ],
+      "displayedText": "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar. Soy Paco Terruño, alcalde. Antes de prometer otro túnel, asigne un tren compatible. Nos ahorraríamos veinte años y una colección de ministros con tijeras.",
+      "displayedSentences": [
+        "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar.",
+        "Soy Paco Terruño, alcalde.",
+        "Antes de prometer otro túnel, asigne un tren compatible.",
+        "Nos ahorraríamos veinte años y una colección de ministros con tijeras."
+      ],
+      "label": "diagnosis-debrief-0",
+      "actual": [
+        {
+          "index": 6,
+          "source": {
+            "id": 14,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "dxgk4a",
+          "clipKind": "D",
+          "person": "mayor",
+          "at": 121248.10000000894,
+          "duration": 16.95997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.0821235938045766,
+          "peak": 0.5590493083000183,
+          "path": [
+            {
+              "id": 14,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 15,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 340844,
+            "at": 121164.79999999702,
+            "mp3SHA256": "006b280c9159c0c0e08f47576c5ecde35bd8aad603e1430b8f95ff8e777b8c79",
+            "duration": 16.95997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "e1f83e3a260edd9ddd9d0f294d155a6239c77086718608b27f93e7077f300cb6",
+          "nativeEnded": true,
+          "endedAt": 139125.60000000894
+        }
+      ],
+      "textSHA256": "a85d25fb60f845ec000e9ad1bcaf205481d9b8bb7829ce30a603ce880b866796"
+    },
+    {
+      "person": "treasury",
+      "body": "Vamos con València: las salidas extra también pasan por mi calculadora.\n\nEn Madrid–València, aumenta al menos una salida por sentido y cambia la tarifa. Mira beneficio, ocupación y unidades antes de aplicar el plan. Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia.",
+      "title": "València: una salida más no se paga sola",
+      "stage": "offer",
+      "kind": "briefing",
+      "fragments": [
+        "Vamos con València: las salidas extra también pasan por mi calculadora.",
+        "En Madrid–València, aumenta al menos una salida por sentido y cambia la tarifa.",
+        "Mira beneficio, ocupación y unidades antes de aplicar el plan.",
+        "Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "6cf4ey",
+          "kind": "D",
+          "raw": "Vamos con València: las salidas extra también pasan por mi calculadora.\n\nEn Madrid–València, aumenta al menos una salida por sentido y cambia la tarifa. Mira beneficio, ocupación y unidades antes de aplicar el plan. Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia.",
+          "sha256": "c91ec9b58c9980c130b95bdea64049ce1a4da398d2ec1a9dad13aa0dc53f0903",
+          "productionSHA256": "c91ec9b58c9980c130b95bdea64049ce1a4da398d2ec1a9dad13aa0dc53f0903",
+          "declaredReferenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+        }
+      ],
+      "displayedText": "Vamos con València: las salidas extra también pasan por mi calculadora. En Madrid–València, aumenta al menos una salida por sentido y cambia la tarifa. Mira beneficio, ocupación y unidades antes de aplicar el plan. Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia.",
+      "displayedSentences": [
+        "Vamos con València: las salidas extra también pasan por mi calculadora.",
+        "En Madrid–València, aumenta al menos una salida por sentido y cambia la tarifa.",
+        "Mira beneficio, ocupación y unidades antes de aplicar el plan.",
+        "Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia."
+      ],
+      "label": "offer-briefing",
+      "actual": [
+        {
+          "index": 7,
+          "source": {
+            "id": 16,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "6cf4ey",
+          "clipKind": "D",
+          "person": "treasury",
+          "at": 140972,
+          "duration": 20.95997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.0859143096380996,
+          "peak": 0.7544141411781311,
+          "path": [
+            {
+              "id": 16,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 17,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 421004,
+            "at": 140839.20000000298,
+            "mp3SHA256": "c91ec9b58c9980c130b95bdea64049ce1a4da398d2ec1a9dad13aa0dc53f0903",
+            "duration": 20.95997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "5fcac6ae709a01e51bfaab1b6426dfc443c7adfd0a8dcc9b2830d1039b0e709c",
+          "nativeEnded": true,
+          "endedAt": 162838.5
+        }
+      ],
+      "textSHA256": "9f165c9f39a76aa09996d9f981172c600e6e2724589153fd206e072d98fd12dc"
+    },
+    {
+      "person": "minister",
+      "body": "El nuevo plan está aplicado. Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular. La previsión orienta, no garantiza beneficios. Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces.",
+      "title": "València: una salida más no se paga sola",
+      "stage": "offer",
+      "kind": "debrief",
+      "fragments": [
+        "El nuevo plan está aplicado.",
+        "Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular.",
+        "La previsión orienta, no garantiza beneficios.",
+        "Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "85zv6u",
+          "kind": "D",
+          "raw": "El nuevo plan está aplicado. Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular. La previsión orienta, no garantiza beneficios. Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces.",
+          "sha256": "f54d750ea9cc79a637842d85cbbca9f191545d7fae15b1304911b9386b51bc71",
+          "productionSHA256": "f54d750ea9cc79a637842d85cbbca9f191545d7fae15b1304911b9386b51bc71",
+          "declaredReferenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+        }
+      ],
+      "displayedText": "El nuevo plan está aplicado. Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular. La previsión orienta, no garantiza beneficios. Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces.",
+      "displayedSentences": [
+        "El nuevo plan está aplicado.",
+        "Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular.",
+        "La previsión orienta, no garantiza beneficios.",
+        "Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces."
+      ],
+      "label": "offer-debrief-0",
+      "actual": [
+        {
+          "index": 8,
+          "source": {
+            "id": 18,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "85zv6u",
+          "clipKind": "D",
+          "person": "minister",
+          "at": 169081.40000000596,
+          "duration": 15.359977324263038,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.0846829820082964,
+          "peak": 0.7714419960975647,
+          "path": [
+            {
+              "id": 18,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 19,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 308684,
+            "at": 168987.60000000894,
+            "mp3SHA256": "f54d750ea9cc79a637842d85cbbca9f191545d7fae15b1304911b9386b51bc71",
+            "duration": 15.359977324263038,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "b18baf4b211cfc92c7c769ceba05bf2a91ac0261ce30b68bbd2143313190f09a",
+          "nativeEnded": true,
+          "endedAt": 185136.90000000596
+        }
+      ],
+      "textSHA256": "d9a13e65efab8d4832eeced3460776c3379cbaab5beda0c59a3ab6357e299464"
+    },
+    {
+      "person": "workshop",
+      "body": "A ver, chaval: una cabina no se rellena a golpe de contrato.\n\nCompara maquinistas disponibles y necesarios. Hoy sobra cobertura: no necesitas contratar. Si una ampliación supera la reserva, forma personal tres meses antes. Contratar veinte cuesta 0,3 M€; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina.",
+      "title": "Maquinistas: calcula antes de contratar",
+      "stage": "people",
+      "kind": "briefing",
+      "fragments": [
+        "A ver, chaval: una cabina no se rellena a golpe de contrato.",
+        "Compara maquinistas disponibles y necesarios.",
+        "Hoy sobra cobertura: no necesitas contratar.",
+        "Si una ampliación supera la reserva, forma personal tres meses antes.",
+        "Contratar veinte cuesta 0,3 M€; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "w60wls",
+          "kind": "D",
+          "raw": "A ver, chaval: una cabina no se rellena a golpe de contrato.\n\nCompara maquinistas disponibles y necesarios. Hoy sobra cobertura: no necesitas contratar. Si una ampliación supera la reserva, forma personal tres meses antes. Contratar veinte cuesta 0,3 M€; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina.",
+          "sha256": "5bcd294af61d3cd808c986f36eb3d2c44a76aba0c3cccca30d4e2560ee7b1fbd",
+          "productionSHA256": "5bcd294af61d3cd808c986f36eb3d2c44a76aba0c3cccca30d4e2560ee7b1fbd",
+          "declaredReferenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+        }
+      ],
+      "displayedText": "A ver, chaval: una cabina no se rellena a golpe de contrato. Compara maquinistas disponibles y necesarios. Hoy sobra cobertura: no necesitas contratar. Si una ampliación supera la reserva, forma personal tres meses antes. Contratar veinte cuesta 0,3 M€; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina.",
+      "displayedSentences": [
+        "A ver, chaval: una cabina no se rellena a golpe de contrato.",
+        "Compara maquinistas disponibles y necesarios.",
+        "Hoy sobra cobertura: no necesitas contratar.",
+        "Si una ampliación supera la reserva, forma personal tres meses antes.",
+        "Contratar veinte cuesta 0,3 M€; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina."
+      ],
+      "label": "people-briefing",
+      "actual": [
+        {
+          "index": 9,
+          "source": {
+            "id": 20,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "w60wls",
+          "clipKind": "D",
+          "person": "workshop",
+          "at": 186971.90000000596,
+          "duration": 21.51997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09267803886068253,
+          "peak": 0.773715615272522,
+          "path": [
+            {
+              "id": 20,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 21,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 432044,
+            "at": 186860.79999999702,
+            "mp3SHA256": "5bcd294af61d3cd808c986f36eb3d2c44a76aba0c3cccca30d4e2560ee7b1fbd",
+            "duration": 21.51997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "17392f68f08796d7e916e1d1c4d280e31bab2083c67b431ebcc8db78d91f4e2e",
+          "nativeEnded": true,
+          "endedAt": 209505.90000000596
+        }
+      ],
+      "textSHA256": "92d62f56ece197dafd877f86b176f4345df01b6ee299ed14b22a66496adbede9"
+    },
+    {
+      "person": "workshop",
+      "body": "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura. Si tu reserva ya cubre la ampliación, no necesitas contratar. Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes.",
+      "title": "Maquinistas: calcula antes de contratar",
+      "stage": "people",
+      "kind": "feedback",
+      "fragments": [
+        "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura.",
+        "Si tu reserva ya cubre la ampliación, no necesitas contratar.",
+        "Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "133avee",
+          "kind": "D",
+          "raw": "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura. Si tu reserva ya cubre la ampliación, no necesitas contratar. Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes.",
+          "sha256": "0f4bd7624db133522dac05185fd7267bdb6a9854cef7e08e127a114552803958",
+          "productionSHA256": "0f4bd7624db133522dac05185fd7267bdb6a9854cef7e08e127a114552803958",
+          "declaredReferenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+        }
+      ],
+      "displayedText": "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura. Si tu reserva ya cubre la ampliación, no necesitas contratar. Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes.",
+      "displayedSentences": [
+        "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura.",
+        "Si tu reserva ya cubre la ampliación, no necesitas contratar.",
+        "Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes."
+      ],
+      "label": "people-feedback-pipeline",
+      "actual": [
+        {
+          "index": 10,
+          "source": {
+            "id": 22,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "133avee",
+          "clipKind": "D",
+          "person": "workshop",
+          "at": 213800.40000000596,
+          "duration": 15.670249433106576,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.09064706975446699,
+          "peak": 0.7722806930541992,
+          "path": [
+            {
+              "id": 22,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 23,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 314924,
+            "at": 213732.10000000894,
+            "mp3SHA256": "0f4bd7624db133522dac05185fd7267bdb6a9854cef7e08e127a114552803958",
+            "duration": 15.670249433106576,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "551cbe13288413bfff3a74abf3eb4eed15fc6c166be522ed92846efb297831fa",
+          "nativeEnded": true,
+          "endedAt": 230168.10000000894
+        }
+      ],
+      "textSHA256": "3e084d22f469a78ff1565cb073135c9e37116d189e7f2dc49e63e690f290bb54"
+    },
+    {
+      "person": "treasury",
+      "body": "Mantener la reserva actual cubre estos servicios. Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales. La regla es cubrir lo que falta con antelación. Una plantilla enorme sin plan solo me da más gastos que recortar.",
+      "title": "Maquinistas: calcula antes de contratar",
+      "stage": "people",
+      "kind": "debrief",
+      "fragments": [
+        "Mantener la reserva actual cubre estos servicios.",
+        "Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales.",
+        "La regla es cubrir lo que falta con antelación.",
+        "Una plantilla enorme sin plan solo me da más gastos que recortar."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "1woa6dc",
+          "kind": "D",
+          "raw": "Mantener la reserva actual cubre estos servicios. Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales. La regla es cubrir lo que falta con antelación. Una plantilla enorme sin plan solo me da más gastos que recortar.",
+          "sha256": "0fee6f643511d84cc9cc042c230b343f727cb9c756ee89b5439b185f1e1d8406",
+          "productionSHA256": "0fee6f643511d84cc9cc042c230b343f727cb9c756ee89b5439b185f1e1d8406",
+          "declaredReferenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+        }
+      ],
+      "displayedText": "Mantener la reserva actual cubre estos servicios. Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales. La regla es cubrir lo que falta con antelación. Una plantilla enorme sin plan solo me da más gastos que recortar.",
+      "displayedSentences": [
+        "Mantener la reserva actual cubre estos servicios.",
+        "Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales.",
+        "La regla es cubrir lo que falta con antelación.",
+        "Una plantilla enorme sin plan solo me da más gastos que recortar."
+      ],
+      "label": "people-debrief-0",
+      "actual": [
+        {
+          "index": 11,
+          "source": {
+            "id": 24,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1woa6dc",
+          "clipKind": "D",
+          "person": "treasury",
+          "at": 232807.29999999702,
+          "duration": 14.48,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08605334929768461,
+          "peak": 0.5381355881690979,
+          "path": [
+            {
+              "id": 24,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 25,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 291404,
+            "at": 232711,
+            "mp3SHA256": "0fee6f643511d84cc9cc042c230b343f727cb9c756ee89b5439b185f1e1d8406",
+            "duration": 14.48,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "2a0c93a4c4090c00d8fbf2a9f8bf59d5a29684ae7fd4cdb1ea4a8d413a2c9d1b",
+          "nativeEnded": true,
+          "endedAt": 248005.29999999702
+        }
+      ],
+      "textSHA256": "4876dea945db778a7a57efa84c1f3c32bb8a3fe91ec046d6358f7d839fc960c1"
+    },
+    {
+      "person": "successor",
+      "body": "Antes de comprar otra ocurrencia, vamos a separar sus costes y sus plazos.\n\nCompara competencia, políticas e investigación antes de gastar. Soy Óscar del Puente, hoy alcalde consultado. Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda. Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas.",
+      "title": "Elegir una ventaja también cuesta",
+      "stage": "competition",
+      "kind": "briefing",
+      "fragments": [
+        "Antes de comprar otra ocurrencia, vamos a separar sus costes y sus plazos.",
+        "Compara competencia, políticas e investigación antes de gastar.",
+        "Soy Óscar del Puente, hoy alcalde consultado.",
+        "Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda.",
+        "Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "1htjqf4",
+          "kind": "D",
+          "raw": "Antes de comprar otra ocurrencia, vamos a separar sus costes y sus plazos.\n\nCompara competencia, políticas e investigación antes de gastar. Soy Óscar del Puente, hoy alcalde consultado. Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda. Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas.",
+          "sha256": "f680fbc54d9b49b282bcaf8f426e743a07e5306a9527325fac33890b563b3b63",
+          "productionSHA256": "f680fbc54d9b49b282bcaf8f426e743a07e5306a9527325fac33890b563b3b63",
+          "declaredReferenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+        }
+      ],
+      "displayedText": "Antes de comprar otra ocurrencia, vamos a separar sus costes y sus plazos. Compara competencia, políticas e investigación antes de gastar. Soy Óscar del Puente, hoy alcalde consultado. Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda. Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas.",
+      "displayedSentences": [
+        "Antes de comprar otra ocurrencia, vamos a separar sus costes y sus plazos.",
+        "Compara competencia, políticas e investigación antes de gastar.",
+        "Soy Óscar del Puente, hoy alcalde consultado.",
+        "Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda.",
+        "Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas."
+      ],
+      "label": "competition-briefing",
+      "actual": [
+        {
+          "index": 12,
+          "source": {
+            "id": 26,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1htjqf4",
+          "clipKind": "D",
+          "person": "successor",
+          "at": 249725.90000000596,
+          "duration": 20.239977324263037,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.0848355892329353,
+          "peak": 0.7811617851257324,
+          "path": [
+            {
+              "id": 26,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 27,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 406604,
+            "at": 249633.79999999702,
+            "mp3SHA256": "f680fbc54d9b49b282bcaf8f426e743a07e5306a9527325fac33890b563b3b63",
+            "duration": 20.239977324263037,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "4ae3e12558cfb5e78e56495201f7b1b2998759e78070896836764a7cec213a30",
+          "nativeEnded": true,
+          "endedAt": 270986.40000000596
+        }
+      ],
+      "textSHA256": "413d5fcffa2088337009bf08d083b582d66fcb14a6997f5d117e285fe2fa6a83"
+    },
+    {
+      "person": "successor",
+      "body": "Ya has comparado coste, efecto y plazo. Invierte cuando resuelva un problema concreto; esperar también es una decisión. El wifi no arregla la catenaria y ERTMS no cambia el ancho. Las siglas son ingeniería, no un conjuro para tapar chapuzas.",
+      "title": "Elegir una ventaja también cuesta",
+      "stage": "competition",
+      "kind": "debrief",
+      "fragments": [
+        "Ya has comparado coste, efecto y plazo.",
+        "Invierte cuando resuelva un problema concreto; esperar también es una decisión.",
+        "El wifi no arregla la catenaria y ERTMS no cambia el ancho.",
+        "Las siglas son ingeniería, no un conjuro para tapar chapuzas."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "12xwnbm",
+          "kind": "D",
+          "raw": "Ya has comparado coste, efecto y plazo. Invierte cuando resuelva un problema concreto; esperar también es una decisión. El wifi no arregla la catenaria y ERTMS no cambia el ancho. Las siglas son ingeniería, no un conjuro para tapar chapuzas.",
+          "sha256": "8f10e956ec93fb2021c0242133b04ca5cde196657987dde4ed34886260b1872e",
+          "productionSHA256": "8f10e956ec93fb2021c0242133b04ca5cde196657987dde4ed34886260b1872e",
+          "declaredReferenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+        }
+      ],
+      "displayedText": "Ya has comparado coste, efecto y plazo. Invierte cuando resuelva un problema concreto; esperar también es una decisión. El wifi no arregla la catenaria y ERTMS no cambia el ancho. Las siglas son ingeniería, no un conjuro para tapar chapuzas.",
+      "displayedSentences": [
+        "Ya has comparado coste, efecto y plazo.",
+        "Invierte cuando resuelva un problema concreto; esperar también es una decisión.",
+        "El wifi no arregla la catenaria y ERTMS no cambia el ancho.",
+        "Las siglas son ingeniería, no un conjuro para tapar chapuzas."
+      ],
+      "label": "competition-debrief-0",
+      "actual": [
+        {
+          "index": 13,
+          "source": {
+            "id": 28,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "12xwnbm",
+          "clipKind": "D",
+          "person": "successor",
+          "at": 278334.90000000596,
+          "duration": 15.279977324263038,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08499252952532967,
+          "peak": 0.7740660905838013,
+          "path": [
+            {
+              "id": 28,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 29,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 307244,
+            "at": 278264.299999997,
+            "mp3SHA256": "8f10e956ec93fb2021c0242133b04ca5cde196657987dde4ed34886260b1872e",
+            "duration": 15.279977324263038,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "5af0398d5e670695f6807259c2ff4249c30c4414846b7668138b13bf4274cd7e",
+          "nativeEnded": true,
+          "endedAt": 294262.200000003
+        }
+      ],
+      "textSHA256": "c8361d31893ffa10d6385f33de3284cdbdacafea8a1f6fc748a4acd4d8f02d54"
+    },
+    {
+      "person": "mayor",
+      "body": "Oiga, quiero distinguir el tren de hoy de la excavadora de mañana.\n\nAbra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba–Soria. No adjudique esa obra todavía: basta leer precio y plazo. Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto.",
+      "title": "Abrir Salamanca y presupuestar Soria",
+      "stage": "infrastructure",
+      "kind": "briefing",
+      "fragments": [
+        "Oiga, quiero distinguir el tren de hoy de la excavadora de mañana.",
+        "Abra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba–Soria.",
+        "No adjudique esa obra todavía: basta leer precio y plazo.",
+        "Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "1e9br7e",
+          "kind": "D",
+          "raw": "Oiga, quiero distinguir el tren de hoy de la excavadora de mañana.\n\nAbra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba–Soria. No adjudique esa obra todavía: basta leer precio y plazo. Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto.",
+          "sha256": "8b89bd2a04ce65663d5514df6371f51c366e91086456e6954eec77d900228c73",
+          "productionSHA256": "8b89bd2a04ce65663d5514df6371f51c366e91086456e6954eec77d900228c73",
+          "declaredReferenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+        }
+      ],
+      "displayedText": "Oiga, quiero distinguir el tren de hoy de la excavadora de mañana. Abra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba–Soria. No adjudique esa obra todavía: basta leer precio y plazo. Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto.",
+      "displayedSentences": [
+        "Oiga, quiero distinguir el tren de hoy de la excavadora de mañana.",
+        "Abra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba–Soria.",
+        "No adjudique esa obra todavía: basta leer precio y plazo.",
+        "Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto."
+      ],
+      "label": "infrastructure-briefing",
+      "actual": [
+        {
+          "index": 14,
+          "source": {
+            "id": 30,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1e9br7e",
+          "clipKind": "D",
+          "person": "mayor",
+          "at": 296661.60000000894,
+          "duration": 17.19997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08877468132871603,
+          "peak": 0.5588625073432922,
+          "path": [
+            {
+              "id": 30,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 31,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 345644,
+            "at": 296572.299999997,
+            "mp3SHA256": "8b89bd2a04ce65663d5514df6371f51c366e91086456e6954eec77d900228c73",
+            "duration": 17.19997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "0c2aeb9b2290a7bc29f9400ec9799a3f5dd258e56f110766fcc5a1be56c24ce7",
+          "nativeEnded": true,
+          "endedAt": 314867.10000000894
+        }
+      ],
+      "textSHA256": "99ab3d85374fce29131dcc09ea8f7e88c285c930846d5c0461de8136ab7fcbc8"
+    },
+    {
+      "person": "mayor",
+      "body": "Correcto: electrificar no cambia las ruedas ni el ancho. Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles.",
+      "title": "Abrir Salamanca y presupuestar Soria",
+      "stage": "infrastructure",
+      "kind": "feedback",
+      "fragments": [
+        "Correcto: electrificar no cambia las ruedas ni el ancho.",
+        "Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "1c3y6g7",
+          "kind": "D",
+          "raw": "Correcto: electrificar no cambia las ruedas ni el ancho. Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles.",
+          "sha256": "c890e21f906137ffd5958cc21901bf15f35f4e6e19c104f073c07c296e2a6d4c",
+          "productionSHA256": "c890e21f906137ffd5958cc21901bf15f35f4e6e19c104f073c07c296e2a6d4c",
+          "declaredReferenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+        }
+      ],
+      "displayedText": "Correcto: electrificar no cambia las ruedas ni el ancho. Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles.",
+      "displayedSentences": [
+        "Correcto: electrificar no cambia las ruedas ni el ancho.",
+        "Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles."
+      ],
+      "label": "infrastructure-feedback-power",
+      "actual": [
+        {
+          "index": 15,
+          "source": {
+            "id": 32,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1c3y6g7",
+          "clipKind": "D",
+          "person": "mayor",
+          "at": 320205.5,
+          "duration": 9.999977324263039,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08841796461390551,
+          "peak": 0.5768407583236694,
+          "path": [
+            {
+              "id": 32,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 33,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 201644,
+            "at": 320110.90000000596,
+            "mp3SHA256": "c890e21f906137ffd5958cc21901bf15f35f4e6e19c104f073c07c296e2a6d4c",
+            "duration": 9.999977324263039,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "bd69ac7428e812034b23bb0cee4095a13105923b5554fa15f9de9a1a1f609e1f",
+          "nativeEnded": true,
+          "endedAt": 330679
+        }
+      ],
+      "textSHA256": "54fe788d26fc1e35cfc1084c74398930d5b37514e1468d7c5e0958abb806ad01"
+    },
+    {
+      "person": "riders",
+      "body": "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar. Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico. Has separado abrir trenes de construir vías. Mucho más útil que prometer un AVE en una carretera, como ciertos lumbreras.",
+      "title": "Abrir Salamanca y presupuestar Soria",
+      "stage": "infrastructure",
+      "kind": "debrief",
+      "fragments": [
+        "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar.",
+        "Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico.",
+        "Has separado abrir trenes de construir vías.",
+        "Mucho más útil que prometer un AVE en una carretera, como ciertos lumbreras."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "13eu4ks",
+          "kind": "D",
+          "raw": "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar. Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico. Has separado abrir trenes de construir vías. Mucho más útil que prometer un AVE en una carretera, como ciertos lumbreras.",
+          "sha256": "e0006b9ddf8ebc4d18b584c0b171a09f68c20ce454bd4593f669a86554a19ecf",
+          "productionSHA256": "e0006b9ddf8ebc4d18b584c0b171a09f68c20ce454bd4593f669a86554a19ecf",
+          "declaredReferenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+        }
+      ],
+      "displayedText": "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar. Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico. Has separado abrir trenes de construir vías. Mucho más útil que prometer un AVE en una carretera, como ciertos lumbreras.",
+      "displayedSentences": [
+        "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar.",
+        "Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico.",
+        "Has separado abrir trenes de construir vías.",
+        "Mucho más útil que prometer un AVE en una carretera, como ciertos lumbreras."
+      ],
+      "label": "infrastructure-debrief-0",
+      "actual": [
+        {
+          "index": 16,
+          "source": {
+            "id": 34,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "13eu4ks",
+          "clipKind": "D",
+          "person": "riders",
+          "at": 333523.200000003,
+          "duration": 16.079977324263037,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08613720270091635,
+          "peak": 0.7815402150154114,
+          "path": [
+            {
+              "id": 34,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 35,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 323084,
+            "at": 333414.700000003,
+            "mp3SHA256": "e0006b9ddf8ebc4d18b584c0b171a09f68c20ce454bd4593f669a86554a19ecf",
+            "duration": 16.079977324263037,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "b7181780d3760c476530d026361049d30290f8ce61c6cbbe3cdbdac991b5549d",
+          "nativeEnded": true,
+          "endedAt": 350436.5
+        }
+      ],
+      "textSHA256": "92a04ab8b69ae342e8bd25b23dd58a4ceed4be363cbcc15d53f40c075063338c"
+    },
+    {
+      "person": "workshop",
+      "body": "A ver, que la jornada también trae averías; elija qué problema quiere reducir.\n\nComienza la jornada y atiende la avería. El equipo cuesta 18.000 euros y reduce la demora; el autobús cuesta 9.000 y protege al viajero; esperar ahorra ahora y conserva el retraso. Elige qué importa más. La avería no se arregla soplando, coño.",
+      "title": "El plan encuentra la primera avería",
+      "stage": "incident",
+      "kind": "briefing",
+      "fragments": [
+        "A ver, que la jornada también trae averías; elija qué problema quiere reducir.",
+        "Comienza la jornada y atiende la avería.",
+        "El equipo cuesta 18.000 euros y reduce la demora; el autobús cuesta 9.000 y protege al viajero; esperar ahorra ahora y conserva el retraso.",
+        "Elige qué importa más.",
+        "La avería no se arregla soplando, coño."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "ftibeu",
+          "kind": "D",
+          "raw": "A ver, que la jornada también trae averías; elija qué problema quiere reducir.\n\nComienza la jornada y atiende la avería. El equipo cuesta 18.000 euros y reduce la demora; el autobús cuesta 9.000 y protege al viajero; esperar ahorra ahora y conserva el retraso. Elige qué importa más. La avería no se arregla soplando, coño.",
+          "sha256": "16e6df6a22d75877d79e4969a8824113e0cb1917856dbecb3ecd82e7ec2ea6a2",
+          "productionSHA256": "16e6df6a22d75877d79e4969a8824113e0cb1917856dbecb3ecd82e7ec2ea6a2",
+          "declaredReferenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+        }
+      ],
+      "displayedText": "A ver, que la jornada también trae averías; elija qué problema quiere reducir. Comienza la jornada y atiende la avería. El equipo cuesta 18.000 euros y reduce la demora; el autobús cuesta 9.000 y protege al viajero; esperar ahorra ahora y conserva el retraso. Elige qué importa más. La avería no se arregla soplando, coño.",
+      "displayedSentences": [
+        "A ver, que la jornada también trae averías; elija qué problema quiere reducir.",
+        "Comienza la jornada y atiende la avería.",
+        "El equipo cuesta 18.000 euros y reduce la demora; el autobús cuesta 9.000 y protege al viajero; esperar ahorra ahora y conserva el retraso.",
+        "Elige qué importa más.",
+        "La avería no se arregla soplando, coño."
+      ],
+      "label": "incident-briefing",
+      "actual": [
+        {
+          "index": 17,
+          "source": {
+            "id": 36,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "ftibeu",
+          "clipKind": "D",
+          "person": "workshop",
+          "at": 352222.10000000894,
+          "duration": 21.248526077097505,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08906541311731643,
+          "peak": 0.7668381333351135,
+          "path": [
+            {
+              "id": 36,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 37,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 426764,
+            "at": 352097.799999997,
+            "mp3SHA256": "16e6df6a22d75877d79e4969a8824113e0cb1917856dbecb3ecd82e7ec2ea6a2",
+            "duration": 21.248526077097505,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "0b7c0a60cf07b7d3fc0d90262357be407f345d21f7068aa20f71010fe0f47ff1",
+          "nativeEnded": true,
+          "endedAt": 374487.200000003
+        }
+      ],
+      "textSHA256": "1891bfb8c33505c088617e016e6f1c492b53d6fe3841b856d511e9d301ef262d"
+    },
+    {
+      "person": "president",
+      "body": "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso. Revisa el parte para comprobarlo. Una consecuencia medida vale más que decir «todo controlado»; esa frase ya la rellena mi gabinete.",
+      "title": "El plan encuentra la primera avería",
+      "stage": "incident",
+      "kind": "debrief",
+      "fragments": [
+        "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso.",
+        "Revisa el parte para comprobarlo.",
+        "Una consecuencia medida vale más que decir «todo controlado»; esa frase ya la rellena mi gabinete."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "f2vunv",
+          "kind": "D",
+          "raw": "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso. Revisa el parte para comprobarlo. Una consecuencia medida vale más que decir «todo controlado»; esa frase ya la rellena mi gabinete.",
+          "sha256": "e6995448f2ccd03639024bc02687fbc44f18120262f8152bdb4897214036c0b2",
+          "productionSHA256": "e6995448f2ccd03639024bc02687fbc44f18120262f8152bdb4897214036c0b2",
+          "declaredReferenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+        }
+      ],
+      "displayedText": "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso. Revisa el parte para comprobarlo. Una consecuencia medida vale más que decir «todo controlado»; esa frase ya la rellena mi gabinete.",
+      "displayedSentences": [
+        "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso.",
+        "Revisa el parte para comprobarlo.",
+        "Una consecuencia medida vale más que decir «todo controlado»; esa frase ya la rellena mi gabinete."
+      ],
+      "label": "incident-debrief-0",
+      "actual": [
+        {
+          "index": 18,
+          "source": {
+            "id": 38,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "f2vunv",
+          "clipKind": "D",
+          "person": "president",
+          "at": 381544,
+          "duration": 14.08,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08806554452958215,
+          "peak": 0.7714048624038696,
+          "path": [
+            {
+              "id": 38,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 39,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 283244,
+            "at": 381469.40000000596,
+            "mp3SHA256": "e6995448f2ccd03639024bc02687fbc44f18120262f8152bdb4897214036c0b2",
+            "duration": 14.08,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "bbef1071116a3d21df18e99486970a030481382640b67e41dc9d6788d3c65788",
+          "nativeEnded": true,
+          "endedAt": 396406.10000000894
+        }
+      ],
+      "textSHA256": "334113f8c7fddd897f7bae318a24623df6c70b347b8602e9e6bc4cdeb249f961"
+    },
+    {
+      "person": "riders",
+      "body": "¡Oye, director, que el día termina con un parte, no con otra excusa!\n\nTermina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente. Es un resultado diario; las cuentas completas se liquidan al cerrar el mes. Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares.",
+      "title": "Cerrar el día sin perder el mes de vista",
+      "stage": "review",
+      "kind": "briefing",
+      "fragments": [
+        "¡Oye, director, que el día termina con un parte, no con otra excusa!",
+        "Termina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente.",
+        "Es un resultado diario; las cuentas completas se liquidan al cerrar el mes.",
+        "Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "1qsoqa1",
+          "kind": "D",
+          "raw": "¡Oye, director, que el día termina con un parte, no con otra excusa!\n\nTermina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente. Es un resultado diario; las cuentas completas se liquidan al cerrar el mes. Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares.",
+          "sha256": "b3c630444b68840595f1ef85faa4c5a5963074b6aeb99610f3f2d077f4ba1f09",
+          "productionSHA256": "b3c630444b68840595f1ef85faa4c5a5963074b6aeb99610f3f2d077f4ba1f09",
+          "declaredReferenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+        }
+      ],
+      "displayedText": "¡Oye, director, que el día termina con un parte, no con otra excusa! Termina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente. Es un resultado diario; las cuentas completas se liquidan al cerrar el mes. Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares.",
+      "displayedSentences": [
+        "¡Oye, director, que el día termina con un parte, no con otra excusa!",
+        "Termina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente.",
+        "Es un resultado diario; las cuentas completas se liquidan al cerrar el mes.",
+        "Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares."
+      ],
+      "label": "review-briefing",
+      "actual": [
+        {
+          "index": 19,
+          "source": {
+            "id": 40,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "1qsoqa1",
+          "clipKind": "D",
+          "person": "riders",
+          "at": 398105,
+          "duration": 17.27997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08798992204887594,
+          "peak": 0.7824602723121643,
+          "path": [
+            {
+              "id": 40,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 41,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 347084,
+            "at": 397996.700000003,
+            "mp3SHA256": "b3c630444b68840595f1ef85faa4c5a5963074b6aeb99610f3f2d077f4ba1f09",
+            "duration": 17.27997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "1a2681719b3fa66494a8a0ac9a0feac1a54d9c5e0f310e63f78886e765320a50",
+          "nativeEnded": true,
+          "endedAt": 416165.90000000596
+        }
+      ],
+      "textSHA256": "0f492d1d36d545bed8f3098c23cfd0ac19aefb6a23fbdc582f229c71a100d7bd"
+    },
+    {
+      "person": "adif",
+      "body": "Ya has preparado, ejecutado y comprobado un turno. Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario. Las obras no terminan porque el alcalde proteste tres veces. Lo he comprobado: protesta muchísimo y siguen ahí.",
+      "title": "Cerrar el día sin perder el mes de vista",
+      "stage": "review",
+      "kind": "debrief",
+      "fragments": [
+        "Ya has preparado, ejecutado y comprobado un turno.",
+        "Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario.",
+        "Las obras no terminan porque el alcalde proteste tres veces.",
+        "Lo he comprobado: protesta muchísimo y siguen ahí."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "u10bmo",
+          "kind": "D",
+          "raw": "Ya has preparado, ejecutado y comprobado un turno. Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario. Las obras no terminan porque el alcalde proteste tres veces. Lo he comprobado: protesta muchísimo y siguen ahí.",
+          "sha256": "6a12fbff865276ddb3123e24dbb2db487e01e8907ad57ef83e35910b1101a2f2",
+          "productionSHA256": "6a12fbff865276ddb3123e24dbb2db487e01e8907ad57ef83e35910b1101a2f2",
+          "declaredReferenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+        }
+      ],
+      "displayedText": "Ya has preparado, ejecutado y comprobado un turno. Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario. Las obras no terminan porque el alcalde proteste tres veces. Lo he comprobado: protesta muchísimo y siguen ahí.",
+      "displayedSentences": [
+        "Ya has preparado, ejecutado y comprobado un turno.",
+        "Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario.",
+        "Las obras no terminan porque el alcalde proteste tres veces.",
+        "Lo he comprobado: protesta muchísimo y siguen ahí."
+      ],
+      "label": "review-debrief-0",
+      "actual": [
+        {
+          "index": 20,
+          "source": {
+            "id": 42,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "u10bmo",
+          "clipKind": "D",
+          "person": "adif",
+          "at": 422128.5,
+          "duration": 17.919977324263037,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08736940285510031,
+          "peak": 0.7794631719589233,
+          "path": [
+            {
+              "id": 42,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 43,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 360044,
+            "at": 422006.299999997,
+            "mp3SHA256": "6a12fbff865276ddb3123e24dbb2db487e01e8907ad57ef83e35910b1101a2f2",
+            "duration": 17.919977324263037,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "87484031d55c0fd76dd70ef0874e263143708b29c376616e518f9b54302e98ba",
+          "nativeEnded": true,
+          "endedAt": 440785.799999997
+        }
+      ],
+      "textSHA256": "64f7b3da9f9f89d0572a472f917108adf287bd849a0750dfd048ffeeaf2a8553"
+    },
+    {
+      "person": "president",
+      "body": "Llega la hora de firmar, director; la foto sola no cobra el premio.\n\nLee el encargo de Agenda y acepta la rama que puedas cumplir. Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional. El plazo es de dieciocho meses. El premio llega al cumplir, no al prometer; una crueldad que en política evitamos.",
+      "title": "Tu primer compromiso con fecha de entrega",
+      "stage": "handoff",
+      "kind": "briefing",
+      "fragments": [
+        "Llega la hora de firmar, director; la foto sola no cobra el premio.",
+        "Lee el encargo de Agenda y acepta la rama que puedas cumplir.",
+        "Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional.",
+        "El plazo es de dieciocho meses.",
+        "El premio llega al cumplir, no al prometer; una crueldad que en política evitamos."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "4c4ita",
+          "kind": "D",
+          "raw": "Llega la hora de firmar, director; la foto sola no cobra el premio.\n\nLee el encargo de Agenda y acepta la rama que puedas cumplir. Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional. El plazo es de dieciocho meses. El premio llega al cumplir, no al prometer; una crueldad que en política evitamos.",
+          "sha256": "217d64f4c793b74720c73b7dea87bffcb86e284fe93070f7960bd69467b7e74b",
+          "productionSHA256": "217d64f4c793b74720c73b7dea87bffcb86e284fe93070f7960bd69467b7e74b",
+          "declaredReferenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+        }
+      ],
+      "displayedText": "Llega la hora de firmar, director; la foto sola no cobra el premio. Lee el encargo de Agenda y acepta la rama que puedas cumplir. Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional. El plazo es de dieciocho meses. El premio llega al cumplir, no al prometer; una crueldad que en política evitamos.",
+      "displayedSentences": [
+        "Llega la hora de firmar, director; la foto sola no cobra el premio.",
+        "Lee el encargo de Agenda y acepta la rama que puedas cumplir.",
+        "Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional.",
+        "El plazo es de dieciocho meses.",
+        "El premio llega al cumplir, no al prometer; una crueldad que en política evitamos."
+      ],
+      "label": "handoff-briefing",
+      "actual": [
+        {
+          "index": 21,
+          "source": {
+            "id": 44,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "4c4ita",
+          "clipKind": "D",
+          "person": "president",
+          "at": 443897.299999997,
+          "duration": 21.51997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08832650499307033,
+          "peak": 0.7807590365409851,
+          "path": [
+            {
+              "id": 44,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 45,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 432044,
+            "at": 443813.10000000894,
+            "mp3SHA256": "217d64f4c793b74720c73b7dea87bffcb86e284fe93070f7960bd69467b7e74b",
+            "duration": 21.51997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "5dec3d858d4a03b525d0ec352053bc5af6576199bef6c88c3bb1ea9773c16aa8",
+          "nativeEnded": true,
+          "endedAt": 466475.200000003
+        }
+      ],
+      "textSHA256": "97f70d72a89a459f2d8f1780776b9cf70dd8c9b3e1e8afeb2419b1ec96c98ee0"
+    },
+    {
+      "person": "president",
+      "body": "Ya ha firmado servicio público; ahora vienen los viajeros y el calendario.\n\nEs el compromiso más accesible de las dos ramas. El apoyo territorial también tiene valor: no solo importa el premio. Tu firma ya está en el encargo. Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer.",
+      "title": "Tu primer compromiso con fecha de entrega",
+      "stage": "handoff",
+      "kind": "feedback",
+      "fragments": [
+        "Ya ha firmado servicio público; ahora vienen los viajeros y el calendario.",
+        "Es el compromiso más accesible de las dos ramas.",
+        "El apoyo territorial también tiene valor: no solo importa el premio.",
+        "Tu firma ya está en el encargo.",
+        "Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "obwd05",
+          "kind": "D",
+          "raw": "Ya ha firmado servicio público; ahora vienen los viajeros y el calendario.\n\nEs el compromiso más accesible de las dos ramas. El apoyo territorial también tiene valor: no solo importa el premio. Tu firma ya está en el encargo. Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer.",
+          "sha256": "05896ca596d0bccd5c7a8b47fd1adb417fc30380b98bcc24a4b484d65c0b85d2",
+          "productionSHA256": "05896ca596d0bccd5c7a8b47fd1adb417fc30380b98bcc24a4b484d65c0b85d2",
+          "declaredReferenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+        }
+      ],
+      "displayedText": "Ya ha firmado servicio público; ahora vienen los viajeros y el calendario. Es el compromiso más accesible de las dos ramas. El apoyo territorial también tiene valor: no solo importa el premio. Tu firma ya está en el encargo. Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer.",
+      "displayedSentences": [
+        "Ya ha firmado servicio público; ahora vienen los viajeros y el calendario.",
+        "Es el compromiso más accesible de las dos ramas.",
+        "El apoyo territorial también tiene valor: no solo importa el premio.",
+        "Tu firma ya está en el encargo.",
+        "Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer."
+      ],
+      "label": "handoff-feedback-public",
+      "actual": [
+        {
+          "index": 22,
+          "source": {
+            "id": 46,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "obwd05",
+          "clipKind": "D",
+          "person": "president",
+          "at": 472411.200000003,
+          "duration": 17.83997732426304,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08733680739276388,
+          "peak": 0.7151837944984436,
+          "path": [
+            {
+              "id": 46,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 47,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 358604,
+            "at": 472284.5,
+            "mp3SHA256": "05896ca596d0bccd5c7a8b47fd1adb417fc30380b98bcc24a4b484d65c0b85d2",
+            "duration": 17.83997732426304,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "0dc1567572c9c5662edac49b0210eb8eaf100c119742c6fd9ce16934d3d998c0",
+          "nativeEnded": true,
+          "endedAt": 491166.799999997
+        }
+      ],
+      "textSHA256": "e2455f52b0e7e9a679e3cf58490e1c20e7144ce517fe9b10a34fa472ec460769"
+    },
+    {
+      "person": "rival",
+      "body": "El encargo tiene fecha y tu plan sigue en la partida. Revisa demanda, recursos y confianza antes de ampliar. Nos veremos en los precios y en los titulares. Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+      "title": "Tu primer compromiso con fecha de entrega",
+      "stage": "handoff",
+      "kind": "debrief",
+      "fragments": [
+        "El encargo tiene fecha y tu plan sigue en la partida.",
+        "Revisa demanda, recursos y confianza antes de ampliar.",
+        "Nos veremos en los precios y en los titulares.",
+        "Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren."
+      ],
+      "plan": "whole-paragraph",
+      "clips": [
+        {
+          "id": "2zzhsa",
+          "kind": "D",
+          "raw": "El encargo tiene fecha y tu plan sigue en la partida. Revisa demanda, recursos y confianza antes de ampliar. Nos veremos en los precios y en los titulares. Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+          "sha256": "8b7b0a7b158c0de30e2346bf03c5a7f3a1cec50e723732d9e0c6bf4967d17ce2",
+          "productionSHA256": "8b7b0a7b158c0de30e2346bf03c5a7f3a1cec50e723732d9e0c6bf4967d17ce2",
+          "declaredReferenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+        }
+      ],
+      "displayedText": "El encargo tiene fecha y tu plan sigue en la partida. Revisa demanda, recursos y confianza antes de ampliar. Nos veremos en los precios y en los titulares. Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+      "displayedSentences": [
+        "El encargo tiene fecha y tu plan sigue en la partida.",
+        "Revisa demanda, recursos y confianza antes de ampliar.",
+        "Nos veremos en los precios y en los titulares.",
+        "Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren."
+      ],
+      "label": "handoff-debrief-0",
+      "actual": [
+        {
+          "index": 23,
+          "source": {
+            "id": 48,
+            "type": "AudioBufferSourceNode"
+          },
+          "clipId": "2zzhsa",
+          "clipKind": "D",
+          "person": "rival",
+          "at": 493457.60000000894,
+          "duration": 14.719977324263038,
+          "speakingMode": "dialogue",
+          "nativeBuffer": true,
+          "sampleRate": 44100,
+          "channels": 1,
+          "contextState": "running",
+          "playbackRate": 1,
+          "detune": 0,
+          "rms": 0.08981488909338153,
+          "peak": 0.737206757068634,
+          "path": [
+            {
+              "id": 48,
+              "type": "AudioBufferSourceNode",
+              "outgoing": 1
+            },
+            {
+              "id": 49,
+              "type": "GainNode",
+              "outgoing": 1,
+              "gain": 0.7300000190734863
+            },
+            {
+              "id": 3,
+              "type": "AudioDestinationNode",
+              "outgoing": 0
+            }
+          ],
+          "volume": 0.73,
+          "decode": {
+            "bytes": 296204,
+            "at": 493396.90000000596,
+            "mp3SHA256": "8b7b0a7b158c0de30e2346bf03c5a7f3a1cec50e723732d9e0c6bf4967d17ce2",
+            "duration": 14.719977324263038,
+            "sampleRate": 44100,
+            "channels": 1,
+            "nativeBuffer": true
+          },
+          "pcmSHA256": "8f71e5744681d892be5f5e682423853dd578417e9c38f38a583a7a119511a521",
+          "nativeEnded": true,
+          "endedAt": 509095.299999997
+        }
+      ],
+      "textSHA256": "7f9d92845f25a47ef15db2b9e5d90c89c3e9543cfdccfb7905d25379f76f9395"
+    }
+  ],
+  "taskActions": [
+    {
+      "selector": ".main-menu [data-action=begin]",
+      "at": "2026-10-08T22:07:43.277Z"
+    },
+    {
+      "selector": "#modal [data-action=decision][data-choice=\"0\"]",
+      "at": "2026-10-08T22:07:54.594Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:08:15.378Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-answer][data-choice=\"balanced\"]",
+      "at": "2026-10-08T22:08:17.383Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:08:29.567Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:08:30.576Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:08:46.777Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:09:13.394Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-view][data-id=gauge]",
+      "at": "2026-10-08T22:09:14.871Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-view][data-id=power]",
+      "at": "2026-10-08T22:09:16.088Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-view][data-id=salamanca]",
+      "at": "2026-10-08T22:09:17.547Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-answer][data-choice=\"variable\"]",
+      "at": "2026-10-08T22:09:18.116Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:09:32.672Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:09:33.654Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:09:53.804Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:10:17.708Z"
+    },
+    {
+      "selector": "#routeForm button[type=submit]",
+      "at": "2026-10-08T22:10:20.084Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:10:21.860Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:10:39.695Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:11:04.118Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-view][data-id=people]",
+      "at": "2026-10-08T22:11:05.798Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-answer][data-choice=\"pipeline\"]",
+      "at": "2026-10-08T22:11:06.567Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:11:24.694Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:11:25.674Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:11:42.666Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:12:05.713Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-view][data-id=market]",
+      "at": "2026-10-08T22:12:07.479Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-view][data-id=research]",
+      "at": "2026-10-08T22:12:08.287Z"
+    },
+    {
+      "selector": "#coach [data-action=tycoon-research][data-id=online]",
+      "at": "2026-10-08T22:12:09.024Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:12:11.284Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:12:29.082Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:12:49.402Z"
+    },
+    {
+      "selector": "#coach [data-action=open-route][data-id=madrid-salamanca]",
+      "at": "2026-10-08T22:12:50.932Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-quote]",
+      "at": "2026-10-08T22:12:52.206Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-answer][data-choice=\"power\"]",
+      "at": "2026-10-08T22:12:52.610Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:13:05.499Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:13:06.287Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:13:24.928Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:13:49.147Z"
+    },
+    {
+      "selector": "#coach [data-action=day-start]",
+      "at": "2026-10-08T22:13:51.025Z"
+    },
+    {
+      "selector": "#coach [data-action=respond][data-id=\"inc-tut-0-3\"][data-option=team]",
+      "at": "2026-10-08T22:13:51.607Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:13:53.542Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:14:10.877Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:14:30.999Z"
+    },
+    {
+      "selector": "#coach [data-action=day-end]",
+      "at": "2026-10-08T22:14:33.387Z"
+    },
+    {
+      "selector": "#coach [data-action=day-next]",
+      "at": "2026-10-08T22:14:34.105Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:14:34.854Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:14:55.917Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:15:20.973Z"
+    },
+    {
+      "selector": "#coach [data-action=tycoon-public]",
+      "at": "2026-10-08T22:15:22.606Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-answer][data-choice=\"public\"]",
+      "at": "2026-10-08T22:15:24.375Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:15:45.733Z"
+    },
+    {
+      "selector": "#coach [data-action=tutorial-next]",
+      "at": "2026-10-08T22:15:46.270Z"
+    },
+    {
+      "selector": "#modal [data-action=say][data-person=rival]",
+      "at": "2026-10-08T22:16:03.538Z"
+    },
+    {
+      "selector": "#modal [data-action=say][data-person=rival]",
+      "at": "2026-10-08T22:16:05.530Z"
+    },
+    {
+      "selector": "#modal [data-action=say][data-person=rival]",
+      "at": "2026-10-08T22:16:06.880Z"
+    },
+    {
+      "selector": "#modal [data-action=tutorial-next]",
+      "at": "2026-10-08T22:16:24.066Z"
+    }
+  ],
+  "errors": [],
+  "unexpectedRequests": [],
+  "status": "pass",
+  "browser": "151.0.7922.173",
+  "offlineDuringAllPlayback": true,
+  "assets": {
+    "sentenceClips": 0,
+    "wholeDialogues": 412
+  },
+  "controls": {
+    "person": "rival",
+    "bodySHA256": "7f9d92845f25a47ef15db2b9e5d90c89c3e9543cfdccfb7905d25379f76f9395",
+    "stopped": {
+      "index": 24,
+      "source": {
+        "id": 50,
+        "type": "AudioBufferSourceNode"
+      },
+      "clipId": "2zzhsa",
+      "clipKind": "D",
+      "person": "rival",
+      "at": 510670.60000000894,
+      "duration": 14.719977324263038,
+      "speakingMode": "dialogue",
+      "nativeBuffer": true,
+      "sampleRate": 44100,
+      "channels": 1,
+      "contextState": "running",
+      "playbackRate": 1,
+      "detune": 0,
+      "rms": 0.08981488909338153,
+      "peak": 0.737206757068634,
+      "path": [
+        {
+          "id": 50,
+          "type": "AudioBufferSourceNode",
+          "outgoing": 1
+        },
+        {
+          "id": 51,
+          "type": "GainNode",
+          "outgoing": 1,
+          "gain": 0.7300000190734863
+        },
+        {
+          "id": 3,
+          "type": "AudioDestinationNode",
+          "outgoing": 0
+        }
+      ],
+      "volume": 0.73,
+      "decode": {
+        "bytes": 296204,
+        "at": 493396.90000000596,
+        "mp3SHA256": "8b7b0a7b158c0de30e2346bf03c5a7f3a1cec50e723732d9e0c6bf4967d17ce2",
+        "duration": 14.719977324263038,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true
+      },
+      "pcmSHA256": "8f71e5744681d892be5f5e682423853dd578417e9c38f38a583a7a119511a521",
+      "stoppedAt": 512122.5,
+      "nativeEnded": true,
+      "endedAt": 512174.10000000894
+    },
+    "replay": {
+      "index": 25,
+      "source": {
+        "id": 52,
+        "type": "AudioBufferSourceNode"
+      },
+      "clipId": "2zzhsa",
+      "clipKind": "D",
+      "person": "rival",
+      "at": 514003.299999997,
+      "duration": 14.719977324263038,
+      "speakingMode": "dialogue",
+      "nativeBuffer": true,
+      "sampleRate": 44100,
+      "channels": 1,
+      "contextState": "running",
+      "playbackRate": 1,
+      "detune": 0,
+      "rms": 0.08981488909338153,
+      "peak": 0.737206757068634,
+      "path": [
+        {
+          "id": 52,
+          "type": "AudioBufferSourceNode",
+          "outgoing": 1
+        },
+        {
+          "id": 53,
+          "type": "GainNode",
+          "outgoing": 1,
+          "gain": 0.7300000190734863
+        },
+        {
+          "id": 3,
+          "type": "AudioDestinationNode",
+          "outgoing": 0
+        }
+      ],
+      "volume": 0.73,
+      "decode": {
+        "bytes": 296204,
+        "at": 493396.90000000596,
+        "mp3SHA256": "8b7b0a7b158c0de30e2346bf03c5a7f3a1cec50e723732d9e0c6bf4967d17ce2",
+        "duration": 14.719977324263038,
+        "sampleRate": 44100,
+        "channels": 1,
+        "nativeBuffer": true
+      },
+      "pcmSHA256": "8f71e5744681d892be5f5e682423853dd578417e9c38f38a583a7a119511a521",
+      "nativeEnded": true,
+      "endedAt": 529474.900000006
+    }
+  },
+  "speechSynthesisCalls": [],
+  "nativeDecoder": [
+    {
+      "bytes": 3180,
+      "at": 8202.29999999702,
+      "mp3SHA256": "42a3abf83b76ac8a07ff35df668af6322e2e74af0701707c4439e3d20df6af82",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8202.90000000596,
+      "mp3SHA256": "e30a92dcff29978b50a9f6638eb29245a43a4d727591d0ebec7b240eb4d1c98e",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8203.40000000596,
+      "mp3SHA256": "fa3d662f48d16c7a507f1ff8819b6a3aa06c0d82db1fcfe41ed5968102b72711",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3702,
+      "at": 8203.70000000298,
+      "mp3SHA256": "c13d8e26c1a8d34e820a8668aa055abb1e474dad0c8ee79bd8475c98aa571061",
+      "duration": 0.3,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3702,
+      "at": 8203.79999999702,
+      "mp3SHA256": "3b50c6e8ef1aa6115a85348dc6ceffe54b12edf05a69be04e0125e32823613a5",
+      "duration": 0.3,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3702,
+      "at": 8204.10000000894,
+      "mp3SHA256": "e423627accb8a60f9ac4901f09da4a80bdd3e7ce4be1a8e4b102c16422e6564e",
+      "duration": 0.3,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8204.20000000298,
+      "mp3SHA256": "651da7d5116113f06fd1454ec929d0060960e655f7abada7cfc73fd2f6ca7176",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 3180,
+      "at": 8204.60000000894,
+      "mp3SHA256": "91a19b9ada2769d2eb18f1ddc60cc547603a9b3762c73b4d7f2d98a407c307be",
+      "duration": 0.25,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5270,
+      "at": 8204.70000000298,
+      "mp3SHA256": "1c53eaecc631749805d2d69bdd4bdc553b85e27a04aea5dfc699ec1040e80471",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5270,
+      "at": 8204.79999999702,
+      "mp3SHA256": "7439c7e4ad723f48a73e5851f4c502815bb54b6e6c8a779f3af193539ebf15fb",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5270,
+      "at": 8205.40000000596,
+      "mp3SHA256": "b60bcd8e5a124ed26901237beba60375eb80a05d4a0a184f6ca5afa29b882b83",
+      "duration": 0.45,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5792,
+      "at": 8206.5,
+      "mp3SHA256": "011ae1372f40ccd0e302acdc0d8e128e5ea105f1f11d9d12fd100fe34d0cc298",
+      "duration": 0.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 5792,
+      "at": 8206.70000000298,
+      "mp3SHA256": "362837987d5f5276b2be6b3804e1df91007a22674241492434ef9efb17b1980c",
+      "duration": 0.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 20682,
+      "at": 8207.10000000894,
+      "mp3SHA256": "e52028fc0fb8d75472c0e4f0b5460ef59031c02e0f5355e76dae74419d4e86b0",
+      "duration": 2,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 25645,
+      "at": 8207.70000000298,
+      "mp3SHA256": "2ce9211fd31417eff8dfbfe1f5b684f3c4a0464eb39bc4ab49f5e79a9ab7ed87",
+      "duration": 2.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 25645,
+      "at": 8208.70000000298,
+      "mp3SHA256": "b217d952e2a7461df0d54a8def576fa9a364a176ee6bbed583c01f6788fe4381",
+      "duration": 2.5,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 12584,
+      "at": 8209.20000000298,
+      "mp3SHA256": "c8afd8ab25b92033421a779865b67383fd9e4dab84b9a459004bf5e0f966e6a1",
+      "duration": 1.2,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 12584,
+      "at": 8209.5,
+      "mp3SHA256": "f113ced849b740857baf47d3591f34d01e0be5b03aed7ba4ca8f821e9fe722ff",
+      "duration": 1.2,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14913,
+      "at": 8210.29999999702,
+      "mp3SHA256": "565a96a8505094b27528d1e9269cf30f522dabf173845141ebb83f233695b9d9",
+      "duration": 2.04,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14661,
+      "at": 8210.40000000596,
+      "mp3SHA256": "1f5cee95bbb6691a7b9a27d6e52cb2d572660e79e5cd966652a7cddeeabe5a6c",
+      "duration": 2.0133125,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14409,
+      "at": 8210.40000000596,
+      "mp3SHA256": "ecca97d9808427f2e444d5aa6f80723e30119dd0cd69be948fd115d7d3c905fa",
+      "duration": 1.96,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 14157,
+      "at": 8210.60000000894,
+      "mp3SHA256": "cb62f870a79c6122a77c973ce5cf24700887c9dd047711894e4037e4367ed1ee",
+      "duration": 1.92,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13905,
+      "at": 8210.60000000894,
+      "mp3SHA256": "eeddedf0afe40fe66734dbd51f2b468c2a9119e609dea6487cbf3f3ec0bd1d58",
+      "duration": 1.88,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13653,
+      "at": 8210.70000000298,
+      "mp3SHA256": "107c95cf67c52c0dfdd6d58116ce31dd51dc3cb80131b55d4d981bc7262e2e91",
+      "duration": 1.8533125,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13401,
+      "at": 8210.70000000298,
+      "mp3SHA256": "4ff0fc030225c30b174f6647141561f89f1892e851942a15bdf96b4c001801ae",
+      "duration": 1.82665625,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13149,
+      "at": 8210.79999999702,
+      "mp3SHA256": "d3932b78850789e1cfee27c1af3327721bbfec01d09b6b8a8ec2e047b1d8cbc1",
+      "duration": 1.8,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 13149,
+      "at": 8210.90000000596,
+      "mp3SHA256": "857f673bf639064910d9f27c344dd9002aa1736ede8d4a691863453d916bb1f2",
+      "duration": 1.8,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9873,
+      "at": 8211,
+      "mp3SHA256": "b56055ee86d1b58e7ecef2d68714512a3fdb75705114442aba9cd946c82d9eb2",
+      "duration": 1.325,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9621,
+      "at": 8211,
+      "mp3SHA256": "c8c6c4797a81160d91c99d1d7b47ec6434d545df2753577c14bae6c72986c066",
+      "duration": 1.282125,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9369,
+      "at": 8211.10000000894,
+      "mp3SHA256": "434721174ef83259412186bef1b404ee66270b48335f3d7d5f2adcf73ded7249",
+      "duration": 1.25,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 9117,
+      "at": 8211.10000000894,
+      "mp3SHA256": "4e9bd1cde056a538534c9a9d00490e4739ecbae070f2a777315023c6cf9c5480",
+      "duration": 1.21784375,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 8865,
+      "at": 8211.10000000894,
+      "mp3SHA256": "c476ab53ff3ac14a1be386129233d2fc9cf858544fb953d5f24a329885cf6bdd",
+      "duration": 1.175,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 8613,
+      "at": 8211.20000000298,
+      "mp3SHA256": "cdea35f525b1ce14c0e4fc804dadd789ebdf50ef12006c694847caa16bcc06c5",
+      "duration": 1.14284375,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 8361,
+      "at": 8214,
+      "mp3SHA256": "0b17d5f03b3983de3ca3c49c6afa0ada65d5dcce2b69bbb6eaa1c94984806f8a",
+      "duration": 1.1,
+      "sampleRate": 32000,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 169484,
+      "at": 10391.60000000894,
+      "mp3SHA256": "9c9ce09cf36416f62da03f1a31cd72139a8f7a32856e67300bd17586e323c14f",
+      "duration": 8.39997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 360044,
+      "at": 21918.40000000596,
+      "mp3SHA256": "dece74e168d9a03a30304297c2d94e5780ba42aae6f97b29a2e9fb806b1fd0fa",
+      "duration": 17.919977324263037,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 203084,
+      "at": 44512.90000000596,
+      "mp3SHA256": "8df57d0b852b5685b31322356cd1211fb5d2d10c2379e224ac73c424f8479320",
+      "duration": 10.079977324263039,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 270284,
+      "at": 57687.70000000298,
+      "mp3SHA256": "686405b1efff1d7668fe8c5cb6e0e5e0edef505b1bae7efdc7f2a0f6cb9905d3",
+      "duration": 13.44,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 469004,
+      "at": 73988.20000000298,
+      "mp3SHA256": "4ddd0c4d48b7c00f5e98f35b3fc8e91eb58325b15928fe2ee085742bd29ecbeb",
+      "duration": 23.35997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 241484,
+      "at": 105283.5,
+      "mp3SHA256": "a8ecc626dd8e2643c1c4ac609f6740f3ceaecba6aec2035fc6c4d5798453b33e",
+      "duration": 12,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 340844,
+      "at": 121164.79999999702,
+      "mp3SHA256": "006b280c9159c0c0e08f47576c5ecde35bd8aad603e1430b8f95ff8e777b8c79",
+      "duration": 16.95997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 421004,
+      "at": 140839.20000000298,
+      "mp3SHA256": "c91ec9b58c9980c130b95bdea64049ce1a4da398d2ec1a9dad13aa0dc53f0903",
+      "duration": 20.95997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 308684,
+      "at": 168987.60000000894,
+      "mp3SHA256": "f54d750ea9cc79a637842d85cbbca9f191545d7fae15b1304911b9386b51bc71",
+      "duration": 15.359977324263038,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 432044,
+      "at": 186860.79999999702,
+      "mp3SHA256": "5bcd294af61d3cd808c986f36eb3d2c44a76aba0c3cccca30d4e2560ee7b1fbd",
+      "duration": 21.51997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 314924,
+      "at": 213732.10000000894,
+      "mp3SHA256": "0f4bd7624db133522dac05185fd7267bdb6a9854cef7e08e127a114552803958",
+      "duration": 15.670249433106576,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 291404,
+      "at": 232711,
+      "mp3SHA256": "0fee6f643511d84cc9cc042c230b343f727cb9c756ee89b5439b185f1e1d8406",
+      "duration": 14.48,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 406604,
+      "at": 249633.79999999702,
+      "mp3SHA256": "f680fbc54d9b49b282bcaf8f426e743a07e5306a9527325fac33890b563b3b63",
+      "duration": 20.239977324263037,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 307244,
+      "at": 278264.299999997,
+      "mp3SHA256": "8f10e956ec93fb2021c0242133b04ca5cde196657987dde4ed34886260b1872e",
+      "duration": 15.279977324263038,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 345644,
+      "at": 296572.299999997,
+      "mp3SHA256": "8b89bd2a04ce65663d5514df6371f51c366e91086456e6954eec77d900228c73",
+      "duration": 17.19997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 201644,
+      "at": 320110.90000000596,
+      "mp3SHA256": "c890e21f906137ffd5958cc21901bf15f35f4e6e19c104f073c07c296e2a6d4c",
+      "duration": 9.999977324263039,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 323084,
+      "at": 333414.700000003,
+      "mp3SHA256": "e0006b9ddf8ebc4d18b584c0b171a09f68c20ce454bd4593f669a86554a19ecf",
+      "duration": 16.079977324263037,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 426764,
+      "at": 352097.799999997,
+      "mp3SHA256": "16e6df6a22d75877d79e4969a8824113e0cb1917856dbecb3ecd82e7ec2ea6a2",
+      "duration": 21.248526077097505,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 283244,
+      "at": 381469.40000000596,
+      "mp3SHA256": "e6995448f2ccd03639024bc02687fbc44f18120262f8152bdb4897214036c0b2",
+      "duration": 14.08,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 347084,
+      "at": 397996.700000003,
+      "mp3SHA256": "b3c630444b68840595f1ef85faa4c5a5963074b6aeb99610f3f2d077f4ba1f09",
+      "duration": 17.27997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 360044,
+      "at": 422006.299999997,
+      "mp3SHA256": "6a12fbff865276ddb3123e24dbb2db487e01e8907ad57ef83e35910b1101a2f2",
+      "duration": 17.919977324263037,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 432044,
+      "at": 443813.10000000894,
+      "mp3SHA256": "217d64f4c793b74720c73b7dea87bffcb86e284fe93070f7960bd69467b7e74b",
+      "duration": 21.51997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 358604,
+      "at": 472284.5,
+      "mp3SHA256": "05896ca596d0bccd5c7a8b47fd1adb417fc30380b98bcc24a4b484d65c0b85d2",
+      "duration": 17.83997732426304,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    },
+    {
+      "bytes": 296204,
+      "at": 493396.90000000596,
+      "mp3SHA256": "8b7b0a7b158c0de30e2346bf03c5a7f3a1cec50e723732d9e0c6bf4967d17ce2",
+      "duration": 14.719977324263038,
+      "sampleRate": 44100,
+      "channels": 1,
+      "nativeBuffer": true
+    }
+  ],
+  "fullSpeakRequests": [
+    {
+      "person": "minister",
+      "text": "Los alcaldes quieren sus trenes. Hacienda quiere su dinero. Y yo quiero un titular para el telediario de las tres. ¿Qué ponemos primero? Piénsalo rápido, que tengo una inauguración.",
+      "at": 9864.20000000298,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 10428.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 11876.79999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 13039.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 16221.90000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 17091.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 19267.70000000298
+    },
+    {
+      "person": "minister",
+      "text": "A ver, director: antes de las fotos toca decidir qué vas a proteger.\n\nElige qué protegerás primero: la caja, la cobertura o ambas. Enero de 2022; soy Raquel Sanz y tú diriges la empresa. Después prepararemos una jornada real, decisión por decisión. La inauguración absurda puede esperar; yo tengo experiencia.",
+      "at": 21188,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 22005,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 26665.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 30261,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 34190.70000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 37061,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 40662.5
+    },
+    {
+      "person": "minister",
+      "text": "Un buen punto de partida: una línea fuerte ayuda a sostener cobertura. Aun así, compara ocupación, beneficio y recursos; ningún criterio sustituye mirar los números.",
+      "at": 43983.40000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 44577.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 49417.79999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 55096.79999999702
+    },
+    {
+      "person": "rival",
+      "text": "Tu prioridad está elegida; la caja sigue igual. Antes de abrir servicios, comprueba qué tren admite la vía. Soy Íñigo Asfalto, de Autocares Meseta: en mi familia vasca llamamos oportunidad a los viajeros que un iluminado deja sin tren.",
+      "at": 57163,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 57779.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 60536.29999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 63983,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 71977
+    },
+    {
+      "person": "adif",
+      "text": "Baje al plano, director: Salamanca necesita ruedas compatibles, no otro discurso.\n\nAbre Madrid–Salamanca y lee «Qué puede circular». Consulta también sus anchos y electricidad. Soy Benito Balasto, Adif: un tren debe cumplir ambos requisitos en todo el recorrido. Pintar la línea de rojo no la convierte en alta velocidad, por mucho que vote el alcalde.",
+      "at": 73372.29999999702,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 74204.70000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 78797,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 82130.90000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 84641.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 90474,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 98710.20000000298
+    },
+    {
+      "person": "adif",
+      "text": "Exacto: el Alvia eléctrico puede aprovechar ambos anchos y la catenaria. Aún debes comprobar unidades disponibles y frecuencia antes de abrir. Has diagnosticado material, no comprado una obra.",
+      "at": 104714.79999999702,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 105366.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 110080.79999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 114366.79999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 117966.29999999702
+    },
+    {
+      "person": "mayor",
+      "text": "Salamanca admite un Alvia eléctrico mediante el cambiador existente: no necesita una obra para empezar. Soy Paco Terruño, alcalde. Antes de prometer otro túnel, asigne un tren compatible. Nos ahorraríamos veinte años y una colección de ministros con tijeras.",
+      "at": 120225.40000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 121281.29999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 127810.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 129546.20000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 133460.20000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 139125.5
+    },
+    {
+      "person": "treasury",
+      "text": "Vamos con València: las salidas extra también pasan por mi calculadora.\n\nEn Madrid–València, aumenta al menos una salida por sentido y cambia la tarifa. Mira beneficio, ocupación y unidades antes de aplicar el plan. Más trenes cuestan dinero; rebajar billetes a ciegas no es gestión, es subvencionar tu propia ocurrencia.",
+      "at": 140401.79999999702,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 141007.20000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 145527.70000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 151282,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 155391.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 162838.10000000894
+    },
+    {
+      "person": "minister",
+      "text": "El nuevo plan está aplicado. Has cambiado ingresos previstos, costes y trenes necesarios; comprueba el resultado al circular. La previsión orienta, no garantiza beneficios. Ahora revisa el personal: los trenes no los conduce mi gabinete, aunque algunos se crean capaces.",
+      "at": 168453.10000000894,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 169093.20000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 171012.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 176004.79999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 178308.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 185135.40000000596
+    },
+    {
+      "person": "workshop",
+      "text": "A ver, chaval: una cabina no se rellena a golpe de contrato.\n\nCompara maquinistas disponibles y necesarios. Hoy sobra cobertura: no necesitas contratar. Si una ampliación supera la reserva, forma personal tres meses antes. Contratar veinte cuesta 0,3 M€; puedes probarlo, pero contratar porque sí sería una gilipollez con nómina.",
+      "at": 186282.90000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 186991.90000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 191960.29999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 194027.29999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 196510.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 201063,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 209505.60000000894
+    },
+    {
+      "person": "workshop",
+      "text": "Ese es el orden: demanda prevista, unidades, personal y fecha de apertura. Si tu reserva ya cubre la ampliación, no necesitas contratar. Si faltan maquinistas, calcula cuántos, el plazo de formación y sus costes recurrentes.",
+      "at": 213166.20000000298,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 213835.29999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 219208.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 223697.70000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 230167.79999999702
+    },
+    {
+      "person": "treasury",
+      "text": "Mantener la reserva actual cubre estos servicios. Si contrataste alumnos, estarán disponibles en tres meses y sumarán costes mensuales. La regla es cubrir lo que falta con antelación. Una plantilla enorme sin plan solo me da más gastos que recortar.",
+      "at": 232268.90000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 232822.20000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 235360.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 239700.90000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 242960.29999999702,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 248005.29999999702
+    },
+    {
+      "person": "successor",
+      "text": "Antes de comprar otra ocurrencia, vamos a separar sus costes y sus plazos.\n\nCompara competencia, políticas e investigación antes de gastar. Soy Óscar del Puente, hoy alcalde consultado. Una política actúa ya y cobra cada mes; una investigación paga ahora y tarda. Puedes conservar la caja: no te obligaré a comprar otro PowerPoint con siglas.",
+      "at": 249246.40000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 249773.20000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 254560,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 257500.70000000298,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 260076.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 265228.700000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 270986.200000003
+    },
+    {
+      "person": "successor",
+      "text": "Ya has comparado coste, efecto y plazo. Invierte cuando resuelva un problema concreto; esperar también es una decisión. El wifi no arregla la catenaria y ERTMS no cambia el ancho. Las siglas son ingeniería, no un conjuro para tapar chapuzas.",
+      "at": 277873.5,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 278352.700000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 280783.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 284603.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 290160.799999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 294262
+    },
+    {
+      "person": "mayor",
+      "text": "Oiga, quiero distinguir el tren de hoy de la excavadora de mañana.\n\nAbra Salamanca con un Alvia compatible y consulte cuánto cuesta electrificar Torralba–Soria. No adjudique esa obra todavía: basta leer precio y plazo. Quiero un tren útil hoy y un presupuesto para mañana, no otra excavadora contratada para la foto.",
+      "at": 295668.10000000894,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 296682.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 300657,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 304960.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 308264.200000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 314867
+    },
+    {
+      "person": "mayor",
+      "text": "Correcto: electrificar no cambia las ruedas ni el ancho. Un Alvia eléctrico puede aprovechar la obra si el recorrido y los cambiadores también son compatibles.",
+      "at": 319206.5,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 320209.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 323809.299999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 330678.799999997
+    },
+    {
+      "person": "riders",
+      "text": "Salamanca tiene servicio; Soria, un presupuesto que puedes comparar. Electrificar permitiría material eléctrico compatible, pero conservaría el ancho ibérico. Has separado abrir trenes de construir vías. Mucho más útil que prometer un AVE en una carretera, como ciertos lumbreras.",
+      "at": 332884.299999997,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 333527.299999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 337237.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 341364.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 344246.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 350436.10000000894
+    },
+    {
+      "person": "workshop",
+      "text": "A ver, que la jornada también trae averías; elija qué problema quiere reducir.\n\nComienza la jornada y atiende la avería. El equipo cuesta 18.000 euros y reduce la demora; el autobús cuesta 9.000 y protege al viajero; esperar ahorra ahora y conserva el retraso. Elige qué importa más. La avería no se arregla soplando, coño.",
+      "at": 351525.60000000894,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 352240.700000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 357263.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 359967.200000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 369239.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 370785.299999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 374486.90000000596
+    },
+    {
+      "person": "president",
+      "text": "La respuesta ya está aplicada: has cambiado la demora o la atención al viajero, o has aceptado el retraso. Revisa el parte para comprobarlo. Una consecuencia medida vale más que decir «todo controlado»; esa frase ya la rellena mi gabinete.",
+      "at": 380129.700000003,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 381573.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 388274.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 390033.799999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 396405.90000000596
+    },
+    {
+      "person": "riders",
+      "text": "¡Oye, director, que el día termina con un parte, no con otra excusa!\n\nTermina la jornada, lee viajeros, ingresos y puntualidad en el parte y pasa al día siguiente. Es un resultado diario; las cuentas completas se liquidan al cerrar el mes. Mira qué mejoró y qué falló, que nosotros no vivimos de vuestros titulares.",
+      "at": 397465.700000003,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 398114.200000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 402202.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 407229.200000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 411313.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 416164.90000000596
+    },
+    {
+      "person": "adif",
+      "text": "Ya has preparado, ejecutado y comprobado un turno. Usa el siguiente para corregir la oferta; los plazos siguen avanzando con el calendario. Las obras no terminan porque el alcalde proteste tres veces. Lo he comprobado: protesta muchísimo y siguen ahí.",
+      "at": 421434.40000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 422167.799999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 425752.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 432023.700000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 436503.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 440785.700000003
+    },
+    {
+      "person": "president",
+      "text": "Llega la hora de firmar, director; la foto sola no cobra el premio.\n\nLee el encargo de Agenda y acepta la rama que puedas cumplir. Servicio público exige menos; la apuesta comercial paga más y exige un 25 % adicional. El plazo es de dieciocho meses. El premio llega al cumplir, no al prometer; una crueldad que en política evitamos.",
+      "at": 442509.90000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 443903.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 448565.799999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 452869.90000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 458249.799999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 460401.799999997,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 466475.10000000894
+    },
+    {
+      "person": "president",
+      "text": "Ya ha firmado servicio público; ahora vienen los viajeros y el calendario.\n\nEs el compromiso más accesible de las dos ramas. El apoyo territorial también tiene valor: no solo importa el premio. Tu firma ya está en el encargo. Ahora cumple el objetivo dentro del plazo: el premio llega al terminar, no al prometer.",
+      "at": 470969.60000000894,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 472419.200000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 476383.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 479360,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 482990.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 4,
+          "at": 485304.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 491166.700000003
+    },
+    {
+      "person": "rival",
+      "text": "El encargo tiene fecha y tu plan sigue en la partida. Revisa demanda, recursos y confianza antes de ampliar. Nos veremos en los precios y en los titulares. Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+      "at": 492873.5,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 493467.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 496843.700000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 499293.700000003,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 502053.60000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 509095.10000000894
+    },
+    {
+      "person": "rival",
+      "text": "El encargo tiene fecha y tu plan sigue en la partida. Revisa demanda, recursos y confianza antes de ampliar. Nos veremos en los precios y en los titulares. Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+      "at": 510143.10000000894,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 510680,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 512122.90000000596
+    },
+    {
+      "person": "rival",
+      "text": "El encargo tiene fecha y tu plan sigue en la partida. Revisa demanda, recursos y confianza antes de ampliar. Nos veremos en los precios y en los titulares. Procura que el siguiente viajero me elija por gusto, no porque un señor con despacho haya olvidado poner su tren.",
+      "at": 513481.90000000596,
+      "sentenceEvents": [
+        {
+          "index": 0,
+          "at": 514012.10000000894,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 1,
+          "at": 517385.5,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 2,
+          "at": 519838.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        },
+        {
+          "index": 3,
+          "at": 522598.40000000596,
+          "detail": {
+            "approximate": true,
+            "mode": "dialogue"
+          }
+        }
+      ],
+      "mode": "dialogue",
+      "endedAt": 529474.799999997
+    }
+  ],
+  "finishedAt": "2026-10-08T22:16:25.590Z"
+}
