@@ -2,15 +2,15 @@
   "schema": 1,
   "version": "3.6.3",
   "status": "partial-preview",
-  "availableWholeDialogues": 261,
+  "availableWholeDialogues": 301,
   "expectedWholeDialogues": 412,
-  "pendingWholeDialogues": 151,
-  "pacoWholeDialogues": 28,
+  "pendingWholeDialogues": 111,
+  "pacoWholeDialogues": 32,
   "sourceFrozenHTMLs": {
     "gameSHA256": "96c153146a586428091566c5e4580fd21069f63d0deec86eeb63f4158dabe2c7",
     "listeningSHA256": "f6d24efbf716cbdafcaae81194d061092b0be61df68f2667ec2ad475da2e886b"
   },
-  "sourceManifestSHA256": "035a3fd8239fcddf9ac1a697f826f9e744a50bb4d1735c1cd74727f8f981c767",
+  "sourceManifestSHA256": "862f2ce04f507623e5e3c8c34a40cc5b2552ec3377b6a08a41c4a494e548eb1a",
   "sourceCatalogueSHA256": "bcb87414e1558252847bd9ed2be87999f0a71c2be69f046f089d58af06f0800b",
   "sameWholeRecordingsOnBothPages": true,
   "sentenceRecordings": 0,
@@ -19,12 +19,12 @@
   "game": {
     "url": "index.html",
     "bytes": 38534,
-    "sha256": "671585a3e0a771426f9c4970517d16cc5912ff2726f715375e180501b39dd88b"
+    "sha256": "dcd07dc4ebe9bf91ce50776765ea066dd2f4ced51f1e57c4eb509c00fb5c2d05"
   },
   "listening": {
     "url": "dialogos.html",
-    "bytes": 279910,
-    "sha256": "6054067e30895c79f3fba5758baf2aa9e39afa0eb2d5e1ae539b0d4bccb052b1"
+    "bytes": 284338,
+    "sha256": "95d275e123e4727a4e36d3051f8c19b25687911d8b24935b718ca1fbb1bda2c0"
   },
   "assets": [
     {
@@ -53,9 +53,9 @@
       "sha256": "7b1c5d75b28d9de15042e2b374f83566d8c7146697af8fdeb4558b0fb528a585"
     },
     {
-      "url": "assets/game-script-5-8dfb0e86a8df.js",
-      "bytes": 11320929,
-      "sha256": "8dfb0e86a8dfeb8e61cf6358898ab9d96b4f6ef64553849f3b4619b56fb60f4f"
+      "url": "assets/game-script-5-a4f845a3086b.js",
+      "bytes": 11323195,
+      "sha256": "a4f845a3086b8d182c7901950450fbc40dc985cf832d0c51d2c61424bd4f747c"
     },
     {
       "url": "assets/game-style-0-707fd252cb38.css",
@@ -155,6 +155,16 @@
       "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
+      "id": "12idlia",
+      "person": "riders",
+      "kind": "Situación",
+      "url": "assets/voces/12idlia-128c10cf27b7.mp3",
+      "bytes": 155084,
+      "sha256": "128c10cf27b7cc49b2c525c90b2caf305c8d586e506780303cf12f6675220d9c",
+      "duration": 7.728,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
       "id": "12xwnbm",
       "person": "successor",
       "kind": "Primer turno",
@@ -193,6 +203,16 @@
       "sha256": "f0e367077386ef37b23e6d3020610b15225be002dfea876bf11b1d471844705b",
       "duration": 7.704,
       "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "14et5mv",
+      "person": "successor",
+      "kind": "Situación",
+      "url": "assets/voces/14et5mv-0df4be4f46b9.mp3",
+      "bytes": 150284,
+      "sha256": "0df4be4f46b90a2d967ac6a481d6b1e13c8e48d69925dac775acc8e4eb19a301",
+      "duration": 7.488,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
     },
     {
       "id": "14mdncu",
@@ -415,6 +435,26 @@
       "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
     },
     {
+      "id": "1agm7zh",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/1agm7zh-daff1ba78ea5.mp3",
+      "bytes": 169484,
+      "sha256": "daff1ba78ea59d407c29a3f650312407eed90140f64c7be7c058fb3c18fdc3a2",
+      "duration": 8.448,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1bqdd72",
+      "person": "treasury",
+      "kind": "Situación",
+      "url": "assets/voces/1bqdd72-a2ea70c882a1.mp3",
+      "bytes": 188684,
+      "sha256": "a2ea70c882a1c02cbb485fa5586705c81b0425a521b10fece95c89edb451cbc7",
+      "duration": 9.408,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
       "id": "1bvxf4a",
       "person": "riders",
       "kind": "Situación",
@@ -493,6 +533,16 @@
       "sha256": "fb6572cf7821ae80b99c0db73276b187448f8f19053d1f2b2f4c61e9becba38a",
       "duration": 13.248,
       "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1d7r0i6",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/1d7r0i6-7849785ad724.mp3",
+      "bytes": 161804,
+      "sha256": "7849785ad7241fb6abb5f3f0e691b4ea3f6764b90b50372e09f5bfb4d3b18f0a",
+      "duration": 8.064,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
       "id": "1d9tsir",
@@ -575,6 +625,16 @@
       "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
     },
     {
+      "id": "1ewocrm",
+      "person": "treasury",
+      "kind": "Situación",
+      "url": "assets/voces/1ewocrm-6bc4dbd5e77a.mp3",
+      "bytes": 161324,
+      "sha256": "6bc4dbd5e77a9bb5b218c01716a4bd0237b78b999f49152266dc754171454231",
+      "duration": 8.04,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
       "id": "1f5xdig",
       "person": "workshop",
       "kind": "Situación",
@@ -583,6 +643,16 @@
       "sha256": "d134ea4a2c4385c619af0aee380af39aa61000ca0d02f69484e52f0b30f308b1",
       "duration": 8.304,
       "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1f996bv",
+      "person": "mayor",
+      "kind": "Situación",
+      "url": "assets/voces/1f996bv-8c6dfb9be6fc.mp3",
+      "bytes": 166604,
+      "sha256": "8c6dfb9be6fcbc41412d45fff216d7313b4beca9f0a081795bcacd6e369768f0",
+      "duration": 8.304,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
     },
     {
       "id": "1fchtet",
@@ -635,6 +705,16 @@
       "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
+      "id": "1h20yhj",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/1h20yhj-9a544704ff90.mp3",
+      "bytes": 142604,
+      "sha256": "9a544704ff903d8adb98aac03a83d7c020bc1d5f653525b319fbe0c8a4569bae",
+      "duration": 7.104,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
       "id": "1h5asy7",
       "person": "riders",
       "kind": "Situación",
@@ -643,6 +723,16 @@
       "sha256": "04e9addb0285e2508fcb99356af03632d44b8fff9c0ad990c0a86cca82257c1f",
       "duration": 5.808,
       "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1hlxi46",
+      "person": "mayor",
+      "kind": "Situación",
+      "url": "assets/voces/1hlxi46-1cee5496b799.mp3",
+      "bytes": 181004,
+      "sha256": "1cee5496b799f191ce7d65bfbc1bef0f64fa6e5ab788a679c8f1837310c6f157",
+      "duration": 9.024,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
     },
     {
       "id": "1hn9lkq",
@@ -692,6 +782,16 @@
       "bytes": 144044,
       "sha256": "99621fa7f869a9922a34a3c215431fd0e82e516f06c35cda2dab24871b640e08",
       "duration": 7.176,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1imag0w",
+      "person": "riders",
+      "kind": "Situación",
+      "url": "assets/voces/1imag0w-4978a7f42f3e.mp3",
+      "bytes": 168044,
+      "sha256": "4978a7f42f3e3965a066b40808a895e6414bd9de58407406659191e31de7a762",
+      "duration": 8.376,
       "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
     },
     {
@@ -805,6 +905,16 @@
       "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
+      "id": "1lm3rnb",
+      "person": "president",
+      "kind": "Situación",
+      "url": "assets/voces/1lm3rnb-8dedfdabeb16.mp3",
+      "bytes": 144044,
+      "sha256": "8dedfdabeb16bfebcc97a61e7ca936196790821e038fd7ce9bc93629b1acb268",
+      "duration": 7.176,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
       "id": "1lsixlg",
       "person": "successor",
       "kind": "Situación",
@@ -833,6 +943,16 @@
       "sha256": "ebc07ef218f08f9b9d60a13edb735511972e9f6f5022a49c29dfd78ae9364b93",
       "duration": 9.096,
       "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+    },
+    {
+      "id": "1mhr5z",
+      "person": "successor",
+      "kind": "Situación",
+      "url": "assets/voces/1mhr5z-99b098c883cc.mp3",
+      "bytes": 187244,
+      "sha256": "99b098c883cc5343ac417e332c0e6f097649d7bd1e6f47cce38c074972f22913",
+      "duration": 9.336,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
     },
     {
       "id": "1mpawl7",
@@ -913,6 +1033,16 @@
       "sha256": "2bdb09761dcea992d4281597fde19cd552d4e4de282d13030054ffbdf8d637e0",
       "duration": 6.552,
       "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+    },
+    {
+      "id": "1olnu4u",
+      "person": "rival",
+      "kind": "Situación",
+      "url": "assets/voces/1olnu4u-632a2aacd2c1.mp3",
+      "bytes": 153644,
+      "sha256": "632a2aacd2c16507c2b1025e6392dde0080236354b7209f1abe9b5eb2744452d",
+      "duration": 7.656,
+      "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
     },
     {
       "id": "1p8hp96",
@@ -1205,6 +1335,16 @@
       "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
     },
     {
+      "id": "1w1wndu",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/1w1wndu-4a95628bc5f9.mp3",
+      "bytes": 148844,
+      "sha256": "4a95628bc5f98b250cd05a0adbebc41d5e7fa8aadedbf76a6b74c9a434e2ab66",
+      "duration": 7.416,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
       "id": "1w70g5r",
       "person": "workshop",
       "kind": "Respuesta de la guía",
@@ -1393,6 +1533,16 @@
       "sha256": "8f874f7976b3db36755aa2852fa0ab45d8b29976c7245bd6c577853c602b444d",
       "duration": 9.576,
       "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "2agvuh",
+      "person": "rival",
+      "kind": "Situación",
+      "url": "assets/voces/2agvuh-9e4c2f405d8c.mp3",
+      "bytes": 157004,
+      "sha256": "9e4c2f405d8c55d2554899438a8c2bea5d1df7462200947ad98a3022fbf4960f",
+      "duration": 7.824,
+      "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
     },
     {
       "id": "2geyyy",
@@ -1635,6 +1785,16 @@
       "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
     },
     {
+      "id": "98yf05",
+      "person": "workshop",
+      "kind": "Situación",
+      "url": "assets/voces/98yf05-7189d8377550.mp3",
+      "bytes": 172844,
+      "sha256": "7189d83775503b9d043f48e5c65f4dd1aa40446323c0921dd38c59473357c9f4",
+      "duration": 8.616,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
       "id": "9kn16h",
       "person": "riders",
       "kind": "Situación",
@@ -1643,6 +1803,16 @@
       "sha256": "57440bae2411ed2dbd9467615663079591df66ec065c86f1a387b0fbde5e2699",
       "duration": 7.008,
       "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "9mlhln",
+      "person": "workshop",
+      "kind": "Situación",
+      "url": "assets/voces/9mlhln-32916cf31ee7.mp3",
+      "bytes": 190604,
+      "sha256": "32916cf31ee7e70c3a4e58e071e3b874477586811a6fcfa9ae008784e66c8540",
+      "duration": 9.504,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
     },
     {
       "id": "9njzoo",
@@ -1663,6 +1833,26 @@
       "sha256": "4a4e5db56880febe8da87036504429243f91a342dcd3ea197cf2be0fa186cabc",
       "duration": 8.688,
       "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "au0x8k",
+      "person": "successor",
+      "kind": "Situación",
+      "url": "assets/voces/au0x8k-fb3d036ef351.mp3",
+      "bytes": 158444,
+      "sha256": "fb3d036ef3512727a67f8b39c6642cdfc0f55828f631b24c83a7ea7bbf7fef41",
+      "duration": 7.896,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+    },
+    {
+      "id": "bk9pz8",
+      "person": "adif",
+      "kind": "Situación",
+      "url": "assets/voces/bk9pz8-70090230a368.mp3",
+      "bytes": 187244,
+      "sha256": "70090230a3681567196cca6f2c0c321857f72642b3df781ada0d24390329d2aa",
+      "duration": 9.336,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
     },
     {
       "id": "bolz59",
@@ -1785,6 +1975,16 @@
       "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
     },
     {
+      "id": "dmykfe",
+      "person": "rival",
+      "kind": "Situación",
+      "url": "assets/voces/dmykfe-d4eb88992d4b.mp3",
+      "bytes": 168044,
+      "sha256": "d4eb88992d4b9c96d72da404751a879a8dbdb7f781b46edbff5658cdfbdba46c",
+      "duration": 8.376,
+      "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+    },
+    {
       "id": "dxgk4a",
       "person": "mayor",
       "kind": "Primer turno",
@@ -1813,6 +2013,16 @@
       "sha256": "941894e989473b2630e740622faff1ba3ec1a070a2eb5a138ae20779149f6c7e",
       "duration": 6.456,
       "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "e6artb",
+      "person": "mayor",
+      "kind": "Situación",
+      "url": "assets/voces/e6artb-28bfcfb16444.mp3",
+      "bytes": 190604,
+      "sha256": "28bfcfb16444e85c39267921de69766a14269cc027d746137a2524be4ddd92cf",
+      "duration": 9.504,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
     },
     {
       "id": "eg0udo",
@@ -1885,6 +2095,16 @@
       "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
     },
     {
+      "id": "fqerkc",
+      "person": "rival",
+      "kind": "Situación",
+      "url": "assets/voces/fqerkc-eeef0f376e55.mp3",
+      "bytes": 171404,
+      "sha256": "eeef0f376e555fd6bb083e6cc36d13782720c6028765ae4c129467d876754c76",
+      "duration": 8.544,
+      "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+    },
+    {
       "id": "ftibeu",
       "person": "workshop",
       "kind": "Primer turno",
@@ -1955,6 +2175,16 @@
       "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
     },
     {
+      "id": "hzuovs",
+      "person": "adif",
+      "kind": "Situación",
+      "url": "assets/voces/hzuovs-f75eaaabf0d4.mp3",
+      "bytes": 219404,
+      "sha256": "f75eaaabf0d44710e8f855b26a770a75ea2ada3a1af4263d7f6ddb7982e857d2",
+      "duration": 10.944,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
       "id": "i2rzo6",
       "person": "mayor",
       "kind": "Situación",
@@ -1963,6 +2193,16 @@
       "sha256": "2ea16ed4e9d6e7bb35f3c6fcf71cd8ef978eb1d4061c8be25400b2de26d9f858",
       "duration": 7.728,
       "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "i441ot",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/i441ot-7b7f5ce8b129.mp3",
+      "bytes": 116684,
+      "sha256": "7b7f5ce8b129495cbcd2f56adcdab262e80479068c1692f2b6e617b0ff783de8",
+      "duration": 5.808,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
       "id": "i5g7d2",
@@ -2045,6 +2285,16 @@
       "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
     },
     {
+      "id": "jupxk0",
+      "person": "successor",
+      "kind": "Situación",
+      "url": "assets/voces/jupxk0-6bc1c139cb38.mp3",
+      "bytes": 189164,
+      "sha256": "6bc1c139cb388fbe73758dfc0a7302f98fd2d1026e2ad153b836dc7189393113",
+      "duration": 9.432,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+    },
+    {
       "id": "k3e6y9",
       "person": "treasury",
       "kind": "Situación",
@@ -2095,6 +2345,26 @@
       "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
+      "id": "l3se23",
+      "person": "riders",
+      "kind": "Situación",
+      "url": "assets/voces/l3se23-b3c04389ffe4.mp3",
+      "bytes": 171404,
+      "sha256": "b3c04389ffe4e117484ea4a87322b724ca27b7dd3b95d76631c2e55cee1605e1",
+      "duration": 8.544,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "lg80ri",
+      "person": "president",
+      "kind": "Situación",
+      "url": "assets/voces/lg80ri-0d5f80b8de36.mp3",
+      "bytes": 179084,
+      "sha256": "0d5f80b8de366c5a0be61ff43cf3e5352f0f9d1b0e31fe72565d6260a666e082",
+      "duration": 8.928,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
       "id": "lh6g6m",
       "person": "adif",
       "kind": "Situación",
@@ -2133,6 +2403,16 @@
       "sha256": "7d091e764c48f1eae175812d6fa2cc8ea00989a0f82c222f80ad4d3532eefc3d",
       "duration": 10.296,
       "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "ndwuui",
+      "person": "president",
+      "kind": "Situación",
+      "url": "assets/voces/ndwuui-0594c34a5d3d.mp3",
+      "bytes": 172844,
+      "sha256": "0594c34a5d3d17f43e7a00945baec9e10ed3695fe9f2e67094576f50d572e9c9",
+      "duration": 8.616,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
     },
     {
       "id": "nhl902",
@@ -2195,6 +2475,16 @@
       "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
     },
     {
+      "id": "o5z4ft",
+      "person": "mayor",
+      "kind": "Situación",
+      "url": "assets/voces/o5z4ft-045ee4d6ea0a.mp3",
+      "bytes": 183884,
+      "sha256": "045ee4d6ea0a196f9941e51d53244c6b777caf00e0847a7cc654f8eef062a618",
+      "duration": 9.168,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
       "id": "obwd05",
       "person": "president",
       "kind": "Respuesta de la guía",
@@ -2233,6 +2523,16 @@
       "sha256": "36fbbc669afb1a4025ae0bab6b2fd168f98a91a15f092461e62319b90166c31f",
       "duration": 7.824,
       "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "p474w0",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/p474w0-f067cd17990c.mp3",
+      "bytes": 158444,
+      "sha256": "f067cd17990ceeb5d0d21100144ec75bcca2203fc9b25951e646d36a99d90428",
+      "duration": 7.896,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
       "id": "p8l9z5",
@@ -2325,6 +2625,16 @@
       "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
     },
     {
+      "id": "qynw7b",
+      "person": "adif",
+      "kind": "Situación",
+      "url": "assets/voces/qynw7b-06073de15788.mp3",
+      "bytes": 190604,
+      "sha256": "06073de15788160b7c27f8a78a75efd28b9eac6635507f705f3e14195d2fd63d",
+      "duration": 9.504,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
       "id": "reflh6",
       "person": "workshop",
       "kind": "Situación",
@@ -2342,6 +2652,16 @@
       "bytes": 181004,
       "sha256": "66369cb241c2689a3933a2df56b2d1f2c25cb2c94312bdc31b17701e8d06d617",
       "duration": 9.024,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "rynao7",
+      "person": "workshop",
+      "kind": "Situación",
+      "url": "assets/voces/rynao7-2a087af3fde8.mp3",
+      "bytes": 205004,
+      "sha256": "2a087af3fde816b119127962006b5dfe30c782bd6b5e3358b78306323255db85",
+      "duration": 10.224,
       "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
     },
     {
@@ -2405,6 +2725,16 @@
       "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
+      "id": "tk21s2",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/tk21s2-33c8f0d7cb60.mp3",
+      "bytes": 172844,
+      "sha256": "33c8f0d7cb606735d215193137070f80f40d8bcd7b5153029efa49b24c8313d9",
+      "duration": 8.616,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
       "id": "tr2mf3",
       "person": "adif",
       "kind": "Situación",
@@ -2433,6 +2763,26 @@
       "sha256": "6a12fbff865276ddb3123e24dbb2db487e01e8907ad57ef83e35910b1101a2f2",
       "duration": 17.976,
       "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "u2tvcy",
+      "person": "minister",
+      "kind": "Situación",
+      "url": "assets/voces/u2tvcy-d6bd9c25930a.mp3",
+      "bytes": 153644,
+      "sha256": "d6bd9c25930a1e9a026bff034bb7582f59d84c2714941b5aa92f5b5c67d6bd4a",
+      "duration": 7.656,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "u3tumi",
+      "person": "riders",
+      "kind": "Situación",
+      "url": "assets/voces/u3tumi-5f9253110143.mp3",
+      "bytes": 142604,
+      "sha256": "5f92531101434f802ff5a4abf1ee0323cd511df1b4e92e40699086328a1307ca",
+      "duration": 7.104,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
     },
     {
       "id": "ub1uir",
@@ -2473,6 +2823,16 @@
       "sha256": "3cfce81032fd09d6e45b896d23b4c60a594fab4edbd8469baee15a82414e225a",
       "duration": 9.336,
       "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "unhdvb",
+      "person": "workshop",
+      "kind": "Situación",
+      "url": "assets/voces/unhdvb-794bc5a6e2ab.mp3",
+      "bytes": 198284,
+      "sha256": "794bc5a6e2ab72ca3a24ca67efffb8273934ae02ac3d1776608ff7f017b608e4",
+      "duration": 9.888,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
     },
     {
       "id": "ut1oia",
@@ -2585,6 +2945,16 @@
       "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
     },
     {
+      "id": "x1veuu",
+      "person": "treasury",
+      "kind": "Situación",
+      "url": "assets/voces/x1veuu-7796f1eee12a.mp3",
+      "bytes": 181004,
+      "sha256": "7796f1eee12ab693d3c43d6edbe06602f26c98dad83f8eefae398b52f7efc470",
+      "duration": 9.024,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
       "id": "x2g5h4",
       "person": "successor",
       "kind": "Situación",
@@ -2615,6 +2985,16 @@
       "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
     },
     {
+      "id": "xtihl3",
+      "person": "adif",
+      "kind": "Situación",
+      "url": "assets/voces/xtihl3-b2dce6df3230.mp3",
+      "bytes": 206444,
+      "sha256": "b2dce6df32305854ae647da84f0683de5d2fc9205f119d0ed7b97daba6e4db5c",
+      "duration": 10.296,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
       "id": "xundv2",
       "person": "workshop",
       "kind": "Primer turno",
@@ -2623,6 +3003,16 @@
       "sha256": "7e677593523574737ae5d2f5cf9f6927c0eb723039f12ce06b21348449346180",
       "duration": 16.128,
       "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "xv1z59",
+      "person": "treasury",
+      "kind": "Situación",
+      "url": "assets/voces/xv1z59-015a92462780.mp3",
+      "bytes": 190604,
+      "sha256": "015a92462780ca6b7a520c407373ac98ea5a2a57014458e29ef0bd441f14f553",
+      "duration": 9.504,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
     },
     {
       "id": "xz4fx1",
@@ -2653,6 +3043,16 @@
       "sha256": "249277766d76fcbee0319e6ace0ed548dceb87ca3b5ba9290ed03bd29388e786",
       "duration": 11.184,
       "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "yzbbiy",
+      "person": "president",
+      "kind": "Situación",
+      "url": "assets/voces/yzbbiy-9c31476badea.mp3",
+      "bytes": 157004,
+      "sha256": "9c31476badea0927970531762a89e53b83dd8e1ac7c93370d649819a32366456",
+      "duration": 7.824,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
     },
     {
       "id": "z7gbtm",
@@ -2693,5 +3093,12 @@
     "relativeURLs": true,
     "browserTested": false,
     "humanListening": false
-  }
+  },
+  "retainedAssets": [
+    {
+      "url": "assets/game-script-5-8dfb0e86a8df.js",
+      "bytes": 11320929,
+      "sha256": "8dfb0e86a8dfeb8e61cf6358898ab9d96b4f6ef64553849f3b4619b56fb60f4f"
+    }
+  ]
 }

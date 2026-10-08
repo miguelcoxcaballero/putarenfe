@@ -287,5 +287,7 @@
       "bytes": 35555,
       "sha256": "0074204b2c84d6bc968a4e13eddc211bc3c8988701aaf0334e167f4311106799"
     }
-  ]
+  ],
+  "currentManifestSHA256": "862f2ce04f507623e5e3c8c34a40cc5b2552ec3377b6a08a41c4a494e548eb1a",
+  "currentWholeDialogues": 301
 }
