@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "current C6 source inventory; final publication pending",
+  "status": "current C6 source inventory with final product publication verified",
   "originalSourceCommit": "273343e021ef022c1ba6f6ae7df38ac74f96264e",
   "sourceInventory": {
     "path": "/tmp/onboarding/final-release-runtime-001/latest-mirror-inventory-after-sfx.json",
@@ -22,10 +22,16 @@
     "wholeBodies": 412
   },
   "publishedAudio": {
-    "status": "local-current412-native-accepted-publicHTTPS-pending",
+    "status": "publicHTTPS-verified-current412",
     "releaseSHA256": "37446ca2d267dc3fcc92ce9650fa731f683b12d3762a0508bafca0f1042832e3",
     "wholeDialogues": 412,
-    "sameWholeRecordingsOnBothPages": true
+    "sameWholeRecordingsOnBothPages": true,
+    "productCommit": "90247a3a130ac13d65a3d3b41ba713815fcada24",
+    "publicHTTPSProof": {
+      "file": "docs/pages-final412-https-proof.json",
+      "sha256": "a2e439c177f94ce2cc0537a5ed46114d025441502045349af286719d8d91f381"
+    },
+    "checkedPublicRoutes": 496
   },
   "intentionalGitPlaceholder": {
     "file": "proyecto/dist/assets/voice-dialogues.js",

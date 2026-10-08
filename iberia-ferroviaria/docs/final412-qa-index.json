@@ -1,22 +1,24 @@
 {
   "schema": 1,
-  "status": "CURRENT412_NATIVE_ACCEPTED_PUBLIC_HTTPS_PENDING",
+  "status": "CURRENT412_NATIVE_AND_PUBLIC_HTTPS_VERIFIED",
   "version": "3.6.3",
   "releaseScope": "current C6 complete 412, latest ownfolder source and final paired pages",
   "ROOTReviewAndAdoptionPending": false,
   "publication": {
-    "status": "pending",
-    "commit": null,
-    "cacheBuster": null,
-    "publishedAt": null,
+    "status": "verified",
+    "commit": "90247a3a130ac13d65a3d3b41ba713815fcada24",
+    "cacheBuster": "v363-412",
+    "publishedAt": "2026-10-08T22:38:29.064455+00:00",
     "base": "https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/",
     "HTTPSProof": {
-      "path": null,
-      "sha256": null,
-      "status": null,
-      "actualVerifiedRouteCount": null,
-      "initialFailureRetained": null,
-      "targetedRetries": null
+      "file": "docs/pages-final412-https-proof.json",
+      "path": "/workspace/onboarding/pages-final412-https-proof-001.json",
+      "sha256": "a2e439c177f94ce2cc0537a5ed46114d025441502045349af286719d8d91f381",
+      "status": "allMatched",
+      "actualVerifiedRouteCount": 496,
+      "initialFailureRetained": false,
+      "targetedRetries": [],
+      "deploymentReadinessWaitObserved": true
     }
   },
   "catalogue": {
@@ -98,6 +100,13 @@
     "listeningProvenance": {
       "path": "/tmp/onboarding/final-native-materialization/final412-001/investigacion/voces/auditorio-dialogos-3.6.3/latest.json",
       "sha256": "7db5f61cc086755237b2b6691889727ac42738557d1d771e8200361d1f2a354a"
+    },
+    "defaultRebuild": {
+      "actualToolSessionID": 41015,
+      "terminalChunkID": "aced15",
+      "actualTerminalExitCode": 0,
+      "releaseSHA256Unchanged": "37446ca2d267dc3fcc92ce9650fa731f683b12d3762a0508bafca0f1042832e3",
+      "neuralInference": false
     }
   },
   "producerProvenance": {
@@ -369,7 +378,7 @@
   "sourceInventoryDocument": {
     "file": "docs/current-source-mirror-412.json",
     "scope": "194 current proyecto files and separately pinned canonical catalogue",
-    "sha256": "b23599d06023665d0abb9204dabe6a4bacfa785ac550f4f33ff5e5cb02743b29",
+    "sha256": "b488dc6a08e32e7bbacb6ca1e04a715d484cf4daac5fdbdce24bda98ea9ae50a",
     "finalROOTAdoptionPending": false
   }
 }

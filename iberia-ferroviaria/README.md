@@ -12,7 +12,7 @@ Esta construcción reúne **412 grabaciones completas, sin cuerpos pendientes**,
 - **Escuchar sin el juego:** [Auditorio de voces](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html?v=v363-412).
 - **Fuente editable y pruebas:** [proyecto](./proyecto/) y [docs/README.md](./docs/README.md).
 
-**Estado de esta entrega:** validación técnica y pruebas nativas completadas; verificación del despliegue público en curso. La [prueba actual](./docs/final412-qa-index.json) identifica los resultados y su alcance. [release.json](./release.json) conserva las huellas de las páginas, los assets y las 412 grabaciones publicadas.
+**Estado de esta entrega:** pruebas nativas completadas y publicación verificada por HTTPS: 496 rutas correctas, incluidos los 412 MP3, en el commit `90247a3a130ac13d65a3d3b41ba713815fcada24`. La [prueba actual](./docs/final412-qa-index.json) identifica los resultados y su alcance. [release.json](./release.json) conserva las huellas de las páginas, los assets y las 412 grabaciones publicadas.
 
 El progreso se guarda en el `localStorage` de tu navegador y origen. Otro dispositivo, navegador o dirección local tiene su propio guardado.
 

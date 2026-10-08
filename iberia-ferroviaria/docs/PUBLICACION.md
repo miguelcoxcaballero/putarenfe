@@ -2,7 +2,7 @@
 
 El juego utiliza <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/> y el auditorio <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html>. Pages publica desde `main`, carpeta raíz `/`, con HTTPS y sin CNAME. La aplicación de Renfe continúa en la raíz; Iberia Ferroviaria ocupa `iberia-ferroviaria/`.
 
-Esta versión completa ha superado las pruebas nativas. El commit y la verificación pública se registrarán al terminar el despliegue. La [prueba actual](./final412-qa-index.json) enlaza los resultados, sus SHA y los archivos exactos que verifican; las pruebas históricas conservan el alcance de su propia entrega.
+La versión completa está publicada y verificada: commit `90247a3a130ac13d65a3d3b41ba713815fcada24`, 496 rutas HTTPS correctas y 412 MP3, sin repeticiones dirigidas tras completarse el despliegue. La [prueba actual](./final412-qa-index.json) enlaza los resultados, sus SHA y los archivos exactos que verifican; las pruebas históricas conservan el alcance de su propia entrega.
 
 La construcción contiene **412/412 grabaciones enteras**, cero cuerpos pendientes, 50 audios de la guía y **47 diálogos de Paco** generados con la muestra real de Torrente interpretado por Santiago Segura. Suman **4097,976 segundos: 68 minutos y 18 segundos**. Juego y auditorio comparten las mismas tomas completas, sin encadenar fragmentos ni usar síntesis del navegador como sustitución. Incluye Trenespop, las 25 fotos del taller, AVArato, los seis logos de fabricantes, 315 intervenciones de situaciones y la campaña de cinco capítulos de 2022 a 2050.
 
