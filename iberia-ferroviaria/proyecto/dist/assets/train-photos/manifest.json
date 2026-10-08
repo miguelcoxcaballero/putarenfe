@@ -1,0 +1,743 @@
+{
+  "schema": 1,
+  "method": "image_gen.imagegen",
+  "setting": "Taller compartido, vigas azules y grúa amarilla",
+  "photos": [
+    {
+      "series": "100",
+      "file": "100.webp",
+      "bytes": 241568,
+      "sha256": "2e0d05803b3a631e7af9847633225b2d91898d2daa3060f7740aed3a1f4cfc2d",
+      "generatedSHA256": "6cc9cbf2d2beb8336b2d7511ffacc0252aeb47bddb94964ebe26e94c33889076",
+      "generatedFile": "exec-efa42ebb-4c2c-4cd6-b27b-de6b4572ff3a.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 100",
+      "references": [
+        {
+          "series": 100,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Renfe_100_Class_at_Lyon_Part-Dieu.jpg/960px-Renfe_100_Class_at_Lyon_Part-Dieu.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Renfe_100_Class_at_Lyon_Part-Dieu.jpg",
+          "sourceSHA256": "5f9143362cde456361066d6e557d81d50be1730254143e36d38817b8839a9f68",
+          "artist": "Usinex",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Usinex&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Usinex (page does not exist)\">Usinex</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "103",
+      "file": "103.webp",
+      "bytes": 247926,
+      "sha256": "708ba88541e48e1e7466f02e26f762ed89a3814e76d04bb394d8220bf154f216",
+      "generatedSHA256": "c6325834c8fd1aa9b355efafbb9d1a9f5cf00f3095cff994ee371494451be133",
+      "generatedFile": "exec-c14d97df-e295-4d43-8abd-a75331c47a78.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 103",
+      "references": [
+        {
+          "series": 103,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/S3274_Bf_Madrid_Atocha%2C_103_xxx.jpg/960px-S3274_Bf_Madrid_Atocha%2C_103_xxx.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:S3274_Bf_Madrid_Atocha,_103_xxx.jpg",
+          "sourceSHA256": "5b5ce1f023c9296bc2b70aefcafaf18cc3ac6645913b13fd50d2244aa041a35e",
+          "artist": "Falk2",
+          "license": {
+            "LicenseShortName": "CC BY-SA 3.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Falk2\" title=\"User:Falk2\">Falk2</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "104",
+      "file": "104.webp",
+      "bytes": 247722,
+      "sha256": "4f674b8dff1017b070e768799c9dd6622392f933c11df2b3282f9c3a1a90be45",
+      "generatedSHA256": "b36c13a4a6dbfcb73eccd43b5480907848a8933a0177cd08d3208448bcd9becc",
+      "generatedFile": "exec-209f62ee-3282-464c-a5d5-b5dc8239e176.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 104",
+      "references": [
+        {
+          "series": 104,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Zaragoza_-_Delicias_7_-_Avant.JPG/960px-Zaragoza_-_Delicias_7_-_Avant.JPG",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Zaragoza_-_Delicias_7_-_Avant.JPG",
+          "sourceSHA256": "42a38d3a3db50c970a56f6898fd378d560feba748b3d6504d0bc9c649a20fa31",
+          "artist": "Zarateman",
+          "license": {
+            "LicenseShortName": "CC0",
+            "LicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Zarateman\" title=\"User:Zarateman\">Zarateman</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "false",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "106",
+      "file": "106.webp",
+      "bytes": 236272,
+      "sha256": "ef8598fa9568aa41f81aa3e258516edfd3091797a15e4b2936a69c03e4b5ce91",
+      "generatedSHA256": "981eac5253bdfdc9af68cc7874246bc0eb164265e4db4bbfadce2d3919225228",
+      "generatedFile": "exec-7c62e125-4340-47da-b433-8f7622be9c26.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 106",
+      "references": [
+        {
+          "series": 106,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Serie_106_de_Renfe.jpg/960px-Serie_106_de_Renfe.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Serie_106_de_Renfe.jpg",
+          "sourceSHA256": "3f2c83540243dddcb607e6fa431835b3d3335a9cfdaaa8cf200d4ca43c31e7d3",
+          "artist": "FDV",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:FDV\" title=\"User:FDV\">FDV</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "106avlo",
+      "file": "106avlo.webp",
+      "bytes": 233942,
+      "sha256": "218c132487c9866064ba1b67dde98ef2f2a5a8e60f527cc4bd0cb9504c6c4c11",
+      "generatedSHA256": "6d1bb3e8363fa90d97ff2e92b9f29a4a1f131bec64b779c2b64c3be399235c88",
+      "generatedFile": "exec-02ffdd55-0e9a-4761-aad6-44e794c2617f.png",
+      "generated": true,
+      "fictional": false,
+      "label": "AVArato · Serie 106",
+      "references": [
+        {
+          "series": 106,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Serie_106_de_Renfe.jpg/960px-Serie_106_de_Renfe.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Serie_106_de_Renfe.jpg",
+          "sourceSHA256": "3f2c83540243dddcb607e6fa431835b3d3335a9cfdaaa8cf200d4ca43c31e7d3",
+          "artist": "FDV",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:FDV\" title=\"User:FDV\">FDV</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png",
+      "editedFrom": "exec-af920135-3985-4fdc-8bf7-b14fa308a1e8.png",
+      "changes": "AVLO→AVArato; Talgo→Tardo; photographic geometry and workshop preserved"
+    },
+    {
+      "series": "112",
+      "file": "112.webp",
+      "bytes": 240218,
+      "sha256": "5665c1a463ddc9f44e24acf90065995eaaabf282f76cc2659e5dc4da09032dd5",
+      "generatedSHA256": "b9126e3856780f74121a1ead575196dcb2cbf9d6ccc91d4e9055f172ede85a5f",
+      "generatedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 112",
+      "references": [
+        {
+          "series": 112,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Renfe_Serie_112.jpg/960px-Renfe_Serie_112.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Renfe_Serie_112.jpg",
+          "sourceSHA256": "9d2679d564da671cb9bd6acf68681daba1eb7415549ff7ee547c733cb7a7b640",
+          "artist": "Alejandro Navarro López (Usuario Manchego)",
+          "license": {
+            "LicenseShortName": "CC0",
+            "LicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "Artist": "Alejandro Navarro López (Usuario <a href=\"//commons.wikimedia.org/wiki/User:Manchego\" title=\"User:Manchego\">Manchego</a>)",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "false",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "114",
+      "file": "114.webp",
+      "bytes": 267182,
+      "sha256": "c1090171d735c89613f64169e98ae1cc8cf075a36b9dc908875d962c449171ee",
+      "generatedSHA256": "0a8bcdab7f87bda62926fa62b2a1b2b5b276d286cf79162fdf7bd0c4a51c9776",
+      "generatedFile": "exec-5936337f-49c3-4aa1-94bd-2ccfc8bea563.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 114",
+      "references": [
+        {
+          "series": 114,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Serie_114_de_Renfe_en_Valladolid-Campo_Grande.jpg/960px-Serie_114_de_Renfe_en_Valladolid-Campo_Grande.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Serie_114_de_Renfe_en_Valladolid-Campo_Grande.jpg",
+          "sourceSHA256": "91c857c15f48f8862eeb5630183f570454a0988ae7643c86b63850b1ed97e595",
+          "artist": "Rastrojo (D•ES)",
+          "license": {
+            "LicenseShortName": "CC BY-SA 3.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+            "Artist": "<b><a href=\"//commons.wikimedia.org/wiki/User:Rastrojo\" title=\"User:Rastrojo\">Rastrojo</a></b> <sub>(<a href=\"//commons.wikimedia.org/wiki/User_talk:Rastrojo\" title=\"User talk:Rastrojo\">D</a>•<a href=\"https://en.wikipedia.org/wiki/es:User:Rastrojo\" class=\"extiw\" title=\"w:es:User:Rastrojo\">ES</a>)</sub>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "120",
+      "file": "120.webp",
+      "bytes": 236220,
+      "sha256": "caaff48aa73fe4fd598a8c047859d773c2b627df121111e983001fb162965551",
+      "generatedSHA256": "4a3b933dc740719c30168c911017ba7da78cbf1961c03353bd5bc5ddf5a8029e",
+      "generatedFile": "exec-3516e2de-eac7-40bf-9d20-f11950d5a113.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 120",
+      "references": [
+        {
+          "series": 120,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Alvia_120-861_Madrid_Hendaya.jpg/960px-Alvia_120-861_Madrid_Hendaya.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Alvia_120-861_Madrid_Hendaya.jpg",
+          "sourceSHA256": "818a2609eb7c74691b29087244efd92daa16c874b61119eb9e8e9e3d4e78d63a",
+          "artist": "Galandil",
+          "license": {
+            "LicenseShortName": "CC BY-SA 3.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Galandil\" title=\"User:Galandil\">Galandil</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "130",
+      "file": "130.webp",
+      "bytes": 242660,
+      "sha256": "1b2f3e57503baf6332ef79002540fadabb3c7c13250ba49d7c8156a0037ba45d",
+      "generatedSHA256": "5eb39fb51a16dee1b4e261e1b8b9400e6a4f76075d8aca69e7019e66b73c93dd",
+      "generatedFile": "exec-6365805a-b95a-4417-9b0a-11e58da4e841.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 130",
+      "references": [
+        {
+          "series": 130,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/RENFE_Alvia_S-130.000_%2850524546342%29.jpg/960px-RENFE_Alvia_S-130.000_%2850524546342%29.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:RENFE_Alvia_S-130.000_(50524546342).jpg",
+          "sourceSHA256": "9acb2e8ace26385af063f2a351ae2c70450d27f960c8bd514286b9154112d26e",
+          "artist": "Nelso Silva",
+          "license": {
+            "LicenseShortName": "CC BY-SA 2.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+            "Artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/53768422@N08\">Nelso Silva</a>",
+            "Credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/nelsosilva/50524546342/\">RENFE Alvia S-130.000</a>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "334",
+      "file": "334.webp",
+      "bytes": 268376,
+      "sha256": "c4e1dc1ca00bf01371d5f5e07e4faba1d4e240e172811e7af99466dc658c30dc",
+      "generatedSHA256": "d24658b0c5fccdefa05eea07d4a8907bd763babf7fadeca5e1128bf50d739a86",
+      "generatedFile": "exec-1b4a79eb-3e40-4d19-9a8f-d58e03cb3b59.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 334",
+      "references": [
+        {
+          "series": 334,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/SERIE334ALC.JPG/960px-SERIE334ALC.JPG",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:SERIE334ALC.JPG",
+          "sourceSHA256": "29ecf29559853f9b24dffd1a6933be8d9f8f19afd2082b9718ff762ed2384a37",
+          "artist": "Hanspore",
+          "license": {
+            "LicenseShortName": "CC BY 3.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by/3.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Hanspore\" title=\"User:Hanspore\">Hanspore</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "402",
+      "file": "402.webp",
+      "bytes": 238012,
+      "sha256": "0386f89a6edb6372df2b136a1e0ccea0e6bfa39790af0f99bb5f4e03495c6833",
+      "generatedSHA256": "f8f21a70593e1ab4b0a1907b2ea4b249267178ba4f8a222494f42a65cdc4144a",
+      "generatedFile": "exec-19b4642e-b31b-49f6-a60c-53c9baf43d27.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 402",
+      "references": [
+        {
+          "series": 402,
+          "sourceURL": "https://www.railin.net/wp-content/uploads/2026/05/Dos-coches-de-la-serie-402-en-la-factoria-de-CAF-en-Beasain.-AUTORIA-DESCONOCIDA-1200x628.jpg",
+          "sourcePage": "https://www.railin.net/es/noticias/homologada-serie-402-cercedilla-cotos/",
+          "sourceSHA256": "6283ab8aca6cd8f81df0bd9041581f9c6301ee96db91d899f1208060d9d963be",
+          "artist": "Author unknown, as credited by Railin/Trenvista",
+          "license": {
+            "LicenseShortName": "Not stated; public news photograph, reference-only",
+            "LicenseUrl": null,
+            "Artist": "Author unknown, as credited by Railin/Trenvista",
+            "Credit": "Dos coches de la serie 402 en la factoría de CAF en Beasain. AUTORÍA DESCONOCIDA.",
+            "AttributionRequired": null
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    },
+    {
+      "series": "440",
+      "file": "440.webp",
+      "bytes": 266324,
+      "sha256": "269940a45c2c4e5e373bee52aa66138c603dd1ac065c01ffd76b9959e7cebee4",
+      "generatedSHA256": "f93f97bf0ec65c57a136e435d20e04c65f661f5e466d87e3628ea5d32c92cd86",
+      "generatedFile": "exec-c2ae3a0f-6c6b-4293-a000-bace09bc07f6.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 440",
+      "references": [
+        {
+          "series": 440,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/440113_Renfe_-_Estacion_de_Cadiz_-_Phil_Richards.jpg/960px-440113_Renfe_-_Estacion_de_Cadiz_-_Phil_Richards.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:440113_Renfe_-_Estacion_de_Cadiz_-_Phil_Richards.jpg",
+          "sourceSHA256": "3e6a28bdcfa6a0bcfbdc6753869b82c67877983ee020a3a25c0f8426a0ee9ede",
+          "artist": "Phil Richards from London, UK",
+          "license": {
+            "LicenseShortName": "CC BY-SA 2.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+            "Artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/13035092@N00\">Phil Richards</a> from London, UK",
+            "Credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/philstephenrichards/3385473723/\">04.11.91 Cádiz 440.113</a> <a rel=\"nofollow\" class=\"external free\" href=\"http://www.ferropedia.es/wiki/Archivo:440113_Renfe_-_Estacion_de_Cadiz_-_Phil_Richards.jpg\">http://www.ferropedia.es/wiki/Archivo:440113_Renfe_-_Estacion_de_Cadiz_-_Phil_Richards.jpg</a>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "446",
+      "file": "446.webp",
+      "bytes": 262636,
+      "sha256": "4e184ab64e5067718f14c7ce72591d3aacc312c1b9297f28c7a65e1032ade77c",
+      "generatedSHA256": "9138b3ad6dc3658bf41bb6ea155d61c3e492c6893ad95c719c87bb15b9e06605",
+      "generatedFile": "exec-b560ae2c-1c98-45b9-9c11-08ca1226a8d9.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 446",
+      "references": [
+        {
+          "series": 446,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Hugh_llewelyn_180_%285553135644%29.jpg/960px-Hugh_llewelyn_180_%285553135644%29.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Hugh_llewelyn_180_(5553135644).jpg",
+          "sourceSHA256": "46a21c570e26b4d7f5c273207b7ac143e1950f6be25910b4fd7223d6cf673e04",
+          "artist": "Hugh Llewelyn",
+          "license": {
+            "LicenseShortName": "CC BY-SA 2.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+            "Artist": "<bdi><a href=\"https://www.wikidata.org/wiki/Q57710838\" class=\"extiw\" title=\"d:Q57710838\"><span title=\"photographer\">Hugh Llewelyn</span></a></bdi>",
+            "Credit": "<p><a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/camperdown/5553135644/\">180</a>\n</p>\n<ul><li>Uploaded by <a href=\"//commons.wikimedia.org/wiki/User:Oxyman\" title=\"User:Oxyman\">Oxyman</a></li></ul>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "449",
+      "file": "449.webp",
+      "bytes": 253818,
+      "sha256": "9dffbc7359d0cf3eda41087e8fedcc95cc273f6366531a950457a6c48d8e68ce",
+      "generatedSHA256": "de212266aa5c515f289193d3c30ff897d474740862625aaf5a6975c3c0b17b9a",
+      "generatedFile": "exec-85c772a1-078f-4e3b-9eca-80de1387d0f5.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 449",
+      "references": [
+        {
+          "series": 449,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/449_-_Vilamalla_-_2010_-_Jordi_Verdugo.jpg/960px-449_-_Vilamalla_-_2010_-_Jordi_Verdugo.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:449_-_Vilamalla_-_2010_-_Jordi_Verdugo.jpg",
+          "sourceSHA256": "8a16e0bc45c878c726bebdaf2c5f8453cd79788d73372afc0e07db39ebf7baea",
+          "artist": "Jordi Verdugo.",
+          "license": {
+            "LicenseShortName": "CC BY-SA 2.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+            "Artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/jordiver/\">Jordi Verdugo</a>.",
+            "Credit": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.flickr.com/photos/jordiver/5312074402/\">https://www.flickr.com/photos/jordiver/5312074402/</a> <a rel=\"nofollow\" class=\"external free\" href=\"http://ferropedia.es/wiki/Archivo:449_-_Vilamalla_-_2010_-_Jordi_Verdugo.jpg\">http://ferropedia.es/wiki/Archivo:449_-_Vilamalla_-_2010_-_Jordi_Verdugo.jpg</a>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "450",
+      "file": "450.webp",
+      "bytes": 266138,
+      "sha256": "7b51156dcf015df78d132241eb0b35b366eedd70d38b3d89a9098e859a010389",
+      "generatedSHA256": "b2550ab8dbf29d6b531e6dbfff7a6258bbe44c3fd0395c0b87c8abaeaf8718ef",
+      "generatedFile": "exec-a4f7ef6b-3079-4b9e-8f3d-c48b5911e431.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 450",
+      "references": [
+        {
+          "series": 450,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Serie_450.jpg/960px-Serie_450.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Serie_450.jpg",
+          "sourceSHA256": "42bf52731188599744c9572bdcd0f102adf8b4bbcc535d2c62172bbed23c51e9",
+          "artist": "SerrgioFdezz",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:SerrgioFdezz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:SerrgioFdezz (page does not exist)\">SerrgioFdezz</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "452",
+      "file": "452.webp",
+      "bytes": 265208,
+      "sha256": "a8b8d632fb0d4bee0bfc3c5ae2b798edfb702f99a1123b97d0b200c96ed22fb0",
+      "generatedSHA256": "9a6e0ae64a26dcedb800ca271a2c9533fae63d9d9886cb44ba391432361c3d42",
+      "generatedFile": "exec-205d862b-1d28-4b96-83d9-d1573b5b7ccf.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 452",
+      "references": [
+        {
+          "series": 452,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Lateral_Renfe_Rodalies_452.jpg/960px-Lateral_Renfe_Rodalies_452.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Lateral_Renfe_Rodalies_452.jpg",
+          "sourceSHA256": "61f3a4a4a06fdbbb017dd868a7cd8ab83f9e8cb5217bb64c58a7aed94317f785",
+          "artist": "ItsAstrid",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:ItsAstrid\" title=\"User:ItsAstrid\">ItsAstrid</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        },
+        {
+          "series": 452,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Renfe_Rodalies_452_en_proves.jpg/960px-Renfe_Rodalies_452_en_proves.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Renfe_Rodalies_452_en_proves.jpg",
+          "sourceSHA256": "04e2ce4e6b8c6255ea49c08ee07c5baa6c374c958bd43ce47b0f6c8420404c54",
+          "artist": "ItsAstrid",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:ItsAstrid\" title=\"User:ItsAstrid\">ItsAstrid</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true"
+          }
+        }
+      ]
+    },
+    {
+      "series": "465",
+      "file": "465.webp",
+      "bytes": 257714,
+      "sha256": "b5a1b30f01122f48bf8df03734496a525050c0de1bc180c7d109ee25332eea6d",
+      "generatedSHA256": "c7b55fadb194fbde49825a5c9cad98cac1e4e95733610fa8270599dfe31bce66",
+      "generatedFile": "exec-8fac0160-5d40-4f95-b8b0-2bcfd7c7b8ce.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 465",
+      "references": [
+        {
+          "series": 465,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Serie_465.jpg/960px-Serie_465.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Serie_465.jpg",
+          "sourceSHA256": "371b9b02dc9003e9c3493836c222e8479c34dbb3c2522dbc76a16a0922c9f765",
+          "artist": "SerrgioFdezz",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:SerrgioFdezz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:SerrgioFdezz (page does not exist)\">SerrgioFdezz</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "592",
+      "file": "592.webp",
+      "bytes": 267282,
+      "sha256": "f4e02a5a8fbe45f62b077b7141651b570a7560065fe74e78ecfd4b5f32fe4683",
+      "generatedSHA256": "a3586c9ab0091493b7ad9a4430f7af49f5edf557b85eafade43ac0816eff796b",
+      "generatedFile": "exec-efea1d6d-afaa-4c81-85b2-e12a7d8bf3bc.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 592",
+      "references": [
+        {
+          "series": 592,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/J29_454_Bf_San_G%C3%A1briel%2C_9_592_010.jpg/960px-J29_454_Bf_San_G%C3%A1briel%2C_9_592_010.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:J29_454_Bf_San_G%C3%A1briel,_9_592_010.jpg",
+          "sourceSHA256": "24290c7d60bf097889e9c173ae3da61167da7f3955dc8711cb7d7d390c675463",
+          "artist": "Falk2",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Falk2\" title=\"User:Falk2\">Falk2</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "594",
+      "file": "594.webp",
+      "bytes": 256882,
+      "sha256": "e980e29f660a1d872ee4bb9fad600ce0c165a4022277b455f0994e37f7a8ca8b",
+      "generatedSHA256": "02b0d5aab535a8dc782269db450ea52e269971715d978b9e601df25761177470",
+      "generatedFile": "exec-f514968a-aade-40fa-a948-31eea33c5b43.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 594",
+      "references": [
+        {
+          "series": 594,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Renfe_594-108_TRD.jpg/960px-Renfe_594-108_TRD.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Renfe_594-108_TRD.jpg",
+          "sourceSHA256": "f75a499a576458f2013d39401b0debd600866d68fa75fcc637aa4d373964ad78",
+          "artist": "Oscar López Herrero (Powell 333).",
+          "license": {
+            "LicenseShortName": "CC BY-SA 3.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+            "Artist": "Oscar López Herrero (Powell 333).",
+            "Credit": "<a rel=\"nofollow\" class=\"external free\" href=\"http://www.ferropedia.es/wiki/Archivo:594108.jpg\">http://www.ferropedia.es/wiki/Archivo:594108.jpg</a>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "599",
+      "file": "599.webp",
+      "bytes": 246510,
+      "sha256": "a15b3185f082e107db724be24d7467ee008ed9d4a6773566ca5040b03a491b73",
+      "generatedSHA256": "4543af9c1db070ba33c50490f51abe777513542e085ab41cab493232a63fd1da",
+      "generatedFile": "exec-b44755c5-9c49-43b4-962a-8418fdc7e37e.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 599",
+      "references": [
+        {
+          "series": 599,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/599_en_Vitoria-Gasteiz.jpg/960px-599_en_Vitoria-Gasteiz.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:599_en_Vitoria-Gasteiz.jpg",
+          "sourceSHA256": "3368e45e5df1380e2dd36c6e0da61681841cc33559ce343540e1e820ee34f270",
+          "artist": "Yrithinnd",
+          "license": {
+            "LicenseShortName": "CC BY-SA 3.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Yrithinnd\" title=\"User:Yrithinnd\">Yrithinnd</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "730",
+      "file": "730.webp",
+      "bytes": 236064,
+      "sha256": "35dc9fc2e9e253f9398b910ba2ea38aef43d48c88259245260d4e10fe3b3fe48",
+      "generatedSHA256": "723c1c00e051faa1f718056f00368e2e36d9ccb0a85c6ce35d8b111462cb418b",
+      "generatedFile": "exec-5eb0f02d-96f6-4397-b0c2-ba98a8ee08e9.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 730",
+      "references": [
+        {
+          "series": 730,
+          "sourceURL": "https://upload.wikimedia.org/wikipedia/commons/2/24/Serie_730_de_Renfe_-_1.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Serie_730_de_Renfe_-_1.jpg",
+          "sourceSHA256": "4c765d5229c811a7b3774ac543d0f06a5fae46410820e8b1b94561e078eea947",
+          "artist": "From J.C. Blanco in http://www.ferropedia.es, published under a Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) license",
+          "license": {
+            "LicenseShortName": "CC BY-SA 3.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+            "Artist": "From <b>J.C. Blanco</b> in <a rel=\"nofollow\" class=\"external free\" href=\"http://www.ferropedia.es\">http://www.ferropedia.es</a>, published under a Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) license",
+            "Credit": "<a rel=\"nofollow\" class=\"external text\" href=\"http://ferropedia.es/wiki/Archivo:JCB_130-11.JPG\">http://www.ferropedia.es</a>",
+            "AttributionRequired": "true"
+          }
+        }
+      ],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png",
+      "derivedFrom": "exec-6365805a-b95a-4417-9b0a-11e58da4e841.png (generated S130 photograph)"
+    },
+    {
+      "series": "2400",
+      "file": "2400.webp",
+      "bytes": 274214,
+      "sha256": "64e22c3a8223b3051ca28fd7b352ae43f3703cbb36969a2776bb1c4d74345493",
+      "generatedSHA256": "91c03f5d0029c713a805d1e0c4106fbd765a171e020777f29a9a506ccaec3662",
+      "generatedFile": "exec-3d55241d-674c-48db-a2fd-4cbe6f18d26b.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 2400",
+      "references": [
+        {
+          "series": 2400,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Serie_524_descansando_en_Llanes.jpg/960px-Serie_524_descansando_en_Llanes.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Serie_524_descansando_en_Llanes.jpg",
+          "sourceSHA256": "842d9e91657e98df17ef8e305314478b6503e9c905168e99fb138f4b03e6aa48",
+          "artist": "Ander Ibarra from Bilbao",
+          "license": {
+            "LicenseShortName": "CC BY 2.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+            "Artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/193299746@N05\">Ander Ibarra</a> from Bilbao",
+            "Credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/anderibarra/54260802430/\">Lejanías</a>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "2700",
+      "file": "2700.webp",
+      "bytes": 268384,
+      "sha256": "efed2adfb9afa38cac80463f7f37f2e1ae78fc95e04392fae7cd6add4f9251aa",
+      "generatedSHA256": "cb321a8b0e0bae7eb7e704e2ab70bcbae98e9e041f91b04b440346dc81dd7d30",
+      "generatedFile": "exec-e6bdc07f-18f9-4e1a-9b25-4d0f55cd71d1.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 2700",
+      "references": [
+        {
+          "series": 2700,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Renfe_series_UTDH-2700_at_Poo%2C_Llanes_station_01.jpg/960px-Renfe_series_UTDH-2700_at_Poo%2C_Llanes_station_01.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Renfe_series_UTDH-2700_at_Poo,_Llanes_station_01.jpg",
+          "sourceSHA256": "d4bb6f0602e170f81203c778de8575363252c89f6461b1cfa421cfa99973cfa7",
+          "artist": "Gravitatas",
+          "license": {
+            "LicenseShortName": "CC0",
+            "LicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Gravitatas\" title=\"User:Gravitatas\">Gravitatas</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "false",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "3600",
+      "file": "3600.webp",
+      "bytes": 266706,
+      "sha256": "f58c0c7ff460f6fc0885aeeca7ffe1455dd82b2cdc79564f96a862b485edcde3",
+      "generatedSHA256": "f08fbb282deb4b18cdbca1c8172eba33fffcd9996166b363b38832327f43e0c6",
+      "generatedFile": "exec-93a80c49-f878-427e-8a3b-25d0ee77a455.png",
+      "generated": true,
+      "fictional": false,
+      "label": "Tenfe · Serie 3600",
+      "references": [
+        {
+          "series": 3600,
+          "sourceURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/J23_162_Bf_Torrelavega-Centro%2C_ET_3610.jpg/960px-J23_162_Bf_Torrelavega-Centro%2C_ET_3610.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:J23_162_Bf_Torrelavega-Centro,_ET_3610.jpg",
+          "sourceSHA256": "c770e8215aaa31ef9bd466a67068ea0375a0cb82c0526767043ad2a626de296f",
+          "artist": "Falk2",
+          "license": {
+            "LicenseShortName": "CC BY-SA 4.0",
+            "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+            "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Falk2\" title=\"User:Falk2\">Falk2</a>",
+            "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+            "AttributionRequired": "true",
+            "Restrictions": ""
+          }
+        }
+      ]
+    },
+    {
+      "series": "future",
+      "file": "future.webp",
+      "bytes": 249330,
+      "sha256": "0726b8abf2a386f64d4e43417250f44789c2a51c2c4b90f55080e6d885cb1c20",
+      "generatedSHA256": "adb729145f66f39f543a76be487a413cdb068619dea204c34e111e4738188344",
+      "generatedFile": "exec-0f3ff739-7c8c-4814-9b04-41f0aa612088.png",
+      "generated": true,
+      "fictional": true,
+      "label": "AV 2030 · Nueva generación",
+      "references": [],
+      "workshopGeneratedFile": "exec-d19f9851-de02-479d-8eb3-228183fbe6ba.png"
+    }
+  ],
+  "aliases": {
+    "102": "112",
+    "107": "112",
+    "121": "120",
+    "401": "3600",
+    "442": "440",
+    "447": "446",
+    "448": "449",
+    "451": "450",
+    "453": "452",
+    "462": "465",
+    "463": "465",
+    "464": "465",
+    "470": "592",
+    "480": "449",
+    "490": "449",
+    "596": "594",
+    "598": "599",
+    "2600": "2700",
+    "2900": "3600",
+    "3300": "3600",
+    "3500": "3600",
+    "3800": "3600",
+    "112M": "112"
+  }
+}

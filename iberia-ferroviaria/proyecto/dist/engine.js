@@ -1,6 +1,7 @@
 import {validInduction} from './induction-runtime.js';
 import {ENCOUNTER} from './encounters.js';
 import * as T from './tycoon.js';
+import * as M from './marketplace.js';
 import {MODELS,MODEL,HISTORICAL_ORDERS,PROJECTS,CITY,CITIES,POP} from './data.js';
 import {ALL_ROUTES,ROUTE_DEF,makeRoute} from './network.js';
 import {CHAPTERS,DECISIONS,EVENTS} from './story.js';
@@ -89,14 +90,25 @@ export function configureRoute(s,id,fleetId,frequency,fare){
 }
 export function closeRoute(s,id){ensurePlaying(s);const r=s.routes.find(r=>r.id===id);if(!r||!r.active)throw Error('Ese servicio ya está cerrado.');r.active=false;r.fleet=null;r.units=0;s.reputation=clamp(s.reputation-1,5,100);log(s,'Servicio suspendido',routeName(r));}
 export function upgradeRoute(s,id){ensurePlaying(s);const r=s.routes.find(r=>r.id===id);if(!r||r.level>=3)throw Error('Ya está al máximo. Más no se puede.');if(s.projects.some(p=>p.id==='upgrade-'+id&&!p.done))throw Error('La mejora ya está en marcha.');const cost=12+12*r.level;spend(s,cost);s.projects.push({id:'upgrade-'+id,type:'upgrade',route:id,due:s.month+4,started:s.month,cost,done:false});log(s,'Mejora contratada',routeName(r)+' · información, accesibilidad y fiabilidad.');}
-export function purchaseQuote(s,model,qty){
+export function purchaseQuote(s,model,qty,listing=null){
  const m=MODEL[model];qty=Number(qty);if(!m||!Number.isInteger(qty)||qty<1||qty>30)throw Error('Entre 1 y 30 unidades.');
  const price=m.price*(1+Math.max(0,economicYear(s)-2022)*.018),total=price*qty;
- const backlog=s.orders.filter(o=>!o.historical&&o.delivered<o.qty).reduce((n,o)=>n+o.qty-o.delivered,0);
+ const backlog=s.orders.filter(o=>!o.historical&&o.marketplace?.state!=='used'&&o.delivered<o.qty).reduce((n,o)=>n+o.qty-o.delivered,0);
  const lead=Math.max(16,m.lead+Math.floor(backlog/10)*2+(s.flags.backlog>s.month?8:0)-(s.flags.factory>s.month?6:0));
- return {total,deposit:total*.3,remaining:total*.7,lead,last:lead+Math.ceil(qty/2)-1,unit:price};
+ const standard={total,deposit:total*.3,remaining:total*.7,lead,last:lead+Math.ceil(qty/2)-1,unit:price};
+ return listing?M.quoteListing(s,model,qty,listing,standard):standard;
 }
-export function buy(s,model,qty){ensurePlaying(s);if(!MODEL[model]||yearOf(s)<MODEL[model].year)throw Error('Ese modelo todavía no se vende.');const q=purchaseQuote(s,model,qty);spend(s,q.deposit);const id='o'+s.nextId++;s.orders.push({id,model,qty:Number(qty),delivered:0,start:s.month,first:s.month+q.lead,next:s.month+q.lead,total:q.total,remaining:q.remaining,unit:q.unit,delay:0,historical:false});s.stats.purchased+=Number(qty);log(s,'Pedido firmado',`${qty} × ${MODEL[model].name}. Primera entrega: ${dateOf(s.month+q.lead)}, si el fabricante quiere.`);return id;}
+export function buy(s,model,qty,listing=null){
+ ensurePlaying(s);if(!MODEL[model]||!listing&&yearOf(s)<MODEL[model].year)throw Error('Ese modelo todavía no se vende.');
+ const q=purchaseQuote(s,model,qty,listing);qty=Number(qty);spend(s,q.deposit);
+ const id='o'+s.nextId++,o={id,model,qty,delivered:0,start:s.month,first:s.month+q.lead,next:s.month+q.lead,total:q.total,remaining:q.remaining,unit:q.unit,delay:0,historical:false};
+ if(q.item){const item=q.item;o.marketplace={listing:item.id,state:item.state,maker:item.maker,condition:item.condition,born:yearOf(s)-item.age,depositRate:q.depositRate};if(item.state==='used'){const market=M.ensureMarketplace(s);market.sold[item.id]=(market.sold[item.id]||0)+qty;o.delayChecked=true;}}
+ s.orders.push(o);s.stats.purchased+=qty;
+ if(q.lead===0){o.delivered=qty;addPurchasedFleet(s,o,qty);s.stats.delivered+=qty;log(s,'Compra en Trenespop',`${qty} × ${MODEL[model].name} · ${o.marketplace.condition} % de estado. Ya están en tu parque.`);}
+ else log(s,q.item?'Compra en Trenespop':'Pedido firmado',`${qty} × ${MODEL[model].name}${q.item?' · '+q.item.maker:''}. Primera entrega: ${dateOf(s.month+q.lead)}${q.item?.state==='used'?'.':', si el fabricante quiere.'}`);
+ return id;
+}
+export function marketplaceFavorite(s,listing){return M.favorite(s,listing);}
 export function refurbish(s,id,qty){ensurePlaying(s);const f=s.fleet.find(f=>f.id===id);qty=Number(qty);if(!f||!Number.isInteger(qty)||qty<1||available(s,f)<qty)throw Error('Solo se reforman trenes libres del lote.');spend(s,qty*MODEL[f.model].price*.12);f.qty-=qty;s.refits.push({id:'ref'+s.nextId++,model:f.model,qty,due:s.month+5,born:f.born});log(s,'Al taller',qty+' × '+MODEL[f.model].name+' · 5 meses.');}
 export function sell(s,id,qty){ensurePlaying(s);const f=s.fleet.find(f=>f.id===id);qty=Number(qty);if(!f||!Number.isInteger(qty)||qty<1||available(s,f)<qty)throw Error('Solo se venden trenes libres.');const value=qty*MODEL[f.model].price*.23*(f.condition/100);s.cash+=value;f.qty-=qty;log(s,'Venta de material',qty+' × '+MODEL[f.model].name+' · '+value.toFixed(1)+' M€.');}
 // ---- Obras
@@ -172,6 +184,13 @@ export function objectiveValue(s,key){switch(key){case 'active':return s.routes.
 export function chapterReady(s){if(s.tycoon.mode==='free')return false;const c=CHAPTERS[s.chapter];return !!c&&yearOf(s)>=c.year&&c.objectives.every(([k,target])=>objectiveValue(s,k)>=target)&&!s.claimed.includes(c.id);}
 export function claimChapter(s){ensurePlaying(s);if(!chapterReady(s))throw Error('Aún faltan objetivos o no ha empezado la etapa.');const c=CHAPTERS[s.chapter];s.claimed.push(c.id);s.cash+=c.reward;s.reputation=clamp(s.reputation+5,0,100);log(s,'Capítulo completado',c.title+' · '+c.reward+' M€ de financiación.');if(s.chapter<4)s.chapter++;}
 function addFleet(s,model,qty,origin){const f=s.fleet.find(f=>f.origin===origin&&f.model===model&&f.born===yearOf(s));if(f)f.qty+=qty;else s.fleet.push({id:'f'+s.nextId++,model,qty,condition:100,born:yearOf(s),origin});}
+function addPurchasedFleet(s,o,qty){
+ if(!o.marketplace){addFleet(s,o.model,qty,'Compra '+o.id);return;}
+ const p=o.marketplace,origin='Trenespop '+o.id,existing=s.fleet.find(f=>f.origin===origin&&f.model===o.model);
+ // Delivered batches keep their own condition: earlier batches may already have been operating.
+ if(existing&&existing.condition===p.condition)existing.qty+=qty;
+ else s.fleet.push({id:'f'+s.nextId++,model:o.model,qty,condition:p.condition,born:p.state==='used'?p.born:yearOf(s),origin,maker:p.maker});
+}
 function historic(s){
  for(const h of HISTORICAL_ORDERS){if(h.signed>s.month||h.tender||!h.model)continue;let o=s.orders.find(o=>o.id===h.id);if(!o){o={id:h.id,model:h.model,qty:h.qty,delivered:0,historical:true,start:h.signed,first:h.start,next:h.start,total:0,remaining:0};s.orders.push(o);}if(s.month<h.start)continue;const target=Math.min(h.qty,1+Math.floor((s.month-h.start)*(h.qty-1)/(h.span-1)));const count=target-o.delivered;if(count>0){addFleet(s,h.model,count,'Contrato '+h.id);o.delivered+=count;if(s.month%6===0||o.delivered===h.qty)log(s,'Llegan trenes del contrato',h.name+': '+o.delivered+' de '+h.qty+'.');}}
 }
@@ -198,9 +217,9 @@ export function step(s){
  historic(s);advanceInfra(s);
  for(const o of s.orders.filter(o=>!o.historical&&o.delivered<o.qty&&s.month>=o.next)){
   if(!o.delayChecked){o.delayChecked=true;if(random(s)<.28){const delay=2+Math.floor(random(s)*5);o.delay=delay;o.next+=delay;log(s,'El fabricante se retrasa',MODEL[o.model].name+' · +'+delay+' meses. Qué sorpresa.');continue;}}
-  const count=Math.min(2,o.qty-o.delivered),due=count*o.unit*.7;
+  const count=Math.min(2,o.qty-o.delivered),due=count*o.unit*(1-(o.marketplace?.depositRate??.3));
   if(s.cash<due){if(o.blocked!==s.month-1)log(s,'Entrega retenida por impago',MODEL[o.model].name+': faltan '+due.toFixed(1)+' M€ en caja.');o.blocked=s.month;continue;}
-  s.cash-=due;o.remaining=Math.max(0,o.remaining-due);o.delivered+=count;o.next=s.month+1;s.stats.delivered+=count;addFleet(s,o.model,count,'Compra '+o.id);log(s,'Trenes nuevos',count+' × '+MODEL[o.model].name+' listos para salir.');
+  s.cash-=due;o.remaining=Math.max(0,o.remaining-due);o.delivered+=count;o.next=s.month+1;s.stats.delivered+=count;addPurchasedFleet(s,o,count);log(s,o.marketplace?.state==='used'?'Llegan los trenes de ocasión':'Trenes nuevos',count+' × '+MODEL[o.model].name+' listos para salir.');
  }
  for(const r of s.refits.filter(r=>!r.done&&s.month>=r.due)){r.done=true;s.fleet.push({id:'f'+s.nextId++,model:r.model,qty:r.qty,condition:98,born:r.born,origin:'Reforma '+r.id});s.stats.refurbished+=r.qty;log(s,'Vuelven del taller',r.qty+' unidades como nuevas. Casi.');}
  for(const p of s.projects.filter(p=>!p.done&&s.month>=p.due)){
@@ -265,6 +284,7 @@ export function validateSave(input){
  if(!T.validReferences(s))throw Error('El encargo guardado apunta a una conexión desconocida.');
  for(const k of ['refurbished','purchased','delivered','upgrades','built','passengers'])if(!Number.isFinite(s.stats[k])||s.stats[k]<0)throw Error('Estadísticas no válidas.');
  for(const o of s.orders)if(!safeId(o.id)||!MODEL[o.model]||!Number.isInteger(o.qty)||o.qty<1||!Number.isInteger(o.delivered)||o.delivered<0||o.delivered>o.qty||!Number.isFinite(o.next)||!Number.isFinite(o.remaining)||o.remaining<0||(!o.historical&&(!Number.isFinite(o.unit)||o.unit<0)))throw Error('Pedido no válido.');
+ if(s.orders.some(o=>!M.validMarketplaceOrder(o,s))||!M.validMarketplace(s))throw Error('Los pedidos o el stock de Trenespop no son válidos.');
  for(const p of s.projects){if(!safeId(p.id)||!['upgrade','infrastructure','custom','tramo','changer'].includes(p.type)||!Number.isFinite(p.due)||!Number.isFinite(p.started))throw Error('Obra no válida.');
   if((p.type==='infrastructure'&&!PROJECTS.some(d=>d.id===p.id))||(p.type==='upgrade'&&!routeIds.has(p.route))||(p.type==='tramo'&&(!n.t[p.target]||!I.WORKS[p.work]))||(p.type==='changer'&&!I.NODES[p.target])||(p.type==='custom'&&!n.custom.some(c=>c.id===p.target)))throw Error('Obra no válida.');}
  for(const r of s.refits)if(!safeId(r.id)||!MODEL[r.model]||!Number.isInteger(r.qty)||r.qty<1||!Number.isFinite(r.due)||!Number.isFinite(r.born))throw Error('Reforma no válida.');

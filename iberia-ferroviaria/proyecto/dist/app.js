@@ -9,6 +9,7 @@ import {tycoonPage,directionCount} from './tycoon-ui.js';
 import {CITIES, CITY, MODELS, MODEL, PROJECTS, HISTORICAL_ORDERS, GAUGES, POWERS} from './data.js';
 import {CHAPTERS, CHARACTERS} from './story.js';
 import * as E from './engine.js';
+import * as Marketplace from './marketplace.js';
 import * as O from './operations.js';
 import * as S from './schedule.js';
 import * as I from './infra.js';
@@ -61,6 +62,8 @@ let linePicking=null,savedError='',menuOpen=true;
 let state = E.initialState(), saved = null, screen = null, inspect = null, playing = false, speedIndex = 1, layer = 'network';
 let lastTick = 0, lastPanel = 0, lastTimeline = 0, observerMinute = 480, seenIncidents = new Set(), alertTimer = null, toastTimer = null;
 let ui = {routeTab: 'all', routeStatus: 'all', routeQuery: '', netView: 'routes', ttType: null, ttStation: '', ttLine: '', ttHour: 6, fleetTab: 'fleet', worksTab: 'conv', officeTab: 'tycoon', autoPause: true};
+const freshMarketFilters = () => ({query: '', state: 'all', delivery: 'all', maker: 'all', family: 'all', sort: 'recommended', favorites: false});
+ui.market = freshMarketFilters();
 O.ensureOps(state);
 try { const raw = localStorage.getItem(KEY); if (raw) saved = E.validateSave(JSON.parse(raw)); } catch(error) { saved = null; savedError=error.message; }
 
@@ -742,6 +745,7 @@ function renderDrawer(resetScroll = false) {
   const pages = {ops: opsPage, network: () => ui.netView === 'timetables' ? withView(timetablesPage()) : withView(networkPage()), fleet: trainsPage, works: worksPage, story: officePage};
   const scroll = resetScroll ? 0 : el.querySelector('.body')?.scrollTop || 0, focusId = document.activeElement?.id, pos = document.activeElement?.selectionStart;
   const [head, body] = pages[screen]();
+  el.classList.toggle('trenespop-drawer', screen === 'fleet' && ui.fleetTab === 'market');
   el.innerHTML = head + `<div class="body">${body}</div>`;
   el.querySelectorAll('table').forEach(table=>{
     if(table.querySelectorAll('thead th').length<4)return;
@@ -824,8 +828,9 @@ function withView([head, body]) {
   return [head, `<div class="segmented">${views.map(([k, t]) => `<button class="${ui.netView === k ? 'active' : ''}" data-action="net-view" data-id="${k}">${t}</button>`).join('')}</div>` + body];
 }
 function trainsPage() {
-  const tabs = [['fleet', 'Parque y taller'], ['market', 'Comprar'], ['orders', 'Pedidos']];
+  const tabs = [['fleet', 'Parque y taller'], ['market', 'Trenespop'], ['orders', 'Mis compras']];
   const [, body] = ['market', 'orders'].includes(ui.fleetTab) ? marketPage(ui.fleetTab === 'market' ? 'catalogue' : 'orders') : fleetPage();
+  if (ui.fleetTab === 'market') return [`<header class="tp-game-strip"><button data-action="fleet-tab" data-id="fleet">‹ Mi parque</button><span>Compra material para tu red</span><button class="close" data-action="close-drawer" aria-label="Cerrar Trenespop">×</button></header>`, body];
   return [header('Trenes', 'Los que tienes y los que vienen.', 'Los AVE solo van por ancho estándar. Los Alvia, por donde les echen.'), `<div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.fleetTab === k ? 'active' : ''}" data-action="fleet-tab" data-id="${k}">${t}</button>`).join('')}</div>` + body];
 }
 function officePage() {
@@ -867,7 +872,7 @@ function fleetPage() {
     body += `<dl class="figures"><div><dt>Unidades</dt><dd>${n(total)}</dd></div><div><dt>AVE</dt><dd>${n(count('AVE'))}</dd></div><div><dt>Alvia</dt><dd>${n(count('Alvia'))}</dd></div><div><dt>Libres</dt><dd>${n(free)}</dd></div></dl>
     <table><thead><tr><th style="width:150px"></th><th>Material</th><th class="num">Parque</th><th class="num">Libres</th><th>Estado</th></tr></thead><tbody>${state.fleet.filter(f => f.qty > 0).map(f => {
       const m = MODEL[f.model];
-      return `<tr class="clickable" data-action="fleet-detail" data-id="${f.id}"><td>${trainThumb(f.model)}</td><td><button class="linkish fleet-link" data-action="fleet-detail" data-id="${f.id}">${esc(m.name)}</button><small>${esc(f.origin)} · desde ${f.born} · ${GAUGES[m.gauge]} · ${POWERS[m.power]}</small></td><td class="num">${f.qty}</td><td class="num">${E.available(state, f)}</td><td style="min-width:120px"><div class="bar ${f.condition < 50 ? '' : 'green'}"><span style="width:${f.condition}%"></span></div><small>${n(f.condition)} %</small></td></tr>`;
+      return `<tr class="clickable" data-action="fleet-detail" data-id="${f.id}"><td>${trainThumb(f.model)}</td><td><button class="linkish fleet-link" data-action="fleet-detail" data-id="${f.id}">${esc(m.name)}</button><small>${esc(f.origin)}${f.maker ? ' · ' + esc(f.maker) : ''} · desde ${f.born} · ${GAUGES[m.gauge]} · ${POWERS[m.power]}</small></td><td class="num">${f.qty}</td><td class="num">${E.available(state, f)}</td><td style="min-width:120px"><div class="bar ${f.condition < 50 ? '' : 'green'}"><span style="width:${f.condition}%"></span></div><small>${n(f.condition)} %</small></td></tr>`;
     }).join('')}</tbody></table><p class="note">Solo se venden o reforman trenes libres: quítalos antes de alguna línea.</p>`;
     body += `<h2 class="section">Taller</h2>` + (state.refits.length ? `<div class="rows">${state.refits.map(r => `<div><span class="status ${r.done ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[r.model].name)} · ${r.qty} unidades</h3><p>${r.done ? 'Reforma terminada' : 'Salen del taller en ' + E.dateOf(r.due)}</p></div><span></span></div>`).join('')}</div>` : '<div class="empty">El taller está vacío. Los mecánicos, encantados.</div>');
     body += '<p class="note">Una reforma cuesta el 12 % del precio y dura cinco meses. El tren vuelve casi nuevo.</p>';
@@ -878,14 +883,10 @@ function fleetPage() {
 function marketPage(view) {
   let body = '';
   if (view === 'catalogue') {
-    body += `<div class="catalogue">${MODELS.filter(m => m.year < 2099).map(m => {
-      const unlocked = E.yearOf(state) >= m.year, q = E.purchaseQuote(state, m.id, 1);
-      return `<div>${trainThumb(m.id)}<div><h3>${chip(m.family, FAMILY_COLOR[m.family])} ${esc(m.name)}</h3><p>${esc(m.desc)}</p><div class="specline"><span><b>${m.speed}</b> km/h</span><span><b>${n(m.seats)}</b> plazas</span><span>${GAUGES[m.gauge]}</span><span>${POWERS[m.power]}</span><span>entrega en <b>${m.lead}</b> meses</span><span>${esc(m.maker)}</span></div></div>
-      <div style="text-align:right"><strong style="font:600 20px var(--serif)">${money(q.total)}</strong><br><button class="btn small ${unlocked ? 'primary' : ''}" data-action="purchase" data-id="${m.id}" ${!unlocked || state.ended ? 'disabled' : ''}>${unlocked ? 'Encargar' : 'Desde ' + m.year}</button></div></div>`;
-    }).join('')}</div><p class="note">Precio por unidad. Anticipo del 30 % al firmar y el resto en cada entrega.</p>`;
+    body = Marketplace.catalogueHTML(state, ui.market, (model, qty, listing) => E.purchaseQuote(state, model, qty, listing), trainThumb);
   } else {
     const orders = state.orders.filter(o => !o.historical);
-    body += orders.length ? `<div class="rows">${orders.map(o => `<div><span class="status ${o.delivered === o.qty ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[o.model].name)} · ${o.qty} unidades</h3><p>${o.delivered === o.qty ? 'Pedido completo' : 'Próximo lote: ' + E.dateOf(o.next)}${o.delay ? ' · ' + o.delay + ' meses de retraso' : ''} · ${money(o.remaining)} pendiente</p><div class="bar gold"><span style="width:${o.delivered / o.qty * 100}%"></span></div></div><span class="num">${o.delivered}/${o.qty}</span></div>`).join('')}</div>` : '<div class="empty">No has encargado ni un tren. Así no se crece.</div>';
+    body += orders.length ? `<div class="rows">${orders.map(o => `<div><span class="status ${o.delivered === o.qty ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[o.model].name)} · ${o.qty} unidades</h3><p>${o.marketplace ? esc(o.marketplace.maker) + ' · ' + (o.marketplace.state === 'used' ? 'ocasión, ' + o.marketplace.condition + ' %' : 'nuevo') + ' · ' : ''}${o.delivered === o.qty ? 'Pedido completo' : 'Próximo lote: ' + E.dateOf(o.next)}${o.delay ? ' · ' + o.delay + ' meses de retraso' : ''} · ${money(o.remaining)} pendiente</p><div class="bar gold"><span style="width:${o.delivered / o.qty * 100}%"></span></div></div><span class="num">${o.delivered}/${o.qty}</span></div>`).join('')}</div>` : '<div class="empty">No has encargado ni un tren. Así no se crece.</div>';
     body += `<h2 class="section">Contratos heredados</h2><table><thead><tr><th>Contrato</th><th class="num">Unidades</th><th>Estado</th></tr></thead><tbody>${HISTORICAL_ORDERS.map(h => {
       const o = state.orders.find(x => x.id === h.id);
       return `<tr><td><strong>${esc(h.name)}</strong></td><td class="num">${h.qty}</td><td>${h.signed > state.month ? 'Desde ' + (2022 + Math.floor(h.signed / 12)) : h.tender ? 'Licitación' : `${o?.delivered || 0}/${h.qty} recibidos`}</td></tr>`;
@@ -1149,6 +1150,7 @@ $('modal').addEventListener('close', () => { if (!$('modal').open && voices.spea
 function intro() { tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey='';showModal(menuHTML(saved,savedError),'main-menu-shell'); }
 function resetSessionView(){
  tutorialChrome();adviceLine=null;tutorialDraft=null;clearCoach();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
+ ui.market=freshMarketFilters();
  map.selected=null;map.selectedCity=null;map.selectedTrain=null;map.selectedTramo=null;map.follow=false;map.reset();setLayer('network');resetToday();
  if(['running','review'].includes(state.ops.phase)){spawnArrivals(-1,state.ops.minute);popups=[];}
 }
@@ -1191,9 +1193,14 @@ function purchaseDialog(id) {
   showModal(`<div class="content"><div class="kicker">Nuevo pedido</div><h1>${esc(m.name)}</h1><div class="train3d" data-train3d="${id}"></div><p>${esc(m.desc)}</p><label for="buyQty">Unidades (1–30)</label><input id="buyQty" type="number" min="1" max="30" value="4" data-model="${id}"><div id="purchaseQuote"></div><div class="actions"><button class="btn primary" data-action="confirm-buy" data-id="${id}">Firmar pedido</button><button class="btn" data-action="close-modal">Cancelar</button></div><p class="note">Entregas de hasta 2 unidades por mes; puede haber un retraso de 2 a 6 meses.</p></div>`, 'single');
   updateQuote();
 }
+function marketListingDialog(id) {
+  try { showModal(Marketplace.detailHTML(state, Marketplace.listing(state, id), trainThumb), 'single trenespop-modal'); updateQuote(); }
+  catch (error) { toast(error.message); renderDrawer(); }
+}
 function updateQuote() {
-  try { const q = E.purchaseQuote(state, $('buyQty').dataset.model, +$('buyQty').value); $('purchaseQuote').innerHTML = `<dl class="figures"><div><dt>Total</dt><dd>${money(q.total)}</dd></div><div><dt>Anticipo</dt><dd>${money(q.deposit)}</dd></div><div><dt>Primer lote</dt><dd style="font-size:18px">${E.dateOf(state.month + q.lead)}</dd></div></dl>${state.cash < q.deposit ? '<p class="callout red">No hay caja suficiente para el anticipo.</p>' : ''}`; }
-  catch (e) { $('purchaseQuote').innerHTML = `<p class="callout red">${esc(e.message)}</p>`; }
+  const button=$('modal').querySelector('[data-action="confirm-buy"]');
+  try { const q = E.purchaseQuote(state, $('buyQty').dataset.model, +$('buyQty').value, $('buyQty').dataset.listing); $('purchaseQuote').innerHTML = `<dl class="figures"><div><dt>Total</dt><dd>${money(q.total)}</dd></div><div><dt>${q.lead === 0 ? 'A pagar ahora' : 'Anticipo (30 %)'}</dt><dd>${money(q.deposit)}</dd></div><div><dt>${q.lead === 0 ? 'Entrega' : 'Primer lote'}</dt><dd style="font-size:18px">${q.lead === 0 ? 'Ahora mismo' : E.dateOf(state.month + q.lead)}</dd></div></dl>${q.item && q.last > q.lead ? `<p class="tp-detail-note">Último lote previsto: ${E.dateOf(state.month + q.last)}.</p>` : ''}${state.cash < q.deposit ? '<p class="callout red">No hay caja suficiente para el pago inicial.</p>' : ''}`; if(button)button.disabled=state.ended||state.cash<q.deposit; }
+  catch (e) { $('purchaseQuote').innerHTML = `<p class="callout red">${esc(e.message)}</p>`;if(button)button.disabled=true; }
 }
 function placeOptions(id, selected, withJunctions = true) {
   const list = [...CITIES.map(c => ({id: c.id, name: c.name})), ...(withJunctions ? Object.values(I.NODES).filter(nd => nd.kind === 'junction').map(nd => ({id: nd.id, name: nd.name + ' (bifurcación)'})) : [])].filter(x => I.NODES[x.id] || !withJunctions).sort((a, b) => a.name.localeCompare(b.name));
@@ -1350,7 +1357,12 @@ document.addEventListener('click', event => {
     case 'refurbish': if (act(() => E.refurbish(state, id, +$('fleetQty').value), 'Material enviado a reforma.')) closeModal(); break;
     case 'sell': if (act(() => E.sell(state, id, +$('fleetQty').value), 'Venta completada.')) closeModal(); break;
     case 'purchase': purchaseDialog(id); break;
-    case 'confirm-buy': if (act(() => E.buy(state, id, +$('buyQty').value), 'Pedido firmado.')) closeModal(); break;
+    case 'market-listing': marketListingDialog(id); break;
+    case 'market-reset': event.preventDefault();ui.market=freshMarketFilters();renderDrawer(true);break;
+    case 'market-family': ui.market.family=id;renderDrawer(true);break;
+    case 'market-favorites': ui.market.favorites=!ui.market.favorites;renderDrawer(true);break;
+    case 'market-favorite': try {const liked=E.marketplaceFavorite(state,id);autosave();renderDrawer();if($('modal').open&&$('buyQty')?.dataset.listing===id){b.classList.toggle('liked',liked);b.setAttribute('aria-pressed',String(liked));b.setAttribute('aria-label',liked?'Quitar de favoritos':'Guardar anuncio');}toast(liked?'Anuncio guardado en favoritos.':'Anuncio retirado de favoritos.');}catch(error){toast(error.message);}break;
+    case 'confirm-buy': {const listing=b.dataset.listing,immediate=b.dataset.immediate==='true';if (act(() => E.buy(state, id, +$('buyQty').value, listing), immediate?'Compra completada. Los trenes ya están en tu parque.':'Pedido firmado. Revisa el envío en Mis compras.')) closeModal();break;}
     case 'project': { const p = PROJECTS.find(p => p.id === id); const km = I.TRAMOS.filter(t => t.plan === id).reduce((v, t) => v + t.km, 0); showModal(`<div class="content"><div class="kicker">Alta velocidad nueva · ${esc(p.region)}</div><h1>${esc(p.name)}</h1><p>${esc(p.desc)}</p><dl class="figures"><div><dt>Coste</dt><dd>${money(p.cost)}</dd></div><div><dt>Longitud</dt><dd>${n(km)} km</dd></div><div><dt>Obra</dt><dd>${p.duration} meses</dd></div></dl><p class="small">No estará lista antes de ${p.earliest}. Ancho estándar y 25 kV.</p><div class="actions"><button class="btn primary" data-action="confirm-project" data-id="${id}">Financiar · ${money(p.cost)}</button><button class="btn" data-action="close-modal">Cancelar</button></div></div>`, 'single'); break; }
     case 'confirm-project': if (act(() => E.startProject(state, id), 'Obra adjudicada. Ahora a esperar.')) closeModal(); break;
     case 'line-map': linePicking=[];closeModal();screen=null;render();toast('Pulsa dos ciudades del mapa para trazar la línea. Escape cancela.');break;
@@ -1367,6 +1379,7 @@ document.addEventListener('click', event => {
   if(tut){if(a==='day-start'||a==='play')tutorialIncident();if(a==='work'&&b.dataset.work==='electrify'&&/Torralba.*Soria/i.test(I.tramoDef(state,id)?.name||''))tutorialMark('soria-quote');renderCoach();} // el tutorial avanza en cuanto se cumple el paso, sin esperar al siguiente fotograma
 });
 document.addEventListener('submit', event => {
+  if(event.target.id==='marketSearchForm'){event.preventDefault();ui.market.query=$('marketSearch').value;renderDrawer(true);return;}
   if (event.target.id !== 'routeForm') return;
   event.preventDefault();
   sfx.expect('plan');
@@ -1380,6 +1393,7 @@ document.addEventListener('input', event => {
   if (['routeFleet', 'frequency', 'fare'].includes(t.id)) {tutorialMark('preview');updatePreview();rememberTutorialDraft();if(tut&&$('coach')?.querySelector('.lesson-progress')){const c=stageChecks(state,tut);$('coach').querySelector('.lesson-progress').textContent=c.filter(x=>x.done).length+' / '+c.length;}}
   if (t.id === 'musicVolume') music.setVolume(+t.value);
   if (t.id === 'routeSearch') { ui.routeQuery = t.value; renderDrawer(); }
+  if (t.id === 'marketSearch') { ui.market.query = t.value; renderDrawer(); }
   if (t.id === 'ttStation') { ui.ttStation = t.value; ui.ttStationId = undefined; renderDrawer(); }
   if (t.id === 'buyQty') updateQuote();
   if (['lineA', 'lineB'].includes(t.id)) updateLineQuote();
@@ -1392,6 +1406,7 @@ document.addEventListener('change', async event => {
   if (t.type === 'file' && t.files[0]) sfx.play('page');
   if (t.id === 'maintenance') sfx.intent = null;
   if (t.id === 'routeStatus') { ui.routeStatus = t.value; renderDrawer(); }
+  if (['marketState','marketDelivery','marketMaker','marketSort'].includes(t.id)) {const field={marketState:'state',marketDelivery:'delivery',marketMaker:'maker',marketSort:'sort'}[t.id];ui.market[field]=t.value;renderDrawer(true);}
   if (t.id === 'ttHour') { ui.ttHour = +t.value; renderDrawer(); }
   if (t.id === 'dayPriority' && state.ops.phase === 'planning') { state.ops.priority = t.value; autosave(); render(); }
   if (t.id === 'autoPause') ui.autoPause = t.checked;

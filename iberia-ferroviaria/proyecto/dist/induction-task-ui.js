@@ -5,6 +5,7 @@ import * as O from './operations.js';
 import * as I from './infra.js';
 import {MODEL} from './data.js';
 import {handoffAccepted,handoffBranch} from './induction-runtime.js';
+import {brandLogo} from './brands.js';
 
 // El turno guiado usa las mismas acciones y precios que el despacho. Cada vista
 // presenta una sola decisión; consultar un dato no compra ni adjudica nada.
@@ -52,8 +53,8 @@ function people(s,t,stage){
 }
 function competition(s,t){
  if(!t.marks.includes('market')){
-  const r=s.routes.find(r=>r.active&&T.competition(s,r).some(c=>c.name==='Lowgo'))||s.routes.find(r=>r.active&&T.competition(s,r).length), rivals=r?T.competition(s,r):[];
-  return `<h4>${r?esc(E.routeName(r)):'Competencia'}</h4>${r?`<table class="lesson-table"><thead><tr><th>Operador</th><th>Tarifa</th><th>Salidas/sentido</th></tr></thead><tbody><tr><th>Tu servicio</th><td>${num(r.fare,1)} €</td><td>${r.frequency}</td></tr>${rivals.map(c=>`<tr><th>${esc(c.name)}</th><td>${num(c.fare,1)} €</td><td>${c.frequency}</td></tr>`).join('')}</tbody></table>`:'<p>No hay rivales activos en esta red.</p>'}${button('tutorial-view','market','Comparar inversiones')}`;
+  const r=s.routes.find(r=>r.active&&T.competition(s,r).some(c=>c.id==='lowgo'))||s.routes.find(r=>r.active&&T.competition(s,r).length), rivals=r?T.competition(s,r):[];
+  return `<h4>${r?esc(E.routeName(r)):'Competencia'}</h4>${r?`<table class="lesson-table"><thead><tr><th>Operador</th><th>Tarifa</th><th>Salidas/sentido</th></tr></thead><tbody><tr><th><span style="display:block;width:72px;">${brandLogo('Tenfe')}</span><span class="small">Tu servicio</span></th><td>${num(r.fare,1)} €</td><td>${r.frequency}</td></tr>${rivals.map(c=>`<tr><th><span style="display:block;width:72px;">${brandLogo(c.name)}</span><span class="small">${esc(c.name)}</span></th><td>${num(c.fare,1)} €</td><td>${c.frequency}</td></tr>`).join('')}</tbody></table>`:'<p>No hay rivales activos en esta red.</p>'}${button('tutorial-view','market','Comparar inversiones')}`;
  }
  const items=[...['youth','wifi','dynamic'].map(id=>({id,...T.POLICIES[id],type:'policy'})),...['online','ertms'].map(id=>({id,...T.TECHS[id],type:'research'}))];
  if(!t.marks.includes('research'))return `<h4>Ventajas y costes</h4><table class="lesson-table lesson-investments"><thead><tr><th>Medida</th><th>Coste y efecto</th></tr></thead><tbody>${items.map(p=>`<tr><th>${esc(p.name)}</th><td><b>${money(p.cost)}${p.type==='policy'?'/mes':' · '+p.months+' meses'}</b><span>${esc(p.note)}</span></td></tr>`).join('')}</tbody></table>${button('tutorial-view','research','Ya puedo elegir')}`;

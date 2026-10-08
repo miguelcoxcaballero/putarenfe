@@ -297,10 +297,13 @@ dialog .spot,dialog .coach{position:absolute}
 .alert-pill{max-width:calc(100vw - 24px)}
 @media (max-width:760px){.alert-pill{top:70px;width:calc(100vw - 16px);border-radius:16px;font-size:13px;padding:8px 10px}.alert-pill span:nth-child(2){flex:1}}
 
-/* modelos 3D */
-.train-3d-thumb{display:block;width:100%;max-width:300px;border-radius:10px;aspect-ratio:520/210;object-fit:cover;background:#e6dcc4}
-.train3d{border-radius:14px;overflow:hidden;margin:10px 0;background:#dfe6ea;cursor:grab;min-height:120px}.train3d canvas{display:block}
-.train3d::after{content:'Arrastra para girar · rueda para acercar';display:block;font-size:11px;color:var(--ink-3);text-align:center;padding:4px;background:var(--paper)}
+/* fotografías del material en el taller */
+.train-photo{display:block;width:100%;max-width:300px;height:auto;border-radius:10px;aspect-ratio:3/2;object-fit:contain;background:#e9eceb}
+.train3d{border-radius:14px;overflow:hidden;margin:10px 0;background:#e9eceb;min-height:120px}
+.train-workshop-photo{margin:0}.train-workshop-photo .train-photo{max-width:none;border-radius:0}
+.train-workshop-photo figcaption{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;background:var(--paper);font-size:11px;color:var(--ink-3)}
+.train-workshop-photo figcaption span{flex:none;font-size:10px;opacity:.8}
+.train-photo-pending{display:grid;place-items:center;min-height:110px;background:#edf1ef;color:#64726e;font:12px var(--sans)}
 
 /* banda sonora */
 .rail .music-btn.on svg{color:var(--gold-2);animation:beat 1.1s infinite}

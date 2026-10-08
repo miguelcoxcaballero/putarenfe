@@ -54,8 +54,10 @@ for (const row of rows) {
 }
 const available = Object.keys(clips).length;
 const label = `Avance en pruebas · ${available}/412 voces completas · resto con subtítulos`;
-const order = ['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
+const baselineOrder = ['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
   'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
+const optionalBefore = {'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'train3d.js':['assets/train-photos.js']};
+const order = baselineOrder.flatMap(file => [...(optionalBefore[file] || []).filter(extra => fs.existsSync(path.join(dist,extra))),file]);
 const sources = [];
 const read = file => {
   const bytes = fs.readFileSync(path.join(dist, file));
@@ -91,14 +93,15 @@ const voiceSource = fs.readFileSync(path.join(dist, 'voice.js'), 'utf8');
 assert(!/speechSynthesis|SpeechSynthesisUtterance/.test(voiceSource), 'no automatic browser voices');
 let html = read('index.html');
 let css = read('style-v3.css') + '\n' + read('main-menu.css') + '\n' + read('induction.css');
+if (fs.existsSync(path.join(dist,'marketplace.css'))) css += '\n' + read('marketplace.css');
 css += '\n.menu-preview-note{padding:9px 12px;margin:10px 0 15px;border:1px solid #cda85d66;border-radius:8px;background:#f8e7ba;color:#493019;font-size:12px;line-height:1.5;}\n';
-const mime = {png:'image/png',jpg:'image/jpeg',woff2:'font/woff2'};
+const mime = {png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',svg:'image/svg+xml',woff2:'font/woff2'};
 css = css.replace(/url\('assets\/([^']+)'\)/g, (_, asset) => {
   const bytes = fs.readFileSync(path.join(dist, 'assets', asset));
   sources.push({file:'assets/'+asset, bytes:bytes.length, sha256:sha(bytes)});
   return `url('data:${mime[asset.split('.').pop()]};base64,${bytes.toString('base64')}')`;
 });
-html = html.replace('<link rel="stylesheet" href="main-menu.css">','').replace('<link rel="stylesheet" href="induction.css">','')
+html = html.replace('<link rel="stylesheet" href="main-menu.css">','').replace('<link rel="stylesheet" href="induction.css">','').replace('<link rel="stylesheet" href="marketplace.css">','')
   .replace('<link rel="stylesheet" href="style-v3.css">', () => '<style>'+css+'</style>')
   .replace('<script src="assets/three.min.js"></script>', () => '<script>'+read('assets/three.min.js').replaceAll('</script','<\\/script')+'</script>')
   .replace('<script type="module" src="app.js"></script>', () => '<script>\n(() => {\n'+code.replaceAll('</script','<\\/script')+'\n})();\n</script>')

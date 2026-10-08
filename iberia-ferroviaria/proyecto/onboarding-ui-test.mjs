@@ -423,7 +423,7 @@ try {
         break;
       }
       case 'competition': {
-        assert.match(await page.locator('#coach .lesson-controls').textContent(),/Lowgo/,'se compara competencia que existe ahora');
+        assert.match(await page.locator('#coach .lesson-controls').textContent(),/OuiOui/,'se compara competencia que existe ahora');
         await click(page,'#coach [data-action=tutorial-view][data-id=market]');
         await click(page,'#coach [data-action=tutorial-view][data-id=research]');
         const before = await snapshot(page);

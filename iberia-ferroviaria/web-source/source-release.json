@@ -31,10 +31,6 @@
       {
         "filename": "game-script-4.js",
         "token": "__WEB_GAME_SCRIPT_4__"
-      },
-      {
-        "filename": "game-script-5.js",
-        "token": "__WEB_GAME_SCRIPT_5__"
       }
     ],
     "listening": [
@@ -78,9 +74,14 @@
       "sha256": "6fcc3aa6d6cc6ac3fa4cd99e1b12ba263e8f8e7a54d62db1fdc1a3d60aa01422"
     },
     {
+      "file": "brands.js",
+      "bytes": 27664,
+      "sha256": "ea76206b14f6238e16f9b5ba41f6b49fb6347c473e6f98843d1e2a4fd6aaff36"
+    },
+    {
       "file": "data.js",
-      "bytes": 11754,
-      "sha256": "e445b24c1783a6fa08b0b557cd27c7610020b5c8cd330bd7bb1b413fd72b9348"
+      "bytes": 11745,
+      "sha256": "6c39aa27d22bd505f69f0bcddd6eb770bf6ca932629ce3a39fc3160e3c5e5ddb"
     },
     {
       "file": "story.js",
@@ -109,8 +110,8 @@
     },
     {
       "file": "induction-runtime.js",
-      "bytes": 7436,
-      "sha256": "d26de38f1cd2454ba1f9c3a8ac0448ad4eaa43397407b987454d40fb85789682"
+      "bytes": 7437,
+      "sha256": "497ebe1c222a0ad7ea0d426e6a19201c997fb01b094abf2b6e0ed27ca4294d89"
     },
     {
       "file": "encounters.js",
@@ -118,14 +119,19 @@
       "sha256": "f7c847d3e85e39ebc48bd52684b0cc79ce18f1c3a34eb661432a607255c9f349"
     },
     {
+      "file": "marketplace.js",
+      "bytes": 16147,
+      "sha256": "b28ccacbcd05b513682d806d792df8a0efbf9c60d8017bc7a22c2970b01aee16"
+    },
+    {
       "file": "tycoon.js",
-      "bytes": 30403,
-      "sha256": "a7fb9a88c4e2ae19324b57afc31316e70ef60f1b08eaabef6570346a68791232"
+      "bytes": 30466,
+      "sha256": "7ebac0681d04eb47aa37e90c22a1f8e9aaea35100264f32595b5f407fe9c130d"
     },
     {
       "file": "engine.js",
-      "bytes": 37003,
-      "sha256": "684098960730780117a8117a67f87ace5ab5ef48b8d61830ba85e4631b92fb3f"
+      "bytes": 38655,
+      "sha256": "45ec3a4bda763f53b68007fada3dfe1bdfece7a4aa5fd0be963080b37c74a677"
     },
     {
       "file": "operations.js",
@@ -139,13 +145,18 @@
     },
     {
       "file": "train-art.js",
-      "bytes": 16830,
-      "sha256": "4d95bd12aed240daada2e7bd9a76b6c0819c82c7f0b89005512d77184ccea0be"
+      "bytes": 16838,
+      "sha256": "3290ea1c615ebd2f02c0d3cdf0ee9c9a1f6db16ee1a15295e1cf26a35b4fb3a6"
+    },
+    {
+      "file": "assets/train-photos.js",
+      "bytes": 8452778,
+      "sha256": "6b923e3ef23b9ccd37f09fb7147532d4539bf30b875110baee707c3e1b551374"
     },
     {
       "file": "train3d.js",
-      "bytes": 25927,
-      "sha256": "8718de1d8841b8113573de467a0dbf1e7100f38f19a75b028a9fa8413936f14a"
+      "bytes": 1851,
+      "sha256": "181373d2146766a43849ad91d51c85f61d28464287f48e6de6144979fd34291d"
     },
     {
       "file": "city-art.js",
@@ -189,28 +200,28 @@
     },
     {
       "file": "tycoon-ui.js",
-      "bytes": 21057,
-      "sha256": "e8f74c858790fd391d82739558ba0b335d7dde486f87a1bc69d8913a46d646de"
+      "bytes": 21550,
+      "sha256": "655b906d6398cdb2d14ff6b380eb0aaaa4c957002acb8bceb2e22460bde95621"
     },
     {
       "file": "main-menu.js",
-      "bytes": 6071,
-      "sha256": "3a32075e68209cae3f13389c44e49c4def97d60bcf1d84016b1890424b4765d4"
+      "bytes": 6173,
+      "sha256": "f8aa9f93f0d2195f8547ad48dc9a73d251af4b00a104fc980e383042ba475daf"
     },
     {
       "file": "induction-task-ui.js",
-      "bytes": 15798,
-      "sha256": "6b8b81c93c5fc90726b2ce4344cc1f2cbbb58412ad830c84796e4f0d2ff030d7"
+      "bytes": 16024,
+      "sha256": "88bb39e28922d1d73366855e648b40561ac5e1c5c8e139190007f71306b1479f"
     },
     {
       "file": "app.js",
-      "bytes": 151092,
-      "sha256": "02f8965517a72e954469d092b37a60b7d861cb34af1cad16508cc70502de5fc0"
+      "bytes": 153149,
+      "sha256": "7c941506866a642fe265066b7eb2ba73f3cfb799f8a8604379490a0a9467472b"
     },
     {
       "file": "style-v3.css",
-      "bytes": 61657,
-      "sha256": "e6bd4f3d45d23793127a1402bb53d1c1b6ac5bd26634f8857540b69028900ced"
+      "bytes": 61939,
+      "sha256": "a1b68f57b24ce4f4262bbbf1d612e8afdd289b588183de4fbf8392facc11f349"
     },
     {
       "file": "main-menu.css",
@@ -221,6 +232,11 @@
       "file": "induction.css",
       "bytes": 7044,
       "sha256": "4aaaace7c0c68b477d35e16adbfda988d71b8051a09c5e2b1afd10047f37ab7c"
+    },
+    {
+      "file": "marketplace.css",
+      "bytes": 14639,
+      "sha256": "fb9198acbb45f588d71498e156ac5249146f550491aed920a3965cd26d0324ec"
     },
     {
       "file": "assets/fonts/fraunces.woff2",
@@ -253,6 +269,11 @@
       "sha256": "a5f08b2676adfcdad44f973c5004fa932753d25e9b34181c66be638dad73aceb"
     },
     {
+      "file": "index.html",
+      "bytes": 2775,
+      "sha256": "970d63e56a399dc4fb7a3df89d2f4bac8431b41db74e8ec7426cdb0a2f327162"
+    },
+    {
       "file": "assets/muestras-ui.js",
       "bytes": 455233,
       "sha256": "71d400cecb3450a9fb12a42409b2e0b2273aec586bfc33fc7d8d172ad910eaf0"
@@ -273,21 +294,11 @@
       "sha256": "9719b93313905010404c634e1e0acf18dbbe4fc94d6d83c74dae19a51382eb02"
     },
     {
-      "file": "assets/three.min.js",
-      "bytes": 668024,
-      "sha256": "7b1c5d75b28d9de15042e2b374f83566d8c7146697af8fdeb4558b0fb528a585"
-    },
-    {
-      "file": "index.html",
-      "bytes": 2772,
-      "sha256": "98fc9c8500374a262e17947bf83e2b01ce1f6c7de97a0e0a67856144e8f283da"
-    },
-    {
       "file": "LICENSE-GEODATA.txt",
       "bytes": 35555,
       "sha256": "0074204b2c84d6bc968a4e13eddc211bc3c8988701aaf0334e167f4311106799"
     }
   ],
-  "currentManifestSHA256": "862f2ce04f507623e5e3c8c34a40cc5b2552ec3377b6a08a41c4a494e548eb1a",
-  "currentWholeDialogues": 301
+  "currentManifestSHA256": "92fd7d13003623a1f6bcdbc1f9031e8ed1e04e00cbabeadcaaa4475123e562a7",
+  "currentWholeDialogues": 339
 }

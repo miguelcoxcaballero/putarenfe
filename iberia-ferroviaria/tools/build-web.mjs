@@ -183,12 +183,34 @@ const listeningLabel=`${available}/412 diálogos grabados · ${partial?'el resto
 catalogue.audio=audio;catalogue.label=listeningLabel;
 const pacoCount=recordings.filter(row=>row.person==='mayor').length;
 const assets=[];
+const photoAssets=new Map();
+function externalizeTrainPhotos(script){
+  const marker='// ---- assets/train-photos.js\n';
+  const start=script.indexOf(marker);if(start===-1)return script;
+  assert.equal(script.split(marker).length-1,1,'one train-photo module');
+  const next=script.indexOf('\n// ---- ',start+marker.length);
+  assert(next!==-1,'the train-photo module has its own bounded scope');
+  const module=script.slice(start,next).replace(/data:image\/(webp|png|jpeg|jpg);base64,([A-Za-z0-9+/]+={0,2})/g,(data,extension,encoded)=>{
+    const bytes=Buffer.from(encoded,'base64');
+    assert(bytes.length>0&&bytes.toString('base64')===encoded,'exact photo base64 payload');
+    const digest=sha(bytes),suffix=extension==='jpeg'?'jpg':extension;
+    const url='assets/fotos/train-'+digest.slice(0,12)+'.'+suffix;
+    if(!photoAssets.has(url)){
+      write(url,bytes);
+      const row={url,bytes:bytes.length,sha256:digest,kind:'generated-train-photo'};
+      photoAssets.set(url,row);assets.push(row);
+    }
+    return url;
+  });
+  return script.slice(0,start)+module+script.slice(next);
+}
 function publishSource(entry,kind){
   let bytes=fs.readFileSync(path.join(source,entry.filename));
   if(kind==='game'&&bytes.includes(Buffer.from('__WEB_DIALOGUES__'))){
     let script=bytes.toString('utf8');
     script=oneReplace(script,'__WEB_DIALOGUES__',JSON.stringify(dialogues),'one complete web recording map');
     script=oneReplace(script,'__WEB_PREVIEW_LABEL__',gameLabel,'one generated game label');
+    script=externalizeTrainPhotos(script);
     new vm.Script(script,{filename:entry.filename});bytes=Buffer.from(script);
   }
   if(entry.filename.endsWith('.js'))new vm.Script(bytes.toString('utf8'),{filename:entry.filename});
@@ -220,13 +242,14 @@ const release={schema:1,version:'3.6.3',status:partial?'partial-preview':'comple
   listening:{url:'dialogos.html',bytes:Buffer.byteLength(listeningHTML),sha256:sha(listeningHTML)},
   assets,recordings,validation:{physicalMP3Hashes:true,pairedFrozenHTMLHashes:true,registeredEOS:true,
     javascriptSyntax:true,relativeURLs:true,browserTested:false,humanListening:false}};
-// Keep the previous published URLs through a rollout. Rebuilding the same web
-// release must keep that previous set too, rather than immediately deleting it.
+// Preserve the rollout cache while local previews are rebuilt before publication.
+// The first public preview remains useful to clients that still have its HTML.
 const keep=new Set([...assets.map(row=>row.url),...recordings.map(row=>row.url)]);
-const samePublishedContent=priorRelease?.game?.sha256===release.game.sha256
-  && priorRelease?.listening?.sha256===release.listening.sha256;
-const previousAssets=priorRelease?[...(priorRelease.assets||[]),...(priorRelease.recordings||[]),
-  ...(samePublishedContent?(priorRelease.retainedAssets||[]):[])]:[];
+const historicalAssets=[{url:'assets/game-script-5-8dfb0e86a8df.js',bytes:11320929,
+  sha256:'8dfb0e86a8dfeb8e61cf6358898ab9d96b4f6ef64553849f3b4619b56fb60f4f'}]
+  .filter(row=>fs.existsSync(path.join(output,row.url)));
+const previousAssets=[...(priorRelease?.assets||[]),...(priorRelease?.recordings||[]),
+  ...(priorRelease?.retainedAssets||[]),...historicalAssets];
 const retainedAssets=[];
 for(const row of previousAssets){
   if(keep.has(row.url))continue;

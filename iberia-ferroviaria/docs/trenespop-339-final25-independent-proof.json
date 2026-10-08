@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "status": "independent-final25-static-pass",
+  "releaseSHA256": "31cfa7654eda0fb49bfea8e64503d77c4bf0b805084d3666983c85e2c431ba36",
+  "gameSHA256": "48e84b6ee62eca15dcc28ba9614200f79809f6e9b9ae7d38a2fdfb21d114305a",
+  "listeningSHA256": "c31f328cb620bab683525b118d34af1783185ca7f50254fa8d2c6b6b0b74a415",
+  "sourcePhotoManifestSHA256": "40cdb110d8460d273c2e613b814fd57cb396bb399f3d409875f51b52ac52106c",
+  "sourceManifestSHA256": "92fd7d13003623a1f6bcdbc1f9031e8ed1e04e00cbabeadcaaa4475123e562a7",
+  "availableWholeDialogues": 339,
+  "pacoWholeDialogues": 36,
+  "all50Tutorial": true,
+  "publicAssetsVerified": 33,
+  "retainedAssetsVerified": 5,
+  "MP3sVerified": 339,
+  "generatedPhotosVerified": 25,
+  "photoBytes": 6337308,
+  "currentRuntimeURL": "assets/game-script-4-20124302adf8.js",
+  "voiceRuntimeUnchangedExceptURLBranch": true,
+  "dualDialogueMapsExact": true,
+  "oneListeningAudio": true,
+  "canonicalCatalogueUnchanged": true,
+  "noThreeLoader": true,
+  "noOldSentenceOrSystemVoices": true,
+  "dependencyEdges": 83,
+  "photosExactSourceEmbeddedAndExternal": true,
+  "pagesPhotoPathsCorrect": true,
+  "ninePurchaseModelsCovered": true,
+  "coverage": [
+    {
+      "model": "s100",
+      "photo": "100"
+    },
+    {
+      "model": "s112",
+      "photo": "112"
+    },
+    {
+      "model": "s103",
+      "photo": "103"
+    },
+    {
+      "model": "s106f",
+      "photo": "106"
+    },
+    {
+      "model": "av2030",
+      "photo": "future"
+    },
+    {
+      "model": "s120",
+      "photo": "120"
+    },
+    {
+      "model": "s130",
+      "photo": "130"
+    },
+    {
+      "model": "s730",
+      "photo": "730"
+    },
+    {
+      "model": "s106v",
+      "photo": "106"
+    }
+  ],
+  "allPhotoAliasesResolved": true,
+  "AVAratoHasDedicatedPhoto": true,
+  "AVAratoSHA256": "218c132487c9866064ba1b67dde98ef2f2a5a8e60f527cc4bd0cb9504c6c4c11",
+  "AVAratoGeneratedSHA256": "6d1bb3e8363fa90d97ff2e92b9f29a4a1f131bec64b779c2b64c3be399235c88",
+  "lowcostPolicyUsesBrandAndPhoto": true,
+  "lowcostMechanics": {
+    "monthlyCost": 0.3,
+    "fare": 0.88,
+    "demand": 1.18
+  },
+  "oldClientAssetsRetained": [
+    {
+      "url": "assets/game-script-5-a4f845a3086b.js",
+      "wholeVoices": 301,
+      "allVoiceURLsAvailable": true
+    },
+    {
+      "url": "assets/game-script-5-8dfb0e86a8df.js",
+      "wholeVoices": 261,
+      "allVoiceURLsAvailable": true
+    }
+  ],
+  "rebuildExecuted": false,
+  "browserTested": false,
+  "humanListening": false
+}

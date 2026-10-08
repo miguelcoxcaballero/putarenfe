@@ -1,0 +1,714 @@
+{
+  "schema": 1,
+  "status": "trenespop-native-real-purchase-pass",
+  "startedAt": "2026-10-08T17:52:10.925Z",
+  "finishedAt": "2026-10-08T17:53:32.846Z",
+  "scope": "Trenespop native UI on the exact 339-dialogue/17-photo construction before the 25-photo and AVArato extension.",
+  "limitations": [
+    "No voice quality, whole campaign or full dialogue playback certification.",
+    "Screenshots require visual review; DOM checks cannot prove workshop accuracy or aesthetic likeness.",
+    "Voices were disabled using the ordinary settings UI. Audio file presence is not whole dialogue playback or acting-quality approval.",
+    "Screenshot hashes identify the captured files; they do not substitute for human visual review."
+  ],
+  "actualChildWaitExitCode": 0,
+  "allObservedOwnedChildrenClosed": true,
+  "sourceSHA256": "536b83a1419c51e2690f5bb5ba95bedebaf449e0a910c20e190409b9f262ecae",
+  "configSHA256": "397b1e04f4a4f24fa9cd8db3c81dbb677e78c928b7f55c0edbdf3ac59982f8fc",
+  "fullNativeReportSHA256": "76c0abb83f492d008636128864be53f98de0dc2a996902c11521d89162671a6e",
+  "executionRecordSHA256": "013c93750e4b395b43f96b32db3ee4e0d0b97e28fa62b9c27e43af2a7d41f468",
+  "testedRelease": {
+    "availableWholeDialogues": 339,
+    "releaseSHA256": "e9e1be6fb374286b79adb012aa42bb458c1defe75c3a92550b00f98eccc0e7e0",
+    "gameSHA256": "bd5281b087b32a07513a8b9d6cb6c7ba5565342c5085b16b1622d7663b8fc7c9",
+    "catalogueSHA256": "bcb87414e1558252847bd9ed2be87999f0a71c2be69f046f089d58af06f0800b",
+    "referenceSHA256": "46ba5d81fc8a6f657f5f1cdab3951a39956bfd86a7fcc0798006ea8fa9c470bd",
+    "photoManifestSHA256": "a3c3da6803f32a053ac932a88fce35b7be5e4e12eee9bf7b9745cd87810d3935"
+  },
+  "physicalGraph": {
+    "files": 369,
+    "allHashesMatched": true,
+    "availableWholeDialogues": 339,
+    "photoManifestSHA256": "a3c3da6803f32a053ac932a88fce35b7be5e4e12eee9bf7b9745cd87810d3935",
+    "photoModels": 17
+  },
+  "ordinaryUI": {
+    "initScripts": 0,
+    "prototypeOverrides": 0,
+    "applicationStateSetters": 0,
+    "voicesOffByUI": true,
+    "modelsSignalled": false
+  },
+  "filters": [
+    {
+      "label": "new only",
+      "values": {
+        "marketState": "new"
+      },
+      "visibleListings": [
+        "new-s112",
+        "new-s103",
+        "new-s120",
+        "new-s130",
+        "new-s730",
+        "new-dorfler-s120",
+        "new-bcbb-s103"
+      ]
+    },
+    {
+      "label": "new immediate is empty",
+      "values": {
+        "marketDelivery": "0"
+      },
+      "visibleListings": []
+    },
+    {
+      "label": "used immediate",
+      "values": {
+        "marketState": "used",
+        "marketDelivery": "0"
+      },
+      "visibleListings": [
+        "used-s100-0",
+        "used-s130-0"
+      ]
+    },
+    {
+      "label": "used up to3 months",
+      "values": {
+        "marketDelivery": "3"
+      },
+      "visibleListings": [
+        "used-s100-0",
+        "used-s112-0",
+        "used-s103-0",
+        "used-s130-0",
+        "used-s730-0"
+      ]
+    },
+    {
+      "label": "maker Tardo",
+      "values": {
+        "marketMaker": "Tardo"
+      },
+      "visibleListings": [
+        "used-s112-0",
+        "used-s130-0",
+        "used-s730-0",
+        "new-s112",
+        "new-s130",
+        "new-s730"
+      ]
+    },
+    {
+      "label": "maker KAFKA",
+      "values": {
+        "marketMaker": "KAFKA"
+      },
+      "visibleListings": [
+        "used-s120-0",
+        "new-s120"
+      ]
+    },
+    {
+      "label": "maker Schlimmens",
+      "values": {
+        "marketMaker": "Schlimmens"
+      },
+      "visibleListings": [
+        "used-s103-0",
+        "new-s103"
+      ]
+    },
+    {
+      "label": "maker Dörfler",
+      "values": {
+        "marketMaker": "Dörfler"
+      },
+      "visibleListings": [
+        "new-dorfler-s120"
+      ]
+    },
+    {
+      "label": "maker BCBB",
+      "values": {
+        "marketMaker": "BCBB"
+      },
+      "visibleListings": [
+        "new-bcbb-s103"
+      ]
+    },
+    {
+      "label": "maker Malstom",
+      "values": {
+        "marketMaker": "Malstom"
+      },
+      "visibleListings": [
+        "used-s100-0"
+      ]
+    }
+  ],
+  "purchaseAndDeliveryStates": {
+    "initialState": {
+      "month": 0,
+      "cashMillions": 5000,
+      "marketplace": null,
+      "marketplaceOrders": [],
+      "purchasedFleet": []
+    },
+    "afterImmediate": {
+      "month": 0,
+      "cashMillions": 4983.792,
+      "marketplace": {
+        "version": 1,
+        "sold": {
+          "used-s100-0": 2
+        },
+        "favorites": [
+          "used-s112-0"
+        ]
+      },
+      "marketplaceOrders": [
+        {
+          "id": "o22",
+          "model": "s100",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 0,
+          "next": 0,
+          "total": 16.208,
+          "remaining": 0,
+          "unit": 8.104,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s100-0",
+            "state": "used",
+            "maker": "Malstom",
+            "condition": 59,
+            "born": 1992,
+            "depositRate": 1
+          },
+          "delayChecked": true
+        }
+      ],
+      "purchasedFleet": [
+        {
+          "id": "f23",
+          "model": "s100",
+          "qty": 2,
+          "condition": 59,
+          "born": 1992,
+          "origin": "Trenespop o22",
+          "maker": "Malstom"
+        }
+      ]
+    },
+    "afterShippingOrder": {
+      "month": 0,
+      "cashMillions": 4975.827,
+      "marketplace": {
+        "version": 1,
+        "sold": {
+          "used-s100-0": 2,
+          "used-s112-0": 2
+        },
+        "favorites": [
+          "used-s112-0"
+        ]
+      },
+      "marketplaceOrders": [
+        {
+          "id": "o22",
+          "model": "s100",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 0,
+          "next": 0,
+          "total": 16.208,
+          "remaining": 0,
+          "unit": 8.104,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s100-0",
+            "state": "used",
+            "maker": "Malstom",
+            "condition": 59,
+            "born": 1992,
+            "depositRate": 1
+          },
+          "delayChecked": true
+        },
+        {
+          "id": "o24",
+          "model": "s112",
+          "qty": 2,
+          "delivered": 0,
+          "start": 0,
+          "first": 1,
+          "next": 1,
+          "total": 26.55,
+          "remaining": 18.585,
+          "unit": 13.275,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s112-0",
+            "state": "used",
+            "maker": "Tardo",
+            "condition": 66,
+            "born": 2015,
+            "depositRate": 0.3
+          },
+          "delayChecked": true
+        }
+      ],
+      "purchasedFleet": [
+        {
+          "id": "f23",
+          "model": "s100",
+          "qty": 2,
+          "condition": 59,
+          "born": 1992,
+          "origin": "Trenespop o22",
+          "maker": "Malstom"
+        }
+      ]
+    },
+    "afterFirstReload": {
+      "month": 0,
+      "cashMillions": 4975.827,
+      "marketplace": {
+        "version": 1,
+        "sold": {
+          "used-s100-0": 2,
+          "used-s112-0": 2
+        },
+        "favorites": [
+          "used-s112-0"
+        ]
+      },
+      "marketplaceOrders": [
+        {
+          "id": "o22",
+          "model": "s100",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 0,
+          "next": 0,
+          "total": 16.208,
+          "remaining": 0,
+          "unit": 8.104,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s100-0",
+            "state": "used",
+            "maker": "Malstom",
+            "condition": 59,
+            "born": 1992,
+            "depositRate": 1
+          },
+          "delayChecked": true
+        },
+        {
+          "id": "o24",
+          "model": "s112",
+          "qty": 2,
+          "delivered": 0,
+          "start": 0,
+          "first": 1,
+          "next": 1,
+          "total": 26.55,
+          "remaining": 18.585,
+          "unit": 13.275,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s112-0",
+            "state": "used",
+            "maker": "Tardo",
+            "condition": 66,
+            "born": 2015,
+            "depositRate": 0.3
+          },
+          "delayChecked": true
+        }
+      ],
+      "purchasedFleet": [
+        {
+          "id": "f23",
+          "model": "s100",
+          "qty": 2,
+          "condition": 59,
+          "born": 1992,
+          "origin": "Trenespop o22",
+          "maker": "Malstom"
+        }
+      ]
+    },
+    "afterMonthDelivery": {
+      "month": 1,
+      "cashMillions": 4958.932525560001,
+      "marketplace": {
+        "version": 1,
+        "sold": {
+          "used-s100-0": 2,
+          "used-s112-0": 2
+        },
+        "favorites": [
+          "used-s112-0"
+        ]
+      },
+      "marketplaceOrders": [
+        {
+          "id": "o22",
+          "model": "s100",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 0,
+          "next": 0,
+          "total": 16.208,
+          "remaining": 0,
+          "unit": 8.104,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s100-0",
+            "state": "used",
+            "maker": "Malstom",
+            "condition": 59,
+            "born": 1992,
+            "depositRate": 1
+          },
+          "delayChecked": true
+        },
+        {
+          "id": "o24",
+          "model": "s112",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 1,
+          "next": 2,
+          "total": 26.55,
+          "remaining": 0,
+          "unit": 13.275,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s112-0",
+            "state": "used",
+            "maker": "Tardo",
+            "condition": 66,
+            "born": 2015,
+            "depositRate": 0.3
+          },
+          "delayChecked": true
+        }
+      ],
+      "purchasedFleet": [
+        {
+          "id": "f23",
+          "model": "s100",
+          "qty": 2,
+          "condition": 58.92,
+          "born": 1992,
+          "origin": "Trenespop o22",
+          "maker": "Malstom"
+        },
+        {
+          "id": "f25",
+          "model": "s112",
+          "qty": 2,
+          "condition": 66,
+          "born": 2015,
+          "origin": "Trenespop o24",
+          "maker": "Tardo"
+        }
+      ]
+    },
+    "beforeFinalReload": {
+      "month": 1,
+      "cashMillions": 4958.932525560001,
+      "marketplace": {
+        "version": 1,
+        "sold": {
+          "used-s100-0": 2,
+          "used-s112-0": 2
+        },
+        "favorites": [
+          "used-s112-0"
+        ]
+      },
+      "marketplaceOrders": [
+        {
+          "id": "o22",
+          "model": "s100",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 0,
+          "next": 0,
+          "total": 16.208,
+          "remaining": 0,
+          "unit": 8.104,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s100-0",
+            "state": "used",
+            "maker": "Malstom",
+            "condition": 59,
+            "born": 1992,
+            "depositRate": 1
+          },
+          "delayChecked": true
+        },
+        {
+          "id": "o24",
+          "model": "s112",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 1,
+          "next": 2,
+          "total": 26.55,
+          "remaining": 0,
+          "unit": 13.275,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s112-0",
+            "state": "used",
+            "maker": "Tardo",
+            "condition": 66,
+            "born": 2015,
+            "depositRate": 0.3
+          },
+          "delayChecked": true
+        }
+      ],
+      "purchasedFleet": [
+        {
+          "id": "f23",
+          "model": "s100",
+          "qty": 2,
+          "condition": 58.92,
+          "born": 1992,
+          "origin": "Trenespop o22",
+          "maker": "Malstom"
+        },
+        {
+          "id": "f25",
+          "model": "s112",
+          "qty": 2,
+          "condition": 66,
+          "born": 2015,
+          "origin": "Trenespop o24",
+          "maker": "Tardo"
+        }
+      ]
+    },
+    "afterFinalReload": {
+      "month": 1,
+      "cashMillions": 4958.932525560001,
+      "marketplace": {
+        "version": 1,
+        "sold": {
+          "used-s100-0": 2,
+          "used-s112-0": 2
+        },
+        "favorites": [
+          "used-s112-0"
+        ]
+      },
+      "marketplaceOrders": [
+        {
+          "id": "o22",
+          "model": "s100",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 0,
+          "next": 0,
+          "total": 16.208,
+          "remaining": 0,
+          "unit": 8.104,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s100-0",
+            "state": "used",
+            "maker": "Malstom",
+            "condition": 59,
+            "born": 1992,
+            "depositRate": 1
+          },
+          "delayChecked": true
+        },
+        {
+          "id": "o24",
+          "model": "s112",
+          "qty": 2,
+          "delivered": 2,
+          "start": 0,
+          "first": 1,
+          "next": 2,
+          "total": 26.55,
+          "remaining": 0,
+          "unit": 13.275,
+          "delay": 0,
+          "historical": false,
+          "marketplace": {
+            "listing": "used-s112-0",
+            "state": "used",
+            "maker": "Tardo",
+            "condition": 66,
+            "born": 2015,
+            "depositRate": 0.3
+          },
+          "delayChecked": true
+        }
+      ],
+      "purchasedFleet": [
+        {
+          "id": "f23",
+          "model": "s100",
+          "qty": 2,
+          "condition": 58.92,
+          "born": 1992,
+          "origin": "Trenespop o22",
+          "maker": "Malstom"
+        },
+        {
+          "id": "f25",
+          "model": "s112",
+          "qty": 2,
+          "condition": 66,
+          "born": 2015,
+          "origin": "Trenespop o24",
+          "maker": "Tardo"
+        }
+      ]
+    }
+  },
+  "screens": [
+    {
+      "kind": "catalogue",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "filename": "catalogue-1440.png",
+      "sha256": "7bdb3dcadc334eec7ae1e7f9b08761386180f85fde22447f42d16deea86ec0f4",
+      "documentWidth": 1440,
+      "trains3d": 0,
+      "imagesDecoded": 13
+    },
+    {
+      "kind": "catalogue",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "filename": "catalogue-390.png",
+      "sha256": "93fd3a9c8beb793256c6d49dfddffac3c73c1868b13dc2ef77947169548b70d1",
+      "documentWidth": 390,
+      "trains3d": 0,
+      "imagesDecoded": 13
+    },
+    {
+      "kind": "catalogue",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "filename": "catalogue-320.png",
+      "sha256": "f1eeecb11daf7bd69e458c8e143f7622219c268eac6bb1a7c14fb5ee44de6a56",
+      "documentWidth": 320,
+      "trains3d": 0,
+      "imagesDecoded": 13
+    },
+    {
+      "kind": "detail",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "filename": "detail-1440.png",
+      "sha256": "ec3d957ef839b3060f98ca4f226cdbbc1a20c053817b03ed4a977fea629fbfe3",
+      "documentWidth": 1440,
+      "trains3d": 0,
+      "imagesDecoded": 1
+    },
+    {
+      "kind": "detail",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "filename": "detail-390.png",
+      "sha256": "4dffc9c46d984198c3c7538183394c74eed7ccfb04d63424e6fc02a2d4d758c6",
+      "documentWidth": 390,
+      "trains3d": 0,
+      "imagesDecoded": 1
+    },
+    {
+      "kind": "detail",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "filename": "detail-320.png",
+      "sha256": "c41a77dbaebdebbacc7e7dd35db2350f500dbc535b6361b31dd96bba2fc692ec",
+      "documentWidth": 320,
+      "trains3d": 0,
+      "imagesDecoded": 1
+    },
+    {
+      "kind": "after-delivery",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "filename": "after-delivery-1440.png",
+      "sha256": "51656d114a0e91aa766b0b301396b3bcdb61cff4e845b56255ee24b28e075c1a",
+      "documentWidth": 1440,
+      "trains3d": 0,
+      "imagesDecoded": 12
+    },
+    {
+      "kind": "after-delivery",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "filename": "after-delivery-390.png",
+      "sha256": "b8427f789104a6d7dae2a9b3f5253beaa14450350c6ecf648ede368a7bae8f97",
+      "documentWidth": 390,
+      "trains3d": 0,
+      "imagesDecoded": 12
+    },
+    {
+      "kind": "after-delivery",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "filename": "after-delivery-320.png",
+      "sha256": "911d37a8e936dcd9a3207b12a3ed0ff0f56340395999c288a3e4211839362ef3",
+      "documentWidth": 320,
+      "trains3d": 0,
+      "imagesDecoded": 12
+    }
+  ],
+  "errors": [],
+  "requestFailures": [],
+  "unexpectedRequests": [],
+  "serverErrors": []
+}

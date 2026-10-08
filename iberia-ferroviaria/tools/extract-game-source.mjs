@@ -24,8 +24,10 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   assert.equal(catalogueModule.DIALOGUE_CATALOGUE.length,412);
   const dist=path.join(project,'dist'),sources=[];
   const read=file=>{const bytes=fs.readFileSync(path.join(dist,file));sources.push({file,bytes:bytes.length,sha256:sha(bytes)});return bytes.toString('utf8');};
-  const order=['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
+  const baselineOrder=['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
     'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
+  const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'train3d.js':['assets/train-photos.js']};
+  const order=baselineOrder.flatMap(file=>[...(optionalBefore[file]||[]).filter(extra=>fs.existsSync(path.join(dist,extra))),file]);
   function bundle(file){
     let text=file==='assets/voices.js'?'export const CLIPS = {};\n':file==='assets/voice-dialogues.js'?'export const DIALOGUES = __WEB_DIALOGUES__;\n':read(file);
     if(file==='main-menu.js'){
@@ -59,24 +61,33 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   assert(gameCode.includes('const CLIPS = {};'),'no old recordings');
   assert.equal(gameCode.split('__WEB_DIALOGUES__').length-1,1);
   let css=read('style-v3.css')+'\n'+read('main-menu.css')+'\n'+read('induction.css');
+  if(fs.existsSync(path.join(dist,'marketplace.css')))css+='\n'+read('marketplace.css');
   css+='\n.menu-preview-note{padding:9px 12px;margin:10px 0 15px;border:1px solid #cda85d66;border-radius:8px;background:#f8e7ba;color:#493019;font-size:12px;line-height:1.5;}\n';
-  const mime={png:'image/png',jpg:'image/jpeg',woff2:'font/woff2'};
+  const mime={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',svg:'image/svg+xml',woff2:'font/woff2'};
   css=css.replace(/url\('assets\/([^']+)'\)/g,(_,asset)=>{
     const bytes=fs.readFileSync(path.join(dist,'assets',asset));sources.push({file:'assets/'+asset,bytes:bytes.length,sha256:sha(bytes)});
     assert(mime[asset.split('.').pop()],'known local CSS asset');return `url('data:${mime[asset.split('.').pop()]};base64,${bytes.toString('base64')}')`;
   });
   for(const match of css.matchAll(/url\(([^)]+)\)/g))assert(/^["']?(data:|blob:|#)/.test(match[1].trim()),'CSS asset is embedded');
+  let html=read('index.html');
+  const threeTag='<script src="assets/three.min.js"></script>';
+  const includeThree=html.includes(threeTag);
   const scripts=['ui','orquesta','teclas','percusion'].map(group=>read('assets/muestras-'+group+'.js'));
-  scripts.push(read('assets/three.min.js').replaceAll('</script','<\\/script'),gameCode);
+  if(includeThree)scripts.push(read('assets/three.min.js').replaceAll('</script','<\\/script'));
+  scripts.push(gameCode);
   const gameLabels=scripts.map((body,index)=>({filename:'game-script-'+index+'.js',token:'__WEB_GAME_SCRIPT_'+index+'__'}));
   for(let index=0;index<scripts.length;index++)new vm.Script(scripts[index],{filename:gameLabels[index].filename});
-  let html=read('index.html');
   html=replaceOne(html,'<link rel="stylesheet" href="main-menu.css">','','main menu CSS link');
   html=replaceOne(html,'<link rel="stylesheet" href="induction.css">','','induction CSS link');
+  const marketplaceLink='<link rel="stylesheet" href="marketplace.css">';
+  if(html.includes(marketplaceLink)){
+    assert(fs.existsSync(path.join(dist,'marketplace.css')),'the market stylesheet exists');
+    html=replaceOne(html,marketplaceLink,'','market stylesheet link');
+  }
   html=replaceOne(html,'<link rel="stylesheet" href="style-v3.css">','<link rel="stylesheet" href="__WEB_GAME_STYLE_0__">','game stylesheet');
   html=replaceOne(html,"<script>globalThis.IBERIA_SAMPLE_BASE = 'assets/';</script>",gameLabels.slice(0,4).map(row=>'<script src="'+row.token+'"></script>').join(''),'music samples');
-  html=replaceOne(html,'<script src="assets/three.min.js"></script>','<script src="__WEB_GAME_SCRIPT_4__"></script>','three source');
-  html=replaceOne(html,'<script type="module" src="app.js"></script>','<script src="__WEB_GAME_SCRIPT_5__"></script>','game runtime source');
+  if(includeThree)html=replaceOne(html,threeTag,'<script src="'+gameLabels[4].token+'"></script>','three source');
+  html=replaceOne(html,'<script type="module" src="app.js"></script>','<script src="'+gameLabels.at(-1).token+'"></script>','game runtime source');
   const licenseBytes=fs.readFileSync(path.join(project,'LICENSE-GEODATA.txt'));
   const licenseText=licenseBytes.toString('utf8').replace(/\n*$/,'\n\n');
   html=replaceOne(html,'</body>','<script type="text/plain" id="geodata-license">'+licenseText.replaceAll('</script','<\\/script')+'</script></body>','geography attribution');

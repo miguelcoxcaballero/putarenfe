@@ -55,15 +55,15 @@ export const ROUTES = [
 ].map(([id,ends,via,kind])=>({id,ends:ends.split(' '),via:via.split(' '),kind}));
 // Material: AVE (ancho estándar fijo) y Alvia (ancho variable; el híbrido no necesita catenaria).
 export const MODELS = [
- {id:'s100',name:'S100 · AVE',family:'AVE',maker:'Alstom',gauge:'uic',power:'electric',speed:300,seats:329,price:16,lead:30,year:2099,energy:.78,desc:'El abuelo de la familia: llegó en 1992 y todavía se cree joven.'},
- {id:'s112',name:'S112 · AVE «Pato»',family:'AVE',maker:'Talgo',gauge:'uic',power:'electric',speed:330,seats:365,price:25,lead:30,year:2022,energy:.62,desc:'El morro de pato más famoso de la Meseta. Rápido, cómodo y fotogénico de perfil.'},
- {id:'s103',name:'S103 · AVE Velaro',family:'AVE',maker:'Siemens',gauge:'uic',power:'electric',speed:350,seats:404,price:33,lead:34,year:2022,energy:.66,desc:'El más rápido del catálogo. Solo sale de las vías de ancho estándar, como algunos ministros de su despacho.'},
- {id:'s106f',name:'S106 · AVE Avril',family:'AVE',maker:'Talgo',gauge:'uic',power:'electric',speed:330,seats:521,price:29,lead:36,year:2024,energy:.58,desc:'Mucho tren por poco dinero, si llega. Ancho estándar fijo.'},
- {id:'av2030',name:'AV 2030 · Nueva generación',family:'AVE',maker:'Licitación de Renfe',gauge:'uic',power:'electric',speed:350,seats:540,price:36,lead:42,year:2026,energy:.48,desc:'La flota del futuro. Promete, que ya es más de lo que hacen muchos.'},
- {id:'s120',name:'S120 · Alvia',family:'Alvia',maker:'CAF',gauge:'variable',power:'electric',speed:250,seats:238,price:18,lead:26,year:2022,energy:.6,desc:'Ancho variable y catenaria obligatoria. Pasa por los cambiadores sin despeinarse.'},
- {id:'s130',name:'S130 · Alvia «Patito»',family:'Alvia',maker:'Talgo',gauge:'variable',power:'electric',speed:250,seats:299,price:21,lead:28,year:2022,energy:.62,desc:'Ancho variable y doble tensión. Necesita catenaria todo el camino.'},
- {id:'s730',name:'S730 · Alvia híbrido',family:'Alvia',maker:'Talgo',gauge:'variable',power:'hybrid',speed:250,seats:265,price:24,lead:30,year:2022,energy:.8,desc:'Lleva su propia central diésel: va donde no llega la catenaria, aunque sin prisas.'},
- {id:'s106v',name:'S106 · Avril variable',family:'Alvia',maker:'Talgo',gauge:'variable',power:'electric',speed:330,seats:507,price:31,lead:38,year:2024,energy:.6,desc:'Velocidad de AVE y bogies de Alvia: cambia de ancho y no pide perdón.'},
+ {id:'s100',name:'S100 · AVE',family:'AVE',maker:'Malstom',gauge:'uic',power:'electric',speed:300,seats:329,price:16,lead:30,year:2099,energy:.78,desc:'El abuelo de la familia: llegó en 1992 y todavía se cree joven.'},
+ {id:'s112',name:'S112 · AVE «Pato»',family:'AVE',maker:'Tardo',gauge:'uic',power:'electric',speed:330,seats:365,price:25,lead:30,year:2022,energy:.62,desc:'El morro de pato más famoso de la Meseta. Rápido, cómodo y fotogénico de perfil.'},
+ {id:'s103',name:'S103 · AVE Velaro',family:'AVE',maker:'Schlimmens',gauge:'uic',power:'electric',speed:350,seats:404,price:33,lead:34,year:2022,energy:.66,desc:'El más rápido del catálogo. Solo sale de las vías de ancho estándar, como algunos ministros de su despacho.'},
+ {id:'s106f',name:'S106 · AVE Avril',family:'AVE',maker:'Tardo',gauge:'uic',power:'electric',speed:330,seats:521,price:29,lead:36,year:2024,energy:.58,desc:'Mucho tren por poco dinero, si llega. Ancho estándar fijo.'},
+ {id:'av2030',name:'AV 2030 · Nueva generación',family:'AVE',maker:'Tenfe',gauge:'uic',power:'electric',speed:350,seats:540,price:36,lead:42,year:2026,energy:.48,desc:'La flota del futuro. Promete, que ya es más de lo que hacen muchos.'},
+ {id:'s120',name:'S120 · Alvia',family:'Alvia',maker:'KAFKA',gauge:'variable',power:'electric',speed:250,seats:238,price:18,lead:26,year:2022,energy:.6,desc:'Ancho variable y catenaria obligatoria. Pasa por los cambiadores sin despeinarse.'},
+ {id:'s130',name:'S130 · Alvia «Patito»',family:'Alvia',maker:'Tardo',gauge:'variable',power:'electric',speed:250,seats:299,price:21,lead:28,year:2022,energy:.62,desc:'Ancho variable y doble tensión. Necesita catenaria todo el camino.'},
+ {id:'s730',name:'S730 · Alvia híbrido',family:'Alvia',maker:'Tardo',gauge:'variable',power:'hybrid',speed:250,seats:265,price:24,lead:30,year:2022,energy:.8,desc:'Lleva su propia central diésel: va donde no llega la catenaria, aunque sin prisas.'},
+ {id:'s106v',name:'S106 · Avril variable',family:'Alvia',maker:'Tardo',gauge:'variable',power:'electric',speed:330,seats:507,price:31,lead:38,year:2024,energy:.6,desc:'Velocidad de AVE y bogies de Alvia: cambia de ancho y no pide perdón.'},
 ];
 export const MODEL=Object.fromEntries(MODELS.map(m=>[m.id,m]));
 export const HISTORICAL_ORDERS = [

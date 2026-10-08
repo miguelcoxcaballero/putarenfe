@@ -15,8 +15,10 @@ const dist = path.join(root, 'dist');
 if (Object.keys(DIALOGUES).length !== DIALOGUE_CATALOGUE.length || DIALOGUE_CATALOGUE.some(item => typeof DIALOGUES[item.id] !== 'string' || !DIALOGUES[item.id])) {
   throw Error('La entrega necesita una toma completa para cada diálogo. No se ha modificado el HTML anterior.');
 }
-const order = ['assets/geography.js', 'assets/railways.js', 'assets/timetable.js', 'assets/infra.js', 'data.js', 'story.js', 'schedule.js', 'infra.js', 'network.js',
+const baselineOrder = ['assets/geography.js', 'assets/railways.js', 'assets/timetable.js', 'assets/infra.js', 'data.js', 'story.js', 'schedule.js', 'infra.js', 'network.js',
   'induction.js', 'induction-runtime.js', 'encounters.js', 'tycoon.js', 'engine.js', 'operations.js', 'map-v3.js', 'train-art.js', 'train3d.js', 'city-art.js', 'assets/samples-index.js', 'music.js', 'assets/voices.js', 'assets/voice-dialogues.js', 'voice.js', 'dialogue-presentation.js', 'sfx.js', 'assets/portraits.js', 'faces.js', 'tycoon-ui.js', 'main-menu.js', 'induction-task-ui.js', 'app.js'];
+const optionalBefore = {'data.js': ['brands.js'], 'tycoon.js': ['marketplace.js'], 'train3d.js': ['assets/train-photos.js']};
+const order = baselineOrder.flatMap(file => [...(optionalBefore[file] || []).filter(extra => fs.existsSync(path.join(dist, extra))), file]);
 
 function bundle(file) {
   // Con el reparto completo, evita incrustar también las antiguas tomas por frase.
@@ -36,12 +38,13 @@ let code = 'const __m = {};\n' + order.map(bundle).join('\n');
 new Function(code); // validación sintáctica
 let html = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 let css = fs.readFileSync(path.join(dist, 'style-v3.css'), 'utf8') + '\n' + fs.readFileSync(path.join(dist, 'main-menu.css'), 'utf8') + '\n' + fs.readFileSync(path.join(dist, 'induction.css'), 'utf8');
-const mime = {png: 'image/png', jpg: 'image/jpeg', woff2: 'font/woff2'};
+if (fs.existsSync(path.join(dist, 'marketplace.css'))) css += '\n' + fs.readFileSync(path.join(dist, 'marketplace.css'), 'utf8');
+const mime = {png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', svg: 'image/svg+xml', woff2: 'font/woff2'};
 css = css.replace(/url\('assets\/([^']+)'\)/g, (_, asset) => {
   const data = fs.readFileSync(path.join(dist, 'assets', asset)).toString('base64');
   return `url('data:${mime[asset.split('.').pop()]};base64,${data}')`;
 });
-html = html.replace('<link rel="stylesheet" href="main-menu.css">', '').replace('<link rel="stylesheet" href="induction.css">', '').replace('<link rel="stylesheet" href="style-v3.css">', () => '<style>' + css + '</style>')
+html = html.replace('<link rel="stylesheet" href="main-menu.css">', '').replace('<link rel="stylesheet" href="induction.css">', '').replace('<link rel="stylesheet" href="marketplace.css">', '').replace('<link rel="stylesheet" href="style-v3.css">', () => '<style>' + css + '</style>')
   .replace('<script src="assets/three.min.js"></script>', () => '<script>' + fs.readFileSync(path.join(dist, 'assets/three.min.js'), 'utf8').replaceAll('</script', '<\\/script') + '</script>')
   .replace('<script type="module" src="app.js"></script>', () => '<script>\n(() => {\n' + code.replaceAll('</script', '<\\/script') + '\n})();\n</script>')
   .replace('</body>', () => '<script type="text/plain" id="geodata-license">' + fs.readFileSync(path.join(root, 'LICENSE-GEODATA.txt'), 'utf8').replaceAll('</script', '<\\/script') + '</script></body>');

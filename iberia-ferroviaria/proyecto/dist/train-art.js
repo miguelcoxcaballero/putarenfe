@@ -56,7 +56,7 @@ let uid = 0;
 export function artKey(x) {
   const s = String(x ?? '');
   if (MODEL_SERIES[s]) return MODEL_SERIES[s];
-  if (/avlo/i.test(s)) return '106avlo';
+  if (/avlo|avarato/i.test(s)) return '106avlo';
   if (/caf_am_dual/.test(s)) return '2700';
   if (/caf_am/.test(s)) return '401';
   if (/trenhotel|334/i.test(s)) return '334';

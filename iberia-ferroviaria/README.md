@@ -1,25 +1,25 @@
-# Iberia Ferroviaria · avance 3.6.3
+# Iberia Ferroviaria · Trenespop
 
-En este checkout está preparado el avance de **301 de las 412 grabaciones completas**, las 50 intervenciones y respuestas de la guía y 32 diálogos de Paco con la referencia real de Torrente. Los 412 textos están presentes; los diálogos todavía sin grabación conservan subtítulos y decisiones. Su publicación y comprobación HTTPS siguen pendientes. La versión pública verificada conserva todavía 261 grabaciones y 28 diálogos de Paco. La producción y la verificación final siguen en curso.
+La siguiente versión está preparada con **Trenespop**, la tienda de trenes nuevos y usados: busca anuncios, filtra por fabricante y plazo de entrega, guarda favoritos y revisa tus compras. Las unidades usadas conservan su antigüedad y estado; los pedidos con envío descuentan una señal y cobran el resto cuando llegan.
 
-- **Jugar en el navegador:** [Iberia Ferroviaria](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/).
-- **Escuchar diálogos sin el juego:** [Auditorio de voces](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html).
-- **Fuente editable y continuidad:** [proyecto](./proyecto/) y [docs/README.md](./docs/README.md).
+El catálogo muestra **25 fotos generadas por IA** en un mismo taller, con las marcas parodia Tardo, KAFKA, Schlimmens, Dörfler, BCBB y Malstom. Las operadoras se llaman Tenfe, OuiOui y YaIré. AVArato tiene su propio logo y su rotulación en la foto del tren. Algunas variantes usan la foto de una familia afín; los [créditos de las referencias](./docs/train-photo-credits.md) detallan las series representadas.
 
-La primera publicación de 261 voces se verificó desde el commit `b1bce7e339cdd78f9b48d947de6b2ab590871279`: Pages terminó su construcción y las 273 rutas comprobadas, incluidos los 261 MP3, devolvieron HTTP 200 y los SHA esperados. La [prueba HTTPS histórica](./docs/pages-261-https-proof.json) registra ese alcance; no certifica el avance preparado de 301 ni es una prueba nativa de navegador.
+- **Jugar:** [Iberia Ferroviaria](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/?v=trenespop339).
+- **Escuchar sin el juego:** [Auditorio de voces](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html?v=trenespop339).
+- **Fuente editable y pruebas:** [proyecto](./proyecto/) y [docs/README.md](./docs/README.md).
 
-Cada intervención con audio utiliza una toma completa y continua. La versión web carga los MP3 actuales; no encadena los antiguos fragmentos ni sustituye una grabación ausente por síntesis del navegador. Las comprobaciones parciales anteriores tienen su propio alcance: todavía no consta la prueba nativa completa de este avance ni el cierre de las 412 voces. No se afirma aprobación de naturalidad o parecido de todo el reparto.
+Esta entrega contiene **339 de las 412 grabaciones completas**, los 50 audios de la guía y 36 diálogos de Paco con la referencia real de Torrente. Los 73 cuerpos que faltan por grabar conservan texto y decisiones. El juego y el auditorio comparten las mismas tomas completas; no encadenan los antiguos fragmentos ni sustituyen audios ausentes por síntesis del navegador. La producción y la revisión final de las 412 voces siguen en curso.
 
-El progreso se guarda en el navegador mediante `localStorage`. El guardado pertenece a ese navegador y origen; otro dispositivo, navegador o dirección local tiene su propio guardado.
+**Publicación de Trenespop pendiente de comprobación HTTPS.** La versión pública comprobada anterior contiene 301 voces: su [prueba HTTPS](./docs/pages-301-https-proof.json) acredita 315 rutas con HTTP 200 y SHA coincidentes. La [prueba nativa de Trenespop](./docs/trenespop-native-339-proof.json) comprobó filtros, favoritos, compras reales, señales, entregas y guardados en escritorio y móvil sobre la construcción con 17 fotos; no certifica la reproducción de las 412 voces ni una aprobación humana de su naturalidad.
 
-El constructor web utiliza la fuente editable de `proyecto/dist`. Desde `proyecto`, `npm run web:build` reconstruye la web con el manifiesto congelado aceptado; no genera voces.
+El progreso se guarda mediante el `localStorage` de tu navegador y origen. Otro dispositivo, navegador o dirección local tiene su propio guardado.
 
-Para servir esta carpeta en tu equipo, ejecuta desde la raíz del repositorio `putarenfe`:
+Para probar esta carpeta localmente, ejecuta desde la raíz de `putarenfe`:
 
 ```sh
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Abre <http://localhost:8080/iberia-ferroviaria/> para jugar o <http://localhost:8080/iberia-ferroviaria/dialogos.html> para escuchar. El servidor debe mantenerse abierto mientras uses la web.
+Abre <http://localhost:8080/iberia-ferroviaria/> o <http://localhost:8080/iberia-ferroviaria/dialogos.html>. Desde `proyecto`, `npm run web:build` reconstruye la web con el manifiesto congelado aceptado; no genera voces. El contenido de cada entrega queda identificado en [release.json](./release.json), y el procedimiento está en [docs/PUBLICACION.md](./docs/PUBLICACION.md).
 
-Iberia Ferroviaria ocupa esta carpeta propia. La aplicación de Renfe continúa en la raíz del repositorio. Las próximas versiones conservan las mismas direcciones; [release.json](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/release.json) identifica su cobertura y archivos. Procedimiento de actualización: [docs/PUBLICACION.md](./docs/PUBLICACION.md).
+Iberia Ferroviaria ocupa esta carpeta propia; la aplicación de Renfe continúa en la raíz del repositorio.

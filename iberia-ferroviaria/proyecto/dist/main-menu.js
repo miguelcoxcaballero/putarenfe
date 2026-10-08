@@ -1,6 +1,7 @@
 import {CHARACTERS, CHAPTERS} from './story.js';
 import {faceURL} from './faces.js';
 import {effectiveMonth} from './engine.js';
+import {brandLogo} from './brands.js';
 
 // La portada vive dentro del diálogo principal. Todas las acciones las resuelve app.js.
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -30,13 +31,13 @@ export function menuHTML(saved = null, savedError = '') {
   return `<main class="main-menu" aria-labelledby="menu-title">
     <div class="main-menu-art" role="img" aria-label="Un tren de alta velocidad entra en una estación española al amanecer, entre viaductos y colinas."></div>
     <div class="main-menu-grain" aria-hidden="true"></div>
-    <header class="menu-masthead"><span class="menu-railmark" aria-hidden="true">${icon('train')}</span><span>Gestión ferroviaria <i>·</i> España, 2022–2050</span><span class="menu-edition">AVE · ALVIA · POLÍTICA</span></header>
+    <header class="menu-masthead"><span style="display:inline-flex;align-items:center;flex:none;width:84px;height:28px;">${brandLogo('Tenfe',{variant:'white'})}</span><span>Gestión ferroviaria <i>·</i> España, 2022–2050</span><span class="menu-edition">AVE · ALVIA · POLÍTICA</span></header>
     <div class="menu-body">
       <section class="menu-world">
         <div class="menu-eyebrow"><span aria-hidden="true"></span>Tu próximo gran marrón</div>
         <h1 id="menu-title">Iberia<br><em>Ferroviaria</em></h1>
         <p class="menu-tagline">Todo un país. <br>Nueve egos. Tus vías.</p>
-        <p class="menu-premise">Dirige Renfe, levanta una red que funcione y pelea cada viajero. Los ministros quieren fotos. Los viajeros, llegar. Charo quiere la factura.</p>
+        <p class="menu-premise">Dirige Tenfe, levanta una red que funcione y pelea cada viajero. Los ministros quieren fotos. Los viajeros, llegar. Charo quiere la factura.</p>
         <div class="menu-journey" aria-label="Lo que harás en el juego"><span>Programa trenes</span><b aria-hidden="true">→</b><span>Construye tu red</span><b aria-hidden="true">→</b><span>Sobrevive al despacho</span></div>
       </section>
       <section class="menu-departures" aria-labelledby="menu-departures-title">

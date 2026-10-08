@@ -1,10 +1,12 @@
 # Publicación en GitHub Pages
 
-El juego permanece en <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/> y el auditorio en <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html>. Pages está configurado con el sistema de publicación por rama: `main`, carpeta raíz `/`. El archivo `.nojekyll` de la raíz permite servir los archivos estáticos directamente. Iberia Ferroviaria ocupa `iberia-ferroviaria/`; la aplicación de Renfe continúa en la raíz.
+El juego permanece en <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/> y el auditorio en <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html>. Pages publica desde `main`, carpeta raíz `/`. El archivo `.nojekyll` de la raíz permite servir archivos estáticos directamente. La aplicación de Renfe continúa en la raíz e Iberia Ferroviaria ocupa `iberia-ferroviaria/`.
 
-El primer avance publicado tiene **261/412 grabaciones**, guía completa de 50 audios y 28 diálogos de Paco con la referencia real de Torrente. Commit de esa publicación: `b1bce7e339cdd78f9b48d947de6b2ab590871279`. Su construcción de Pages terminó y [pages-261-https-proof.json](./pages-261-https-proof.json) conserva 273 respuestas HTTPS 200 con SHA coincidentes, incluidos los 261 MP3. Esta prueba es histórica y acredita entrega de archivos; no certifica reproducción nativa, naturalidad, parecido ni el catálogo completo de 412.
+La próxima versión incorpora Trenespop, 25 fotos generadas, logos parodia y AVArato, con **339/412 grabaciones completas**, 50 audios de la guía y 36 diálogos de Paco con la referencia real de Torrente. Quedan 73 cuerpos disponibles solo como texto. Su publicación y comprobación HTTPS están pendientes. La [prueba nativa](./trenespop-native-339-proof.json) acredita compras, entregas y guardados de la construcción con 17 fotos, anterior a esa ampliación; no certifica reproducción completa ni aprobación humana de las voces.
 
-Desde la raíz de `putarenfe`, el constructor actual permite añadir grabaciones a partir de un manifiesto y sus MP3 físicos congelados:
+La última entrega pública comprobada es la de 301 voces, commit `4b59b8e8e6594e6dc72a09313a8801f31168bf7c`. [pages-301-https-proof.json](./pages-301-https-proof.json) conserva las 315 respuestas HTTPS 200 con SHA coincidentes, incluidos sus 301 MP3. La prueba de [261 voces](./pages-261-https-proof.json) es histórica. Cada prueba acredita los archivos exactos que identifica.
+
+Desde la raíz de `putarenfe`, reconstruye a partir de un manifiesto y sus MP3 físicos congelados:
 
 ```sh
 node iberia-ferroviaria/tools/build-web.mjs \
@@ -12,14 +14,16 @@ node iberia-ferroviaria/tools/build-web.mjs \
   --audio-stage /ruta/al/snapshot
 ```
 
-El constructor usa las plantillas y metadatos conservados en `web-source`, comprueba el catálogo, las referencias y los SHA del audio, y escribe las páginas, assets y `release.json`. Los MP3 se cargan a petición y conservan sus bytes; no ejecuta TTS. Para incorporar también cambios del juego, hay que renovar las fuentes web desde una pareja verificada de HTML de juego y auditorio y su snapshot común; añadir MP3 no actualiza por sí solo esa fuente de interfaz. No uses el stage activo como una instantánea de publicación.
+El constructor extrae `proyecto/dist`, comprueba catálogo, referencias y SHA de audio, y escribe páginas, assets y `release.json`. Los argumentos del snapshot aceptado quedan guardados: desde `proyecto`, `npm run web:build` usa esos mismos inputs. Los MP3 se cargan a petición conservando sus bytes, y los assets de páginas antiguas se conservan para atender la caché. Usa un snapshot congelado como entrada de publicación. El constructor no genera voces ni descarga modelos.
 
-Después de revisar el resultado, desde la rama `main`:
+Después de revisar el resultado, publica el commit en `main`:
 
 ```sh
 git add -- iberia-ferroviaria .nojekyll
 git commit -m "Actualiza Iberia Ferroviaria"
-git push origin main
+git -c pack.threads=1 push origin HEAD:main
 ```
 
-Pages se reconstruye desde ese commit. Comprueba el estado de la construcción y descarga las páginas, `release.json` y sus archivos para contrastar HTTP y SHA. Las direcciones públicas se mantienen; el recuento y la procedencia de cada versión quedan en `release.json`. Conserva las pruebas anteriores con su versión y hash: no atribuyas una comprobación histórica al HTML nuevo. Una entrega completa requiere el cierre y la revisión de las 412 tomas y sus pruebas actuales antes de describirse como terminada.
+Pages se reconstruye desde ese commit. Comprueba el estado de la construcción y descarga por HTTPS las páginas, `release.json` y todos sus archivos para contrastar estado HTTP, bytes y SHA. Conserva una prueba fechada con el commit y recuento reales, y actualiza los enlaces con `?v=trenespop339` cuando la entrega esté verificada. Mantén las pruebas anteriores como historial.
+
+El contenido de cada entrega queda en `release.json`; una entrega completa exige cierre y revisión de las 412 tomas, junto con sus pruebas actuales, antes de describirse como terminada. [train-photo-credits.md](./train-photo-credits.md) documenta las imágenes y sus referencias.
