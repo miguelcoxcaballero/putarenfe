@@ -1,0 +1,272 @@
+{
+  "schema": 1,
+  "generation": "image_gen.imagegen",
+  "manufacturers": [
+    {
+      "name": "Tardo",
+      "id": "tardo",
+      "referenceURL": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Talgo_logo.svg",
+      "generatedPNG": {
+        "sha256": "93e969d76a5d98f114700d66d5e5a015a88a7b6d988877455f883bf55698a55a",
+        "bytes": 537468,
+        "width": 1578,
+        "height": 997,
+        "mode": "RGBA",
+        "alphaBBox": [
+          0,
+          14,
+          1578,
+          992
+        ],
+        "rgbaSHA256": "af564b0de46ae3ef421d2c4a8ebe440ee43082bed0d087ddc319d1e6b22341d5"
+      },
+      "processedAsset": {
+        "file": "assets/logos/tardo-ai.webp",
+        "sha256": "9ab8d04e1d81e4907452eebae41e8f9cd4dd4fa0fec46ad78ead5ce7eaa5a8b5",
+        "bytes": 312480
+      },
+      "processing": "lossless WebP encoding only; original dimensions and visible pixels unchanged; alpha bound controls SVG layout without modifying or cropping pixels",
+      "pixelProof": {
+        "dimensionsUnchanged": true,
+        "alphaUnchanged": true,
+        "visiblePixelsUnchanged": true
+      }
+    },
+    {
+      "name": "KAFKA",
+      "id": "kafka",
+      "referenceURL": "https://www.cafmobility.com/static-icons/caf-logo.svg",
+      "generatedPNG": {
+        "sha256": "3db6e2087d28c79f689e97aaf7df7ae2bfae81375187857e1db5fb6d1151eee6",
+        "bytes": 679395,
+        "width": 2120,
+        "height": 742,
+        "mode": "RGBA",
+        "alphaBBox": [
+          0,
+          35,
+          2116,
+          704
+        ],
+        "rgbaSHA256": "e47bc4f0e2e0ed60b9843522745930eba06e9feb26f1e4aff7020835180bdbcc"
+      },
+      "processedAsset": {
+        "file": "assets/logos/kafka-ai.webp",
+        "sha256": "519eb7ad52cd490d602d583b141c7e89263a50680f5e5b21a86a47f6d9b41e47",
+        "bytes": 329888
+      },
+      "processing": "lossless WebP encoding only; original dimensions and visible pixels unchanged; alpha bound controls SVG layout without modifying or cropping pixels",
+      "pixelProof": {
+        "dimensionsUnchanged": true,
+        "alphaUnchanged": true,
+        "visiblePixelsUnchanged": true
+      }
+    },
+    {
+      "name": "Schlimmens",
+      "id": "schlimmens",
+      "referenceURL": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg",
+      "generatedPNG": {
+        "sha256": "1d7f7c133545aeccdd0c17fbd3fe52cfa6059ab2f596e2fd5e4b2e27ebba3faf",
+        "bytes": 530108,
+        "width": 2170,
+        "height": 725,
+        "mode": "RGBA",
+        "alphaBBox": [
+          0,
+          25,
+          2170,
+          645
+        ],
+        "rgbaSHA256": "31dd9fb3b1cc752a10f98dce7456c034ed449020933e995d429fe7bd9208aa6c"
+      },
+      "processedAsset": {
+        "file": "assets/logos/schlimmens-ai.webp",
+        "sha256": "d916f9f03284b9ac20b51de724368c32ea0877d05e59857ae95f53246d8b9d87",
+        "bytes": 276466
+      },
+      "processing": "lossless WebP encoding only; original dimensions and visible pixels unchanged; alpha bound controls SVG layout without modifying or cropping pixels",
+      "pixelProof": {
+        "dimensionsUnchanged": true,
+        "alphaUnchanged": true,
+        "visiblePixelsUnchanged": true
+      }
+    },
+    {
+      "name": "Dörfler",
+      "id": "dorfler",
+      "referenceURL": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg",
+      "generatedPNG": {
+        "sha256": "5fec58f07127162cf9c0b125134e5de28aa3af9ce1fb1ed8ff13db1e0a2df22b",
+        "bytes": 607629,
+        "width": 2170,
+        "height": 725,
+        "mode": "RGBA",
+        "alphaBBox": [
+          0,
+          19,
+          2170,
+          676
+        ],
+        "rgbaSHA256": "273062d746a1898968ecbdf4e3b2228fe617cbc68761dc8018ecf4c858e826a3"
+      },
+      "processedAsset": {
+        "file": "assets/logos/dorfler-ai.webp",
+        "sha256": "036c1cbe529aca8aa62cf895a2cb5eafa10d0c5bd0bbf0fb653cfc3ebf22463f",
+        "bytes": 307270
+      },
+      "processing": "lossless WebP encoding only; original dimensions and visible pixels unchanged; alpha bound controls SVG layout without modifying or cropping pixels",
+      "pixelProof": {
+        "dimensionsUnchanged": true,
+        "alphaUnchanged": true,
+        "visiblePixelsUnchanged": true
+      }
+    },
+    {
+      "name": "BCBB",
+      "id": "bcbb",
+      "referenceURL": "https://www.crrcgc.cc/Portals/73/196.png",
+      "generatedPNG": {
+        "sha256": "698b01bce7d583cafa9d1b6f143fbf88d216bd793a1a9ba8c45a2eff5a6cab1b",
+        "bytes": 360109,
+        "width": 2169,
+        "height": 725,
+        "mode": "RGBA",
+        "alphaBBox": [
+          0,
+          61,
+          2114,
+          690
+        ],
+        "rgbaSHA256": "c9308998cfbea5c9a68da1f6ad9ef908d8e55c8fc1f91000a34ea3a7334587a4"
+      },
+      "processedAsset": {
+        "file": "assets/logos/bcbb-ai.webp",
+        "sha256": "ae51920e6164dde3cc1a7f5b950c8d83678a8a9225e301b2c5f2148166b62b10",
+        "bytes": 176726
+      },
+      "processing": "lossless WebP encoding only; original dimensions and visible pixels unchanged; alpha bound controls SVG layout without modifying or cropping pixels",
+      "pixelProof": {
+        "dimensionsUnchanged": true,
+        "alphaUnchanged": true,
+        "visiblePixelsUnchanged": true
+      }
+    },
+    {
+      "name": "Malstom",
+      "id": "malstom",
+      "referenceURL": "https://www.alstom.com/themes/custom/alstom/dist/assets/svg/icon-sprite.svg",
+      "generatedPNG": {
+        "sha256": "483cb385ee745372d6d25fbe3e959c43058c6e5cf37ed466c8e659ef3105c190",
+        "bytes": 476463,
+        "width": 2172,
+        "height": 724,
+        "mode": "RGBA",
+        "alphaBBox": [
+          14,
+          55,
+          2157,
+          700
+        ],
+        "rgbaSHA256": "a765bbf37158a91f7ace001a200a66a828775f9d36df7dffd446e9c7d3f3321a"
+      },
+      "processedAsset": {
+        "file": "assets/logos/malstom-ai.webp",
+        "sha256": "e149a255253e81dc58ba750dc8e55193685d26e9b8df88a4ba93c7ada8d04493",
+        "bytes": 259242
+      },
+      "processing": "lossless WebP encoding only; original dimensions and visible pixels unchanged; alpha bound controls SVG layout without modifying or cropping pixels",
+      "pixelProof": {
+        "dimensionsUnchanged": true,
+        "alphaUnchanged": true,
+        "visiblePixelsUnchanged": true
+      }
+    }
+  ],
+  "preservedOutlineIdentities": [
+    {
+      "file": "ouioui.svg",
+      "sha256": "4edd14d8f32fbe711b0239a56908ddf4dfe9b7024ac23efaa204f80302e420c2",
+      "bytes": 1659
+    },
+    {
+      "file": "ouioui-white.svg",
+      "sha256": "34122f23a6d17e968277aae2dca3b5b6c6d769b63c4d720db038154b87048097",
+      "bytes": 1659
+    },
+    {
+      "file": "ouioui-dark.svg",
+      "sha256": "175cdd047f2608fced31a0cf606248793b7c57305e381c2992bff4c0edbab263",
+      "bytes": 1659
+    },
+    {
+      "file": "yaire.svg",
+      "sha256": "1a30a94947c43058e81560e8f31f587a44884c76a07133b1be2e79ffb516a062",
+      "bytes": 1813
+    },
+    {
+      "file": "yaire-white.svg",
+      "sha256": "a1b4b3d088e5ec9a69c2ec65f0e058dd38fa8bdfec959d3bc942fe488138a3eb",
+      "bytes": 1813
+    },
+    {
+      "file": "yaire-dark.svg",
+      "sha256": "a5ba100be105e6f0bc051f81417bea06c8ebcee1c74ba53d6d85ecac5fcb391d",
+      "bytes": 1813
+    },
+    {
+      "file": "tenfe.svg",
+      "sha256": "0a01914795a514ffd21a30766a896270d8825377124451f7fc44dc8dad863115",
+      "bytes": 2021
+    },
+    {
+      "file": "tenfe-white.svg",
+      "sha256": "db48cfe17aad84440a286971f094a2637dc3e8c775ac91a85eb471c387054c00",
+      "bytes": 2021
+    },
+    {
+      "file": "tenfe-dark.svg",
+      "sha256": "0ccdea9f54566e0fb01603b4a062297abcf29b8d00261abf20c3af3cc7f09e2e",
+      "bytes": 2021
+    },
+    {
+      "file": "trenespop.svg",
+      "sha256": "0d05455f1451430412620ef196db3f759ee242b5f8edfb16669032f2c75a7605",
+      "bytes": 3456
+    },
+    {
+      "file": "trenespop-white.svg",
+      "sha256": "29ccf8c9b572c6bd66ebb9ba39b9c2c07d5f5eff78bf18c8d675f8bb17e94f65",
+      "bytes": 3456
+    },
+    {
+      "file": "trenespop-dark.svg",
+      "sha256": "f2eb7f02222eef950fb3d28d8633af721239191463da070e2cba2b59bd561e57",
+      "bytes": 3456
+    },
+    {
+      "file": "avarato.svg",
+      "sha256": "8f5c5100e4bfb407ec1e0d6d0b590489edc61ad480221aa70ff45c245502731d",
+      "bytes": 1960
+    },
+    {
+      "file": "avarato-white.svg",
+      "sha256": "f41409f71c95126cc4c4a89d07cd8469d085f50540da7f350f14614236a4114e",
+      "bytes": 1960
+    },
+    {
+      "file": "avarato-dark.svg",
+      "sha256": "bc62331b5da48f7e8863615c1adc3182f8b10b3774c6650d8588c5a220b24f41",
+      "bytes": 1960
+    }
+  ],
+  "filters": {
+    "color": "none",
+    "white": "brightness(0) invert(1)",
+    "dark": "brightness(0) opacity(.82)"
+  },
+  "sourceModuleSHA256": "ea76206b14f6238e16f9b5ba41f6b49fb6347c473e6f98843d1e2a4fd6aaff36",
+  "preparedModuleSHA256": "284f2d977890e60070e799ddeab1f3d58f69412f4fe74086e7878fb818fa083e",
+  "integrationStatus": "integrated",
+  "nativeBrowserVerification": false
+}

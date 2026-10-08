@@ -184,6 +184,7 @@ catalogue.audio=audio;catalogue.label=listeningLabel;
 const pacoCount=recordings.filter(row=>row.person==='mayor').length;
 const assets=[];
 const photoAssets=new Map();
+const manufacturerLogoAssets=new Map();
 function externalizeTrainPhotos(script){
   const marker='// ---- assets/train-photos.js\n';
   const start=script.indexOf(marker);if(start===-1)return script;
@@ -204,6 +205,27 @@ function externalizeTrainPhotos(script){
   });
   return script.slice(0,start)+module+script.slice(next);
 }
+function externalizeManufacturerLogos(script){
+  const marker='// ---- brands.js\n';
+  const start=script.indexOf(marker);if(start===-1)return script;
+  assert.equal(script.split(marker).length-1,1,'one brand module');
+  const next=script.indexOf('\n// ---- ',start+marker.length);
+  assert(next!==-1,'the brand module has its own bounded scope');
+  let converted=0;
+  const module=script.slice(start,next).replace(/data:image\/webp;base64,([A-Za-z0-9+/]+={0,2})/g,(data,encoded)=>{
+    const bytes=Buffer.from(encoded,'base64');
+    assert(bytes.length>0&&bytes.toString('base64')===encoded,'exact generated logo payload');
+    const digest=sha(bytes),url='assets/logos/logo-'+digest.slice(0,12)+'.webp';
+    if(!manufacturerLogoAssets.has(url)){
+      write(url,bytes);
+      const row={url,bytes:bytes.length,sha256:digest,kind:'generated-brand-logo'};
+      manufacturerLogoAssets.set(url,row);assets.push(row);
+    }
+    converted++;return url;
+  });
+  if(converted)assert.equal(manufacturerLogoAssets.size,6,'six independently generated manufacturer logos');
+  return script.slice(0,start)+module+script.slice(next);
+}
 function publishSource(entry,kind){
   let bytes=fs.readFileSync(path.join(source,entry.filename));
   if(kind==='game'&&bytes.includes(Buffer.from('__WEB_DIALOGUES__'))){
@@ -211,6 +233,7 @@ function publishSource(entry,kind){
     script=oneReplace(script,'__WEB_DIALOGUES__',JSON.stringify(dialogues),'one complete web recording map');
     script=oneReplace(script,'__WEB_PREVIEW_LABEL__',gameLabel,'one generated game label');
     script=externalizeTrainPhotos(script);
+    script=externalizeManufacturerLogos(script);
     new vm.Script(script,{filename:entry.filename});bytes=Buffer.from(script);
   }
   if(entry.filename.endsWith('.js'))new vm.Script(bytes.toString('utf8'),{filename:entry.filename});

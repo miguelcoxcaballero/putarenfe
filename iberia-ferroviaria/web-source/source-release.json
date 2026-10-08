@@ -75,8 +75,8 @@
     },
     {
       "file": "brands.js",
-      "bytes": 27664,
-      "sha256": "ea76206b14f6238e16f9b5ba41f6b49fb6347c473e6f98843d1e2a4fd6aaff36"
+      "bytes": 2231051,
+      "sha256": "284f2d977890e60070e799ddeab1f3d58f69412f4fe74086e7878fb818fa083e"
     },
     {
       "file": "data.js",
@@ -236,7 +236,7 @@
     {
       "file": "marketplace.css",
       "bytes": 14639,
-      "sha256": "fb9198acbb45f588d71498e156ac5249146f550491aed920a3965cd26d0324ec"
+      "sha256": "8f32a4fc703573d503eed0dcc38262be28db604f371b17ca5d7927799423f6d5"
     },
     {
       "file": "assets/fonts/fraunces.woff2",

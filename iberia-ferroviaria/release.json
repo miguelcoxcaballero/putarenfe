@@ -19,7 +19,7 @@
   "game": {
     "url": "index.html",
     "bytes": 38474,
-    "sha256": "48e84b6ee62eca15dcc28ba9614200f79809f6e9b9ae7d38a2fdfb21d114305a"
+    "sha256": "57b4e67d3986398d11f6d1c0a821ccb5520d63a1322f9a50f025e48a8358d2e4"
   },
   "listening": {
     "url": "dialogos.html",
@@ -198,14 +198,50 @@
       "kind": "generated-train-photo"
     },
     {
-      "url": "assets/game-script-4-20124302adf8.js",
-      "bytes": 11353396,
-      "sha256": "20124302adf81881f4f1abdcd47142bf7fbdfb77a3cfa5fdd0730826dfb36858"
+      "url": "assets/logos/logo-9ab8d04e1d81.webp",
+      "bytes": 312480,
+      "sha256": "9ab8d04e1d81e4907452eebae41e8f9cd4dd4fa0fec46ad78ead5ce7eaa5a8b5",
+      "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-style-0-d5f76bf36caa.css",
+      "url": "assets/logos/logo-519eb7ad52cd.webp",
+      "bytes": 329888,
+      "sha256": "519eb7ad52cd490d602d583b141c7e89263a50680f5e5b21a86a47f6d9b41e47",
+      "kind": "generated-brand-logo"
+    },
+    {
+      "url": "assets/logos/logo-d916f9f03284.webp",
+      "bytes": 276466,
+      "sha256": "d916f9f03284b9ac20b51de724368c32ea0877d05e59857ae95f53246d8b9d87",
+      "kind": "generated-brand-logo"
+    },
+    {
+      "url": "assets/logos/logo-036c1cbe529a.webp",
+      "bytes": 307270,
+      "sha256": "036c1cbe529aca8aa62cf895a2cb5eafa10d0c5bd0bbf0fb653cfc3ebf22463f",
+      "kind": "generated-brand-logo"
+    },
+    {
+      "url": "assets/logos/logo-ae51920e6164.webp",
+      "bytes": 176726,
+      "sha256": "ae51920e6164dde3cc1a7f5b950c8d83678a8a9225e301b2c5f2148166b62b10",
+      "kind": "generated-brand-logo"
+    },
+    {
+      "url": "assets/logos/logo-e149a255253e.webp",
+      "bytes": 259242,
+      "sha256": "e149a255253e81dc58ba750dc8e55193685d26e9b8df88a4ba93c7ada8d04493",
+      "kind": "generated-brand-logo"
+    },
+    {
+      "url": "assets/game-script-4-c961b4834c8b.js",
+      "bytes": 11340751,
+      "sha256": "c961b4834c8ba6f1b817dc4143e77f12fc6cb26fcf41cc889d88e453ee1c212b"
+    },
+    {
+      "url": "assets/game-style-0-4ea156c543a7.css",
       "bytes": 2018928,
-      "sha256": "d5f76bf36caa948e222594ae3ebba1f569548af97083568603095c205436ca27"
+      "sha256": "4ea156c543a77690e383966d3451c841a27b862199f3b7608856307a35673a48"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -3620,6 +3656,16 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-20124302adf8.js",
+      "bytes": 11353396,
+      "sha256": "20124302adf81881f4f1abdcd47142bf7fbdfb77a3cfa5fdd0730826dfb36858"
+    },
+    {
+      "url": "assets/game-style-0-d5f76bf36caa.css",
+      "bytes": 2018928,
+      "sha256": "d5f76bf36caa948e222594ae3ebba1f569548af97083568603095c205436ca27"
+    },
     {
       "url": "assets/game-script-4-f8efa465802a.js",
       "bytes": 11350127,
