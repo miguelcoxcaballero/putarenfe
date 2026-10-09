@@ -225,18 +225,18 @@
     },
     {
       "file": "rescate.js",
-      "bytes": 96458,
-      "sha256": "85deec3c2f59d5325796b721b01ecb373b1768297fe0677aa925d2c908a6bb2b"
+      "bytes": 98162,
+      "sha256": "5465a01dc11dea9c263793f3f080765ace7e743d0adc7628b400489eac72af52"
     },
     {
       "file": "rescate-map.js",
-      "bytes": 13699,
-      "sha256": "3518f0d477a1ce6f4016bb96bdb9107eacad79af11ec5ee93585486129a11b68"
+      "bytes": 15399,
+      "sha256": "8c447e72ccf3e87b8c1f057db89d88ec70a8a14a49eb133586f879d07fec97c9"
     },
     {
       "file": "rescate-ui.js",
-      "bytes": 64694,
-      "sha256": "6f521740f440fc03f3e3b198b8dfe5786e6e4c3b8d017688bd7a2e0a6e1d745f"
+      "bytes": 64756,
+      "sha256": "5b3de5863ad6419c27cfb27069f3cfab93e97f70b1344c21b35e7e017611e339"
     },
     {
       "file": "app.js",

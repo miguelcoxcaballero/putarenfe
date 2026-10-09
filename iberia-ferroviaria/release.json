@@ -19,7 +19,7 @@
   "game": {
     "url": "index.html",
     "bytes": 38474,
-    "sha256": "b84cda1904e9fec7e3d77cd405b4b0032a2eb18b83fbd6a029487c3095d289cf"
+    "sha256": "764cdd8d83d1836cc5aff055da2019c678ddc967369b02119409595bbcc6e1e9"
   },
   "listening": {
     "url": "dialogos.html",
@@ -27,11 +27,389 @@
     "sha256": "a8829c04594266de630e656266450a22b8bb49c83481d4ee62e775f7c1ebb2ba"
   },
   "rescue": {
-    "photos": 0,
+    "photos": 63,
     "recordedDialogues": 3,
     "expectedDialogues": 70
   },
   "assets": [
+    {
+      "url": "assets/rescate/cloacas.webp",
+      "bytes": 98868,
+      "sha256": "01b4da8136cbfb82d02398153f4ead3b8b964558b36f51b5b6be9245b561b087",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/elecciones.webp",
+      "bytes": 82100,
+      "sha256": "45c6370d3ffe8f69e8c2940758df4b24277b12d6de30b4bd11d90d2200ab6f93",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/escandalo-charo.webp",
+      "bytes": 70000,
+      "sha256": "b6723307ec7993c83bf62ae0aa21de28263599fedb08f673b1c87c2e1d6daf11",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/escandalo-enchufe.webp",
+      "bytes": 62190,
+      "sha256": "3b6ce8314fc0a4e8f44be302ab2a6b1e7d58c5fabd52818e90e51b6b44e30999",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/escandalo-juez.webp",
+      "bytes": 45048,
+      "sha256": "cbb3e4e28c22e4813c32a52a4eaf70dfd16eac23eee0739253dd0061c5c29e92",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/escandalo-mariscada.webp",
+      "bytes": 152974,
+      "sha256": "8a2353beb70d52d32f247534272e3072b5fc7540ad058bc7ae81c4a51c4b03ff",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/escandalo-sobres.webp",
+      "bytes": 89410,
+      "sha256": "2a99d2a06afd6cebdf8124b6df035098b85d32ffc02a21b1b181bb5df8774d95",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/escandalo-traviesas.webp",
+      "bytes": 234632,
+      "sha256": "72570c7890cd8c68e924c897f03230ef567a254cbc0b7546e5e34bd4fa297fb1",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/escandalo-yate.webp",
+      "bytes": 143854,
+      "sha256": "f8bcb621a7334e18ce7422cccd120e30240d965c76b5a0507de7167ae291f3cb",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/etapa-s1.webp",
+      "bytes": 108526,
+      "sha256": "2fa4361671032c067bd0e863e1b20fbd099e7c53e264528453d7a6a889268886",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/etapa-s2.webp",
+      "bytes": 176606,
+      "sha256": "5926bf9fb8ec50a9c3934586db6abbf55afd2ca416bfedb33bea1565829f2f04",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/etapa-s3.webp",
+      "bytes": 104474,
+      "sha256": "44f6b0b4c915aa751104492cad46e5ad8fbff18732e3bb88d1da7e97d1eae922",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/etapa-s4.webp",
+      "bytes": 139440,
+      "sha256": "fb25d54810df04cdbeb6ca6895cef181ddef03b4a87fc8a6971ea4feecd2c36c",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/etapa-s5.webp",
+      "bytes": 135272,
+      "sha256": "d72ff790af8f74e3272a8bfa1ab81f1bfc7c103c73dba68895e365c72c8dc193",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-auditoria.webp",
+      "bytes": 90282,
+      "sha256": "5fed526faae4409ea0d532119dfd3d5899989df3ca0cf5367c3d39c9dd604104",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-averia.webp",
+      "bytes": 110456,
+      "sha256": "efdb84778c94f3b3a3db89cecf14421e4fb06191803b551ac4307152ee16bdbe",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-cable.webp",
+      "bytes": 134662,
+      "sha256": "a657a349dc456777e9c7003369c7079c1dfc35fd13f540d13643c79d654365c4",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-calor.webp",
+      "bytes": 97628,
+      "sha256": "0b5e29b5b6784791513e99a142f20170dc657d916f213fd9060032e46a017494",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-desprendimiento.webp",
+      "bytes": 210210,
+      "sha256": "0a4ec4d0aebc12da7e833dd95a270c8689438d64364ba68a73da6da4d80c7ca5",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-fondos.webp",
+      "bytes": 121640,
+      "sha256": "938281b5367bda9ad1b2ac4c59f908e94da2824058fd7d1966f39935bcd099a6",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-huelga.webp",
+      "bytes": 138432,
+      "sha256": "17ca640d98c28fb9395e7fa84c5b6d3218b6b769c4c79fea844cc8fc014d04ae",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-lowgo.webp",
+      "bytes": 137324,
+      "sha256": "270e1114e99f0d9397de7f34c807b88914dbcf159b6faec9620315a1f2263cb2",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-nevada.webp",
+      "bytes": 171720,
+      "sha256": "10fbfae0f090cf0605cc5b895abc4fac5e9b70a9ee56958c0c8f586bfd6c32bf",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-tuneles.webp",
+      "bytes": 184446,
+      "sha256": "4e0e0c3083b0474dac28b4ae683dedb20339b945bb0251021f8516d6a43053ed",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-viral.webp",
+      "bytes": 92988,
+      "sha256": "f4394e8245077ea49dd3d5fdb5b8c8ab24198d1603573352ec346f595b9a126d",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/evento-visita.webp",
+      "bytes": 130526,
+      "sha256": "a39bd2aa25aba8ee865f313feb1d7ef695669bbf83fe969641d76fa09897e36f",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/extorsion.webp",
+      "bytes": 93660,
+      "sha256": "2dc3a58fa3c90c32b39914550990cd1908477c7c80f47c47003bdfef39d13527",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/fin-derrota.webp",
+      "bytes": 55414,
+      "sha256": "962cd93317f44a15bee003a435ee6baa472fc8841f9f125ccc2b632edb9572e9",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/fin-victoria.webp",
+      "bytes": 161754,
+      "sha256": "7673dc038a5ae8f097d6fabccb38f9ea3a7b522bcd974d7882232a0bc5dcb5b3",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/hito.webp",
+      "bytes": 101398,
+      "sha256": "e619f24e50e238bf8d47ffcf189162c66f10ccf293f966f98a1a1368e0868587",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/impago.webp",
+      "bytes": 99426,
+      "sha256": "2c506b302744217af1774bc87deee5409c85ba03a066e5fc73529c1cab95f340",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/juzgado.webp",
+      "bytes": 166716,
+      "sha256": "0b7b774d35e4d9a2193bc524071399ceae69e7653398ac37ebfcf46ae5679c79",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/mega-ctc.webp",
+      "bytes": 145692,
+      "sha256": "fabfe991963ad3c2ffc8ae93e40bc692b7ad4747821c8c77ac8dfe373fffadd6",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/mega-estacion.webp",
+      "bytes": 152478,
+      "sha256": "a29f0639d36816858d2bfe17135aa34bbcfdc9ce280c54a0517ee80ca115393c",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/mega-mediterraneo.webp",
+      "bytes": 213488,
+      "sha256": "05b7e0ab244ba6d8b7cfa4f299a8d33c7be80fde256c7ea08dc083f416450c8d",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/mega-monumento.webp",
+      "bytes": 164458,
+      "sha256": "9d96a547a291cd2ae071ebefda9d13e91cba600de9811e7c42d0582b411a7177",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/mega-taller.webp",
+      "bytes": 194992,
+      "sha256": "e01a7e7362ef3a4dd4a7d43bca4081d7c258f3002bc5107abaee5e769263c38f",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/mega-teruel.webp",
+      "bytes": 217770,
+      "sha256": "ab98c1165ab9329d95e718116174ee08082992f3187d8a8be8531bd2549e83b5",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/portada-rescate.webp",
+      "bytes": 207692,
+      "sha256": "886ce69d6184789561b70f7d70273665ca81ca82884c4e1a5e9d9a70c6547487",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-abogados.webp",
+      "bytes": 55762,
+      "sha256": "18996aa01b10d8e870e4a831458fb22cb8aeeeec7c49ecba4b5e89e4e4416208",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-abono.webp",
+      "bytes": 62498,
+      "sha256": "e7b0334df1b345fa37227bb789b541b7816a72258581f16455fc6c387f29e215",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-app.webp",
+      "bytes": 66272,
+      "sha256": "a286f6ba1622f271d9ed924aa98434f4ea7f4e7c8d8fd20b0d2346a8f5a4d932",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-bateadora.webp",
+      "bytes": 131430,
+      "sha256": "993aef11afc5291a9f1996d51ddb6796fe19d694a34e08fa217e1af6018e2882",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-bimodo.webp",
+      "bytes": 128800,
+      "sha256": "ab19b4d9155255157776eb8dc4fbbaf10be639d8cdd605c1223835fd6f7dcc65",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-cadenciados.webp",
+      "bytes": 132688,
+      "sha256": "52118179656b0743ca12c142cd5fb9d36ee2bdbe55877c3142ddf7baeef1b691",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-contabilidad.webp",
+      "bytes": 78098,
+      "sha256": "955931337b132d90fdfd12d6492e242c10159f1572bd3072cc0e96019790abc0",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-contrato.webp",
+      "bytes": 91964,
+      "sha256": "159ffa0510345cf9220227705b0be9fde0d6c2fde128287f350fe42199c41444",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-destructora.webp",
+      "bytes": 76118,
+      "sha256": "a68d813af22b594f316e4b0d4b37f1e4a2bfb8e35a60506bf6de0933a9898b10",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-dinamico.webp",
+      "bytes": 46026,
+      "sha256": "620c84b1574cd99ae2a2f88ab1fcf9f24720c2138faf48b422fb675e4ec14149",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-ertms.webp",
+      "bytes": 74246,
+      "sha256": "59364aa81a6cb5f6a35087de90c079cb5fc805e22f1243e7fe498c908f521983",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-inauguraciones.webp",
+      "bytes": 90850,
+      "sha256": "af2570784891d4ce5f523aab61f063f19db2820af2590cfc425ba401ec5d999f",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-influencers.webp",
+      "bytes": 65642,
+      "sha256": "956c504be4ee10e0c4401a8abf6c9145fd46ac550a3570d82ea9db57cc6dd90c",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-predictivo.webp",
+      "bytes": 101494,
+      "sha256": "ef4cd0e8fbf82ee1cd33421cf4bc4cf85c88515489ccae297116cff76dd80d31",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-prensa.webp",
+      "bytes": 56918,
+      "sha256": "17bccf6321e38721a290cee314cd440ae12736141ce9be6c6febb262c8419c6e",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-regulacion.webp",
+      "bytes": 112118,
+      "sha256": "4da4536ed88606a409702152d2db23f8fd49fa5531decaa9791f4034811e3169",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-segunda.webp",
+      "bytes": 127166,
+      "sha256": "358f29b55d1cc53f6dd850b12e289e6a47904dd94b00325756e5a0f644346365",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tech-ultrasonidos.webp",
+      "bytes": 106296,
+      "sha256": "bcf268a2933433f858fcb462526c1b2e4c5c21b8246d6787da062445d050b913",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/territorio-cantabria.webp",
+      "bytes": 262466,
+      "sha256": "f46117cc683c392acd33dda0282759441899d0ba9e40fc5cc9fe5789eadd8d4c",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/territorio-extremadura.webp",
+      "bytes": 160148,
+      "sha256": "2ad7ed2c3cbce7f549bfa5d7bdbe8fde5f40ada4a9da0d7a4265fc7175c75f55",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/territorio-soria.webp",
+      "bytes": 149712,
+      "sha256": "7c300a8730d07d3842df5ec168092bfab57a77783b2eb3dda587b9c230ac3b1c",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/territorio-teruel.webp",
+      "bytes": 166052,
+      "sha256": "6262a25142da5508b51cdaee6eb03f3bd4bf84b2510c150d842bf2a2adf3a5fb",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tren-bcbb.webp",
+      "bytes": 179814,
+      "sha256": "aa23e089453170475652fcde47db494cf21a96172033f661672d5808f1b1ed25",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/tren-dorfler.webp",
+      "bytes": 193870,
+      "sha256": "7abf3fd93c6ec150f5d7ee4af8b9f28bf375b3c3c6c694bb63bc278d1ef77c56",
+      "kind": "rescue-photo"
+    },
     {
       "url": "assets/rescate-voces/manifest.json",
       "bytes": 2716,
@@ -263,9 +641,9 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-225ab9e80ba0.js",
-      "bytes": 11583734,
-      "sha256": "225ab9e80ba0a3dde011c59d2d823f15fea3970d00ce279f2ca990f0ae83ea7d"
+      "url": "assets/game-script-4-879e8f62afd0.js",
+      "bytes": 11587227,
+      "sha256": "879e8f62afd03ff735e291ab4533f1be34fca4a01fc7225eb9b7e1ee203a19b7"
     },
     {
       "url": "assets/game-style-0-4b25dae623c8.css",
@@ -4415,6 +4793,11 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-225ab9e80ba0.js",
+      "bytes": 11583734,
+      "sha256": "225ab9e80ba0a3dde011c59d2d823f15fea3970d00ce279f2ca990f0ae83ea7d"
+    },
     {
       "url": "assets/game-script-4-6e67aa416d73.js",
       "bytes": 11345036,
