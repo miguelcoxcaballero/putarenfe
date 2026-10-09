@@ -6,7 +6,9 @@
   "scripts": {
     "build": "node build.mjs",
     "web:build": "node ../tools/build-web.mjs",
-    "test": "node rescate-test.mjs && node test.mjs && node campaign-test.mjs",
+    "test": "node rescate-test.mjs && node red-test.mjs && node marketplace-test.mjs && node test.mjs && node campaign-test.mjs",
+    "red-test": "node red-test.mjs",
+    "red-ui": "node red-ui-test.mjs",
     "rescate-test": "node rescate-test.mjs",
     "rescate-ui": "node rescate-ui-test.mjs",
     "rescate-voices": "python3 tools/build_rescate_voices.py",

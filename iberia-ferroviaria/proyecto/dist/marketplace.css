@@ -61,6 +61,10 @@
 .tp-title:hover{color:#015354}
 .tp-spec{font-size:14px;line-height:20px;color:#5c7a89;margin:4px 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tp-delivery{display:flex;align-items:center;gap:5px;color:#015354;font-size:11px;white-space:nowrap;line-height:1.5}
+.tp-fit{font-size:12px;line-height:18px;font-weight:600;margin:-4px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tp-fit.ok{color:#087e6d}.tp-fit.no{color:#b23a2f}
+.tp-detail .tp-fit{font-size:13px;margin:-8px 0 16px;white-space:normal}
+.tp-route select{max-width:230px}
 .tp-delivery svg{width:17px;height:17px;flex:none;fill:none;stroke:#0aa58d;stroke-width:1.5;stroke-linejoin:round}
 .tp-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:4px;border-top:1px solid #f0f3f4;margin-top:10px;padding-top:8px;min-height:32px}
 .tp-card-bottom>span{min-width:0;font-size:10px;color:#85969c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

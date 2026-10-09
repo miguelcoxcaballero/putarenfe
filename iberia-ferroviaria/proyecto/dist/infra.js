@@ -1,5 +1,6 @@
-// Red de vías del juego: estado de cada tramo (ancho, catenaria, velocidad, construido), cambiadores de ancho,
-// obras históricas y enrutado de AVE (ancho estándar fijo) y Alvia (ancho variable, eléctrico o híbrido).
+// Red de vías del juego: estado de cada tramo (ancho, catenaria y su tensión, velocidad, construido), cambiadores de
+// ancho, obras históricas y enrutado de AVE (ancho estándar fijo) y Alvia (ancho variable, eléctrico o híbrido).
+// Un tren eléctrico solo entra en un tramo con una tensión que admita; el híbrido va con gasóleo donde no puede.
 import {INFRA} from './assets/infra.js';
 
 export const NODES = Object.fromEntries(INFRA.nodes.map(n => [n.id, n]));
@@ -10,6 +11,11 @@ export const GAUGE_LONG = {ib: 'Ancho ibérico · 1.668 mm', std: 'Ancho estánd
 export const ELEC_LABEL = {'25kv': '25 kV', '3kv': '3 kV', no: 'Sin catenaria'};
 export const ELEC_LONG = {'25kv': 'Electrificada a 25 kV', '3kv': 'Electrificada a 3 kV', no: 'Sin electrificar'};
 export const CHANGE_MINUTES = 12;
+/** Tensiones de catenaria y velocidad con gasóleo por defecto (material antiguo sin esos datos). */
+export const VOLTAGES = ['3kv', '25kv'];
+export const DIESEL_SPEED = 160;
+/** Revisión de la red: 2 añade la rampa de Pajares, Palencia — León y Córdoba — Sevilla convencionales. */
+export const NET_REVISION = 2;
 
 // Obras históricas (fecha real): título y texto del diario.
 export const HISTORY = {
@@ -62,7 +68,33 @@ export function initialInfra() {
     }
     t[d.id] = st;
   }
-  return {ver: 1, t, c: INFRA.nodes.filter(n => n.changer).map(n => n.id), h: [], custom: [], done: {elec: 0, conv: 0, changers: 0, lav: 0}};
+  return {ver: 1, rev: NET_REVISION, t, c: INFRA.nodes.filter(n => n.changer).map(n => n.id), h: [], custom: [], done: {elec: 0, conv: 0, changers: 0, lav: 0}};
+}
+
+// Velocidades corregidas en la revisión 2 con los tramos reales (segments.json): [antes, ahora].
+const SPEED_FIX_2 = {'vdb-pal': [160, 130], 'pal-san': [110, 120], 'pol-ovi': [110, 100], 'scq-pon': [180, 170], 'mad-gua': [140, 160], 'gua-trb': [140, 150],
+  'trb-sor': [110, 100], 'ter-sag': [160, 90], 'vlc-xat': [150, 140], 'alc-lin': [140, 130], 'lin-cor': [160, 150]};
+/**
+ * Pone al día la red de una partida guardada con una revisión anterior. Hasta la revisión 2, «leo-pol» era la rampa de
+ * Pajares hasta el 29-11-2023 y la variante después: si la variante aún no había abierto, su estado (y las obras en
+ * curso) pasan a la rampa y la variante queda por abrir en su fecha. Los tramos nuevos llegan con su estado inicial y
+ * las velocidades corregidas solo cambian si el jugador no las había tocado. Devuelve los tramos añadidos.
+ */
+export function migrateInfra(s) {
+  const n = s?.infra;
+  if (!n || !n.t || typeof n.t !== 'object' || !Array.isArray(n.h) || (n.rev || 1) >= NET_REVISION) return [];
+  const fresh = initialInfra().t, added = [];
+  if (!n.t['leo-pol-rampa'] && n.t['leo-pol'] && !n.h.includes('leo-pol@2023-11-29')) {
+    const old = n.t['leo-pol'];
+    n.t['leo-pol-rampa'] = {...old, v: old.v === 70 ? fresh['leo-pol-rampa'].v : old.v};
+    n.t['leo-pol'] = {...fresh['leo-pol']};
+    for (const p of Array.isArray(s.projects) ? s.projects : []) if (!p.done && p.type === 'tramo' && p.target === 'leo-pol') p.target = 'leo-pol-rampa';
+  }
+  for (const d of TRAMOS) if (!n.t[d.id]) { n.t[d.id] = {...fresh[d.id]}; added.push(d.id); }
+  for (const [id, [before, after]] of Object.entries(SPEED_FIX_2)) if (n.t[id]?.v === before) n.t[id].v = after;
+  n.rev = NET_REVISION;
+  if (Number.isInteger(n.ver)) n.ver++;
+  return added;
 }
 
 /** Tramos propios del jugador (líneas nuevas de alta velocidad), con geometría recta entre sus nodos. */
@@ -100,9 +132,14 @@ export function closedTramos(s) {
 }
 
 // ---------------------------------------------------------------- enrutado
-/** Perfil de circulación de un modelo de tren. */
-export function profileOf(m) { return {fixed: m.gauge === 'uic', electric: m.power === 'electric', speed: m.speed}; }
-export const PROFILES = {ave: {fixed: true, electric: true, speed: 300}, alvia: {fixed: false, electric: true, speed: 250}, hybrid: {fixed: false, electric: false, speed: 250}};
+/** Perfil de circulación de un modelo de tren: ancho, tracción, tensiones que admite y velocidad con gasóleo. */
+export function profileOf(m) {
+  const electric = m.power === 'electric';
+  return {fixed: m.gauge === 'uic', electric, speed: m.speed, volts: m.voltages || VOLTAGES, diesel: electric ? 0 : m.dieselSpeed || DIESEL_SPEED};
+}
+/** Lo mejor que existe de cada producto (para saber qué permite la vía): el AVE bitensión, el Alvia y el híbrido. */
+export const PROFILES = {ave: {fixed: true, electric: true, speed: 300, volts: VOLTAGES, diesel: 0}, alvia: {fixed: false, electric: true, speed: 250, volts: VOLTAGES, diesel: 0},
+  hybrid: {fixed: false, electric: false, speed: 250, volts: VOLTAGES, diesel: 180}, ave25: {fixed: true, electric: true, speed: 300, volts: ['25kv'], diesel: 0}};
 const MODES = ['std', 'ib'];
 
 function graph(s) {
@@ -126,10 +163,13 @@ function traverse(s, g, e, mode, prof, relaxed) {
   if (!st) return null;
   if (!st.b) { if (!relaxed) return null; faults.push({type: 'build', tramo: e.d.id}); }
   if (g.closedSet.has(e.d.id)) { if (!relaxed) return null; faults.push({type: 'closed', tramo: e.d.id}); }
-  if (prof.electric && st.e === 'no') { if (!relaxed) return null; faults.push({type: 'elec', tramo: e.d.id}); }
   const ok = st.g === 'mixto' || (mode === 'std' ? st.g === 'std' : st.g === 'ib');
   if (!ok) { if (!relaxed || !prof.fixed) return null; faults.push({type: 'gauge', tramo: e.d.id}); }
-  const top = Math.min(st.v, prof.speed, st.e === 'no' ? 160 : 999);
+  const volts = prof.volts || VOLTAGES, powered = st.e !== 'no' && volts.includes(st.e);
+  if (prof.electric && st.e === 'no') { if (!relaxed) return null; faults.push({type: 'elec', tramo: e.d.id}); }
+  else if (prof.electric && !powered) { if (!relaxed) return null; faults.push({type: 'tension', tramo: e.d.id, volts}); }
+  // sin catenaria (o con una tensión que no admite) el híbrido tira de gasóleo
+  const top = Math.min(st.v, prof.speed, powered ? 999 : prof.electric ? DIESEL_SPEED : prof.diesel || DIESEL_SPEED);
   const minutes = e.d.km / Math.max(40, top * .84) * 60;
   return {minutes, faults};
 }
@@ -181,7 +221,7 @@ function search(s, way, prof, relaxed) {
 
 /** ¿Puede circular este perfil por los nodos de paso? Devuelve recorrido, tiempo y, si no, qué falta. */
 export function plan(s, way, prof) {
-  const g = graph(s), ck = way.join(',') + '#' + (prof.fixed ? 'f' : 'v') + (prof.electric ? 'e' : 'h') + prof.speed;
+  const g = graph(s), ck = way.join(',') + '#' + (prof.fixed ? 'f' : 'v') + (prof.electric ? 'e' : 'h') + prof.speed + '|' + (prof.volts || VOLTAGES).join('/') + '|' + (prof.diesel || 0);
   if (g.cache.has(ck)) return g.cache.get(ck);
   let out = search(s, way, prof, false);
   // Un rodeo enorme para esquivar un tramo (catenaria, ancho) no es un servicio: cuenta como bloqueado.
@@ -218,13 +258,19 @@ function physicalKm(s, way) {
   return total;
 }
 
-/** Texto de una falta del recorrido. */
-export function faultText(s, f) {
+/** Fecha en que abre un tramo que llega con la historia (variante de Pajares, Burgos, Murcia), o null. */
+export function opensOn(d) {
+  const when = d?.hist?.find(([, ch]) => ch.built)?.[0];
+  return when ? new Date(when + 'T00:00:00Z').toLocaleDateString('es-ES', {day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'}) : null;
+}
+/** Texto de una falta del recorrido. short: solo el tramo y lo que tiene (para listas estrechas). */
+export function faultText(s, f, short = false) {
   const d = f.tramo ? tramoDef(s, f.tramo) : null, name = d ? d.name.replace(/^LAV /, '') : '';
   switch (f.type) {
-    case 'build': return `Falta construir ${d?.name || 'una línea'}`;
-    case 'closed': return `${name}: cortado por obras de cambio de ancho`;
+    case 'build': { const opens = opensOn(d); return opens ? `${name}: abre el ${opens}` : `Falta construir ${d?.name || 'una línea'}`; } // las que abre la historia dicen cuándo
+    case 'closed': return `${name}: cortado por obras${short ? '' : ' de cambio de ancho'}`;
     case 'elec': return `${name}: sin catenaria`;
+    case 'tension': { const e = ELEC_LABEL[s.infra.t[f.tramo]?.e] || 'otra tensión'; return short ? `${name}: ${e}` : `${name}: ${e}, este tren solo admite ${(f.volts || []).map(v => ELEC_LABEL[v]).join(' y ') || 'otra tensión'}`; }
     case 'gauge': return `${name}: ancho ${GAUGE_LABEL[s.infra.t[f.tramo]?.g]?.toLowerCase() || 'distinto'}`;
     case 'changer': return `Sin cambiador de ancho en ${NODES[f.node]?.name || f.node}`;
     case 'detour': return 'Solo podría ir dando un rodeo absurdo';

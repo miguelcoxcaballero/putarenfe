@@ -75,7 +75,7 @@ NODES = {
     'alc': ('Alcázar de S. Juan', -3.20574, 39.39563, 'city', {}),
     'mor': ('Moreda', -3.31052, 37.43122, 'junction', {}),
     'utr': ('Utrera', -5.79075, 37.18482, 'junction', {}),
-    'mot': ('Motilla', -2.7533, 40.0316, 'junction', {}),
+    'mot': ('Motilla', -1.95759, 39.60915, 'junction', {}),  # bifurcación de Motilla del Palancar (unión de las LAV 040 y 042 en OSM)
     'mnc': ('Monforte del Cid', -0.7398, 38.4027, 'junction', {}),
     'seg': ('Segovia', -4.09456, 40.91058, 'city', {}),
     'olm': ('Olmedo', -4.665, 41.29, 'junction', {}),
@@ -124,7 +124,10 @@ NODES = {
 # (a, b, clase, nombre, opciones). clase: 'lav' (alta velocidad) o 'conv' (convencional).
 # opciones: via (puntos de paso), pa/pb (puerto de la estación en cada extremo), plan (proyecto que lo construye:
 # el tramo no existe al empezar), hist (obras históricas: [(fecha, cambios)]), fix (corrige el estado de 2026),
-# start (estado al empezar la campaña si difiere del de 2026).
+# start (estado al empezar la campaña si difiere del de 2026), id (identificador fijo) y trace (perfil con el que se
+# traza sobre OSM si no es el de su clase) y avoid (vías OSM que no se usan, por nombre).
+# Las velocidades de fix que citan segments.json vienen de investigacion/modo-unico/datos/segments.json (tramos reales
+# comprobados): se corrigen las que difieren 10 km/h o más de la medida en OSM, salvo las que fija un hito con fecha.
 LAV, CONV = 'lav', 'conv'
 TRAMOS = [
     # Madrid–Barcelona–frontera francesa
@@ -170,8 +173,9 @@ TRAMOS = [
     ('vdb', 'pal', LAV, 'LAV Venta de Baños — Palencia', {}),
     ('pal', 'leo', LAV, 'LAV Palencia — León', {}),
     ('vdb', 'bur', LAV, 'LAV Venta de Baños — Burgos', {'start': {'built': False}, 'hist': [('2022-07-21', {'built': True, 'changer': True})]}),
-    ('leo', 'pol', CONV, 'León — Pola de Lena (Pajares)', {'fix': {'gauge': 'mixto'}, 'start': {'gauge': 'ib', 'elec': '3kv', 'speed': 70},
-                                                                'hist': [('2023-11-29', {'gauge': 'mixto', 'elec': '25kv', 'speed': 220, 'changer': True})]}),
+    # Pajares: la variante (alta velocidad, ancho mixto) abre el 29-11-2023; la rampa clásica sigue en servicio.
+    ('leo', 'pol', LAV, 'Variante de Pajares: León — Pola de Lena', {'id': 'leo-pol', 'trace': CONV, 'fix': {'gauge': 'mixto', 'elec': '25kv', 'speed': 220},
+                                                                'start': {'built': False}, 'hist': [('2023-11-29', {'built': True, 'changer': True})]}),
     # Convencional: Castilla y León
     ('mad', 'avi', CONV, 'Madrid — Ávila', {'pa': 'cham'}),
     ('avi', 'med', CONV, 'Ávila — Medina del Campo', {}),
@@ -179,9 +183,12 @@ TRAMOS = [
     ('med', 'sal', CONV, 'Medina del Campo — Salamanca', {}),
     ('avi', 'sal', CONV, 'Ávila — Salamanca', {'via': [(-5.0, 40.85)]}),
     ('vll', 'vdb', CONV, 'Valladolid — Venta de Baños', {}),
-    ('vdb', 'pal', CONV, 'Venta de Baños — Palencia', {}),
+    ('vdb', 'pal', CONV, 'Venta de Baños — Palencia', {'fix': {'speed': 130}}),  # segments.json
     ('vdb', 'bur', CONV, 'Venta de Baños — Burgos', {}),
-    ('pal', 'san', CONV, 'Palencia — Santander', {'via': [(-4.14095, 42.9945), (-4.04269, 43.32768)]}),
+    ('pal', 'san', CONV, 'Palencia — Santander', {'via': [(-4.14095, 42.9945), (-4.04269, 43.32768)], 'fix': {'speed': 120}}),  # segments.json
+    ('pal', 'leo', CONV, 'Palencia — León', {'via': [(-5.02702, 42.371895)], 'fix': {'speed': 155}}),  # por Sahagún; segments.json
+    ('leo', 'pol', CONV, 'León — Pola de Lena (Rampa de Pajares)', {'id': 'leo-pol-rampa', 'avoid': ('La Robla - Pola de Lena',),
+                                                                     'fix': {'gauge': 'ib', 'elec': '3kv', 'speed': 115}}),  # segments.json
     ('leo', 'ppf', CONV, 'León — Ponferrada', {}),
     # Convencional: norte
     ('bur', 'mir', CONV, 'Burgos — Miranda de Ebro', {}),
@@ -195,7 +202,7 @@ TRAMOS = [
     ('cst', 'zar', CONV, 'Castejón — Zaragoza', {}),
     ('cst', 'pam', CONV, 'Castejón — Pamplona', {}),
     ('pam', 'alt', CONV, 'Pamplona — Altsasu', {}),
-    ('pol', 'ovi', CONV, 'Pola de Lena — Oviedo', {}),
+    ('pol', 'ovi', CONV, 'Pola de Lena — Oviedo', {'fix': {'speed': 100}}),  # segments.json
     ('ovi', 'gij', CONV, 'Oviedo — Gijón', {}),
     ('ovi', 'avl', CONV, 'Oviedo — Avilés', {}),
     # Convencional: Galicia
@@ -207,19 +214,19 @@ TRAMOS = [
     ('bet', 'aco', CONV, 'Betanzos — A Coruña', {}),
     ('bet', 'fer', CONV, 'Betanzos — Ferrol', {}),
     ('aco', 'scq', CONV, 'Eje atlántico: A Coruña — Santiago', {}),
-    ('scq', 'pon', CONV, 'Eje atlántico: Santiago — Pontevedra', {}),
+    ('scq', 'pon', CONV, 'Eje atlántico: Santiago — Pontevedra', {'fix': {'speed': 170}}),  # segments.json
     ('pon', 'vig', CONV, 'Eje atlántico: Pontevedra — Vigo', {}),
     # Convencional: Aragón, Soria y Mediterráneo
-    ('mad', 'gua', CONV, 'Madrid — Guadalajara', {'pb': 'ciudad'}),
-    ('gua', 'trb', CONV, 'Guadalajara — Torralba', {'pa': 'ciudad'}),
-    ('trb', 'sor', CONV, 'Torralba — Soria', {}),
+    ('mad', 'gua', CONV, 'Madrid — Guadalajara', {'pb': 'ciudad', 'fix': {'speed': 160}}),  # segments.json
+    ('gua', 'trb', CONV, 'Guadalajara — Torralba', {'pa': 'ciudad', 'fix': {'speed': 150}}),  # segments.json
+    ('trb', 'sor', CONV, 'Torralba — Soria', {'fix': {'speed': 100}}),  # segments.json
     ('zar', 'ter', CONV, 'Zaragoza — Teruel', {}),
-    ('ter', 'sag', CONV, 'Teruel — Sagunt', {}),
+    ('ter', 'sag', CONV, 'Teruel — Sagunt', {'fix': {'speed': 90}}),  # segments.json
     ('sag', 'vlc', CONV, 'Sagunt — València', {'pb': 'nord', 'fix': {'gauge': 'mixto'}}),
     ('sag', 'cas', CONV, 'Sagunt — Castelló', {'fix': {'gauge': 'mixto'}}),
     ('cas', 'tar', CONV, 'Castelló — Tarragona', {'pb': 'ciutat', 'via': [(0.45573, 40.47168), (0.61431, 40.75356)]}),
     ('tar', 'bcn', CONV, 'Tarragona — Barcelona', {'pa': 'ciutat'}),
-    ('vlc', 'xat', CONV, 'València — Xàtiva', {'pa': 'nord', 'via': [(-0.41498, 39.36195)]}),
+    ('vlc', 'xat', CONV, 'València — Xàtiva', {'pa': 'nord', 'via': [(-0.41498, 39.36195)], 'fix': {'speed': 140}}),  # segments.json
     ('xat', 'enc', CONV, 'Xàtiva — La Encina', {}),
     ('enc', 'alb', CONV, 'La Encina — Albacete', {}),
     ('enc', 'ali', CONV, 'La Encina — Alicante', {}),
@@ -229,13 +236,14 @@ TRAMOS = [
     # Convencional: Madrid–Andalucía y Extremadura
     ('mad', 'alc', CONV, 'Madrid — Alcázar de San Juan', {'via': [(-3.61825, 40.03503)]}),
     ('alc', 'alb', CONV, 'Alcázar de San Juan — Albacete', {}),
-    ('alc', 'lin', CONV, 'Alcázar de San Juan — Linares', {'via': [(-3.37051, 39.00584)]}),
+    ('alc', 'lin', CONV, 'Alcázar de San Juan — Linares', {'via': [(-3.37051, 39.00584)], 'fix': {'speed': 130}}),  # segments.json
     ('lin', 'jae', CONV, 'Linares — Jaén', {}),
-    ('lin', 'cor', CONV, 'Linares — Córdoba', {}),
+    ('lin', 'cor', CONV, 'Linares — Córdoba', {'fix': {'speed': 150}}),  # segments.json
     ('lin', 'mor', CONV, 'Linares — Moreda', {}),
     ('mor', 'gra', CONV, 'Moreda — Granada', {}),
     ('mor', 'alm', CONV, 'Moreda — Almería', {'via': [(-3.12721, 37.31687), (-2.43, 36.88)]}),
     ('cor', 'ant', CONV, 'Córdoba — Bobadilla', {'pb': 'boba'}),
+    ('cor', 'sev', CONV, 'Córdoba — Sevilla', {'via': [(-5.299813, 37.713627), (-5.533174, 37.660732)], 'fix': {'speed': 155}}),  # por Palma y Lora del Río; segments.json
     ('ant', 'ron', CONV, 'Bobadilla — Ronda', {'pa': 'boba'}),
     ('ron', 'alg', CONV, 'Ronda — Algeciras', {}),
     ('sev', 'utr', CONV, 'Sevilla — Utrera', {}),
@@ -352,7 +360,7 @@ class Rail:
             pen = 1. if g in ('ib', 'mixto', '?') else 6. if g == 'std' else 12.
         return L / v * pen * (1. if use in ('main', 'branch', None) else 1.6)
 
-    def leg(self, a, b, prof):
+    def leg(self, a, b, prof, avoid=()):
         src, dst = self.near(*a, 2.5), {n: d for d, n in self.near(*b, 2.5)}
         if not src or not dst:
             return None
@@ -368,6 +376,8 @@ class Rail:
             if n in dst and c + dst[n] / 30. < best:
                 best, bn = c + dst[n] / 30., n
             for m, e in self.adj[n]:
+                if avoid and any(x in e[5] for x in avoid):
+                    continue
                 nc = c + self.cost(e, prof)
                 if nc < dist.get(m, 1e18):
                     dist[m] = nc
@@ -384,12 +394,12 @@ class Rail:
         return out[::-1]
 
 
-def trace(rail, pts, prof):
+def trace(rail, pts, prof, avoid=()):
     """Recorre los puntos de paso: camino OSM por tramos y, si falta continuidad, enlace recto marcado."""
     coords, measured, straight = [pts[0]], [], 0.0
     for a, b in zip(pts, pts[1:]):
         direct = hav(*a, *b)
-        path = rail.leg(a, b, prof) if direct > .05 else None
+        path = rail.leg(a, b, prof, avoid) if direct > .05 else None
         L = sum(e[0] for _, e in path if e) if path else 0
         if not path or L > direct * 1.7 + 6:
             coords.append(b)
@@ -431,8 +441,9 @@ def main():
         nodes_out.append({'id': nid, 'name': name, 'lon': round(lon, 5), 'lat': round(lat, 5), 'kind': kind,
                           **({'changer': changer} if changer else {}), **({'changerName': CHANGER_NAMES[nid]} if nid in CHANGER_NAMES else {})})
     for a, b, kind, name, o in TRAMOS:
-        base = f'{a}-{b}' + ('' if kind == CONV else '-av')
+        base = o.get('id') or f'{a}-{b}' + ('' if kind == CONV else '-av')
         used_ids[base] += 1
+        assert used_ids[base] == 1 or not o.get('id'), 'identificador repetido: ' + base
         tid = base if used_ids[base] == 1 else f'{base}{used_ids[base]}'
         pa = NODES[a][4].get(o.get('pa')) or NODES[a][1:3]
         pb = NODES[b][4].get(o.get('pb')) or NODES[b][1:3]
@@ -441,7 +452,7 @@ def main():
             coords, measured, straight = pts, [], length_km(pts)
             st = {'gauge': 'std', 'elec': '25kv', 'speed': 300 if kind == LAV else 160, 'mix': {}, 'elecMix': {}, 'names': []}
         else:
-            coords, measured, straight = trace(rail, pts, kind)
+            coords, measured, straight = trace(rail, pts, o.get('trace', kind), o.get('avoid', ()))
             st = summarise(measured)
         km = length_km(coords)
         speed = int(round(max(60, min(300, st['speed'] or 120)) / 10) * 10)

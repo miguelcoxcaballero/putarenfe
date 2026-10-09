@@ -242,7 +242,7 @@ export const ACTIONS = {
   train: 'pickTrain', station: 'pickStation', 'station-map': 'focus', 'station-timetable': 'timetable', 'tt-type': 'tab', 'tt-station': 'timetable',
   'real-trip': 'pickTrain', follow: '!toggle', layer: 'lever', 'visit-work': 'focus', 'close-service': '=closeService', upgrade: '=infra', 'fleet-tab': 'tab',
   'fleet-detail': '@open', refurbish: '=refurbish', sell: '=sell', purchase: '@open', 'confirm-buy': '=contract', tramo: 'pickRoute', node: 'pickStation', 'tramo-zoom': 'focus',
-  'market-listing': '@open', 'market-reset': 'page', 'market-family': 'tab', 'market-favorites': 'tab', 'market-favorite': 'tap',
+  'market-listing': '@open', 'market-reset': 'page', 'market-family': 'tab', 'market-favorites': 'tab', 'market-favorite': 'tap', 'market-route': 'nav',
   project: '@open', 'confirm-project': '=infra', 'new-line': '@open', 'confirm-line': '=infra', borrow: '=borrow', repay: '=repay', 'office-tab': 'tab',
   'works-tab': 'tab', work: '@open', 'confirm-work': '=infra',
   'save-dialog': '@open', help: '@open', 'save-now': 'punch', export: 'export', 'new-game': '@open',

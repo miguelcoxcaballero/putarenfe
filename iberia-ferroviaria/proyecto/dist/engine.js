@@ -80,7 +80,7 @@ export function configureRoute(s,id,fleetId,frequency,fare){
  const m=MODEL[f.model];frequency=Number(frequency);fare=Number(fare);
  if(!Number.isInteger(frequency)||frequency<1||frequency>maxFrequency(r)||!Number.isFinite(fare)||fare<1.5||fare>150)throw Error(`Entre 1 y ${maxFrequency(r)} salidas por sentido, y una tarifa de 1,5 a 150 €.`);
  const p=routeCheck(s,r,m);
- if(!p.ok)throw Error(`El ${m.family} no puede ir por ahí: ${I.faultText(s,p.faults[0]).toLowerCase()}.`);
+ if(!p.ok)throw Error(`El ${m.family} no puede ir por ahí. ${I.faultText(s,p.faults[0])}.`);
  if(f.condition<30)throw Error('Este tren está para el desguace. Mándalo al taller antes de sacarlo.');
  const units=requiredUnits(s,r,m,frequency);
  if(available(s,f,r.id)<units)throw Error(`Necesitas ${units} trenes y en ese lote solo quedan ${available(s,f,r.id)} libres.`);
@@ -263,8 +263,26 @@ function migrate(s){
  const known=new Set(s.routes.map(r=>r.id));
  for(const r of s.routes){const def=ROUTE_DEF[r.id];if(!def)continue;for(const k of ['real','baseFrequency','peak','minutes','products','stations','name','via','kind'])if(def[k]!==undefined)r[k]=def[k];}
  for(const def of ALL_ROUTES)if(!known.has(def.id))s.routes.push(copy(def));
+ // Red de la revisión 2: tramos nuevos, rampa de Pajares aparte y velocidades reales. Solo las partidas anteriores
+ // reasignan o suspenden los servicios que la tensión de la catenaria deja sin tren; las actuales se validan tal cual.
+ const legacy=!!s.infra&&typeof s.infra==='object'&&(s.infra.rev||1)<I.NET_REVISION;
+ I.migrateInfra(s);
  for(const t of I.TRAMOS)if(!s.infra?.t?.[t.id])throw Error('La red guardada no coincide con la del juego.');
+ if(legacy)migrateServices(s);
  return s;
+}
+/** Servicios que la red ya no admite con su tren (la tensión de la catenaria cuenta): otro lote compatible o, si no hay, se suspenden. */
+function migrateServices(s){
+ if(!Array.isArray(s.fleet)||!Array.isArray(s.projects)||!s.infra?.t||!Array.isArray(s.infra.c)||!Array.isArray(s.infra.custom)||!s.infra.custom.every(c=>I.NODES[c?.a]&&I.NODES[c?.b]))return; // lo demás lo rechaza validateSave
+ for(const r of s.routes){
+  if(!r?.active||!Array.isArray(r.via))continue;const f=s.fleet.find(f=>f.id===r.fleet);
+  if(!f||!MODEL[f.model]||canRun(s,r,MODEL[f.model]))continue;
+  const p=routeCheck(s,r,MODEL[f.model]),why=p.faults[0]?I.faultText(s,p.faults[0],true):'la vía ya no lo admite';
+  const fits=s.fleet.filter(x=>x.id!==f.id&&x.qty>0&&x.condition>=30&&MODEL[x.model]&&canRun(s,r,MODEL[x.model])&&available(s,x)>=requiredUnits(s,r,MODEL[x.model],r.frequency));
+  const alt=fits.find(x=>MODEL[x.model].family===MODEL[f.model].family)||fits[0];
+  if(alt){r.fleet=alt.id;r.units=requiredUnits(s,r,MODEL[alt.model],r.frequency);log(s,'Material cambiado',routeName(r)+': '+MODEL[f.model].name+' no puede ir ('+why+'). Pasa a '+MODEL[alt.model].name+'.');}
+  else{r.active=false;r.fleet=null;r.units=0;log(s,'Servicio suspendido',routeName(r)+': '+MODEL[f.model].name+' no puede ir ('+why+'). Compra un tren que sí.');}
+ }
 }
 export function validateSave(input){
  const s=migrate(copy(input));if(!validInduction(s.tutorial,s))throw Error('El progreso del turno guiado no es válido.');if(s.version!==4||!Number.isInteger(s.month)||s.month<0||s.month>(s.tycoon?.mode==='free'?12000:348)||!Array.isArray(s.routes)||!Array.isArray(s.fleet)||!Array.isArray(s.orders))throw Error('No es una partida válida de Iberia Ferroviaria.');
@@ -275,7 +293,7 @@ export function validateSave(input){
  if(s.event!==null&&!EVENTS.some(e=>e.id===s.event))throw Error('Imprevisto desconocido.');
  if(!s.stats||!s.flags||!s.last||s.debt<0||s.debt>1500||s.maintenance<.6||s.maintenance>1.5)throw Error('Estado económico no válido.');
  const safeId=v=>typeof v==='string'&&/^[a-zA-Z0-9-]{1,80}$/.test(v),node=v=>!!I.NODES[v]||!!CITY[v];
- const n=s.infra;if(!n||!Number.isInteger(n.ver)||typeof n.t!=='object'||!Array.isArray(n.c)||!Array.isArray(n.h)||!Array.isArray(n.custom)||!n.done)throw Error('Red no válida.');
+ const n=s.infra;if(!n||!Number.isInteger(n.ver)||typeof n.t!=='object'||!Array.isArray(n.c)||!Array.isArray(n.h)||!Array.isArray(n.custom)||!n.done||n.rev!==I.NET_REVISION)throw Error('Red no válida.');
  if(n.custom.length>40||n.custom.some(c=>!safeId(c.id)||!I.NODES[c.a]||!I.NODES[c.b]||!Number.isFinite(c.km)||c.km<=0))throw Error('Líneas propias no válidas.');
  for(const [id,st] of Object.entries(n.t)){if(!I.TRAMO[id]&&!n.custom.some(c=>c.id===id))throw Error('Tramo desconocido.');if(!['ib','std','mixto'].includes(st.g)||!['25kv','3kv','no'].includes(st.e)||!Number.isFinite(st.v)||st.v<20||st.v>400||typeof st.b!=='boolean')throw Error('Estado de vía no válido.');}
  if(n.c.some(c=>!I.NODES[c])||['elec','conv','changers','lav'].some(k=>!Number.isFinite(n.done[k])||n.done[k]<0))throw Error('Cambiadores no válidos.');
