@@ -1,5 +1,7 @@
 # Modo único: análisis previo
 
+**Especificación final: [ESPECIFICACION.md](ESPECIFICACION.md)** (qué cambia para el jugador, modelo de estado, motor de verdad de los diálogos, red y trenes reales, Trenespop, rejugabilidad, interfaz y plan en nueve fases publicables).
+
 Material de trabajo para fusionar la campaña clásica, el modo libre y el Rescate de Tenfe en un único modo de juego. Lo que digan los diálogos tiene que pasar de verdad. Hay que conservar Trenespop y el realismo de catenaria, anchos, velocidades y tipos de tren. Se toman ideas de Tropico, Cities: Skylines y Airport CEO, y la interfaz será más clara.
 
 ## Inventario de lo que existe
