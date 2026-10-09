@@ -1,5 +1,5 @@
 // «Lo que se dice, pasa»: los diálogos solo se juegan cuando lo que dicen es verdad y cada respuesta hace lo que promete.
-// Uso: node verdad-test.mjs
+// Uso: node verdad-test.mjs (10 secciones)
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import * as O from './dist/operations.js';
@@ -28,6 +28,8 @@ function event(s, id) { const e = EVENTS.find(x => x.id === id); s.decided = DEC
 const choiceIndex = (d, label) => { const i = d.choices.findIndex(c => c.label === label); assert(i >= 0, 'opción ' + label); return i; };
 const fareOf = (s, r) => { const m = E.metrics(s, r); return m.passengers ? m.revenue * 1e6 / m.passengers : 0; };
 const route = (s, id) => s.routes.find(r => r.id === id);
+/** Texto de opción limpio: sin huecos de cálculo, signos tipográficos (−3, no -3) y «1 línea», no «1 líneas». */
+const cleanText = x => typeof x === 'string' && x.length > 0 && !/undefined|NaN|null|(^|[\s(])-\d|\b1 (líneas|ciudades)\b/.test(x);
 /** Prepara un encuentro verdadero de ese personaje y conflicto (con el ánimo que sea cierto ahora). */
 function stageAny(s, person, topic) {
   s.decided = DECISIONS.map(d => d.id); s.event = null;
@@ -72,11 +74,13 @@ function stageAny(s, person, topic) {
     for (const d of DECISIONS) {
       const s = fresh(); setup(s); const view = dated(s, d.id);
       const i = view.choices.findIndex(c => playable(s, c)); assert(i >= 0, `${d.id} (${variant}) tiene salida`);
+      for (const c of view.choices) assert(cleanText(c.detail) && (!c.disabled || cleanText(c.reason)), `texto de ${d.id}: ${c.detail}`);
       E.decide(s, d.id, i); assert(E.validateSave(structuredClone(s))); checked++;
     }
     for (const e of EVENTS) {
       const s = fresh(); s.month = 40; setup(s); const view = event(s, e.id);
       const i = view.choices.findIndex(c => playable(s, c)); assert(i >= 0, `${e.id} (${variant}) tiene salida`);
+      for (const c of view.choices) assert(cleanText(c.detail) && (!c.disabled || cleanText(c.reason)), `texto de ${e.id}: ${c.detail}`);
       E.decide(s, e.id, i); assert(E.validateSave(structuredClone(s))); checked++;
     }
   }
@@ -305,7 +309,7 @@ function stageAny(s, person, topic) {
           assert(V.topicInstance(F, d.person, d.topic), `conflicto falso: ${d.id} en el mes ${s.month}`);
           assert(checks[d.topic](s, d, i), `comprobación independiente del conflicto: ${d.id} · ${i.label}`);
           assert(typeof d.instance === 'string' && d.instance.length > 3 && d.instance.length < 160, 'línea de instancia breve');
-          assert(d.choices.every(c => c.detail && !/undefined|NaN/.test(c.detail)), 'detalles calculados');
+          assert(d.choices.every(c => cleanText(c.detail)), 'detalles calculados: ' + d.choices.map(c => c.detail).join(' | '));
           last = s.month; shown++; topics.add(d.topic); people.add(d.person);
         }
         const list = d.choices.map((c, j) => [c, j]).filter(([c]) => playable(s, c));
@@ -336,5 +340,47 @@ function stageAny(s, person, topic) {
   const old = structuredClone(s); delete old.verdad; old.tycoon.encounter = 'scene-rival-proud-1';
   const loaded = E.validateSave(old); assert(loaded.verdad && loaded.tycoon.encounter === null, 'un encuentro antiguo sin comprobar no se juega al cargar');
   ok.push('Guardado: registro validado, partidas anteriores migradas y encuentros antiguos sin comprobar descartados.');
+}
+// 10. Revisión: lo que se cobra se dice, una escena caducada no bloquea el mes y los guardados anteriores se completan.
+{
+  // La auditoría avisa de todo lo que cuesta salir mal, también la confianza de Hacienda.
+  const a = fresh(); a.month = 20; const audit = event(a, 'audit'), g = audit.choices.findIndex(c => c.gamble);
+  assert(/Hacienda −8/.test(audit.choices[g].detail)); a.verdad.frozen.draw = .999; const h = a.tycoon.groups.treasury;
+  E.decide(a, 'audit', g); assert.equal(a.tycoon.groups.treasury, h - 8, 'la penalización anunciada es la que se aplica');
+  // La huelga aguantada dice lo que cuesta a la plantilla.
+  const st = fresh(); st.month = 20; const strike = event(st, 'strike'), hold = choiceIndex(strike, 'Aguantar el pulso'), staff = st.tycoon.groups.staff;
+  assert(/Plantilla −10/.test(strike.choices[hold].detail)); E.decide(st, 'strike', hold); assert.equal(st.tycoon.groups.staff, staff - 10);
+  // Un encuentro que deja de ser verdad no impide cerrar el mes: se descarta y el mes avanza.
+  const s = fresh(); s.month = 12; s.decided = DECISIONS.map(d => d.id); s.tycoon.drivers = 10; assert(stageAny(s, 'treasury', 0));
+  s.tycoon.drivers = 1000; const m = s.month; assert(E.step(s), 'el cierre no se bloquea'); assert.equal(s.month, m + 1);
+  // Partida anterior con un imprevisto pendiente sin fijar: al cargar se fija su instancia y su tirada.
+  const old = fresh(); old.month = 30; old.decided = DECISIONS.map(d => d.id); old.event = 'cable'; old.verdad.frozen = null;
+  const loaded = E.validateSave(structuredClone(old)); assert.equal(loaded.verdad.frozen?.id, 'cable'); assert(loaded.verdad.frozen.tramo, 'tramo afectado fijado');
+  const audit2 = fresh(); audit2.month = 30; audit2.decided = DECISIONS.map(d => d.id); audit2.event = 'audit'; audit2.verdad.frozen = null;
+  const l2 = E.validateSave(structuredClone(audit2)); assert(Number.isFinite(l2.verdad.frozen.draw), 'tirada fijada al cargar');
+  // Y un primer encargo firmado sin foto de la red la recibe al cargar: no se cumple solo.
+  const c = fresh(); decideAll(c); const q = c.tycoon.contracts[0]; T.accept(c, q.id, 'public'); delete q.snap; delete q.organic;
+  const lc = E.validateSave(structuredClone(c)), lq = lc.tycoon.contracts[0]; assert(Array.isArray(lq.snap) && lq.organic === 0);
+  O.ensureOps(lc); month(lc); assert.equal(lq.status, 'active', 'sin crecer, no se gana');
+  // Guardados manipulados: errores claros, nunca una excepción de tipos.
+  for (const patch of [v => { v.credit = null; }, v => { v.scene = {id: 'scene-treasury-happy-2', inst: null}; }, v => { v.frozen = {id: 'cable', tramo: 'no-existe'}; }, v => { v.busWarAt = 'x'; }]) {
+    const bad = structuredClone(c); patch(bad.verdad); assert.throws(() => E.validateSave(bad), /compromisos/);
+  }
+  // Dos avisos del taller sobre el mismo tren no generan incidencias duplicadas.
+  const w = fresh(); const lot = w.routes.find(r => r.active).fleet;
+  V.addMod(w, {kind: 'risk', fleet: lot, value: 1.25, until: w.month + 1}); V.addMod(w, {kind: 'risk', fleet: lot, value: 1.5, until: w.month + 2});
+  assert.deepEqual(V.riskyLots(w), [{fleet: lot, value: 1.5}]);
+  // Ajustar turnos nunca recorta una línea que una ciudad ha pedido reforzar.
+  const r = fresh(); r.month = 12; r.decided = DECISIONS.map(d => d.id); r.tycoon.drivers = 10; r.requests = [];
+  for (const x of r.routes.filter(x => x.active)) r.requests.push({type: 'more', id: 'q' + r.nextId++, city: x.ends[1], route: x.id, until: r.month + 4, target: x.frequency + 1, reward: 10});
+  const freq = new Map(r.routes.filter(x => x.active).map(x => [x.id, x.frequency])), sc = stageAny(r, 'treasury', 0);
+  assert(sc && /sin salidas que recortar/.test(sc.choices[1].detail)); E.decide(r, sc.id, 1);
+  assert(r.routes.filter(x => x.active).every(x => x.frequency === freq.get(x.id)), 'las líneas pedidas no pierden salidas');
+  // Competir en servicio frente a YaIré vale también en las líneas a las que llega después.
+  const y = fresh(); const rossa = dated(y, 'Rossa'); E.decide(y, 'Rossa', choiceIndex(rossa, 'Competir en servicio'));
+  y.month = 24; const vlc = route(y, 'madrid-valencia'); assert(T.competition(y, vlc).some(c => c.id === 'rossa'));
+  const plainY = structuredClone(y); plainY.verdad.mods = []; assert(E.metrics(y, vlc).punctuality > E.metrics(plainY, vlc).punctuality, '+3 de calidad donde YaIré llega en 2024');
+  assert(V.routeEffects(y, vlc.id).some(x => /YaIré/.test(x.label)), 'se ve en la ficha de la línea');
+  ok.push('Revisión: penalizaciones anunciadas, escenas caducadas que no bloquean el cierre, guardados anteriores completados y validados, avisos de taller sin duplicar, recortes que respetan las peticiones y la calidad frente a YaIré allí donde compite.');
 }
 console.log(ok.map(x => '✓ ' + x).join('\n'));

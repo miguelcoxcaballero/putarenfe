@@ -19,6 +19,10 @@ const NEWS_KINDS = ['claim', 'won', 'lost', 'declined', 'work', 'workStart', 'de
 const safeId = x => typeof x === 'string' && /^[a-zA-Z0-9-]{1,80}$/.test(x);
 const fmt = x => Number(x).toLocaleString('es-ES', {maximumFractionDigits: Math.abs(x) < 10 ? 2 : 1});
 const pct = x => Math.round(x * 100);
+/** Número con su signo tipográfico (−3, +2). */
+const signed = x => `${x < 0 ? '−' : '+'}${fmt(Math.abs(x))}`;
+/** «1 línea», «3 líneas». */
+const count = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 const r2 = x => Math.round(x * 100) / 100;
 const routeOf = (s, id) => s.routes.find(r => r.id === id) || null;
 const nameOf = r => r ? (r.name || r.ends.map(id => CITY[id]?.name || id).join(' — ')) : '';
@@ -68,7 +72,7 @@ export function routeMods(s, r, family) {
     else if (x.kind === 'demand' && hits(x, r)) out.demand *= x.value;
     else if (x.kind === 'service' && hits(x, r)) out.service *= x.byFamily ? (x.byFamily[family] ?? 1) : x.value;
     else if (x.kind === 'speed' && hits(x, r)) out.speed *= x.value;
-    else if (x.kind === 'rel' && hits(x, r)) out.rel += x.value;
+    else if (x.kind === 'rel' && (x.rival ? T.competition(s, r).some(c => c.id === x.rival) : hits(x, r))) out.rel += x.value;
     else if ((x.kind === 'staffed' || x.kind === 'unstaffed') && r.ends.includes(x.city)) out.demand *= x.value;
   }
   if (s.verdad?.access?.some(c => r.ends.includes(c))) out.demand *= 1.02;
@@ -94,7 +98,7 @@ export function serviceFactor(s, r, family) { return routeMods(s, r, family).ser
 export const fenced = s => s.flags?.fenced > s.month;
 export const inspected = (s, routeId) => liveMods(s, 'inspected').some(x => x.routes?.includes(routeId));
 export function incidentFactor(s) { return liveMods(s, 'oncall').length ? .5 : liveMods(s, 'nocrew').length ? 1.25 : 1; }
-export function riskyLots(s) { return liveMods(s, 'risk').map(x => ({fleet: x.fleet, value: x.value})); }
+export function riskyLots(s) { const by = new Map(); for (const x of liveMods(s, 'risk')) by.set(x.fleet, Math.max(by.get(x.fleet) || 0, x.value)); return [...by].map(([fleet, value]) => ({fleet, value})); }
 
 // ---------------------------------------------------------------- hechos
 const within = (v, m, k, n, pred) => (OPS_KINDS.has(k) ? v.inc || [] : v.news).filter(e => e.k === k && e.m >= m - n && (!pred || pred(e)));
@@ -323,10 +327,11 @@ const available = (person, F) => person === 'minister' ? F.office === 'minister'
 
 // ---------------------------------------------------------------- conflictos (45): cuándo es verdad cada línea y de qué habla
 function trackNeed(F) {
+  const justBuilt = new Set(within(F.v, F.m, 'work', 1).map(e => F.s.projects.find(p => p.id === e.id)?.target).filter(Boolean));
   for (const r of F.active) {
     const x = F.met.get(r.id); if (x.punctuality >= 85) continue;
     const f = F.s.fleet.find(f => f.id === r.fleet), path = f && X.routeCheck(F.s, r, MODEL[f.model]);
-    const t = path?.tramos.map(t => I.tramoDef(F.s, t.id)).find(d => d && d.kind !== 'lav' && F.s.infra.t[d.id]?.v <= 160 && !F.works.some(p => p.target === d.id));
+    const t = path?.tramos.map(t => I.tramoDef(F.s, t.id)).find(d => d && d.kind !== 'lav' && F.s.infra.t[d.id]?.v <= 160 && !justBuilt.has(d.id) && !F.works.some(p => p.target === d.id));
     if (t) return {route: r.id, tramo: t.id, km: t.km};
   }
   return null;
@@ -339,7 +344,7 @@ function warTargets(F) {
   if (F.busWar) return {routes: F.active.filter(r => r.km < 400), rival: 'bus'};
   return null;
 }
-const instLot = (l, why = '') => ({key: 'lot:' + l.f.id, lot: l.f.id, route: l.routes[0].id, cond: Math.round(l.cond), label: `${lotName(l.f)} · ${nameOf(l.routes[0])} · ${Math.round(l.cond)} %${why}`, sev: clamp(1 - l.cond / 100, .3, 1)});
+const instLot = (l, why = '') => ({key: 'lot:' + l.f.id, lot: l.f.id, route: l.routes[0].id, cond: Math.round(l.cond), label: `${lotName(l.f)} · ${nameOf(l.routes[0])} · estado ${Math.round(l.cond)} %${why}`, sev: clamp(1 - l.cond / 100, .3, 1)});
 const instDrivers = F => ({key: 'drivers', gap: Math.max(0, F.need - F.drivers), label: `Faltan ${F.need - F.drivers} maquinistas · ${Math.round(F.trains * (1 - F.raw))} trenes al día sin cubrir`, sev: clamp((1 - F.raw) * 4, .5, 1)});
 function busyStation(F, maxLevel, minPax, needAccess = false) {
   const cities = [...new Set(F.active.flatMap(r => r.ends))].filter(c => !['mad', 'bcn'].includes(c) && CITY[c] && (F.s.stations[c] || 0) <= maxLevel && !F.staffed(c) && (!needAccess || !F.v.access.includes(c)));
@@ -424,7 +429,7 @@ export const TOPICS = {
     F => base0(F) ? instDrivers(F) : null,
     F => F.busWar && F.v.busWarFrom != null && F.m - F.v.busWarFrom <= 1 && !F.answered ? instWar(F, F.active.filter(r => r.km < 400), 'bus') : null,
     F => F.n('breakdown', 1) > 0 && F.low(45).length ? instLot(F.low(45)[0]) : null,
-    F => { const o = terrOpening(F); return o && !routeOf(F.s, o.route).active ? {...o, label: `${o.label} · el autobús se lleva el ${pct(X.metrics(F.s, routeOf(F.s, o.route)).busShare)} %`} : null; },
+    F => { const o = terrOpening(F); return o && !routeOf(F.s, o.route).active ? {...o, label: `${o.label} · solo autobús`} : null; },
     F => (F.busWar || F.active.some(r => F.met.get(r.id).busShare >= .3)) ? pilotInst(F, ['online', 'loyalty']) : null,
   ],
 };
@@ -454,7 +459,7 @@ function sceneOptions(s, sc) {
       {cost: .36, detail: '−0,36 M€ · cuadrilla de guardia subcontratada un mes: incidencias con la mitad de demora', apply: () => addMod(s, {kind: 'oncall', until: m + 1, label: 'Cuadrilla de guardia'})},
       {detail: 'Sin coste · sin cuadrilla de guardia: incidencias un 25 % más largas durante un mes', apply: () => addMod(s, {kind: 'nocrew', until: m + 1, label: 'Sin cuadrilla de guardia'})}];
     if (p === 'workshop') return [
-      {cost: .6, detail: `−0,6 M€ · turno de noche un mes: ${s.refits.filter(r => !r.done).length} reformas salen un mes antes · Plantilla +4`, trust: {staff: 4}, apply: () => { for (const x of s.refits.filter(r => !r.done)) x.due = Math.max(m + 1, x.due - 1); X.log(s, 'Turno de noche en el taller', 'Las reformas en curso salen un mes antes.'); }},
+      {cost: .6, detail: `−0,6 M€ · turno de noche un mes: ${count(s.refits.filter(r => !r.done && r.due - 1 >= m + 1).length, 'reforma sale', 'reformas salen')} un mes antes · Plantilla +4`, trust: {staff: 4}, apply: () => { for (const x of s.refits.filter(r => !r.done && r.due - 1 >= m + 1)) x.due--; X.log(s, 'Turno de noche en el taller', 'Las reformas en curso salen un mes antes.'); }},
       {detail: 'Sin coste · las reformas en curso tardan un mes más y los trenes gastados fallan más · Plantilla −3', trust: {staff: -3}, apply: () => { for (const x of s.refits.filter(r => !r.done)) x.due++; for (const l of s.fleet.filter(f => f.condition < 50 && s.routes.some(r => r.active && r.fleet === f.id))) addMod(s, {kind: 'risk', fleet: l.id, value: 1.25, until: m + 1, label: 'Taller saturado'}); }}];
     const gap = Math.max(0, T.driverNeed(s) - s.tycoon.drivers), extra = p === 'president' && r ? morePlan(s, r) : null;
     const cost = r2(Math.max(.3, gap * .02)), delta = extra ? planDelta(s, extra) : 0;
@@ -466,7 +471,7 @@ function sceneOptions(s, sc) {
         apply: () => { for (const c of cuts) { const x = routeOf(s, c); const f = s.fleet.find(f => f.id === x.fleet); x.frequency = Math.max(1, x.frequency - 1); x.units = X.requiredUnits(s, x, MODEL[f.model], x.frequency); } if (cuts.length) X.log(s, 'Oferta ajustada a la plantilla', `${cuts.length} salidas menos en las líneas que menos dejan.`); }}];
     }
     const extraTrust = p === 'mayor' ? {territory: -4} : p === 'riders' ? {riders: -3} : {};
-    return [A, {detail: `Sin coste · se suprimen los trenes sin maquinista y −2 de puntualidad un mes · Plantilla −3${p === 'mayor' ? ' · Territorio −4' : p === 'riders' ? ' · Viajeros −3' : ''}`, trust: {staff: -3, ...extraTrust}, reputation: -1,
+    return [A, {detail: `Sin coste · se suprimen los trenes sin maquinista y −2 de puntualidad un mes · −1 de reputación · Plantilla −3${p === 'mayor' ? ' · Territorio −4' : p === 'riders' ? ' · Viajeros −3' : ''}`, trust: {staff: -3, ...extraTrust}, reputation: -1,
       apply: () => addMod(s, {kind: 'rel', value: -2, until: m + 1, label: 'Turnos estirados'})}];
   }
   if (k === 1) {
@@ -479,7 +484,7 @@ function sceneOptions(s, sc) {
     const routes = (i.routes || []).map(id => routeOf(s, id)).filter(x => x && x.active);
     const loss = r2(routes.reduce((n, x) => n + X.metrics(s, x).revenue, 0) * .15 * 3);
     const hTrust = p === 'minister' ? -4 : p === 'treasury' ? -3 : -2;
-    return [{cost: .3, loss, detail: `−0,3 M€ de campaña · tarifas −15 % tres meses en ${routes.length} línea${routes.length === 1 ? '' : 's'} (≈ −${fmt(loss)} M€ en billetes)${p === 'riders' ? ' · precio fijo, sin tarifas dinámicas' : ''} · Viajeros +3`,
+    return [{cost: .3, loss, detail: `−0,3 M€ de campaña · tarifas −15 % tres meses en ${routes.length} línea${routes.length === 1 ? '' : 's'} (≈ −${fmt(loss)} M€ en billetes)${p === 'riders' ? ' · precio fijo, sin tarifas dinámicas' : ''}${p === 'workshop' ? ' · esos trenes se gastan un 15 % más' : ''} · Viajeros +3 · Hacienda ${signed(hTrust)}`,
       trust: {riders: 3, treasury: hTrust}, reason: routes.length ? null : 'Ya no hay líneas en disputa',
       apply: () => {
         addMod(s, {kind: 'fare', value: .85, routes: routes.map(x => x.id), until: m + 3, label: 'Campaña de descuentos'});
@@ -514,14 +519,14 @@ function sceneOptions(s, sc) {
       return [{cost, loss: -delta * 12, trust: {territory: 5}, reason: plan ? null : 'Ya no hay material libre para esa línea',
         detail: `−${fmt(cost)} M€ · ${plan?.open ? `abre ${nameOf(target)} con ${plan.frequency} salidas` : `+1 salida en ${nameOf(target)}`} (${perMonth(delta)}) y personal en la estación de ${cityName(city)} 6 meses · Territorio +5`,
         apply: () => { runPlan(s, plan); addMod(s, {kind: 'staffed', city, value: 1.03, until: m + 6, label: 'Atención en ' + cityName(city)}); }},
-      {detail: `Sin coste · ${cityName(city)} sigue igual: −2 % de viajeros 6 meses · Territorio −4`, trust: {territory: -4}, reputation: -1,
+      {detail: `Sin coste · ${cityName(city)} sigue igual: −2 % de viajeros 6 meses · −1 de reputación · Territorio −4`, trust: {territory: -4}, reputation: -1,
         apply: () => addMod(s, {kind: 'unstaffed', city, value: .98, until: m + 6, label: 'Información a distancia en ' + cityName(city)})}];
     }
     const city = i.city, access = p === 'adif', cost = access ? .37 : .12;
     return [{cost, trust: {territory: 5, riders: 1}, reason: city ? null : 'Sin estación',
       detail: `−${fmt(cost)} M€ · personal en la estación de ${cityName(city)} 6 meses: +3 % de viajeros${access ? ' y accesos nuevos (+2 % para siempre)' : ''} · Territorio +5`,
       apply: () => { addMod(s, {kind: 'staffed', city, value: 1.03, until: m + 6, label: 'Atención en ' + cityName(city)}); if (access) ensure(s).access.push(city); if (p === 'successor') ensure(s).enc.grudge = false; note(s, 'concession'); }},
-    {detail: `Sin coste · información a distancia en ${cityName(city)}: −2 % de viajeros 6 meses · Territorio −4${p === 'successor' ? ' · el alcalde se planta (−6 más)' : ''}`,
+    {detail: `Sin coste · información a distancia en ${cityName(city)}: −2 % de viajeros 6 meses · −1 de reputación · Territorio −4${p === 'successor' ? ' · el alcalde se planta (−6 más)' : ''}`,
       trust: p === 'successor' ? {territory: -10} : {territory: -4}, reputation: -1,
       apply: () => { addMod(s, {kind: 'unstaffed', city, value: .98, until: m + 6, label: 'Información a distancia en ' + cityName(city)}); if (p === 'successor') { ensure(s).enc.planted = m; X.log(s, 'El alcalde acampa en el ministerio', 'Paco Terruño ha traído silla.'); } note(s, 'affront'); }}];
   }
@@ -537,7 +542,9 @@ function sceneOptions(s, sc) {
 function trimPlan(s) {
   const plan = [], freq = new Map(s.routes.filter(r => r.active).map(r => [r.id, r.frequency]));
   const need = () => Math.ceil([...freq.values()].reduce((n, f) => n + f * 2, 0) * .55);
-  const order = s.routes.filter(r => r.active).map(r => [r, X.metrics(s, r).net / Math.max(1, r.frequency)]).sort((a, b) => a[1] - b[1]).map(x => x[0]);
+  // Nunca recorta una línea con una petición de más trenes de la ciudad: eso la incumpliría.
+  const asked = new Set((s.requests || []).filter(q => q.type === 'more').map(q => q.route));
+  const order = s.routes.filter(r => r.active && !asked.has(r.id)).map(r => [r, X.metrics(s, r).net / Math.max(1, r.frequency)]).sort((a, b) => a[1] - b[1]).map(x => x[0]);
   for (let guard = 0; need() > s.tycoon.drivers && guard < 200; guard++) {
     const r = order.find(r => freq.get(r.id) > 1); if (!r) break;
     freq.set(r.id, freq.get(r.id) - 1); plan.push(r.id);
@@ -697,7 +704,7 @@ function alviaPlans(s) {
   const routes = s.routes.filter(r => r.active && X.product(s, r) === 'Alvia').map(r => [r, X.metrics(s, r).occupancy]).sort((a, b) => b[1] - a[1] || a[0].id.localeCompare(b[0].id)).map(x => x[0]);
   return plansFor(s, routes, 4, ['Alvia']);
 }
-function asturiasPlan(s) { return plansFor(s, s.routes.filter(r => r.ends.some(c => ['gij', 'ovi', 'avl'].includes(c))).sort((a, b) => b.demand - a.demand || a.id.localeCompare(b.id)), 2, ['Alvia']); }
+function asturiasPlan(s) { return plansFor(s, s.routes.filter(r => r.ends.some(c => ['gij', 'ovi', 'avl'].includes(c))).sort((a, b) => b.ends.includes('mad') - a.ends.includes('mad') || b.demand - a.demand || a.id.localeCompare(b.id)), 2, ['Alvia']); }
 function extremaduraTramos(s) { return ['mad-tal', 'tal-pla'].filter(id => s.infra.t[id]?.e === 'no' && I.tramoWorks(s, id).some(w => w.work === 'electrify' && !w.busy)); }
 const servedTerr = s => TERRITORY.filter(c => s.routes.some(r => r.active && r.frequency >= 2 && r.ends.includes(c))).length;
 function hasFreeAve(s) { return freeUnits(s, 'AVE') >= 1; }
@@ -705,16 +712,17 @@ const ACT = {
   hedge: {cost: s => hedgeCost(s), loss: () => 0, detail: s => `−${fmt(hedgeCost(s))} M€ ahora · precio de la luz fijo un año (sin seguro: ≈ −${fmt(exposure(s))} M€)`,
     apply: s => { s.flags.energy = s.month + 12; s.flags.hedge = s.month + 12; }},
   nohedge: {loss: s => exposure(s), detail: s => `Sin pagar ahora · la luz sube un ${pct(ENERGY_SPIKE - 1)} % durante un año: ≈ −${fmt(exposure(s))} M€`, apply: s => { s.flags.energy = s.month + 12; }},
-  launch: {detail: (s, c) => `${c.detail.split(' · +10')[0]} · +10 % de viajeros en ${launchRoutes(s, c.city).length} líneas por ${cityName(c.city)} durante 6 meses`,
+  launch: {detail: (s, c) => { const n = launchRoutes(s, c.city).filter(id => routeOf(s, id).active).length; return `${c.detail.split(' · +10')[0]} · +10 % de viajeros en ${n ? count(n, 'línea', 'líneas') : 'las líneas que abras'} por ${cityName(c.city)} durante 6 meses`; },
     apply: (s, c) => { addMod(s, {kind: 'demand', value: 1.1, routes: launchRoutes(s, c.city), until: s.month + 6, label: 'Campaña en ' + cityName(c.city), vanity: true}); note(s, 'vanity'); }},
-  launchAve: {detail: s => `−15 M€ · +6 de reputación · +10 % de viajeros en tus ${s.routes.filter(r => r.active && X.product(s, r) === 'AVE').length} líneas AVE durante 6 meses`,
+  launchAve: {detail: s => `−15 M€ · +6 de reputación · +10 % de viajeros en ${count(s.routes.filter(r => r.active && X.product(s, r) === 'AVE').length, 'línea AVE', 'líneas AVE')} durante 6 meses`,
     apply: s => { addMod(s, {kind: 'demand', value: 1.1, routes: s.routes.filter(r => r.active && X.product(s, r) === 'AVE').map(r => r.id), until: s.month + 6, label: 'Relanzamiento del AVE', vanity: true}); note(s, 'vanity'); }},
   alviaBoost: {reason: s => alviaPlans(s).length ? null : 'Sin Alvia libres para reforzar ninguna línea',
     loss: s => -r2(alviaPlans(s).reduce((n, p) => n + planDelta(s, p), 0) * 18),
     detail: s => `+65 M€ · +1 salida en ${alviaPlans(s).length} Alvia (${alviaPlans(s).map(p => nameOf(routeOf(s, p.route))).join(', ') || 'ninguno'}; ${perMonth(r2(alviaPlans(s).reduce((n, p) => n + planDelta(s, p), 0)))}) · +15 % de demanda en los Alvia durante año y medio`,
     apply: s => { for (const p of alviaPlans(s)) runPlan(s, p); s.flags.passes = s.month + 18; X.log(s, 'Alvia reforzados', 'Una salida más por sentido donde había trenes libres.'); }},
   passes: {apply: s => { s.flags.passes = s.month + 18; }},
-  rossaQuality: {apply: s => { let routes = s.routes.filter(r => r.active && T.competition(s, r).some(c => c.id === 'rossa')); if (!routes.length) routes = s.routes.filter(r => r.active && T.competition(s, r).length); addMod(s, {kind: 'rel', value: 3, routes: routes.map(r => r.id), until: s.month + 24, label: 'Servicio a bordo frente a YaIré'}); }},
+  // Allí donde compita YaIré durante los dos años, también en las líneas a las que llegue después.
+  rossaQuality: {apply: s => { addMod(s, {kind: 'rel', value: 3, rival: 'rossa', until: s.month + 24, label: 'Servicio a bordo frente a YaIré'}); }},
   asturias: {cost: s => { const p = asturiasPlan(s); return 12 + 4 * p.filter(x => x.open).length; },
     loss: s => -r2(asturiasPlan(s).reduce((n, p) => n + planDelta(s, p), 0) * 12),
     detail: s => { const p = asturiasPlan(s); return p.length ? `−${12 + 4 * p.filter(x => x.open).length} M€ · +5 de reputación · ${p.map(x => (x.open ? 'abre ' : '+1 salida en ') + nameOf(routeOf(s, x.route)) + ` (${perMonth(planDelta(s, x))})`).join(' · ')}` : `−12 M€ · +5 de reputación · sin Alvia libres: compromiso de Alvia a Asturias antes de ${X.dateOf(s.month + 6)}`; },
@@ -723,9 +731,9 @@ const ACT = {
     detail: s => { const t = extremaduraTramos(s); const months = Math.max(0, ...t.map(id => I.tramoWorks(s, id).find(w => w.work === 'electrify').duration)); return `−20 M€ · +6 de reputación · catenaria en ${t.map(id => I.tramoDef(s, id).name).join(' y ') || 'ningún tramo'} (${months} meses); el resto lo paga el Ministerio`; },
     apply: s => { const t = extremaduraTramos(s); for (const id of t) X.startWork(s, 'electrify', id, 0); X.log(s, 'Plan Extremadura', 'Obras de catenaria hasta Plasencia, cofinanciadas por el Ministerio.'); }},
   resilience: {apply: s => { s.flags.resilience = 1e6; }},
-  heatCut: {detail: s => `Sin coste · −4 de reputación · −20 % de trenes en ${s.routes.filter(r => r.active && hot(r)).length} líneas del sur este verano, sin perder puntualidad`,
+  heatCut: {detail: s => `Sin coste · −4 de reputación · −20 % de trenes en ${count(s.routes.filter(r => r.active && hot(r)).length, 'línea', 'líneas')} del sur este verano, sin perder puntualidad`,
     apply: s => { const routes = s.routes.filter(r => r.active && hot(r)).map(r => r.id); addMod(s, {kind: 'service', value: .8, routes, until: s.month + 3, label: 'Oferta de verano reducida'}); addMod(s, {kind: 'rel', value: 4, routes, until: s.month + 3, label: 'Oferta de verano reducida'}); }},
-  rural: {loss: () => -6 * 60, detail: s => `+6 M€ al mes durante 5 años si mantienes ${Math.max(1, servedTerr(s))} ciudades rurales con 2 salidas · +3 de reputación`,
+  rural: {loss: () => -6 * 60, detail: s => `+6 M€ al mes durante 5 años si mantienes ${count(Math.max(1, servedTerr(s)), 'ciudad rural', 'ciudades rurales')} con 2 salidas · +3 de reputación`,
     apply: s => { s.flags.rural = s.month + 60; ensure(s).rural = {base: Math.max(1, servedTerr(s)), miss: 0, ok: true}; }},
   pledgeNetwork: {apply: s => promise(s, {kind: 'network', target: s.routes.filter(r => r.active).length, due: 347, label: 'Red para todos: no cerrar servicios', penalty: {reputation: -10, government: -15}, score: true})},
   pledgeAccounts: {apply: s => promise(s, {kind: 'solvent', due: 347, label: 'Cuentas saneadas en 2050', penalty: {reputation: -10, treasury: -15}, score: true})},
@@ -733,14 +741,14 @@ const ACT = {
     apply: (s, c, d, fr) => { if (!fr?.tramo) return; const routes = s.routes.filter(r => r.active && X.routeUses(s, r, fr.tramo)).map(r => r.id); addMod(s, {kind: 'rel', value: -10, routes, until: s.month + 2, label: 'Cable robado: ' + I.tramoDef(s, fr.tramo).name}); }},
   minimum: {apply: s => { addMod(s, {kind: 'service', byFamily: {AVE: .5, Alvia: .75}, until: s.month + 1, tag: 'strike', label: 'Servicios mínimos por huelga'}); X.log(s, 'Servicios mínimos', 'AVE al 50 % y Alvia al 75 % durante la huelga.'); }},
   wifiOn: {apply: s => { if (!s.tycoon.policies.includes('wifi')) s.tycoon.policies.push('wifi'); }},
-  freeze: {loss: (s, c) => r2(estimateSubsidy(s) * c.cut * 12), detail: (s, c) => { const loss = r2(estimateSubsidy(s) * c.cut * 12); return `Sin pago inmediato · transferencias −${pct(c.cut)} % durante un año (≈ −${fmt(loss)} M€)${c.trust?.government ? ` · ${c.effects?.reputation || 0} de reputación · Gobierno ${c.trust.government}`.replace(' -', ' −') : ''}`; },
+  freeze: {loss: (s, c) => r2(estimateSubsidy(s) * c.cut * 12), detail: (s, c) => { const loss = r2(estimateSubsidy(s) * c.cut * 12); return `Sin pago inmediato · transferencias −${pct(c.cut)} % durante un año (≈ −${fmt(loss)} M€)${c.trust?.government ? ` · ${signed(c.effects?.reputation || 0)} de reputación · Gobierno ${signed(c.trust.government)}` : ''}`; },
     apply: (s, c) => addMod(s, {kind: 'transfer', value: 1 - c.cut, until: s.month + 12, label: `Transferencias −${pct(c.cut)} %`})},
   study: {detail: (s, c, d, fr) => fr?.city ? `−3 M€ · +2 de reputación · estudio del AVE a ${cityName(fr.city)}: en 6 meses, petición formal con premio` : c.detail,
     apply: (s, c, d, fr) => { if (fr?.city) promise(s, {kind: 'study', city: fr.city, route: fr.route, due: s.month + 6, label: 'Estudio del AVE a ' + cityName(fr.city), terr: TERRITORY.includes(fr.city)}); }},
   busWar: {apply: s => { const v = ensure(s); s.flags.buswar = s.month + 6; s.flags.busfive = s.month + 6; v.busWarFrom = s.month; v.busWarAt = {bus: s.last?.busShare ?? 0, share: s.last?.share ?? 0}; }},
-  fareCut: {loss: s => r2(s.routes.filter(r => r.active && r.km < 400).reduce((n, r) => n + X.metrics(s, r).revenue, 0) * .15 * 6), detail: s => { const routes = s.routes.filter(r => r.active && r.km < 400); return `Tarifas −15 % durante 6 meses en ${routes.length} líneas de menos de 400 km (≈ −${fmt(r2(routes.reduce((n, r) => n + X.metrics(s, r).revenue, 0) * .15 * 6))} M€ en billetes) · +2 de reputación`; },
+  fareCut: {loss: s => r2(s.routes.filter(r => r.active && r.km < 400).reduce((n, r) => n + X.metrics(s, r).revenue, 0) * .15 * 6), detail: s => { const routes = s.routes.filter(r => r.active && r.km < 400); return `Tarifas −15 % durante 6 meses en ${count(routes.length, 'línea', 'líneas')} de menos de 400 km (≈ −${fmt(r2(routes.reduce((n, r) => n + X.metrics(s, r).revenue, 0) * .15 * 6))} M€ en billetes) · +2 de reputación`; },
     apply: s => { const routes = s.routes.filter(r => r.active && r.km < 400).map(r => r.id), v = ensure(s); addMod(s, {kind: 'fare', value: .85, routes, until: s.month + 6, label: 'Rebaja frente al autobús'}); v.answered = v.busWarFrom; note(s, 'concession'); for (const id of routes) note(s, 'fare', {route: id, pct: -.15}); }},
-  speedLimit: {detail: s => `Sin coste · trayectos un 12 % más lentos en ${s.routes.filter(r => r.active && hot(r)).length} líneas del sur durante 2 meses`,
+  speedLimit: {detail: s => `Sin coste · trayectos un 12 % más lentos en ${count(s.routes.filter(r => r.active && hot(r)).length, 'línea', 'líneas')} del sur durante 2 meses`,
     apply: s => addMod(s, {kind: 'speed', value: 1.12, routes: s.routes.filter(r => r.active && hot(r)).map(r => r.id), until: s.month + 2, label: 'Limitación de velocidad por calor'})},
   fence: {apply: s => { s.flags.fenced = s.month + 60; }},
   wear: {apply: s => addMod(s, {kind: 'wear', value: 1.5, until: s.month + 6, label: 'Taller a medio gas'})},
@@ -766,8 +774,8 @@ function storyInstance(s, d, fr) {
   if (fr?.label) return fr.label;
   if (d.id === 'energy') return `Factura eléctrica: ${fmt(r2(energyBill(s)))} M€ al mes`;
   if (d.id === 'pajares' || d.id === 'extremadura' || d.id === 'burgos' || d.id === 'murcia') return null;
-  if (d.id === 'climate') return `${s.routes.filter(r => r.active && hot(r)).length} líneas por Córdoba, Sevilla y Extremadura`;
-  if (d.id === 'busprice') return `${s.routes.filter(r => r.active && r.km < 400).length} líneas tuyas de menos de 400 km`;
+  if (d.id === 'climate') return `${count(s.routes.filter(r => r.active && hot(r)).length, 'línea', 'líneas')} por Córdoba, Sevilla y Extremadura`;
+  if (d.id === 'busprice') return `${count(s.routes.filter(r => r.active && r.km < 400).length, 'línea tuya', 'líneas tuyas')} de menos de 400 km`;
   if (d.id === 'freeze') return `Transferencias del Estado: ${fmt(r2(estimateSubsidy(s)))} M€ al mes`;
   return null;
 }
@@ -778,7 +786,7 @@ function storyView(s, d) {
     const cost = a?.cost ? a.cost(s, c, d, fr) : Math.max(0, -(c.effects?.cash || 0));
     const reason = a?.reason ? a.reason(s, c, d, fr) : null;
     let detail = a?.detail ? a.detail(s, c, d, fr) : c.detail;
-    if (c.gamble) { const chance = fr?.chance ?? chanceOf(s, c.gamble.chance, fr); detail = `${c.gamble.chance === 'audit' ? 'Según tus cuentas' : 'Según la puntualidad de tus AVE'}: ${pct(chance)} % de que salga bien · ${c.gamble.bad.cash ? `si sale mal, −${-c.gamble.bad.cash} M€ y ` : 'si sale mal, '}${c.gamble.bad.reputation} de reputación`; }
+    if (c.gamble) { const chance = fr?.chance ?? chanceOf(s, c.gamble.chance, fr); detail = `${c.gamble.chance === 'audit' ? 'Según tus cuentas' : 'Según la puntualidad de tus AVE'}: ${pct(chance)} % de que salga bien · ${c.gamble.bad.cash ? `si sale mal, ${signed(c.gamble.bad.cash)} M€ y ` : 'si sale mal, '}${signed(c.gamble.bad.reputation)} de reputación${c.gamble.chance === 'audit' ? ' · Hacienda −8' : ''}`; }
     const gain = Math.max(0, c.effects?.cash || 0), loss = a?.loss ? a.loss(s, c, d, fr) : 0;
     // estimate: efecto total en caja que se conoce al decidir (pago, ingreso y lo que se deja de cobrar).
     return {...c, detail, cost, estimate: r2((gain || -cost) - loss), disabled: !!reason, reason, effects: {...(c.effects || {}), cash: gain || (cost ? -cost : 0)}};
@@ -884,14 +892,14 @@ export function ongoing(s) {
     const key = x.label + '|' + x.until;
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push({label: x.label, until: x.until, from: x.from, route: x.routes?.length === 1 ? x.routes[0] : null, city: x.city || null, count: x.routes?.length || 0, kind: x.kind});
+    out.push({label: x.label, until: x.until, from: x.from, route: x.routes?.length === 1 ? x.routes[0] : null, city: x.city || null, count: x.routes?.length || 0, kind: x.kind, rival: x.rival || null});
   }
   for (const p of v.promises.filter(p => !p.status)) out.push({label: 'Compromiso: ' + p.label, until: p.due + 1, promise: true, city: p.city || null});
   for (const d of v.dues) out.push({label: `Cuotas: ${d.label}`, until: s.month + d.months, amount: r2(d.left)});
   if (s.flags.rural > s.month && v.rural) out.push({label: v.rural.ok ? 'Contrato rural: cumpliendo' : `Contrato rural: incumpliendo (${v.rural.miss}/3)`, until: s.flags.rural});
   return out.sort((a, b) => a.until - b.until);
 }
-export function routeEffects(s, id) { return ongoing(s).filter(x => x.route === id || (x.count > 1 && s.verdad.mods.some(m => m.label === x.label && m.until === x.until && m.routes?.includes(id)))); }
+export function routeEffects(s, id) { const r = routeOf(s, id); return ongoing(s).filter(x => x.route === id || (x.count > 1 && s.verdad.mods.some(m => m.label === x.label && m.until === x.until && m.routes?.includes(id))) || (x.rival && r?.active && T.competition(s, r).some(c => c.id === x.rival))); }
 
 // ---------------------------------------------------------------- guardado
 export function valid(v, s) {
@@ -901,20 +909,27 @@ export function valid(v, s) {
   const routeIds = new Set(s.routes.map(r => r.id));
   for (const x of v.mods) if (!x || !MOD_KINDS.includes(x.kind) || !num(x.until) || !num(x.from ?? 0) || (x.kind === 'rel' ? !(num(x.value) && Math.abs(x.value) <= 20) : x.value !== undefined && !(num(x.value) && x.value > 0 && x.value < 10))
     || (x.routes !== undefined && (!Array.isArray(x.routes) || x.routes.length > 400 || !x.routes.every(id => routeIds.has(id)))) || (x.city !== undefined && !CITY[x.city]) || (x.fleet !== undefined && !safeId(x.fleet))
-    || (x.tech !== undefined && !Object.hasOwn(T.TECHS, x.tech)) || (x.byFamily !== undefined && (typeof x.byFamily !== 'object' || !Object.values(x.byFamily).every(y => num(y) && y > 0 && y <= 2))) || (x.label !== undefined && (typeof x.label !== 'string' || x.label.length > 120))) return false;
+    || (x.tech !== undefined && !Object.hasOwn(T.TECHS, x.tech)) || (x.rival !== undefined && !['rossa', 'lowgo'].includes(x.rival)) || (x.byFamily !== undefined && (typeof x.byFamily !== 'object' || !Object.values(x.byFamily).every(y => num(y) && y > 0 && y <= 2))) || (x.label !== undefined && (typeof x.label !== 'string' || x.label.length > 120))) return false;
+  const obj = x => !!x && typeof x === 'object' && !Array.isArray(x);
   for (const p of v.promises) if (!p || !['electrify', 'asturias', 'study', 'network', 'solvent'].includes(p.kind) || !num(p.due) || ![null, 'kept', 'broken'].includes(p.status) || typeof p.label !== 'string' || p.label.length > 120 || (p.city !== undefined && !CITY[p.city]) || (p.route !== undefined && p.route !== null && !routeIds.has(p.route))) return false;
   for (const e of v.news) if (!e || !NEWS_KINDS.includes(e.k) || !num(e.m)) return false;
   for (const e of v.inc || []) if (!e || !OPS_KINDS.has(e.k) || !num(e.m) || (e.route !== undefined && !routeIds.has(e.route))) return false;
   for (const h of v.hist) if (!h || !num(h.m) || !num(h.punct) || !num(h.bus) || !num(h.net)) return false;
   for (const d of v.dues) if (!d || !num(d.left) || d.left < 0 || d.left > 1000 || !Number.isInteger(d.months) || d.months < 0 || d.months > 12) return false;
   if (!v.access.every(c => CITY[c]) || !v.spent.every(x => num(x.m) && num(x.x) && x.x >= 0)) return false;
-  if (typeof v.credit !== 'object' || !Object.entries(v.credit).every(([k, c]) => Object.hasOwn(T.TECHS, k) && num(c.amount) && c.amount >= 0 && c.amount < 100 && num(c.until))) return false;
+  if (!obj(v.credit) || !Object.entries(v.credit).every(([k, c]) => Object.hasOwn(T.TECHS, k) && num(c.amount) && c.amount >= 0 && c.amount < 100 && num(c.until))) return false;
   if (v.election !== null && !num(v.election)) return false;
-  if (v.rural !== null && (typeof v.rural !== 'object' || !num(v.rural.base) || !num(v.rural.miss) || typeof v.rural.ok !== 'boolean')) return false;
+  if (v.rural !== null && (!obj(v.rural) || !num(v.rural.base) || !num(v.rural.miss) || typeof v.rural.ok !== 'boolean')) return false;
   const e = v.enc;
-  if (!e || !num(e.last) || !arr(e.used, 315) || !e.used.every(id => ENCOUNTER[id]) || ['person', 'mood', 'pt', 'topic', 'inst', 'warned', 'lastMood', 'cool'].some(k => typeof e[k] !== 'object' || e[k] === null || Array.isArray(e[k]))) return false;
+  if (!obj(e) || !num(e.last) || !arr(e.used, 315) || !e.used.every(id => ENCOUNTER[id]) || ['person', 'mood', 'pt', 'topic', 'inst', 'warned', 'lastMood', 'cool'].some(k => !obj(e[k]))) return false;
   if (Object.keys(e.inst).length > 400 || Object.keys(e.warned).length > 400) return false;
-  if (v.scene !== null && (typeof v.scene !== 'object' || !ENCOUNTER[v.scene.id] || typeof v.scene.inst !== 'object' || (v.scene.inst.route !== undefined && !routeIds.has(v.scene.inst.route)))) return false;
-  if (v.frozen !== null && (typeof v.frozen !== 'object' || !EVENTS.some(x => x.id === v.frozen.id) || (v.frozen.draw !== undefined && !(num(v.frozen.draw) && v.frozen.draw >= 0 && v.frozen.draw < 1)))) return false;
+  if (v.scene !== null && (!obj(v.scene) || !ENCOUNTER[v.scene.id] || !obj(v.scene.inst) || (v.scene.inst.route !== undefined && !routeIds.has(v.scene.inst.route)) || (v.scene.inst.lot !== undefined && !safeId(v.scene.inst.lot))
+    || (v.scene.inst.city !== undefined && !CITY[v.scene.inst.city]) || (v.scene.inst.tech !== undefined && !Object.hasOwn(T.TECHS, v.scene.inst.tech)) || (v.scene.inst.routes !== undefined && !(Array.isArray(v.scene.inst.routes) && v.scene.inst.routes.every(id => routeIds.has(id))))
+    || (v.scene.inst.label !== undefined && (typeof v.scene.inst.label !== 'string' || v.scene.inst.label.length > 160)))) return false;
+  if (v.frozen !== null && (!obj(v.frozen) || !EVENTS.some(x => x.id === v.frozen.id) || (v.frozen.draw !== undefined && !(num(v.frozen.draw) && v.frozen.draw >= 0 && v.frozen.draw < 1))
+    || (v.frozen.chance !== undefined && !(num(v.frozen.chance) && v.frozen.chance >= 0 && v.frozen.chance <= 1)) || (v.frozen.route !== undefined && !routeIds.has(v.frozen.route))
+    || (v.frozen.city !== undefined && !CITY[v.frozen.city]) || (v.frozen.tramo !== undefined && !I.tramoDef(s, v.frozen.tramo)) || (v.frozen.work !== undefined && typeof v.frozen.work !== 'string')
+    || (v.frozen.label !== undefined && (typeof v.frozen.label !== 'string' || v.frozen.label.length > 160)))) return false;
+  if ([v.busWarFrom, v.answered].some(x => x != null && !num(x)) || (v.busWarAt != null && (!obj(v.busWarAt) || !num(v.busWarAt.bus) || !num(v.busWarAt.share)))) return false;
   return true;
 }

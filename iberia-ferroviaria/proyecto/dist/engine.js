@@ -131,7 +131,7 @@ export function workQuote(s,kind,target){
 }
 /** paid: lo que paga Tenfe cuando el Ministerio cofinancia la obra (por defecto, todo). */
 export function startWork(s,kind,target,paid=null){
- ensurePlaying(s);const q=workQuote(s,kind,target);spend(s,paid??q.cost);
+ ensurePlaying(s);const q=workQuote(s,kind,target),pay=paid??q.cost;if(pay>0)spend(s,pay);
  const id='w-'+kind+'-'+target+'-'+s.nextId++,name=kind==='changer'?'Cambiador de ancho en '+I.NODES[target].name:q.label+' · '+I.tramoDef(s,target).name;
  s.projects.push({id,type:kind==='changer'?'changer':'tramo',work:kind,target,started:s.month,due:s.month+q.months,originalDue:s.month+q.months,cost:q.cost,done:false,delay:0});
  for(const r of q.affected){r.active=false;r.fleet=null;r.units=0;r.cut=id;V.note(s,'cut',{route:r.id,terr:V.isTerritory(r)});}
@@ -216,7 +216,9 @@ function finishWork(s,p){
 /** ¿Toca la obra una ciudad de la España que espera? */
 function workTerritory(s,p){if(!p)return false;if(p.type==='upgrade')return V.isTerritory(s.routes.find(r=>r.id===p.route)||{ends:[]});const nodes=p.type==='changer'?[p.target]:p.type==='infrastructure'?I.TRAMOS.filter(t=>t.plan===p.id).flatMap(t=>[t.a,t.b]):(()=>{const d=I.tramoDef(s,p.target);return d?[d.a,d.b]:[];})();return nodes.some(n=>V.TERRITORY.includes(n));}
 export function step(s){
- if(s.ended||!s.started||pendingDecision(s))return false;
+ if(s.ended||!s.started)return false;
+ // Un encuentro que ha dejado de ser verdad no bloquea el cierre: se descarta en silencio.
+ V.revalidate(s);if(pendingDecision(s))return false;
  const contracts=T.assessContracts(s,r=>metrics(s,r));
  const b=balance(s);s.cash+=b.net;s.last=b;s.stats.passengers+=b.passengers;
  organicBaseline(s);
@@ -321,6 +323,8 @@ export function validateSave(input){
  if(s.requests!==undefined&&(!Array.isArray(s.requests)||s.requests.length>10||s.requests.some(q=>!safeId(q.id)||!routeIds.has(q.route)||!CITY[q.city]||!['open','more','fare','station','ave'].includes(q.type)||!Number.isFinite(q.reward)||q.reward<0||q.reward>100||!Number.isFinite(q.until)||(q.serving!==undefined&&typeof q.serving!=='boolean')||(q.kept!==undefined&&(!Number.isInteger(q.kept)||q.kept<0||q.kept>REQUEST_CLOSES)))))throw Error('Peticiones no válidas.');
  if(!V.valid(s.verdad,s))throw Error('El registro de compromisos y efectos no es válido.');
  if(s.ops){const o=s.ops;if(!Number.isInteger(o.day)||o.day<1||o.day>new Date(Date.UTC(yearOf(s),effectiveMonth(s)%12+1,0)).getUTCDate()||!Number.isFinite(o.minute)||o.minute<0||o.minute>5000||!['planning','running','review'].includes(o.phase)||!Array.isArray(o.incidents)||!Array.isArray(o.resolved)||o.incidents.length>50||o.resolved.length>50||!['balanced','punctual'].includes(o.priority)||!Number.isInteger(o.completed)||o.completed<0)throw Error('Jornada guardada no válida.');for(const x of o.incidents)if(typeof x.trip!=='string'||!routeIds.has(x.route)||!Number.isFinite(x.at)||x.at<0||!Number.isFinite(x.delay)||x.delay<0||x.delay>500||typeof x.reason!=='string')throw Error('Incidencia inválida.');if(o.surges!==undefined&&(!Array.isArray(o.surges)||o.surges.length>10||o.surges.some(x=>!routeIds.has(x.route)||!Number.isFinite(x.need)||!Number.isFinite(x.bonus)||x.bonus>5)))throw Error('Jornada guardada no válida.');if(o.choices!==undefined&&(typeof o.choices!=='object'||Array.isArray(o.choices)||Object.values(o.choices).some(v=>!['team','bus','wait'].includes(v))))throw Error('Jornada guardada no válida.');if(o.last){if(typeof o.last.date!=='string'||['trains','late','punctuality','passengers','net','first','last','incidents','attended'].some(k=>!Number.isFinite(o.last[k])))throw Error('Resumen de jornada inválido.');}}
+ if(s.event&&s.verdad.frozen?.id!==s.event)V.freezeEvent(s,EVENTS.find(e=>e.id===s.event));
+ for(const q of s.tycoon.contracts)if(q.status==='active'&&q.goal==='passengers'&&!Array.isArray(q.snap)){q.organic=0;q.snap=s.routes.filter(r=>r.active).map(r=>({id:r.id,fleet:r.fleet,frequency:r.frequency,fare:r.fare}));}
  V.revalidate(s);
  return s;
 }
