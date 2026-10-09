@@ -56,7 +56,7 @@ const available = Object.keys(clips).length;
 const label = `Avance en pruebas · ${available}/412 voces completas · resto con subtítulos`;
 const baselineOrder = ['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
   'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
-const optionalBefore = {'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'train3d.js':['assets/train-photos.js']};
+const optionalBefore = {'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'engine.js':['verdad.js'],'train3d.js':['assets/train-photos.js']};
 const order = baselineOrder.flatMap(file => [...(optionalBefore[file] || []).filter(extra => fs.existsSync(path.join(dist,extra))),file]);
 const sources = [];
 const read = file => {

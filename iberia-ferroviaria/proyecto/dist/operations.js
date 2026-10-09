@@ -6,6 +6,7 @@ import * as E from './engine.js';
 import {MODEL, CITY, CITIES} from './data.js';
 import * as S from './schedule.js';
 import * as I from './infra.js';
+import * as V from './verdad.js';
 
 export const opDays = m => new Date(Date.UTC(2022 + Math.floor(m / 12), m % 12 + 1, 0)).getUTCDate();
 export const clockText = m => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(Math.floor(m) % 60).padStart(2, '0')}${m >= 1440 ? ' +' + Math.floor(m / 1440) : ''}`;
@@ -58,7 +59,7 @@ function planKey(s) {
   const op = ensureOps(s);
   return [T.staffing(s),s.tycoon.groups.staff<25,s.month, op.day, op.priority, JSON.stringify(op.incidents), JSON.stringify(op.choices), op.resolved.join(','),
     s.routes.filter(r => r.active).map(r => r.id + ':' + r.frequency + ':' + r.fleet + ':' + (r.first ?? '') + ':' + (r.last ?? '')).join('|'),
-    s.projects.filter(p => !p.done).map(p => p.id).join(','), s.infra.ver].join('#');
+    s.projects.filter(p => !p.done).map(p => p.id).join(','), s.infra.ver, JSON.stringify(V.liveMods(s))].join('#');
 }
 
 /** Obra en curso sobre el recorrido de una relación (con su tren actual). */
@@ -79,13 +80,15 @@ export function servicePlan(s) {
     const f = s.fleet.find(f => f.id === r.fleet), m = MODEL[f?.model];
     if (!m) continue;
     const work = workOn(s, r), path = E.routeCheck(s, r, m);
-    const real = r.real ? S.thin(S.routeTrips(type, r.id), Math.min(1, r.frequency / r.baseFrequency)) : null;
+    // Servicios mínimos, recortes o refuerzos temporales cambian las salidas del día; las limitaciones de velocidad, el tiempo.
+    const mods = V.routeMods(s, r, m.family), slow = mods.speed - 1;
+    const real = r.real ? S.thin(S.routeTrips(type, r.id), Math.min(1, r.frequency / r.baseFrequency * mods.service)) : null;
     if (real && real.length) {
       for (const t of real) {
         const name = S.STATIONS[t.stations[0]].name + ' → ' + S.STATIONS[t.stations.at(-1)].name;
         trips.push({id: t.key, route: r.id, name, label: (t.bus ? 'Bus ' : '') + (r.code || S.LINES[t.line].code) + (t.number ? ' ' + t.number : ''),
           line: t.line, number: t.number, model: t.bus ? 'Autobús de sustitución' : m.name, seats: t.bus ? 55 : m.seats, dep: t.start,
-          scheduled: t.end, duration: t.end - t.start, delay: work ? 3 : 0, real: true, bus: t.bus, trip: t, ends: [t.stations[0], t.stations.at(-1)], family: m.family, changes: path.changes});
+          scheduled: t.end, duration: t.end - t.start, delay: (work ? 3 : 0) + (slow > 0 && !t.bus ? Math.round((t.end - t.start) * slow) : 0), real: true, bus: t.bus, trip: t, ends: [t.stations[0], t.stations.at(-1)], family: m.family, changes: path.changes});
       }
       continue;
     }
@@ -94,9 +97,9 @@ export function servicePlan(s) {
     const coords = I.pathCoords(s, path), cum = [0];
     for (let k = 1; k < coords.length; k++) cum.push(cum[k - 1] + Math.hypot((coords[k][0] - coords[k - 1][0]) * 85, (coords[k][1] - coords[k - 1][1]) * 111));
     const stops = I.pathNodes(s, path, r.via[0]).filter((n, k, all) => k === 0 || k === all.length - 1 || isCity(n)).length;
-    const duration = Math.round(path.minutes + Math.max(0, stops - 2) * 2), first = 390, last = 1290;
-    for (let direction = 0; direction < 2; direction++) for (let i = 0; i < r.frequency; i++) {
-      const dep = Math.round(first + (last - first) * (r.frequency === 1 ? .35 : i / (r.frequency - 1))) + direction * 7;
+    const duration = Math.round((path.minutes + Math.max(0, stops - 2) * 2) * mods.speed), first = 390, last = 1290, frequency = Math.max(1, Math.round(r.frequency * mods.service));
+    for (let direction = 0; direction < 2; direction++) for (let i = 0; i < frequency; i++) {
+      const dep = Math.round(first + (last - first) * (frequency === 1 ? .35 : i / (frequency - 1))) + direction * 7;
       const ends = direction ? [...r.ends].reverse() : r.ends;
       trips.push({id: `${r.id}-${direction}-${i}`, route: r.id, name: ends.map(id => CITY[id]?.name || id).join(' → '), label: m.family + ' ' + (9000 + (hashCode(r.id) % 900) + i * 2 + direction),
         model: m.name, seats: m.seats, dep, scheduled: dep + duration, duration, delay: work ? 6 : 0, direction, real: false, family: m.family, changes: path.changes,
@@ -158,14 +161,25 @@ export function startDay(s) {
       let type = roll < .45 ? 'breakdown' : roll < .75 ? 'signal' : roll < .9 ? 'trespass' : 'weather';
       if (trip.changes?.length && E.random(s) < .35) type = 'changer';
       if (op.incidents.some(x => x.route === trip.route)) continue;
+      // Vallas contra arrollamientos e inspecciones de vía evitan incidencias de verdad.
+      if (type === 'trespass' && V.fenced(s) && E.random(s) < .5) continue;
+      if (type === 'signal' && V.inspected(s, trip.route)) continue;
       let reason = pick(s, INCIDENTS[type].reasons);
       if (type === 'weather') reason = month <= 1 || month === 11 ? pick(s, ['Nevada en la línea', 'Viento fuerte: limitación de velocidad']) : month >= 5 && month <= 8 ? 'Ola de calor: limitación temporal' : pick(s, ['Lluvias intensas', 'Viento fuerte: limitación de velocidad']);
       if (type === 'changer') reason += ' de ' + (I.NODES[pick(s, trip.changes)]?.changer || I.NODES[pick(s, trip.changes)]?.name || '');
-      const delay = type === 'breakdown' ? 15 + Math.floor(E.random(s) * 40) : type === 'weather' ? 6 + Math.floor(E.random(s) * 10) : 12 + Math.floor(E.random(s) * 30);
+      const delay = Math.round((type === 'breakdown' ? 15 + Math.floor(E.random(s) * 40) : type === 'weather' ? 6 + Math.floor(E.random(s) * 10) : 12 + Math.floor(E.random(s) * 30)) * V.incidentFactor(s));
       const id = 'inc-' + s.month + '-' + op.day + '-' + i;
       const at = trip.dep + Math.floor(trip.duration * (.2 + E.random(s) * .5));
       const place = trip.real ? S.STATIONS[trip.trip.stations[Math.min(trip.trip.stations.length - 1, Math.floor(trip.trip.stations.length * .4))]].name : trip.name.split(' → ')[0];
       op.incidents.push({trip: id, id, type, route: trip.route, target: trip.id, label: trip.label, place, at, delay, span: type === 'weather' ? 240 : 60 + Math.floor(E.random(s) * 60), reason});
+    }
+    // Trenes de los que avisó el taller: más probabilidad de avería mientras dura el aviso.
+    for (const x of V.riskyLots(s)) {
+      if (op.incidents.length >= 6 || E.random(s) >= .25 * x.value) continue;
+      const trip = pick(s, trips.filter(t => !t.bus && s.routes.find(r => r.id === t.route)?.fleet === x.fleet && !op.incidents.some(i => i.route === t.route)));
+      if (!trip) continue;
+      const id = 'inc-' + s.month + '-' + op.day + '-r' + x.fleet, at = trip.dep + Math.floor(trip.duration * .4);
+      op.incidents.push({trip: id, id, type: 'breakdown', route: trip.route, target: trip.id, label: trip.label, place: '', at, delay: Math.round((20 + Math.floor(E.random(s) * 30)) * V.incidentFactor(s)), span: 60, reason: pick(s, INCIDENTS.breakdown.reasons)});
     }
   }
   // Momentos del día: picos de demanda que premian reforzar una relación a tiempo.
@@ -222,6 +236,12 @@ export function endDay(s) {
     busiest: busiest ? busiest[0] : null, busiestTrains: busiest ? busiest[1] : 0, worst: worst ? {label: worst.label, name: worst.name, delay: worst.delay} : null};
   op.completed++;
   op.phase = 'review';
+  // Cada incidencia queda en la memoria de la partida (los encuentros solo hablan de las que pasaron).
+  for (const x of op.incidents) {
+    const fleet = s.routes.find(r => r.id === x.route)?.fleet || undefined;
+    V.note(s, 'incident', {route: x.route, delay: x.delay, fleet});
+    if (x.type === 'breakdown') V.note(s, 'breakdown', {route: x.route, fleet});
+  }
   return op.last;
 }
 

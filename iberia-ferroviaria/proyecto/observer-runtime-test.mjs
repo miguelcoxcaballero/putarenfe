@@ -25,7 +25,7 @@ const publicMinute=`var setMinute = ${publicSeek.slice('setMinute: '.length)};`;
 
 for(const phase of ['planning','running','review']){
  const state=E.initialState();state.started=true;
- for(let d;(d=E.pendingDecision(state));)E.decide(state,d.id,d.choices.findIndex(c=>state.cash>=-(c.effects?.cash||0)));
+ for(let d;(d=E.pendingDecision(state));)E.decide(state,d.id,d.choices.findIndex(c=>!c.disabled&&state.cash>=-(c.effects?.cash||0)));
  O.ensureOps(state);O.startDay(state);state.ops.minute+=20;
  if(phase==='planning')state.ops.phase='planning';
  if(phase==='review'){state.ops.minute=O.dayBounds(O.servicePlan(state)).last;O.endDay(state);}

@@ -5,9 +5,9 @@ import * as I from './dist/infra.js';
 import {ENCOUNTERS,EMOTIONS} from './dist/encounters.js';
 import {CHARACTERS} from './dist/story.js';
 const fresh=()=>{const s=E.initialState();s.started=true;return s;};
-const advance=s=>{for(let d;(d=E.pendingDecision(s));)E.decide(s,d.id,d.choices.findIndex(c=>s.cash>=-(c.effects?.cash||0)));assert(E.step(s));};
+const advance=s=>{for(let d;(d=E.pendingDecision(s));)E.decide(s,d.id,d.choices.findIndex(c=>!c.disabled&&s.cash>=-(c.effects?.cash||0)));assert(E.step(s));};
 assert.equal(ENCOUNTERS.length,315);assert.equal(new Set(ENCOUNTERS.map(x=>x.body)).size,315);
-for(const person of Object.keys(CHARACTERS))for(const mood of EMOTIONS){const scenes=ENCOUNTERS.filter(x=>x.person===person&&x.mood===mood);assert.equal(scenes.length,5);assert.equal(new Set(scenes.map(x=>x.topic)).size,5);for(const scene of scenes){const s=fresh();s.decided=['mandate'];s.tycoon.encounter=scene.id;for(let d;(d=E.pendingDecision(s))&&!d.tycoon;)E.decide(s,d.id,0);assert.equal(E.pendingDecision(s).id,scene.id);const before=s.cash;E.decide(s,scene.id,0);assert(s.cash<before);assert.equal(s.tycoon.encounter,null);}}
+for(const person of Object.keys(CHARACTERS))for(const mood of EMOTIONS){const scenes=ENCOUNTERS.filter(x=>x.person===person&&x.mood===mood);assert.equal(scenes.length,5);assert.equal(new Set(scenes.map(x=>x.topic)).size,5);for(const scene of scenes){const s=fresh();s.decided=['mandate'];s.tycoon.encounter=scene.id;assert.equal(E.revalidateScene(s),false,'un encuentro impuesto sin comprobar que es verdad no se juega: '+scene.id);assert.equal(s.tycoon.encounter,null);}}
 {
  const s=fresh(),r=s.routes.find(r=>r.active),before=E.metrics(s,r);s.tycoon.drivers=0;assert.equal(E.metrics(s,r).passengers,0);T.hire(s,20);assert.equal(s.tycoon.drivers,0);advance(s);advance(s);assert.equal(s.tycoon.drivers,0);advance(s);assert.equal(s.tycoon.drivers,20);assert(E.metrics(s,r).passengers<before.passengers);assert.throws(()=>T.hire(s,NaN));
 }

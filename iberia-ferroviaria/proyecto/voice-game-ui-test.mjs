@@ -228,12 +228,23 @@ try {
   await page.click('[data-action=free-setup]');
   await page.selectOption('#freeCash', '500'); await page.uncheck('#freeRivals');
   await page.click('[data-action=free-begin]');
+  // Un encuentro solo se juega si su arranque y su conflicto son verdad: se prepara una situación real
+  // (faltan maquinistas, guerra de precios, un tren gastado, una obra recién terminada...) y el motor decide qué cuerpos lo son.
+  await page.evaluate(() => {
+    window.__prepareTruth = (s, person) => {
+      s.month = person === 'successor' ? 30 : 10; s.ops.day = 1; s.event = null; s.tycoon.encounter = null;
+      s.tycoon.drivers = 5; s.flags.buswar = s.month + 6; s.verdad.busWarFrom = s.month; s.verdad.election = s.month + 3;
+      const lot = s.fleet.find(f => s.routes.some(r => r.active && r.fleet === f.id)); lot.condition = 35;
+      s.verdad.news.push({k: 'work', m: s.month, delay: 0, terr: true}, {k: 'refit', m: s.month}, {k: 'affront', m: s.month}, {k: 'affront', m: s.month}, {k: 'open', m: s.month, terr: true});
+    };
+    window.__truthful = (id, person) => { const g = window.railwayGame, c = structuredClone(g.state()); window.__prepareTruth(c, person); return g.engine.stageScene(c, id); };
+  });
   const samples = await page.evaluate(expected => {
     const rt = window.__voiceRuntime, canon = new Map(expected.map(x => [x.id, x]));
     return Object.keys(rt.CAST).map(person => {
       for (const scene of rt.encounters.filter(x => x.person === person)) {
         const raw = scene.body, parts = rt.sentences(raw), id = rt.clipId(person, raw), canonical = canon.get(id);
-        if (!canonical || canonical.raw !== raw || parts.length < 2) continue;
+        if (!canonical || canonical.raw !== raw || parts.length < 2 || !window.__truthful(scene.id, person)) continue;
         const whole = !!rt.DIALOGUES[id], ids = whole ? [id] : parts.map(part => rt.clipId(person, part));
         const clips = ids.map((clip, i) => ({id:clip, kind:whole ? 'D' : 'S', raw:whole ? raw : parts[i],
           base64:(whole ? rt.DIALOGUES[clip] : rt.CLIPS[clip]) || null}));
@@ -258,9 +269,11 @@ try {
   }
 
   async function playSample(sample, label) {
-    await page.evaluate(({scene, raw, parts}) => {
+    await page.evaluate(({scene, raw, parts, person}) => {
       const g = window.railwayGame; g.voices.enabled = false;
-      g.state().tycoon.encounter = scene; g.navigate('ops'); g.render();
+      window.__prepareTruth(g.state(), person);
+      if (!g.engine.stageScene(g.state(), scene)) throw Error('El encuentro no es verdad en la situación preparada');
+      g.navigate('ops'); g.render();
       // play() abre la decisión real, con la misma UI que encuentra el jugador.
       g.play();
       const paragraph = document.querySelector('#modal [data-say]');

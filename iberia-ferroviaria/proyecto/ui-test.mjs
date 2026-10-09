@@ -154,7 +154,16 @@ await shot('15-periodico');
 done.push('Dirección: cinco grupos, aceptar misión, contratar, activar wifi, investigar y consultar competencia y periódico.');
 // Una cara de cada emoción aparece en decisiones jugables, incluida Charo.
 for(const mood of ['happy','angry','worried','proud','surprised','disappointed','determined']){
- await game(m=>{const g=window.railwayGame;g.state().tycoon.encounter=`scene-treasury-${m}-0`;g.navigate('ops');g.render();},mood);
+ // Un encuentro solo se juega si es verdad: se prepara la situación de cada ánimo de Charo con una guerra de precios del autobús.
+ assert(await game(m=>{const g=window.railwayGame,s=g.state();s.event=null;s.flags.buswar=s.month+6;s.verdad.busWarFrom=s.month;s.verdad.spent=[];s.verdad.dues=[];s.tycoon.groups.treasury=50;s.last.net=0;s.cash=600;
+  if(m==='happy'){s.last.net=1;s.tycoon.groups.treasury=60;}
+  if(m==='angry'){s.cash=5;s.last.net=-10;s.verdad.spent=[{m:s.month,x:1}];}
+  if(m==='worried')s.cash=20;
+  if(m==='proud'){s.month=6;s.decided=[...new Set([...s.decided,'inaugural','energy'])];s.history=[0,1,2,3,4,5].map(i=>({month:i,net:i<3?-1:1}));}
+  if(m==='surprised')s.projects=[];
+  if(m==='disappointed')s.verdad.news.push({k:'misuse',m:s.month});
+  if(m==='determined'){s.orders.push({id:'o990',model:'s103',qty:2,delivered:0,start:s.month,first:s.month+1,next:s.month+1,total:60,remaining:42,unit:30,delay:0,historical:false});s.verdad.mods.push({kind:'fare',value:.85,routes:[s.routes.find(r=>r.active).id],from:s.month,until:s.month+3,label:'Campaña de descuentos'});}
+  const staged=g.engine.stageScene(s,`scene-treasury-${m}-1`);g.navigate('ops');g.render();return staged;},mood),'situación verdadera para Charo '+mood);
  if(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')))await game(()=>window.railwayGame.navigate('ops'));
  await page.click('[data-action=day-start]');
  await page.waitForSelector('#modal .choice');

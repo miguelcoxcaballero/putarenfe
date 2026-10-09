@@ -5,7 +5,7 @@ import {MODEL} from './dist/data.js';
 
 const fresh = () => { const s = E.initialState();s.started = true;s.cash = 10000;return s; };
 const validate = s => E.validateSave(JSON.parse(JSON.stringify(s)));
-const advance = (s,before=null) => {for(let d; (d=E.pendingDecision(s));) E.decide(s,d.id,0);before?.();assert.equal(E.step(s),true);};
+const advance = (s,before=null) => {for(let d; (d=E.pendingDecision(s));) E.decide(s,d.id,Math.max(0,d.choices.findIndex(c=>!c.disabled&&s.cash>=-(c.effects?.cash||0))));before?.();assert.equal(E.step(s),true);};
 const quote = s => (model,qty,id) => E.purchaseQuote(s,model,qty,id);
 const filters = {query:'',state:'all',delivery:'all',maker:'all',family:'all',sort:'recommended',favorites:false};
 const checked=[];

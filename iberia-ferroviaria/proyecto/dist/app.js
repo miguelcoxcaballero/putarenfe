@@ -10,6 +10,7 @@ import {tycoonPage,directionCount} from './tycoon-ui.js';
 import {CITIES, CITY, MODELS, MODEL, PROJECTS, HISTORICAL_ORDERS, GAUGES, POWERS} from './data.js';
 import {CHAPTERS, CHARACTERS} from './story.js';
 import * as E from './engine.js';
+import * as V from './verdad.js';
 import * as Marketplace from './marketplace.js';
 import * as O from './operations.js';
 import * as S from './schedule.js';
@@ -328,17 +329,16 @@ function setService(r, freq, fare = r.fare) {
   if (freq < want) toast(`Solo hay trenes para ${freq} salidas por sentido.`);
 }
 function afterCityAction() {
-  const before = state.stats.requests || 0, cash = state.cash;
-  E.checkRequests(state);
-  if ((state.stats.requests || 0) > before) {
-    const gain = state.cash - cash;
-    toast(`¡Petición atendida! +${money(gain)} y más reputación.`);
-    const city = inspect?.type === 'city' ? inspect.id : 'mad';
-    celebrate(city, '¡Petición cumplida!', '+' + money(gain));
-  }
+  const r = E.checkRequests(state);
+  if (r.started.length) {
+    const q = r.started[0];
+    toast(`Petición en marcha: ${CITY[q.city]?.name || q.city}. Cobras ${q.reward} M€ si la mantienes ${E.REQUEST_CLOSES} cierres de mes.`);
+    celebrate(q.city, 'Petición en marcha', `${E.REQUEST_CLOSES} cierres para cobrar`);
+  } else if (r.broken.length) toast(`Petición incumplida: ${CITY[r.broken[0].city]?.name || r.broken[0].city}. Se pierde el premio.`);
   if (state.ops.phase === 'running') checkSurgeEvents();
   perTrip = {}; cityCache.key = null;
 }
+function reqStatus(q) { return q.serving ? `Cumpliendo · ${q.kept || 0}/${E.REQUEST_CLOSES} cierres` : `Plazo: ${E.dateOf(q.until)}`; }
 function reqText(q) {
   const r = state.routes.find(r => r.id === q.route), dest = r ? otherEnd(r, q.city) : '';
   return {open: `Quiere tren con ${dest}, y lo quiere ya`, more: `Exige ${q.target} salidas por sentido con ${dest}`, fare: `Pide bajar a ${q.target} € el billete a ${dest}`,
@@ -376,7 +376,7 @@ function cityInspector() {
     const pct = r.active ? r.frequency / max * 100 : 0;
     const surge = surges.find(x => x.route === r.id), req = reqs.find(q => q.route === r.id);
     return `<div class="conn ${r.active ? 'on' : unlocked ? 'off' : 'locked'} ${surge || req ? 'hot' : ''}">
-      <div class="conn-top">${routeChip(r)}<strong>${esc(otherEnd(r, id))}</strong>${surge ? `<span class="flag">Necesita ${surge.need}</span>` : req ? '<span class="flag">Petición</span><span><i class="crowd">▮▮▮</i>Trenes llenos</span>' : ''}</div>
+      <div class="conn-top">${routeChip(r)}<strong>${esc(otherEnd(r, id))}</strong>${surge ? `<span class="flag">Necesita ${surge.need}</span>` : req ? `<span class="flag">Petición</span>${mt ? `<span>Ocupación ${n(mt.occupancy * 100)} %</span>` : ''}` : ''}</div>
       <div class="conn-bar"><span style="width:${pct}%;background:${routeColor(r)}"></span></div>
       <div class="conn-meta">${r.active ? `<b>${r.frequency}</b>/${max} salidas por sentido · <span class="${mt.net >= 0 ? 'pos' : 'neg'}">${signed(mt.net)}/mes</span>${mt.occupancy > .93 ? ' · <span class="neg">trenes llenos</span>' : ''}` : r.cut ? 'Cortada por obras de cambio de ancho' : unlocked ? (r.real ? `${n(official)} trenes en el horario real` : 'Sin horario: lo pones tú') : glyph('cone') + ' ' + esc(I.faultText(state, E.routeOptions(state, r).hybrid.faults[0] || {type: 'nopath'}))}</div>
       <div class="conn-actions">${r.active ? `<button class="round" data-action="freq-down" data-id="${r.id}" aria-label="Menos trenes" ${r.frequency <= 1 ? 'disabled' : ''}>−</button><button class="round plus" data-action="freq-up" data-id="${r.id}" aria-label="Más trenes" ${r.frequency >= max ? 'disabled' : ''}>+</button>` : unlocked && !r.cut ? `<button class="btn small primary" data-action="open-route" data-id="${r.id}" ${state.ended ? 'disabled' : ''}>Abrir · 4 M€</button>` : ''}<button class="btn small ghost" data-action="route" data-id="${r.id}">Detalles</button></div></div>`;
@@ -385,7 +385,7 @@ function cityInspector() {
   <div class="city-stats"><div><b>${active.length}/${routes.length}</b><span>conexiones</span></div><div><b>${n(pax / 30)}</b><span>viajeros/día</span></div><div><b class="${monthly >= 0 ? 'pos' : 'neg'}">${signed(monthly)}</b><span>al mes</span></div></div>
   ${incidents.map(x => `<div class="req red"><b>${incidentGlyph(x)} ${esc(x.reason)}</b><span>${esc(routeName(state.routes.find(r => r.id === x.route)))} · demora ${x.delay} min</span><div class="actions">${Object.entries(O.RESPONSES).map(([k, v]) => `<button class="btn small ${k === 'team' ? 'primary' : ''}" data-action="respond" data-id="${x.trip}" data-option="${k}">${esc(v.label)}</button>`).join('')}</div></div>`).join('')}
   ${surges.map(x => `<div class="req gold"><b>${glyph('bolt')} ${esc(x.reason)}</b><span>Refuerza la conexión con ${esc(otherEnd(state.routes.find(r => r.id === x.route), id))} hasta ${x.need} salidas antes de las ${clock(x.until)}.</span><em>+${n(x.bonus * 1000)} mil €</em></div>`).join('')}
-  ${reqs.map(q => `<div class="req"><b>${glyph('alert')} ${esc(reqText(q))}</b><span>Plazo: ${E.dateOf(q.until)} · recompensa</span><em>+${q.reward} M€</em><div class="actions"><button class="btn small primary" data-action="request" data-id="${q.id}">${q.type === 'station' ? 'Mejorar estación' : q.type === 'open' ? 'Abrir conexión' : q.type === 'fare' ? 'Bajar tarifa' : q.type === 'ave' ? 'Poner un AVE' : 'Poner más trenes'}</button>${q.type === 'ave' ? `<button class="btn small ghost" data-action="route" data-id="${q.route}">Ver qué falta</button>` : ''}</div></div>`).join('')}
+  ${reqs.map(q => `<div class="req"><b>${glyph('alert')} ${esc(reqText(q))}</b><span>${reqStatus(q)} · recompensa</span><em>+${q.reward} M€</em>${q.serving ? '' : `<div class="actions"><button class="btn small primary" data-action="request" data-id="${q.id}">${q.type === 'station' ? 'Mejorar estación' : q.type === 'open' ? 'Abrir conexión' : q.type === 'fare' ? 'Bajar tarifa' : q.type === 'ave' ? 'Poner un AVE' : 'Poner más trenes'}</button>${q.type === 'ave' ? `<button class="btn small ghost" data-action="route" data-id="${q.route}">Ver qué falta</button>` : ''}</div>`}</div>`).join('')}
   <h3 class="sub">Conexiones</h3><div class="conns">${cards || '<p class="muted">Sin conexiones ferroviarias en el juego.</p>'}</div>
   <h3 class="sub">Estación · ${E.STATION_LEVELS[level]}</h3>
   <div class="stations">${[0, 1, 2, 3].map(l => `<div class="${l <= level ? 'have' : ''}">${stationIcon(l, l === level)}<span>${E.STATION_LEVELS[l]}</span></div>`).join('')}</div>
@@ -572,6 +572,7 @@ function play() {
   if (layer === 'real') { playing = true; renderDaybar(); return; }
   if (!state.started) return intro();
   if (state.ended) return toast('Tu mandato ha terminado.');
+  E.revalidateScene(state);
   if (E.pendingDecision(state)) return showDecision();
   if ($('modal').open) return;
   const op = state.ops;
@@ -660,12 +661,21 @@ function renderMission() {
   el.classList.toggle('hidden', !!screen || (!!inspect && innerWidth < 1200) || !state.started);
   const q=state.tycoon.contracts.find(q=>q.status==='active')||state.tycoon.contracts.find(q=>q.status==='offered');
   const mandate=q?`<div class="mandate-card"><div class="kicker">${q.status==='active'?'Tu compromiso':'Propuesta por decidir'}${q.project?.stability?' · acuerdo operativo':q.project?` · etapa ${q.project.stage}/3`:''}</div><strong>${esc(q.project?`${q.project.title} · ${routeName(routeById(q.project.route))}`:T.ARCS[q.arc][0])}</strong>${q.status==='active'?`<div class="mandate-progress"><span>${n(T.missionValue(state,q))} / ${n(q.target)}</span><span>${Math.max(0,q.until-state.month)} meses restantes</span></div><div class="meter"><span style="width:${Math.min(100,T.missionValue(state,q)/Math.max(1,q.target)*100)}%"></span></div>${q.goal==='project'?'<small>Tres cierres mensuales consecutivos.</small>':''}`:`<small>Elige un plan en ${Math.max(0,q.until-state.month)} meses.</small>`}<button class="btn small" data-action="tycoon-tab" data-id="agenda">${q.status==='active'?'Ver requisitos y siguiente paso':'Comparar los dos planes'}</button></div>`:'';
-  if(state.tycoon.mode==='free'){el.innerHTML=`<div class="kicker">Modo libre</div><h2>Tu red, tus reglas.</h2>${mandate||'<p>Explora la red, compite y decide qué encargos asumir.</p><button class="btn small" data-action="tycoon-tab" data-id="agenda">Abrir agenda</button>'}`;return;}
+  if(state.tycoon.mode==='free'){el.innerHTML=`<div class="kicker">Modo libre</div><h2>Tu red, tus reglas.</h2>${mandate||'<p>Explora la red, compite y decide qué encargos asumir.</p><button class="btn small" data-action="tycoon-tab" data-id="agenda">Abrir agenda</button>'}${ongoingHTML()}`;return;}
   if (!c) return;
   el.innerHTML = `${mandate}<div class="kicker">Capítulo ${state.chapter + 1} · ${c.years}</div><h2>${esc(c.title)}</h2><ul>${c.objectives.map(([k, target, title]) => {
     const v = E.objectiveValue(state, k), done = v >= target;
     return `<li class="${done ? 'done' : ''}"><i></i><span>${esc(title)}<div class="meter"><span style="width:${Math.min(100, v / target * 100)}%"></span></div></span><span>${k === 'solvent' ? (v ? '✓' : '—') : n(Math.min(v, target)) + '/' + n(target)}</span></li>`;
-  }).join('')}</ul>${E.chapterReady(state)?`<button class="btn small primary chapter-reward" data-action="claim" ${state.ended?'disabled':''}>Recibir ${money(c.reward)} de financiación</button>`:''}${(state.requests || []).length || liveSurges().length ? `<div class="requests"><div class="kicker">Peticiones de las ciudades</div>${liveSurges().map(x => `<button data-action="city" data-id="${x.city}"><b>${glyph('bolt')} ${esc(CITY[x.city]?.name)}</b><span>${esc(x.reason)} · hasta ${clock(x.until)}</span><em>+${n(x.bonus * 1000)}k€</em></button>`).join('')}${(state.requests || []).map(q => `<button data-action="city" data-id="${q.city}"><b>${glyph('alert')} ${esc(CITY[q.city]?.name)}</b><span>${esc(reqText(q))}</span><em>+${q.reward} M€</em></button>`).join('')}</div>` : ''}`;
+  }).join('')}</ul>${E.chapterReady(state)?`<button class="btn small primary chapter-reward" data-action="claim" ${state.ended?'disabled':''}>Recibir ${money(c.reward)} de financiación</button>`:''}${(state.requests || []).length || liveSurges().length ? `<div class="requests"><div class="kicker">Peticiones de las ciudades</div>${liveSurges().map(x => `<button data-action="city" data-id="${x.city}"><b>${glyph('bolt')} ${esc(CITY[x.city]?.name)}</b><span>${esc(x.reason)} · hasta ${clock(x.until)}</span><em>+${n(x.bonus * 1000)}k€</em></button>`).join('')}${(state.requests || []).map(q => `<button data-action="city" data-id="${q.city}"><b>${glyph('alert')} ${esc(CITY[q.city]?.name)}</b><span>${esc(reqText(q))}${q.serving ? ` · ${q.kept || 0}/${E.REQUEST_CLOSES}` : ''}</span><em>+${q.reward} M€</em></button>`).join('')}</div>` : ''}${ongoingHTML()}`;
+}
+/** Lo que está en marcha por decisiones y compromisos: qué es y hasta cuándo. */
+function ongoingHTML() {
+  const list = V.ongoing(state).slice(0, 5);
+  if (!list.length) return '';
+  return `<div class="requests"><div class="kicker">En curso</div>${list.map(x => {
+    const target = x.route ? `data-action="route" data-id="${x.route}"` : x.city ? `data-action="city" data-id="${x.city}"` : 'data-action="navigate" data-screen="network"';
+    return `<button ${target}><b>${esc(x.label)}</b><span>${x.promise ? 'Plazo' : 'Hasta'}: ${E.dateOf(Math.max(state.month, x.until - 1))}</span></button>`;
+  }).join('')}</div>`;
 }
 function renderLegend() {
   const items = {
@@ -1027,6 +1037,8 @@ function routeInspector() {
   if (r.active) body += `<h2 class="section">Frente a la carretera</h2><div class="shares"><span style="width:${m.share * 100}%;background:var(--wine)"></span><span style="width:${m.busShare * 100}%;background:var(--gold-2)"></span><span style="width:${m.otherShare * 100}%;background:var(--paper-3)"></span></div>
   <div class="shares-legend"><span><i style="background:var(--wine)"></i>Tren ${n(m.share * 100)} %</span><span><i style="background:var(--gold-2)"></i>Autobús ${n(m.busShare * 100)} %</span><span><i style="background:var(--paper-3)"></i>Coche y otros ${n(m.otherShare * 100)} %</span></div>
   <dl class="figures"><div><dt>Viajeros / mes</dt><dd>${n(m.passengers)}</dd></div><div><dt>Ocupación</dt><dd>${n(m.occupancy * 100)} %</dd></div><div><dt>Resultado</dt><dd class="${m.net >= 0 ? 'pos' : 'neg'}">${signed(m.net)}</dd></div></dl>`;
+  const effects = V.routeEffects(state, r.id);
+  if (effects.length) body += `<p class="callout">${effects.map(x => `${esc(x.label)} · hasta ${E.dateOf(Math.max(state.month, x.until - 1))}`).join('<br>')}</p>`;
   if (work && work.type !== 'upgrade') body += `<h2 class="section">Obra en la línea</h2><div class="bar gold"><span style="width:${O.constructionStatus(state, work).progress * 100}%"></span></div><p class="small">${esc(map.workName(work))} · fin previsto ${E.dateOf(work.due)}</p><button class="btn small" data-action="visit-work" data-id="${work.id}">Ver la obra</button>`;
   body += `<div class="toolbar">${r.real ? `<button class="btn small" data-action="route-trips" data-id="${r.id}">Ver sus trenes</button>` : ''}<button class="btn small" data-action="route-zoom" data-id="${r.id}">Encuadrar</button></div>`;
   return {kicker: r.active ? 'Relación en servicio' : r.cut ? 'Relación cortada por obras' : 'Relación por abrir', title: `${routeChip(r)} ${esc(routeName(r))}`, body};
@@ -1169,9 +1181,11 @@ function requestCampaign(){
 }
 function menuGuide(){showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="begin">Nueva campaña</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}
 function showDecision() {
-  const d = E.pendingDecision(state); if (!d) return;
+  // Un encuentro solo se enseña si su arranque y su conflicto siguen siendo verdad ahora.
+  E.revalidateScene(state);
+  const d = E.pendingDecision(state); if (!d) { render(); return; }
   const person = CHARACTERS[d.person];
-  showModal(`<div class="art portrait" data-mood="${d.mood||'happy'}" style="${faceStyle(d.person, d.mood)}" role="img" aria-label="${esc(person.name)}"><span class="plate"><b>${esc(person.name)}</b>${esc(person.role)}</span></div><div class="content"><div class="kicker">${esc(E.dateOf(state.month))} · ${d.event ? 'Imprevisto' : 'Consejo de dirección'}</div><h1>${esc(d.title)}</h1><p data-say="${esc(d.body)}">${sayHtml(d.body,d.person)}</p><p class="small speaker">${sayButton(d.person, 'modal')} <span class="say-caption" aria-hidden="true">${sayLabel('modal')}</span></p>${d.choices.map((c, i) => `<button class="choice" data-action="decision" data-id="${d.id}" data-choice="${i}" ${state.cash < -(c.effects.cash || 0) ? 'disabled' : ''}><strong>${esc(c.label)}</strong><span>${esc(c.detail)}</span></button>`).join('')}</div>`);
+  showModal(`<div class="art portrait" data-mood="${d.mood||'happy'}" style="${faceStyle(d.person, d.mood)}" role="img" aria-label="${esc(person.name)}"><span class="plate"><b>${esc(person.name)}</b>${esc(person.role)}</span></div><div class="content"><div class="kicker">${esc(E.dateOf(state.month))} · ${d.event ? 'Imprevisto' : 'Consejo de dirección'}</div><h1>${esc(d.title)}</h1><p data-say="${esc(d.body)}">${sayHtml(d.body,d.person)}</p>${d.instance ? `<p class="small decision-instance"><b>${esc(d.instance)}</b></p>` : ''}<p class="small speaker">${sayButton(d.person, 'modal')} <span class="say-caption" aria-hidden="true">${sayLabel('modal')}</span></p>${d.choices.map((c, i) => `<button class="choice" data-action="decision" data-id="${d.id}" data-choice="${i}" ${c.disabled || (!c.deferred && c.cost > 0 && state.cash < c.cost) ? 'disabled' : ''}><strong>${esc(c.label)}</strong><span>${esc(c.disabled && c.reason ? c.reason : c.detail)}</span></button>`).join('')}</div>`);
   speakIn($('modal'), d.person, 'modal');
 }
 function dayReport() {
@@ -1301,7 +1315,7 @@ document.addEventListener('click', event => {
     case 'day-end': pause(); if (state.ops.phase === 'running') { state.ops.minute = O.dayBounds(plan()).last; finishDay(); } break;
     case 'day-review': dayReport(); break;
     case 'day-next': try { O.nextDay(state); sfx.result(true); closeModal(); seenIncidents = new Set(); autosave(); render(); if (E.pendingDecision(state)) showDecision(); else if (state.ended) navigate('story'); } catch (e) { sfx.result(false); toast(e.message); } break;
-    case 'skip-month': pause();if(E.pendingDecision(state)){showDecision();break;}try { if (O.skipMonth(state)) { sfx.result(true); autosave(); render(); toast('Mes delegado. Cuentas liquidadas.'); if (E.pendingDecision(state)) showDecision(); if (state.ended) navigate('story'); } else sfx.intent = null; } catch (e) { sfx.result(false); toast(e.message); } break;
+    case 'skip-month': pause();if(E.pendingDecision(state)){showDecision();break;}try { const paidBefore = state.stats.requests || 0; if (O.skipMonth(state)) { sfx.result(true); autosave(); render(); const paid = (state.stats.requests || 0) - paidBefore; toast('Mes delegado. Cuentas liquidadas.' + (paid ? ` ${paid} petición${paid > 1 ? 'es' : ''} cobrada${paid > 1 ? 's' : ''}.` : '')); if (E.pendingDecision(state)) showDecision(); if (state.ended) navigate('story'); } else sfx.intent = null; } catch (e) { sfx.result(false); toast(e.message); } break;
     case 'open-incidents': document.querySelector('.alert-pill')?.remove(); navigate('ops'); if (screen !== 'ops') navigate('ops'); break;
     case 'respond': if(act(() => O.resolveIncident(state, id, b.dataset.option), O.RESPONSES[b.dataset.option].note)&&tut?.answers.incident===id)tutorialMark('incident-resolved'); break;
     case 'route': selectRoute(id); break;
