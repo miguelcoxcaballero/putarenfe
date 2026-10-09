@@ -19,6 +19,7 @@ jobs:
         with:
           sparse-checkout: |
             /rescate-originales/
+            /rescate-preview/
             /iberia-ferroviaria/proyecto/dist/assets/rescate/
             /iberia-ferroviaria/assets/rescate/
           sparse-checkout-cone-mode: false
