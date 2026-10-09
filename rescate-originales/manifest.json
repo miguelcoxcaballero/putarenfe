@@ -1,0 +1,380 @@
+[
+  {
+    "name": "portada-rescate",
+    "width": 1600,
+    "height": 900,
+    "description": "Un tren regional blanco con franja morada de Tenfe, viejo y cansado, parado en un andén rural español al amanecer, viajeros esperando con abrigos, niebla baja."
+  },
+  {
+    "name": "tren-bcbb",
+    "width": 1536,
+    "height": 1024,
+    "description": "Tren de alta velocidad inspirado en el CRRC CR400AF «Fuxing» (morro largo y afilado, faros rasgados), librea blanca con detalles morados, en el MISMO taller de vigas azules y grúa amarilla que las demás fotos de trenes."
+  },
+  {
+    "name": "tren-dorfler",
+    "width": 1536,
+    "height": 1024,
+    "description": "Tren regional eléctrico inspirado en el Stadler FLIRT (frontal corto y redondeado, parabrisas grande y curvo), librea blanca y morada, en el MISMO taller de vigas azules y grúa amarilla."
+  },
+  {
+    "name": "tech-ultrasonidos",
+    "width": 960,
+    "height": 640,
+    "description": "Carretón amarillo de auscultación por ultrasonidos sobre la vía, técnico con chaleco naranja y tableta, campo castellano por la mañana."
+  },
+  {
+    "name": "tech-predictivo",
+    "width": 960,
+    "height": 640,
+    "description": "Ingenieros de mantenimiento mirando gráficas de sensores de trenes en pantallas grandes; a través de una cristalera, trenes en un depósito."
+  },
+  {
+    "name": "tech-bateadora",
+    "width": 960,
+    "height": 640,
+    "description": "Bateadora amarilla trabajando de noche sobre el balasto con focos, operarios con chalecos naranjas."
+  },
+  {
+    "name": "tech-cadenciados",
+    "width": 960,
+    "height": 640,
+    "description": "Gran panel de salidas en el vestíbulo de una estación española, viajeros con maletas, luz natural."
+  },
+  {
+    "name": "tech-regulacion",
+    "width": 960,
+    "height": 640,
+    "description": "Puesto de regulación ferroviaria: operadores frente a una pared de pantallas con el esquema de las líneas."
+  },
+  {
+    "name": "tech-ertms",
+    "width": 960,
+    "height": 640,
+    "description": "Cabina de conducción de un tren moderno con pantallas digitales ETCS, asiento vacío, la vía al frente a través del parabrisas."
+  },
+  {
+    "name": "tech-contrato",
+    "width": 960,
+    "height": 640,
+    "description": "Un técnico del fabricante y el jefe de taller se dan la mano junto a un tren regional blanco en el taller."
+  },
+  {
+    "name": "tech-segunda",
+    "width": 960,
+    "height": 640,
+    "description": "Trenes regionales diésel viejos aparcados en una playa de vías con hierbajos, paisaje seco español."
+  },
+  {
+    "name": "tech-bimodo",
+    "width": 960,
+    "height": 640,
+    "description": "Tren regional bimodo blanco y morado circulando por vía única sin catenaria entre colinas secas."
+  },
+  {
+    "name": "tech-abono",
+    "width": 960,
+    "height": 640,
+    "description": "Mano sujetando una tarjeta-abono morada junto a un torniquete de validación de una estación."
+  },
+  {
+    "name": "tech-dinamico",
+    "width": 960,
+    "height": 640,
+    "description": "Móvil en la mano de un viajero mostrando una gráfica de precios de billetes, andén desenfocado detrás."
+  },
+  {
+    "name": "tech-app",
+    "width": 960,
+    "height": 640,
+    "description": "Joven escaneando un billete con código QR en su móvil en la puerta de un tren blanco."
+  },
+  {
+    "name": "tech-prensa",
+    "width": 960,
+    "height": 640,
+    "description": "Sala de prensa vacía con muchos micrófonos en un atril de madera y fotógrafos."
+  },
+  {
+    "name": "tech-inauguraciones",
+    "width": 960,
+    "height": 640,
+    "description": "Inauguración en una estación pequeña: banda de música de pueblo y políticos con unas tijeras enormes cortando una cinta."
+  },
+  {
+    "name": "tech-influencers",
+    "width": 960,
+    "height": 640,
+    "description": "Joven influencer grabándose con un aro de luz dentro de un vagón de tren moderno."
+  },
+  {
+    "name": "tech-contabilidad",
+    "width": 960,
+    "height": 640,
+    "description": "Mesa de despacho de noche con libros de cuentas, facturas, calculadora y un sobre marrón lleno de billetes de euro."
+  },
+  {
+    "name": "tech-abogados",
+    "width": 960,
+    "height": 640,
+    "description": "Abogados con toga negra caminando por el pasillo de un juzgado español con carpetas gruesas."
+  },
+  {
+    "name": "tech-destructora",
+    "width": 960,
+    "height": 640,
+    "description": "Destructora de papel industrial rebosante de documentos triturados en un despacho a oscuras."
+  },
+  {
+    "name": "mega-taller",
+    "width": 1280,
+    "height": 720,
+    "description": "Interior de un gran taller ferroviario nuevo con fosos, torno de ruedas y trenes blancos, vigas azules y grúa amarilla."
+  },
+  {
+    "name": "mega-ctc",
+    "width": 1280,
+    "height": 720,
+    "description": "Centro de control ferroviario futurista con una pared de vídeo curva gigante con el mapa de líneas y operadores."
+  },
+  {
+    "name": "mega-mediterraneo",
+    "width": 1280,
+    "height": 720,
+    "description": "Vista aérea de una doble vía nueva junto a la costa mediterránea, naranjos y mar azul, tren blanco y morado."
+  },
+  {
+    "name": "mega-teruel",
+    "width": 1280,
+    "height": 720,
+    "description": "Obra de un túnel y un viaducto de hormigón en montañas áridas de Teruel, grúas y operarios."
+  },
+  {
+    "name": "mega-estacion",
+    "width": 1280,
+    "height": 720,
+    "description": "Gran estación subterránea pasante moderna en Madrid, andenes largos, techo de madera y vidrio, viajeros."
+  },
+  {
+    "name": "mega-monumento",
+    "width": 1280,
+    "height": 720,
+    "description": "Rotonda de un pueblo español con una estatua de bronce de una locomotora de vapor sobre un pedestal y una cinta roja."
+  },
+  {
+    "name": "territorio-extremadura",
+    "width": 1280,
+    "height": 720,
+    "description": "Dehesa extremeña con encinas y una vía única sin electrificar; un tren diésel viejo detenido en mitad del campo."
+  },
+  {
+    "name": "territorio-teruel",
+    "width": 1280,
+    "height": 720,
+    "description": "Estación pequeña de montaña en Teruel con pancartas de «Teruel existe» y vecinos esperando."
+  },
+  {
+    "name": "territorio-soria",
+    "width": 1280,
+    "height": 720,
+    "description": "Estación de Soria casi vacía en invierno, paisaje de páramo nevado."
+  },
+  {
+    "name": "territorio-cantabria",
+    "width": 1280,
+    "height": 720,
+    "description": "Boca de túnel antiguo de piedra en un valle verde de Cantabria interior con una vía estrecha."
+  },
+  {
+    "name": "evento-averia",
+    "width": 1280,
+    "height": 720,
+    "description": "Tren regional averiado en una rampa con el capó abierto y un mecánico con linterna."
+  },
+  {
+    "name": "evento-cable",
+    "width": 1280,
+    "height": 720,
+    "description": "Zanja de cables junto a la vía con el cable de cobre robado, cortes limpios, guardia civil al fondo."
+  },
+  {
+    "name": "evento-calor",
+    "width": 1280,
+    "height": 720,
+    "description": "Vagón de tren abarrotado en verano, viajeros abanicándose con billetes, sol intenso."
+  },
+  {
+    "name": "evento-nevada",
+    "width": 1280,
+    "height": 720,
+    "description": "Tren detenido en una vía nevada de montaña con una quitanieves al fondo."
+  },
+  {
+    "name": "evento-huelga",
+    "width": 1280,
+    "height": 720,
+    "description": "Trabajadores ferroviarios en huelga con pancartas delante de una estación."
+  },
+  {
+    "name": "evento-viral",
+    "width": 1280,
+    "height": 720,
+    "description": "Revisora sonriente cantando en un vagón mientras los viajeros graban con el móvil."
+  },
+  {
+    "name": "evento-desprendimiento",
+    "width": 1280,
+    "height": 720,
+    "description": "Rocas caídas sobre la vía en una trinchera, operarios inspeccionando."
+  },
+  {
+    "name": "evento-auditoria",
+    "width": 1280,
+    "height": 720,
+    "description": "Auditores con cajas de archivo revisando facturas en una sala de reuniones."
+  },
+  {
+    "name": "evento-fondos",
+    "width": 1280,
+    "height": 720,
+    "description": "Bandera de la Unión Europea junto a un cartel de obra ferroviaria financiada."
+  },
+  {
+    "name": "evento-visita",
+    "width": 1280,
+    "height": 720,
+    "description": "Andén con cámaras de televisión y periodistas esperando la llegada de un tren."
+  },
+  {
+    "name": "evento-tuneles",
+    "width": 1280,
+    "height": 720,
+    "description": "Tren nuevo atascado en la boca de un túnel antiguo demasiado estrecho, operarios midiendo con cinta."
+  },
+  {
+    "name": "evento-lowgo",
+    "width": 1280,
+    "height": 720,
+    "description": "Tren de una compañía low cost con colores chillones adelantando en un andén, cartel de billetes a 9 €."
+  },
+  {
+    "name": "escandalo-traviesas",
+    "width": 1280,
+    "height": 720,
+    "description": "Montón de traviesas de hormigón nuevas abandonadas en un descampado con hierba crecida."
+  },
+  {
+    "name": "escandalo-yate",
+    "width": 1280,
+    "height": 720,
+    "description": "Yate de lujo en un puerto mediterráneo con una mesa de marisco y champán en cubierta, sin personas reconocibles."
+  },
+  {
+    "name": "escandalo-enchufe",
+    "width": 1280,
+    "height": 720,
+    "description": "Casco de obra nuevo y reluciente sobre una mesa de despacho con una placa de «jefe de cuadrilla»."
+  },
+  {
+    "name": "escandalo-mariscada",
+    "width": 1280,
+    "height": 720,
+    "description": "Mesa enorme de marisco con nécoras, gambas y botellas en un restaurante, restos de una cena."
+  },
+  {
+    "name": "escandalo-sobres",
+    "width": 1280,
+    "height": 720,
+    "description": "Libreta abierta con iniciales y cifras junto a sobres marrones sobre una mesa."
+  },
+  {
+    "name": "escandalo-juez",
+    "width": 1280,
+    "height": 720,
+    "description": "Mazo de juez sobre una mesa de juzgado con un sobre marrón medio escondido."
+  },
+  {
+    "name": "escandalo-charo",
+    "width": 1280,
+    "height": 720,
+    "description": "Despacho de Hacienda ordenadísimo con un sobre marrón cerrado sobre la mesa y una lámpara."
+  },
+  {
+    "name": "extorsion",
+    "width": 1280,
+    "height": 720,
+    "description": "Fotos impresas sobre la mesa de un bar, una mano las empuja hacia el espectador."
+  },
+  {
+    "name": "impago",
+    "width": 1280,
+    "height": 720,
+    "description": "Oficina de tesorería con facturas impagadas apiladas y una calculadora con números rojos."
+  },
+  {
+    "name": "hito",
+    "width": 1280,
+    "height": 720,
+    "description": "Andén lleno de viajeros subiendo a un tren regional blanco y morado al atardecer."
+  },
+  {
+    "name": "elecciones",
+    "width": 1280,
+    "height": 720,
+    "description": "Urna electoral transparente con papeletas en un colegio electoral español."
+  },
+  {
+    "name": "juzgado",
+    "width": 1280,
+    "height": 720,
+    "description": "Fachada de un juzgado español con periodistas en la puerta."
+  },
+  {
+    "name": "cloacas",
+    "width": 1280,
+    "height": 720,
+    "description": "Túnel de servicio oscuro bajo una estación con tuberías y una luz al fondo."
+  },
+  {
+    "name": "etapa-s1",
+    "width": 1280,
+    "height": 720,
+    "description": "Corredor Norte: tren regional llegando tarde a la estación de Valladolid, viajeros mirando el reloj."
+  },
+  {
+    "name": "etapa-s2",
+    "width": 1280,
+    "height": 720,
+    "description": "Tres trenes regionales en tres andenes de una gran estación, amanecer."
+  },
+  {
+    "name": "etapa-s3",
+    "width": 1280,
+    "height": 720,
+    "description": "Despacho ministerial con carteles electorales y un mapa ferroviario de España en la pared."
+  },
+  {
+    "name": "etapa-s4",
+    "width": 1280,
+    "height": 720,
+    "description": "Carretera vacía y vía abandonada en la España vaciada al atardecer, pueblo al fondo."
+  },
+  {
+    "name": "etapa-s5",
+    "width": 1280,
+    "height": 720,
+    "description": "Tren regional moderno blanco y morado cruzando un viaducto al sol, red ferroviaria funcionando."
+  },
+  {
+    "name": "fin-victoria",
+    "width": 1280,
+    "height": 720,
+    "description": "Inauguración multitudinaria con confeti en una estación moderna y un tren nuevo blanco y morado."
+  },
+  {
+    "name": "fin-derrota",
+    "width": 1280,
+    "height": 720,
+    "description": "Despacho vacío con cajas de mudanza y una placa de «Presidencia de Tenfe» en el suelo."
+  }
+]

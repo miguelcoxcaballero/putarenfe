@@ -1,0 +1,82 @@
+name: Convertir imágenes Rescate de Tenfe
+on:
+  push:
+    branches: [codex/rescate-originales-20261009]
+    paths:
+      - 'rescate-originales/**'
+      - '.github/workflows/rescate-assets.yml'
+permissions:
+  contents: write
+concurrency:
+  group: rescate-assets-conversion
+  cancel-in-progress: false
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /rescate-originales/
+            /iberia-ferroviaria/proyecto/dist/assets/rescate/
+            /iberia-ferroviaria/assets/rescate/
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Convertir y validar
+        shell: python
+        run: |
+          import hashlib, io, json
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          root = Path("rescate-originales")
+          items = json.loads((root / "manifest.json").read_text())
+          assert len(items) == 63
+          assert len({item["name"] for item in items}) == 63
+          source = Path("iberia-ferroviaria/proyecto/dist/assets/rescate")
+          public = Path("iberia-ferroviaria/assets/rescate")
+          source.mkdir(parents=True, exist_ok=True)
+          public.mkdir(parents=True, exist_ok=True)
+          completed = []
+          for item in items:
+              name = item["name"]
+              assert name.replace("-", "").isalnum() and name == name.lower()
+              original = root / (name + ".png")
+              if not original.is_file():
+                  continue
+              target_size = (item["width"], item["height"])
+              with Image.open(original) as opened:
+                  opened.load()
+                  assert opened.format == "PNG"
+                  photo = ImageOps.fit(opened.convert("RGB"), target_size, method=Image.Resampling.LANCZOS, centering=(0.5, 0.5))
+                  quality = 80
+                  while True:
+                      buffer = io.BytesIO()
+                      photo.save(buffer, format="WEBP", quality=quality, method=6)
+                      data = buffer.getvalue()
+                      if len(data) <= 350000 or quality <= 60:
+                          break
+                      quality -= 5
+              for folder in (source, public):
+                  (folder / (name + ".webp")).write_bytes(data)
+              with Image.open(io.BytesIO(data)) as check:
+                  check.load()
+                  assert check.format == "WEBP" and check.size == target_size
+              assert (source / (name + ".webp")).read_bytes() == (public / (name + ".webp")).read_bytes()
+              completed.append(name)
+              print(f"{name}: {target_size[0]}x{target_size[1]}, {len(data)} bytes, quality={quality}, sha256={hashlib.sha256(data).hexdigest()}")
+          assert completed, "No generated originals found"
+          print(f"Validated {len(completed)}/63 images, {len(completed)*2}/126 files")
+      - name: Guardar solo WebP en la rama de trabajo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --force iberia-ferroviaria/proyecto/dist/assets/rescate iberia-ferroviaria/assets/rescate
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Convertir y validar originales del Rescate de Tenfe"
+          git push origin HEAD:codex/rescate-originales-20261009
