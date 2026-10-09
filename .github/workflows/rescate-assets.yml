@@ -31,7 +31,7 @@ jobs:
         run: |
           import hashlib, io, json
           from pathlib import Path
-          from PIL import Image, ImageOps
+          from PIL import Image, ImageOps, ImageDraw
           root = Path("rescate-originales")
           items = json.loads((root / "manifest.json").read_text())
           assert len(items) == 63
@@ -70,11 +70,42 @@ jobs:
               print(f"{name}: {target_size[0]}x{target_size[1]}, {len(data)} bytes, quality={quality}, sha256={hashlib.sha256(data).hexdigest()}")
           assert completed, "No generated originals found"
           print(f"Validated {len(completed)}/63 images, {len(completed)*2}/126 files")
+          previews = Path("rescate-preview")
+          previews.mkdir(exist_ok=True)
+          report = []
+          for item in items:
+              if item["name"] not in completed:
+                  continue
+              data = (public / (item["name"] + ".webp")).read_bytes()
+              report.append(dict(item, bytes=len(data), sha256=hashlib.sha256(data).hexdigest()))
+          (previews / "validation.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
+          for offset in range(0, len(completed), 32):
+              names = completed[offset:offset+32]
+              board = Image.new("RGB", (1280, ((len(names)+3)//4)*210), "#161c24")
+              draw = ImageDraw.Draw(board)
+              for index, name in enumerate(names):
+                  x, y = (index % 4)*320, (index // 4)*210
+                  with Image.open(public / (name + ".webp")) as opened:
+                      thumb = ImageOps.contain(opened.convert("RGB"), (316, 180), Image.Resampling.LANCZOS)
+                      board.paste(thumb, (x+(320-thumb.width)//2, y+(180-thumb.height)//2))
+                  draw.text((x+5, y+187), name, fill="white")
+              board.save(previews / f"contact-{offset//32+1}.jpg", quality=88)
+          wide = [item["name"] for item in items if item["name"] in completed and item["width"] == 1280]
+          if wide:
+              board = Image.new("RGB", (1280, ((len(wide)+3)//4)*150), "#161c24")
+              draw = ImageDraw.Draw(board)
+              for index, name in enumerate(wide):
+                  x, y = (index % 4)*320, (index // 4)*150
+                  with Image.open(public / (name + ".webp")) as opened:
+                      thumb = ImageOps.fit(opened.convert("RGB"), (316, 118), Image.Resampling.LANCZOS)
+                      board.paste(thumb, (x+2, y))
+                  draw.text((x+5, y+125), name, fill="white")
+              board.save(previews / "crop-16-6.jpg", quality=88)
       - name: Guardar solo WebP en la rama de trabajo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --force iberia-ferroviaria/proyecto/dist/assets/rescate iberia-ferroviaria/assets/rescate
+          git add --force iberia-ferroviaria/proyecto/dist/assets/rescate iberia-ferroviaria/assets/rescate rescate-preview
           if git diff --cached --quiet; then
             exit 0
           fi
