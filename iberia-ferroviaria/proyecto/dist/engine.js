@@ -80,7 +80,7 @@ export function configureRoute(s,id,fleetId,frequency,fare){
  const m=MODEL[f.model];frequency=Number(frequency);fare=Number(fare);
  if(!Number.isInteger(frequency)||frequency<1||frequency>maxFrequency(r)||!Number.isFinite(fare)||fare<1.5||fare>150)throw Error(`Entre 1 y ${maxFrequency(r)} salidas por sentido, y una tarifa de 1,5 a 150 €.`);
  const p=routeCheck(s,r,m);
- if(!p.ok)throw Error(`El ${m.family} no puede ir por ahí. ${I.faultText(s,p.faults[0])}.`);
+ if(!p.ok)throw Error(`El ${m.family} no puede ir por ahí. ${I.faultText(s,I.keyFault(s,p.faults)||p.faults[0])}.`);
  if(f.condition<30)throw Error('Este tren está para el desguace. Mándalo al taller antes de sacarlo.');
  const units=requiredUnits(s,r,m,frequency);
  if(available(s,f,r.id)<units)throw Error(`Necesitas ${units} trenes y en ese lote solo quedan ${available(s,f,r.id)} libres.`);
@@ -273,11 +273,11 @@ function migrate(s){
 }
 /** Servicios que la red ya no admite con su tren (la tensión de la catenaria cuenta): otro lote compatible o, si no hay, se suspenden. */
 function migrateServices(s){
- if(!Array.isArray(s.fleet)||!Array.isArray(s.projects)||!s.infra?.t||!Array.isArray(s.infra.c)||!Array.isArray(s.infra.custom)||!s.infra.custom.every(c=>I.NODES[c?.a]&&I.NODES[c?.b]))return; // lo demás lo rechaza validateSave
+ if(!Array.isArray(s.fleet)||!Array.isArray(s.projects)||!Array.isArray(s.log)||!s.infra?.t||!Array.isArray(s.infra.c)||!Array.isArray(s.infra.custom)||!s.infra.custom.every(c=>I.NODES[c?.a]&&I.NODES[c?.b]))return; // lo demás lo rechaza validateSave
  for(const r of s.routes){
   if(!r?.active||!Array.isArray(r.via))continue;const f=s.fleet.find(f=>f.id===r.fleet);
   if(!f||!MODEL[f.model]||canRun(s,r,MODEL[f.model]))continue;
-  const p=routeCheck(s,r,MODEL[f.model]),why=p.faults[0]?I.faultText(s,p.faults[0],true):'la vía ya no lo admite';
+  const p=routeCheck(s,r,MODEL[f.model]),k=I.keyFault(s,p.faults),why=k?I.faultText(s,k,true):'la vía ya no lo admite';
   const fits=s.fleet.filter(x=>x.id!==f.id&&x.qty>0&&x.condition>=30&&MODEL[x.model]&&canRun(s,r,MODEL[x.model])&&available(s,x)>=requiredUnits(s,r,MODEL[x.model],r.frequency));
   const alt=fits.find(x=>MODEL[x.model].family===MODEL[f.model].family)||fits[0];
   if(alt){r.fleet=alt.id;r.units=requiredUnits(s,r,MODEL[alt.model],r.frequency);log(s,'Material cambiado',routeName(r)+': '+MODEL[f.model].name+' no puede ir ('+why+'). Pasa a '+MODEL[alt.model].name+'.');}

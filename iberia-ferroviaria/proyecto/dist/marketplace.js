@@ -1,6 +1,6 @@
 import {MODELS, MODEL, GAUGES, POWERS, VOLTAGE_TEXT} from './data.js';
 import {brandLogo, brandName} from './brands.js';
-import {plan, profileOf, faultText} from './infra.js';
+import {plan, profileOf, faultText, keyFault} from './infra.js';
 
 export const MANUFACTURERS = ['Tardo', 'KAFKA', 'Schlimmens', 'Dörfler', 'BCBB', 'Malstom'];
 export const makerName = m => brandName(m.maker);
@@ -90,8 +90,8 @@ const routeOf = (s, id) => (s.routes || []).find(r => r.id === id) || null;
 export function routeFit(s, routeId, model) {
   const r = routeOf(s, routeId), m = MODEL[model];
   if (!r || !m) return null;
-  const p = plan(s, r.via, profileOf(m));
-  return {ok: p.ok, reason: p.ok ? '' : p.faults[0] ? faultText(s, p.faults[0], true) : 'No hay vías'};
+  const p = plan(s, r.via, profileOf(m)), f = p.ok ? null : keyFault(s, p.faults);
+  return {ok: p.ok, reason: p.ok ? '' : f ? faultText(s, f, true) : 'No hay vías'};
 }
 /** En cuántas relaciones del juego puede circular hoy el modelo. */
 export function routeReach(s, model) {

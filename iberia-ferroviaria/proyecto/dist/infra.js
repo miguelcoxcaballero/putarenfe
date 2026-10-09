@@ -174,8 +174,8 @@ function traverse(s, g, e, mode, prof, relaxed) {
   return {minutes, faults};
 }
 
-/** Recorrido por los nodos de paso con el perfil dado. relaxed: admite faltas (para explicar qué falta). */
-function search(s, way, prof, relaxed) {
+/** Recorrido por los nodos de paso con el perfil dado. relaxed: admite faltas (para explicar qué falta); short: el más corto en km, no el más rápido. */
+function search(s, way, prof, relaxed, short = false) {
   const g = graph(s), W = way.length, PEN = 60;
   const modes = prof.fixed ? ['std'] : MODES;
   const key = (k, n, m) => k + '|' + n + '|' + m;
@@ -200,7 +200,7 @@ function search(s, way, prof, relaxed) {
     for (const e of g.adj[n] || []) {
       const t = traverse(s, g, e, m, prof, relaxed);
       if (!t) continue;
-      relax(c + t.minutes + t.faults.length * PEN, k, e.to, m, {tramo: e.d.id, rev: e.rev, minutes: t.minutes, faults: t.faults});
+      relax(c + (short ? e.d.km : t.minutes) + t.faults.length * PEN, k, e.to, m, {tramo: e.d.id, rev: e.rev, minutes: t.minutes, faults: t.faults});
     }
   }
   if (!goal) return null;
@@ -224,8 +224,10 @@ export function plan(s, way, prof) {
   const g = graph(s), ck = way.join(',') + '#' + (prof.fixed ? 'f' : 'v') + (prof.electric ? 'e' : 'h') + prof.speed + '|' + (prof.volts || VOLTAGES).join('/') + '|' + (prof.diesel || 0);
   if (g.cache.has(ck)) return g.cache.get(ck);
   let out = search(s, way, prof, false);
-  // Un rodeo enorme para esquivar un tramo (catenaria, ancho) no es un servicio: cuenta como bloqueado.
-  if (out && out.km > physicalKm(s, way) * 1.3 + 40) out = null;
+  // Un rodeo enorme para esquivar un tramo (catenaria, ancho) no es un servicio: cuenta como bloqueado. Si el más
+  // rápido es un rodeo (una LAV lejana, por ejemplo), vale el más corto que pueda hacer el tren.
+  const limit = physicalKm(s, way) * 1.3 + 40;
+  if (out && out.km > limit) { const near = search(s, way, prof, false, true); out = near && near.km <= limit ? near : null; }
   if (out) out.ok = true;
   else {
     out = search(s, way, prof, true) || {tramos: [], changes: [], faults: [{type: 'nopath'}], km: 0, minutes: 0};
@@ -276,6 +278,15 @@ export function faultText(s, f, short = false) {
     case 'detour': return 'Solo podría ir dando un rodeo absurdo';
     default: return 'No hay vías que unan estas ciudades';
   }
+}
+
+// La falta que se cuenta en una sola línea (Trenespop, selector de material, diario): primero lo que depende del tren
+// (ancho, tensión, catenaria), luego lo que pide obra y al final lo que se arregla esperando (un tramo con fecha).
+const FAULT_RANK = {gauge: 0, tension: 1, elec: 2, changer: 3, build: 4, closed: 5, detour: 6};
+/** La falta principal de un recorrido imposible, o null. */
+export function keyFault(s, faults) {
+  const rank = f => (FAULT_RANK[f.type] ?? 7) + (f.type === 'build' && opensOn(tramoDef(s, f.tramo)) ? 1.5 : 0);
+  return [...(faults || [])].sort((a, b) => rank(a) - rank(b))[0] || null;
 }
 
 /** Puntos [lon,lat] de un recorrido, en orden de marcha. */

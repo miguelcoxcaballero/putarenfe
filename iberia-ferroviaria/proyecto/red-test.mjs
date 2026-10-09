@@ -111,7 +111,20 @@ const fixture = name => JSON.parse(zlib.gunzipSync(fs.readFileSync(new URL('./fi
   assert(vlc.ok && vlc.km >= 385 && vlc.km <= 400, 'Madrid — València por la LAV: ' + vlc.km + ' km (antes 499)');
   for (const [id, v] of Object.entries({'ter-sag': 90, 'vdb-pal': 130, 'mad-gua': 160, 'trb-sor': 100, 'pal-san': 120})) assert.equal(s.infra.t[id].v, v, 'velocidad real de ' + id);
   assert.equal(I.TRAMO['pla-cac'].speed, 180, 'Extremadura sigue a 180 km/h como dice su hito de 2022');
+  assert.equal(s.infra.t['mot-alb-av'].v, 300, 'la LAV Motilla — Albacete sigue a 300 km/h');
   ok.push(`Motilla junto a Motilla del Palancar: Madrid — València ${vlc.km} km (antes 499); Teruel — Sagunt 90, Venta de Baños — Palencia 130, Madrid — Guadalajara 160 km/h.`);
+}
+// 7b. Si el camino más rápido es un rodeo, vale el más corto; y el motivo que se cuenta en una línea es el del tren.
+{
+  const s = fresh();
+  for (const id of ['mad-alc', 'alc-lin', 'lin-cor']) s.infra.t[id].g = 'mixto';
+  s.infra.ver++;
+  const r = route(s, E.createService(s, 'mad', 'lin')), p = E.routeCheck(s, r, MODEL.s106f);
+  assert(p.ok && p.km < 330 && p.tramos.map(t => t.id).join() === 'mad-alc,alc-lin', 'Madrid — Linares por Alcázar, no por Córdoba: ' + p.km + ' km');
+  const gij = route(fresh(), 'madrid-gijon'), q = E.routeCheck(fresh(), gij, MODEL.s112);
+  assert(q.faults.some(f => f.type === 'build' && f.tramo === 'leo-pol'), 'la variante aún no existe');
+  assert.equal(I.faultText(fresh(), I.keyFault(fresh(), q.faults), true), 'Pola de Lena — Oviedo: ancho ibérico', 'el motivo es el ancho, no la fecha de la variante');
+  ok.push('Rodeos: si el más rápido da la vuelta por Córdoba, el AVE va por Alcázar; el motivo corto es el del tren (ancho), no la fecha de la variante.');
 }
 // 8. Partidas guardadas con la red anterior (fixtures generados con el código previo) se cargan y quedan coherentes.
 {

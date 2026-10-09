@@ -30,7 +30,7 @@ const money = x => n(x, Math.abs(x) < 10 ? 2 : 1) + ' M€', signed = x => (x >=
 const clock = O.clockText;
 const KEY = 'iberia-ferroviaria-v2';
 const SPEEDS = [[2, '1×'], [6, '3×'], [20, '10×'], [60, '30×']];
-const LAYERS = ['network', 'real', 'gauge', 'power', 'works', 'speed'];
+const LAYERS = ['network', 'real', 'gauge', 'power', 'speed', 'works'];
 const ICONS = {
   ops: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>',
   network: '<path d="M4 18c4-1 4-11 8-12s4 9 8 8"/><circle cx="4" cy="18" r="1.6"/><circle cx="20" cy="14" r="1.6"/><circle cx="12" cy="6" r="1.6"/>',
@@ -1032,8 +1032,8 @@ function routeInspector() {
   body += `<div class="toolbar">${r.real ? `<button class="btn small" data-action="route-trips" data-id="${r.id}">Ver sus trenes</button>` : ''}<button class="btn small" data-action="route-zoom" data-id="${r.id}">Encuadrar</button></div>`;
   return {kicker: r.active ? 'Relación en servicio' : r.cut ? 'Relación cortada por obras' : 'Relación por abrir', title: `${routeChip(r)} ${esc(routeName(r))}`, body};
 }
-/** Por qué un modelo no puede ir por una relación, en corto: el primer tramo y lo que tiene. */
-function fitText(r, model) { const p = E.routeCheck(state, r, MODEL[model]); return p.ok ? 'Circula' : p.faults[0] ? I.faultText(state, p.faults[0], true) : 'no puede ir por esta vía'; }
+/** Por qué un modelo no puede ir por una relación, en corto: la falta principal (tramo y lo que tiene). */
+function fitText(r, model) { const p = E.routeCheck(state, r, MODEL[model]), f = p.ok ? null : I.keyFault(state, p.faults); return p.ok ? 'Circula' : f ? I.faultText(state, f, true) : 'no puede ir por esta vía'; }
 function updatePreview() {
   const r = state.routes.find(r => r.id === inspect?.id), f = state.fleet.find(f => f.id === $('routeFleet')?.value), out = $('routePreview');
   if (!r || !out) return;
@@ -1127,7 +1127,7 @@ function tramoInspector() {
   <p class="small">${!st.b ? (I.opensOn(d) ? 'Abre el ' + I.opensOn(d) + '.' : 'Todavía no existe.') : st.g === 'std' ? 'Ancho estándar: AVE sí; los Alvia, también.' : st.g === 'mixto' ? 'Tercer carril: pasan los dos anchos sin cambiar.' : 'Ancho ibérico: solo Alvia. Los AVE, que den la vuelta.'} ${st.b && st.e === 'no' ? 'Sin catenaria: solo el Alvia híbrido.' : ''}${st.b && st.e === '3kv' && st.g !== 'ib' ? '3 kV: solo los AVE bitensión.' : ''}</p>`;
   if (job) { const s2 = O.constructionStatus(state, job); body += `<h2 class="section">Obra en marcha</h2><p>${esc(map.workName(job))}${job.type === 'tramo' ? ' · ' + esc(I.WORKS[job.work].label) : ''}</p><div class="bar gold"><span style="width:${s2.progress * 100}%"></span></div><p class="small">${s2.stage} · fin previsto ${E.dateOf(job.due)}</p>`; }
   else if (plan) body += `<h2 class="section">Se construye con</h2><p>${esc(plan.name)} · ${money(plan.cost)}</p><button class="btn primary" data-action="project" data-id="${plan.id}" ${state.ended ? 'disabled' : ''}>Ver el proyecto</button>`;
-  else if (works.length) body += `<h2 class="section">Obras posibles</h2><div class="works-list">${works.map(w => `<button class="choice" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended || w.busy ? 'disabled' : ''}><strong>${esc(w.label)} · ${money(w.cost)}</strong><span>${w.duration} meses${w.closes ? ' · corta la línea mientras dura' : ''}${w.work === 'mixed' ? ' · pasan AVE y Alvia sin cambiar' : w.work === 'standard' ? ' · solo ancho estándar para siempre' : w.work === 'renew' ? ' · límite de 220 km/h' : ' · ya pueden pasar los Alvia eléctricos'}</span></button>`).join('')}</div>`;
+  else if (works.length) body += `<h2 class="section">Obras posibles</h2><div class="works-list">${works.map(w => `<button class="choice" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended || w.busy ? 'disabled' : ''}><strong>${esc(w.label)} · ${money(w.cost)}</strong><span>${w.duration} meses${w.closes ? ' · corta la línea mientras dura' : ''}${w.work === 'mixed' ? ' · pasan AVE y Alvia sin cambiar' : w.work === 'standard' ? ' · solo ancho estándar para siempre' : w.work === 'renew' ? '' : ' · ya pueden pasar los Alvia eléctricos'}</span></button>`).join('')}</div>`;
   else if (st.b) body += '<p class="small muted">Este tramo ya está como debe. Que no es poco.</p>';
   if (using.length) body += `<h2 class="section">La usan</h2><p>${using.map(r => `<button class="linkish" data-action="route" data-id="${r.id}">${esc(routeName(r))}</button>`).join(' · ')}</p>`;
   if (waiting.length) body += `<h2 class="section">La están esperando</h2><p>${waiting.slice(0, 12).map(r => `<button class="linkish" data-action="route" data-id="${r.id}">${esc(routeName(r))}</button>`).join(' · ')}</p>`;
@@ -1264,7 +1264,7 @@ function workDialog(kind, target) {
   showModal(`<div class="content"><div class="kicker">${esc(q.label)}</div><h1>${esc(place)}</h1>
   <dl class="figures"><div><dt>Coste</dt><dd>${money(q.cost)}</dd></div><div><dt>Obra</dt><dd>${q.months} meses</dd></div><div><dt>Termina</dt><dd style="font-size:18px">${E.dateOf(state.month + q.months)}</dd></div></dl>
   ${q.closes ? `<p class="callout red">La línea se corta mientras dure la obra.${q.affected.length ? ' Se suspenden: ' + q.affected.map(r => esc(routeName(r))).join(', ') + '.' : ''}</p>` : ''}
-  <p class="small">${kind === 'renew' ? 'Renovación de vía para elevar el límite a 220 km/h; el tren respeta su velocidad máxima y los demás tramos.' : kind === 'electrify' ? 'Catenaria de 25 kV: permite material eléctrico compatible con el ancho. La obra no cambia el ancho de la vía.' : kind === 'mixed' ? 'Un tercer carril: pasan los dos anchos y no se corta el tráfico.' : kind === 'standard' ? 'Fuera el ancho ibérico: el AVE entra hasta la cocina, pero solo por ancho estándar.' : 'Los Alvia podrán cambiar de ancho aquí.'}</p>
+  <p class="small">${kind === 'renew' ? 'Renovación de vía para elevar el límite a 220 km/h; el tren respeta su velocidad máxima y los demás tramos.' : kind === 'electrify' ? 'Catenaria de 25 kV: permite material eléctrico compatible con el ancho. La obra no cambia el ancho de la vía.' : kind === 'mixed' ? 'Un tercer carril: pasan los dos anchos y no se corta el tráfico.' : kind === 'standard' ? 'Fuera el ancho ibérico: el AVE entra hasta la cocina, pero solo por ancho estándar.' : 'Los Alvia podrán cambiar de ancho aquí.'}${['mixed', 'standard'].includes(kind) && state.infra.t[target]?.e === '3kv' ? ' Sigue a 3 kV: solo AVE bitensión.' : ''}</p>
   <div class="actions"><button class="btn primary" data-action="confirm-work" data-work="${kind}" data-id="${esc(target)}">Adjudicar · ${money(q.cost)}</button><button class="btn" data-action="close-modal">Cancelar</button></div></div>`, 'single');
 }
 

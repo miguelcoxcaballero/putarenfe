@@ -156,7 +156,7 @@ TRAMOS = [
     ('cue', 'mot', LAV, 'LAV Cuenca — Motilla', {}),
     ('mot', 'req', LAV, 'LAV Motilla — Requena', {}),
     ('req', 'vlc', LAV, 'LAV Requena — València', {}),
-    ('mot', 'alb', LAV, 'LAV Motilla — Albacete', {}),
+    ('mot', 'alb', LAV, 'LAV Motilla — Albacete', {'fix': {'speed': 300}}),  # como antes de mover Motilla: OSM da 290 por la curva de la bifurcación
     ('alb', 'mnc', LAV, 'LAV Albacete — Monforte del Cid', {'via': [(-0.8733, 38.5853)]}),
     ('mnc', 'ali', LAV, 'LAV Monforte del Cid — Alicante', {}),
     ('mnc', 'elx', LAV, 'LAV Monforte del Cid — Elche', {}),
