@@ -33,7 +33,7 @@ async function home(page) {
 /** Cierra la misión inicial y las escenas del rescate, y salta su tutorial, para llegar a su menú «Partida». */
 async function rescueMenu(page) {
   for (let n = 0; n < 8 && await page.evaluate(() => !!document.querySelector('.rs-modal[open] .rs-choice')); n++) { await page.click('.rs-modal[open] .rs-choice'); await page.waitForTimeout(250); }
-  if (await page.locator('.rs [data-a=tutorial-skip]').count()) await page.click('.rs [data-a=tutorial-skip]');
+  await page.evaluate(() => document.querySelector('.rs [data-a=tutorial-skip]')?.click()); // el globo del tutorial se redibuja: clic directo
   await page.click('.rs [data-a=game-menu]');
   await page.waitForSelector('.rs-modal[open] .rs-seed');
 }
@@ -101,11 +101,14 @@ try {
   await page.keyboard.press('ArrowRight');
   await page.keyboard.press('Escape');
   await home(page);
+  await page.keyboard.press('Escape'); await page.waitForTimeout(300); // Chromium cierra el diálogo con un segundo Esc seguido: la portada vuelve
+  await home(page);
+  assert(await page.evaluate(() => document.getElementById('modal').open), 'un segundo Esc no deja la pantalla sin portada');
   await openNew(page);
   await page.click('.np-screen [data-action=np-back]');
   await home(page);
   assert.equal(await page.evaluate(k => localStorage.getItem(k), CLASSIC), null, 'mirar los arranques no crea partida');
-  done.push('Nueva partida: tres tarjetas con foto (La herencia recomendada) que se recorren con las flechas, sin reglas fuera de la Maqueta; Esc y ← vuelven sin guardar nada.');
+  done.push('Nueva partida: tres tarjetas con foto (La herencia recomendada) que se recorren con las flechas, sin reglas fuera de la Maqueta; Esc (también dos seguidos) y ← vuelven sin guardar nada.');
 
   // 3. Maqueta: presupuesto y rivales aplicados; semilla visible en Guardar.
   await openNew(page);
@@ -141,6 +144,7 @@ try {
   await page.click('#drawer [data-action=office-tab][data-id=campaign]');
   await page.click('#drawer [data-action=new-game]');
   await page.waitForSelector('#modal[open] .np-screen');
+  assert.equal(await page.locator('.np-start[aria-checked=true]').getAttribute('data-id'), 'maqueta', 'desde una maqueta viene elegida la Maqueta');
   await page.click('.np-screen [data-action=np-pick][data-id=maqueta]');
   await page.fill('#npSeed', 'Repetible');
   await page.click('.np-screen [data-action=np-begin]');
@@ -192,6 +196,13 @@ try {
   await page.click('.rs-modal [data-a=new-game]');
   await page.waitForSelector('#modal[open] .np-screen');
   assert.equal(await page.locator('#rescate').count(), 0, '«Nueva partida» del rescate abre la elección');
+  assert.equal(await page.locator('.np-start[aria-checked=true]').getAttribute('data-id'), 'rescate', 'con el rescate ya elegido');
+  await page.click('.np-screen [data-action=np-back]');
+  await page.waitForSelector('#rescate'); await page.waitForTimeout(600);
+  assert.equal(await page.evaluate(() => window.tenfeRescue.state().seed), 12345, '← desde el rescate vuelve a él');
+  await rescueMenu(page);
+  await page.click('.rs-modal [data-a=new-game]');
+  await page.waitForSelector('#modal[open] .np-screen');
   const rescueStates = [];
   for (const run of [1, 2]) {
     if (run === 2) { await rescueMenu(page); await page.click('.rs-modal [data-a=new-game]'); await page.waitForSelector('#modal[open] .np-screen'); }
@@ -200,10 +211,18 @@ try {
   }
   assert.deepEqual(rescueStates[1], rescueStates[0], 'misma semilla, mismo rescate');
   assert.equal(rescueStates[0].seed, seedFromCode('NORTE'));
+  // Un rescate terminado: «Nueva partida» lo deja elegido, sin partida a la que volver ni que continuar.
   await rescueMenu(page);
-  await page.click('.rs-modal [data-a=exit]');
+  const rescueSave = await page.evaluate(k => localStorage.getItem(k), RESCUE);
+  await page.evaluate(k => { const r = JSON.parse(localStorage.getItem(k)); r.ended = {kind: 'partial', week: r.week}; localStorage.setItem(k, JSON.stringify(r)); }, RESCUE);
+  await page.click('.rs-modal [data-a=new-game]');
+  await page.waitForSelector('#modal[open] .np-screen');
+  assert.equal(await page.locator('.np-start[aria-checked=true]').getAttribute('data-id'), 'rescate', 'tras un rescate terminado también viene elegido');
+  await page.click('.np-screen [data-action=np-back]');
   await home(page);
-  done.push('2027 · El rescate: semilla 12345 y «Norte» repetibles, «Semilla 12345» en su menú, la partida clásica intacta y su «Nueva partida» abre la elección.');
+  assert.equal(await page.locator('.main-menu [data-game=rescue]').count(), 0, 'un rescate terminado no se ofrece para continuar');
+  await page.evaluate(([k, v]) => localStorage.setItem(k, v), [RESCUE, rescueSave]);
+  done.push('2027 · El rescate: semilla 12345 y «Norte» repetibles, «Semilla 12345» en su menú, la partida clásica intacta y su «Nueva partida» abre la elección con el rescate elegido (← vuelve a él).');
 
   // 6. Continuar elige por savedAt; los guardados sin fecha siguen funcionando.
   await page.evaluate(([c, r]) => { const a = JSON.parse(localStorage.getItem(c)), b = JSON.parse(localStorage.getItem(r)); a.savedAt = Date.now() + 5000; localStorage.setItem(c, JSON.stringify(a)); b.savedAt = Date.now() - 5000; localStorage.setItem(r, JSON.stringify(b)); }, [CLASSIC, RESCUE]);

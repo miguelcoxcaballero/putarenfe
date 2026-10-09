@@ -1151,7 +1151,7 @@ function closeModal() { if ($('modal').open) $('modal').close(); }
 function startRescue(fresh, seed, seedCode) {
   menuOpen = false; np = null; pause(); voices.stop(); clearCoach(); closeModal();
   $('game').hidden = true;
-  mountRescue({music, sfx, fresh, seed, seedCode, voiceEnabled: () => voices.enabled, onExit: (exit = {}) => { $('game').hidden = false; map.dirty = true; if (exit.newGame) newGameScreen(); else intro(); }});
+  mountRescue({music, sfx, fresh, seed, seedCode, voiceEnabled: () => voices.enabled, onExit: (exit = {}) => { $('game').hidden = false; map.dirty = true; if (exit.newGame) newGameScreen('rescue'); else intro(); }});
 }
 $('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.np-screen')){event.preventDefault();sfx.play('drawerClose');npBack();}else if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
 $('modal').addEventListener('keydown',event=>{
@@ -1163,6 +1163,8 @@ $('modal').addEventListener('keydown',event=>{
   sfx.play('tab');np.pick=id;np.confirm=null;drawNewGame(`[data-action="np-pick"][data-id="${id}"]`);
 });
 $('modal').addEventListener('close', () => { if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
+// Chromium cierra el diálogo con un segundo Esc seguido aunque el primero se haya cancelado: la portada no desaparece.
+$('modal').addEventListener('close', () => { if ($('modal').open) return; if (menuOpen) intro(); else if (np) { np = null; render(); } });
 function menuChrome() { if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }
 function intro() { menuChrome();np=null;showModal(menuHTML(saved,savedError,rescueSaveSummary()),'main-menu-shell');$('modal').querySelector('[autofocus]')?.focus(); }
 function resetSessionView(){
@@ -1172,11 +1174,13 @@ function resetSessionView(){
  if(['running','review'].includes(state.ops.phase)){spawnArrivals(-1,state.ops.minute);popups=[];}
 }
 // ------------------------------------------------------------ nueva partida: un solo botón, tres arranques
-/** Segundo paso de la portada. Desde una partida clásica en marcha, «Volver» regresa a ella. */
+/** Segundo paso de la portada. Desde una partida en marcha (clásica o rescate) viene elegido su arranque y «Volver» regresa a ella. */
 function newGameScreen(from = 'menu') {
   if (from === 'game' && (tut || !state.started)) from = 'menu';
-  if (from === 'menu') menuChrome(); else { pause(); voices.stop(); }
-  np = {pick: 'herencia', cash: 500, rivals: true, seed: '', confirm: null, from};
+  const pick = from === 'rescue' ? 'rescate' : from === 'game' && state.tycoon.mode === 'free' ? 'maqueta' : 'herencia';
+  if (from === 'rescue' && !rescueSaveSummary()) from = 'menu'; // rescate terminado: no hay partida a la que volver
+  if (from === 'game') { pause(); voices.stop(); } else menuChrome();
+  np = {pick, cash: 500, rivals: pick === 'maqueta' ? state.tycoon.rivals !== false : true, seed: '', confirm: null, from};
   showModal(newGameHTML(np), 'main-menu-shell');
   $('modal').querySelector('[data-action="np-begin"]')?.focus();
 }
@@ -1191,6 +1195,7 @@ function npBack() {
   if (!np) return;
   if (np.confirm) { np.confirm = null; drawNewGame('[data-action="np-begin"]'); return; }
   if (np.from === 'game') { np = null; closeModal(); render(); return; }
+  if (np.from === 'rescue' && rescueSaveSummary()) { startRescue(false); return; }
   intro();
 }
 /** «Empezar»: pregunta antes de sustituir una partida guardada del mismo tipo; las demás no se tocan. */

@@ -67,7 +67,7 @@ export function newGameHTML({pick = 'herencia', cash = 500, rivals = true, seed 
   return `<main class="main-menu np-screen" aria-labelledby="np-title">
     <div class="main-menu-art" aria-hidden="true"></div><div class="main-menu-grain" aria-hidden="true"></div>
     <div class="np-body">
-      <header class="np-head"><button type="button" class="np-back" data-action="np-back" aria-label="Volver a la portada" title="Volver (Esc)">${back}</button><h1 id="np-title">Nueva partida</h1></header>
+      <header class="np-head"><button type="button" class="np-back" data-action="np-back" aria-label="Volver" title="Volver (Esc)">${back}</button><h1 id="np-title">Nueva partida</h1></header>
       <div class="np-starts" role="radiogroup" aria-label="Cómo empezar">${cards}</div>
       ${rules}
       ${foot}
