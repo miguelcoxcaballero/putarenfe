@@ -225,9 +225,10 @@ try {
     g.music.enabled = false; g.music.stop?.(); g.sfx.enabled = false;
     window.__voiceQA.attach();
   });
-  await page.click('[data-action=free-setup]');
-  await page.selectOption('#freeCash', '500'); await page.uncheck('#freeRivals');
-  await page.click('[data-action=free-begin]');
+  await page.click('.main-menu [data-action=new-game]');
+  await page.click('.np-screen [data-action=np-pick][data-id=maqueta]');
+  await page.click('.np-screen [data-action=np-cash][data-id="500"]'); await page.click('.np-screen [data-action=np-rivals][data-id=off]');
+  await page.fill('#npSeed', '72022'); await page.click('.np-screen [data-action=np-begin]');
   const samples = await page.evaluate(expected => {
     const rt = window.__voiceRuntime, canon = new Map(expected.map(x => [x.id, x]));
     return Object.keys(rt.CAST).map(person => {

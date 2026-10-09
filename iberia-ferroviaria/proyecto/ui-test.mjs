@@ -42,11 +42,11 @@ const game = (fn, arg) => page.evaluate(fn, arg);
 const wait = ms => page.waitForTimeout(ms);
 
 await page.goto(html); await wait(1500);
-assert.equal(await page.title(), 'Iberia Ferroviaria · Renfe 2022–2050');
+assert.equal(await page.title(), 'Iberia Ferroviaria · Tenfe 2022–2050');
 assert.equal(await page.locator('a[href^="http"]').count(), 0, 'sin enlaces a webs externas');
 await shot('01-portada');
 // Decisión inaugural con retrato propio de la ministra.
-await page.click('[data-action=begin]'); await wait(400);
+await page.click('.main-menu [data-action=new-game]'); await page.fill('#npSeed', '72022'); await page.click('.np-screen [data-action=np-begin]'); await wait(400);
 const portrait = await page.locator('#modal .art.portrait').getAttribute('style');
 assert(/data:image\/jpeg/.test(portrait), 'la decisión lleva el retrato fotográfico');
 assert.equal(await page.locator('#modal .plate b').textContent(), 'Raquel Sanz');
@@ -121,7 +121,7 @@ const phone = await browser.newPage({viewport: {width: 390, height: 844}, device
 phone.setDefaultTimeout(Number(process.env.UI_TEST_TIMEOUT || 60000));
 phone.on('pageerror', e => errors.push('móvil: ' + e.message));
 await phone.goto(html); await phone.waitForTimeout(1200);
-await phone.click('[data-action=begin]'); await phone.waitForTimeout(300); await phone.click('.choice >> nth=0'); await phone.waitForTimeout(300);
+await phone.click('.main-menu [data-action=new-game]'); await phone.fill('#npSeed', '72022'); await phone.click('.np-screen [data-action=np-begin]'); await phone.waitForTimeout(300); await phone.click('.choice >> nth=0'); await phone.waitForTimeout(300);
 await phone.click('[data-action=tutorial-skip]').catch(() => {});
 await phone.evaluate(() => window.railwayGame.pick({type: 'city', id: 'bcn'})); await phone.waitForTimeout(400);
 assert(await phone.evaluate(() => document.scrollingElement.scrollWidth <= innerWidth + 1), 'sin desplazamiento horizontal en móvil');
@@ -164,8 +164,8 @@ for(const mood of ['happy','angry','worried','proud','surprised','disappointed',
  assert.equal(await game(()=>window.railwayGame.state().tycoon.encounter),null);
 }
 done.push('Siete emociones fotográficas de Charo en decisiones con consecuencias.');
-// Modo libre configurable y trazado por dos clics del mapa.
-await page.reload();await page.click('[data-action=free-setup]');await page.selectOption('#freeCash','5000');await page.uncheck('#freeRivals');await page.click('[data-action=free-begin]');await page.click('[data-action=free-begin][data-confirmed=true]');
+// Maqueta configurable y trazado por dos clics del mapa.
+await page.reload();await page.click('.main-menu [data-action=new-game]');await page.click('.np-screen [data-action=np-pick][data-id=maqueta]');await page.click('.np-screen [data-action=np-cash][data-id="5000"]');await page.click('.np-screen [data-action=np-rivals][data-id=off]');await page.click('.np-screen [data-action=np-begin]');await page.click('.np-screen [data-action=np-yes]');
 assert.equal(await game(()=>window.railwayGame.state().cash),5000);
 assert.equal(await game(()=>window.railwayGame.state().tycoon.rivals),false);
 assert.equal(await game(()=>window.railwayGame.state().tycoon.mode),'free');
@@ -175,7 +175,7 @@ await game(()=>window.railwayGame.pick({type:'city',id:'tol'}));await game(()=>w
 assert.equal(await page.inputValue('#lineA'),'tol');assert.equal(await page.inputValue('#lineB'),'sor');
 await shot('16-linea-propia');await page.click('[data-action=confirm-line]');
 assert(await game(()=>window.railwayGame.state().projects.some(x=>x.type==='custom')));
-done.push('Modo libre de 5.000 M€ sin rivales y construcción de línea seleccionando dos ciudades del mapa.');
+done.push('Maqueta de 5.000 M€ sin rivales y construcción de línea seleccionando dos ciudades del mapa.');
 await phone.evaluate(()=>window.railwayGame.navigate('story'));await phone.click('[data-action=office-tab][data-id=tycoon]');
 assert(await phone.evaluate(()=>document.scrollingElement.scrollWidth<=innerWidth+1),'Dirección sin desbordar en móvil');
 await phone.screenshot({path:path.join(out,'17-direccion-movil.png'), animations: 'disabled', timeout: Number(process.env.UI_TEST_TIMEOUT || 60000)});

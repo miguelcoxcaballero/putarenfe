@@ -26,7 +26,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   const read=file=>{const bytes=fs.readFileSync(path.join(dist,file));sources.push({file,bytes:bytes.length,sha256:sha(bytes)});return bytes.toString('utf8');};
   const baselineOrder=['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
     'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
-  const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'train3d.js':['assets/train-photos.js'],
+  const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'train3d.js':['assets/train-photos.js'],'main-menu.js':['nueva-partida.js'],
     'app.js':['assets/rescate-art.js','assets/rescate-voices.js','rescate-data.js','rescate.js','rescate-map.js','rescate-ui.js']};
   const order=baselineOrder.flatMap(file=>[...(optionalBefore[file]||[]).filter(extra=>fs.existsSync(path.join(dist,extra))),file]);
   function bundle(file){

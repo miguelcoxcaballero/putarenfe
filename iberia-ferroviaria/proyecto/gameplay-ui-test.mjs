@@ -23,7 +23,8 @@ const noOverflow=async()=>assert(await page.locator('#drawer .body').evaluate(el
 async function loadFixture(s){await game(value=>{const g=window.railwayGame;Object.assign(g.state(),value);g.operations.ensureOps(g.state());g.render();},s);await game(()=>{const g=window.railwayGame;g.navigate('story');});if(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')))await game(()=>window.railwayGame.navigate('story'));await page.click('[data-action=office-tab][data-id=tycoon]');await tab('agenda');}
 try{
  await page.goto(process.env.GAME_URL||pathToFileURL(path.join(root,'../outputs/Iberia-Ferroviaria.html')).href);
- await page.click('[data-action=free-setup]');await page.selectOption('#freeCash','5000');await page.click('[data-action=free-begin]');
+ await page.click('.main-menu [data-action=new-game]');await page.click('.np-screen [data-action=np-pick][data-id=maqueta]');await page.click('.np-screen [data-action=np-cash][data-id="5000"]');await page.fill('#npSeed','72022');await page.click('.np-screen [data-action=np-begin]');
+ assert.equal(await game(()=>window.railwayGame.state().cash),5000,'la Maqueta empieza con el presupuesto elegido');
  await game(()=>{const g=window.railwayGame;g.voices.enabled=false;g.music.enabled=false;g.sfx.enabled=false;});
  await page.waitForFunction(()=>window.railwayGame.map.lastFrame>0);
  await game(()=>{const g=window.railwayGame;g.map.opts.isVisible=()=>false;g.navigate('story');});

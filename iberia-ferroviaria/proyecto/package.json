@@ -13,6 +13,7 @@
     "ui": "node ui-test.mjs",
     "music-test": "node music-test.mjs",
     "onboarding-ui": "node onboarding-ui-test.mjs",
+    "nueva-partida-ui": "node nueva-partida-ui-test.mjs",
     "infra": "python3 tools/build_infra.py",
     "timetable": "python3 tools/build_timetable.py",
     "samples": "python3 tools/build_samples.py",

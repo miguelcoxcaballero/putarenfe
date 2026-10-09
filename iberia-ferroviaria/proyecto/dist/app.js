@@ -2,6 +2,7 @@ import {INDUCTION_STAGES} from './induction.js';
 import {dialogueHtml} from './dialogue-presentation.js';
 import {freshInduction, note, stageChecks, readyInduction, inductionBriefing, inductionFeedbackLine, canInductionAnswer, restoreInductionHandoff} from './induction-runtime.js';
 import {menuHTML} from './main-menu.js';
+import {STARTS, newGameHTML, normalizeSeed, seedFromCode, randomSeedCode, seedCodeOf, overwrittenBy} from './nueva-partida.js';
 import {mountRescue, rescueSaveSummary} from './rescate-ui.js';
 import {focusedTaskHTML} from './induction-task-ui.js';
 import * as T from './tycoon.js';
@@ -59,7 +60,7 @@ const PAGES = {ops: 'Jornada', network: 'Red', fleet: 'Trenes', works: 'Obras', 
 // Secciones antiguas que ahora son pestañas de una de las cinco páginas.
 const ALIASES = {timetables: ['network', 'netView', 'timetables'], market: ['fleet', 'fleetTab', 'market'], finance: ['story', 'officeTab', 'finance'], archive: ['story', 'officeTab', 'journal']};
 
-let linePicking=null,savedError='',menuOpen=true;
+let linePicking=null,savedError='',menuOpen=true,np=null; // np: pantalla «Nueva partida» abierta (arranque, maqueta, semilla, confirmación)
 let state = E.initialState(), saved = null, screen = null, inspect = null, playing = false, speedIndex = 1, layer = 'network';
 let lastTick = 0, lastPanel = 0, lastTimeline = 0, observerMinute = 480, seenIncidents = new Set(), alertTimer = null, toastTimer = null;
 let ui = {routeTab: 'all', routeStatus: 'all', routeQuery: '', netView: 'routes', ttType: null, ttStation: '', ttLine: '', ttHour: 6, fleetTab: 'fleet', worksTab: 'conv', officeTab: 'tycoon', autoPause: true};
@@ -178,7 +179,7 @@ function musicDialog(refresh = false) {
 // ------------------------------------------------------------ utilidades de UI
 function toast(text) { $('toast').textContent = text; $('toast').classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 4200); }
 function autosave(announce = false) {
-  try { localStorage.setItem(KEY, JSON.stringify(state)); saved = state; if (announce) toast('Partida guardada en este navegador.'); return true; }
+  try { state.savedAt = Date.now(); localStorage.setItem(KEY, JSON.stringify(state)); saved = state; if (announce) toast('Partida guardada en este navegador.'); return true; }
   catch { if (announce) toast('El navegador no permite guardar aquí. Exporta la partida.'); return false; }
 }
 function act(fn, message) {
@@ -660,7 +661,7 @@ function renderMission() {
   el.classList.toggle('hidden', !!screen || (!!inspect && innerWidth < 1200) || !state.started);
   const q=state.tycoon.contracts.find(q=>q.status==='active')||state.tycoon.contracts.find(q=>q.status==='offered');
   const mandate=q?`<div class="mandate-card"><div class="kicker">${q.status==='active'?'Tu compromiso':'Propuesta por decidir'}${q.project?.stability?' · acuerdo operativo':q.project?` · etapa ${q.project.stage}/3`:''}</div><strong>${esc(q.project?`${q.project.title} · ${routeName(routeById(q.project.route))}`:T.ARCS[q.arc][0])}</strong>${q.status==='active'?`<div class="mandate-progress"><span>${n(T.missionValue(state,q))} / ${n(q.target)}</span><span>${Math.max(0,q.until-state.month)} meses restantes</span></div><div class="meter"><span style="width:${Math.min(100,T.missionValue(state,q)/Math.max(1,q.target)*100)}%"></span></div>${q.goal==='project'?'<small>Tres cierres mensuales consecutivos.</small>':''}`:`<small>Elige un plan en ${Math.max(0,q.until-state.month)} meses.</small>`}<button class="btn small" data-action="tycoon-tab" data-id="agenda">${q.status==='active'?'Ver requisitos y siguiente paso':'Comparar los dos planes'}</button></div>`:'';
-  if(state.tycoon.mode==='free'){el.innerHTML=`<div class="kicker">Modo libre</div><h2>Tu red, tus reglas.</h2>${mandate||'<p>Explora la red, compite y decide qué encargos asumir.</p><button class="btn small" data-action="tycoon-tab" data-id="agenda">Abrir agenda</button>'}`;return;}
+  if(state.tycoon.mode==='free'){el.innerHTML=`<div class="kicker">Maqueta</div><h2>Tu red, tus reglas.</h2>${mandate||'<p>Explora la red, compite y decide qué encargos asumir.</p><button class="btn small" data-action="tycoon-tab" data-id="agenda">Abrir agenda</button>'}`;return;}
   if (!c) return;
   el.innerHTML = `${mandate}<div class="kicker">Capítulo ${state.chapter + 1} · ${c.years}</div><h2>${esc(c.title)}</h2><ul>${c.objectives.map(([k, target, title]) => {
     const v = E.objectiveValue(state, k), done = v >= target;
@@ -835,7 +836,7 @@ function trainsPage() {
   return [header('Trenes', 'Los que tienes y los que vienen.', 'Los AVE solo van por ancho estándar. Los Alvia, por donde les echen.'), `<div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.fleetTab === k ? 'active' : ''}" data-action="fleet-tab" data-id="${k}">${t}</button>`).join('')}</div>` + body];
 }
 function officePage() {
-  const tabs = [['tycoon', 'Dirección'], ['campaign', 'Campaña'], ['finance', 'Cuentas'], ['journal', 'Diario']];
+  const tabs = [['tycoon', 'Dirección'], ['campaign', state.tycoon.mode === 'free' ? 'Maqueta' : 'Campaña'], ['finance', 'Cuentas'], ['journal', 'Diario']];
   const [, body] = ui.officeTab === 'tycoon' ? ['',tycoonPage(state,ui.tycoonTab||'agenda')] : ui.officeTab === 'finance' ? financePage() : ui.officeTab === 'journal' ? archivePage() : storyPage();
   return [header('Despacho', 'Dirige tu compañía.'), `<div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.officeTab === k ? 'active' : ''}" data-action="office-tab" data-id="${k}">${t}</button>`).join('')}</div>` + body];
 }
@@ -957,7 +958,7 @@ function drawChart() {
 }
 
 function storyPage() {
-  if(state.tycoon.mode==='free')return ['', '<h2>Modo libre</h2><p>Sin capítulos obligatorios. Construye, compite y gestiona a tu ritmo.</p><button class="btn" data-action="new-game">Nueva partida</button>'];
+  if(state.tycoon.mode==='free')return ['', '<h2>Maqueta</h2><p>Sin capítulos obligatorios. Construye, compite y gestiona a tu ritmo.</p><button class="btn" data-action="new-game">Nueva partida</button>'];
   const c = CHAPTERS[state.chapter], person = CHARACTERS[c.speaker], score = E.finalScore(state);
   const body = `${state.ended ? `<div class="callout"><strong>${state.ending === '2050' ? '31 de diciembre de 2050' : 'Intervención de la compañía'}</strong><br>Tu legado: <b>${score}/100</b>. ${state.routes.filter(r => r.active).length} servicios, ${n(E.dailyTrains(state))} circulaciones diarias, ${E.aveCities(state).size} ciudades con AVE y ${n(state.stats.passengers / 1e6, 1)} millones de viajes.</div>` : ''}
   <div class="chapters">${CHAPTERS.map((ch, i) => `<div class="${state.claimed.includes(ch.id) ? 'done' : i === state.chapter ? 'now' : ''}"><strong>${esc(ch.title)}</strong>${ch.years}</div>`).join('')}</div>
@@ -965,7 +966,7 @@ function storyPage() {
   <ul class="objectives">${c.objectives.map(([k, target, title]) => { const v = E.objectiveValue(state, k); return `<li class="${v >= target ? 'done' : ''}"><i></i><span>${esc(title)}</span><span class="num">${k === 'solvent' ? (v ? '✓' : '—') : n(Math.min(v, target)) + ' / ' + n(target)}</span></li>`; }).join('')}</ul>
   <div class="toolbar"><button class="btn primary" data-action="claim" ${!E.chapterReady(state) || state.ended ? 'disabled' : ''}>${state.claimed.includes(c.id) ? 'Capítulo completado' : 'Reclamar ' + c.reward + ' M€'}</button><button class="btn" data-action="navigate" data-screen="network">Gestionar la red</button></div>
   ${E.yearOf(state) < c.year ? `<p class="callout">Esta etapa empieza en ${c.year}. Ve adelantando trabajo.</p>` : ''}</div></div>
-  <div class="toolbar" style="margin-top:30px"><button class="btn" data-action="save-dialog">Guardar o exportar</button><button class="btn danger" data-action="new-game">Nueva campaña</button></div>`;
+  <div class="toolbar" style="margin-top:30px"><button class="btn" data-action="save-dialog">Guardar o exportar</button><button class="btn danger" data-action="new-game">Nueva partida</button></div>`;
   return [header('Campaña 2022–2050', 'Tu mandato, tu historia.', 'Cada capítulo trae dinero para el siguiente.'), body];
 }
 
@@ -1147,27 +1148,78 @@ function nodeInspector() {
 function showModal(html, cls = '') { pause(); const was = $('modal').open; $('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons(); sfx.play(was ? 'page' : 'open'); }
 function closeModal() { if ($('modal').open) $('modal').close(); }
 /** Rescate de Tenfe: modo propio con su mapa, su interfaz y su guardado; al salir vuelve a esta portada. */
-function startRescue(fresh) {
-  menuOpen = false; pause(); voices.stop(); clearCoach(); closeModal();
+function startRescue(fresh, seed, seedCode) {
+  menuOpen = false; np = null; pause(); voices.stop(); clearCoach(); closeModal();
   $('game').hidden = true;
-  mountRescue({music, sfx, fresh, voiceEnabled: () => voices.enabled, onExit: () => { $('game').hidden = false; map.dirty = true; intro(); }});
+  mountRescue({music, sfx, fresh, seed, seedCode, voiceEnabled: () => voices.enabled, onExit: (exit = {}) => { $('game').hidden = false; map.dirty = true; if (exit.newGame) newGameScreen(); else intro(); }});
 }
-$('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
+$('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.np-screen')){event.preventDefault();sfx.play('drawerClose');npBack();}else if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
+$('modal').addEventListener('keydown',event=>{
+  if(!np)return;
+  if(event.key==='Enter'&&event.target.id==='npSeed'){event.preventDefault();sfx.expect('begin');npBegin(false);return;} // Intro en la semilla = «Empezar»
+  const step={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[event.key]; // flechas entre los tres arranques, como un grupo de radio
+  if(!step||!event.target.classList?.contains('np-start'))return;
+  event.preventDefault();const ids=STARTS.map(start=>start.id),id=ids[(ids.indexOf(np.pick)+step+ids.length)%ids.length];
+  sfx.play('tab');np.pick=id;np.confirm=null;drawNewGame(`[data-action="np-pick"][data-id="${id}"]`);
+});
 $('modal').addEventListener('close', () => { if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
-function intro() { tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey='';showModal(menuHTML(saved,savedError,rescueSaveSummary()),'main-menu-shell'); }
+function menuChrome() { if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }
+function intro() { menuChrome();np=null;showModal(menuHTML(saved,savedError,rescueSaveSummary()),'main-menu-shell');$('modal').querySelector('[autofocus]')?.focus(); }
 function resetSessionView(){
  tutorialChrome();adviceLine=null;tutorialDraft=null;clearCoach();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
  ui.market=freshMarketFilters();
  map.selected=null;map.selectedCity=null;map.selectedTrain=null;map.selectedTramo=null;map.follow=false;map.reset();setLayer('network');resetToday();
  if(['running','review'].includes(state.ops.phase)){spawnArrivals(-1,state.ops.minute);popups=[];}
 }
-function beginCampaign(){
- menuOpen=false;voices.stop();clearCoach();tut=null;state=E.initialState();O.ensureOps(state);state.ops.day=3;state.started=true;resetSessionView();savedError='';closeModal();netKey=networkKey();map.dirty=true;render();autosave();showDecision();
+// ------------------------------------------------------------ nueva partida: un solo botón, tres arranques
+/** Segundo paso de la portada. Desde una partida clásica en marcha, «Volver» regresa a ella. */
+function newGameScreen(from = 'menu') {
+  if (from === 'game' && (tut || !state.started)) from = 'menu';
+  if (from === 'menu') menuChrome(); else { pause(); voices.stop(); }
+  np = {pick: 'herencia', cash: 500, rivals: true, seed: '', confirm: null, from};
+  showModal(newGameHTML(np), 'main-menu-shell');
+  $('modal').querySelector('[data-action="np-begin"]')?.focus();
 }
-function requestCampaign(){
- if(saved?.started)showModal(`<div class="content"><div class="kicker">Nueva campaña</div><h1>Un nuevo mandato.</h1><p>Se sustituirá el guardado automático de ${esc(E.dateOf(saved.month))}. Puedes exportarlo antes.</p><div class="actions"><button class="btn" data-action="export">Exportar partida</button><button class="btn primary" data-action="campaign-confirm">Empezar campaña nueva</button><button class="btn ghost" data-action="menu-home">Cancelar</button></div></div>`,'single');else beginCampaign();
+function drawNewGame(focus) {
+  const box = $('modal').querySelector('.modal.main-menu-shell');
+  if (!np || !box) return;
+  const field = $('npSeed'); if (field) np.seed = field.value;
+  box.innerHTML = newGameHTML(np);
+  box.querySelector(focus)?.focus();
 }
-function menuGuide(){showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="begin">Nueva campaña</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}
+function npBack() {
+  if (!np) return;
+  if (np.confirm) { np.confirm = null; drawNewGame('[data-action="np-begin"]'); return; }
+  if (np.from === 'game') { np = null; closeModal(); render(); return; }
+  intro();
+}
+/** «Empezar»: pregunta antes de sustituir una partida guardada del mismo tipo; las demás no se tocan. */
+function npBegin(force) {
+  if (!np) return;
+  const field = $('npSeed'); if (field) np.seed = field.value;
+  const replaced = overwrittenBy(np.pick, saved, rescueSaveSummary());
+  if (replaced && !force) { sfx.intent = null; sfx.play('page'); np.confirm = replaced; drawNewGame('[data-action="np-no"]'); return; }
+  const code = normalizeSeed(np.seed) || randomSeedCode(), seed = seedFromCode(code), pick = np.pick, rules = {cash: np.cash, rivals: np.rivals};
+  sfx.result(true);
+  if (pick === 'rescate') startRescue(true, seed, code);
+  else startClassic(pick === 'maqueta' ? rules : null, seed, code);
+}
+/** La herencia (campaña con turno guiado) o la Maqueta (sin guion, con presupuesto y rivales a elegir). */
+function startClassic(maqueta, seed, code) {
+  menuOpen=false;np=null;voices.stop();clearCoach();inductionModalKey='';tut=null;savedError='';
+  state=E.initialState(seed);state.seedCode=code;
+  if(maqueta)T.freeGame(state,maqueta.cash,maqueta.rivals);
+  O.ensureOps(state);state.ops.day=3;state.started=true;
+  if(maqueta)state.tutorial={done:true};
+  resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();autosave();
+  if(!maqueta)showDecision();
+}
+function continueClassic(){
+  if(!saved)return;
+  menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();
+  if(E.pendingDecision(state))showDecision();else if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();
+}
+function menuGuide(){showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="new-game">Nueva partida</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}
 function showDecision() {
   const d = E.pendingDecision(state); if (!d) return;
   const person = CHARACTERS[d.person];
@@ -1230,7 +1282,7 @@ function updateServicePreview() {
   el.innerHTML = optionRow('AVE', I.plan(state, way, P.ave)) + optionRow('Alvia', I.plan(state, way, P.alvia)) + optionRow('Alvia híbrido', I.plan(state, way, P.hybrid));
 }
 function saveDialog() {
-  showModal(`<div class="content"><div class="kicker">Guardar</div><h1>Tu partida, a salvo.</h1><p>Se guarda sola en este navegador. Exporta una copia para llevártela a otro equipo.</p><div class="actions"><button class="btn primary" data-action="save-now">Guardar ahora</button><button class="btn" data-action="export">Exportar (.json)</button></div><label for="importSave">Importar una partida</label><input id="importSave" type="file" accept="application/json,.json"></div>`, 'single');
+  showModal(`<div class="content"><div class="kicker">Guardar</div><h1>Tu partida, a salvo.</h1><p>Se guarda sola en este navegador. Exporta una copia para llevártela a otro equipo.</p><div class="actions"><button class="btn primary" data-action="save-now">Guardar ahora</button><button class="btn" data-action="export">Exportar (.json)</button></div><label for="importSave">Importar una partida</label><input id="importSave" type="file" accept="application/json,.json">${seedCodeOf(state) ? `<p class="small muted seed-code">Semilla <b class="mono">${esc(seedCodeOf(state))}</b></p>` : ''}</div>`, 'single');
 }
 function help() {
   showModal(`<div class="content"><div class="kicker">Cómo jugar</div><h1>Un día, un turno.</h1><ol class="method">
@@ -1279,19 +1331,20 @@ document.addEventListener('click', event => {
     case 'tycoon-research': act(()=>T.research(state,id),`${T.TECHS[id].name} financiada. Final previsto: ${E.dateOf(state.month+T.TECHS[id].months)}.`);break;
     case 'tycoon-lobby': act(()=>T.lobby(state,id),`${T.GROUPS[id][0]}: +12 de confianza. Negociación: 8 M€.`);break;
     case 'tycoon-public': case 'tycoon-commercial': act(()=>T.accept(state,id,a==='tycoon-public'?'public':'commercial'),'Compromiso aceptado. Revisa los requisitos y su fecha límite en la agenda.');break;
-    case 'free-setup': showModal(`<div class="content"><h1>Tu red, tus reglas.</h1><label for="freeCash">Caja inicial</label><select id="freeCash"><option value="500">500 M€ · ajustada</option><option value="1500">1.500 M€ · expansión</option><option value="5000">5.000 M€ · constructor</option></select><label><input type="checkbox" id="freeRivals" checked> Rivales activos</label><p>Sin objetivos obligatorios ni cese político. La caja y las vías siguen mandando.</p><div class="actions"><button class="btn primary" data-action="free-begin">Empezar modo libre</button><button class="btn" data-action="close-modal">Cancelar</button></div></div>`,'single');break;
-    case 'free-begin': if(saved?.started&&!b.dataset.confirmed){showModal(`<div class="content"><h1>¿Sustituir tu partida por una red libre?</h1><p>Se sustituirá el guardado automático. Exporta la partida si quieres conservarla.</p><input id="freeCash" type="hidden" value="${$('freeCash').value}"><input id="freeRivals" type="checkbox" hidden ${$('freeRivals').checked?'checked':''}><div class="actions"><button class="btn" data-action="export">Exportar partida</button><button class="btn primary" data-action="free-begin" data-confirmed="true">Sustituir y empezar</button><button class="btn" data-action="menu-home">Cancelar</button></div></div>`,'single');break;} {menuOpen=false;const cash=Number($('freeCash').value),rivals=$('freeRivals').checked;clearCoach();inductionModalKey='';screen=null;inspect=null;layer='network';savedError='';state=E.initialState();T.freeGame(state,cash,rivals);O.ensureOps(state);state.ops.day=3;state.started=true;state.tutorial={done:true};tut=null;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();autosave();break;}
     case 'navigate': if($('modal').open)closeModal();navigate(b.dataset.screen); break;
     case 'close-drawer': screen = null; render(); break;
     case 'close-inspector': inspect = null; map.selected = null; map.selectedTrain = null; map.follow = false; renderInspector(); break;
     case 'close-modal': closeModal();if(menuOpen||!state.started)intro();break;
-    case 'begin': requestCampaign(); break;
-    case 'rescue-new': case 'rescue-continue': startRescue(a === 'rescue-new'); break;
-    case 'campaign-confirm': beginCampaign();break;
+    case 'np-pick': np.pick = id; np.confirm = null; drawNewGame(`[data-action="np-pick"][data-id="${id}"]`); break;
+    case 'np-cash': np.cash = +id; drawNewGame(`[data-action="np-cash"][data-id="${id}"]`); break;
+    case 'np-rivals': np.rivals = id === 'on'; drawNewGame(`[data-action="np-rivals"][data-id="${id}"]`); break;
+    case 'np-begin': npBegin(false); break;
+    case 'np-yes': npBegin(true); break;
+    case 'np-no': case 'np-back': npBack(); break;
     case 'menu-home': if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;}intro();break;
     case 'menu-guide': menuGuide();break;
     case 'menu-settings': musicDialog();break;
-    case 'continue': if (saved) { menuOpen=false;tut=null;voices.stop();state = E.validateSave(saved); O.ensureOps(state); state.started = true;resetSessionView();closeModal(); netKey = networkKey(); map.dirty = true; render(); if (E.pendingDecision(state)) showDecision();else if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial(); } break;
+    case 'continue': case 'continue-other': if (b.dataset.game === 'rescue') startRescue(false); else continueClassic(); break;
     case 'observe': menuOpen=false;closeModal(); setLayer('real'); observerMinute = 480; play(); break;
     case 'decision': if (act(() => E.decide(state, id, +b.dataset.choice))) { closeModal(); if (E.pendingDecision(state)) showDecision(); else if (!state.tutorial?.done && !state.tutorial?.suspended && !tut && (state.month === 0||state.tutorial?.version===1)) startTutorial(); } break;
     case 'claim': act(() => E.claimChapter(state), 'Financiación recibida. Tu siguiente etapa está preparada.'); setTimeout(() => { const st = document.querySelector('.story'); if (st && !state.ended) speakIn(st, CHAPTERS[state.chapter].speaker, 'story'); }, 60); break;
@@ -1382,7 +1435,7 @@ document.addEventListener('click', event => {
     case 'help': help(); break;
     case 'save-now': autosave(true); break;
     case 'export': { const exported=menuOpen&&saved?saved:state;const blob = new Blob([JSON.stringify(exported, null, 2)], {type: 'application/json'}), url = URL.createObjectURL(blob), link = document.createElement('a'); link.href = url; link.download = 'Iberia-Ferroviaria-' + E.yearOf(exported) + '.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); toast('Partida exportada.'); break; }
-    case 'new-game': showModal(`<div class="content"><div class="kicker">Nueva campaña</div><h1>¿Un nuevo mandato?</h1><p>La nueva campaña sustituirá el guardado automático.</p><div class="actions"><button class="btn" data-action="export">Exportar la actual</button><button class="btn primary" data-action="campaign-confirm">Empezar en 2022</button><button class="btn" data-action="close-modal">Cancelar</button></div></div>`, 'single'); break;
+    case 'new-game': newGameScreen(menuOpen ? 'menu' : 'game'); break;
   }
   if(tut){if(a==='day-start'||a==='play')tutorialIncident();if(a==='work'&&b.dataset.work==='electrify'&&/Torralba.*Soria/i.test(I.tramoDef(state,id)?.name||''))tutorialMark('soria-quote');renderCoach();} // el tutorial avanza en cuanto se cumple el paso, sin esperar al siguiente fotograma
 });
@@ -1403,6 +1456,7 @@ document.addEventListener('input', event => {
   if (t.id === 'routeSearch') { ui.routeQuery = t.value; renderDrawer(); }
   if (t.id === 'marketSearch') { ui.market.query = t.value; renderDrawer(); }
   if (t.id === 'ttStation') { ui.ttStation = t.value; ui.ttStationId = undefined; renderDrawer(); }
+  if (t.id === 'npSeed' && np) np.seed = t.value;
   if (t.id === 'buyQty') updateQuote();
   if (['lineA', 'lineB'].includes(t.id)) updateLineQuote();
   if (['svcA', 'svcB'].includes(t.id)) updateServicePreview();

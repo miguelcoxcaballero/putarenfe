@@ -230,10 +230,12 @@ export const RECIPES = R;
 //  'nombre' → ese efecto al pulsar · '=nombre' → ese efecto si la acción sale bien (si falla, «error»)
 //  '@open' / '@close' → lo pone el propio diálogo al abrirse o cerrarse · '!…' → depende del estado (se decide en app.js)
 export const ACTIONS = {
- 'menu-home':'@open','menu-guide':'@open','rescue-new':'begin','rescue-continue':'continue','menu-settings':'@open','campaign-confirm':'begin','tutorial-recover-day':'dayEnd','tutorial-advice':'tab','tutorial-advice-close':'dismiss','tutorial-view':'tab','tutorial-quote':'@open','tutorial-answer':'decision','tutorial-focus':'focus','tutorial-hold':'decision','tutorial-finish':'celebrate','tutorial-collapse':'toggleOn',
- 'tycoon-tab':'tab','tycoon-policy':'=decision','tycoon-hire':'=contract','tycoon-research':'=contract','tycoon-lobby':'=decision','tycoon-public':'=decision','tycoon-commercial':'=decision','free-setup':'@open','free-begin':'begin','line-map':'pickCity',
+ 'menu-home':'@open','menu-guide':'@open','menu-settings':'@open','continue-other':'continue',
+ 'np-pick':'tab','np-cash':'tab','np-rivals':'tab','np-begin':'=begin','np-yes':'=begin','np-no':'dismiss','np-back':'drawerClose',
+ 'tutorial-recover-day':'dayEnd','tutorial-advice':'tab','tutorial-advice-close':'dismiss','tutorial-view':'tab','tutorial-quote':'@open','tutorial-answer':'decision','tutorial-focus':'focus','tutorial-hold':'decision','tutorial-finish':'celebrate','tutorial-collapse':'toggleOn',
+ 'tycoon-tab':'tab','tycoon-policy':'=decision','tycoon-hire':'=contract','tycoon-research':'=contract','tycoon-lobby':'=decision','tycoon-public':'=decision','tycoon-commercial':'=decision','line-map':'pickCity',
   navigate: 'nav', 'close-drawer': 'drawerClose', 'close-inspector': 'dismiss', 'close-modal': '@close',
-  begin: 'begin', continue: 'continue', observe: 'observe', decision: '=decision', claim: '=celebrate',
+  continue: 'continue', observe: 'observe', decision: '=decision', claim: '=celebrate',
   play: '!play', speed: 'speed', 'day-start': '!play', 'day-end': 'dayEnd', 'day-review': '@open', 'day-next': '=dayNext', 'skip-month': '=skipMonth',
   'open-incidents': 'nav', respond: '=respond', route: 'pickRoute', city: 'pickCity', 'freq-up': '=plus', 'freq-down': '=minus',
   'open-route': '=openRoute', request: '=request', 'station-up': '=celebrate', music: '@open', 'music-play': 'musicPick', 'music-toggle': '!toggle',
