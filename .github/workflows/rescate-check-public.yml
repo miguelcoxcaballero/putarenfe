@@ -1,0 +1,57 @@
+name: Verificar publicación Rescate de Tenfe
+on:
+  push:
+    branches: [codex/rescate-originales-20261009]
+    paths: ['.github/workflows/rescate-check-public.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: rescate-preview
+      - name: Comprobar los 63 WebP públicos
+        env:
+          EXPECTED_COMMIT: 59ee47ee631ca7ab7f7be7bbdd52b92082de0c4d
+        shell: python
+        run: |
+          import concurrent.futures, hashlib, json, os, time, urllib.request
+          from pathlib import Path
+          report = json.loads(Path("rescate-preview/validation.json").read_text())
+          assert len(report) == 63
+          base = "https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/"
+          version = os.environ["EXPECTED_COMMIT"]
+          def check(item):
+              url = base + "assets/rescate/" + item["name"] + ".webp?v=" + version
+              request = urllib.request.Request(url, headers={"User-Agent": "Tenfe-asset-validation/1.0", "Cache-Control": "no-cache"})
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  data = response.read()
+                  assert response.status == 200
+              assert data[:4] == b"RIFF" and data[8:12] == b"WEBP", item["name"]
+              assert len(data) == item["bytes"], item["name"]
+              assert hashlib.sha256(data).hexdigest() == item["sha256"], item["name"]
+              return item["name"]
+          pending = report
+          for attempt in range(16):
+              failures = []
+              with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+                  futures = {pool.submit(check, item): item for item in pending}
+                  for future in concurrent.futures.as_completed(futures):
+                      item = futures[future]
+                      try:
+                          print("OK", future.result())
+                      except Exception as error:
+                          print("Pending", item["name"], str(error))
+                          failures.append(item)
+              pending = failures
+              if not pending:
+                  break
+              time.sleep(15)
+          assert not pending, f"{len(pending)} public assets did not match"
+          with urllib.request.urlopen(base + "?v=" + version, timeout=30) as response:
+              assert response.status == 200
+              assert b"<html" in response.read().lower()
+          print("PASS: 63/63 published WebP assets match validated bytes; game page responds HTTP 200.")
