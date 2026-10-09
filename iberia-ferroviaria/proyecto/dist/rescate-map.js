@@ -3,6 +3,7 @@
 import {RailMap} from './map-v3.js';
 import {TRAMOS, NODES, tramoGeom} from './infra.js';
 import {CORRIDORS, CORRIDOR, TERRITORIES} from './rescate-data.js';
+import {segmentsOf} from './rescate.js';
 
 /** Recorrido de cada corredor por la red real: camino más corto entre sus nodos, prefiriendo vía convencional. */
 const ADJ = {};
@@ -49,11 +50,24 @@ export const LAYERS = {
   puntualidad: {name: 'Puntualidad', legend: [['#2f8f4e', '85 % o más'], ['#c9a227', '75–85 %'], ['#d9772b', '65–75 %'], ['#c23b2f', 'menos del 65 %']]},
   via: {name: 'Estado de la vía', legend: [['#2f8f4e', 'Buena (80 %+)'], ['#c9a227', 'Regular'], ['#c23b2f', 'Mala (menos del 50 %)']]},
   demanda: {name: 'Viajeros', legend: [['#7a4fb0', 'Grosor = viajeros por semana'], ['#c23b2f', 'Rojo: gente sin plaza']]},
+  catenaria: {name: 'Catenaria', legend: [['#2f6fb0', '25 kV'], ['#3f9a5c', '3 kV'], ['#9a7f5c', 'Sin electrificar (discontinuo)']]},
+  ancho: {name: 'Ancho', legend: [['#d08a1c', 'Ibérico'], ['#a3123a', 'Estándar'], ['#7a4fb0', 'Mixto (tercer carril)']]},
+  velocidad: {name: 'Velocidad', legend: [['#c23b2f', 'Hasta 120 km/h'], ['#c9a227', '120–160'], ['#2f8f4e', '160–200'], ['#2f6fb0', 'Más de 200']]},
   obras: {name: 'Obras', legend: [['#f0b544', 'Obra en marcha'], ['#8a7c69', 'Sin obras']]},
   apoyo: {name: 'Territorios', legend: [['#a8385a', 'Territorio desatendido'], ['#3f7d4e', 'Con tren'], ['#c98a1c', 'Con licencia']]},
 };
 const ramp = (v, stops) => { for (const [lim, col] of stops) if (v >= lim) return col; return stops[stops.length - 1][1]; };
 export const punctColor = p => ramp(p, [[85, '#2f8f4e'], [75, '#c9a227'], [65, '#d9772b'], [0, '#c23b2f']]);
+export const ELEC_COLOR = {'25kv': '#2f6fb0', '3kv': '#3f9a5c', no: '#9a7f5c'};
+export const GAUGE_COLOR = {ib: '#d08a1c', std: '#a3123a', mixto: '#7a4fb0'};
+export const speedColor = v => ramp(v, [[201, '#2f6fb0'], [161, '#2f8f4e'], [121, '#c9a227'], [0, '#c23b2f']]);
+/** Trozo de la polilínea de un corredor entre dos fracciones de su longitud. */
+export function slice(id, f0, f1) {
+  const pts = [pointAt(id, f0)], g = GEOMETRY[id], a = f0 * g.length, b = f1 * g.length;
+  for (let i = 0; i < g.pts.length; i++) if (g.acc[i] > a && g.acc[i] < b) pts.push(g.pts[i]);
+  pts.push(pointAt(id, f1));
+  return pts.map(p => [p[0], p[1]]);
+}
 export const trackColor = p => ramp(p, [[80, '#2f8f4e'], [50, '#c9a227'], [0, '#c23b2f']]);
 
 export class RescueMap extends RailMap {
@@ -98,7 +112,17 @@ export class RescueMap extends RailMap {
       const g = GEOMETRY[d.id], cc = s.corridors[d.id], w = this.corridorWidth(d.id);
       if (!cc.open) { stroke(g.pts, 'rgba(90,72,52,.55)', w, [3, 6]); continue; }
       stroke(g.pts, 'rgba(255,250,236,.92)', w + 4);
-      stroke(g.pts, this.corridorColor(d.id), w);
+      if (['catenaria', 'ancho', 'velocidad'].includes(this.layer)) {
+        // tramo a tramo, en proporción a sus kilómetros
+        const segs = segmentsOf(s, d.id), total = segs.reduce((n, x) => n + x.km, 0) || 1;
+        let f = 0;
+        for (const x of segs) {
+          const f1 = f + x.km / total, pts = slice(d.id, f, f1);
+          const col = this.layer === 'catenaria' ? ELEC_COLOR[x.elec] : this.layer === 'ancho' ? GAUGE_COLOR[x.gauge] : speedColor(x.vmax);
+          stroke(pts, col, w, this.layer === 'catenaria' && x.elec === 'no' ? [6, 5] : null);
+          f = f1;
+        }
+      } else stroke(g.pts, this.corridorColor(d.id), w);
       if (cc.works || cc.closed) stroke(g.pts, 'rgba(42,34,28,.55)', w * .45, [6, 7]);
     }
   }

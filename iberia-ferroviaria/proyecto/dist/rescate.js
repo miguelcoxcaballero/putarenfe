@@ -3,6 +3,7 @@
 import {RESCUE_VERSION, START_YEAR, WEEKS, ELECTIONS, ORDERS_PER_WEEK, MAX_PACTS, GROUPS, CORRIDORS, CORRIDOR, TERRITORIES, TRAIN_OFFERS, OFFER, RENT, CREW,
   WORKS, SERVICE_MODES, PHASES, AIDS, MILESTONES, TECHS, TECH, TIER_MILESTONE, ACHIEVEMENTS, MEGAPROJECTS, MEGA, STAGES, PROGRAM, PACTS, PACT,
   BRIBES, BRIBE, JUDICIAL, LINES, HEADLINES} from './rescate-data.js';
+import {TRAMOS} from './infra.js';
 
 export const SAVE_KEY = 'tenfe-rescate-v1';
 const OSP_BASE = 4.8;            // subvención trimestral por obligaciones de servicio público (M€)
@@ -66,6 +67,35 @@ export function newGame(seed = Date.now() % 1e9) {
   pushGaceta(s, 'late', 'El Norte llega tarde. Otra vez.');
   record(s, 0);
   return s;
+}
+
+// ------------------------------------------------------------------ tramos de cada corredor
+/** Tramos del corredor con su ancho, catenaria y velocidad (los de la red del juego; las obras los cambian en s.segs). */
+const SEGMENT_CACHE = {};
+export function baseSegments(id) {
+  if (SEGMENT_CACHE[id]) return SEGMENT_CACHE[id];
+  const def = CORRIDOR[id];
+  if (def.segments) return (SEGMENT_CACHE[id] = def.segments.map(x => ({...x, key: segKey(x.from, x.to)})));
+  const segs = [];
+  for (let k = 0; k + 1 < def.way.length; k++) for (const t of netPath(def.way[k], def.way[k + 1])) segs.push({from: t.a, to: t.b, km: Math.round(t.km), gauge: t.gauge, elec: t.elec, vmax: t.speed, track: 'doble', key: segKey(t.a, t.b)});
+  return (SEGMENT_CACHE[id] = segs);
+}
+export const segKey = (a, b) => [a, b].sort().join('-');
+export function segmentsOf(s, id) { return baseSegments(id).map(x => ({...x, ...(s?.segs?.[x.key] || {})})); }
+let NET_ADJ = null;
+function netPath(a, b) {
+  if (!NET_ADJ) { NET_ADJ = {}; for (const t of TRAMOS) { if (t.plan) continue; const w = t.km * (t.kind === 'lav' ? 3 : 1); (NET_ADJ[t.a] ||= []).push([t.b, w, t]); (NET_ADJ[t.b] ||= []).push([t.a, w, t]); } }
+  const dist = {[a]: 0}, prev = {}, done = new Set();
+  for (;;) {
+    let n = null;
+    for (const id in dist) if (!done.has(id) && (n === null || dist[id] < dist[n])) n = id;
+    if (n === null || n === b) break;
+    done.add(n);
+    for (const [m, w, t] of NET_ADJ[n] || []) if (dist[n] + w < (dist[m] ?? Infinity)) { dist[m] = dist[n] + w; prev[m] = [n, t]; }
+  }
+  const out = [];
+  for (let n = b; n !== a && prev[n]; n = prev[n][0]) out.unshift(prev[n][1]);
+  return out;
 }
 
 // ------------------------------------------------------------------ utilidades de estado

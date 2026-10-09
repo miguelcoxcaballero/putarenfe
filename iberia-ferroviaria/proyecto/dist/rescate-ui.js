@@ -39,7 +39,7 @@ const P = {
 const icon = (name, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${P[name] || ''}</svg>`;
 const PAGES = [['finanzas', 'Finanzas'], ['obras', 'Obras'], ['flota', 'Flota'], ['pactos', 'Pactos'], ['progreso', 'Progreso'], ['tecnologia', 'Tecnología'], ['mega', 'Megaobras'], ['elecciones', 'Elecciones'], ['cloacas', 'Cloacas'], ['gaceta', 'Gaceta'], ['ayuda', 'Ayuda']];
 const STAGE_TITLE = {s1: 'Recupera el Norte', s2: 'Tres corredores fiables', s3: 'Cuentas y reelección', s4: 'La España vaciada', s5: 'Cinco corredores al 85 %'};
-const LAYER_COLOR = {puntualidad: '#74cc93', via: '#f2b84b', demanda: '#a98be0', obras: '#f2b84b', apoyo: '#c4466d'};
+const LAYER_COLOR = {puntualidad: '#74cc93', via: '#f2b84b', demanda: '#a98be0', catenaria: '#7cb6e8', ancho: '#d08a1c', velocidad: '#74cc93', obras: '#f2b84b', apoyo: '#c4466d'};
 const WORK_SHORT = {renovar: 'Renovar vía', senalizacion: 'Señalización', apartaderos: 'Apartaderos', electrificar: 'Electrificar', apeadero: 'Apeadero'};
 const NEED_SHORT = {norte80: 'Norte 80 %', fiables3: '3 fiables', fiables5: '5 al 85 %', flota6: '6 trenes', flota9: '9 trenes', caja5: 'Caja 5 M€', pax48: 'Red regional', pax66: 'Operador serio', pax86: 'Columna vertebral', trab55: 'Plantilla 55 %', eco55: 'Economía 55 %', terr50: 'Territorios 50 %', viaj60: 'Viajeros 60 %', tech_predictivo: 'Predictivo', tech_regulacion: 'Regulación', tech_ertms: 'ERTMS', med_open: 'Mediterráneo abierto', med85: 'Mediterráneo 85 %', teruel_open: 'Tren a Teruel', sinIncidencias: '12 sem tranquilas', resultado: 'Resultado +', pacto_ministra: 'Pacto ministra', pacto_cualquiera: 'Un pacto cumplido', limpio: 'Sin juez'};
 
