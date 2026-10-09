@@ -1,0 +1,66 @@
+{
+ "totales": {
+  "A-simulacion": 161,
+  "B-tropico-cities": 164,
+  "C-narrativa": 181
+ },
+ "veredictos": [
+  {
+   "winner": "C-narrativa",
+   "mustFix": [
+    "Do not keep the old Rescate engine as a separate entry in the menu until the last phase. While it remains, label it clearly as the old version, and port the 2027 start onto the single engine by mid-plan (R1).",
+    "Do not delay the replay toolkit: the seed and share code plus the sandbox (maqueta) rules must ship in phase 1, and traits and modifiers soon after (R4).",
+    "Remove the random encounter shuffle (tycoon.js:158), the 32 % monthly event roll and the retry-able bets in phase 1, not phase 7. Gate any body whose mechanic is not built yet with mecanicas flags, so it stays silent rather than lies (R2).",
+    "No artificial action caps (3 orders or signatures a month) in a realistic M€ economy. Scarcity must come from visible real resources: cash and credit, compatible free units, drivers, crews, workshop slots, paths (surcos), and one research at a time.",
+    "Never edit the hashed fields or the array order in story.js, encounters.js, induction.js or ARCS. Override behaviour by id in guion.js, add a sin-copias test, and check the catalogue SHA on every build.",
+    "A minister or successor body plays only when that person holds the office on that date. Óscar is mayor until 21-11-2023. paco-estacion's «Ministro» must be re-recorded or retired, not excused as a verbal tic.",
+    "Every number in a recorded body must be an engine constant enforced by a test (4 M€; 0,3 M€ and 3 months; 18.000 € with delay ×0,3; 9.000 €; 10 M€ and 4 months; 35 M€ and 12 months; 18 months with 18 or 26 M€ and +25 %; 60 % for 24 months). Dynamic figures go only in an unvoiced Dato line.",
+    "Every choice must leave a visible, verifiable effect on a named object, or an open commitment. Exogenous events happen whatever the player chooses. No scene may leave every option blocked for lack of cash.",
+    "One symbol, one meaning: ★ must not be political capital, contract class and Tenfe's grade at the same time.",
+    "No phase much larger than about 2.500 lines. Each phase must be playable, tested, versioned and pushed to Pages with verify-pages, and must state its real voice count (412/412 + N/M).",
+    "UI: at most 2 levels, about 6 top-level sections, tab limits that the design itself respects, a DOM test against nested boxes, no horizontal scroll at 390 and 320 px, and the names the tutorial voices fix kept («Qué puede circular», «Competencia», «Investigación», «Agenda»).",
+    "If the clock runs by days, set a measured per-day simulation budget and test that ▶ with the protocol equals ▶▶▶, so delegating never dominates and watching a day is never a tax.",
+    "Save under a new key, iberia-ferroviaria-v5, with a pure, tested migration from v2/v4 and tenfe-rescate-v1. Never delete the old keys.",
+    "The Rescate 2027 start keeps t-1 and t-2 literally true: an 8-year mandate, a 13-week test with a real consequence, and only the Norte line blinking red."
+   ]
+  },
+  {
+   "winner": "C-narrativa",
+   "mustFix": [
+    "Never edit story.js, encounters.js, induction.js or tycoon.js ARCS (bodies, persons, moods, ids, array order, the at:0 set, counts). Override triggers and choices by id from a new module. Every phase runs extract-game-source, which asserts SHA 6348984c… and 412 rows.",
+    "Do not depend on regenerating assets/infra.js with tools/build_infra.py: its OSM input (investigacion/railgeo/railways-iberia-compact.json) is not in the repo. Put the real-segment fixes (pal-leo-c, cor-sev-c, leo-pol split into Rampa/Variante, the mot node, vmax/km from segments.json) in an overlay asset. Migrate s.infra.t keys, route vias and the HISTORY entry for 2023-11-29 in validateSave/migrate.",
+    "Before phase 1 ships, get npm test green: replace the test.mjs §11 embedded-base64 assertion with a manifest/release.json check, and fix the stale onboarding-ui-test title. Keep sfx recipes for every new data-* action, since the §11 rule must cover the new dispatcher attribute.",
+    "Keep the build anchors exactly: menu-departures-title '¿Adónde vamos?', the app.js voice-error toast string, and the two voice.js decode lines. Add every new module to optionalBefore in dependency order, with single-line named imports and no export default or multi-line imports. Add every new CSS file to the extractor's style list.",
+    "Encounters, events or pacts whose mechanic is not shipped yet must be gated off (a requires/mecanicas flag), never fired untrue. Revalidate the predicate right before display and on load; silence is the default.",
+    "In the 2022 start, recorded claims must hold: 'Enero de 2022', Óscar 'hoy alcalde consultado' until 20-11-2023, 'Hoy sobra cobertura' (drivers ≥ need, also with any MD fleet), 'solo sirve hoy nuestro Alvia híbrido S730' (no owned diesel at month 0), 'media flota parada', 'abrir cuesta 4 M€', '20 maquinistas 0,3 M€ y 3 meses', '18.000 €/9.000 €', 'online 10 M€/4 meses', 'ERTMS 35 M€/12 meses', 'primer encargo 18 meses, 18/26 M€, +25 %'. Generalise voice-text-test to all of them.",
+    "Keep the UI labels that recorded tutorial lines name: «Qué puede circular», «Competencia», «Investigación», «Agenda», and 'Comienza la jornada' / 'pasa al día siguiente' mapping to real controls.",
+    "New save key iberia-ferroviaria-v5 with a pure, tested migration from iberia-ferroviaria-v2 (version 4). Never delete the old keys or tenfe-rescate-v1. Until the 2027 start is ported, the legacy rescue card must say it is the old engine.",
+    "All randomness is seeded by seed + day + domain: reloading changes nothing, bets cannot be re-rolled, the negotiation roll is stored when the window opens, and no 22 %/28 %/32 % dice without a visible cause.",
+    "Moving the fleet from lots to named units must go behind a pure migration with tests that preserve marketplace commerce rules (30 % deposit, 70 % on delivery, 2 units/month), contracts' supplyOptions and campaign-test behaviour. Do not combine it in the same phase with the HUD rewrite.",
+    "Daily tick performance: cache servicePlan by network version and day type, aggregate at ▶▶▶, and assert a per-day time budget in tests. Fall back to 7-day blocks if the budget is exceeded.",
+    "Spoken new lines carry no dynamic figures; freeze texts per phase before recording (build_rescate_voices --package drops any take whose text, person or mood changed); stay ≤150 lines; labels must state the real count '412/412 + N/M'.",
+    "Retire or re-record paco-estacion, which addresses the Tenfe president as 'Ministro'; do not explain it away.",
+    "Do not claim rescate.js functions can be reused as-is: pacts, groups, election, cloacas, workQuote and punctProjection are keyed by s.corridors and weeks. Port them to tramos/lines and months/days, together with their rescate-test assertions.",
+    "Cap each phase at about 3,000 lines with one visible headline, and never ship a phase that leaves a recorded line false or an option without an observable effect (efectos-test: every choice changes state or opens a commitment within a few days)."
+   ]
+  },
+  {
+   "winner": "C-narrativa",
+   "mustFix": [
+    "No release may play a body that is false. Gate every contract, story and encounter by the mechanics it needs from phase 1 onward. The classic encounter permutation (tycoon.js:158) and the monthly 32 % event roll must not survive into any published phase. Silence is the default.",
+    "Exogenous facts stated in a recorded body must happen whatever the player picks. Examples: eufunds «40 % más baratas durante dos años» (A's option B of +30 M€ breaks it), the discounts demand surge, the festival, the Autocares 5 € campaign, YaIré's entry on 25-11-2022, and the industry «dieciocho meses de cola» (B's +8 months contradicts it).",
+    "Voiced numbers and dates are engine constants checked by a test: 4 M€; 20 drivers for 0,3 M€ with 3 months of training; 18.000 € with delay ×0,3; 9.000 €; 10 M€/4 months; 35 M€/12 months; 18 months, 18/26 M€, +25 %; Torralba–Soria 44 M€/21 months; 40 %/24 months; climate at 45 °C, not 44.",
+    "Speakers must hold the office the line assumes. Raquel is minister until 20-11-2023 and Óscar after that. Óscar is shown as mayor («alcalde consultado») during the 2022 tutorial. A minister out of office never speaks as minister. A dismissed Adif chief falls silent.",
+    "Villanueva and Paco must stay consistent: 412 inhabitants, «una estación preciosa sin trenes», mayorchain chains him to his own village's track. paco-estacion's «Ministro» must be retired or re-recorded, not explained away, and paco-inaugura must be rewritten to match the population.",
+    "Never touch catalogue-hashed fields: id, person, raw, text, mood, priority, kind, source, order. A's plan to change «tipos» in web-source/dialogue-catalogue.json would break the pinned SHA 6348984c…. «Dónde suena» must live in separate metadata. Do not edit story.js or encounters.js bodies or array order, and do not copy body text into new modules.",
+    "Keep the tutorial's truths: the only owned non-electric unit in January 2022 is the S730. The first encargo is measured on growth over the January 2022 baseline. «Hoy sobra cobertura» holds. Keep the UI names the takes cite: «Qué puede circular», «Competencia», «Investigación», «Agenda». Keep «al cerrar el mes llegan…» as a real month close.",
+    "Every choice leaves an observable, labelled effect or a tracked commitment, checked by a test. No gamble can be re-rolled (seed per scene, stored when the window opens). No softlock: event:freeze must never require paying up front.",
+    "Historical decisions fire on their exact day inside a window and are skipped rather than played late. Fix the gameDate/rollover bug (operations.js:232) so openings are not applied on day 1.",
+    "Scarcity should come from real resources: cash and credit, drivers, crews, workshop slots, surcos and a single research slot. Do not carry the rescue's 3 orders/signatures per turn into a continuous-clock game; no recorded line needs it.",
+    "R7: phases must be small enough to ship often. Split 4,000-line steps like B's F2, and give phase 1 a visible single-mode improvement. If the 2027 start temporarily keeps the old engine, label it clearly and remove that separate entry once it is ported. Saves go under a new key (iberia-ferroviaria-v5) with migration, and the old keys are never deleted.",
+    "Voice production: freeze each phase's texts before recording, because --package drops takes whose text, person or mood changed. Show the real counts on both pages (412/412 + N/M). Unrecorded lines are subtitle-only, never speechSynthesis. Keep the menu anchor «¿Adónde vamos?», the app.js voice-error string and exactly 6 brand logos.",
+    "Set a performance budget for the daily tick at top speed (≤5–50 ms per simulated day) and enforce it with a test. Cache plans per network version, and aggregate rather than simulating minute by minute at ▶▶▶."
+   ]
+  }
+ ]
+}

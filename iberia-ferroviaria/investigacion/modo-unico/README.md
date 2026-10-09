@@ -34,3 +34,15 @@ Conclusión principal: las 412 grabaciones clásicas no se pueden volver a graba
 | [juegos-ferroviarios.md](juegos-ferroviarios.md) | Transport Fever 2, Railway Empire 2, OpenTTD, Mini Metro, Rail Route y NIMBY Rails: compra de trenes con compatibilidad, gestor de líneas y recompensas semanales. |
 
 El diseño del modo único se escribe a partir de estos documentos.
+
+## Diseños del modo único
+
+Tres diseños independientes, puntuados por tres jueces (jugador exigente, jefe técnico y defensor de lo que pidió el usuario) en cumplimiento, verdad de los diálogos, diversión, realismo, interfaz, viabilidad y entregas por fases:
+
+| Diseño | Enfoque | Puntos |
+| --- | --- | --- |
+| [diseno-C-narrativa.md](disenos/diseno-C-narrativa.md) | Lo que se dice, pasa: motor de hechos, guion por diálogo, promesas y reparto por fecha. **Ganador para los tres jueces.** | 181 |
+| [diseno-B-tropico-cities.md](disenos/diseno-B-tropico-cities.md) | Facciones con líder, edictos, elecciones, hitos, arranques y semillas. | 164 |
+| [diseno-A-simulacion.md](disenos/diseno-A-simulacion.md) | Red y operación reales, convenios al estilo Airport CEO, monitor y líneas trazadas. | 161 |
+
+Los veredictos y lo que cualquier diseño final debe evitar están en [disenos/jueces.json](disenos/jueces.json). La especificación final parte del diseño C e incorpora las mejores ideas de A y B.
