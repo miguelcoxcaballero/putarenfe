@@ -124,8 +124,8 @@
     "width": 960,
     "height": 640,
     "description": "Sala de prensa vacía con muchos micrófonos en un atril de madera y fotógrafos.",
-    "bytes": 74686,
-    "sha256": "909fa391bffc46cd054cfd916de2cf6c65a38bd3185b6df4fcbd6fea082df6de"
+    "bytes": 56918,
+    "sha256": "17bccf6321e38721a290cee314cd440ae12736141ce9be6c6febb262c8419c6e"
   },
   {
     "name": "tech-inauguraciones",
@@ -156,8 +156,8 @@
     "width": 960,
     "height": 640,
     "description": "Abogados con toga negra caminando por el pasillo de un juzgado español con carpetas gruesas.",
-    "bytes": 98654,
-    "sha256": "e877d1af647c6c5d505e5a7aafcd38ce76e5b32e1ac1df03579d4dad3ea4dea0"
+    "bytes": 55762,
+    "sha256": "18996aa01b10d8e870e4a831458fb22cb8aeeeec7c49ecba4b5e89e4e4416208"
   },
   {
     "name": "tech-destructora",
@@ -460,8 +460,8 @@
     "width": 1280,
     "height": 720,
     "description": "Tres trenes regionales en tres andenes de una gran estación, amanecer.",
-    "bytes": 150062,
-    "sha256": "792281f7f12ddf24bb685e30e94c86091d8f06ec8ee91008917ae49a0a1c30e7"
+    "bytes": 176606,
+    "sha256": "5926bf9fb8ec50a9c3934586db6abbf55afd2ca416bfedb33bea1565829f2f04"
   },
   {
     "name": "etapa-s3",
@@ -500,7 +500,7 @@
     "width": 1280,
     "height": 720,
     "description": "Despacho vacío con cajas de mudanza y una placa de «Presidencia de Tenfe» en el suelo.",
-    "bytes": 114926,
-    "sha256": "e1fc485f20b71e35528fcc8a4c88748878cca4e4e084b97786585227604d76ed"
+    "bytes": 55414,
+    "sha256": "962cd93317f44a15bee003a435ee6baa472fc8841f9f125ccc2b632edb9572e9"
   }
 ]
