@@ -18,7 +18,8 @@ const shot = name => page.screenshot({path: path.join(out, name + '.png'), anima
 const settle = () => page.waitForTimeout(400);
 try {
   await page.goto(process.env.GAME_URL || pathToFileURL(path.join(root, 'dist/index.html')).href);
-  await page.click('[data-action=free-setup]'); await page.selectOption('#freeCash', '5000'); await page.click('[data-action=free-begin]');
+  await page.click('.main-menu [data-action=new-game]'); await page.click('.np-screen [data-action=np-pick][data-id=maqueta]');
+  await page.click('.np-screen [data-action=np-cash][data-id="5000"]'); await page.click('.np-screen [data-action=np-begin]');
   await game(() => { const g = window.railwayGame; g.voices.enabled = false; g.music.enabled = false; g.sfx.enabled = false; });
   await page.waitForFunction(() => window.railwayGame.map.lastFrame > 0);
 

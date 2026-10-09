@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 // Pruebas de reglas de Iberia Ferroviaria 2.0: solo AVE y Alvia, red con anchos y catenaria, obras,
 // cambiadores, obras históricas, imprevistos, personajes con retrato y guardado. Uso: node test.mjs
 import assert from 'node:assert/strict';
@@ -163,7 +164,8 @@ await import('./voice-text-test.mjs');
   }
   const {DIALOGUE_CATALOGUE: lines} = await import('./tools/voice_dialogues.mjs');
   const catalogue = JSON.parse(fs.readFileSync('../investigacion/voces/dialogos-3.6.3.json', 'utf8'));
-  const {DIALOGUES} = await import('./dist/assets/voice-dialogues.js');
+  const release = JSON.parse(fs.readFileSync('../release.json', 'utf8'));
+  const takes = new Map(release.recordings.map(take => [take.id, take]));
   const {CAST, clipId, speechText} = await import('./dist/voice.js');
   const expectedIds = lines.map(line => line.id).sort();
   const expectedCast = Object.keys(CAST).sort();
@@ -175,10 +177,12 @@ await import('./voice-text-test.mjs');
   for (const line of lines) {
     assert.equal(line.id, clipId(line.person, line.raw), 'ID vigente del texto de ' + line.person);
     assert.equal(line.text, speechText(line.raw), 'texto pronunciable vigente de ' + line.person);
-    assert(typeof DIALOGUES[line.id] === 'string' && Buffer.from(DIALOGUES[line.id], 'base64').length > 0,
-      'grabación completa incrustada obligatoria para ' + line.person + ': ' + line.raw);
+    const take = takes.get(line.id);
+    assert(take && take.person === line.person, 'grabación completa publicada obligatoria para ' + line.person + ': ' + line.raw);
+    const audio = fs.readFileSync('../' + take.url);
+    assert.equal(crypto.createHash('sha256').update(audio).digest('hex'), take.sha256, 'la toma publicada coincide con su SHA-256: ' + take.url);
   }
-  assert.deepEqual(Object.keys(DIALOGUES).sort(), expectedIds, 'grabaciones completas cubren exactamente el catálogo: sin faltantes ni obsoletas');
+  assert.deepEqual([...takes.keys()].sort(), expectedIds, 'grabaciones completas cubren exactamente el catálogo: sin faltantes ni obsoletas');
   ok.push(`${actions.size} acciones con su efecto de sonido; los 412 diálogos de los nueve personajes tienen una toma completa.`);
 }
 console.log(ok.map(x => '✓ ' + x).join('\n'));

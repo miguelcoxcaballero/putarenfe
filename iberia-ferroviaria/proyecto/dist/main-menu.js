@@ -44,7 +44,7 @@ export function menuHTML(saved = null, savedError = '', rescue = null) {
         ${other ? `<button class="menu-other" data-action="continue-other" data-game="${other.game}">${icon('resume')}<span>También guardada: ${where(other)}</span><b aria-hidden="true">→</b></button>` : ''}
         <div class="menu-secondary"><button data-action="menu-guide">${icon('book')}<span>Guía del director</span></button><button data-action="menu-settings">${icon('settings')}<span>Sonido y ajustes</span></button></div>
         <button class="menu-observe" data-action="observe">${icon('eye')}<span>Solo mirar los trenes</span><b aria-hidden="true">→</b></button>
-        <p class="menu-save-note">Tu partida se guarda automáticamente en este navegador. · Versión 4.0.0</p>
+        <p class="menu-save-note">Tu partida se guarda automáticamente en este navegador. · Versión 4.1.0</p>
       </section>
     </div>
     <footer class="menu-council"><div class="menu-council-label"><strong>El consejo te espera.</strong><span>Y cada cual quiere algo distinto.</span></div><ul aria-label="Los nueve personajes de tu consejo de dirección">${cast}</ul><span class="menu-footer-note">Un billete al poder.<br>Sin derecho a devolución.</span></footer>

@@ -295,7 +295,7 @@ assert(!/<base\b/i.test(gameHTML+listeningHTML),'all asset URLs use the document
 assert.equal((listeningHTML.match(/<audio\b/g)||[]).length,1,'one native listening player');
 write('index.html',gameHTML);write('dialogos.html',listeningHTML);
 write('.nojekyll','');
-const release={schema:1,version:'4.0.0',status:partial?'partial-preview':'complete-catalogue',
+const release={schema:1,version:'4.1.0',status:partial?'partial-preview':'complete-catalogue',
   availableWholeDialogues:available,expectedWholeDialogues:412,pendingWholeDialogues:pending,pacoWholeDialogues:pacoCount,
   sourceFrozenHTMLs:{gameSHA256:sourceRelease.gameSourceSHA256,listeningSHA256:sourceRelease.listeningSourceSHA256},
   sourceManifestSHA256:sha(manifestBytes),sourceCatalogueSHA256:sourceRelease.sourceCatalogueSHA256,

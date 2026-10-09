@@ -70,8 +70,8 @@
     },
     {
       "file": "assets/infra.js",
-      "bytes": 72158,
-      "sha256": "6fcc3aa6d6cc6ac3fa4cd99e1b12ba263e8f8e7a54d62db1fdc1a3d60aa01422"
+      "bytes": 73659,
+      "sha256": "798730cfe9cbff2094800257eba000a409dd8824984b7e4c43e77e2dee7ea4bf"
     },
     {
       "file": "brands.js",
@@ -80,13 +80,13 @@
     },
     {
       "file": "data.js",
-      "bytes": 11745,
-      "sha256": "6c39aa27d22bd505f69f0bcddd6eb770bf6ca932629ce3a39fc3160e3c5e5ddb"
+      "bytes": 12320,
+      "sha256": "7f8b2376c479f5c74fb9eed6948e3fdedf0e6c1750d7743d6085b3507a543abd"
     },
     {
       "file": "story.js",
-      "bytes": 24273,
-      "sha256": "9b1e2d2436c3d37b28861bc2a05f238472b8530509137af0b2e7b9b2faa1e233"
+      "bytes": 26230,
+      "sha256": "9a0ba3bbd0863e59f79566fc4061ac531547a4156e7e263434fe4ba3d8702eae"
     },
     {
       "file": "schedule.js",
@@ -95,8 +95,8 @@
     },
     {
       "file": "infra.js",
-      "bytes": 14418,
-      "sha256": "19edfebfd3ab88e8a6ffa9dc8e0413f2a5236ace2b127f4cc6970362928b9209"
+      "bytes": 19244,
+      "sha256": "ba6ef1ac17c7608ee5cacc5645f88b6f49f59d270d240da1580bb9a05f081664"
     },
     {
       "file": "network.js",
@@ -115,33 +115,38 @@
     },
     {
       "file": "encounters.js",
-      "bytes": 9955,
-      "sha256": "0036b38a10bcad59cd86a0c631f2c90df464788727d3b4b33b107a0b72351f7a"
+      "bytes": 10243,
+      "sha256": "0518e1ee90378ea32d49f0950c4c80b6b1c08d9576d3bd0b56003fa3c5164e16"
     },
     {
       "file": "marketplace.js",
-      "bytes": 16370,
-      "sha256": "b4479efde952007796af418edfc4738b054e05031caa1cec2ae61082b7e42129"
+      "bytes": 19460,
+      "sha256": "62421e5032d83bbccac7fea214c084a0f746ad7139568c0fa42bccba527606cc"
     },
     {
       "file": "tycoon.js",
-      "bytes": 30467,
-      "sha256": "31de36b24ad79df11e918d92070bf05b0976636890f39b254210df63f81dcc62"
+      "bytes": 32185,
+      "sha256": "cf6f7104c9bc3a9596d558f76af8202d3399a3771ade6349fb832cd5ca6cdbc9"
+    },
+    {
+      "file": "verdad.js",
+      "bytes": 84007,
+      "sha256": "8458cae9111f60e49df40a877b7c351895478bc56df1caac4421e97291923483"
     },
     {
       "file": "engine.js",
-      "bytes": 38655,
-      "sha256": "45ec3a4bda763f53b68007fada3dfe1bdfece7a4aa5fd0be963080b37c74a677"
+      "bytes": 45768,
+      "sha256": "7cec4e67d34d587138963d2a5dae2998f77c9c90fc995081ed7adc3f71783480"
     },
     {
       "file": "operations.js",
-      "bytes": 18971,
-      "sha256": "94f312b4bea88f28780ba638d872cda8ddb31b58f99fb619675d3bcf682e0c8a"
+      "bytes": 20818,
+      "sha256": "eb62c67734b5014e751cd3eb4f269128d63de70e4679823b565d87ab4ddb1fdf"
     },
     {
       "file": "map-v3.js",
-      "bytes": 51764,
-      "sha256": "4499fec9aa975853f471490f6979557fb0c519486819e94e97794181ce67e4f6"
+      "bytes": 52506,
+      "sha256": "a6a0df7c7782ac17d95ac9c552908024e9f5de269a85d3e9cfd3fa0117a66e5f"
     },
     {
       "file": "train-art.js",
@@ -185,8 +190,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 28275,
-      "sha256": "6289a85b455f7d3c99ab96b88f9387c1968beb427b507193f59d356f4d935c10"
+      "bytes": 28325,
+      "sha256": "b5791217647293b0c3267c988bfdb466f0973ad476d097fa6f5fc45125eb66e2"
     },
     {
       "file": "assets/portraits.js",
@@ -200,13 +205,18 @@
     },
     {
       "file": "tycoon-ui.js",
-      "bytes": 21550,
-      "sha256": "655b906d6398cdb2d14ff6b380eb0aaaa4c957002acb8bceb2e22460bde95621"
+      "bytes": 21640,
+      "sha256": "7dbd044d55b7542b13f4504516a66563f9f1507130ae227328429f4626e98ca3"
+    },
+    {
+      "file": "nueva-partida.js",
+      "bytes": 6553,
+      "sha256": "330027c1acf81424bb04c7d156c102983184f52c70529c94745023899b5a9c94"
     },
     {
       "file": "main-menu.js",
-      "bytes": 6604,
-      "sha256": "bc7cc61eddbeec4c217bf37e08b49aa2ee592c5d6bd757c2ccedcb413aad4cef"
+      "bytes": 5046,
+      "sha256": "b38728313a243f26020245cad6bb510bd7717c05133c340ec64849970854db6f"
     },
     {
       "file": "induction-task-ui.js",
@@ -220,8 +230,8 @@
     },
     {
       "file": "rescate-data.js",
-      "bytes": 60419,
-      "sha256": "5641e67c22342e8102e974d0ce1a03ae1ad9908eccc97e54ea2a74b616bf0e3d"
+      "bytes": 63028,
+      "sha256": "1b311312454e9d3769819ad0f19d5af4883447683ddd49c7eab2e7006d6337bf"
     },
     {
       "file": "rescate.js",
@@ -235,23 +245,23 @@
     },
     {
       "file": "rescate-ui.js",
-      "bytes": 64756,
-      "sha256": "5b3de5863ad6419c27cfb27069f3cfab93e97f70b1344c21b35e7e017611e339"
+      "bytes": 64738,
+      "sha256": "0bc36bd39fc92668ecc0c8763a0d70630992f5ebc9594ab7257d886d5644e945"
     },
     {
       "file": "app.js",
-      "bytes": 153704,
-      "sha256": "744efbc69dc935aad819bd410a785e69cd9c305ed05a8164ff96ec5c65faed4c"
+      "bytes": 158675,
+      "sha256": "8f6ce1254b90897ef3469f6cc2f7dce0b4612b17140812922f836092d6716548"
     },
     {
       "file": "style-v3.css",
-      "bytes": 61939,
-      "sha256": "a1b68f57b24ce4f4262bbbf1d612e8afdd289b588183de4fbf8392facc11f349"
+      "bytes": 62268,
+      "sha256": "ca3beae782090ef4ac90a53eaa5a7792552a4c6eb51fd56d8effc3fae93c3ada"
     },
     {
       "file": "main-menu.css",
-      "bytes": 12406,
-      "sha256": "b6e8be90c408b4057a48e7abee8865d8563a68f86b0ae16c8b22d146c7c79e1e"
+      "bytes": 16926,
+      "sha256": "daf9c48a05ef9e7afcdb25e845a9c1c64b5e5063980bb2493f0c2f07da798441"
     },
     {
       "file": "induction.css",
@@ -260,8 +270,8 @@
     },
     {
       "file": "marketplace.css",
-      "bytes": 14639,
-      "sha256": "8f32a4fc703573d503eed0dcc38262be28db604f371b17ca5d7927799423f6d5"
+      "bytes": 14930,
+      "sha256": "a9d09a6e1d0191b0bd8e898662f20d34d88df2f123d05018ec05141ab07c8c8d"
     },
     {
       "file": "rescate.css",
@@ -300,8 +310,8 @@
     },
     {
       "file": "index.html",
-      "bytes": 2817,
-      "sha256": "9d8e3a75ac687e1b3818129c6617df1140dd16bc1a0dfb3c949b43de68901477"
+      "bytes": 2862,
+      "sha256": "fac927fa3fccb8ac0949424261486e6895634c4886a8eb1f7d3eee4c7162109a"
     },
     {
       "file": "assets/muestras-ui.js",
