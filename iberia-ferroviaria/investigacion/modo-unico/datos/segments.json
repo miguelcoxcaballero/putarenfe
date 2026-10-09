@@ -1,0 +1,393 @@
+{
+ "norte": [
+  {
+   "from": "mad",
+   "to": "avi",
+   "km": 121,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 110,
+   "track": "doble"
+  },
+  {
+   "from": "avi",
+   "to": "med",
+   "km": 86,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 150,
+   "track": "doble"
+  },
+  {
+   "from": "med",
+   "to": "vll",
+   "km": 42,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 150,
+   "track": "doble"
+  },
+  {
+   "from": "vll",
+   "to": "vdb",
+   "km": 37,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 135,
+   "track": "mixta"
+  },
+  {
+   "from": "vdb",
+   "to": "pal",
+   "km": 12,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 130,
+   "track": "doble"
+  },
+  {
+   "from": "pal",
+   "to": "leo",
+   "km": 123,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 155,
+   "track": "doble"
+  }
+ ],
+ "levante": [
+  {
+   "from": "mad",
+   "to": "alc",
+   "km": 148,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 145,
+   "track": "doble"
+  },
+  {
+   "from": "alc",
+   "to": "alb",
+   "km": 131,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 170,
+   "track": "doble"
+  },
+  {
+   "from": "alb",
+   "to": "enc",
+   "km": 98,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 160,
+   "track": "doble"
+  },
+  {
+   "from": "enc",
+   "to": "xat",
+   "km": 53,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 135,
+   "track": "unica"
+  },
+  {
+   "from": "xat",
+   "to": "vlc",
+   "km": 57,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 140,
+   "track": "doble"
+  }
+ ],
+ "sur": [
+  {
+   "from": "mad",
+   "to": "alc",
+   "km": 148,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 145,
+   "track": "doble"
+  },
+  {
+   "from": "alc",
+   "to": "lin",
+   "km": 167,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 130,
+   "track": "mixta"
+  },
+  {
+   "from": "lin",
+   "to": "cor",
+   "km": 127,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 150,
+   "track": "unica"
+  },
+  {
+   "from": "cor",
+   "to": "sev",
+   "km": 129,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 155,
+   "track": "mixta"
+  }
+ ],
+ "mediterraneo": [
+  {
+   "from": "vlc",
+   "to": "sag",
+   "km": 33,
+   "gauge": "mixto",
+   "elec": "3kv",
+   "vmax": 160,
+   "track": "doble"
+  },
+  {
+   "from": "sag",
+   "to": "cas",
+   "km": 40,
+   "gauge": "mixto",
+   "elec": "3kv",
+   "vmax": 200,
+   "track": "doble"
+  },
+  {
+   "from": "cas",
+   "to": "tar",
+   "km": 190,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 195,
+   "track": "doble"
+  },
+  {
+   "from": "tar",
+   "to": "bcn",
+   "km": 84,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 140,
+   "track": "doble"
+  }
+ ],
+ "ebro": [
+  {
+   "from": "bil",
+   "to": "mir",
+   "km": 104,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 92,
+   "track": "mixta"
+  },
+  {
+   "from": "mir",
+   "to": "log",
+   "km": 70.6,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 100,
+   "track": "unica"
+  },
+  {
+   "from": "log",
+   "to": "cst",
+   "km": 76,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 125,
+   "track": "unica"
+  },
+  {
+   "from": "cst",
+   "to": "zar",
+   "km": 90,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 160,
+   "track": "doble"
+  }
+ ],
+ "galicia": [
+  {
+   "from": "aco",
+   "to": "scq",
+   "km": 61,
+   "gauge": "ib",
+   "elec": "25kv",
+   "vmax": 185,
+   "track": "doble"
+  },
+  {
+   "from": "scq",
+   "to": "pon",
+   "km": 66,
+   "gauge": "ib",
+   "elec": "25kv",
+   "vmax": 170,
+   "track": "doble"
+  },
+  {
+   "from": "pon",
+   "to": "vig",
+   "km": 28,
+   "gauge": "ib",
+   "elec": "25kv",
+   "vmax": 185,
+   "track": "doble"
+  }
+ ],
+ "asturias": [
+  {
+   "from": "leo",
+   "to": "pol",
+   "km": 108,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 115,
+   "track": "mixta"
+  },
+  {
+   "from": "pol",
+   "to": "ovi",
+   "km": 31,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 100,
+   "track": "doble"
+  },
+  {
+   "from": "ovi",
+   "to": "gij",
+   "km": 31.6,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 110,
+   "track": "doble"
+  }
+ ],
+ "extremadura": [
+  {
+   "from": "mad",
+   "to": "tal",
+   "km": 134,
+   "gauge": "ib",
+   "elec": "no",
+   "vmax": 155,
+   "track": "mixta"
+  },
+  {
+   "from": "tal",
+   "to": "pla",
+   "km": 134,
+   "gauge": "ib",
+   "elec": "no",
+   "vmax": 155,
+   "track": "unica"
+  },
+  {
+   "from": "pla",
+   "to": "cac",
+   "km": 79,
+   "gauge": "ib",
+   "elec": "25kv",
+   "vmax": 200,
+   "track": "mixta"
+  },
+  {
+   "from": "cac",
+   "to": "mer",
+   "km": 71,
+   "gauge": "ib",
+   "elec": "25kv",
+   "vmax": 200,
+   "track": "mixta"
+  },
+  {
+   "from": "mer",
+   "to": "bad",
+   "km": 59,
+   "gauge": "ib",
+   "elec": "25kv",
+   "vmax": 200,
+   "track": "mixta"
+  }
+ ],
+ "teruel": [
+  {
+   "from": "zar",
+   "to": "ter",
+   "km": 182,
+   "gauge": "ib",
+   "elec": "no",
+   "vmax": 160,
+   "track": "unica"
+  },
+  {
+   "from": "ter",
+   "to": "sag",
+   "km": 138,
+   "gauge": "ib",
+   "elec": "no",
+   "vmax": 90,
+   "track": "unica"
+  },
+  {
+   "from": "sag",
+   "to": "vlc",
+   "km": 29,
+   "gauge": "mixto",
+   "elec": "3kv",
+   "vmax": 160,
+   "track": "doble"
+  }
+ ],
+ "soria": [
+  {
+   "from": "mad",
+   "to": "gua",
+   "km": 57,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 160,
+   "track": "doble"
+  },
+  {
+   "from": "gua",
+   "to": "trb",
+   "km": 99,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 150,
+   "track": "doble"
+  },
+  {
+   "from": "trb",
+   "to": "sor",
+   "km": 93,
+   "gauge": "ib",
+   "elec": "no",
+   "vmax": 100,
+   "track": "unica"
+  }
+ ],
+ "cantabria": [
+  {
+   "from": "pal",
+   "to": "san",
+   "km": 217,
+   "gauge": "ib",
+   "elec": "3kv",
+   "vmax": 120,
+   "track": "unica"
+  }
+ ]
+}
