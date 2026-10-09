@@ -26,19 +26,29 @@ const shot = name => page.screenshot({path: path.join(out, name + '.png')});
 const wait = ms => page.waitForTimeout(ms);
 const game = (fn, arg) => page.evaluate(fn, arg);
 const step = () => page.evaluate(() => document.querySelector('.rs-coach')?.dataset.step ?? 'none');
+/** Portada → «Nueva partida» → 2027 · El rescate → «Empezar» (aceptando sustituir un rescate guardado si lo hay). */
+async function newRescue(p) {
+  await p.click('.main-menu [data-action=new-game]');
+  await p.click('.np-screen [data-action=np-pick][data-id=rescate]');
+  await p.click('.np-screen [data-action=np-begin]');
+  if (await p.locator('.np-screen [data-action=np-yes]').count()) await p.click('.np-screen [data-action=np-yes]');
+}
 
 await page.goto(url); await wait(2500);
 await game(() => localStorage.removeItem('tenfe-rescate-v1'));
 await page.reload(); await wait(2500);
-assert.equal(await page.locator('[data-action=rescue-new]').count(), 1, 'la portada ofrece el Rescate de Tenfe');
-assert.equal(await page.locator('[data-action=begin]').count(), 1, 'la campaña clásica sigue disponible');
+assert.equal(await page.locator('.main-menu [data-action=new-game]').count(), 1, 'la portada ofrece un único «Nueva partida»');
+assert.equal(await page.locator('.main-menu [data-action=rescue-new], .main-menu [data-action=begin]').count(), 0, 'sin entradas separadas por modo');
 await shot('01-portada');
-await page.click('[data-action=rescue-new]'); await wait(1200);
+await page.click('.main-menu [data-action=new-game]');
+assert.deepEqual(await page.locator('.np-start').evaluateAll(cards => cards.map(card => card.dataset.id)), ['herencia', 'rescate', 'maqueta'], 'el rescate y la campaña clásica son dos de los tres arranques');
+await page.click('.np-screen [data-action=np-back]');
+await newRescue(page); await wait(1200);
 assert(/Recupera el Norte/.test(await page.locator('.rs-modal h1').textContent()), 'arranca con la misión del primer trimestre');
 assert.equal(await page.locator('.rs-modal .rs-talk img.face').count(), 1, 'habla un personaje con su retrato');
 await shot('02-mision');
 await page.click('.rs-modal .rs-choice'); await wait(500);
-done.push('Portada con el rescate como modo principal y misión inicial contada por la ministra.');
+done.push('Portada con un único «Nueva partida»; el arranque 2027 abre el rescate con la misión inicial contada por la ministra.');
 
 // Tutorial: una persona habla cada vez y cada paso avanza al hacer lo que pide.
 assert.equal(await step(), '0');
@@ -119,7 +129,7 @@ const phone = await browser.newPage({viewport: {width: 390, height: 844}, device
 phone.setDefaultTimeout(30000);
 phone.on('pageerror', e => errors.push('móvil: ' + e.message));
 await phone.goto(url); await phone.waitForTimeout(2500);
-await phone.click('[data-action=rescue-new]'); await phone.waitForTimeout(1200);
+await newRescue(phone); await phone.waitForTimeout(1200);
 for (let g = 0; g < 6 && await phone.evaluate(() => !!document.querySelector('.rs-modal[open] .rs-choice')); g++) { await phone.click('.rs-modal[open] .rs-choice'); await phone.waitForTimeout(400); }
 await phone.click('[data-a=tutorial-skip]').catch(() => {}); await phone.waitForTimeout(300);
 await phone.screenshot({path: path.join(out, '10-movil.png')});

@@ -57,7 +57,7 @@ try {
     assert.equal(entry.clipId,row.id);assert.equal(entry.clipKind,'D');assert.equal(entry.speakingMode,'dialogue');assert.equal(entry.person,row.person);assert.equal(entry.decode.mp3SHA256,expectedSHA);assert.match(entry.pcmSHA256,/^[a-f0-9]{64}$/);assert.equal(entry.playbackRate,1);assert.equal(entry.detune,0);assert.equal(entry.nativeBuffer,true);assert.equal(entry.contextState,'running');assert(entry.rms>.00001);assert.equal(entry.stoppedAt,undefined);assert(entry.endedAt-entry.at>=entry.duration*1000-250);assert.deepEqual(entry.path.map(n=>n.type),['AudioBufferSourceNode','GainNode','AudioDestinationNode']);
     const {base64,...text}=row;report.messages.push({...text,label,productionSHA256:take.sha256,referenceSHA256:take.reference_sha256,actual:entry});cursor++;save();console.log(`PASS ${label}: ${row.person}, cuerpo completo, fuente única, ${entry.duration.toFixed(2)} s nativos.`);
   }
-  await page.locator('.main-menu [data-action=begin]').click();await message('apertura');
+  await page.locator('.main-menu [data-action=new-game]').click();await page.fill('#npSeed','72022');await page.locator('.np-screen [data-action=np-begin]').click();await message('apertura'); // Nueva partida → 2022 · La herencia
   await page.locator('#modal [data-action=decision][data-choice="0"]').click();await message('primer-encargo');
   await page.locator('#modal [data-action=tutorial-next]').click();await page.waitForSelector('#coach[data-step-id=mandate][data-kind=task]');
   assert.equal(await page.locator('#coach [data-action=tutorial-answer]').count(),3,'tres prioridades reales disponibles');

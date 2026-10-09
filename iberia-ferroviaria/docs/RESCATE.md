@@ -80,5 +80,7 @@ Comisiones de los fabricantes y contratistas que llenan la **caja B**, propuesta
 | `proyecto/rescate-test.mjs` | Reglas y partidas completas de ocho años jugadas por un jugador automático con órdenes legales. |
 | `proyecto/rescate-ui-test.mjs` | Recorrido real con Chromium: tutorial, obra, compra, semanas, pactos, páginas y móvil. |
 | `proyecto/tools/build_rescate_voices.py` | Graba los diálogos con el mismo modelo, referencias y masterizado que el catálogo de 412. |
+| `proyecto/dist/nueva-partida.js` | Pantalla «Nueva partida» (2022 · La herencia, 2027 · El rescate, Maqueta), semilla repetible y partidas guardadas para «Continuar». |
+| `proyecto/nueva-partida-test.mjs`, `proyecto/nueva-partida-ui-test.mjs` | Semilla, arranques, `savedAt` y portada; recorrido con Chromium de la portada, los tres arranques, la confirmación y el móvil. |
 
-La campaña clásica 2022–2050 y el modo libre siguen intactos en el menú.
+La portada tiene un solo «Nueva partida»; el rescate es el arranque «2027 · El rescate». La campaña clásica 2022–2050 («2022 · La herencia») y el antiguo modo libre («Maqueta») siguen intactos. Cada guardado (`iberia-ferroviaria-v2` y `tenfe-rescate-v1`) lleva `savedAt`; «Continuar» reanuda el más reciente.

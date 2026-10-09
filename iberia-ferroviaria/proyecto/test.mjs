@@ -152,7 +152,7 @@ await import('./voice-text-test.mjs');
 // 11. Cada botón suena y cada diálogo tiene una grabación completa.
 {
   const {ACTIONS, RECIPES} = await import('./dist/sfx.js');
-  const app = fs.readFileSync('dist/app.js', 'utf8');
+  const app = ['dist/app.js', 'dist/main-menu.js', 'dist/nueva-partida.js'].map(file => fs.readFileSync(file, 'utf8')).join('\n'); // portada y «Nueva partida» incluidas
   const actions = new Set([...app.matchAll(/data-action="([a-z-]+)"/g), ...app.matchAll(/case '([a-z-]+)':/g)].map(m => m[1]));
   for (const a of actions) {
     const spec = ACTIONS[a];
@@ -186,6 +186,7 @@ console.log(ok.map(x => '✓ ' + x).join('\n'));
 await import('./tycoon-test.mjs');
 
 await import('./induction-test.mjs');
+await import('./nueva-partida-test.mjs');
 
 await import('./music-test.mjs');
 await import('./operations-calendar-test.mjs');

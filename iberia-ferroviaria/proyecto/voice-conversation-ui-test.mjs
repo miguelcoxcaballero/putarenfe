@@ -319,7 +319,9 @@ try {
       await click('#modal [data-action=tutorial-next]');
     }
   }
-  await click('.main-menu [data-action=begin]');
+  await click('.main-menu [data-action=new-game]');
+  await page.fill('#npSeed', '72022'); // 2022 · La herencia con la semilla de siempre
+  await click('.np-screen [data-action=np-begin]');
   await fullMessage('campaign-opening');
   await click('#modal [data-action=decision][data-choice="0"]');
   await fullMessage('mandate-briefing');

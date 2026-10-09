@@ -10,6 +10,7 @@ import {brandLogo} from './brands.js';
 import {trainThumb} from './train3d.js';
 import {CHARACTERS} from './story.js';
 import {NODES} from './infra.js';
+import {seedCodeOf} from './nueva-partida.js';
 
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const fmt = R.fmt;
@@ -49,7 +50,7 @@ export function rescueSave() {
 }
 export function rescueSaveSummary(s = rescueSave()) {
   if (!s || s.ended) return null;
-  return {week: s.week, date: R.dateLabel(s.week, {month: 'long', year: 'numeric'}), stage: STAGES[s.stageIdx]?.name, cash: s.cash, support: R.support(s)};
+  return {week: s.week, date: R.dateLabel(s.week, {month: 'long', year: 'numeric'}), stage: STAGES[s.stageIdx]?.name, cash: s.cash, support: R.support(s), savedAt: s.savedAt || 0};
 }
 
 // ------------------------------------------------------------------ tutorial: una persona habla cada vez
@@ -63,8 +64,9 @@ const TUTORIAL = [
   {line: 't-7', next: 'A gobernar', final: true},
 ];
 
-export function mountRescue({music, sfx, onExit, voiceEnabled = () => true, fresh = false, seed} = {}) {
+export function mountRescue({music, sfx, onExit, voiceEnabled = () => true, fresh = false, seed, seedCode} = {}) {
   let s = (!fresh && rescueSave()) || R.newGame(seed ?? Math.floor(Math.random() * 1e9));
+  if (fresh && seedCode) s.seedCode = seedCode;
   const ui = {selected: null, layer: 'puntualidad', page: null, modal: null, plan: null, tutorial: s.week === 1 && !s.tutorial.done ? s.tutorial.step : -1, popups: [], closing: false, spoken: -1};
   const root = document.createElement('div');
   root.className = 'rs'; root.id = 'rescate';
@@ -87,7 +89,7 @@ export function mountRescue({music, sfx, onExit, voiceEnabled = () => true, fres
   setTimeout(homeView, 60);
 
   // ---------------------------------------------------------------- utilidades
-  function save() { try { localStorage.setItem(R.SAVE_KEY, R.serialize(s)); } catch {} }
+  function save() { try { s.savedAt = Date.now(); localStorage.setItem(R.SAVE_KEY, R.serialize(s)); } catch {} }
   let toastTimer;
   function toast(text) { const t = $('.rs-toast'); t.textContent = text; t.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('on'), 3000); }
   function attempt(fn, ok, sound = 'confirm') {
@@ -530,10 +532,10 @@ export function mountRescue({music, sfx, onExit, voiceEnabled = () => true, fres
       case 'tutorial-next': if (TUTORIAL[ui.tutorial]?.final) stopVoice(); advanceTutorial(); break;
       case 'tutorial-skip': ui.tutorial = -1; s.tutorial.done = true; stopVoice(); save(); coach(); play('dismiss'); break;
       case 'tutorial-restart': ui.tutorial = 0; ui.spoken = -1; s.tutorial = {step: 0, done: false}; sheet.close(); coach(); break;
-      case 'game-menu': openModal(`<div class="body">${X}<h1>Partida</h1><div class="rs-choices"><button class="rs-choice main" data-a="close"><b>Seguir jugando</b></button><button class="rs-choice" data-a="export"><b>Exportar</b><span>.json</span></button><button class="rs-choice" data-a="import"><b>Importar</b></button><button class="rs-choice" data-a="exit"><b>Menú principal</b><span>se guarda sola</span></button><button class="rs-choice" data-a="new-game"><b>Empezar de nuevo</b></button></div></div>`, 'menu'); break;
+      case 'game-menu': openModal(`<div class="body">${X}<h1>Partida</h1><div class="rs-choices"><button class="rs-choice main" data-a="close"><b>Seguir jugando</b></button><button class="rs-choice" data-a="export"><b>Exportar</b><span>.json</span></button><button class="rs-choice" data-a="import"><b>Importar</b></button><button class="rs-choice" data-a="exit"><b>Menú principal</b><span>se guarda sola</span></button><button class="rs-choice" data-a="new-game"><b>Nueva partida</b></button></div>${seedCodeOf(s) ? `<p class="rs-seed">Semilla <b>${esc(seedCodeOf(s))}</b></p>` : ''}</div>`, 'menu'); break;
       case 'export': { const blob = new Blob([R.serialize(s)], {type: 'application/json'}); const el = document.createElement('a'); el.href = URL.createObjectURL(blob); el.download = `rescate-tenfe-semana-${s.week}.json`; el.click(); setTimeout(() => URL.revokeObjectURL(el.href), 4000); play('export'); break; }
       case 'import': { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'application/json,.json'; inp.onchange = async () => { try { s = R.load(await inp.files[0].text()); save(); closeModal(); map.dirty = true; render(); toast('Partida cargada'); } catch (err) { toast(err.message); } }; inp.click(); break; }
-      case 'new-game': if (!s.ended && !confirm('¿Empezar de nuevo? Se pierde esta partida.')) break; s = R.newGame(Math.floor(Math.random() * 1e9)); ui.tutorial = 0; ui.spoken = -1; ui.selected = null; map.selected = null; s.flags.introShown = true; s.decisions.push({kind: 'stage-intro', line: 'stage-s1', title: STAGES[0].name, text: STAGES[0].goal}); save(); closeModal(); map.dirty = true; render(); break;
+      case 'new-game': stopVoice(); if (modal.open) modal.close(); destroy(); onExit?.({newGame: true}); break; // la pantalla «Nueva partida» de la portada
       case 'exit': stopVoice(); if (modal.open) modal.close(); destroy(); onExit?.(); break;
     }
   });

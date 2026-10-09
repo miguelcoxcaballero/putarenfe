@@ -69,6 +69,31 @@ async function click(page, selector) {
   await button.click();
 }
 
+/** Portada → Nueva partida → 2022 · La herencia con la semilla de siempre (72022), para un turno guiado reproducible. */
+async function startHerencia(page) {
+  await click(page, '.main-menu [data-action=new-game]');
+  await page.waitForSelector('#modal[open] .np-screen');
+  await click(page, '.np-screen [data-action=np-pick][data-id=herencia]');
+  await page.fill('#npSeed', '72022');
+  await click(page, '.np-screen [data-action=np-begin]');
+  if (await page.locator('.np-screen .np-confirm').count()) await click(page, '.np-screen [data-action=np-yes]');
+}
+/** Nueva partida → (Maqueta con sus reglas) → «Empezar» hasta la confirmación, sin aceptarla; o ← sin empezar. */
+async function newGameAndBack(page, {maqueta = false, cash, rivals, confirm = false} = {}) {
+  await click(page, '.main-menu [data-action=new-game]');
+  await page.waitForSelector('#modal[open] .np-screen');
+  if (maqueta) await click(page, '.np-screen [data-action=np-pick][data-id=maqueta]');
+  if (cash) await click(page, `.np-screen [data-action=np-cash][data-id="${cash}"]`);
+  if (rivals !== undefined) await click(page, `.np-screen [data-action=np-rivals][data-id=${rivals ? 'on' : 'off'}]`);
+  if (confirm) {
+    await click(page, '.np-screen [data-action=np-begin]');
+    await page.waitForSelector('.np-screen .np-confirm');
+    await click(page, '.np-screen [data-action=np-no]');
+  }
+  await click(page, '.np-screen [data-action=np-back]');
+  await page.waitForSelector('#modal[open] .main-menu:not(.np-screen)');
+}
+
 async function noHorizontalOverflow(page, label) {
   assert(await page.evaluate(() => document.scrollingElement.scrollWidth <= innerWidth + 1), label + ' sin desplazamiento horizontal');
 }
@@ -320,7 +345,7 @@ try {
     assert.equal((await snapshot(page)).tutorial.done,true,'el punto de control procede de los nueve encargos completados');
     done.push('Continuación desde el guardado real obtenido al completar los nueve encargos.');
   }else{
-  assert.equal(await page.title(), 'Iberia Ferroviaria · Renfe 2022–2050');
+  assert.equal(await page.title(), 'Iberia Ferroviaria · Tenfe 2022–2050');
   await page.waitForSelector('.main-menu');
   assert.equal(await page.locator('.menu-council img').count(), 9, 'el menú presenta el reparto completo');
   assert(await page.locator('.menu-council img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0)), 'retratos del menú cargados');
@@ -335,14 +360,11 @@ try {
   assert.equal(await page.locator('#modal [data-action=voice-toggle]').count(), 1, 'ajuste de voces accesible desde la portada');
   await click(page, '#modal [data-action=close-modal]');
   await page.waitForSelector('.main-menu');
-  await click(page, '.main-menu [data-action=free-setup]');
-  await page.selectOption('#freeCash', '1500');
-  await click(page, '#modal [data-action=close-modal]');
-  await page.waitForSelector('.main-menu');
-  assert.equal(await savedText(page), null, 'cancelar el modo libre conserva la primera apertura');
-  done.push('Menú ilustrado, nueve retratos, guía, sonido y modo libre cancelable antes de crear una partida.');
+  await newGameAndBack(page, {maqueta: true, cash: 1500});
+  assert.equal(await savedText(page), null, 'volver de la Maqueta conserva la primera apertura');
+  done.push('Menú ilustrado, nueve retratos, guía, sonido y Maqueta cancelable antes de crear una partida.');
 
-  await click(page, '.main-menu [data-action=begin]');
+  await startHerencia(page);
   await page.waitForSelector('#modal [data-action=decision]');
   await shot(page, '02-primer-mandato');
   await click(page, '#modal [data-action=decision][data-choice="0"]');
@@ -519,25 +541,14 @@ try {
   await click(page, '[data-action=menu-home]');
   await page.waitForSelector('.main-menu');
   assert.equal(await savedText(page), saveBeforeMenu, 'abrir el menú conserva la partida');
-  assert.match(await page.locator('.menu-save').textContent(), /Servicios/);
+  assert.match(await page.locator('.main-menu [data-action=continue]').textContent(), /Continuar\s*La herencia · /);
   await shot(page, '12-menu-con-partida');
-  await click(page, '.main-menu [data-action=begin]');
-  await page.waitForSelector('#modal [data-action=campaign-confirm]');
-  assert.equal(await savedText(page), saveBeforeMenu, 'la confirmación de campaña no sustituye el guardado');
-  await click(page, '#modal [data-action=menu-home]');
-  assert.equal(await savedText(page), saveBeforeMenu, 'cancelar una campaña nueva conserva el guardado');
-  await click(page, '.main-menu [data-action=free-setup]');
-  await page.selectOption('#freeCash', '5000');
-  await page.uncheck('#freeRivals');
-  await click(page, '#modal [data-action=close-modal]');
-  await page.waitForSelector('.main-menu');
-  assert.equal(await savedText(page), saveBeforeMenu, 'cancelar el modo libre conserva el guardado');
-  await click(page, '.main-menu [data-action=free-setup]');
-  await click(page, '#modal [data-action=free-begin]');
-  await page.waitForSelector('#modal [data-action=free-begin][data-confirmed=true]');
-  assert.equal(await savedText(page), saveBeforeMenu, 'la confirmación de modo libre no sustituye todavía el guardado');
-  await click(page, '#modal [data-action=menu-home]');
-  assert.equal(await savedText(page), saveBeforeMenu, 'cancelar la sustitución por modo libre conserva el guardado');
+  await newGameAndBack(page, {confirm: true});
+  assert.equal(await savedText(page), saveBeforeMenu, 'la confirmación de La herencia no sustituye el guardado y «No» lo conserva');
+  await newGameAndBack(page, {maqueta: true, cash: 5000, rivals: false});
+  assert.equal(await savedText(page), saveBeforeMenu, 'volver de la Maqueta conserva el guardado');
+  await newGameAndBack(page, {maqueta: true, confirm: true});
+  assert.equal(await savedText(page), saveBeforeMenu, 'rechazar la sustitución por una Maqueta conserva el guardado');
   await click(page, '.main-menu [data-action=menu-settings]');
   await click(page, '#modal [data-action=close-modal]');
   await page.waitForSelector('.main-menu');
@@ -550,17 +561,22 @@ try {
   await click(page, '[data-action=help]');
   await click(page, '#modal [data-action=tutorial-start]');
   assert.equal((await snapshot(page)).tutorial.done, true, 'consultar la formación completada no reinicia una partida modificada');
-  done.push('Menú con guardado: confirmar antes de sustituirlo, cancelar campaña/modo libre y observar sin perder la partida.');
+  done.push('Menú con guardado: confirmar antes de sustituirlo, rechazar La herencia o la Maqueta y observar sin perder la partida.');
   await context.close();
 
   for(const width of [390,320]){
   const mobileContext = await browser.newContext({viewport: {width, height: 844}, deviceScaleFactor: 2, isMobile: true, hasTouch: true});
   const phone = await openPage(mobileContext, 'móvil '+width);
   await noHorizontalOverflow(phone, 'Menú móvil');
-  await reachable(phone, '.main-menu [data-action=begin]', 'Nueva campaña en móvil');
-  await reachable(phone, '.main-menu [data-action=free-setup]', 'Modo libre en móvil');
+  await reachable(phone, '.main-menu [data-action=new-game]', 'Nueva partida en móvil');
   await shot(phone, '13-menu-movil-'+width);
-  await click(phone, '.main-menu [data-action=begin]');
+  await click(phone, '.main-menu [data-action=new-game]');
+  await noHorizontalOverflow(phone, 'Nueva partida móvil');
+  for (const start of ['herencia', 'rescate', 'maqueta']) await reachable(phone, `.np-screen [data-action=np-pick][data-id=${start}]`, start + ' en móvil');
+  await reachable(phone, '.np-screen [data-action=np-begin]', 'Empezar en móvil');
+  await click(phone, '.np-screen [data-action=np-back]');
+  await phone.waitForSelector('#modal[open] .main-menu:not(.np-screen)');
+  await startHerencia(phone);
   await click(phone, '#modal [data-action=decision][data-choice="0"]');
   await phone.waitForSelector('.induction-dialog');
   await noHorizontalOverflow(phone, 'Intervención móvil');
