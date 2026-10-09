@@ -48,7 +48,7 @@ const months = (s, n) => { for (let k = 0; k < n; k++) { decideAll(s); assert(E.
   assert.equal(E.product(s, soria), 'Alvia');
   const gij = E.routeOptions(s, s.routes.find(r => r.id === 'madrid-gijon'));
   assert(!gij.ave.ok && gij.alvia.ok && gij.alvia.changes.length >= 1, 'a Gijón, Alvia con cambio de ancho');
-  assert(gij.ave.faults.every(f => f.type === 'gauge' || f.type === 'elec'), 'el AVE a Gijón choca con el ancho ibérico');
+  assert(gij.ave.faults.some(f => f.type === 'gauge') && gij.ave.faults.every(f => f.type === 'gauge' || f.type === 'elec' || (f.type === 'build' && f.tramo === 'leo-pol')), 'el AVE a Gijón choca con el ancho ibérico (y en 2022 aún no está la variante)');
   ok.push('AVE solo por ancho estándar o mixto con catenaria; Alvia por cambiadores; híbrido sin catenaria.');
 }
 // 4. Obras: catenaria, tercer carril, ancho estándar (corta la línea) y cambiadores.

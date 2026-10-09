@@ -54,16 +54,18 @@ export const ROUTES = [
  ['bilbao-donostia','bil don','bil ber don','new'],
 ].map(([id,ends,via,kind])=>({id,ends:ends.split(' '),via:via.split(' '),kind}));
 // Material: AVE (ancho estándar fijo) y Alvia (ancho variable; el híbrido no necesita catenaria).
+// voltages: tensiones de catenaria que admite (investigacion/modo-unico/datos/trains.json y fichas reales: el S100 y el
+// Avril son bitensión; S103, S112 y AV 2030, solo 25 kV). dieselSpeed: velocidad máxima con gasóleo del híbrido.
 export const MODELS = [
- {id:'s100',name:'S100 · AVE',family:'AVE',maker:'Malstom',gauge:'uic',power:'electric',speed:300,seats:329,price:16,lead:30,year:2099,energy:.78,desc:'El abuelo de la familia: llegó en 1992 y todavía se cree joven.'},
- {id:'s112',name:'S112 · AVE «Pato»',family:'AVE',maker:'Tardo',gauge:'uic',power:'electric',speed:330,seats:365,price:25,lead:30,year:2022,energy:.62,desc:'El morro de pato más famoso de la Meseta. Rápido, cómodo y fotogénico de perfil.'},
- {id:'s103',name:'S103 · AVE Velaro',family:'AVE',maker:'Schlimmens',gauge:'uic',power:'electric',speed:350,seats:404,price:33,lead:34,year:2022,energy:.66,desc:'El más rápido del catálogo. Solo sale de las vías de ancho estándar, como algunos ministros de su despacho.'},
- {id:'s106f',name:'S106 · AVE Avril',family:'AVE',maker:'Tardo',gauge:'uic',power:'electric',speed:330,seats:521,price:29,lead:36,year:2024,energy:.58,desc:'Mucho tren por poco dinero, si llega. Ancho estándar fijo.'},
- {id:'av2030',name:'AV 2030 · Nueva generación',family:'AVE',maker:'Tenfe',gauge:'uic',power:'electric',speed:350,seats:540,price:36,lead:42,year:2026,energy:.48,desc:'La flota del futuro. Promete, que ya es más de lo que hacen muchos.'},
- {id:'s120',name:'S120 · Alvia',family:'Alvia',maker:'KAFKA',gauge:'variable',power:'electric',speed:250,seats:238,price:18,lead:26,year:2022,energy:.6,desc:'Ancho variable y catenaria obligatoria. Pasa por los cambiadores sin despeinarse.'},
- {id:'s130',name:'S130 · Alvia «Patito»',family:'Alvia',maker:'Tardo',gauge:'variable',power:'electric',speed:250,seats:299,price:21,lead:28,year:2022,energy:.62,desc:'Ancho variable y doble tensión. Necesita catenaria todo el camino.'},
- {id:'s730',name:'S730 · Alvia híbrido',family:'Alvia',maker:'Tardo',gauge:'variable',power:'hybrid',speed:250,seats:265,price:24,lead:30,year:2022,energy:.8,desc:'Lleva su propia central diésel: va donde no llega la catenaria, aunque sin prisas.'},
- {id:'s106v',name:'S106 · Avril variable',family:'Alvia',maker:'Tardo',gauge:'variable',power:'electric',speed:330,seats:507,price:31,lead:38,year:2024,energy:.6,desc:'Velocidad de AVE y bogies de Alvia: cambia de ancho y no pide perdón.'},
+ {id:'s100',name:'S100 · AVE',family:'AVE',maker:'Malstom',gauge:'uic',power:'electric',speed:300,voltages:['3kv','25kv'],seats:329,price:16,lead:30,year:2099,energy:.78,desc:'El abuelo de la familia: llegó en 1992 y todavía se cree joven.'},
+ {id:'s112',name:'S112 · AVE «Pato»',family:'AVE',maker:'Tardo',gauge:'uic',power:'electric',speed:330,voltages:['25kv'],seats:365,price:25,lead:30,year:2022,energy:.62,desc:'El morro de pato más famoso de la Meseta. Rápido, cómodo y fotogénico de perfil.'},
+ {id:'s103',name:'S103 · AVE Velaro',family:'AVE',maker:'Schlimmens',gauge:'uic',power:'electric',speed:350,voltages:['25kv'],seats:404,price:33,lead:34,year:2022,energy:.66,desc:'El más rápido del catálogo. Solo sale de las vías de ancho estándar, como algunos ministros de su despacho.'},
+ {id:'s106f',name:'S106 · AVE Avril',family:'AVE',maker:'Tardo',gauge:'uic',power:'electric',speed:330,voltages:['3kv','25kv'],seats:521,price:29,lead:36,year:2024,energy:.58,desc:'Mucho tren por poco dinero, si llega. Ancho estándar fijo.'},
+ {id:'av2030',name:'AV 2030 · Nueva generación',family:'AVE',maker:'Tenfe',gauge:'uic',power:'electric',speed:350,voltages:['25kv'],seats:540,price:36,lead:42,year:2026,energy:.48,desc:'La flota del futuro. Promete, que ya es más de lo que hacen muchos.'},
+ {id:'s120',name:'S120 · Alvia',family:'Alvia',maker:'KAFKA',gauge:'variable',power:'electric',speed:250,voltages:['3kv','25kv'],seats:238,price:18,lead:26,year:2022,energy:.6,desc:'Ancho variable y catenaria obligatoria. Pasa por los cambiadores sin despeinarse.'},
+ {id:'s130',name:'S130 · Alvia «Patito»',family:'Alvia',maker:'Tardo',gauge:'variable',power:'electric',speed:250,voltages:['3kv','25kv'],seats:299,price:21,lead:28,year:2022,energy:.62,desc:'Ancho variable y doble tensión. Necesita catenaria todo el camino.'},
+ {id:'s730',name:'S730 · Alvia híbrido',family:'Alvia',maker:'Tardo',gauge:'variable',power:'hybrid',speed:250,voltages:['3kv','25kv'],dieselSpeed:180,seats:265,price:24,lead:30,year:2022,energy:.8,desc:'Lleva su propia central diésel: va donde no llega la catenaria, aunque sin prisas.'},
+ {id:'s106v',name:'S106 · Avril variable',family:'Alvia',maker:'Tardo',gauge:'variable',power:'electric',speed:330,voltages:['3kv','25kv'],seats:507,price:31,lead:38,year:2024,energy:.6,desc:'Velocidad de AVE y bogies de Alvia: cambia de ancho y no pide perdón.'},
 ];
 export const MODEL=Object.fromEntries(MODELS.map(m=>[m.id,m]));
 export const HISTORICAL_ORDERS = [
@@ -87,4 +89,5 @@ export const PROJECTS = [
 export const POP = {mad:6700,bcn:5600,vlc:1600,ali:760,elx:235,mur:700,car:215,lor:95,alm:200,gra:530,mal:1000,sev:1500,cor:320,cad:400,jer:213,hue:145,alg:260,ron:34,ant:41,jae:112,lin:57,cic:75,pue:47,cue:54,req:20,alb:173,xat:30,enc:2,cas:300,tar:300,gir:200,fig:47,zar:760,lle:140,huc:53,ter:36,sag:68,pam:370,log:150,bil:1000,vit:255,don:440,iru:62,san:300,bur:175,mir:35,pal:78,vll:420,seg:52,leo:200,ppf:64,ovi:220,gij:270,avl:76,fer:65,aco:420,scq:98,vig:480,pon:83,our:105,lug:98,zam:60,sal:150,avi:57,tal:83,pla:40,cac:96,mer:60,bad:150,tol:85,gua:87,cal:20,sor:40,alc:30,med:20};
 export const GAUGES = {uic:'Ancho estándar fijo',variable:'Ancho variable',std:'Estándar · 1.435 mm',ib:'Ibérico · 1.668 mm',mixto:'Mixto · tercer carril'};
 export const POWERS = {electric:'Eléctrico',hybrid:'Híbrido · sin catenaria'};
+export const VOLTAGE_TEXT = v => v.length > 1 ? 'Bitensión · 3 y 25 kV' : v[0] === '25kv' ? 'Solo 25 kV' : 'Solo 3 kV';
 export const ELECS = {'25kv':'25 kV alterna','3kv':'3 kV continua',no:'Sin electrificar'};

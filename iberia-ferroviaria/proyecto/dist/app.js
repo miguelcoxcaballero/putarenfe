@@ -15,7 +15,7 @@ import * as Marketplace from './marketplace.js';
 import * as O from './operations.js';
 import * as S from './schedule.js';
 import * as I from './infra.js';
-import {RailMap, FAMILY_COLOR, GAUGE_COLOR, ELEC_COLOR} from './map-v3.js';
+import {RailMap, FAMILY_COLOR, GAUGE_COLOR, ELEC_COLOR, SPEED_BANDS, INFRA_LAYERS} from './map-v3.js';
 import {trainArt, artKey} from './train-art.js';
 import {citySkyline} from './city-art.js';
 import {trainThumb, mountViewers} from './train3d.js';
@@ -31,7 +31,7 @@ const money = x => n(x, Math.abs(x) < 10 ? 2 : 1) + ' M€', signed = x => (x >=
 const clock = O.clockText;
 const KEY = 'iberia-ferroviaria-v2';
 const SPEEDS = [[2, '1×'], [6, '3×'], [20, '10×'], [60, '30×']];
-const LAYERS = ['network', 'real', 'gauge', 'power', 'works'];
+const LAYERS = ['network', 'real', 'gauge', 'power', 'speed', 'works'];
 const ICONS = {
   ops: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>',
   network: '<path d="M4 18c4-1 4-11 8-12s4 9 8 8"/><circle cx="4" cy="18" r="1.6"/><circle cx="20" cy="14" r="1.6"/><circle cx="12" cy="6" r="1.6"/>',
@@ -64,7 +64,7 @@ let linePicking=null,savedError='',menuOpen=true,np=null; // np: pantalla «Nuev
 let state = E.initialState(), saved = null, screen = null, inspect = null, playing = false, speedIndex = 1, layer = 'network';
 let lastTick = 0, lastPanel = 0, lastTimeline = 0, observerMinute = 480, seenIncidents = new Set(), alertTimer = null, toastTimer = null;
 let ui = {routeTab: 'all', routeStatus: 'all', routeQuery: '', netView: 'routes', ttType: null, ttStation: '', ttLine: '', ttHour: 6, fleetTab: 'fleet', worksTab: 'conv', officeTab: 'tycoon', autoPause: true};
-const freshMarketFilters = () => ({query: '', state: 'all', delivery: 'all', maker: 'all', family: 'all', sort: 'recommended', favorites: false});
+const freshMarketFilters = () => ({query: '', state: 'all', delivery: 'all', maker: 'all', family: 'all', sort: 'recommended', favorites: false, route: ''});
 ui.market = freshMarketFilters();
 O.ensureOps(state);
 try { const raw = localStorage.getItem(KEY); if (raw) saved = E.validateSave(JSON.parse(raw)); } catch(error) { saved = null; savedError=error.message; }
@@ -672,9 +672,10 @@ function renderLegend() {
   const items = {
     works: [['#d18a2a', 'Obra en marcha'], ['#5a4630', 'Tramo terminado'], ['#a06a1c', 'Gran obra por financiar', true]],
     gauge: [[GAUGE_COLOR.std, 'Ancho estándar'], [GAUGE_COLOR.ib, 'Ancho ibérico'], [GAUGE_COLOR.mixto, 'Ancho mixto'], ['#8a7c69', 'Proyectada', true]],
-    power: [[ELEC_COLOR['25kv'], '25 kV'], [ELEC_COLOR['3kv'], '3 kV'], [ELEC_COLOR.no, 'Sin catenaria', true], ['#8a7c69', 'Proyectada', true]],
+    power: [[ELEC_COLOR['25kv'], '25 kV alterna'], [ELEC_COLOR['3kv'], '3 kV continua'], [ELEC_COLOR.no, 'Sin catenaria', true], ['#8a7c69', 'Proyectada', true]],
+    speed: [...SPEED_BANDS.map(([, c, t]) => [c, t]), ['#8a7c69', 'Proyectada', true]],
   }[layer] || [[FAMILY_COLOR.AVE, 'AVE'], [FAMILY_COLOR.Alvia, 'Alvia'], ['#8a7c69', layer === 'real' ? 'Trazado aproximado' : 'Por abrir', true]];
-  const extra = layer === 'gauge' ? '<span><i class="rombo"></i>Cambiador de ancho</span><span class="muted">Pulsa un tramo o un cambiador</span>' : layer === 'power' ? '<span class="muted">Pulsa un tramo para electrificarlo</span>' : layer === 'works' ? '' :
+  const extra = layer === 'gauge' ? '<span><i class="rombo"></i>Cambiador de ancho</span><span class="muted">Pulsa un tramo o un cambiador</span>' : layer === 'power' ? '<span class="muted">Pulsa un tramo para electrificarlo</span>' : layer === 'speed' ? '<span class="muted">Pulsa un tramo para renovarlo</span>' : layer === 'works' ? '' :
     '<span><i class="dot" style="border-color:#3f9d5a"></i>Ciudad conectada</span><span><i class="dot" style="border-color:#f0b544"></i>Parcial</span><span><i class="dot" style="border-color:#9c8b74"></i>Sin tren</span><span><i class="pin">!</i>Petición</span><span><i class="crowd">▮▮▮</i>Trenes llenos</span>' + `<span class="muted">${layer === 'real' ? 'AVE y Alvia publicados · ' + S.DAY_TYPES[dayType()] : 'Pulsa una ciudad'}</span>`;
   $('legend').innerHTML = items.map(([c, t, d]) => `<span><i class="${d ? 'dash' : ''}" style="background:${c};color:${c.startsWith('linear') ? GAUGE_COLOR.std : c}"></i>${t}</span>`).join('') + extra;
 }
@@ -1011,15 +1012,15 @@ function routeInspector() {
   const lots = state.fleet.filter(f => f.qty > 0), compatible = lots.filter(f => E.canRun(state, r, MODEL[f.model]));
   const maxF = E.maxFrequency(r), freq = r.active ? r.frequency : Math.max(1, Math.round(maxF * (r.real ? .5 : .25)));
   const todays = r.real ? S.thin(S.routeTrips(dayType(), r.id), r.active ? Math.min(1, r.frequency / r.baseFrequency) : 1) : [];
-  const m = E.metrics(state, r);
+  const m = E.metrics(state, r), bitension = o.ave.ok && !I.plan(state, r.via, I.PROFILES.ave25).ok;
   let body = `<p><span class="status ${work ? 'works' : cls}">${work ? 'Con obras · ' + O.constructionStatus(state, work).stage : label}</span></p>
   <dl class="figures"><div><dt>Horario oficial</dt><dd>${r.real ? n(stats?.trips || 0) : '—'}</dd><em>${r.real ? 'circulaciones · ' + S.DAY_TYPES[dayType()].toLowerCase() : 'sin horario: lo pones tú'}</em></div><div><dt>Longitud</dt><dd>${n(r.km)} km</dd></div>${r.real ? `<div><dt>Trayecto</dt><dd>${clock(r.minutes).replace(/^0/, '')} h</dd></div><div><dt>Pico</dt><dd>${r.peak}</dd><em>trenes a la vez</em></div>` : ''}</dl>
-  <h2 class="section">Qué puede circular</h2><div class="options">${optionRow('AVE', o.ave)}${optionRow('Alvia', o.alvia)}${optionRow('Alvia híbrido', o.hybrid)}</div>
+  <h2 class="section">Qué puede circular</h2><div class="options">${optionRow(bitension ? 'AVE bitensión' : 'AVE', o.ave)}${optionRow('Alvia', o.alvia)}${optionRow('Alvia híbrido', o.hybrid)}</div>
   ${r.real ? `<h3>Salidas a lo largo del día ${r.active ? '(tu oferta)' : '(horario oficial)'}</h3>${hourHistogram(todays.map(t => ({dep: t.start})), currentMinute())}` : ''}`;
   if (r.cut) body += `<p class="callout red">Cortada mientras duren las obras de cambio de ancho.</p>`;
   if (!unlocked) body += `<p class="callout">Hoy no puede circular ningún tren por esta relación. Arregla lo que falta en <b>Obras</b>.</p><button class="btn" data-action="navigate" data-screen="works">Ir a Obras</button>`;
   else if (!r.cut) body += `<h2 class="section">Plan de servicio</h2><form id="routeForm">
-    <label for="routeFleet">Material</label><select id="routeFleet" required style="width:100%">${lots.map(f => { const ok = E.canRun(state, r, MODEL[f.model]); return `<option value="${f.id}" ${r.fleet === f.id ? 'selected' : ''} ${ok ? '' : 'disabled'}>${esc(MODEL[f.model].name)} · ${ok ? E.available(state, f, r.id) + ' libres · ' + n(f.condition) + ' %' : 'no puede ir por esta vía'}</option>`; }).join('')}</select>
+    <label for="routeFleet">Material</label><select id="routeFleet" required style="width:100%">${lots.map(f => { const ok = E.canRun(state, r, MODEL[f.model]); return `<option value="${f.id}" ${r.fleet === f.id ? 'selected' : ''} ${ok ? '' : 'disabled'}>${esc(MODEL[f.model].name)} · ${ok ? E.available(state, f, r.id) + ' libres · ' + n(f.condition) + ' %' : esc(fitText(r, f.model))}</option>`; }).join('')}</select>
     <label for="frequency">Salidas por sentido: <strong id="freqOut">${freq}</strong> de ${maxF}${r.real ? ' del horario oficial' : ''}</label><input id="frequency" type="range" min="1" max="${maxF}" step="1" value="${freq}">
     <label for="fare">Tarifa media (€)</label><input id="fare" type="number" min="1.5" max="150" step="0.1" value="${r.fare}" style="width:120px">
     <p id="routePreview" class="callout"></p>
@@ -1032,12 +1033,14 @@ function routeInspector() {
   body += `<div class="toolbar">${r.real ? `<button class="btn small" data-action="route-trips" data-id="${r.id}">Ver sus trenes</button>` : ''}<button class="btn small" data-action="route-zoom" data-id="${r.id}">Encuadrar</button></div>`;
   return {kicker: r.active ? 'Relación en servicio' : r.cut ? 'Relación cortada por obras' : 'Relación por abrir', title: `${routeChip(r)} ${esc(routeName(r))}`, body};
 }
+/** Por qué un modelo no puede ir por una relación, en corto: la falta principal (tramo y lo que tiene). */
+function fitText(r, model) { const p = E.routeCheck(state, r, MODEL[model]), f = p.ok ? null : I.keyFault(state, p.faults); return p.ok ? 'Circula' : f ? I.faultText(state, f, true) : 'no puede ir por esta vía'; }
 function updatePreview() {
   const r = state.routes.find(r => r.id === inspect?.id), f = state.fleet.find(f => f.id === $('routeFleet')?.value), out = $('routePreview');
   if (!r || !out) return;
   const freq = +$('frequency').value, fare = +$('fare').value, submit=$('routeForm').querySelector('[type="submit"]');
   $('freqOut').textContent = freq;
-  if (!f || !E.canRun(state, r, MODEL[f.model])) { out.textContent = 'Ningún tren tuyo puede ir por esta vía. Compra uno que sí, o arregla la vía.';submit.disabled=true;return; }
+  if (!f || !E.canRun(state, r, MODEL[f.model])) { out.innerHTML = `Ningún tren tuyo puede ir por esta vía. <button type="button" class="linkish" data-action="market-route" data-screen="fleet" data-id="${esc(r.id)}">Compra uno que sí</button>, o arregla la vía.`;submit.disabled=true;return; }
   if(!Number.isFinite(fare)||fare<1.5||fare>150){out.textContent='Introduce una tarifa entre 1,5 y 150 € para comparar el plan.';submit.disabled=true;return;}
   const m = MODEL[f.model], units = E.requiredUnits(state, r, m, freq), free = E.available(state, f, r.id), b = E.metrics(state, r, {active: true, fleet: f.id, frequency: freq, fare, units}), previous = E.metrics(state,r);
   const reason=state.ended?'El mandato ha terminado.':f.condition<30?'Este material necesita una reforma antes de salir.':units>free?`Faltan ${units-free} trenes libres de este lote. Baja la frecuencia o cambia de material.`:!r.active&&state.cash<4?'Necesitas 4 M€ de caja para abrir el servicio.':'';
@@ -1122,10 +1125,10 @@ function tramoInspector() {
   const plan = d.plan && PROJECTS.find(p => p.id === d.plan), {using, waiting} = routesOnTramo(d.id), works = I.tramoWorks(state, d.id);
   let body = `<dl class="figures"><div><dt>Longitud</dt><dd>${n(d.km)} km</dd></div><div><dt>Velocidad</dt><dd>${st.v}</dd><em>km/h</em></div></dl>
   <div class="infra-tags">${st.b ? `${chip(I.GAUGE_LONG[st.g], GAUGE_COLOR[st.g])} ${chip(I.ELEC_LONG[st.e], ELEC_COLOR[st.e])}` : chip('Proyectada', '#8a7c69')} ${chip(d.kind === 'lav' ? 'Alta velocidad' : 'Convencional', '#4a3e30')}</div>
-  <p class="small">${!st.b ? 'Todavía no existe.' : st.g === 'std' ? 'Ancho estándar: AVE sí; los Alvia, también.' : st.g === 'mixto' ? 'Tercer carril: pasan los dos anchos sin cambiar.' : 'Ancho ibérico: solo Alvia. Los AVE, que den la vuelta.'} ${st.b && st.e === 'no' ? 'Sin catenaria: solo el Alvia híbrido.' : ''}</p>`;
+  <p class="small">${!st.b ? (I.opensOn(d) ? 'Abre el ' + I.opensOn(d) + '.' : 'Todavía no existe.') : st.g === 'std' ? 'Ancho estándar: AVE sí; los Alvia, también.' : st.g === 'mixto' ? 'Tercer carril: pasan los dos anchos sin cambiar.' : 'Ancho ibérico: solo Alvia. Los AVE, que den la vuelta.'} ${st.b && st.e === 'no' ? 'Sin catenaria: solo el Alvia híbrido.' : ''}${st.b && st.e === '3kv' && st.g !== 'ib' ? '3 kV: solo los AVE bitensión.' : ''}</p>`;
   if (job) { const s2 = O.constructionStatus(state, job); body += `<h2 class="section">Obra en marcha</h2><p>${esc(map.workName(job))}${job.type === 'tramo' ? ' · ' + esc(I.WORKS[job.work].label) : ''}</p><div class="bar gold"><span style="width:${s2.progress * 100}%"></span></div><p class="small">${s2.stage} · fin previsto ${E.dateOf(job.due)}</p>`; }
   else if (plan) body += `<h2 class="section">Se construye con</h2><p>${esc(plan.name)} · ${money(plan.cost)}</p><button class="btn primary" data-action="project" data-id="${plan.id}" ${state.ended ? 'disabled' : ''}>Ver el proyecto</button>`;
-  else if (works.length) body += `<h2 class="section">Obras posibles</h2><div class="works-list">${works.map(w => `<button class="choice" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended || w.busy ? 'disabled' : ''}><strong>${esc(w.label)} · ${money(w.cost)}</strong><span>${w.duration} meses${w.closes ? ' · corta la línea mientras dura' : ''}${w.work === 'mixed' ? ' · pasan AVE y Alvia sin cambiar' : w.work === 'standard' ? ' · solo ancho estándar para siempre' : ' · ya pueden pasar los Alvia eléctricos'}</span></button>`).join('')}</div>`;
+  else if (works.length) body += `<h2 class="section">Obras posibles</h2><div class="works-list">${works.map(w => `<button class="choice" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended || w.busy ? 'disabled' : ''}><strong>${esc(w.label)} · ${money(w.cost)}</strong><span>${w.duration} meses${w.closes ? ' · corta la línea mientras dura' : ''}${w.work === 'mixed' ? ' · pasan AVE y Alvia sin cambiar' : w.work === 'standard' ? ' · solo ancho estándar para siempre' : w.work === 'renew' ? '' : ' · ya pueden pasar los Alvia eléctricos'}</span></button>`).join('')}</div>`;
   else if (st.b) body += '<p class="small muted">Este tramo ya está como debe. Que no es poco.</p>';
   if (using.length) body += `<h2 class="section">La usan</h2><p>${using.map(r => `<button class="linkish" data-action="route" data-id="${r.id}">${esc(routeName(r))}</button>`).join(' · ')}</p>`;
   if (waiting.length) body += `<h2 class="section">La están esperando</h2><p>${waiting.slice(0, 12).map(r => `<button class="linkish" data-action="route" data-id="${r.id}">${esc(routeName(r))}</button>`).join(' · ')}</p>`;
@@ -1258,7 +1261,7 @@ function purchaseDialog(id) {
   updateQuote();
 }
 function marketListingDialog(id) {
-  try { showModal(Marketplace.detailHTML(state, Marketplace.listing(state, id), trainThumb), 'single trenespop-modal'); updateQuote(); }
+  try { showModal(Marketplace.detailHTML(state, Marketplace.listing(state, id), trainThumb, ui.market.route || null), 'single trenespop-modal'); updateQuote(); }
   catch (error) { toast(error.message); renderDrawer(); }
 }
 function updateQuote() {
@@ -1304,7 +1307,7 @@ function realTripModal(id) { inspect = {type: 'train', id}; map.selectedTrain = 
 // ------------------------------------------------------------ capas y acciones
 function setLayer(l) {
   if(['gauge','power'].includes(l))tutorialMark(l);
-  layer = LAYERS.includes(l) ? l : 'network'; map.layer = ['works', 'gauge', 'power'].includes(layer) ? layer : 'network';
+  layer = LAYERS.includes(l) ? l : 'network'; map.layer = ['works', ...INFRA_LAYERS].includes(layer) ? layer : 'network';
   document.querySelectorAll('[data-layer]').forEach(b => b.classList.toggle('active', b.dataset.layer === layer));
   netKey = networkKey(); map.dirty = true; renderLegend(); renderDaybar();
   if (layer === 'real') toast('Horario real: todos los AVE y Alvia publicados para un día ' + S.DAY_TYPES[dayType()].toLowerCase() + '. Mirar no cuesta dinero.');
@@ -1318,7 +1321,7 @@ function workDialog(kind, target) {
   showModal(`<div class="content"><div class="kicker">${esc(q.label)}</div><h1>${esc(place)}</h1>
   <dl class="figures"><div><dt>Coste</dt><dd>${money(q.cost)}</dd></div><div><dt>Obra</dt><dd>${q.months} meses</dd></div><div><dt>Termina</dt><dd style="font-size:18px">${E.dateOf(state.month + q.months)}</dd></div></dl>
   ${q.closes ? `<p class="callout red">La línea se corta mientras dure la obra.${q.affected.length ? ' Se suspenden: ' + q.affected.map(r => esc(routeName(r))).join(', ') + '.' : ''}</p>` : ''}
-  <p class="small">${kind === 'renew' ? 'Renovación de vía para elevar el límite a 220 km/h; el tren respeta su velocidad máxima y los demás tramos.' : kind === 'electrify' ? 'Catenaria de 25 kV: permite material eléctrico compatible con el ancho. La obra no cambia el ancho de la vía.' : kind === 'mixed' ? 'Un tercer carril: pasan los dos anchos y no se corta el tráfico.' : kind === 'standard' ? 'Fuera el ancho ibérico: el AVE entra hasta la cocina, pero solo por ancho estándar.' : 'Los Alvia podrán cambiar de ancho aquí.'}</p>
+  <p class="small">${kind === 'renew' ? 'Renovación de vía para elevar el límite a 220 km/h; el tren respeta su velocidad máxima y los demás tramos.' : kind === 'electrify' ? 'Catenaria de 25 kV: permite material eléctrico compatible con el ancho. La obra no cambia el ancho de la vía.' : kind === 'mixed' ? 'Un tercer carril: pasan los dos anchos y no se corta el tráfico.' : kind === 'standard' ? 'Fuera el ancho ibérico: el AVE entra hasta la cocina, pero solo por ancho estándar.' : 'Los Alvia podrán cambiar de ancho aquí.'}${['mixed', 'standard'].includes(kind) && state.infra.t[target]?.e === '3kv' ? ' Sigue a 3 kV: solo AVE bitensión.' : ''}</p>
   <div class="actions"><button class="btn primary" data-action="confirm-work" data-work="${kind}" data-id="${esc(target)}">Adjudicar · ${money(q.cost)}</button><button class="btn" data-action="close-modal">Cancelar</button></div></div>`, 'single');
 }
 
@@ -1408,9 +1411,9 @@ document.addEventListener('click', event => {
     case 'follow': map.follow = !map.follow; renderInspector(); break;
     case 'layer': setLayer(id); screen = null; render(); break;
     case 'visit-work': { const job = state.projects.find(p => p.id === id) || {id}; const pts = map.workGeometry(job).flatMap(g => g.pts); setLayer('works'); if (pts.length) map.fit(pts, 45); inspect = {type: 'work', id}; screen = null; render(); break; }
-    case 'tramo': { const d = I.tramoDef(state, id); if (!d) break; if (!['gauge', 'power'].includes(layer)) setLayer('gauge'); inspect = {type: 'tramo', id}; map.selectedTramo = id; screen = null; closeModal(); render(); break; }
+    case 'tramo': { const d = I.tramoDef(state, id); if (!d) break; if (!INFRA_LAYERS.includes(layer)) setLayer('gauge'); inspect = {type: 'tramo', id}; map.selectedTramo = id; screen = null; closeModal(); render(); break; }
     case 'tramo-zoom': { const d = I.tramoDef(state, id); if (d) map.fit(I.tramoGeom(d).pts, 40); break; }
-    case 'node': { const nd = I.NODES[id]; if (!nd) break; if (!['gauge', 'power'].includes(layer)) setLayer('gauge'); inspect = {type: 'node', id}; screen = null; closeModal(); if (map.zoom < 2) map.focusAt(nd.lon, nd.lat, 3); render(); break; }
+    case 'node': { const nd = I.NODES[id]; if (!nd) break; if (!INFRA_LAYERS.includes(layer)) setLayer('gauge'); inspect = {type: 'node', id}; screen = null; closeModal(); if (map.zoom < 2) map.focusAt(nd.lon, nd.lat, 3); render(); break; }
     case 'work': workDialog(b.dataset.work, id); break;
     case 'confirm-work': if (act(() => E.startWork(state, b.dataset.work, id), 'Obra adjudicada. Ya hay máquinas en la vía.')) closeModal(); break;
     case 'works-tab': ui.worksTab = id; renderDrawer(true); break;
@@ -1426,6 +1429,7 @@ document.addEventListener('click', event => {
     case 'market-listing': marketListingDialog(id); break;
     case 'market-reset': event.preventDefault();ui.market=freshMarketFilters();renderDrawer(true);break;
     case 'market-family': ui.market.family=id;renderDrawer(true);break;
+    case 'market-route': ui.market={...freshMarketFilters(),route:id||''};inspect=null;map.selected=null;if($('modal').open)closeModal();navigate('market');renderInspector();break;
     case 'market-favorites': ui.market.favorites=!ui.market.favorites;renderDrawer(true);break;
     case 'market-favorite': try {const liked=E.marketplaceFavorite(state,id);autosave();renderDrawer();if($('modal').open&&$('buyQty')?.dataset.listing===id){b.classList.toggle('liked',liked);b.setAttribute('aria-pressed',String(liked));b.setAttribute('aria-label',liked?'Quitar de favoritos':'Guardar anuncio');}toast(liked?'Anuncio guardado en favoritos.':'Anuncio retirado de favoritos.');}catch(error){toast(error.message);}break;
     case 'confirm-buy': {const listing=b.dataset.listing,immediate=b.dataset.immediate==='true';if (act(() => E.buy(state, id, +$('buyQty').value, listing), immediate?'Compra completada. Los trenes ya están en tu parque.':'Pedido firmado. Revisa el envío en Mis compras.')) closeModal();break;}
@@ -1473,7 +1477,7 @@ document.addEventListener('change', async event => {
   if (t.type === 'file' && t.files[0]) sfx.play('page');
   if (t.id === 'maintenance') sfx.intent = null;
   if (t.id === 'routeStatus') { ui.routeStatus = t.value; renderDrawer(); }
-  if (['marketState','marketDelivery','marketMaker','marketSort'].includes(t.id)) {const field={marketState:'state',marketDelivery:'delivery',marketMaker:'maker',marketSort:'sort'}[t.id];ui.market[field]=t.value;renderDrawer(true);}
+  if (['marketState','marketDelivery','marketMaker','marketSort','marketRoute'].includes(t.id)) {const field={marketState:'state',marketDelivery:'delivery',marketMaker:'maker',marketSort:'sort',marketRoute:'route'}[t.id];ui.market[field]=t.value;renderDrawer(true);}
   if (t.id === 'ttHour') { ui.ttHour = +t.value; renderDrawer(); }
   if (t.id === 'dayPriority' && state.ops.phase === 'planning') { state.ops.priority = t.value; autosave(); render(); }
   if (t.id === 'autoPause') ui.autoPause = t.checked;

@@ -1,5 +1,6 @@
 // Mapa ilustrado de la red: relieve y ríos esquemáticos, luz solar por longitud, luces urbanas,
-// tramos coloreados por producto, mapas de anchos y de electrificación, trenes sobre su trazado, estaciones y obras.
+// tramos coloreados por producto, mapas de anchos, de electrificación (3 kV y 25 kV) y de velocidad, trenes sobre su
+// trazado, estaciones y obras.
 import {CITIES, CITY, PROJECTS, POP, MODEL} from './data.js';
 import {COUNTRIES} from './assets/geography.js';
 import {RAILWAYS} from './assets/railways.js';
@@ -11,6 +12,11 @@ import {sunAltitude, constructionStatus, STAGES} from './operations.js';
 export const FAMILY_COLOR = {AVE: '#a3123a', Alvia: '#2f6f9f'};
 export const GAUGE_COLOR = {std: '#a3123a', ib: '#d08a1c', mixto: '#7a4fb0'};
 export const ELEC_COLOR = {'25kv': '#2f6fb0', '3kv': '#3f9a5c', no: '#9a7f5c'};
+/** Velocidad máxima del tramo: mismos colores que el mapa del rescate. */
+export const SPEED_BANDS = [[201, '#2f6fb0', 'Más de 200 km/h'], [161, '#2f8f4e', '161–200 km/h'], [121, '#c9a227', '121–160 km/h'], [0, '#c23b2f', 'Hasta 120 km/h']];
+export const speedColor = v => (SPEED_BANDS.find(([min]) => v >= min) || SPEED_BANDS.at(-1))[1];
+/** Capas que pintan la red tramo a tramo (y dejan pulsar tramos y nodos). */
+export const INFRA_LAYERS = ['gauge', 'power', 'speed'];
 const FOREIGN = [['Lisboa', -9.14, 38.72, 2900], ['Porto', -8.61, 41.15, 1700], ['Braga', -8.42, 41.55, 190], ['Coimbra', -8.43, 40.2, 140], ['Faro', -7.93, 37.02, 120],
   ['Évora', -7.91, 38.57, 55], ['Toulouse', 1.44, 43.6, 1000], ['Perpignan', 2.9, 42.7, 200], ['Montpellier', 3.88, 43.61, 450], ['Bayonne', -1.47, 43.49, 300],
   ['Andorra', 1.52, 42.51, 80], ['Palma', 2.65, 39.57, 420], ['Eivissa', 1.43, 38.91, 50], ['Maó', 4.26, 39.89, 30], ['Tánger', -5.81, 35.77, 1000],
@@ -152,8 +158,8 @@ export class RailMap {
     if (best) return best;
     // 2. Peticiones y obras
     for (const w of this.workPoints || []) if (Math.hypot(w.x - x, w.y - y) < 14) return {type: 'work', id: w.id};
-    // 2b. Mapas de anchos y electrificación: nodos (cambiadores) y tramos
-    if (this.layer === 'gauge' || this.layer === 'power') {
+    // 2b. Mapas de anchos, electrificación y velocidad: nodos (cambiadores) y tramos
+    if (INFRA_LAYERS.includes(this.layer)) {
       for (const n of this.nodePoints || []) if (Math.hypot(n.x - x, n.y - y) < 10) return {type: 'node', id: n.id};
       const t = this.tramoAt(x, y);
       if (t) return {type: 'tramo', id: t};
@@ -301,7 +307,7 @@ export class RailMap {
       pts.forEach(([lon, lat], k) => { const p = this.project(lon, lat); k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1]); });
       c.setLineDash(dash || []); c.globalAlpha = alpha; c.strokeStyle = color; c.lineWidth = width; c.stroke(); c.globalAlpha = 1; c.setLineDash([]);
     };
-    if (this.layer === 'gauge' || this.layer === 'power') return this.drawInfra(c, draw, zw, night);
+    if (INFRA_LAYERS.includes(this.layer)) return this.drawInfra(c, draw, zw, night);
     const usage = S.edgeUsage(view.dayType || 'L');
     const active = new Map(state.routes.filter(r => r.active).map(r => [r.id, r]));
     const real = view.mode === 'real', works = this.layer === 'works';
@@ -335,9 +341,11 @@ export class RailMap {
     }
   }
 
-  /** Mapa de anchos o de electrificación: cada tramo de la red con su estado actual. */
+  /** Mapa de anchos, de electrificación o de velocidad: cada tramo de la red con su estado actual. */
   drawInfra(c, draw, zw, night) {
-    const state = this.opts.getState(), gauge = this.layer === 'gauge', busy = new Map();
+    const state = this.opts.getState(), mode = this.layer, busy = new Map();
+    // obra que cambia lo que enseña la capa: ancho (tercer carril, cambio de ancho), catenaria o velocidad (renovación)
+    const shows = {gauge: w => w === 'mixed' || w === 'standard', power: w => w === 'electrify', speed: w => w === 'renew'}[mode];
     for (const p of state.projects) if (!p.done && (p.type === 'tramo' || p.type === 'custom')) busy.set(p.target, p);
     for (const p of state.projects) if (!p.done && p.type === 'infrastructure') for (const t of I.TRAMOS) if (t.plan === p.id) busy.set(t.id, p);
     const list = I.allTramos(state).map(d => ({d, st: state.infra.t[d.id], pts: I.tramoGeom(d).pts})).filter(x => x.st);
@@ -346,17 +354,18 @@ export class RailMap {
     const built = list.filter(x => x.st.b), width = d => (d.kind === 'lav' ? 3.1 : 2.1) * zw;
     for (const {d, pts} of built) draw(pts, night > .5 ? 'rgba(10,16,30,.6)' : 'rgba(255,250,236,.92)', width(d) + 2.6);
     for (const {d, st, pts} of built) {
-      if (gauge) draw(pts, GAUGE_COLOR[st.g], width(d));
+      if (mode === 'gauge') draw(pts, GAUGE_COLOR[st.g], width(d));
+      else if (mode === 'speed') draw(pts, speedColor(st.v), width(d));
       else draw(pts, ELEC_COLOR[st.e], width(d), st.e === 'no' ? [6, 4] : null);
       const job = busy.get(d.id);
-      if (job && job.type === 'tramo' && (gauge ? job.work !== 'electrify' : job.work === 'electrify')) draw(pts, '#f1b43c', width(d) * .55, [3, 5]);
+      if (job && job.type === 'tramo' && shows(job.work)) draw(pts, '#f1b43c', width(d) * .55, [3, 5]);
     }
   }
 
   /** Nodos del mapa de anchos y electrificación: cambiadores de ancho (rombos) y bifurcaciones. */
   drawNodes(view, night) {
     this.nodePoints = [];
-    if (this.layer !== 'gauge' && this.layer !== 'power') return;
+    if (!INFRA_LAYERS.includes(this.layer)) return;
     const c = this.ctx, state = this.opts.getState(), gauge = this.layer === 'gauge', zw = Math.min(3.2, Math.max(1, Math.pow(this.zoom, .38)));
     const changing = new Set(state.projects.filter(p => !p.done && p.type === 'changer').map(p => p.target));
     for (const n of Object.values(I.NODES)) {
@@ -437,7 +446,7 @@ export class RailMap {
     const nightW = 1 - lightOf(altW), nightE = 1 - lightOf(altE), night = (nightW + nightE) / 2;
     const idle = performance.now() - this.lastInteraction > 140;
     if (!this.snap || this.dirty || (idle && (this.snap.zoom !== this.zoom || this.snap.pan.x !== this.pan.x || this.snap.pan.y !== this.pan.y)) || this.snap.night !== (night > .5) || this.snap.layer !== this.layer || this.snap.mode !== view.mode || this.snap.key !== view.networkKey) this.renderCaches(view, night);
-    const infraLayer = this.layer === 'gauge' || this.layer === 'power';
+    const infraLayer = INFRA_LAYERS.includes(this.layer);
     c.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     c.fillStyle = '#6f9fa8'; c.fillRect(0, 0, w, h);
     this.blit('base');
@@ -511,7 +520,7 @@ export class RailMap {
     const state = this.opts.getState(), c = this.ctx, z = this.zoom, showAll = this.layer === 'works';
     this.workPoints = [];
     const jobs = state.projects.filter(p => !p.done && p.type !== 'upgrade');
-    if (this.layer === 'gauge' || this.layer === 'power') return;
+    if (INFRA_LAYERS.includes(this.layer)) return;
     const planned = showAll ? PROJECTS.filter(p => !state.projects.some(j => j.id === p.id)) : [];
     c.lineCap = 'round'; c.lineJoin = 'round';
     for (const def of planned) for (const g of this.workGeometry({id: def.id})) {

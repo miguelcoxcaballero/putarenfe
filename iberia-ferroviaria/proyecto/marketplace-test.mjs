@@ -84,4 +84,27 @@ const checked=[];
  const item=M.listing(s,'used-s100-0'),detail=M.detailHTML(s,item,id=>`<img alt="${id}">`);assert(detail.includes('data-listing="used-s100-0"'));assert(detail.includes('Todas las unidades entran en tu parque al pagar.'));
  checked.push('Accessible catalogue, working controls and finite checkout metadata appear in rendered UI.');
 }
+{
+ // «Circula en»: cada anuncio dice si su tren puede ir hoy por la relación elegida, y por qué no.
+ const s=fresh(),route='madrid-castellon',items=M.filterListings(s,{...filters,route},quote(s));
+ assert.equal(items.length,M.filterListings(s,filters,quote(s)).length,'el filtro no esconde anuncios: los marca');
+ assert(items.every(x=>x.fit&&typeof x.fit.ok==='boolean'));
+ const firstNo=items.findIndex(x=>!x.fit.ok);assert(firstNo>0&&items.slice(firstNo).every(x=>!x.fit.ok),'primero los que circulan');
+ const s112=items.find(x=>x.model==='s112'&&x.state==='new');assert(!s112.fit.ok);assert.equal(s112.fit.reason,'Sagunt — València: 3 kV');
+ assert(items.find(x=>x.model==='s130').fit.ok&&items.find(x=>x.model==='s100').fit.ok,'Alvia y S100 bitensión sí');
+ assert.equal(items.find(x=>x.id==='new-bcbb-s103').fit.ok,false,'el BCBB conserva el perfil del S103');
+ assert.deepEqual(M.routeFit(s,'madrid-soria','s130'),{ok:false,reason:'Torralba — Soria: sin catenaria'});
+ assert.equal(M.routeFit(s,'no-existe','s130'),null);assert(M.filterListings(s,{...filters,route:'no-existe'},quote(s)).every(x=>x.fit===null));
+ const html=M.catalogueHTML(s,{...filters,route},quote(s),id=>`<img alt="${id}">`);
+ assert(html.includes('id="marketRoute"')&&html.includes(`value="${route}" selected`),'selector «Circula en» con la relación elegida');
+ assert(html.includes('✗ Sagunt — València: 3 kV')&&html.includes('✓ Circula'));
+ assert(new RegExp(`id="marketRouteCount">${items.filter(x=>x.fit.ok).length}</span> circulan por Madrid — Castelló`).test(html));
+ assert(!M.catalogueHTML(s,filters,quote(s),id=>id).includes('tp-fit'),'sin relación elegida, sin marcas');
+ const reach=M.routeReach(s,'s112'),wide=M.routeReach(s,'s130');assert.equal(reach.total,s.routes.length);assert(reach.ok>0&&reach.ok<wide.ok,'el Alvia bitensión llega a más relaciones que el S112');
+ const item=M.listing(s,'new-s112'),detail=M.detailHTML(s,item,id=>`<img alt="${id}">`,route);
+ assert(detail.includes(`Circula en ${reach.ok} de ${reach.total} relaciones`)&&detail.includes('Solo 25 kV'));
+ assert(detail.includes('✗ Madrid — Castelló · Sagunt — València: 3 kV'));
+ assert(M.detailHTML(s,M.listing(s,'new-s730'),id=>id).includes('Gasóleo · 180 km/h'));
+ checked.push('«Circula en»: ✓/✗ con el primer motivo por anuncio (S112 a Castelló: 3 kV), compatibles primero y alcance en la ficha.');
+}
 console.log(JSON.stringify({pass:true,checks:checked},null,2));
