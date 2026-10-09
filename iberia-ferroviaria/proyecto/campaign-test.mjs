@@ -19,9 +19,14 @@ const coming = (fam) => s.orders.filter(o => !o.historical && MODEL[o.model].fam
 
 function decideAll() {
   for (let d; (d = E.pendingDecision(s));) {
-    let ix = d.choices.findIndex(c => s.cash - reserve() >= -(c.effects?.cash || 0));
-    if (ix < 0) ix = d.choices.findIndex(c => s.cash >= -(c.effects?.cash || 0));
+    let ix = d.choices.findIndex(c => !c.disabled && s.cash - reserve() >= -(c.effects?.cash || 0));
+    if (ix < 0) ix = d.choices.findIndex(c => !c.disabled && s.cash >= -(c.effects?.cash || 0));
     if (ix < 0) { E.loan(s, 100); continue; }
+    // Cada opción dice su efecto total en caja: si la primera esconde una pérdida grande además de su precio
+    // (una rebaja de tarifas, por ejemplo), se elige la opción con mejor efecto total.
+    const hidden = c => (c.estimate ?? 0) + (c.cost ?? 0);
+    const best = d.choices.map((c, i) => [c, i]).filter(([c]) => !c.disabled && s.cash >= -(c.effects?.cash || 0)).sort((a, b) => (b[0].estimate ?? 0) - (a[0].estimate ?? 0))[0];
+    if (best && hidden(d.choices[ix]) < -5 && (best[0].estimate ?? 0) > (d.choices[ix].estimate ?? 0)) ix = best[1];
     E.decide(s, d.id, ix);
   }
 }
@@ -122,6 +127,16 @@ function startProjects() {
     if (s.cash - p.cost > reserve() + 50 && tryDo(() => E.startProject(s, p.id))) say('proyecto', p.name);
   }
 }
+/** Taller: más esfuerzo de mantenimiento cuando la flota se gasta y reforma de las unidades libres más viejas. */
+function maintainFleet() {
+  const units = s.fleet.reduce((n, f) => n + f.qty, 0), avg = units ? s.fleet.reduce((n, f) => n + f.condition * f.qty, 0) / units : 100;
+  s.maintenance = avg < 80 ? 1.4 : avg > 90 ? 1 : s.maintenance;
+  let budget = 4;
+  for (const f of s.fleet.filter(f => f.qty && f.condition < 50).sort((a, b) => a.condition - b.condition)) {
+    const n = Math.min(budget, E.available(s, f)), cost = MODEL[f.model].price * .12;
+    if (n > 0 && s.cash - cost * n > reserve() + 20 && tryDo(() => E.refurbish(s, f.id, n))) budget -= n;
+  }
+}
 /** Relaciones nuevas hacia ciudades que el AVE ya puede alcanzar pero que no son extremo de ninguna. */
 function newServices() {
   const ends = new Set(s.routes.flatMap(r => r.ends));
@@ -138,6 +153,8 @@ for (let guard = 0; guard < 400 && !s.ended; guard++) {
   if (E.chapterReady(s)) { reached[CHAPTERS[s.chapter].id] = E.dateOf(s.month); E.claimChapter(s); say('capítulo superado'); decideAll(); }
   const ch = CHAPTERS[s.chapter].id;
   if (s.month === 0) { const old = s.fleet.find(f => f.model === 's100'); E.refurbish(s, old.id, 2); }
+  // Las revisiones de los encuentros ya no arreglan toda la flota: el mantenimiento se paga con el esfuerzo de taller y las reformas.
+  maintainFleet();
   const gap=T.driverNeed(s)*1.12-s.tycoon.drivers-s.tycoon.training.reduce((n,x)=>n+x.count,0);
   if(gap>0&&s.cash>10)T.hire(s,Math.min(200,Math.ceil(gap+20)));
   for(const q of s.tycoon.contracts)if(q.status==='offered')T.accept(s,q.id,'public');

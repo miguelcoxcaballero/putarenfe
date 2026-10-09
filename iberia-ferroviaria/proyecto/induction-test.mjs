@@ -48,7 +48,7 @@ assert.deepEqual(E.validateSave(report).tutorial,report.tutorial,'completar el t
  const resumed=E.initialState();resumed.started=true;O.ensureOps(resumed);resumed.tutorial=freshInduction(resumed);
  Object.assign(resumed.tutorial,{step:8,phase:'task',suspended:true});
  for(let month=0;month<18;month++){
-  for(let d;(d=E.pendingDecision(resumed));){const i=d.choices.findIndex(c=>resumed.cash>=-(c.effects?.cash||0));assert(i>=0);E.decide(resumed,d.id,i);}
+  for(let d;(d=E.pendingDecision(resumed));){const i=d.choices.findIndex(c=>!c.disabled&&resumed.cash>=-(c.effects?.cash||0));assert(i>=0);E.decide(resumed,d.id,i);}
   assert(O.skipMonth(resumed));
  }
  assert(E.validateSave(resumed));const q=resumed.tycoon.contracts[0];assert.equal(q.goal,'project');
@@ -76,7 +76,7 @@ assert.deepEqual(E.validateSave(report).tutorial,report.tutorial,'completar el t
  assert(!/18 M€|26 M€|25\s*%|18 meses/.test(strategy),'la pregunta no anuncia cifras del contrato inicial');
 }
 function legalClose(state){
- for(let d;(d=E.pendingDecision(state));){const i=d.choices.findIndex(c=>state.cash>=-(c.effects?.cash||0));assert(i>=0);E.decide(state,d.id,i);}
+ for(let d;(d=E.pendingDecision(state));){const i=d.choices.findIndex(c=>!c.disabled&&state.cash>=-(c.effects?.cash||0));assert(i>=0);E.decide(state,d.id,i);}
  assert(O.skipMonth(state));
 }
 {
@@ -86,7 +86,7 @@ function legalClose(state){
  for(const other of INDUCTION_STAGES.slice(0,8))assert.equal(inductionBriefing(state,other),other.briefing);
  const later=structuredClone(state);later.month=17;
  assert.deepEqual(inductionBriefing(later,stage),[stage.briefing[2]],'una guía retomada tarde no vuelve a anunciar dieciocho meses');
- for(let d;(d=E.pendingDecision(state));){E.decide(state,d.id,d.choices.findIndex(c=>state.cash>=-(c.effects?.cash||0)));}
+ for(let d;(d=E.pendingDecision(state));){E.decide(state,d.id,d.choices.findIndex(c=>!c.disabled&&state.cash>=-(c.effects?.cash||0)));}
  T.accept(state,state.tycoon.contracts[0].id,'public');
  for(let month=0;month<18&&!state.tycoon.completed;month++)legalClose(state);
  assert(state.tycoon.resolved.some(q=>q.result==='won'),'la aceptación histórica procede de un encargo realmente ganado');

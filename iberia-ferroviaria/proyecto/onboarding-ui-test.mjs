@@ -410,7 +410,7 @@ try {
         assert.equal(paused.tutorial.phase, 'task');
         assert.equal(await page.locator('#coach').count(), 0);
         assert(await page.locator('.hud').isVisible(),'pausar devuelve la interfaz de gestión');
-        await page.evaluate(() => { window.railwayGame.state().tycoon.encounter = 'scene-treasury-happy-0'; });
+        await page.evaluate(() => { window.railwayGame.state().event = 'eufunds'; });
         await click(page, '[data-action=day-start]');
         await page.waitForSelector('#modal [data-action=decision]');
         await click(page, '#modal [data-action=decision][data-choice="0"]');

@@ -11,7 +11,7 @@ import {CHARACTERS, CHAPTERS, DECISIONS, EVENTS} from './dist/story.js';
 import {faceURL, LOOKS, MOOD_LIST} from './dist/faces.js';
 const ok = [];
 const fresh = () => { const s = E.initialState(); s.started = true; return s; };
-const decideAll = s => { for (let d; (d = E.pendingDecision(s));) { const i = d.choices.findIndex(c => s.cash >= -(c.effects?.cash || 0)); E.decide(s, d.id, Math.max(0, i)); } };
+const decideAll = s => { for (let d; (d = E.pendingDecision(s));) { const i = d.choices.findIndex(c => !c.disabled && s.cash >= -(c.effects?.cash || 0)); E.decide(s, d.id, Math.max(0, i)); } };
 /** Avanza meses resolviendo decisiones con la primera opción que se pueda pagar. */
 const months = (s, n) => { for (let k = 0; k < n; k++) { decideAll(s); assert(E.step(s), 'el mes avanza'); } decideAll(s); };
 
