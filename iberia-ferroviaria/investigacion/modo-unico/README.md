@@ -30,6 +30,7 @@ Conclusión principal: las 412 grabaciones clásicas no se pueden volver a graba
 | [juegos-airport-ceo.md](juegos-airport-ceo.md) | Contratos con estrellas y renegociación, planificador, monitor de operaciones, avisos, calificación con causas, finanzas y emergencias. |
 | [juegos-tropico.md](juegos-tropico.md) | Facciones con exigencias, edictos, elecciones, almanaque, sucesos y opciones de partida que hacen cada partida distinta. |
 | [juegos-cities-skylines.md](juegos-cities-skylines.md) | Hitos y desbloqueos, políticas, capas de información, presupuesto, líneas de transporte y modo libre. |
+| [juegos-sintesis-ideas-y-menus.md](juegos-sintesis-ideas-y-menus.md) | Síntesis: las 25 mejores ideas por valor y coste, herramientas de rejugabilidad y mapa completo de la interfaz con bocetos de la pantalla principal y de los paneles clave. |
 | [juegos-ferroviarios.md](juegos-ferroviarios.md) | Transport Fever 2, Railway Empire 2, OpenTTD, Mini Metro, Rail Route y NIMBY Rails: compra de trenes con compatibilidad, gestor de líneas y recompensas semanales. |
 
 El diseño del modo único se escribe a partir de estos documentos.
