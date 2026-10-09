@@ -1,0 +1,74 @@
+{
+ "schema": 1,
+ "model": {
+  "repository": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+  "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+  "files": {
+   "model.safetensors": "180b3b10eb1c9f1b4db7806d5475bae3071c0243c299d49926bab1da3b6946f6",
+   "speech_tokenizer/model.safetensors": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+  }
+ },
+ "precision": "mixed-bf16-talker",
+ "reference_pack": "investigacion/voces/referencias-qwen-3.6.3",
+ "mastering": {
+  "schema": 1,
+  "mode": "speech",
+  "mp3_bitrate": "160k",
+  "target_lufs": -21.0,
+  "maximum_true_peak_dbfs": -1.5,
+  "outer_silence_threshold_relative_db": -60,
+  "leading_margin_ms": 80,
+  "trailing_margin_ms": 120,
+  "processing": "Exterior silence only, static gain and bounded lookahead peak guard; no internal pause removal, EQ, pitch, tempo or broadband compression.",
+  "peak_guard": {
+   "threshold_dbfs": -1.8,
+   "maximum_peak_reduction_db": 6,
+   "attack_ms": 5,
+   "release_ms": 80,
+   "level": false,
+   "latency": true
+  }
+ },
+ "recorded": 3,
+ "expected": 70,
+ "browser_speech_synthesis": false,
+ "note": "Una grabación entera por diálogo, generada localmente; sin escucha humana certificada.",
+ "takes": [
+  {
+   "id": "t-1",
+   "person": "minister",
+   "mood": "determined",
+   "text": "Bienvenido a Tenfe. Te lo resumo: no hay dinero, no hay trenes y el Norte llega tarde hasta a su propio funeral. Tienes ocho años. Las primeras trece semanas deciden si llegas a la segunda.",
+   "file": "t-1-3e18a70e5061.mp3",
+   "sha256": "3e18a70e5061ce7f4f0c7c1e06e2c12ccdd60ea638ae0179e769ae05329871df",
+   "duration": 10.224,
+   "reference_sha256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575",
+   "seed": 424242,
+   "eos_found": true
+  },
+  {
+   "id": "t-2",
+   "person": "riders",
+   "mood": "angry",
+   "text": "Soy Marisa, de la asociación de viajeros. Pincha en el corredor Norte del mapa. Ese que parpadea en rojo. Así llevamos meses.",
+   "file": "t-2-62733af8189b.mp3",
+   "sha256": "62733af8189b65b930f349e1c267e336a9750b8ac521afb8bf34aef9efd8fee9",
+   "duration": 7.008,
+   "reference_sha256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf",
+   "seed": 424242,
+   "eos_found": true
+  },
+  {
+   "id": "paco-estacion",
+   "person": "mayor",
+   "mood": "happy",
+   "text": "Ministro, mi pueblo necesita una estación. Viajeros tenemos pocos; votantes, los suficientes para que me escuche.",
+   "file": "paco-estacion-28a51874d025.mp3",
+   "sha256": "28a51874d025c8d323366869c8e61d20d4b5d9433c5c0a582a60df709a2b1fad",
+   "duration": 6.216,
+   "reference_sha256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964",
+   "seed": 424242,
+   "eos_found": true
+  }
+ ]
+}

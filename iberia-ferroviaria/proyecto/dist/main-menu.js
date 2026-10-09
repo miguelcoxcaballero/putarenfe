@@ -26,7 +26,7 @@ function savedSummary(saved) {
   return `<div class="menu-save" aria-label="Resumen de tu partida guardada"><div class="menu-save-heading"><span class="menu-save-dot" aria-hidden="true"></span><span>Tu dirección sigue abierta</span><time>${escapeHTML(date)}</time></div><strong>${escapeHTML(mode)}</strong><dl><div><dt>Caja</dt><dd>${number(saved.cash)} <small>M€</small></dd></div><div><dt>Servicios</dt><dd>${number(routes)}</dd></div><div><dt>Viajeros satisfechos</dt><dd>${number(saved.satisfaction)}<small> %</small></dd></div></dl></div>`;
 }
 
-export function menuHTML(saved = null, savedError = '') {
+export function menuHTML(saved = null, savedError = '', rescue = null) {
   const cast = Object.entries(CHARACTERS).map(([id, person]) => `<li title="${escapeHTML(person.name)} · ${escapeHTML(person.role)}"><img src="${faceURL(id, id === 'rival' ? 'proud' : 'happy')}" alt="${escapeHTML(person.name)}" width="52" height="66"><span>${escapeHTML(person.name.split(' ')[0])}</span></li>`).join('');
   return `<main class="main-menu" aria-labelledby="menu-title">
     <div class="main-menu-art" role="img" aria-label="Un tren de alta velocidad entra en una estación española al amanecer, entre viaductos y colinas."></div>
@@ -44,13 +44,16 @@ export function menuHTML(saved = null, savedError = '') {
         <div class="menu-panel-kicker">Estación de salida <span aria-hidden="true">01</span></div>
         <h2 id="menu-departures-title">¿Adónde vamos?</h2>
         ${savedError ? `<p class="menu-save-error" role="status">${escapeHTML(savedError)}</p>` : ''}
-        ${saved ? `${savedSummary(saved)}<button class="menu-destination menu-continue" data-action="continue" autofocus>${icon('resume')}<span><strong>Continuar partida</strong><small>La red no se arregla sola.</small></span><b aria-hidden="true">→</b></button>` : ''}
-        <button class="menu-destination menu-campaign ${saved ? 'has-save' : ''}" data-action="begin" ${saved ? '' : 'autofocus'}>${icon('train')}<span><strong>${saved ? 'Nueva campaña' : 'Asumir la dirección'}</strong><small>Empieza en 2022 con una primera misión guiada.</small></span><b aria-hidden="true">→</b></button>
-        <p class="menu-tutorial-note">Aprende tomando decisiones reales: trenes, dinero, obras y un consejo de dirección con demasiadas opiniones.</p>
+        <div class="menu-rescue">
+          ${rescue ? `<button class="menu-destination menu-continue" data-action="rescue-continue" autofocus>${icon('resume')}<span><strong>Continuar el rescate</strong><small>Semana ${number(rescue.week)} · ${escapeHTML(rescue.date)}</small></span><b aria-hidden="true">→</b></button>` : ''}
+          <button class="menu-destination menu-campaign" data-action="rescue-new" ${rescue ? '' : 'autofocus'}>${icon('train')}<span><strong>${rescue ? 'Nuevo rescate' : 'Rescate de Tenfe'}</strong><small>2027–2034 · nuevo</small></span><b aria-hidden="true">→</b></button>
+        </div>
+        ${saved ? `${savedSummary(saved)}<button class="menu-destination menu-continue" data-action="continue">${icon('resume')}<span><strong>Continuar partida</strong><small>La red no se arregla sola.</small></span><b aria-hidden="true">→</b></button>` : ''}
+        <button class="menu-destination menu-campaign has-save" data-action="begin">${icon('compass')}<span><strong>${saved ? 'Nueva campaña clásica' : 'Campaña clásica 2022–2050'}</strong><small>Alta velocidad, 2022–2050</small></span><b aria-hidden="true">→</b></button>
         <button class="menu-destination menu-free" data-action="free-setup">${icon('compass')}<span><strong>Modo libre</strong><small>Elige tu presupuesto y construye a tu ritmo.</small></span><b aria-hidden="true">→</b></button>
         <div class="menu-secondary"><button data-action="menu-guide">${icon('book')}<span>Guía del director</span></button><button data-action="menu-settings">${icon('settings')}<span>Sonido y ajustes</span></button></div>
         <button class="menu-observe" data-action="observe">${icon('eye')}<span>Solo mirar los trenes</span><b aria-hidden="true">→</b></button>
-        <p class="menu-save-note">${saved ? 'Una campaña nueva sustituye el guardado automático.' : 'Tu partida se guarda automáticamente en este navegador.'} · Versión 3.6.3</p>
+        <p class="menu-save-note">${saved ? 'Una campaña nueva sustituye el guardado automático.' : 'Tu partida se guarda automáticamente en este navegador.'} · Versión 4.0.0</p>
       </section>
     </div>
     <footer class="menu-council"><div class="menu-council-label"><strong>El consejo te espera.</strong><span>Y cada cual quiere algo distinto.</span></div><ul aria-label="Los nueve personajes de tu consejo de dirección">${cast}</ul><span class="menu-footer-note">Un billete al poder.<br>Sin derecho a devolución.</span></footer>

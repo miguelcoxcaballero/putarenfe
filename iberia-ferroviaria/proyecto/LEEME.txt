@@ -1,6 +1,15 @@
-IBERIA FERROVIARIA — REPARACIÓN 3.6.3 EN CURSO
-Actualización: 8 de octubre de 2026.
+IBERIA FERROVIARIA 4.0 — RESCATE DE TENFE
+Actualización: 9 de octubre de 2026.
 
+RESCATE DE TENFE (MODO PRINCIPAL)
+Diriges una empresa ferroviaria pública en crisis durante ocho años y dos legislaturas (2027–2034). Empiezas con 12 M€, cuatro trenes, dos cuadrillas y un corredor Norte al 62 % de puntualidad. Cada etapa tiene un objetivo con plazo, sus obstáculos y un dilema; la misión de la izquierda dice qué debes conseguir, qué te lo impide y qué puedes decidir ahora.
+Semanas con el tiempo parado: tres órdenes por semana (aprobar obra, reorganizar servicio, contratar capacidad, comprar trenes o negociar un acuerdo). Consultar, comparar y descartar es gratis. «Cerrar la semana» pone los trenes a circular, cobra, paga y avanza las obras; «Hasta la próxima decisión» cierra semanas hasta que haya algo que decidir.
+Obras con preparación y permisos, construcción y pruebas; servicio por fases, con autobuses o con el tramo cortado. Préstamos con cuotas visibles, subvención trimestral limitada y ayudas que solo se cobran al terminar la obra. Pactos con los personajes (como mucho dos), elecciones al final del año 4 y del año 8 con cuatro grupos de interés, hitos de viajeros y territorios a lo Cities: Skylines, árbol tecnológico pagado con popularidad y dinero, megaproyectos por etapas a lo SimCity, y unas cloacas con comisiones, sobornos, extorsiones, escándalos y juzgados.
+Tutorial: seis personajes, uno cada vez, piden una acción real. Diseño completo: ../docs/RESCATE.md. Pruebas: «node rescate-test.mjs» (reglas y ocho partidas de ocho años con un jugador automático) y «node rescate-ui-test.mjs URL» (recorrido con Chromium).
+Voces: una grabación entera por diálogo del rescate con el mismo Qwen3-TTS, las mismas nueve referencias y el mismo masterizado que el catálogo de 412 (tools/build_rescate_voices.py). Imágenes: nombre fijo en dist/assets/rescate/ (lista y encargo en ../docs/PROMPT-FOTOS.md); se ven en cuanto existen, también las fotos propias de BCBB y Dörfler.
+La campaña clásica 2022–2050 y el modo libre siguen en el menú, con sus 412 diálogos.
+
+HISTORIAL 3.6.3
 ESTADO ACTUAL
 La reparación cambia la unidad de voz: cada diálogo completo tendrá una sola grabación continua, en lugar de encadenar frases generadas por separado. El catálogo actual reúne 412 cuerpos, 11.796 palabras y nueve personajes. La producción del reparto actual arrancó el 8 de octubre a las 13:07:52 UTC, con lote 4 y precisión mixed-bf16-talker; su revisión BASE comenzó a las 13:11:11 UTC. Todavía no está publicada. El código elimina la síntesis del navegador, conserva velocidad y tono originales y muestra un aviso si una grabación falta o no puede decodificarse. La construcción exige las 412 tomas actuales antes de sustituir el HTML principal.
 Se añadieron 31 introducciones habladas originales: 21 entradas del tutorial, nueve respuestas y el arco del Mediterráneo. Cada una precede al párrafo principal, que conserva sus palabras; las otras 381 intervenciones permanecen idénticas, incluidos los 315 encuentros. La presentación destaca la entrada y el texto principal dentro del mismo diálogo. No añade ventanas ni una segunda voz. La estructura se contrastó con escenas reales de Tropico y fuentes oficiales: humor inicial, contexto y petición concreta, con parlamentos originales de Iberia Ferroviaria.

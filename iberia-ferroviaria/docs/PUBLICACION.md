@@ -1,5 +1,11 @@
 # Publicación en GitHub Pages
 
+## Entrega 4.0 · Rescate de Tenfe
+
+La 4.0 añade el modo Rescate de Tenfe sin tocar el catálogo de 412 diálogos ni su manifiesto aceptado. `tools/build-web.mjs` copia además `proyecto/dist/assets/rescate/` (imágenes con nombre fijo) y `proyecto/dist/assets/rescate-voces/` (una grabación entera por diálogo del rescate), comprueba que cada nombre lleva el principio de su SHA-256, los registra en `release.json` (`rescue` y `assets`) y añade esos diálogos a la sala de escucha con las mismas URL que usa el juego. Las fotos de BCBB y Dörfler son `assets/rescate/tren-bcbb.webp` y `tren-dorfler.webp`; mientras falten, Trenespop enseña las series 103 y 120.
+
+Orden de trabajo: grabar con `proyecto/tools/build_rescate_voices.py --model … --stage …` (fuera de Git), publicar las tomas validadas con `--package`, subir las imágenes con los nombres de `docs/PROMPT-FOTOS.md` a `proyecto/dist/assets/rescate/` y `assets/rescate/`, reconstruir con `node tools/build-web.mjs`, probar con `proyecto/rescate-ui-test.mjs`, hacer commit en `main` y verificar con `node tools/verify-pages.mjs URL docs/pages-400-https-proof.json`.
+
 El juego utiliza <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/> y el auditorio <https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html>. Pages publica desde `main`, carpeta raíz `/`, con HTTPS y sin CNAME. La aplicación de Renfe continúa en la raíz; Iberia Ferroviaria ocupa `iberia-ferroviaria/`.
 
 La versión completa está publicada y verificada: commit `90247a3a130ac13d65a3d3b41ba713815fcada24`, 496 rutas HTTPS correctas y 412 MP3, sin repeticiones dirigidas tras completarse el despliegue. La [prueba actual](./final412-qa-index.json) enlaza los resultados, sus SHA y los archivos exactos que verifican; las pruebas históricas conservan el alcance de su propia entrega.

@@ -120,8 +120,8 @@
     },
     {
       "file": "marketplace.js",
-      "bytes": 16147,
-      "sha256": "b28ccacbcd05b513682d806d792df8a0efbf9c60d8017bc7a22c2970b01aee16"
+      "bytes": 16370,
+      "sha256": "b4479efde952007796af418edfc4738b054e05031caa1cec2ae61082b7e42129"
     },
     {
       "file": "tycoon.js",
@@ -155,8 +155,8 @@
     },
     {
       "file": "train3d.js",
-      "bytes": 1851,
-      "sha256": "181373d2146766a43849ad91d51c85f61d28464287f48e6de6144979fd34291d"
+      "bytes": 2582,
+      "sha256": "6c72da1b9d883f294e8bd1ba7d5afb4bb6d73adfc067b95a6316878509db9bfa"
     },
     {
       "file": "city-art.js",
@@ -185,8 +185,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 28225,
-      "sha256": "42c7f10534e60a7efe79758ba03dcf8fc04a3567107cc2fd8f06b9977835d4dd"
+      "bytes": 28275,
+      "sha256": "6289a85b455f7d3c99ab96b88f9387c1968beb427b507193f59d356f4d935c10"
     },
     {
       "file": "assets/portraits.js",
@@ -205,8 +205,8 @@
     },
     {
       "file": "main-menu.js",
-      "bytes": 6173,
-      "sha256": "f8aa9f93f0d2195f8547ad48dc9a73d251af4b00a104fc980e383042ba475daf"
+      "bytes": 6604,
+      "sha256": "bc7cc61eddbeec4c217bf37e08b49aa2ee592c5d6bd757c2ccedcb413aad4cef"
     },
     {
       "file": "induction-task-ui.js",
@@ -214,9 +214,34 @@
       "sha256": "88bb39e28922d1d73366855e648b40561ac5e1c5c8e139190007f71306b1479f"
     },
     {
+      "file": "assets/rescate-voices.js",
+      "bytes": 490,
+      "sha256": "199cce0070b9aaebc0b74e4521dcdb156abf453d5289583a1e74b1e601f88d4e"
+    },
+    {
+      "file": "rescate-data.js",
+      "bytes": 60419,
+      "sha256": "5641e67c22342e8102e974d0ce1a03ae1ad9908eccc97e54ea2a74b616bf0e3d"
+    },
+    {
+      "file": "rescate.js",
+      "bytes": 96458,
+      "sha256": "85deec3c2f59d5325796b721b01ecb373b1768297fe0677aa925d2c908a6bb2b"
+    },
+    {
+      "file": "rescate-map.js",
+      "bytes": 13699,
+      "sha256": "3518f0d477a1ce6f4016bb96bdb9107eacad79af11ec5ee93585486129a11b68"
+    },
+    {
+      "file": "rescate-ui.js",
+      "bytes": 64694,
+      "sha256": "6f521740f440fc03f3e3b198b8dfe5786e6e4c3b8d017688bd7a2e0a6e1d745f"
+    },
+    {
       "file": "app.js",
-      "bytes": 153149,
-      "sha256": "7c941506866a642fe265066b7eb2ba73f3cfb799f8a8604379490a0a9467472b"
+      "bytes": 153704,
+      "sha256": "744efbc69dc935aad819bd410a785e69cd9c305ed05a8164ff96ec5c65faed4c"
     },
     {
       "file": "style-v3.css",
@@ -225,8 +250,8 @@
     },
     {
       "file": "main-menu.css",
-      "bytes": 12037,
-      "sha256": "da1d7ee65c3c94979b0c1732821f09574e587934656186b143cbd366d5dee6ae"
+      "bytes": 12406,
+      "sha256": "b6e8be90c408b4057a48e7abee8865d8563a68f86b0ae16c8b22d146c7c79e1e"
     },
     {
       "file": "induction.css",
@@ -237,6 +262,11 @@
       "file": "marketplace.css",
       "bytes": 14639,
       "sha256": "8f32a4fc703573d503eed0dcc38262be28db604f371b17ca5d7927799423f6d5"
+    },
+    {
+      "file": "rescate.css",
+      "bytes": 22860,
+      "sha256": "3296706401760bbc0f5f0bc7e90276c8d95c57b75c7e764f7b7d1cfc325fb700"
     },
     {
       "file": "assets/fonts/fraunces.woff2",
@@ -270,8 +300,8 @@
     },
     {
       "file": "index.html",
-      "bytes": 2775,
-      "sha256": "970d63e56a399dc4fb7a3df89d2f4bac8431b41db74e8ec7426cdb0a2f327162"
+      "bytes": 2817,
+      "sha256": "9d8e3a75ac687e1b3818129c6617df1140dd16bc1a0dfb3c949b43de68901477"
     },
     {
       "file": "assets/muestras-ui.js",

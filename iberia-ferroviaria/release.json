@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "3.6.3",
+  "version": "4.0.0",
   "status": "complete-catalogue",
   "availableWholeDialogues": 412,
   "expectedWholeDialogues": 412,
@@ -19,14 +19,43 @@
   "game": {
     "url": "index.html",
     "bytes": 38474,
-    "sha256": "adb5deb55865b7766b889868edf5deb3a38fcb3fb259df375bc8c054a810930c"
+    "sha256": "b84cda1904e9fec7e3d77cd405b4b0032a2eb18b83fbd6a029487c3095d289cf"
   },
   "listening": {
     "url": "dialogos.html",
-    "bytes": 296740,
-    "sha256": "226d6dac2f509bee1d25f0099ed8da9d243238a546e3732488f17f346afb4799"
+    "bytes": 298216,
+    "sha256": "a8829c04594266de630e656266450a22b8bb49c83481d4ee62e775f7c1ebb2ba"
+  },
+  "rescue": {
+    "photos": 0,
+    "recordedDialogues": 3,
+    "expectedDialogues": 70
   },
   "assets": [
+    {
+      "url": "assets/rescate-voces/manifest.json",
+      "bytes": 2716,
+      "sha256": "5a12b457c4009cfa99550e3255986d458d9536644d8de4d26cc2a5bf0087764e",
+      "kind": "rescue-recording-manifest"
+    },
+    {
+      "url": "assets/rescate-voces/paco-estacion-28a51874d025.mp3",
+      "bytes": 124845,
+      "sha256": "28a51874d025c8d323366869c8e61d20d4b5d9433c5c0a582a60df709a2b1fad",
+      "kind": "rescue-recording"
+    },
+    {
+      "url": "assets/rescate-voces/t-1-3e18a70e5061.mp3",
+      "bytes": 205005,
+      "sha256": "3e18a70e5061ce7f4f0c7c1e06e2c12ccdd60ea638ae0179e769ae05329871df",
+      "kind": "rescue-recording"
+    },
+    {
+      "url": "assets/rescate-voces/t-2-62733af8189b.mp3",
+      "bytes": 140685,
+      "sha256": "62733af8189b65b930f349e1c267e336a9750b8ac521afb8bf34aef9efd8fee9",
+      "kind": "rescue-recording"
+    },
     {
       "url": "assets/game-script-0-71d400cecb34.js",
       "bytes": 455233,
@@ -234,14 +263,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-6e67aa416d73.js",
-      "bytes": 11345036,
-      "sha256": "6e67aa416d734ed1b3323a2a02f075891084644fd6ba192910c81f113467b233"
+      "url": "assets/game-script-4-225ab9e80ba0.js",
+      "bytes": 11583734,
+      "sha256": "225ab9e80ba0a3dde011c59d2d823f15fea3970d00ce279f2ca990f0ae83ea7d"
     },
     {
-      "url": "assets/game-style-0-4ea156c543a7.css",
-      "bytes": 2018928,
-      "sha256": "4ea156c543a77690e383966d3451c841a27b862199f3b7608856307a35673a48"
+      "url": "assets/game-style-0-4b25dae623c8.css",
+      "bytes": 2042158,
+      "sha256": "4b25dae623c851edf7f1663a04eac7edd6aedc01964ba70bc57bb9e24ed6220f"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -4386,6 +4415,16 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-6e67aa416d73.js",
+      "bytes": 11345036,
+      "sha256": "6e67aa416d734ed1b3323a2a02f075891084644fd6ba192910c81f113467b233"
+    },
+    {
+      "url": "assets/game-style-0-4ea156c543a7.css",
+      "bytes": 2018928,
+      "sha256": "4ea156c543a77690e383966d3451c841a27b862199f3b7608856307a35673a48"
+    },
     {
       "url": "assets/game-script-4-c961b4834c8b.js",
       "bytes": 11340751,

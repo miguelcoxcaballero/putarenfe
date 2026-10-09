@@ -197,6 +197,32 @@ const listeningLabel=`${available}/412 diálogos grabados · ${partial?'el resto
 catalogue.audio=audio;catalogue.label=listeningLabel;
 const pacoCount=recordings.filter(row=>row.person==='mayor').length;
 const assets=[];
+// Rescate de Tenfe (4.0): imágenes con nombre fijo (assets/rescate/) y una grabación entera por diálogo con el SHA en el nombre.
+const rescue={photos:[],recordings:[],expectedDialogues:0};
+for(const [sub,kind] of [['rescate','rescue-photo'],['rescate-voces','rescue-recording']]){
+  const dir=path.join(editableProject,'dist','assets',sub);
+  if(!fs.existsSync(dir))continue;
+  for(const name of fs.readdirSync(dir).sort()){
+    const bytes=fs.readFileSync(path.join(dir,name)),digest=sha(bytes),url='assets/'+sub+'/'+name;
+    if(sub==='rescate-voces'&&name!=='manifest.json')assert(name.includes(digest.slice(0,12)),'rescue recording name carries its SHA: '+name);
+    if(sub==='rescate')assert(/^[a-z0-9-]+\.(webp|jpg|png)$/.test(name),'rescue image has a fixed lowercase name: '+name);
+    write(url,bytes);const row={url,bytes:bytes.length,sha256:digest,kind:name==='manifest.json'?kind+'-manifest':kind};
+    assets.push(row);(kind==='rescue-photo'?rescue.photos:rescue.recordings).push(row);
+  }
+}
+const rescueVoiceManifest=path.join(editableProject,'dist','assets','rescate-voces','manifest.json');
+if(fs.existsSync(rescueVoiceManifest)){
+  const meta=JSON.parse(read(rescueVoiceManifest));rescue.expectedDialogues=meta.expected;
+  const names=Object.fromEntries((catalogue.characters||[]).map(c=>[c.id,c.name]));
+  for(const take of meta.takes){
+    const url='assets/rescate-voces/'+take.file;
+    assert(rescue.recordings.some(r=>r.url===url&&r.sha256===take.sha256),'rescue take is published with its SHA');
+    catalogue.rows.push({id:'rescate-'+take.id,person:take.person,name:names[take.person]||take.person,mood:take.mood,emotion:catalogue.emotions?.[take.mood]||take.mood,
+      kind:'Rescate de Tenfe',title:take.id,text:take.text,available:true,duration:take.duration,sha256:take.sha256});
+    catalogue.audio['rescate-'+take.id]=url;
+  }
+  catalogue.label+=` · Rescate de Tenfe: ${meta.takes.length}/${meta.expected}`;
+}
 const photoAssets=new Map();
 const manufacturerLogoAssets=new Map();
 function externalizeTrainPhotos(script){
@@ -261,7 +287,7 @@ for(const entry of [...sourceRelease.labels.game,...sourceRelease.labels.gameSty
 for(const entry of [...sourceRelease.labels.listening,...sourceRelease.labels.listeningStyles])
   listeningHTML=oneReplace(listeningHTML,entry.token,publishSource(entry,'listening'),'one listening asset placeholder');
 listeningHTML=oneReplace(listeningHTML,'__WEB_DIALOGUE_DATA__',JSON.stringify(catalogue).replaceAll('<','\\u003c'),'one complete listening catalogue');
-listeningHTML=oneReplace(listeningHTML,'__WEB_LISTENING_LABEL__',listeningLabel,'one listening label');
+listeningHTML=oneReplace(listeningHTML,'__WEB_LISTENING_LABEL__',catalogue.label,'one listening label');
 listeningHTML=oneReplace(listeningHTML,'__WEB_PENDING__',String(pending),'one listening pending count');
 listeningHTML=oneReplace(listeningHTML,'__WEB_PACO_COUNT__',String(pacoCount),'one current Paco count');
 assert(!/__WEB_[A-Z_0-9]+__/.test(gameHTML+listeningHTML),'no unexpanded HTML token');
@@ -269,7 +295,7 @@ assert(!/<base\b/i.test(gameHTML+listeningHTML),'all asset URLs use the document
 assert.equal((listeningHTML.match(/<audio\b/g)||[]).length,1,'one native listening player');
 write('index.html',gameHTML);write('dialogos.html',listeningHTML);
 write('.nojekyll','');
-const release={schema:1,version:'3.6.3',status:partial?'partial-preview':'complete-catalogue',
+const release={schema:1,version:'4.0.0',status:partial?'partial-preview':'complete-catalogue',
   availableWholeDialogues:available,expectedWholeDialogues:412,pendingWholeDialogues:pending,pacoWholeDialogues:pacoCount,
   sourceFrozenHTMLs:{gameSHA256:sourceRelease.gameSourceSHA256,listeningSHA256:sourceRelease.listeningSourceSHA256},
   sourceManifestSHA256:sha(manifestBytes),sourceCatalogueSHA256:sourceRelease.sourceCatalogueSHA256,
@@ -277,6 +303,7 @@ const release={schema:1,version:'3.6.3',status:partial?'partial-preview':'comple
   webPlayback:'whole unchanged MP3 downloaded on demand; one source at original rate and pitch',
   game:{url:'index.html',bytes:Buffer.byteLength(gameHTML),sha256:sha(gameHTML)},
   listening:{url:'dialogos.html',bytes:Buffer.byteLength(listeningHTML),sha256:sha(listeningHTML)},
+  rescue:{photos:rescue.photos.filter(r=>r.kind==='rescue-photo').length,recordedDialogues:rescue.recordings.filter(r=>r.kind==='rescue-recording').length,expectedDialogues:rescue.expectedDialogues},
   assets,recordings,validation:{physicalMP3Hashes:true,pairedFrozenHTMLHashes:true,registeredEOS:true,
     javascriptSyntax:true,relativeURLs:true,browserTested:false,humanListening:false}};
 // Preserve the rollout cache while local previews are rebuilt before publication.

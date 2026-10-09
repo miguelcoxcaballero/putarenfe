@@ -26,7 +26,8 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   const read=file=>{const bytes=fs.readFileSync(path.join(dist,file));sources.push({file,bytes:bytes.length,sha256:sha(bytes)});return bytes.toString('utf8');};
   const baselineOrder=['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
     'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
-  const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'train3d.js':['assets/train-photos.js']};
+  const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'train3d.js':['assets/train-photos.js'],
+    'app.js':['assets/rescate-art.js','assets/rescate-voices.js','rescate-data.js','rescate.js','rescate-map.js','rescate-ui.js']};
   const order=baselineOrder.flatMap(file=>[...(optionalBefore[file]||[]).filter(extra=>fs.existsSync(path.join(dist,extra))),file]);
   function bundle(file){
     let text=file==='assets/voices.js'?'export const CLIPS = {};\n':file==='assets/voice-dialogues.js'?'export const DIALOGUES = __WEB_DIALOGUES__;\n':read(file);
@@ -62,6 +63,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   assert.equal(gameCode.split('__WEB_DIALOGUES__').length-1,1);
   let css=read('style-v3.css')+'\n'+read('main-menu.css')+'\n'+read('induction.css');
   if(fs.existsSync(path.join(dist,'marketplace.css')))css+='\n'+read('marketplace.css');
+  if(fs.existsSync(path.join(dist,'rescate.css')))css+='\n'+read('rescate.css');
   css+='\n.menu-preview-note{padding:9px 12px;margin:10px 0 15px;border:1px solid #cda85d66;border-radius:8px;background:#f8e7ba;color:#493019;font-size:12px;line-height:1.5;}\n';
   const mime={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',svg:'image/svg+xml',woff2:'font/woff2'};
   css=css.replace(/url\('assets\/([^']+)'\)/g,(_,asset)=>{
@@ -84,6 +86,8 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
     assert(fs.existsSync(path.join(dist,'marketplace.css')),'the market stylesheet exists');
     html=replaceOne(html,marketplaceLink,'','market stylesheet link');
   }
+  const rescueLink='<link rel="stylesheet" href="rescate.css">';
+  if(html.includes(rescueLink))html=replaceOne(html,rescueLink,'','rescue stylesheet link');
   html=replaceOne(html,'<link rel="stylesheet" href="style-v3.css">','<link rel="stylesheet" href="__WEB_GAME_STYLE_0__">','game stylesheet');
   html=replaceOne(html,"<script>globalThis.IBERIA_SAMPLE_BASE = 'assets/';</script>",gameLabels.slice(0,4).map(row=>'<script src="'+row.token+'"></script>').join(''),'music samples');
   if(includeThree)html=replaceOne(html,threeTag,'<script src="'+gameLabels[4].token+'"></script>','three source');

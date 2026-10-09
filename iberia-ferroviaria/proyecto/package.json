@@ -1,12 +1,15 @@
 {
   "name": "iberia-ferroviaria",
-  "version": "3.6.3",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
     "web:build": "node ../tools/build-web.mjs",
-    "test": "node test.mjs && node campaign-test.mjs",
+    "test": "node rescate-test.mjs && node test.mjs && node campaign-test.mjs",
+    "rescate-test": "node rescate-test.mjs",
+    "rescate-ui": "node rescate-ui-test.mjs",
+    "rescate-voices": "python3 tools/build_rescate_voices.py",
     "ui": "node ui-test.mjs",
     "music-test": "node music-test.mjs",
     "onboarding-ui": "node onboarding-ui-test.mjs",

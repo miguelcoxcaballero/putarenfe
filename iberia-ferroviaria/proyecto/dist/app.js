@@ -2,6 +2,7 @@ import {INDUCTION_STAGES} from './induction.js';
 import {dialogueHtml} from './dialogue-presentation.js';
 import {freshInduction, note, stageChecks, readyInduction, inductionBriefing, inductionFeedbackLine, canInductionAnswer, restoreInductionHandoff} from './induction-runtime.js';
 import {menuHTML} from './main-menu.js';
+import {mountRescue, rescueSaveSummary} from './rescate-ui.js';
 import {focusedTaskHTML} from './induction-task-ui.js';
 import * as T from './tycoon.js';
 import {tycoonPage,directionCount} from './tycoon-ui.js';
@@ -1145,9 +1146,15 @@ function nodeInspector() {
 // ------------------------------------------------------------ ventanas modales
 function showModal(html, cls = '') { pause(); const was = $('modal').open; $('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons(); sfx.play(was ? 'page' : 'open'); }
 function closeModal() { if ($('modal').open) $('modal').close(); }
+/** Rescate de Tenfe: modo propio con su mapa, su interfaz y su guardado; al salir vuelve a esta portada. */
+function startRescue(fresh) {
+  menuOpen = false; pause(); voices.stop(); clearCoach(); closeModal();
+  $('game').hidden = true;
+  mountRescue({music, sfx, fresh, voiceEnabled: () => voices.enabled, onExit: () => { $('game').hidden = false; map.dirty = true; intro(); }});
+}
 $('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
 $('modal').addEventListener('close', () => { if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
-function intro() { tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey='';showModal(menuHTML(saved,savedError),'main-menu-shell'); }
+function intro() { tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey='';showModal(menuHTML(saved,savedError,rescueSaveSummary()),'main-menu-shell'); }
 function resetSessionView(){
  tutorialChrome();adviceLine=null;tutorialDraft=null;clearCoach();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
  ui.market=freshMarketFilters();
@@ -1279,6 +1286,7 @@ document.addEventListener('click', event => {
     case 'close-inspector': inspect = null; map.selected = null; map.selectedTrain = null; map.follow = false; renderInspector(); break;
     case 'close-modal': closeModal();if(menuOpen||!state.started)intro();break;
     case 'begin': requestCampaign(); break;
+    case 'rescue-new': case 'rescue-continue': startRescue(a === 'rescue-new'); break;
     case 'campaign-confirm': beginCampaign();break;
     case 'menu-home': if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;}intro();break;
     case 'menu-guide': menuGuide();break;

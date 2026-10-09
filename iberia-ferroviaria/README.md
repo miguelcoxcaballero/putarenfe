@@ -1,4 +1,10 @@
-# Iberia Ferroviaria · Trenespop
+# Iberia Ferroviaria · Rescate de Tenfe
+
+**Novedad 4.0 — Rescate de Tenfe**, el nuevo modo principal: diriges una empresa ferroviaria pública en crisis durante ocho años y dos legislaturas (2027–2034). Empiezas con 12 M€, cuatro trenes, dos cuadrillas y un corredor Norte que llega tarde; tienes que cumplir un programa ferroviario concreto, ganar dos elecciones y dejar una red que se pague sola. Semanas con el tiempo parado y tres órdenes por semana, obras con fases y pagos, pactos con los personajes, hitos de viajeros y territorios a lo *Cities: Skylines*, un árbol tecnológico que se paga con popularidad y dinero, megaproyectos por etapas a lo *SimCity*, y unas cloacas con comisiones, sobornos, extorsiones y escándalos. Un tutorial en el que habla un personaje cada vez enseña a jugar. Todo el diseño está en [docs/RESCATE.md](./docs/RESCATE.md).
+
+Las imágenes del rescate (árbol tecnológico, megaproyectos, sucesos y los trenes propios de **BCBB** y **Dörfler**) tienen nombre fijo en `assets/rescate/` y aparecen en cuanto se suben; la lista y el encargo están en [docs/PROMPT-FOTOS.md](./docs/PROMPT-FOTOS.md).
+
+## La campaña clásica y Trenespop
 
 Gestiona una compañía ferroviaria española entre inauguraciones, averías, presupuestos y personajes con muy poca paciencia. La campaña recorre **cinco capítulos, de 2022 a 2050**: dirige Tenfe, conecta ciudades, cumple contratos, renueva infraestructura y compite con OuiOui y YaIré. También puedes empezar una partida libre con tus propias prioridades.
 
