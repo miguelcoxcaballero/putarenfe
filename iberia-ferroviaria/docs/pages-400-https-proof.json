@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-09T11:27:42.551Z",
+  "base": "https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/",
+  "version": "4.0.0",
+  "releaseSHA256": "683d3a0a660900862fd23470802a473c8b4c4b7812267027957e7cff8c91dd39",
+  "checked": 501,
+  "ok": 501,
+  "failed": [],
+  "rescue": {
+    "photos": 0,
+    "recordedDialogues": 3,
+    "expectedDialogues": 70
+  },
+  "availableWholeDialogues": 412
+}
