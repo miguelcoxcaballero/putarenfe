@@ -41,7 +41,7 @@ function observe(){
  };
  if(window.speechSynthesis){const speak=speechSynthesis.speak;speechSynthesis.speak=function(u){qa.system.push(u.text);return speak.call(this,u);};}
 }
-const screenshot=async(p,name)=>{await p.screenshot({path:path.join(out,name+'.png')});const b=await p.screenshot({type:'jpeg',quality:55});console.log('QA_IMAGE:'+name+':'+b.toString('base64'));};
+const screenshot=async(p,name)=>{const b=await p.screenshot({type:'jpeg',quality:55});fs.writeFileSync(path.join(out,name+'.jpg'),b);console.log('QA_IMAGE:'+name+':'+b.toString('base64'));};
 const start=async page=>{
  await page.goto(url);await page.waitForFunction(()=>!!window.railwayGame);
  await page.locator('[data-action="new-game"]').click();await page.locator('#npSeed').fill('MAPA-VOCES');
@@ -86,9 +86,15 @@ try{
  await screenshot(page,'consejo-con-voz');
  const count=await page.evaluate(()=>window.__audioQA.starts.length);await page.evaluate(()=>window.railwayGame.render());
  await page.waitForTimeout(500);assert.equal(await page.evaluate(()=>window.__audioQA.starts.length),count,'redibujar no reinicia ni duplica la conversación');
- await page.locator('.desk-decision .say-btn').click();assert.equal(await page.evaluate(()=>window.railwayGame.voices.speaking),null);
- await page.locator('.desk-decision .say-btn').click();await waitVoice(page,count);
- await page.waitForFunction(i=>window.__audioQA.starts[i].ended,count,{timeout:Math.ceil(first.duration*1000)+15000});
+ // La captura puede durar más que una toma breve: se prueba detener una lectura recién iniciada.
+ if(await page.evaluate(()=>!!window.railwayGame.voices.speaking))await page.locator('.desk-decision .say-btn').click();
+ await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
+ const stopIndex=await page.evaluate(()=>window.__audioQA.starts.length);
+ await page.locator('.desk-decision .say-btn').click();await waitVoice(page,stopIndex);
+ await page.locator('.desk-decision .say-btn').click();await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
+ const repeatIndex=await page.evaluate(()=>window.__audioQA.starts.length);
+ await page.locator('.desk-decision .say-btn').click();await waitVoice(page,repeatIndex);
+ await page.waitForFunction(i=>window.__audioQA.starts[i].ended,repeatIndex,{timeout:Math.ceil(first.duration*1000)+15000});
  await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
  assert.equal(await page.locator('.desk-decision .say-btn').getAttribute('aria-pressed'),'false');
  await page.evaluate(()=>window.railwayGame.voices.toggle());
