@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "6.0.0",
+  "version": "6.1.0",
   "status": "complete-catalogue",
   "availableWholeDialogues": 412,
   "expectedWholeDialogues": 412,
@@ -18,13 +18,21 @@
   "webPlayback": "whole unchanged MP3 downloaded on demand; one source at original rate and pitch",
   "game": {
     "url": "index.html",
-    "bytes": 38614,
-    "sha256": "235848d00eda577d25f375e41650d9791ff1121bcfb59e55b68ff18580480593"
+    "bytes": 38615,
+    "sha256": "b9b0517208bddcd1f7587a8fb2405b4516fe919f5b6f18fafc21cba8eb4a34b7"
   },
   "listening": {
     "url": "dialogos.html",
     "bytes": 298216,
     "sha256": "a8829c04594266de630e656266450a22b8bb49c83481d4ee62e775f7c1ebb2ba"
+  },
+  "trainWorkshop": {
+    "models": 14,
+    "images": 28,
+    "duration": 5,
+    "costFraction": 0.12,
+    "restoredCondition": 98,
+    "art": "AI recreations based on linked interior references; three fictional models marked as concepts"
   },
   "trackWorkshop": {
     "configurations": 27,
@@ -55,6 +63,230 @@
     "expectedDialogues": 70
   },
   "assets": [
+    {
+      "url": "assets/interiores/r465-actual.webp",
+      "model": "r465",
+      "interior": "actual",
+      "bytes": 80888,
+      "sha256": "9761efc46b45c45c4ba42d093076e32f78ffd7cd4e43786534f769c8d401421e",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r465-reformado.webp",
+      "model": "r465",
+      "interior": "reformado",
+      "bytes": 79036,
+      "sha256": "d06cec9ed33f129e435c4beae70d5d09b2b3e34d4d1f8d0bb8a2209dc1f574f2",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r592-actual.webp",
+      "model": "r592",
+      "interior": "actual",
+      "bytes": 94808,
+      "sha256": "8cbd8b551930185b7f42c8ced20df4a42b8518448613c0440da1d6c4f23072f2",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r592-reformado.webp",
+      "model": "r592",
+      "interior": "reformado",
+      "bytes": 72630,
+      "sha256": "277a702e45e73a1000ff0ca3a06899c20f2de1f0998385f08976b217b76ce6a9",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r599-actual.webp",
+      "model": "r599",
+      "interior": "actual",
+      "bytes": 85462,
+      "sha256": "c8dc67b4c761f579cb5873f724eec54a974ab8b85364bbf89033a7106be9a5c4",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r599-reformado.webp",
+      "model": "r599",
+      "interior": "reformado",
+      "bytes": 80482,
+      "sha256": "aaf8e5d4f822f8027037bc2cbc0f8362baafb809e0b786db415c012a085eff32",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rdorf-actual.webp",
+      "model": "rdorf",
+      "interior": "actual",
+      "bytes": 84486,
+      "sha256": "6b25dddba989fd5c2f443a11120a84075fee0b32746e81ed5a349c5519fbd6ae",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rdorf-reformado.webp",
+      "model": "rdorf",
+      "interior": "reformado",
+      "bytes": 78978,
+      "sha256": "e739721665b10912ea7f85f69a7f090b3a45fa773d2571f09a32f552c708ca09",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rbcbb-actual.webp",
+      "model": "rbcbb",
+      "interior": "actual",
+      "bytes": 92086,
+      "sha256": "f8b8c5724b536f8d40f6da51fcce490b232e26462858371c879c3ae921ba007d",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rbcbb-reformado.webp",
+      "model": "rbcbb",
+      "interior": "reformado",
+      "bytes": 83450,
+      "sha256": "31bfc2aa18c07da16722cef8247e7113105dd00872c2124839adbd5cce3cfbf3",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/av2030-actual.webp",
+      "model": "av2030",
+      "interior": "actual",
+      "bytes": 71900,
+      "sha256": "5a62a9254a5622c98fcbb4afba5ff0dd6721e2d0cd8b92480e92d85386903685",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/av2030-reformado.webp",
+      "model": "av2030",
+      "interior": "reformado",
+      "bytes": 72368,
+      "sha256": "e62a64375ff2c621b2eae13a450d79ef15604546e83a1f456121faabc4dec310",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s100-actual.webp",
+      "model": "s100",
+      "interior": "actual",
+      "bytes": 71656,
+      "sha256": "0f740ed194858950b4f52db99de895003b8290c62808ce4a8a76cf86edbdfc8b",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s100-reformado.webp",
+      "model": "s100",
+      "interior": "reformado",
+      "bytes": 61954,
+      "sha256": "701e3d9a816934bb0db225881b79cd4806c33cba99a6b86d9dbd0901daf6b049",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s103-actual.webp",
+      "model": "s103",
+      "interior": "actual",
+      "bytes": 83474,
+      "sha256": "64852a6b3f52b7707ed762475334e0fc62410cb1f785bbbb67875cfdab5eee73",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s103-reformado.webp",
+      "model": "s103",
+      "interior": "reformado",
+      "bytes": 69456,
+      "sha256": "7b15a04c2c4c877a0911ce2be04857518a603ec6a36fa6f1f09b3a4acc1bc3d8",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s112-actual.webp",
+      "model": "s112",
+      "interior": "actual",
+      "bytes": 65590,
+      "sha256": "435c335c721c993727efa8903b9c847cd14f620daef6088014d9b3ea0561ba75",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s112-reformado.webp",
+      "model": "s112",
+      "interior": "reformado",
+      "bytes": 58158,
+      "sha256": "edd2caff215499f9584abc19f231a21c009a89c03669118a18ab67c3bfb0f21a",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s120-actual.webp",
+      "model": "s120",
+      "interior": "actual",
+      "bytes": 68230,
+      "sha256": "05afc2774c94f2699da7b06e7c4041deda622331ea9dad3a051b83a7009424a4",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s120-reformado.webp",
+      "model": "s120",
+      "interior": "reformado",
+      "bytes": 62558,
+      "sha256": "22ad32259ef8a1aeb1c53b1845c8e144a2e337df8ccc00dc5920b5d922cc3595",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s130-actual.webp",
+      "model": "s130",
+      "interior": "actual",
+      "bytes": 73236,
+      "sha256": "4ea0977f602ecc2cd8b871ef1224a2eefdb80ab5fdfafd750fa5df0f71cc57c1",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s130-reformado.webp",
+      "model": "s130",
+      "interior": "reformado",
+      "bytes": 57894,
+      "sha256": "8d9b2e0a046370eada9121b678b923b2dd6f86cb2f214314008e4e87480ffd79",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s730-actual.webp",
+      "model": "s730",
+      "interior": "actual",
+      "bytes": 82584,
+      "sha256": "92ecfdb3f295296ac45a0f7bedc682fc3558263b6eb62fc374df577ee19d9ab9",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s730-reformado.webp",
+      "model": "s730",
+      "interior": "reformado",
+      "bytes": 62544,
+      "sha256": "f430d9e518e27bab8a63a3f3dee0e3c8048d150db254e7aab038c4a56dd5c8e2",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106f-actual.webp",
+      "model": "s106f",
+      "interior": "actual",
+      "bytes": 56538,
+      "sha256": "195c0e0dfea27633259761acacc1ad1636a4047e79caeb25f5d3f03ddc6131d5",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106f-reformado.webp",
+      "model": "s106f",
+      "interior": "reformado",
+      "bytes": 62834,
+      "sha256": "7b57339be4ae4cbdd48c25c23225030685710ce81fadf9775577aa5389883c3b",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106v-actual.webp",
+      "model": "s106v",
+      "interior": "actual",
+      "bytes": 54884,
+      "sha256": "278f6d47f16e8f19ace3e54349be92c0d81e69c84bca2995f1d86fe33e6def0f",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106v-reformado.webp",
+      "model": "s106v",
+      "interior": "reformado",
+      "bytes": 62846,
+      "sha256": "8d6d88e6cfa857ca2f5104783d1a4dfee25a84aa896f0610df01f3605bfbb889",
+      "kind": "generated-train-interior"
+    },
     {
       "url": "assets/rescate/cloacas.webp",
       "bytes": 98868,
@@ -682,14 +914,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-023a4bc5ab91.js",
-      "bytes": 11626433,
-      "sha256": "023a4bc5ab911750a014aaee32977bf875642fc1cd7188f64f302fdbb8271567"
+      "url": "assets/game-script-4-922447757162.js",
+      "bytes": 11643347,
+      "sha256": "9224477571627c8c7241561403b05f44e8a594697a6feebf1e3e9072dea4a5c2"
     },
     {
-      "url": "assets/game-style-0-bdb0e445ac3e.css",
-      "bytes": 2045451,
-      "sha256": "bdb0e445ac3e837e5730ec16f459a485a3da7419f81dafe82fcb27e0fa6059cc"
+      "url": "assets/game-style-0-82bbe6ab0171.css",
+      "bytes": 2051481,
+      "sha256": "82bbe6ab0171eed394546fc2d551a209d4711c9846ec5cab81ef06b0de1f42d2"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -4830,11 +5062,20 @@
     "registeredEOS": true,
     "javascriptSyntax": true,
     "relativeURLs": true,
-    "browserTested": true,
-    "humanListening": false,
-    "browserWorkflow": "https://github.com/miguelcoxcaballero/putarenfe/actions/runs/38066281517"
+    "browserTested": false,
+    "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-023a4bc5ab91.js",
+      "bytes": 11626433,
+      "sha256": "023a4bc5ab911750a014aaee32977bf875642fc1cd7188f64f302fdbb8271567"
+    },
+    {
+      "url": "assets/game-style-0-bdb0e445ac3e.css",
+      "bytes": 2045451,
+      "sha256": "bdb0e445ac3e837e5730ec16f459a485a3da7419f81dafe82fcb27e0fa6059cc"
+    },
     {
       "url": "assets/game-script-4-12f55a026bd9.js",
       "bytes": 11625892,

@@ -932,3 +932,44 @@ dialog#modal:has(.trenespop-modal){background:#fff;border-color:#d1dbe0;border-r
   .trenespop-modal .content{padding:17px 18px 21px}.tp-detail h1{font-size:23px;margin-top:17px}.tp-seller{padding:14px 0 11px;gap:8px}.tp-seller-mark{width:42px;height:42px}.tp-seller-mark .brand-logo{width:38px;height:22px}.tp-seller strong{font-size:11px}.tp-seller span{font-size:9px}.tp-seller .tp-heart{top:19px}.tp-description{font-size:12px;line-height:1.6}.tp-detail-tags{gap:5px;margin-bottom:14px}.tp-detail-tags>span{font-size:10px;padding:5px 8px}.trenespop-modal .figures{gap:12px 17px;justify-content:flex-start}.trenespop-modal .figures div{min-width:99px}.trenespop-modal .figures dd{font-size:22px}.trenespop-modal .actions{display:flex;flex-wrap:wrap;gap:8px}.tp-primary,.tp-secondary{padding-left:17px;padding-right:17px;font-size:12px}.tp-detail-note{font-size:10px}
 }
 @media(max-width:350px){.trenespop{padding-left:12px;padding-right:12px}.tp-categories{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}.tp-results h2{font-size:18px}.tp-price{font-size:18px}.tp-card-body{padding:8px 0}.tp-card-bottom{gap:2px}.tp-card-bottom .brand-logo{width:52px;height:19px}}
+
+/* Visual workshop: the original and refurbished interior share one viewpoint. */
+.refit-intro{padding:18px;background:linear-gradient(125deg,#f7f0df,#eee7da);border:1px solid #ded2be;border-radius:12px;margin:12px 0 18px}
+.refit-intro h2{margin:5px 0 10px;font-size:27px}.refit-intro p{line-height:1.5}.refit-overview{display:flex;flex-wrap:wrap;gap:12px 22px;font-size:12px}.refit-overview b{font-size:19px;color:#743844}
+.refit-views{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}.refit-views button{border:1px solid #d6c8b9;border-radius:8px;padding:11px 15px;background:#faf7f0;color:#422f2d;cursor:pointer}.refit-views .selected{background:#713b47;color:white;border-color:#713b47}
+.refit-photo{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;background:#dcd5c8;border:0}
+.refit-lots,.refit-catalogue{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.refit-lots article,.refit-catalogue article{min-width:0;overflow:hidden;border:1px solid #d9cebe;border-radius:11px;background:#fffdf7}
+.refit-lots article>div,.refit-catalogue article>div:not(.refit-photo-pair){padding:13px}.refit-lots h3,.refit-catalogue h3{margin:5px 0;font-size:17px}.refit-lots p,.refit-catalogue p{font-size:12px;line-height:1.5}
+.refit-photo-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}.refit-photo-pair figure{margin:0;min-width:0}.refit-photo-pair figcaption{text-align:center;padding:7px;font-size:10px;font-weight:700;color:#765c48;text-transform:uppercase;letter-spacing:.8px}
+.refit-modal{max-width:800px}.refit-modal h1{margin-bottom:14px}.refit-modal .small{line-height:1.5}
+.refit-scene{position:relative;overflow:hidden;border-radius:10px;aspect-ratio:3/2;background:#dbd3c7;isolation:isolate}
+.refit-scene>.refit-before,.refit-after .refit-photo{height:100%;width:100%;aspect-ratio:auto}
+.refit-after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--refit-split,50%))}
+.refit-stripes{position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 24px,rgba(247,197,62,.16) 24px 31px,transparent 31px 55px);animation:refit-stripes 3s linear infinite;pointer-events:none}
+@keyframes refit-stripes{from{background-position:0 0}to{background-position:60px 0}}
+.refit-divider{position:absolute;inset:0 auto 0 var(--refit-split,50%);width:3px;background:#edc052;transform:translateX(-50%);pointer-events:none}
+.refit-divider span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:#edc052;color:#382d28;display:grid;place-items:center;font-size:22px;box-shadow:0 2px 8px #0005}
+.refit-badge{position:absolute;bottom:10px;background:#262324d9;color:#fff;padding:6px 10px;font-size:10px;font-weight:700;letter-spacing:1px;border-radius:4px;pointer-events:none}.refit-badge.current{left:10px}.refit-badge.proposed{right:10px;background:#734449e6}
+.refit-slider{display:flex;flex-direction:column;gap:5px;font-size:12px;margin:12px 0}.refit-slider input{width:100%;height:35px;accent-color:#b38836;padding:0}
+.refit-benefits{display:flex;gap:6px;flex-wrap:wrap;margin:15px 0}.refit-benefits span{padding:7px 9px;border-radius:20px;font-size:11px;background:#eee7d7;color:#5c423e}
+.refit-quote{margin:15px 0!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}.refit-quote dd{font-size:24px!important;white-space:normal!important}.refit-quote em{font-style:normal;font-size:10px;color:#78695c}.refit-quote-note{font-size:12px;line-height:1.5}
+.refit-references{margin:16px 0;padding:12px;background:#f3eee5;border-radius:8px;font-size:12px;line-height:1.5}.refit-references summary{cursor:pointer;font-weight:700}.refit-references a{overflow-wrap:anywhere}.refit-references li{margin:7px 0}
+.refit-jobs{margin-top:25px}.refit-jobs article{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #ddd3c3}.refit-jobs article>div:first-child{width:110px;flex-shrink:0}.refit-jobs article>div:last-child{flex:1;min-width:0}.refit-jobs .refit-photo{border-radius:7px}.refit-jobs h4{margin:4px 0}.refit-jobs p{font-size:12px}.refit-empty{padding:20px;background:#f5eee2;border-radius:9px;font-size:13px}
+.refit-fleet-link{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:16px;background:#eee7da;border-radius:10px;margin-top:15px}.refit-fleet-link p{font-size:12px}
+@media(max-width:600px){.refit-lots,.refit-catalogue{grid-template-columns:1fr}.refit-intro{padding:14px}.refit-intro h2{font-size:23px}.refit-quote{grid-template-columns:1fr!important}.refit-quote>div{padding:7px 0!important}.refit-jobs article>div:first-child{width:85px}.refit-modal .actions{flex-wrap:wrap}.refit-overview{gap:10px}}
+@media(prefers-reduced-motion:reduce){.refit-stripes{animation:none}}
+
+.refit-catalogue article>header,.refit-catalogue article>p{padding:0 13px}.refit-catalogue article>header{padding-top:13px}.refit-catalogue article>.btn{margin:0 13px 13px}
+
+/* Explicit foregrounds keep the pale workshop cards legible in the dark game. */
+.refit-intro,.refit-lots article,.refit-catalogue article,.refit-empty,.refit-fleet-link,.refit-references{color:#392c2b}
+.refit-intro h2,.refit-lots h3,.refit-catalogue h3{color:#563440}
+.refit-intro .kicker,.refit-lots .kicker,.refit-catalogue .kicker{color:#83585b}
+.refit-intro p,.refit-lots p,.refit-catalogue p,.refit-fleet-link p,.refit-references p{color:#655551}
+.refit-references a{color:#874251}.refit-references summary{color:#58343e}
+.refit-quote em{color:#c8bba9}.refit-slider{color:#e9dfcf}
+
+#refitQty{color:#352a2c!important;background:#fff8ed!important;width:110px;min-height:44px;padding:10px 12px;font-size:17px;font-weight:700}
+.refit-modal>.kicker{color:#dda1b5}
+@media(max-width:600px){.refit-intro{padding:12px}.refit-intro h2{font-size:20px;line-height:1.25;margin:5px 0 8px}.refit-intro p{font-size:12px;line-height:1.45;margin:8px 0 12px}.refit-overview{font-size:10px;gap:8px 12px}.refit-overview b{font-size:16px}}

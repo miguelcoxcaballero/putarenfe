@@ -155,8 +155,8 @@
     },
     {
       "file": "engine.js",
-      "bytes": 48570,
-      "sha256": "46441c2d81158725fadb67807363ceabb94e91da16f4a23421a783f8f9e6e0f8"
+      "bytes": 49450,
+      "sha256": "494fc5cb98e9a16148a7ba3210d69091c91da1a79c9286d8a29a96fe6daa9c5a"
     },
     {
       "file": "operations.js",
@@ -210,8 +210,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 28918,
-      "sha256": "1833e0eb005238f4792443e709f5db10f8dcbe0dd177e3e648628426c5520885"
+      "bytes": 29018,
+      "sha256": "f804448b32c9b6d9e9665c0684fc379a297bbcbfcfd99428b62fe4e2099cc201"
     },
     {
       "file": "assets/portraits.js",
@@ -236,7 +236,7 @@
     {
       "file": "main-menu.js",
       "bytes": 5125,
-      "sha256": "76a335de64d466532a25cc8930ce1e5d44b927fc9921ef605e3b035409be1358"
+      "sha256": "00236c64970971011ba676d6355efdbeeddf60ea593c9f0aadcb525cd658ae43"
     },
     {
       "file": "induction-task-ui.js",
@@ -259,9 +259,14 @@
       "sha256": "6a48ac9c6ea3782560c9559a7a3748079a9ffa6b43af825ba3fe3829493e5e8e"
     },
     {
+      "file": "train-refit.js",
+      "bytes": 14809,
+      "sha256": "75f80a661f1cdad8c8239e2508f0f0159120f971e622a783ec4c1292b261f1ca"
+    },
+    {
       "file": "app.js",
-      "bytes": 172558,
-      "sha256": "42624f6ff082ba55426542939bc7cde09785d3da2f21fae497d909af0e4fe0bd"
+      "bytes": 173566,
+      "sha256": "1d5ad68c940b97ec7947c72de8c8efabf9eec9d99188fb33036d76fa45986c41"
     },
     {
       "file": "style-v3.css",
@@ -282,6 +287,11 @@
       "file": "marketplace.css",
       "bytes": 14930,
       "sha256": "a9d09a6e1d0191b0bd8e898662f20d34d88df2f123d05018ec05141ab07c8c8d"
+    },
+    {
+      "file": "train-refit.css",
+      "bytes": 6029,
+      "sha256": "599dd33427edb4fc87264ebbc00b1ce28ccf34910cc777bccda9a2ad451c84e4"
     },
     {
       "file": "assets/fonts/fraunces.woff2",
@@ -315,8 +325,8 @@
     },
     {
       "file": "index.html",
-      "bytes": 2915,
-      "sha256": "7ebaa67dc44746166d0f1d63fed8c494b8b42474b1d8563a3ecbdd5a2c61cd1d"
+      "bytes": 2962,
+      "sha256": "935eab62a088db71ad1d3f5d55ad39536342901078b5cec682aa35290144d9e1"
     },
     {
       "file": "assets/muestras-ui.js",
