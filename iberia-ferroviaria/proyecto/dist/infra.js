@@ -135,7 +135,7 @@ export function closedTramos(s) {
 /** Perfil de circulación de un modelo de tren: ancho, tracción, tensiones que admite y velocidad con gasóleo. */
 export function profileOf(m) {
   const electric = m.power === 'electric';
-  return {fixed: m.gauge === 'uic', electric, speed: m.speed, volts: m.voltages || VOLTAGES, diesel: electric ? 0 : m.dieselSpeed || DIESEL_SPEED};
+  return {fixed: m.gauge === 'uic' || m.gauge === 'ib', fixedMode: m.gauge === 'ib' ? 'ib' : 'std', electric, speed: m.speed, volts: m.voltages || VOLTAGES, diesel: electric ? 0 : m.dieselSpeed || DIESEL_SPEED};
 }
 /** Lo mejor que existe de cada producto (para saber qué permite la vía): el AVE bitensión, el Alvia y el híbrido. */
 export const PROFILES = {ave: {fixed: true, electric: true, speed: 300, volts: VOLTAGES, diesel: 0}, alvia: {fixed: false, electric: true, speed: 250, volts: VOLTAGES, diesel: 0},
@@ -177,7 +177,7 @@ function traverse(s, g, e, mode, prof, relaxed) {
 /** Recorrido por los nodos de paso con el perfil dado. relaxed: admite faltas (para explicar qué falta); short: el más corto en km, no el más rápido. */
 function search(s, way, prof, relaxed, short = false) {
   const g = graph(s), W = way.length, PEN = 60;
-  const modes = prof.fixed ? ['std'] : MODES;
+  const modes = prof.fixed ? [prof.fixedMode || 'std'] : MODES;
   const key = (k, n, m) => k + '|' + n + '|' + m;
   const dist = new Map(), prev = new Map(), heap = [];
   const push = (c, k, n, m) => { heap.push([c, k, n, m]); let i = heap.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (heap[p][0] <= heap[i][0]) break; [heap[p], heap[i]] = [heap[i], heap[p]]; i = p; } };
@@ -221,7 +221,7 @@ function search(s, way, prof, relaxed, short = false) {
 
 /** ¿Puede circular este perfil por los nodos de paso? Devuelve recorrido, tiempo y, si no, qué falta. */
 export function plan(s, way, prof) {
-  const g = graph(s), ck = way.join(',') + '#' + (prof.fixed ? 'f' : 'v') + (prof.electric ? 'e' : 'h') + prof.speed + '|' + (prof.volts || VOLTAGES).join('/') + '|' + (prof.diesel || 0);
+  const g = graph(s), ck = way.join(',') + '#' + (prof.fixed ? 'f' + (prof.fixedMode || 'std') : 'v') + (prof.electric ? 'e' : 'h') + prof.speed + '|' + (prof.volts || VOLTAGES).join('/') + '|' + (prof.diesel || 0);
   if (g.cache.has(ck)) return g.cache.get(ck);
   let out = search(s, way, prof, false);
   // Un rodeo enorme para esquivar un tramo (catenaria, ancho) no es un servicio: cuenta como bloqueado. Si el más

@@ -49,7 +49,7 @@ export function requiredUnits(s,r,m,frequency){
  const path=I.plan(s,r.via,I.profileOf(m));
  if(r.real){const slow=bound(path.ok&&r.minutes?path.minutes/r.minutes:1,.8,1.35);return Math.max(1,Math.ceil(r.peak*Math.min(1,frequency/r.baseFrequency)*1.12*slow));}
  const minutes=path.ok?path.minutes:r.km/1.5,interval=15/Math.max(1,frequency-1),cycle=(minutes/60+.6)*2;
- return Math.max(2,Math.ceil(cycle/Math.max(.1,interval)));
+ return Math.max(m.family==='Regional'?1:2,Math.ceil(cycle/Math.max(.1,interval)));
 }
 export function supplyOptions(s,r,frequency,needsConfiguration=true){
  const lots=s.fleet.filter(f=>f.qty>0).map(f=>{const model=MODEL[f.model],compatible=I.plan(s,r.via,I.profileOf(model)).ok,available=f.qty-s.routes.filter(x=>x.active&&x.fleet===f.id&&x.id!==r.id).reduce((n,x)=>n+x.units,0),required=requiredUnits(s,r,model,frequency);return {id:f.id,model:f.model,name:model.name,available,required,compatible,condition:f.condition,ready:compatible&&f.condition>=30&&available>=required,reassignable:compatible&&f.condition>=30&&f.qty>=required};});
@@ -167,7 +167,7 @@ export function tick(s,observations=null){
  for(const x of t.training.filter(x=>x.due<=s.month)){t.drivers+=x.count;news.push(`${x.count} maquinistas terminan la formación: ya pueden cubrir salidas.`);}t.training=t.training.filter(x=>x.due>s.month);
  if(t.research&&t.research.due<=s.month){t.tech.push(t.research.id);news.push(TECHS[t.research.id].name+': esta vez el PowerPoint funciona.');t.research=null;}
  const active=s.routes.filter(r=>r.active),on=k=>t.policies.includes(k),ratio=staffing(s);
- const targets={government:s.satisfaction*.8+(s.last.net>0?15:-20),treasury:s.last.net>0?75:s.cash<100?15:35,staff:60+(s.maintenance-1)*35-(on('outsource')?24:0)-(ratio<1?25:0),riders:s.satisfaction+(on('refund')?8:0)-(on('dynamic')?8:0),territory:Math.min(90,45+active.length*.8)};
+ const targets={government:s.satisfaction*.8+(s.last.net>0?15:-20),treasury:s.last.net>0?75:s.cash<100?15:35,staff:60+(s.maintenance-1)*35-(on('outsource')?24:0)-(ratio<1?25:0),riders:s.satisfaction+(on('refund')?8:0)-(on('dynamic')?8:0),territory:Math.min(90,45+active.length*.8+(s.tenfe?active.filter(r=>r.via.some(n=>['sor','ter','bad','san','lug','jae'].includes(n))).length*3:0))};
  for(const k of Object.keys(GROUPS))t.groups[k]=bound(t.groups[k]*.96+targets[k]*.04);
  if(t.groups.territory<25&&s.month%6===0)for(const p of s.projects)if(!p.done)p.due++;
  t.dismissal=t.groups.government<15?t.dismissal+1:0;if(t.mode==='campaign'&&t.dismissal>=6){s.ended=true;s.ending='dismissed';}

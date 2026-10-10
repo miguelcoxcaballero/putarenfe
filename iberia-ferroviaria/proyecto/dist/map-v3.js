@@ -9,7 +9,7 @@ import * as E from './engine.js';
 import * as I from './infra.js';
 import {sunAltitude, constructionStatus, STAGES} from './operations.js';
 
-export const FAMILY_COLOR = {AVE: '#a3123a', Alvia: '#2f6f9f'};
+export const FAMILY_COLOR = {AVE: '#a3123a', Alvia: '#2f6f9f', Regional:'#4c9476'};
 export const GAUGE_COLOR = {std: '#a3123a', ib: '#d08a1c', mixto: '#7a4fb0'};
 export const ELEC_COLOR = {'25kv': '#2f6fb0', '3kv': '#3f9a5c', no: '#9a7f5c'};
 /** Velocidad máxima del tramo: mismos colores que el mapa del rescate. */
