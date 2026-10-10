@@ -36,7 +36,7 @@ export function quote(s,id,desired){
  const gauge=before.g!==after.g,electric=before.e!==after.e,tracks=after.lanes-before.lanes;
  const cost=Math.round((gauge?8+d.km*.45:0)+(electric?6+d.km*.42:0)+(tracks?tracks*(12+d.km*.8):0));
  const months=s.tenfe?.game?Math.max(1,Math.ceil((2+d.km/80+tracks)*(s.tenfe.game.tech.includes('bateadora')?.8:1))):Math.ceil(8+d.km/14+tracks*8);
- return {before,after,cost,months,closes:gauge&&after.g!=='mixto',label:'Configuración de vía',affected:[]};
+ return {before,after,cost,months,closes:(gauge&&after.g!=='mixto')||electric,label:'Configuración de vía',affected:[]};
 }
 export function start(s,E,id,desired){
  E.ensurePlaying(s);const q=quote(s,id,desired);

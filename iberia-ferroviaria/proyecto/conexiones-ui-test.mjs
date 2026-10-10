@@ -69,7 +69,7 @@ try{
   await page.locator('[data-action="market-family"][data-id="Regional"]').click();await page.locator('[data-action="market-listing"][data-id="new-r599"]').first().click();
   await page.locator('#buyQty').fill('1');await page.locator('[data-action="confirm-buy"]').click();assert(await page.evaluate(()=>window.railwayGame.snapshot().orders.some(x=>x.model==='r599')));
   await closeDialog(page);
-  await page.evaluate(()=>{const api=window.railwayGame;api.setLayer('gauge');const s=api.state(),id=Object.keys(s.infra.t).find(id=>s.infra.t[id].b&&s.infra.t[id].g==='ib');api.pick({type:'tramo',id});});
+  await page.evaluate(()=>{const api=window.railwayGame;api.navigate('network');api.setLayer('gauge');const s=api.state(),id=Object.keys(s.infra.t).find(id=>s.infra.t[id].b&&s.infra.t[id].g==='ib');api.pick({type:'tramo',id});});
   await page.locator('[data-action="track-designer"]').click();assert.equal(await page.locator('.track-options button').count(),9);
   const before=await page.evaluate(()=>JSON.stringify(window.railwayGame.snapshot()));
   for(const lanes of [1,2,3])for(const g of ['ib','std','mixto'])for(const e of ['no','3kv','25kv']){
