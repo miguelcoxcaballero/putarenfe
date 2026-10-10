@@ -61,7 +61,7 @@ try{
  await fit(page,'New game');await screenshot(page,'menu-nueva-partida');
  await page.locator('[data-action=np-begin]').click();await page.waitForSelector('[data-action=welcome-close]');await page.locator('[data-action=welcome-close]').click();
  assert.equal(await page.locator('#modal').evaluate(e=>e.open),false);
- let state=await page.evaluate(()=>window.railwayGame.snapshot());assert.equal(state.seedCode,'MENU-REAL');assert.equal(state.tenfe.game.difficulty,'relajada');
+ let state=await page.evaluate(()=>window.railwayGame.snapshot());assert.equal(state.seedCode,'MENU-REAL');assert.equal(state.tenfe.difficulty,'relajada');
  assert(state.routes.length>19&&await page.locator('#map').isVisible(),'real map kept');
  save=await page.evaluate(k=>localStorage.getItem(k),KEY);assert(save);
  await page.reload();await home(page);assert(await page.locator('[data-action=continue]').isEnabled());
