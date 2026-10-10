@@ -1,33 +1,39 @@
-# Iberia Ferroviaria · Rescate de Tenfe
+# Iberia Ferroviaria · Al mando de Tenfe
 
-**Novedad 4.0 — Rescate de Tenfe**, el nuevo modo principal: diriges una empresa ferroviaria pública en crisis durante ocho años y dos legislaturas (2027–2034). Empiezas con 12 M€, cuatro trenes, dos cuadrillas y un corredor Norte que llega tarde; tienes que cumplir un programa ferroviario concreto, ganar dos elecciones y dejar una red que se pague sola. Semanas con el tiempo parado y tres órdenes por semana, obras con fases y pagos, pactos con los personajes, hitos de viajeros y territorios a lo *Cities: Skylines*, un árbol tecnológico que se paga con popularidad y dinero, megaproyectos por etapas a lo *SimCity*, y unas cloacas con comisiones, sobornos, extorsiones y escándalos. Un tutorial en el que habla un personaje cada vez enseña a jugar. Todo el diseño está en [docs/RESCATE.md](./docs/RESCATE.md).
+**Versión 5.0: un único juego.** La herencia y el rescate forman una campaña continua de 2022 a 2050. Empiezas con la red heredada; en 2027 se activa el rescate sobre **tu misma red, flota, caja, calendario y guardado**. Ya no se abre otro motor ni otra interfaz.
 
-Las imágenes del rescate (árbol tecnológico, megaproyectos, sucesos y los trenes propios de **BCBB** y **Dörfler**) tienen nombre fijo en `assets/rescate/` y aparecen en cuanto se suben; la lista y el encargo están en [docs/PROMPT-FOTOS.md](./docs/PROMPT-FOTOS.md).
+[Jugar](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/) · [Auditorio](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html)
 
-## La campaña clásica y Trenespop
+Programa servicios, conecta ciudades y ajusta tarifas. Cumple encargos, investiga, firma hasta dos pactos y construye megaproyectos por fases. Los hitos se comprueban con tus viajeros reales al cerrar el mes. Las elecciones al cerrar diciembre de 2030 y 2034 dependen de la media de apoyo de seis meses: viajeros, territorios, plantilla y economía.
 
-Gestiona una compañía ferroviaria española entre inauguraciones, averías, presupuestos y personajes con muy poca paciencia. La campaña recorre **cinco capítulos, de 2022 a 2050**: dirige Tenfe, conecta ciudades, cumple contratos, renueva infraestructura y compite con OuiOui y YaIré. También puedes empezar una partida libre con tus propias prioridades.
+La interfaz reúne **Red, Flota, Dinero, Despacho, Progreso y Prensa** alrededor del mapa. La misión propone una acción concreta; el informe mensual muestra resultado, viajeros, caja, puntualidad y noticias. Puedes jugar cada jornada o cerrar el mes para avanzar. Las capas del mapa se abren desde «Capas».
 
-La entrada incluye un menú ilustrado y una guía de **nueve tareas reales**, con decisiones, costes y consecuencias. Los personajes intervienen de uno en uno y todos participan varias veces. Sus **315 intervenciones de situaciones** cubren nueve personajes, siete emociones y cinco situaciones por emoción; esas combinaciones de diálogo no representan 315 mecánicas diferentes.
+**Trenes Pop sigue siendo Trenespop.** Conserva su identidad, fotografías, filtros, favoritos, material usado, pedidos y pagos del 30 % / 70 %. AVE, Alvia y regionales se compran allí. Los regionales incluyen Civia, S599, S592, BCBB y Dörfler; usan la red real y respetan ancho, tensión y tracción.
 
-**Trenespop** es la tienda de trenes nuevos y usados. Filtra por fabricante, condición y plazo de entrega; guarda favoritos y revisa tus pedidos. Los usados conservan su edad y estado. Los envíos cobran una señal del 30 % al reservar y el 70 % restante al llegar. El catálogo utiliza **25 fotos generadas por IA en el mismo taller** y seis logos de fabricantes renovados: Tardo, KAFKA, Schlimmens, Dörfler, BCBB y Malstom. AVArato tiene logo y rotulación propios. Los [créditos](./docs/train-photo-credits.md) detallan las series y variantes representadas.
+El rescate incorpora pactos comprobables, elecciones, hitos, proyectos de tres fases y adjudicaciones irregulares con inspección y restitución. Los importes se expresan en la economía de la red nacional. Las voces clásicas conservan sus **412 textos y grabaciones completos**; las nuevas pantallas de gestión tienen texto y no regeneran audio.
 
-Esta construcción reúne **412 grabaciones completas, sin cuerpos pendientes**, y **68 minutos y 18 segundos de audio**. Juego y auditorio utilizan las mismas tomas enteras, incluidos los 50 audios de la guía y **47 diálogos de Paco** generados con la muestra real de José Luis Torrente, interpretado por Santiago Segura, obtenida de RTVE. La banda sonora mantiene las melodías e incorpora guitarra, cajón y palmas. La revisión técnica de voces conserva sus discrepancias de reconocimiento; no equivale a una aprobación humana de parecido, naturalidad o interpretación.
+En «Nueva partida» eliges semilla, primer turno guiado y presión electoral: **Con desafío** (una derrota termina el mandato) o **A tu ritmo** (una derrota reduce el apoyo y permite continuar). Las jornadas y el resto de la economía comparten las mismas reglas.
 
-- **Jugar:** [Iberia Ferroviaria](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/?v=v363-412).
-- **Escuchar sin el juego:** [Auditorio de voces](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html?v=v363-412).
-- **Fuente editable y pruebas:** [proyecto](./proyecto/) y [docs/README.md](./docs/README.md).
+## Partidas anteriores
 
-**Estado de esta entrega:** pruebas nativas completadas y publicación verificada por HTTPS: 496 rutas correctas, incluidos los 412 MP3, en el commit `90247a3a130ac13d65a3d3b41ba713815fcada24`. La [prueba actual](./docs/final412-qa-index.json) identifica los resultados y su alcance. [release.json](./release.json) conserva las huellas de las páginas, los assets y las 412 grabaciones publicadas.
+La campaña clásica continúa en la interfaz unificada. «Recuperar Rescate anterior» muestra la conversión antes de sustituir la partida activa: caja y deuda se escalan ×30, material y corredores pasan a vías reales, y se conservan los votos y las tecnologías equivalentes. Los horarios se replantean con una salida diaria; obras, pactos y expedientes antiguos quedan documentados en la copia original. Esa copia se conserva íntegra y se puede exportar; la clave antigua del navegador no se borra.
 
-El progreso se guarda en el `localStorage` de tu navegador y origen. Otro dispositivo, navegador o dirección local tiene su propio guardado.
+El progreso se guarda en el navegador y origen actuales. Exporta desde Guardar para moverlo a otro dispositivo.
 
-Para probar la carpeta localmente, ejecuta desde la raíz de `putarenfe`:
+## Desarrollo y comprobación
+
+La fuente editable vive en `proyecto/dist/`. `tenfe.js` añade la progresión al motor común; `partidas-anteriores.js` convierte guardados. Los archivos del rescate 4.0 se conservan como historia y pruebas, pero quedan fuera del empaquetado publicado.
+
+Desde `proyecto/`:
 
 ```sh
-python3 -m http.server 8080 --bind 127.0.0.1
+npm test
+npm run web:build
+npm install --no-save --package-lock=false playwright@1.56.1
+npx playwright install --with-deps chromium
+npm run tenfe-ui
 ```
 
-Abre <http://localhost:8080/iberia-ferroviaria/> o <http://localhost:8080/iberia-ferroviaria/dialogos.html>. Desde `proyecto`, `npm run web:build` reconstruye la web con sus inputs congelados aceptados; no genera voces. El procedimiento está en [docs/PUBLICACION.md](./docs/PUBLICACION.md). Los HTML autónomos de pruebas, que incluyen todo el audio, se mantienen fuera de Git por su tamaño.
+GitHub Actions ejecuta las regresiones del motor, las reglas nuevas y el recorrido de Chromium sobre la web compilada, con pantallas de 1440, 390 y 320 píxeles. Guarda capturas y un informe en el artefacto `tenfe-qa`. Solo conserva la publicación reconstruida cuando pasan las comprobaciones. `release.json` recoge los archivos publicados y sus SHA-256.
 
-Iberia Ferroviaria ocupa esta carpeta propia; la aplicación de Renfe continúa en la raíz del repositorio. Las pruebas de entregas anteriores se conservan como historial y acreditan únicamente los archivos y el alcance que identifican.
+La aplicación de Renfe sigue en la raíz del repositorio.

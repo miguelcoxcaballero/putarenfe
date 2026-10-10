@@ -24,7 +24,7 @@ const fixture = name => JSON.parse(zlib.gunzipSync(fs.readFileSync(new URL('./fi
 
 // 1. Cada modelo dice qué tensiones admite.
 {
-  for (const m of MODELS) assert(Array.isArray(m.voltages) && m.voltages.length && m.voltages.every(v => ['3kv', '25kv'].includes(v)), 'tensiones de ' + m.id);
+  for (const m of MODELS) assert(Array.isArray(m.voltages) && (m.power === 'diesel' ? m.voltages.length === 0 : m.voltages.length > 0) && m.voltages.every(v => ['3kv', '25kv'].includes(v)), 'tensiones de ' + m.id);
   for (const id of ['s112', 's103', 'av2030']) assert.deepEqual(MODEL[id].voltages, ['25kv'], id + ': AVE de ancho estándar, solo 25 kV');
   for (const id of ['s100', 's106f', 's120', 's130', 's730', 's106v']) assert.deepEqual([...MODEL[id].voltages].sort(), ['25kv', '3kv'], id + ' es bitensión');
   assert.equal(MODEL.s730.dieselSpeed, 180, 'el S730 va a 180 km/h con gasóleo');

@@ -18,7 +18,7 @@ const months = (s, n) => { for (let k = 0; k < n; k++) { decideAll(s); assert(E.
 
 // 1. Solo AVE y Alvia: material, horario oficial y corredores.
 {
-  assert(MODELS.every(m => ['AVE', 'Alvia'].includes(m.family)), 'solo hay material AVE y Alvia');
+  assert(MODELS.every(m => ['AVE', 'Alvia', 'Regional'].includes(m.family)), 'material AVE, Alvia y regional en la misma red');
   assert(MODELS.filter(m => m.family === 'AVE').every(m => m.gauge === 'uic' && m.power === 'electric'), 'los AVE son de ancho estándar fijo y eléctricos');
   assert(MODELS.filter(m => m.family === 'Alvia').every(m => m.gauge === 'variable'), 'los Alvia son de ancho variable');
   assert(MODELS.some(m => m.power === 'hybrid'), 'hay un Alvia híbrido para las vías sin catenaria');
@@ -26,7 +26,7 @@ const months = (s, n) => { for (let k = 0; k < n; k++) { decideAll(s); assert(E.
   assert.deepEqual([...codes].sort(), ['AVE', 'Alvia'], 'el horario oficial solo trae AVE y Alvia');
   for (const k of ['L', 'S', 'D']) assert(S.dayTrips(k).length > 250, 'circulaciones del día ' + k);
   assert(ROUTES.every(r => ['av', 'alvia', 'new'].includes(r.kind)), 'corredores AVE, Alvia o por abrir');
-  ok.push(`Solo AVE y Alvia: ${MODELS.length} modelos y ${S.dayTrips('L').length} circulaciones oficiales en laborable.`);
+  ok.push(`AVE, Alvia y regionales: ${MODELS.length} modelos y ${S.dayTrips('L').length} circulaciones oficiales en laborable.`);
 }
 // 2. Estado inicial coherente.
 {

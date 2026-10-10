@@ -5,3 +5,4 @@ codex-downloads/
 *.pyc
 **/node_modules/
 iberia-ferroviaria/**/*.tmp
+iberia-ferroviaria/outputs/

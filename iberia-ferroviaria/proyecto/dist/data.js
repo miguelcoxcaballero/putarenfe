@@ -9,6 +9,13 @@ export const CITY = Object.fromEntries([...NODE_ONLY,...CITIES.map(c=>[c.id,c])]
 // Corredores de la campaña: [id, extremos, nodos de paso, producto en 2026 ('av' AVE, 'alvia' Alvia, 'new' sin tren)].
 // El trazado y lo que puede circular se calculan sobre la red de assets/infra.js; la demanda y la tarifa, en network.js.
 export const ROUTES = [
+ ['regional-norte','mad leo','mad avi med vll vdb pal leo','new'],
+ ['regional-levante','mad vlc','mad alc alb enc xat vlc','new'],
+ ['regional-sur','mad sev','mad alc lin cor sev','new'],
+ ['regional-ebro','bil zar','bil mir log cst zar','new'],
+ ['regional-atlantico','aco vig','aco scq pon vig','new'],
+ ['regional-asturias','leo gij','leo pol ovi gij','new'],
+ ['regional-cantabria','pal san','pal san','new'],
  ['madrid-barcelona','mad bcn','mad gua cal zar lle tar bcn','av'],
  ['madrid-figueres','mad fig','mad gua cal zar lle tar bcn gir fig','av'],
  ['madrid-huesca','mad huc','mad gua cal zar tdn huc','av'],
@@ -57,6 +64,11 @@ export const ROUTES = [
 // voltages: tensiones de catenaria que admite (investigacion/modo-unico/datos/trains.json y fichas reales: el S100 y el
 // Avril son bitensión; S103, S112 y AV 2030, solo 25 kV). dieselSpeed: velocidad máxima con gasóleo del híbrido.
 export const MODELS = [
+ {id:'r465',name:'Civia Regional 465',family:'Regional',maker:'KAFKA',gauge:'ib',power:'electric',speed:120,voltages:['3kv'],seats:290,price:3,lead:4,year:2022,energy:.3,photo:'465',desc:'Regional de ancho ibérico y 3 kV. Muchas puertas, paradas cortas y billetes para todos.'},
+ {id:'r599',name:'S599 · Media Distancia',family:'Regional',maker:'KAFKA',gauge:'ib',power:'diesel',speed:160,dieselSpeed:160,voltages:[],seats:187,price:3.2,lead:5,year:2022,energy:.45,photo:'599',desc:'Diésel de ancho ibérico para llegar a Soria, Teruel y donde todavía falta catenaria.'},
+ {id:'r592',name:'S592 · Camello',family:'Regional',maker:'Malstom',gauge:'ib',power:'diesel',speed:120,dieselSpeed:120,voltages:[],seats:220,price:1.8,lead:3,year:2022,energy:.55,photo:'592',desc:'El veterano regional: barato, con muchas historias y alguna visita pendiente al taller.'},
+ {id:'rdorf',name:'Dörfler · LIRIO 4',family:'Regional',maker:'Dörfler',gauge:'ib',power:'electric',speed:160,voltages:['3kv','25kv'],seats:310,price:3.5,lead:6,year:2022,energy:.26,photo:'dorfler',desc:'Regional bitensión de ancho ibérico. El material del rescate entra en la misma red.'},
+ {id:'rbcbb',name:'BCBB · Fuxing Regional',family:'Regional',maker:'BCBB',gauge:'ib',power:'electric',speed:140,voltages:['3kv','25kv'],seats:330,price:2.1,lead:3,year:2022,energy:.37,photo:'bcbb',desc:'Regional bitensión con muchas plazas. Más barato de comprar, más exigente de mantener.'},
  {id:'s100',name:'S100 · AVE',family:'AVE',maker:'Malstom',gauge:'uic',power:'electric',speed:300,voltages:['3kv','25kv'],seats:329,price:16,lead:30,year:2099,energy:.78,desc:'El abuelo de la familia: llegó en 1992 y todavía se cree joven.'},
  {id:'s112',name:'S112 · AVE «Pato»',family:'AVE',maker:'Tardo',gauge:'uic',power:'electric',speed:330,voltages:['25kv'],seats:365,price:25,lead:30,year:2022,energy:.62,desc:'El morro de pato más famoso de la Meseta. Rápido, cómodo y fotogénico de perfil.'},
  {id:'s103',name:'S103 · AVE Velaro',family:'AVE',maker:'Schlimmens',gauge:'uic',power:'electric',speed:350,voltages:['25kv'],seats:404,price:33,lead:34,year:2022,energy:.66,desc:'El más rápido del catálogo. Solo sale de las vías de ancho estándar, como algunos ministros de su despacho.'},
@@ -88,6 +100,6 @@ export const PROJECTS = [
 // Población aproximada del área urbana (miles): demanda, peticiones y luces nocturnas.
 export const POP = {mad:6700,bcn:5600,vlc:1600,ali:760,elx:235,mur:700,car:215,lor:95,alm:200,gra:530,mal:1000,sev:1500,cor:320,cad:400,jer:213,hue:145,alg:260,ron:34,ant:41,jae:112,lin:57,cic:75,pue:47,cue:54,req:20,alb:173,xat:30,enc:2,cas:300,tar:300,gir:200,fig:47,zar:760,lle:140,huc:53,ter:36,sag:68,pam:370,log:150,bil:1000,vit:255,don:440,iru:62,san:300,bur:175,mir:35,pal:78,vll:420,seg:52,leo:200,ppf:64,ovi:220,gij:270,avl:76,fer:65,aco:420,scq:98,vig:480,pon:83,our:105,lug:98,zam:60,sal:150,avi:57,tal:83,pla:40,cac:96,mer:60,bad:150,tol:85,gua:87,cal:20,sor:40,alc:30,med:20};
 export const GAUGES = {uic:'Ancho estándar fijo',variable:'Ancho variable',std:'Estándar · 1.435 mm',ib:'Ibérico · 1.668 mm',mixto:'Mixto · tercer carril'};
-export const POWERS = {electric:'Eléctrico',hybrid:'Híbrido · sin catenaria'};
-export const VOLTAGE_TEXT = v => v.length > 1 ? 'Bitensión · 3 y 25 kV' : v[0] === '25kv' ? 'Solo 25 kV' : 'Solo 3 kV';
+export const POWERS = {electric:'Eléctrico',hybrid:'Híbrido · sin catenaria',diesel:'Diésel · sin catenaria'};
+export const VOLTAGE_TEXT = v => !v.length ? 'Diésel · sin catenaria' : v.length > 1 ? 'Bitensión · 3 y 25 kV' : v[0] === '25kv' ? 'Solo 25 kV' : 'Solo 3 kV';
 export const ELECS = {'25kv':'25 kV alterna','3kv':'3 kV continua',no:'Sin electrificar'};

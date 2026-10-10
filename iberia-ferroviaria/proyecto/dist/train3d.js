@@ -1,3 +1,4 @@
+import {MODEL} from './data.js';
 // Fotografías generadas a partir de las series reales, en un mismo taller.
 // Se conserva la API de las fichas del juego; no se crea ningún contexto WebGL.
 import {artKey, trainArt} from './train-art.js';
@@ -5,7 +6,7 @@ import {TRAIN_PHOTOS, TRAIN_PHOTO_ALIASES} from './assets/train-photos.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function photograph(value) {
-  const key = artKey(value), photoKey = TRAIN_PHOTO_ALIASES[key] || key;
+  const key = artKey(MODEL[value]?.photo || value), photoKey = TRAIN_PHOTO_ALIASES[key] || key;
   return {key, photo: TRAIN_PHOTOS[photoKey]};
 }
 
@@ -13,7 +14,7 @@ function photograph(value) {
 const MAKER_PHOTOS = {bcbb: ['assets/rescate/tren-bcbb.webp', 'BCBB · Fuxing Regional', '103'], dorfler: ['assets/rescate/tren-dorfler.webp', 'Dörfler · LIRIO 4', '120']};
 /** Una miniatura utiliza la misma fotografía que la ficha del material. */
 export function trainThumb(value) {
-  const maker = MAKER_PHOTOS[String(value ?? '').toLowerCase()];
+  const maker = MAKER_PHOTOS[String(MODEL[value]?.photo || value || '').toLowerCase()];
   if (maker) return `<img class="train-photo train-3d-thumb" src="${maker[0]}" alt="${esc(maker[1])} · fotografía" loading="lazy" decoding="async" width="1536" height="1024" data-photo-series="${String(value).toLowerCase()}" onerror="this.onerror=null;this.hidden=true;this.nextElementSibling.hidden=false">`
     + trainThumb(maker[2]).replace('<img ', '<img hidden ');
   const {key, photo} = photograph(value);

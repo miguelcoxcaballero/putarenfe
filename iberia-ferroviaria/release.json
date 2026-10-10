@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "4.1.0",
+  "version": "5.0.0",
   "status": "complete-catalogue",
   "availableWholeDialogues": 412,
   "expectedWholeDialogues": 412,
@@ -18,8 +18,8 @@
   "webPlayback": "whole unchanged MP3 downloaded on demand; one source at original rate and pitch",
   "game": {
     "url": "index.html",
-    "bytes": 38519,
-    "sha256": "62da56b91349f40907f540f003c59907c8e78d6a48a3e788e8eed386079cf059"
+    "bytes": 38614,
+    "sha256": "34d21a05b4692f1210547edef7f4f71b89e75e7a6006fc2855684213fdf0fbfa"
   },
   "listening": {
     "url": "dialogos.html",
@@ -641,14 +641,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-69a005f5837f.js",
-      "bytes": 11708026,
-      "sha256": "69a005f5837fda71f99662c0f2f1f46543a2410d5f0a5c52040dd4125a75f978"
+      "url": "assets/game-script-4-670682465042.js",
+      "bytes": 11503986,
+      "sha256": "670682465042cfeb0e4b1a7c19d08243535efddbd3a67e50d858eeef4524a9be"
     },
     {
-      "url": "assets/game-style-0-951e70e6137a.css",
-      "bytes": 2047298,
-      "sha256": "951e70e6137a70e585c213cc546caec06e8224668384083a7b29ebfc7186a60f"
+      "url": "assets/game-style-0-90aead16916b.css",
+      "bytes": 2041718,
+      "sha256": "90aead16916be4b4b3259a9c728873ed02b9d6453b10594f4bd5c1d19a9f42db"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -4793,6 +4793,16 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-69a005f5837f.js",
+      "bytes": 11708026,
+      "sha256": "69a005f5837fda71f99662c0f2f1f46543a2410d5f0a5c52040dd4125a75f978"
+    },
+    {
+      "url": "assets/game-style-0-951e70e6137a.css",
+      "bytes": 2047298,
+      "sha256": "951e70e6137a70e585c213cc546caec06e8224668384083a7b29ebfc7186a60f"
+    },
     {
       "url": "assets/game-script-4-879e8f62afd0.js",
       "bytes": 11587227,

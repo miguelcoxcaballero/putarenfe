@@ -21,12 +21,12 @@ const where = game => `${escapeHTML(game.title)} · ${game.date ? `<time>${escap
 
 /** Portada: un solo «Nueva partida» y, si hay algo guardado, «Continuar» con la partida más reciente. */
 export function menuHTML(saved = null, savedError = '', rescue = null) {
-  const [latest, other] = savedGames(saved, rescue);
+  const [latest] = savedGames(saved);
   const cast = Object.entries(CHARACTERS).map(([id, person]) => `<li title="${escapeHTML(person.name)} · ${escapeHTML(person.role)}"><img src="${faceURL(id, id === 'rival' ? 'proud' : 'happy')}" alt="${escapeHTML(person.name)}" width="52" height="66"><span>${escapeHTML(person.name.split(' ')[0])}</span></li>`).join('');
   return `<main class="main-menu" aria-labelledby="menu-title">
     <div class="main-menu-art" role="img" aria-label="Un tren de alta velocidad entra en una estación española al amanecer, entre viaductos y colinas."></div>
     <div class="main-menu-grain" aria-hidden="true"></div>
-    <header class="menu-masthead"><span style="display:inline-flex;align-items:center;flex:none;width:84px;height:28px;">${brandLogo('Tenfe',{variant:'white'})}</span><span>Gestión ferroviaria <i>·</i> España, 2022–2050</span><span class="menu-edition">AVE · ALVIA · POLÍTICA</span></header>
+    <header class="menu-masthead"><span style="display:inline-flex;align-items:center;flex:none;width:84px;height:28px;">${brandLogo('Tenfe',{variant:'white'})}</span><span>Gestión ferroviaria <i>·</i> España, 2022–2050</span><span class="menu-edition">AVE · REGIONALES · POLÍTICA</span></header>
     <div class="menu-body">
       <section class="menu-world">
         <div class="menu-eyebrow"><span aria-hidden="true"></span>Tu próximo gran marrón</div>
@@ -39,12 +39,12 @@ export function menuHTML(saved = null, savedError = '', rescue = null) {
         <div class="menu-panel-kicker">Estación de salida <span aria-hidden="true">01</span></div>
         <h2 id="menu-departures-title">¿Adónde vamos?</h2>
         ${savedError ? `<p class="menu-save-error" role="status">${escapeHTML(savedError)}</p>` : ''}
-        <button class="menu-destination menu-campaign menu-new" data-action="new-game" autofocus>${icon('train')}<span><strong>Nueva partida</strong><small>2022 · 2027 · Maqueta</small></span><b aria-hidden="true">→</b></button>
+        <button class="menu-destination menu-campaign menu-new" data-action="new-game" autofocus>${icon('train')}<span><strong>Nueva partida</strong><small>Una compañía, de la herencia al rescate</small></span><b aria-hidden="true">→</b></button>
         ${latest ? `<button class="menu-destination menu-continue" data-action="continue" data-game="${latest.game}">${icon('resume')}<span><strong>Continuar</strong><small>${where(latest)}</small></span><b aria-hidden="true">→</b></button>` : ''}
-        ${other ? `<button class="menu-other" data-action="continue-other" data-game="${other.game}">${icon('resume')}<span>También guardada: ${where(other)}</span><b aria-hidden="true">→</b></button>` : ''}
+        ${rescue ? `<button class="menu-other" data-action="legacy-preview">${icon('book')}<span>Recuperar Rescate anterior · semana ${rescue.week}</span><b aria-hidden="true">→</b></button>` : ''}
         <div class="menu-secondary"><button data-action="menu-guide">${icon('book')}<span>Guía del director</span></button><button data-action="menu-settings">${icon('settings')}<span>Sonido y ajustes</span></button></div>
         <button class="menu-observe" data-action="observe">${icon('eye')}<span>Solo mirar los trenes</span><b aria-hidden="true">→</b></button>
-        <p class="menu-save-note">Tu partida se guarda automáticamente en este navegador. · Versión 4.1.0</p>
+        <p class="menu-save-note">Tu partida se guarda automáticamente en este navegador. · Versión 5.0.0</p>
       </section>
     </div>
     <footer class="menu-council"><div class="menu-council-label"><strong>El consejo te espera.</strong><span>Y cada cual quiere algo distinto.</span></div><ul aria-label="Los nueve personajes de tu consejo de dirección">${cast}</ul><span class="menu-footer-note">Un billete al poder.<br>Sin derecho a devolución.</span></footer>

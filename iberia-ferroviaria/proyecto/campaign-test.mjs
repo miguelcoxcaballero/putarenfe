@@ -1,4 +1,6 @@
 import * as T from './dist/tycoon.js';
+import * as U from './dist/tenfe.js';
+const unified=process.argv.includes('--tenfe');
 // Campaña completa 2022–2050 jugada solo con acciones legales del motor: decisiones, servicios, compras,
 // reformas, peticiones, obras de ancho y catenaria, cambiadores y líneas nuevas. Comprueba que los cinco
 // capítulos se pueden superar con la red real y que la partida termina en 2050 sin quiebra.
@@ -10,7 +12,7 @@ import {MODEL, MODELS, PROJECTS, CITIES} from './dist/data.js';
 import {CHAPTERS} from './dist/story.js';
 
 const verbose = process.argv.includes('--verbose'), trace = process.argv.includes('--trace');
-const s = E.initialState(); s.started = true;
+const s = E.initialState(); if(unified)U.begin(s); s.started = true;
 const say = (...x) => { if (verbose) console.log(E.dateOf(s.month), '·', ...x); };
 const tryDo = (fn) => { try { fn(); return true; } catch { return false; } };
 const reserve = () => 60 + s.month * .25;
@@ -185,5 +187,6 @@ console.log(JSON.stringify(summary, null, 1));
 assert.equal(s.ended, true, 'la campaña llega al final');
 assert.equal(s.ending, '2050', 'termina en 2050, no en quiebra');
 assert.equal(s.claimed.length, 5, 'los cinco capítulos se pueden superar: ' + JSON.stringify(reached));
+if(unified){assert(s.tenfe.rescueWon,'el rescate se puede superar con las mismas acciones legales');assert(s.tenfe.elections.filter(v=>v.won).length>=2,'dos mandatos ganados jugando');console.log('✓ Tenfe: herencia, rescate superado y legado 2050 sin trucar caja, encuestas ni hitos.');}
 assert(E.validateSave(JSON.parse(JSON.stringify(s))), 'la partida final se puede guardar y cargar');
 console.log('✓ Campaña completa 2022–2050 con acciones legales: 5 capítulos, obras de ancho y catenaria, cambiadores y AVE en', summary.aveCities, 'ciudades.');

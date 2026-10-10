@@ -32,31 +32,29 @@ const savedClassic = {...classic(7), savedAt: 2000, seedCode: 'X'};
 assert.equal(E.validateSave(savedClassic).savedAt, 2000, 'savedAt viaja con la partida clásica');
 assert(R.validate({...R.newGame(7), savedAt: 1, seedCode: 'X'}), 'y con la del rescate');
 
-// Partidas guardadas: la más reciente primero; sin fecha, empate a favor del rescate.
+// Una compañía activa; el rescate anterior se ofrece solo para recuperar.
 const rescue = {week: 12, savedAt: 1000};
-assert.deepEqual(savedGames(savedClassic, rescue).map(g => g.game + ':' + g.title + ':' + g.where), ['classic:La herencia:enero de 2022', 'rescue:El rescate:semana 12']);
-assert.deepEqual(savedGames({...savedClassic, savedAt: 10}, rescue).map(g => g.game), ['rescue', 'classic']);
-assert.deepEqual(savedGames({...savedClassic, savedAt: undefined}, {week: 3}).map(g => g.game), ['rescue', 'classic'], 'guardados antiguos');
-assert.equal(savedGames(classic(1, {cash: 500, rivals: true}))[0].title, 'Maqueta');
+assert.deepEqual(savedGames(savedClassic, rescue).map(g => g.game + ':' + g.title + ':' + g.where), ['classic:Tenfe:enero de 2022', 'rescue:Rescate anterior:semana 12']);
+assert.deepEqual(savedGames({...savedClassic, savedAt: 10}, rescue).map(g => g.game), ['classic', 'rescue'], 'Continuar conserva la compañía activa, aunque el original sea más reciente');
+assert.equal(savedGames(classic(1, {cash: 500, rivals: true}))[0].title, 'Tenfe');
 assert.deepEqual(savedGames(), []);
-assert.equal(overwrittenBy('herencia', savedClassic, rescue), 'La herencia');
-assert.equal(overwrittenBy('maqueta', savedClassic, null), 'La herencia', 'la Maqueta comparte guardado con la campaña');
-assert.equal(overwrittenBy('rescate', savedClassic, null), null, 'el rescate no sustituye la clásica');
-assert.equal(overwrittenBy('rescate', null, rescue), 'El rescate');
+assert.equal(overwrittenBy('tenfe', savedClassic), 'Tenfe');
+assert.equal(overwrittenBy('tenfe', null, rescue), null, 'Nueva partida no elimina el rescate original');
 
-// HTML: tres arranques, reglas solo en la Maqueta, confirmación en línea y texto escapado.
-assert.deepEqual(STARTS.map(s => s.id), ['herencia', 'rescate', 'maqueta']);
+// Un solo arranque, dificultad y guía; confirmación en línea y texto escapado.
+assert.deepEqual(STARTS.map(s => s.id), ['tenfe']);
 const screen = newGameHTML({seed: '"><b>'});
-assert.equal(screen.match(/data-action="np-pick"/g).length, 3);
-assert(/class="np-rules" hidden/.test(screen) && !screen.includes('"><b>'), 'reglas ocultas y semilla escapada');
-assert(!/class="np-rules" hidden/.test(newGameHTML({pick: 'maqueta'})));
-assert(newGameHTML({confirm: 'Maqueta'}).includes('Hay una partida guardada de Maqueta. ¿Empezar otra?'));
-assert(newGameHTML({pick: 'maqueta', cash: 1500}).includes('data-action="np-cash" data-id="1500" aria-pressed="true">1.500 M€'));
+assert(!screen.includes('data-action="np-pick"'));
+assert(!screen.includes('"><b>'), 'semilla escapada');
+assert.equal(screen.match(/data-action="np-difficulty"/g).length, 2);
+assert(screen.includes('id="npGuide"'));
+assert(newGameHTML({confirm:'Tenfe'}).includes('Hay una partida de Tenfe guardada. ¿Empezar otra?'));
+assert(newGameHTML({difficulty:'relajada'}).includes('data-id="relajada" class="on" aria-pressed="true"'));
 const menu = menuHTML(savedClassic, '', rescue);
 assert.equal(menu.split('<h2 id="menu-departures-title">¿Adónde vamos?</h2>').length - 1, 1, 'ancla del publicador');
 assert.equal(menu.match(/data-action="new-game"[^>]*autofocus/g).length, 1, 'un único «Nueva partida» con el foco');
 assert(menu.includes('data-action="continue" data-game="classic"') && menu.includes('<time>enero de 2022</time>'));
-assert(menu.includes('data-action="continue-other" data-game="rescue"') && menu.includes('El rescate · semana 12'));
-assert(!/data-action="(begin|free-setup|rescue-new|rescue-continue)"/.test(menuHTML(savedClassic, '', rescue)));
+assert(menu.includes('data-action="legacy-preview"') && menu.includes('Rescate anterior · semana 12'));
+assert(!/data-action="(begin|free-setup|rescue-new|rescue-continue|continue-other)"/.test(menu));
 assert(!menuHTML().includes('data-action="continue'), 'sin guardado no hay Continuar');
-console.log('✓ Nueva partida: semilla repetible (72022 = campaña de siempre), tres arranques, reglas de la Maqueta, savedAt, Continuar por fecha y portada con un solo botón.');
+console.log('✓ Nueva partida única: semilla repetible, dificultad, guía, confirmación y recuperación del original.');

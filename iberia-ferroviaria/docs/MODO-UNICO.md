@@ -1,33 +1,30 @@
-# Iberia Ferroviaria · un solo juego
+# Tenfe 5.0 · una sola compañía
 
-La campaña, el modo libre y el Rescate de Tenfe se van fusionando en un único modo de juego. El diseño completo y el plan de fases están en [`investigacion/modo-unico/ESPECIFICACION.md`](../investigacion/modo-unico/ESPECIFICACION.md). Cada fase se publica en cuanto pasa las pruebas.
+La campaña de 2022 y el rescate de 2027 comparten `engine.js`, la red física, la flota, Trenespop, las cuentas y el guardado. La portada crea una sola campaña. No carga `rescate.js`, `rescate-ui.js` ni su mapa separado.
 
-## 4.1 · Una sola partida
+## Lo que se integra
 
-**Portada.** Solo dos botones: «Nueva partida» y, si hay algo guardado, «Continuar», que dice qué partida es y dónde va (por ejemplo «La herencia · marzo de 2023») y abre la más reciente.
+- Red de ancho, tensión y velocidad; trenes en circulación y horarios oficiales del clásico.
+- Material regional y corredores convencionales para los territorios del rescate.
+- Encargos, decisiones narrativas y las 412 grabaciones del clásico.
+- Hitos de viajeros, pactos con obligaciones y plazos, proyectos por fases y efectos verificables.
+- Media electoral de seis cierres mensuales: Viajeros 34 %, Territorios 20 %, Plantilla 20 %, Economía 26 %.
+- Etapa de rescate desde 2027, elecciones en diciembre de 2030 y 2034, y continuación del legado hasta 2050.
+- Cloacas con expediente causal: la adjudicación aporta 45 M€, la inspección llega seis meses después y la sentencia después de doce. Restituir o pedir revisión tiene un coste visible.
+- Informe mensual, previsión de pedidos, objetivo y acción siguiente sobre la partida actual.
 
-**Nueva partida.** Una pantalla con tres arranques:
-- **2022 · La herencia** (recomendado): la red real desde enero de 2022, con el turno guiado hablado.
-- **2027 · El rescate**: el Rescate de Tenfe 4.0. Su motor aún es el anterior; en la fase 5 pasa al motor único.
-- **Maqueta**: el antiguo modo libre, con sus reglas en la misma tarjeta (presupuesto de 500, 1.500 o 5.000 M€ y rivales sí o no).
+El rescate se considera superado tras dos elecciones ganadas, dos conexiones rurales nuevas, margen mensual no negativo y ningún crédito puente en los últimos 24 meses. La interfaz enseña cada condición. No hay cupo semanal de órdenes ni otra moneda para investigar: la escasez está en la caja, el material, los maquinistas y los plazos.
 
-Hay un campo **Semilla**: si lo dejas vacío, el juego genera un código; la misma semilla da la misma partida y se ve en Guardar o en el menú Partida. Antes de sustituir una partida guardada del mismo tipo, pregunta. Nunca borra las demás.
+## Interfaz
 
-**Lo que se dice, pasa.**
-- Los 315 encuentros ya no salen por turno: un personaje solo habla si su estado de ánimo y el problema del que habla son ciertos en tu partida, y lo que eliges cae sobre el tren, la línea o la estación que nombra. El cuadro dice en una línea de qué caso se trata. Si no hay nada cierto que decir, nadie habla. No se repite nunca el mismo diálogo en una partida.
-- Las apuestas (auditoría y visita del Rey) se deciden una sola vez: recargar no cambia el resultado.
-- Ninguna decisión se queda sin opción jugable: si falta caja, la opción más barata se paga a plazos.
-- Las peticiones de las ciudades pagan cuando has mantenido el servicio tres cierres de mes; la ficha enseña la ocupación real.
-- El primer encargo se mide por encima de lo que la red ya llevaba al firmarlo.
-- Burgos, Murcia, Pajares y Extremadura se anuncian después de que sus obras abren de verdad, en su día real.
-- Cada opción hace lo que dice: servicios mínimos, bajada temporal de tarifas, recorte de oferta con calor, refuerzo de los Alvia (o desactivado con el motivo), wifi, cobertura energética, limitación de velocidad y vallado. Las promesas (Plan Extremadura, catenaria a Teruel, Alvia a Asturias) se comprueban cada mes.
+Seis secciones: Red, Flota, Dinero, Despacho, Progreso y Prensa. El mapa permanece como superficie principal; las acciones se realizan en las fichas y los cajones. «Capas» agrupa las herramientas visuales. Trenes Pop conserva su tienda y sus fotografías.
 
-**Red real.**
-- **La tensión cuenta.** Los AVE de 25 kV (S103, S112, AV 2030) no entran en vías de 3 kV; S100, S106, S120, S130 y S730 son bitensión, y el S730 cruza sin catenaria con gasóleo a 180 km/h. El motivo sale escrito: «Sagunt — València: 3 kV».
-- **Tramos nuevos**, trazados sobre OpenStreetMap: Palencia — León convencional por Sahagún, Córdoba — Sevilla convencional por Palma y Lora del Río, y la Rampa de Pajares separada de la Variante (que sigue abriendo el 29 de noviembre de 2023).
-- Motilla corregida: Madrid — València pasa de 499 a 391 km. Velocidades corregidas en once tramos con datos reales (Teruel — Sagunt 90, Venta de Baños — Palencia 130, Madrid — Guadalajara 160…).
-- Capa **Velocidad** en el mapa y leyenda de electrificación que separa 25 kV alterna y 3 kV continua.
-- **Trenespop** filtra con «Circula en»: cada tren dice ✓ o ✗ con el motivo, la ficha cuenta en cuántas relaciones puede ir, y «Compra uno que sí» abre la tienda ya filtrada.
-- Las partidas guardadas de la 4.0 se migran: se añaden los tramos nuevos y, si un servicio se queda sin tren compatible, se le asigna otro o se suspende con aviso.
+## Guardados y audio
 
-**Voces.** Los 412 diálogos grabados no cambian ni una letra; el rescate tiene 3 de sus 70 líneas grabadas.
+La clave de la campaña clásica se conserva y el estado nuevo añade `tenfe.version=1`, validado al importar. La antigua clave `tenfe-rescate-v1` se conserva. La conversión muestra sus límites: economía ×30, vías reales y horario replanteado; las obras y expedientes originales quedan en una copia íntegra exportable.
+
+Los 412 cuerpos hablados no cambian. La publicación reutiliza las mismas tomas completas del auditorio. Las pantallas nuevas no inventan grabaciones ni usan síntesis del navegador.
+
+## Comprobación
+
+`tenfe-test.mjs` cubre compatibilidad, compra de regionales, pactos, hitos, fases, elecciones deterministas, corrupción, continuidad de 2027 y conversión de guardados. `tenfe-ui-test.mjs` recorre la publicación compilada en Chromium, ejecuta compras y decisiones, cierra meses y continúa la partida en escritorio y móvil. Se conserva el resultado real de GitHub Actions y sus capturas.

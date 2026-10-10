@@ -1,12 +1,12 @@
 {
   "name": "iberia-ferroviaria",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
     "web:build": "node ../tools/build-web.mjs",
-    "test": "node rescate-test.mjs && node red-test.mjs && node marketplace-test.mjs && node test.mjs && node campaign-test.mjs",
+    "test": "node rescate-test.mjs && node red-test.mjs && node marketplace-test.mjs && node test.mjs && node campaign-test.mjs && node tenfe-test.mjs && node campaign-test.mjs --tenfe",
     "red-test": "node red-test.mjs",
     "red-ui": "node red-ui-test.mjs",
     "rescate-test": "node rescate-test.mjs",
@@ -24,6 +24,9 @@
     "voice-dialogue-catalogue": "node tools/voice_dialogues.mjs > ../investigacion/voces/dialogos-3.6.3.json",
     "voice-dialogues": "python3 tools/build_qwen_dialogues.py",
     "voice-conversations": "node voice-conversation-ui-test.mjs",
-    "voice-listening": "node voice-listening-ui-test.mjs"
+    "voice-listening": "node voice-listening-ui-test.mjs",
+    "tenfe-test": "node tenfe-test.mjs",
+    "tenfe-ui": "node tenfe-ui-test.mjs",
+    "tenfe-campaign": "node campaign-test.mjs --tenfe"
   }
 }
