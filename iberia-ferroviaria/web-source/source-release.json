@@ -150,8 +150,8 @@
     },
     {
       "file": "track-preview.js",
-      "bytes": 5163,
-      "sha256": "66c945cd2383e405253687a2d45e1be7b92d36ff9fbdcb19a5191967e5215e94"
+      "bytes": 5263,
+      "sha256": "344ee75d59b8743bd1377bd115c036d5eef5532506cd3026452eadfddaf4e1a7"
     },
     {
       "file": "engine.js",
@@ -260,8 +260,8 @@
     },
     {
       "file": "app.js",
-      "bytes": 172117,
-      "sha256": "9a2a6595a76395faa8560210430fad47b162db5eb57dfd42e85f90ca551829ed"
+      "bytes": 172558,
+      "sha256": "42624f6ff082ba55426542939bc7cde09785d3da2f21fae497d909af0e4fe0bd"
     },
     {
       "file": "style-v3.css",

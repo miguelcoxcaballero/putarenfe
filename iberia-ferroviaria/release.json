@@ -19,7 +19,7 @@
   "game": {
     "url": "index.html",
     "bytes": 38614,
-    "sha256": "e2ef45bbad4f21fb4dd1ec08672843520a5bc8111fb299bf3abafeded2572b56"
+    "sha256": "235848d00eda577d25f375e41650d9791ff1121bcfb59e55b68ff18580480593"
   },
   "listening": {
     "url": "dialogos.html",
@@ -682,9 +682,9 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-12f55a026bd9.js",
-      "bytes": 11625892,
-      "sha256": "12f55a026bd96dcc6ba15bc12bf70b90f6df4cdf6b69c3e285bd27d9758c5cdf"
+      "url": "assets/game-script-4-023a4bc5ab91.js",
+      "bytes": 11626433,
+      "sha256": "023a4bc5ab911750a014aaee32977bf875642fc1cd7188f64f302fdbb8271567"
     },
     {
       "url": "assets/game-style-0-bdb0e445ac3e.css",
@@ -4834,6 +4834,11 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-12f55a026bd9.js",
+      "bytes": 11625892,
+      "sha256": "12f55a026bd96dcc6ba15bc12bf70b90f6df4cdf6b69c3e285bd27d9758c5cdf"
+    },
     {
       "url": "assets/game-script-4-670682465042.js",
       "bytes": 11503986,
