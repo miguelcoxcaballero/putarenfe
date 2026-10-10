@@ -80,8 +80,8 @@
     },
     {
       "file": "data.js",
-      "bytes": 12320,
-      "sha256": "7f8b2376c479f5c74fb9eed6948e3fdedf0e6c1750d7743d6085b3507a543abd"
+      "bytes": 14269,
+      "sha256": "20aea0465a71355b0079ff5356d3827d89cd9e875fa6ee1f395c21f2b796861b"
     },
     {
       "file": "story.js",
@@ -95,8 +95,8 @@
     },
     {
       "file": "infra.js",
-      "bytes": 19244,
-      "sha256": "ba6ef1ac17c7608ee5cacc5645f88b6f49f59d270d240da1580bb9a05f081664"
+      "bytes": 19354,
+      "sha256": "56656e6b5e2ffd86d6d24644043d7db0d33978bd0d93670b3df37a7bc8ce7f85"
     },
     {
       "file": "network.js",
@@ -120,13 +120,13 @@
     },
     {
       "file": "marketplace.js",
-      "bytes": 19460,
-      "sha256": "62421e5032d83bbccac7fea214c084a0f746ad7139568c0fa42bccba527606cc"
+      "bytes": 19684,
+      "sha256": "bd67e8ba918f9bfd5a36883890c2b7a33148c3402e3cd2a4dd530a6f5a537120"
     },
     {
       "file": "tycoon.js",
-      "bytes": 32185,
-      "sha256": "cf6f7104c9bc3a9596d558f76af8202d3399a3771ade6349fb832cd5ca6cdbc9"
+      "bytes": 32313,
+      "sha256": "4dbe379e5e2553fad658b858c874b6c20cd43776bf854d2165ec9f3349c1a1d9"
     },
     {
       "file": "verdad.js",
@@ -134,9 +134,14 @@
       "sha256": "8458cae9111f60e49df40a877b7c351895478bc56df1caac4421e97291923483"
     },
     {
+      "file": "tenfe.js",
+      "bytes": 16890,
+      "sha256": "2afab64a0d4e2af7a95dcb1f283b37b99a03a3edfe8c84937bf8e6285c36e6d0"
+    },
+    {
       "file": "engine.js",
-      "bytes": 45768,
-      "sha256": "7cec4e67d34d587138963d2a5dae2998f77c9c90fc995081ed7adc3f71783480"
+      "bytes": 46150,
+      "sha256": "3935790e46e40cabb05a033b2a4521363542a071828f97e9b0802425402524ac"
     },
     {
       "file": "operations.js",
@@ -145,8 +150,8 @@
     },
     {
       "file": "map-v3.js",
-      "bytes": 52506,
-      "sha256": "a6a0df7c7782ac17d95ac9c552908024e9f5de269a85d3e9cfd3fa0117a66e5f"
+      "bytes": 52526,
+      "sha256": "bc1a30ccfc53e49e308c7969b12949c878e66aab9e807c7ee47d8ec0f72ad5c8"
     },
     {
       "file": "train-art.js",
@@ -160,8 +165,8 @@
     },
     {
       "file": "train3d.js",
-      "bytes": 2582,
-      "sha256": "6c72da1b9d883f294e8bd1ba7d5afb4bb6d73adfc067b95a6316878509db9bfa"
+      "bytes": 2661,
+      "sha256": "9db785331ed157ae43f278f53bd8437b9d930bafa757e3caee63ed5ec50ba84c"
     },
     {
       "file": "city-art.js",
@@ -190,8 +195,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 28325,
-      "sha256": "b5791217647293b0c3267c988bfdb466f0973ad476d097fa6f5fc45125eb66e2"
+      "bytes": 28738,
+      "sha256": "35fd222e6c1da645f89b43ded5febe25ce4430cfa8885a850f8c8bf6c4fb5055"
     },
     {
       "file": "assets/portraits.js",
@@ -210,13 +215,13 @@
     },
     {
       "file": "nueva-partida.js",
-      "bytes": 6553,
-      "sha256": "330027c1acf81424bb04c7d156c102983184f52c70529c94745023899b5a9c94"
+      "bytes": 4267,
+      "sha256": "8c48bb74b4005dca8601183867818f14d0a7113ba8d4443ce245418af41753be"
     },
     {
       "file": "main-menu.js",
-      "bytes": 5046,
-      "sha256": "b38728313a243f26020245cad6bb510bd7717c05133c340ec64849970854db6f"
+      "bytes": 5044,
+      "sha256": "2bfe54e73298c626e314be556132f341e1840ffdd75a6e0f061ea4b949e4edaa"
     },
     {
       "file": "induction-task-ui.js",
@@ -224,39 +229,24 @@
       "sha256": "88bb39e28922d1d73366855e648b40561ac5e1c5c8e139190007f71306b1479f"
     },
     {
-      "file": "assets/rescate-voices.js",
-      "bytes": 490,
-      "sha256": "199cce0070b9aaebc0b74e4521dcdb156abf453d5289583a1e74b1e601f88d4e"
+      "file": "partidas-anteriores.js",
+      "bytes": 5173,
+      "sha256": "5f8139dc3883d58ec346c0eeb102cddb431623c0424d585bb54881052f863468"
     },
     {
-      "file": "rescate-data.js",
-      "bytes": 63028,
-      "sha256": "1b311312454e9d3769819ad0f19d5af4883447683ddd49c7eab2e7006d6337bf"
-    },
-    {
-      "file": "rescate.js",
-      "bytes": 98162,
-      "sha256": "5465a01dc11dea9c263793f3f080765ace7e743d0adc7628b400489eac72af52"
-    },
-    {
-      "file": "rescate-map.js",
-      "bytes": 15399,
-      "sha256": "8c447e72ccf3e87b8c1f057db89d88ec70a8a14a49eb133586f879d07fec97c9"
-    },
-    {
-      "file": "rescate-ui.js",
-      "bytes": 64738,
-      "sha256": "0bc36bd39fc92668ecc0c8763a0d70630992f5ebc9594ab7257d886d5644e945"
+      "file": "tenfe-ui.js",
+      "bytes": 9528,
+      "sha256": "ad90f346c1fe3974629cb694ad95764f823da65ed7263212af8d79d8c55fe98b"
     },
     {
       "file": "app.js",
-      "bytes": 158675,
-      "sha256": "8f6ce1254b90897ef3469f6cc2f7dce0b4612b17140812922f836092d6716548"
+      "bytes": 164505,
+      "sha256": "e94f70af9f5463e9c546663d4947d8821674c21931dfc94f65929d4b145a5c34"
     },
     {
       "file": "style-v3.css",
-      "bytes": 62268,
-      "sha256": "ca3beae782090ef4ac90a53eaa5a7792552a4c6eb51fd56d8effc3fae93c3ada"
+      "bytes": 79549,
+      "sha256": "01ecc448843beb16b446635b7a23206c9dda506205eff9bebe62df3e7a56b98f"
     },
     {
       "file": "main-menu.css",
@@ -272,11 +262,6 @@
       "file": "marketplace.css",
       "bytes": 14930,
       "sha256": "a9d09a6e1d0191b0bd8e898662f20d34d88df2f123d05018ec05141ab07c8c8d"
-    },
-    {
-      "file": "rescate.css",
-      "bytes": 22860,
-      "sha256": "3296706401760bbc0f5f0bc7e90276c8d95c57b75c7e764f7b7d1cfc325fb700"
     },
     {
       "file": "assets/fonts/fraunces.woff2",
@@ -310,8 +295,8 @@
     },
     {
       "file": "index.html",
-      "bytes": 2862,
-      "sha256": "fac927fa3fccb8ac0949424261486e6895634c4886a8eb1f7d3eee4c7162109a"
+      "bytes": 2915,
+      "sha256": "7ebaa67dc44746166d0f1d63fed8c494b8b42474b1d8563a3ecbdd5a2c61cd1d"
     },
     {
       "file": "assets/muestras-ui.js",
