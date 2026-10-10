@@ -17,7 +17,8 @@ await (async function(){
   const url='http://127.0.0.1:'+server.address().port+'/';
   const browser=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[],checks=[];
-  page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(45000);
+  page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(20000);
+  checks.push=(...entries)=>{for(const entry of entries)console.log('✓ '+entry);return Array.prototype.push.apply(checks,entries);};
   const dismiss=async()=>{
     for(let i=0;i<40;i++){
       if(!await page.locator('#modal').evaluate(el=>el.open))return;
@@ -93,5 +94,5 @@ await (async function(){
     checks.push('2027 activa el rescate sin cambiar de mapa, interfaz, motor ni guardado.');
     assert.deepEqual(errors,[]);
     const report={status:'passed',url,checks,errors};fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
-  }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
+  }catch(error){console.error(error.stack);console.error('Errores de página:',errors);try{await page.screenshot({path:path.join(out,'fallo.png'),timeout:10000});fs.writeFileSync(path.join(out,'fallo.html'),await page.content());}catch{}throw error;}finally{server.closeAllConnections();await browser.close();await new Promise(resolve=>server.close(resolve));}
 })();
