@@ -70,6 +70,7 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
       }).join('')}</div>`;
   }
   export function scandalHTML(s) {
+    if(s.tenfe?.game)return JUI.scandalHTML(s);
     const c=s.tenfe.scandal;
     return `<div class="tenfe-title"><span class="kicker">El precio del atajo</span><h2>Las cloacas</h2></div>
       <p>Una adjudicación amañada aporta 45 M€ ahora. La inspección encuentra el expediente seis meses después: Hacienda −20, Viajeros y Gobierno −15. A los doce meses, 60 M€ de restitución y multa, y reputación −12.</p>

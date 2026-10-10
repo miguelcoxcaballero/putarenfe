@@ -59,3 +59,11 @@ export function boardHTML(s){
  return '<div class="board-heading"><span class="kicker">CONEXIONES · TU RED</span><h2>El próximo tren lo decides tú.</h2><p>'+s.routes.filter(r=>r.active).length+' servicios · '+number(E.balance(s).passengers)+' viajeros previstos · '+(3-s.projects.filter(p=>!p.done).length-s.tenfe.megas.filter(p=>p.due).length)+' cuadrillas libres</p></div>'+
  '<div class="board-map"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Conexiones ferroviarias">'+edges+'</svg>'+J.HUBS.map(x=>'<button class="board-hub '+(s.routes.some(r=>r.active&&r.ends.includes(x.id))?'connected':'')+'" style="left:'+x.x+'%;top:'+x.y+'%" data-action="city" data-id="'+x.id+'"><i></i><span>'+esc(x.name)+'</span></button>').join('')+'</div><div class="board-legend"><span><i style="background:#ffbd65"></i>AVE</span><span><i style="background:#85bbff"></i>Alvia</span><span><i style="background:#8ce0b6"></i>Regional</span><span>··· Conexión por abrir</span></div>';
 }
+
+export function scandalHTML(s){
+ const u=s.tenfe,c=u.scandal,amount=u.game.tech.includes('contabilidad')?60:45;
+ return picture('cloacas')+'<h2>El dinero fácil deja huella</h2><p>El atajo entrega '+amount+' M€ de financiación irregular. La inspección llega tras 6 turnos y la restitución de lo recibido más 15 M€ de multa, tras 12. Revisar el expediente aplaza ambos plazos.</p>'+
+ (c?'<dl class="figures"><div><dt>Fondos recibidos</dt><dd>'+money(c.amount)+'</dd></div><div><dt>Expediente</dt><dd>'+ (c.exposed?'Público':'En revisión')+'</dd></div></dl><div class="toolbar">'+button('Restituir fondos','tenfe-restitute','',s.cash<Math.max(0,c.amount-(u.game.tech.includes('destructora')?10:0))||s.ended)+button('Revisión · 8 M€','tenfe-lawyer','',!!c.delay||s.cash<8||s.ended)+'</div>':
+ button('Revisar el atajo','tenfe-shortcut','',s.ended||s.month<u.cooldown))+
+ '<p class="small">Sospecha: '+Math.round(u.game.risk)+' / 100. La investigación, la prensa y la devolución de fondos tienen consecuencias en tu apoyo.</p>';
+}

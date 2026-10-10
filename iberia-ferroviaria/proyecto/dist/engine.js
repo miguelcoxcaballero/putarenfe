@@ -96,7 +96,8 @@ export function configureRoute(s,id,fleetId,frequency,fare){
  return r;
 }
 export function closeRoute(s,id){ensurePlaying(s);const r=s.routes.find(r=>r.id===id);if(!r||!r.active)throw Error('Ese servicio ya está cerrado.');r.active=false;r.fleet=null;r.units=0;s.reputation=clamp(s.reputation-1,5,100);log(s,'Servicio suspendido',routeName(r));V.note(s,'cut',{route:r.id,terr:V.isTerritory(r)});}
-export function upgradeRoute(s,id){ensurePlaying(s);const r=s.routes.find(r=>r.id===id);if(!r||r.level>=3)throw Error('Ya está al máximo. Más no se puede.');if(s.projects.some(p=>p.id==='upgrade-'+id&&!p.done))throw Error('La mejora ya está en marcha.');const cost=12+12*r.level;spend(s,cost);s.projects.push({id:'upgrade-'+id,type:'upgrade',route:id,due:s.month+4,started:s.month,cost,done:false});log(s,'Mejora contratada',routeName(r)+' · información, accesibilidad y fiabilidad.');}
+function ensureCrew(s){if(s.tenfe?.game&&s.projects.filter(p=>!p.done).length+s.tenfe.megas.filter(p=>p.due).length>=3)throw Error('Las tres cuadrillas están ocupadas.');}
+export function upgradeRoute(s,id){ensurePlaying(s);ensureCrew(s);const r=s.routes.find(r=>r.id===id);if(!r||r.level>=3)throw Error('Ya está al máximo. Más no se puede.');if(s.projects.some(p=>p.id==='upgrade-'+id&&!p.done))throw Error('La mejora ya está en marcha.');const cost=12+12*r.level;spend(s,cost);s.projects.push({id:'upgrade-'+id,type:'upgrade',route:id,due:s.month+4,started:s.month,cost,done:false});log(s,'Mejora contratada',routeName(r)+' · información, accesibilidad y fiabilidad.');}
 export function purchaseQuote(s,model,qty,listing=null){
  const m=MODEL[model];qty=Number(qty);if(!m||!Number.isInteger(qty)||qty<1||qty>30)throw Error('Entre 1 y 30 unidades.');
  const price=m.price*(1+Math.max(0,economicYear(s)-2022)*.018),total=price*qty;
@@ -121,7 +122,7 @@ export function marketplaceFavorite(s,listing){return M.favorite(s,listing);}
 export function refurbish(s,id,qty){ensurePlaying(s);const f=s.fleet.find(f=>f.id===id);qty=Number(qty);if(!f||!Number.isInteger(qty)||qty<1||available(s,f)<qty)throw Error('Solo se reforman trenes libres del lote.');spend(s,qty*MODEL[f.model].price*.12*(s.tenfe?.game?.tech.includes('contrato')?.75:1));f.qty-=qty;s.refits.push({id:'ref'+s.nextId++,model:f.model,qty,due:s.month+5,born:f.born});log(s,'Al taller',qty+' × '+MODEL[f.model].name+' · 5 meses.');}
 export function sell(s,id,qty){ensurePlaying(s);const f=s.fleet.find(f=>f.id===id);qty=Number(qty);if(!f||!Number.isInteger(qty)||qty<1||available(s,f)<qty)throw Error('Solo se venden trenes libres.');const value=qty*MODEL[f.model].price*.23*(f.condition/100);s.cash+=value;f.qty-=qty;log(s,'Venta de material',qty+' × '+MODEL[f.model].name+' · '+value.toFixed(1)+' M€.');}
 // ---- Obras
-export function startProject(s,id){ensurePlaying(s);const p=PROJECTS.find(p=>p.id===id);if(!p)throw Error('Proyecto desconocido.');if(s.projects.some(x=>x.id===id))throw Error('Ese proyecto ya está contratado.');spend(s,p.cost);if(s.tenfe?.game&&s.projects.filter(x=>!x.done).length+s.tenfe.megas.filter(x=>x.due).length>=3)throw Error('Las tres cuadrillas están ocupadas.');const due=s.tenfe?.game?s.month+Math.max(2,Math.ceil(p.duration/8)):Math.max(s.month+p.duration,(p.earliest-2022)*12);const job={id,type:'infrastructure',started:s.month,due,originalDue:due,cost:p.cost,done:false,delay:0};s.projects.push(job);log(s,'Obra adjudicada',p.name+' · fin previsto: '+dateOf(due));V.note(s,'workStart',{id,terr:workTerritory(s,job)});}
+export function startProject(s,id){ensurePlaying(s);ensureCrew(s);const p=PROJECTS.find(p=>p.id===id);if(!p)throw Error('Proyecto desconocido.');if(s.projects.some(x=>x.id===id))throw Error('Ese proyecto ya está contratado.');spend(s,p.cost);if(s.tenfe?.game&&s.projects.filter(x=>!x.done).length+s.tenfe.megas.filter(x=>x.due).length>=3)throw Error('Las tres cuadrillas están ocupadas.');const due=s.tenfe?.game?s.month+Math.max(2,Math.ceil(p.duration/8)):Math.max(s.month+p.duration,(p.earliest-2022)*12);const job={id,type:'infrastructure',started:s.month,due,originalDue:due,cost:p.cost,done:false,delay:0};s.projects.push(job);log(s,'Obra adjudicada',p.name+' · fin previsto: '+dateOf(due));V.note(s,'workStart',{id,terr:workTerritory(s,job)});}
 /** ¿Usa este servicio el tramo con su tren actual? */
 export function routeUses(s,r,tramo){const f=s.fleet.find(f=>f.id===r.fleet);return !!f&&routeCheck(s,r,MODEL[f.model]).tramos.some(t=>t.id===tramo);}
 const worksDiscount=s=>s.flags.eufunds>s.month?.6:1;
@@ -143,7 +144,7 @@ export function startWork(s,kind,target,paid=null){
 }
 export function newLineQuote(a,b){if(!I.NODES[a]||!I.NODES[b]||a===b)throw Error('Elige dos sitios distintos.');const ca=I.NODES[a],cb=I.NODES[b],rad=Math.PI/180;const dlat=(cb.lat-ca.lat)*rad,dlon=(cb.lon-ca.lon)*rad;const hav=Math.sin(dlat/2)**2+Math.cos(ca.lat*rad)*Math.cos(cb.lat*rad)*Math.sin(dlon/2)**2;const km=Math.round(6371*2*Math.asin(Math.sqrt(hav))*1.2);return {km,cost:Math.round(km*1.1+25),duration:Math.round(42+km/10)};}
 export function buildLine(s,a,b){
- ensurePlaying(s);if(s.infra.custom.length>=40)throw Error('Ya hay 40 líneas propias: termina lo que has empezado.');const q=newLineQuote(a,b);
+ ensurePlaying(s);ensureCrew(s);if(s.infra.custom.length>=40)throw Error('Ya hay 40 líneas propias: termina lo que has empezado.');const q=newLineQuote(a,b);
  if(I.allTramos(s).some(t=>t.kind==='lav'&&((t.a===a&&t.b===b)||(t.a===b&&t.b===a))))throw Error('Ya hay (o habrá) alta velocidad entre esos dos puntos.');
  spend(s,q.cost);const id='lav'+s.nextId++;
  s.infra.custom.push({id,a,b,km:q.km});s.infra.t[id]={g:'std',e:'25kv',v:300,b:false};s.infra.ver++;
@@ -360,4 +361,4 @@ export function validateSave(input){
 // verdad.js usa estas funciones del motor sin importarlo (el empaquetado no admite ciclos).
 V.bind({metrics,balance,available,product,routeCheck,routeOptions,isUnlocked,maxFrequency,requiredUnits,canRun,random,log,aveCities,dailyTrains,routeUses,startWork,yearOf,dateOf,costIndex,storyPending,chapterTight});
 
-U.bind({balance,log,spend,ensurePlaying,metrics,routeName,pendingDecision,chapterReady});
+U.bind({balance,log,spend,ensurePlaying,metrics,routeName,pendingDecision,chapterReady,canRun,requiredUnits,available,random,generateRequest,routeOptions});
