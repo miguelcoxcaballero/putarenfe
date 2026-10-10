@@ -69,6 +69,7 @@ try{
  await screenshot(page,'mapa-inicial');
  await page.locator('#zoomIn').click();assert(await page.evaluate(z=>window.railwayGame.map.zoom>z,before.zoom));
  await page.locator('#resetMap').click();assert.equal(await page.evaluate(()=>window.railwayGame.map.zoom),before.zoom);
+ await page.waitForFunction(()=>{const m=window.railwayGame.map,c=m.opts.getCities().find(c=>c.id==='mad'),p=m.project(c.lon,c.lat),drawn=m.cityPoints.find(c=>c.id==='mad');return drawn&&Math.hypot(drawn.x-p[0],drawn.y-p[1])<.5;});
  const point=await page.evaluate(()=>window.railwayGame.map.cityPoints.find(c=>c.id==='mad'));
  assert(point);const box=await page.locator('#map').boundingBox();await page.mouse.click(box.x+point.x,box.y+point.y);
  await page.waitForFunction(()=>document.querySelector('#inspector .city-title')?.textContent.includes('Madrid'));
@@ -111,8 +112,7 @@ try{
  await page.evaluate(()=>{const g=window.railwayGame;g.pause();const trip=g.plan().filter(t=>t.arrival-t.dep>15).sort((a,b)=>Math.abs((a.dep+a.arrival)/2-720)-Math.abs((b.dep+b.arrival)/2-720))[0];if(!trip)throw Error('No hay salidas jugables');window.__movingMinute=Math.round((trip.dep+trip.arrival)/2);g.setMinute(window.__movingMinute);});
  await page.waitForFunction(()=>window.railwayGame.map.trainPoints.length>0);
  const trains=await page.evaluate(()=>window.railwayGame.map.trainPoints.map(t=>({...t})));await screenshot(page,'mapa-trenes');
- await page.evaluate(()=>window.railwayGame.setMinute(window.__movingMinute+5));await page.waitForTimeout(200);
- assert(await page.evaluate(old=>window.railwayGame.map.trainPoints.some(t=>{const p=old.find(x=>x.id===t.id);return p&&Math.hypot(t.x-p.x,t.y-p.y)>.1;}),trains),'los trenes avanzan según el reloj de la operación');
+ await page.evaluate(()=>window.railwayGame.setMinute(window.__movingMinute+5));await page.waitForFunction(old=>window.railwayGame.map.trainPoints.some(t=>{const p=old.find(x=>x.id===t.id);return p&&Math.hypot(t.x-p.x,t.y-p.y)>.1;}),trains);
  await page.locator('[data-action="day-end"]').click();await page.locator('#modal [data-action="day-next"]').click();
  check('Trenes sobre la vía geográfica: posición vinculada al reloj, avance real y cierre de jornada.');
  for(let turn=0;turn<8;turn++){
