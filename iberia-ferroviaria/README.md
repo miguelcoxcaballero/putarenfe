@@ -1,14 +1,14 @@
 # Tenfe · Conexiones
 
-**Versión 6.0: un juego nuevo.** Las mejores mecánicas de Rescate y La herencia funcionan juntas desde el primer turno: una red propia de conexiones, cinco retos simultáneos, sucesos ilustrados y elecciones cada 12 turnos.
+**Versión 6.2: mapa completo y consejo con voces.** Las mejores mecánicas de Rescate y La herencia funcionan juntas desde el primer turno: una red propia de conexiones, cinco retos simultáneos, sucesos ilustrados y elecciones cada 12 turnos.
 
 [Jugar](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/) · [Reglas y mapa](docs/CONEXIONES.md) · [Auditorio](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html)
 
-Conecta capitales y territorios con AVE, Alvia y regionales. Ajusta frecuencias y tarifas, atiende incidencias en jornadas simuladas o delega la operación del turno. El consejo, los rivales, los pactos y los grandes proyectos están disponibles desde el comienzo.
+El mapa geográfico de la península conserva toda la red, ciudades pulsables, relieve y capas técnicas. Los trenes se desplazan por las vías según la jornada simulada; el zoom y el encuadre actúan sobre ese mismo mapa. Conecta capitales y territorios con AVE, Alvia y regionales. Ajusta frecuencias y tarifas, atiende incidencias en jornadas simuladas o delega la operación del turno. El consejo, los rivales, los pactos y los grandes proyectos están disponibles desde el comienzo.
 
 Completa cinco retos de fiabilidad, cobertura, rentabilidad, compromisos y construcción; gana dos mandatos para completar la partida. Después puedes continuar ampliando la red. Tres cuadrillas, dos pactos y recursos de investigación limitan qué puedes encargar a la vez.
 
-Las **63 ilustraciones de Rescate** participan en sucesos, 18 investigaciones, seis megaproyectos de cuatro fases, objetivos, elecciones, bienvenida y resultados. Las fotos de material, ciudades y personajes de La herencia permanecen. Se conservan sin modificación los **412 textos y grabaciones canónicos**.
+Las **63 ilustraciones de Rescate** participan en sucesos, 18 investigaciones, seis megaproyectos de cuatro fases, objetivos, elecciones, bienvenida y resultados. Las fotos de material, ciudades y personajes de La herencia permanecen. Se conservan sin modificación los **412 textos y grabaciones canónicos**. Las conversaciones del consejo aparecen antes de los sucesos en Despacho → Agenda y se escuchan al abrirlas, con retrato, resaltado, detener y repetir. Las condiciones de cada encuentro siguen dependiendo del estado real de la compañía.
 
 **Trenes Pop sigue siendo Trenespop**, con fotografías, filtros, favoritos, segunda mano, pedidos y pagos del 30 % / 70 %. El material respeta ancho, tensión y tracción.
 
@@ -33,6 +33,7 @@ npm test
 npm run web:build
 npm install --no-save --package-lock=false playwright@1.56.1
 npx playwright install --with-deps chromium
+node mapa-voces-ui-test.mjs
 npm run conexiones-ui
 ```
 

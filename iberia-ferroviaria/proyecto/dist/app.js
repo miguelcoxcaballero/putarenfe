@@ -112,6 +112,11 @@ const map = new RailMap($('map'), {
     return true;
   },
   getState: () => state,
+  getViewport: () => {
+    const hud=document.querySelector('.hud').getBoundingClientRect(),day=$('daybar').getBoundingClientRect(),mission=$('mission').getBoundingClientRect();
+    const mobile=innerWidth<=760;
+    return {left:mobile?12:mission.right+20,right:innerWidth-20,top:Math.max(hud.bottom+14,mobile?mission.bottom+16:96),bottom:day.top-16};
+  },
   getView: () => ({mode: layer === 'real' ? 'real' : 'campaign', trips: viewTrips(), minute: currentMinute(), date: O.dayDate(state), dayType: dayType(), networkKey: netKey}),
   onPick: hit => pick(hit),
   getCities: () => mapCities(),
@@ -1311,13 +1316,13 @@ function startClassic(maqueta,seed,code,options={}){
   U.begin(state,{...options,rules:'conexiones'});
   O.ensureOps(state);state.ops.day=3;state.started=true;
   if(maqueta||options.guide===false)state.tutorial={done:true};
-  resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();autosave();
+  resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();map.reset();autosave();
   if(!maqueta&&options.guide!==false)startTutorial(false);else showWelcome(false);
 }
 
 function continueClassic(){
   if(!saved)return;
-  menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);U.begin(state,{rules:'conexiones'});O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();
+  menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);U.begin(state,{rules:'conexiones'});O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();map.reset();
   if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showWelcome(true);
 }
 function menuGuide(){if(state.tenfe?.game)return showModal(`<div class="content"><span class="kicker">Conexiones · guía del director</span><h1>Haz que el país llegue.</h1>${JUI.campaignHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a jugar</button><button class="btn" data-action="new-game">Nueva partida</button></div></div>`,'single');showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="new-game">Nueva partida</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}

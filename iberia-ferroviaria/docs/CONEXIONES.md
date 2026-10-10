@@ -1,14 +1,15 @@
-# Tenfe: Conexiones (6.0.0)
+# Tenfe: Conexiones (6.2.0)
 
 Un juego de gestión ferroviaria por turnos. Las mecánicas de Rescate y La herencia están disponibles juntas desde el inicio: no hay cambios de modo por año.
 
 ## Red y objetivos
-19 relaciones iniciales: grandes conexiones AVE, Alvia y regionales; transversales Ebro y Mediterráneo y territorios rurales. El tablero muestra 16 núcleos de forma esquemática; las capas técnicas conservan los tramos físicos, anchos, tensión y compatibilidad del material. Se pueden crear otros servicios y líneas.
+La red geográfica completa está disponible desde el primer turno, con grandes conexiones AVE, Alvia y regionales, transversales y territorios rurales. El mapa muestra la península, sus ciudades, relieve y trazados físicos. Los trenes siguen el reloj de la jornada sobre esas vías. Zoom, desplazamiento, selección de ciudades y capas de anchos, electrificación, velocidad y obras usan el mismo mapa. Se pueden crear otros servicios y líneas.
 Cinco retos simultáneos: puntualidad ≥85 %, dos servicios rurales nuevos, tres cierres rentables, dos compromisos cumplidos y un megaproyecto operativo completo (el monumento no cuenta). Completar los cinco y ganar dos elecciones constituye victoria; permite seguir jugando.
 
 ## Turnos y decisiones
 Un turno liquida la previsión de la red. Se puede simular una jornada e intervenir en las incidencias, o delegar su operación con Cerrar turno.
 Un suceso ilustrado aparece después de cada cierre. El mazo se baraja con la semilla y se guarda; no repite hasta recorrer todos los sucesos. Hay que resolverlo antes del siguiente cierre. Costes y consecuencias aparecen antes de elegir.
+Las conversaciones grabadas del consejo aparecen primero en Despacho → Agenda. Se reproducen al abrir la conversación; el botón permite detenerla o repetirla. El retrato y el texto indican quién habla. No se fuerzan ventanas de conversación al empezar la partida. Los encuentros se seleccionan por condiciones reales de la red y de los compromisos.
 Tres cuadrillas compartidas entre obras y fases de megaproyectos; dos pactos activos; un laboratorio con 18 investigaciones y una investigación simultánea. Se conserva la investigación tecnológica de La herencia en el mismo panel.
 Elecciones cada 12 turnos. Voto ponderado: viajeros 34 %, territorios 20 %, plantilla 20 %, economía 26 %. Se usa la media de los tres cierres anteriores y se renueva con 50 %. En dificultad relajada, la derrota permite continuar.
 
@@ -31,4 +32,4 @@ Para 1.668/1.435 mm, un carril es común. El tercer carril se sitúa a 1.435 mm 
 Referencia técnica: [Adif, La vía de tres carriles, páginas 7–8](https://adfersit.pt/docs/tema_proj-prio_2020_ref-33.pdf). [Mapa de la red de Adif](https://www.adif.es/sobre-adif/red-ferroviaria/mapa).
 
 ## Compatibilidad de guardados
-Las partidas existentes mantienen flota, caja y red al entrar en Conexiones; los nuevos retos y mandatos empiezan al incorporarlas. Rescate conserva una copia exportable del estado original.
+Las partidas existentes recuperan las relaciones que el esquema reducido había omitido como servicios sin abrir, manteniendo flota, caja, tarifas y servicios ya configurados; los nuevos retos y mandatos empiezan al incorporarlas. Rescate conserva una copia exportable del estado original.

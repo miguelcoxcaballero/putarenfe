@@ -64,10 +64,11 @@ try{
  assert.equal(await page.locator('#network-board').count(),0);assert(await page.locator('#map').isVisible());
  await page.waitForFunction(()=>window.railwayGame.map.cityPoints?.length>19);
  const before=await page.evaluate(()=>{const g=window.railwayGame,m=g.map;return {routes:g.state().routes.length,cities:m.cityPoints.length,zoom:m.zoom,pixels:Array.from(m.caches.base.getContext('2d').getImageData(0,0,m.caches.base.width,m.caches.base.height).data).filter((_,i)=>i%512===0)};});
- assert(before.routes>19);assert(before.cities>19);assert(new Set(before.pixels).size>10,'el mapa dibuja geografía, relieve y vías');
+ assert(before.routes>19);assert(before.cities>19);
+ const fitting=await page.evaluate(()=>{const m=window.railwayGame.map,f=m.opts.getViewport();return m.opts.getCities().filter(c=>['mad','bcn','aco','mal','cad','sev'].includes(c.id)).map(c=>({id:c.id,p:m.project(c.lon,c.lat),f}));});assert(fitting.length>=5);assert(fitting.every(c=>c.p[0]>=c.f.left&&c.p[0]<=c.f.right&&c.p[1]>=c.f.top&&c.p[1]<=c.f.bottom),'capitales y sur dentro de la vista sin paneles encima');assert(new Set(before.pixels).size>10,'el mapa dibuja geografía, relieve y vías');
  await screenshot(page,'mapa-inicial');
  await page.locator('#zoomIn').click();assert(await page.evaluate(z=>window.railwayGame.map.zoom>z,before.zoom));
- await page.locator('#resetMap').click();assert.equal(await page.evaluate(()=>window.railwayGame.map.zoom),1);
+ await page.locator('#resetMap').click();assert.equal(await page.evaluate(()=>window.railwayGame.map.zoom),before.zoom);
  const point=await page.evaluate(()=>window.railwayGame.map.cityPoints.find(c=>c.id==='mad'));
  assert(point);const box=await page.locator('#map').boundingBox();await page.mouse.click(box.x+point.x,box.y+point.y);
  await page.waitForFunction(()=>document.querySelector('#inspector .city-title')?.textContent.includes('Madrid'));
@@ -101,10 +102,10 @@ try{
  }throw Error('Consejo sin salida');};
  await decisions();await page.locator('[data-action="close-drawer"]').click();
  await page.locator('[data-action="day-start"]').click();await page.waitForFunction(()=>window.railwayGame.state().ops.phase==='running');
- await page.evaluate(()=>{const g=window.railwayGame;g.pause();g.setMinute(720);});
+ await page.evaluate(()=>{const g=window.railwayGame;g.pause();const trip=g.plan().filter(t=>t.arrival-t.dep>15).sort((a,b)=>Math.abs((a.dep+a.arrival)/2-720)-Math.abs((b.dep+b.arrival)/2-720))[0];if(!trip)throw Error('No hay salidas jugables');window.__movingMinute=Math.round((trip.dep+trip.arrival)/2);g.setMinute(window.__movingMinute);});
  await page.waitForFunction(()=>window.railwayGame.map.trainPoints.length>0);
  const trains=await page.evaluate(()=>window.railwayGame.map.trainPoints.map(t=>({...t})));await screenshot(page,'mapa-trenes');
- await page.evaluate(()=>window.railwayGame.setMinute(725));await page.waitForTimeout(200);
+ await page.evaluate(()=>window.railwayGame.setMinute(window.__movingMinute+5));await page.waitForTimeout(200);
  assert(await page.evaluate(old=>window.railwayGame.map.trainPoints.some(t=>{const p=old.find(x=>x.id===t.id);return p&&Math.hypot(t.x-p.x,t.y-p.y)>.1;}),trains),'los trenes avanzan según el reloj de la operación');
  await page.locator('[data-action="day-end"]').click();await page.locator('#modal [data-action="day-next"]').click();
  check('Trenes sobre la vía geográfica: posición vinculada al reloj, avance real y cierre de jornada.');
