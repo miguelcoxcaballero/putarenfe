@@ -80,7 +80,14 @@ try{
    if(await page.locator(selector).count()){const image=page.locator(selector);assert.equal(await image.getAttribute('data-lanes'),String(lanes));assert.equal(await image.getAttribute('data-gauge'),g);assert.equal(await image.getAttribute('data-power'),e);}
   }
   assert.equal(await page.evaluate(()=>JSON.stringify(window.railwayGame.snapshot())),before,'27 previews no gastan ni cambian estado');
-  await page.locator('[data-action="track-select"][data-key="g"][data-value="mixto"]').click();await saveScreenshot(page,'vias-'+size.width);
+  await page.locator('[data-action="track-select"][data-key="g"][data-value="mixto"]').click();
+  const displayed=await page.evaluate(async()=>Promise.all([...document.querySelectorAll('.track-scene .track-photo')].map(async el=>{
+   const css=getComputedStyle(el),url=css.backgroundImage.slice(4,-1).replace(/^["']|["']$/g,''),img=new Image();img.src=url;await img.decode();
+   return {url,width:img.naturalWidth,height:img.naturalHeight,position:css.backgroundPosition};
+  })));
+  assert.equal(displayed.length,2);assert(displayed.every(x=>new URL(x.url).pathname.startsWith('/assets/vias/')&&x.width===1536&&x.height===1024),'se cargan las fotos utilizadas por el CSS, sin rutas duplicadas');
+  assert.equal(displayed[1].position,'100% 100%');
+  await saveScreenshot(page,'vias-'+size.width);
   const assets=await page.evaluate(async()=>{return await Promise.all([1,2,3].map(async lanes=>{const img=new Image();img.src='assets/vias/via-'+lanes+'.png';await img.decode();return [img.naturalWidth,img.naturalHeight];}));});
   assert(assets.every(([w,h])=>w>=1024&&h>=768),'las tres escenas cargan con resolución útil');
   if(await page.locator('[data-action="track-confirm"]').isEnabled()){await page.locator('[data-action="track-confirm"]').click();assert(await page.evaluate(()=>window.railwayGame.snapshot().projects.some(p=>p.work==='configuration')));}else await closeDialog(page);

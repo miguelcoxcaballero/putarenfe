@@ -656,13 +656,14 @@ function renderBoard(){
 }
 function renderHud(){
   const b=E.balance(state),kind=dayType();
+  const brand=document.querySelector('.hud .brand span');if(brand)brand.textContent=state.tenfe?.game?'Conexiones · al mando de Tenfe':'Dirección de Tenfe';
   const long=O.dayDate(state).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
   $('date').textContent=state.tenfe?.game?'Turno '+J.turn(state)+' · tu red en marcha':state.ended&&state.ending==='2050'?'31 dic 2050':long[0].toUpperCase()+long.slice(1);
   $('dateShort').textContent=state.tenfe?.game?'Turno '+J.turn(state):O.dayLabel(state);
   $('dayKind').textContent=state.tenfe?.game?Math.max(1,J.electionMonth(state)-state.month)+' turnos hasta las urnas':state.tenfe?`Elecciones: ${when(U.electionMonth(state)-1)}`:`Jornada ${state.ops.completed+1} · ${S.DAY_TYPES[kind]}`;
   const free=state.fleet.reduce((sum,f)=>sum+E.available(state,f),0);
   $('resources').innerHTML=[
-    ['Caja',money(state.cash)],['Resultado / mes',`<span class="${b.net>=0?'pos':'neg'}">${signed(b.net)}</span>`],
+    ['Caja',money(state.cash)],[state.tenfe?.game?'Resultado / turno':'Resultado / mes',`<span class="${b.net>=0?'pos':'neg'}">${signed(b.net)}</span>`],
     ['Apoyo',state.tenfe?`${n(U.forecast(state),1)}<small>%</small>`:`${n(state.satisfaction)}<small>%</small>`],
     ['Puntualidad',`${n(b.punctuality,1)}<small>%</small>`],['Trenes libres',n(free)]
   ].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
@@ -1448,7 +1449,7 @@ document.addEventListener('click', event => {
     case 'tenfe-decision': showDecision();break;
     case 'tenfe-pact': act(()=>U.signPact(state,id),'Pacto firmado. Cumple los requisitos antes del plazo.');break;
     case 'tenfe-mega': act(()=>U.startMega(state,id),'Fase encargada. Puedes gestionar tu red mientras avanza.');break;
-    case 'tenfe-shortcut': showModal('<div class="content"><div class="kicker">Decisión con consecuencias</div><h1>45 M€ ahora</h1><p>La inspección encontrará el expediente en seis meses. Hacienda −20; Viajeros y Gobierno −15. A los doce meses: 60 M€ de devolución y multa, reputación −12.</p><div class="actions"><button class="btn danger" data-action="tenfe-shortcut-confirm">Aceptar el atajo</button><button class="btn" data-action="close-modal">Seguir por la vía legal</button></div></div>','single');break;
+    case 'tenfe-shortcut': {const amount=state.tenfe?.game&&state.tenfe.game.tech.includes('contabilidad')?60:45,unit=state.tenfe?.game?'turnos':'meses';showModal('<div class="content"><div class="kicker">Decisión con consecuencias</div><h1>'+amount+' M€ ahora</h1><p>La inspección encontrará el expediente tras seis '+unit+'. Hacienda −20; Viajeros y Gobierno −15. Tras doce '+unit+': '+(amount+15)+' M€ de restitución y multa, reputación −12. La revisión del expediente y las investigaciones pueden modificar estas consecuencias.</p><div class="actions"><button class="btn danger" data-action="tenfe-shortcut-confirm">Aceptar el atajo</button><button class="btn" data-action="close-modal">Seguir por la vía legal</button></div></div>','single');break;}
     case 'tenfe-shortcut-confirm': if(act(()=>U.shortcut(state),'Adjudicación firmada. La inspección revisará el expediente.'))closeModal();break;
     case 'tenfe-restitute': act(()=>U.selfReport(state),'Fondos restituidos.');break;
     case 'tenfe-lawyer': act(()=>U.legalDefence(state),'Revisión jurídica encargada.');break;

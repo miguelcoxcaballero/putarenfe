@@ -12,7 +12,8 @@ export const normalized=st=>({g:st?.g||'ib',e:st?.e||'no',lanes:st?.lanes||1});
 export const label=st=>laneName[st.lanes]+' · '+gaugeName[st.g]+' · '+powerName[st.e];
 export function photo(st,extra=''){
  const x=normalized(st),col=GAUGES.indexOf(x.g),row=POWERS.indexOf(x.e);
- return '<div class="track-photo '+extra+'" role="img" aria-label="'+esc(label(x))+'" data-gauge="'+x.g+'" data-power="'+x.e+'" data-lanes="'+x.lanes+'" style="--track-column:'+col*50+'%;--track-row:'+row*50+'%;--track-image:url(assets/vias/via-'+x.lanes+'.png)"></div>';
+ const path='assets/vias/via-'+x.lanes+'.png',src=typeof document==='object'?new URL(path,document.baseURI).href:path;
+ return '<div class="track-photo '+extra+'" role="img" aria-label="'+esc(label(x))+'" data-gauge="'+x.g+'" data-power="'+x.e+'" data-lanes="'+x.lanes+'" style="--track-column:'+col*50+'%;--track-row:'+row*50+'%;--track-image:url('+esc(src)+')"></div>';
 }
 export function resulting(st,kind){return {...normalized(st),...(kind==='mixed'?{g:'mixto'}:kind==='standard'?{g:'std'}:kind==='electrify'?{e:'25kv'}:{})};}
 export function comparison(before,after,options={}){
