@@ -17,7 +17,7 @@ const browser=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftsh
 const checks=[],errors=[],pages=[];
 const check=s=>{checks.push(s);console.log('✓ '+s);};
 const open=async(page,name)=>{await page.locator('#navigation [data-screen="'+name+'"]').click();if(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')))await page.locator('#navigation [data-screen="'+name+'"]').click();};
-const saveScreenshot=async(page,name)=>page.screenshot({path:path.join(out,name+'.png'),fullPage:false});
+const saveScreenshot=async(page,name)=>{await page.screenshot({path:path.join(out,name+'.png'),fullPage:false});if(['vias-1440','guia-mobile','guia-bienvenida'].includes(name)||name.startsWith('fallo-')){const jpeg=await page.screenshot({type:'jpeg',quality:40});console.log('QA_IMAGE:'+name+':'+jpeg.toString('base64'));}};
 const start=async(page,guide=false)=>{
  await page.goto(url);await page.waitForFunction(()=>!!window.railwayGame);assert.equal(await page.locator('.menu-preview-note').count(),0,'sin aviso de producción al entrar');
  assert.equal(await page.locator('[data-action="new-game"]').count(),1);

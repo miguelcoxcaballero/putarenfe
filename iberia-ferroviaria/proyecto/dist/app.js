@@ -727,7 +727,7 @@ function renderDaybar() {
   <div class="controls"><div class="speed" role="group" aria-label="Velocidad">${SPEEDS.map(([, label], i) => `<button class="${i === speedIndex ? 'active' : ''}" data-action="speed" data-id="${i}">${label}</button>`).join('')}</div>
   <button class="play" data-action="play" aria-label="${playing ? 'Pausar' : 'Reproducir'}">${playing ? '❚❚' : '▶'}</button>
   ${observer ? '' : `<button class="btn primary" data-action="${primary[0]}">${primary[1]}</button>`}
-  ${op.phase !== 'running' && !observer ? `<button class="btn" data-action="skip-month" title="${delegationHint}" ${state.ended?'disabled':''}>Cerrar el mes</button>` : ''}</div>`;
+  ${op.phase !== 'running' && !observer ? `<button class="btn" data-action="skip-month" title="${delegationHint}" ${state.ended?'disabled':''}>${state.tenfe?.game?'Cerrar turno':'Cerrar el mes'}</button>` : ''}</div>`;
   drawTimeline();
 }
 function drawTimeline() {
@@ -1479,7 +1479,7 @@ document.addEventListener('click', event => {
     case 'day-end': pause(); if (state.ops.phase === 'running') { state.ops.minute = O.dayBounds(plan()).last; finishDay(); } break;
     case 'day-review': dayReport(); break;
     case 'day-next': try { const monthBefore=state.month; O.nextDay(state); sfx.result(true); closeModal(); seenIncidents = new Set(); autosave(); render(); if (E.pendingDecision(state)) showDecision(); else showTenfeUpdate(state.month!==monthBefore); } catch (e) { sfx.result(false); toast(e.message); } break;
-    case 'skip-month': pause();E.revalidateScene(state);if(state.tenfe?.game?.event){ui.tycoonTab='agenda';screen='story';render();toast('Elige cómo resolver el suceso del turno.');break;}if(E.pendingDecision(state)){showDecision();break;}try { const paidBefore = state.stats.requests || 0; if (O.skipMonth(state)) { sfx.result(true); autosave(); render(); const paid = (state.stats.requests || 0) - paidBefore; toast('Mes cerrado. Cuentas liquidadas.' + (paid ? ` ${paid} petición${paid > 1 ? 'es' : ''} cobrada${paid > 1 ? 's' : ''}.` : '')); if (state.tenfe?.game)showTenfeUpdate(true);else if(E.pendingDecision(state)) showDecision();else showTenfeUpdate(true); } else sfx.intent = null; } catch (e) { sfx.result(false); toast(e.message); } break;
+    case 'skip-month': pause();E.revalidateScene(state);if(state.tenfe?.game?.event){ui.tycoonTab='agenda';screen='story';render();toast('Elige cómo resolver el suceso del turno.');break;}if(E.pendingDecision(state)){showDecision();break;}try { const paidBefore = state.stats.requests || 0; if (O.skipMonth(state)) { sfx.result(true); autosave(); render(); const paid = (state.stats.requests || 0) - paidBefore; toast((state.tenfe?.game?'Turno cerrado. Cuentas liquidadas.':'Mes cerrado. Cuentas liquidadas.') + (paid ? ` ${paid} petición${paid > 1 ? 'es' : ''} cobrada${paid > 1 ? 's' : ''}.` : '')); if (state.tenfe?.game)showTenfeUpdate(true);else if(E.pendingDecision(state)) showDecision();else showTenfeUpdate(true); } else sfx.intent = null; } catch (e) { sfx.result(false); toast(e.message); } break;
     case 'open-incidents': document.querySelector('.alert-pill')?.remove(); navigate('ops'); if (screen !== 'ops') navigate('ops'); break;
     case 'respond': if(act(()=>O.resolveIncident(state,id,b.dataset.option),O.RESPONSES[b.dataset.option].note)&&tut&&TOUR_STEPS[tut.step].id==='day'){tutorialMark('incident-resolved');screen=null;inspect=null;render();}break;
     case 'route': selectRoute(id); break;
