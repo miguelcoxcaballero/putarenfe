@@ -90,7 +90,7 @@ await (async function(){
       s.decided=['policy',...s.decided];s.event=null;g.engine.revalidateScene(s);g.render();});
     for(let i=0;i<20 && await page.evaluate(()=>window.railwayGame.snapshot().month)<60;i++){await page.locator('[data-action="skip-month"]').click();await dismiss();}
     assert(await page.evaluate(()=>window.railwayGame.snapshot().tenfe.rescueStarted));
-    assert(await page.locator('#mission').innerText().then(t=>t.includes('rescate')));
+    assert(await page.locator('#mission').innerText().then(t=>t.toLocaleLowerCase('es').includes('rescate')));
     await page.screenshot({path:path.join(out,'rescate-misma-partida.png')});
     checks.push('2027 activa el rescate sin cambiar de mapa, interfaz, motor ni guardado.');
     assert.deepEqual(errors,[]);
