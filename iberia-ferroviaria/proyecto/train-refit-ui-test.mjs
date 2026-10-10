@@ -37,7 +37,7 @@ try{
   await page.locator('#refitQty').fill(String(q.free+1));assert(await page.locator('[data-action="refit-confirm"]').isDisabled());assert.equal(JSON.stringify(await snap(page)),JSON.stringify(s));
   await page.locator('#refitQty').fill('2');await screenshot(page,'reforma-confirmar-'+size.width);
   await page.locator('[data-action="refit-confirm"]').click();const after=await snap(page);assert.equal(after.refits.length,s.refits.length+1);assert.equal(after.cash,s.cash-q.total);assert.equal(after.fleet.find(x=>x.id===lot).qty,s.fleet.find(x=>x.id===lot).qty-2);assert.deepEqual(after.routes,s.routes);
-  await page.reload();await page.waitForFunction(()=>!!window.railwayGame);await page.locator('[data-action="continue"]').click();assert.equal((await snap(page)).refits.at(-1).qty,2);
+  await page.reload();await page.waitForFunction(()=>!!window.railwayGame);await page.locator('[data-action="continue"]').click();await page.locator('[data-action="welcome-close"]').click();assert.equal((await snap(page)).refits.at(-1).qty,2);
   await page.evaluate(()=>{const api=window.railwayGame,s=api.state();for(let i=0;i<5;i++){
    if(s.tenfe.game.event){const e=api.campaign.EVENTS.find(x=>x.id===s.tenfe.game.event.id);api.campaign.decide(s,e.id,e.choices.findIndex(x=>x.cost<=s.cash));}
    let d,n=0;while((d=api.engine.pendingDecision(s))){if(++n>100)throw Error('Consejo en bucle');api.engine.decide(s,d.id,d.choices.findIndex(x=>!x.disabled&&(x.cost||0)<=s.cash));}

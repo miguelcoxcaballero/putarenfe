@@ -34,3 +34,7 @@
 .refit-intro p,.refit-lots p,.refit-catalogue p,.refit-fleet-link p,.refit-references p{color:#655551}
 .refit-references a{color:#874251}.refit-references summary{color:#58343e}
 .refit-quote em{color:#c8bba9}.refit-slider{color:#e9dfcf}
+
+#refitQty{color:#352a2c!important;background:#fff8ed!important;width:110px;min-height:44px;padding:10px 12px;font-size:17px;font-weight:700}
+.refit-modal>.kicker{color:#dda1b5}
+@media(max-width:600px){.refit-intro{padding:12px}.refit-intro h2{font-size:20px;line-height:1.25;margin:5px 0 8px}.refit-intro p{font-size:12px;line-height:1.45;margin:8px 0 12px}.refit-overview{font-size:10px;gap:8px 12px}.refit-overview b{font-size:16px}}
