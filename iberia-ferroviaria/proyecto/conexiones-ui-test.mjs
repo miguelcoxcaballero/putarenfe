@@ -35,8 +35,8 @@ try{
   const context=await browser.newContext({viewport:size}),page=await context.newPage();pages.push(page);page.setDefaultTimeout(20000);page.on('pageerror',e=>errors.push(e.message));
   await start(page);
   assert.equal(await page.locator('#modal').evaluate(el=>el.open),false,'inicio sin decisión forzada ni aviso');
-  assert.equal(await page.locator('#entry-welcome').count(),1);assert.equal(await page.locator('#network-board').count(),1);
-  const state=await page.evaluate(()=>window.railwayGame.snapshot());assert(state.tenfe.game);assert.equal(state.routes.length,19);
+  assert.equal(await page.locator('#entry-welcome').count(),1);assert.equal(await page.locator('#network-board').count(),0);assert(await page.locator('#map').isVisible());
+  const state=await page.evaluate(()=>window.railwayGame.snapshot());assert(state.tenfe.game);assert(state.routes.length>19,'la red completa está disponible');
   await saveScreenshot(page,'bienvenida-'+size.width);await page.locator('[data-action="welcome-close"]').click();
   for(const name of ['network','fleet','finance','story','progress','press']){
    await open(page,name);assert(await page.locator('#drawer .body').evaluate(el=>el.scrollWidth<=el.clientWidth+2),'sin desbordamiento en '+name+' a '+size.width);

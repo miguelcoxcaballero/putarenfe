@@ -308,8 +308,12 @@ function migrate(s){
  // Un encuentro guardado sin su instancia viene de la rotación antigua: no se sabe si es verdad, así que no se juega.
  if(s.tycoon?.encounter&&s.verdad.scene?.id!==s.tycoon.encounter)s.tycoon.encounter=null;
  const known=new Set(s.routes.map(r=>r.id));
- for(const r of s.routes){const def=ROUTE_DEF[r.id];if(!def)continue;for(const k of ['real','baseFrequency','peak','minutes','products','stations','name','via','kind'])if(def[k]!==undefined)r[k]=def[k];}
- for(const def of ALL_ROUTES)if(!known.has(def.id))s.routes.push(copy(def));
+ for(const r of s.routes){const def=ROUTE_DEF[r.id];if(!def)continue;for(const k of ['real','baseFrequency','peak','minutes','products','stations','name','via','kind'])if(def[k]!==undefined&&!(s.tenfe?.game&&['real','baseFrequency'].includes(k)))r[k]=def[k];}
+ for(const def of ALL_ROUTES)if(!known.has(def.id)){
+  const r=copy(def);
+  if(s.tenfe?.game)Object.assign(r,{active:false,fleet:null,units:0,real:false,frequency:2,baseFrequency:12,demand:Math.max(r.demand,24000)});
+  s.routes.push(r);
+ }
  // Red de la revisión 2: tramos nuevos, rampa de Pajares aparte y velocidades reales. Solo las partidas anteriores
  // reasignan o suspenden los servicios que la tensión de la catenaria deja sin tren; las actuales se validan tal cual.
  const legacy=!!s.infra&&typeof s.infra==='object'&&(s.infra.rev||1)<I.NET_REVISION;

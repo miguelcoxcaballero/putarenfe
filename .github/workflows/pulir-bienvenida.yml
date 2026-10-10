@@ -1,7 +1,7 @@
 name: Construir Conexiones y talleres
 on:
   push:
-    branches: [codex/pulir-bienvenida, codex/reforma-trenes, main]
+    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, main]
 concurrency:
   group: conexiones-${{ github.ref }}
   cancel-in-progress: true
@@ -37,6 +37,7 @@ jobs:
       - name: Probar el juego publicado
         working-directory: iberia-ferroviaria/proyecto
         run: |
+          node mapa-voces-ui-test.mjs
           node train-refit-ui-test.mjs
           node conexiones-ui-test.mjs
       - name: Guardar capturas e informe
