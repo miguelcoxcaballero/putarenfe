@@ -51,11 +51,11 @@ try{
   await open(page,'story');await page.locator('[data-action="tycoon-tab"][data-id="pactos"]').click();
   await page.locator('[data-action="tenfe-pact"][data-id="investigacion"]').click();
   await page.locator('[data-action="tycoon-tab"][data-id="agenda"]').click();await pendingCouncil(page);
-  await page.locator('[data-action="close-drawer"]').click();await page.locator('[data-action="skip-month"]').click();
+  await page.locator('[data-action="close-drawer"]').click();await page.locator('#daybar [data-action="skip-month"]').click();
   // A dated encounter may still need one native council decision before the settlement.
   if(await page.locator('#modal [data-action="decision"]').count()){
    for(let i=0;i<10&&await page.locator('#modal [data-action="decision"]').count();i++)await page.locator('#modal [data-action="decision"]:not([disabled])').first().click();
-   await page.locator('[data-action="skip-month"]').click();
+   await page.locator('#daybar [data-action="skip-month"]').click();
   }
   await page.waitForFunction(()=>window.railwayGame.snapshot().month===1);
   assert.equal(await page.locator('.game-event').count(),1);assert.equal(await page.locator('.game-event img').evaluate(el=>el.complete&&el.naturalWidth>0),true);
