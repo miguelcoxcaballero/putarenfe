@@ -1,7 +1,7 @@
-name: Construir Conexiones y taller de vías
+name: Construir Conexiones y talleres
 on:
   push:
-    branches: [codex/pulir-bienvenida, main]
+    branches: [codex/pulir-bienvenida, codex/reforma-trenes, main]
 concurrency:
   group: conexiones-${{ github.ref }}
   cancel-in-progress: true
@@ -19,6 +19,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Preparar conversión de imágenes
+        working-directory: iberia-ferroviaria/proyecto
+        run: npm install --no-save --package-lock=false sharp@0.34.5
       - name: Motor y regresiones
         working-directory: iberia-ferroviaria/proyecto
         run: |
@@ -34,6 +37,7 @@ jobs:
       - name: Probar el juego publicado
         working-directory: iberia-ferroviaria/proyecto
         run: |
+          node train-refit-ui-test.mjs
           node conexiones-ui-test.mjs
       - name: Guardar capturas e informe
         if: always()

@@ -8,17 +8,19 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {buildTrainInteriors} from '../tools/build-train-interiors.mjs';
 import {DIALOGUES} from './dist/assets/voice-dialogues.js';
 import {DIALOGUE_CATALOGUE} from './tools/voice_dialogues.mjs';
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(root, 'dist');
+const interiorAssets=await buildTrainInteriors(root,dist);
 if (Object.keys(DIALOGUES).length !== DIALOGUE_CATALOGUE.length || DIALOGUE_CATALOGUE.some(item => typeof DIALOGUES[item.id] !== 'string' || !DIALOGUES[item.id])) {
   throw Error('La entrega necesita una toma completa para cada diálogo. No se ha modificado el HTML anterior.');
 }
 const baselineOrder = ['assets/geography.js', 'assets/railways.js', 'assets/timetable.js', 'assets/infra.js', 'data.js', 'story.js', 'schedule.js', 'infra.js', 'network.js',
   'induction.js', 'induction-runtime.js', 'encounters.js', 'tycoon.js', 'engine.js', 'operations.js', 'map-v3.js', 'train-art.js', 'train3d.js', 'city-art.js', 'assets/samples-index.js', 'music.js', 'assets/voices.js', 'assets/voice-dialogues.js', 'voice.js', 'dialogue-presentation.js', 'sfx.js', 'assets/portraits.js', 'faces.js', 'tycoon-ui.js', 'main-menu.js', 'induction-task-ui.js', 'app.js'];
 const optionalBefore = {'data.js': ['brands.js'], 'tycoon.js': ['marketplace.js'], 'engine.js': ['verdad.js', 'rescate-data.js', 'conexiones.js', 'tenfe.js', 'track-preview.js'], 'train3d.js': ['assets/train-photos.js'], 'main-menu.js': ['nueva-partida.js'],
-  'app.js': ['partidas-anteriores.js', 'conexiones-ui.js', 'tenfe-ui.js']};
+  'app.js': ['partidas-anteriores.js', 'conexiones-ui.js', 'tenfe-ui.js', 'train-refit.js']};
 const order = baselineOrder.flatMap(file => [...(optionalBefore[file] || []).filter(extra => fs.existsSync(path.join(dist, extra))), file]);
 
 function bundle(file) {
@@ -40,25 +42,28 @@ new Function(code); // validación sintáctica
 let html = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 let css = fs.readFileSync(path.join(dist, 'style-v3.css'), 'utf8') + '\n' + fs.readFileSync(path.join(dist, 'main-menu.css'), 'utf8') + '\n' + fs.readFileSync(path.join(dist, 'induction.css'), 'utf8');
 if (fs.existsSync(path.join(dist, 'marketplace.css'))) css += '\n' + fs.readFileSync(path.join(dist, 'marketplace.css'), 'utf8');
+css+='\n'+fs.readFileSync(path.join(dist,'train-refit.css'),'utf8');
 
 const mime = {png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', svg: 'image/svg+xml', woff2: 'font/woff2'};
 css = css.replace(/url\('assets\/([^']+)'\)/g, (_, asset) => {
   const data = fs.readFileSync(path.join(dist, 'assets', asset)).toString('base64');
   return `url('data:${mime[asset.split('.').pop()]};base64,${data}')`;
 });
-html = html.replace('<link rel="stylesheet" href="main-menu.css">', '').replace('<link rel="stylesheet" href="induction.css">', '').replace('<link rel="stylesheet" href="marketplace.css">', '').replace('<link rel="stylesheet" href="rescate.css">', '').replace('<link rel="stylesheet" href="style-v3.css">', () => '<style>' + css + '</style>')
+html = html.replace('<link rel="stylesheet" href="train-refit.css">','').replace('<link rel="stylesheet" href="main-menu.css">', '').replace('<link rel="stylesheet" href="induction.css">', '').replace('<link rel="stylesheet" href="marketplace.css">', '').replace('<link rel="stylesheet" href="rescate.css">', '').replace('<link rel="stylesheet" href="style-v3.css">', () => '<style>' + css + '</style>')
   .replace('<script src="assets/three.min.js"></script>', () => '<script>' + fs.readFileSync(path.join(dist, 'assets/three.min.js'), 'utf8').replaceAll('</script', '<\\/script') + '</script>')
   .replace('<script type="module" src="app.js"></script>', () => '<script>\n(() => {\n' + code.replaceAll('</script', '<\\/script') + '\n})();\n</script>')
   .replace('</body>', () => '<script type="text/plain" id="geodata-license">' + fs.readFileSync(path.join(root, 'LICENSE-GEODATA.txt'), 'utf8').replaceAll('</script', '<\\/script') + '</script></body>');
 const GROUPS = ['ui', 'orquesta', 'teclas', 'percusion'], BASE = `<script>globalThis.IBERIA_SAMPLE_BASE = 'assets/';</script>`;
 if (!html.includes(BASE)) throw Error('index.html no declara IBERIA_SAMPLE_BASE');
 const inline = file => '<script>' + fs.readFileSync(path.join(dist, file), 'utf8').replaceAll('</script', '<\\/script') + '</script>';
-const full = html.replace(BASE, () => GROUPS.map(g => inline(`assets/muestras-${g}.js`)).join(''));
+const interiorMap=Object.fromEntries(interiorAssets.map(row=>[row.url,'data:image/webp;base64,'+fs.readFileSync(path.join(dist,row.url)).toString('base64')]));
+const full = html.replace(BASE, () => '<script>globalThis.TENFE_INTERIOR_IMAGES='+JSON.stringify(interiorMap)+'</script>'+GROUPS.map(g => inline(`assets/muestras-${g}.js`)).join(''));
 const web = html.replace(BASE, () => `<script>globalThis.IBERIA_SAMPLE_BASE = '';</script>`);
 const out = path.join(root, '../outputs'), webDir = path.join(out, 'web');
 fs.mkdirSync(webDir, {recursive: true});
 fs.writeFileSync(path.join(out, 'Iberia-Ferroviaria.html'), full);
 fs.writeFileSync(path.join(webDir, 'index.html'), web);
+for(const row of interiorAssets){const dest=path.join(webDir,row.url);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.copyFileSync(path.join(dist,row.url),dest);}
 for (const g of GROUPS) fs.copyFileSync(path.join(dist, `assets/muestras-${g}.js`), path.join(webDir, `muestras-${g}.js`));
 const mb = n => (n / 1e6).toLocaleString('es-ES', {maximumFractionDigits: 2}) + ' MB';
 console.log(`HTML autónomo: ${mb(Buffer.byteLength(full))}, sin dependencias de red para jugar.`);

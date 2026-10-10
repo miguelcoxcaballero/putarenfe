@@ -27,7 +27,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   const baselineOrder=['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
     'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
   const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'engine.js':['verdad.js','rescate-data.js','conexiones.js','tenfe.js','track-preview.js'],'train3d.js':['assets/train-photos.js'],'main-menu.js':['nueva-partida.js'],
-    'app.js':['partidas-anteriores.js','conexiones-ui.js','tenfe-ui.js']};
+    'app.js':['partidas-anteriores.js','conexiones-ui.js','tenfe-ui.js','train-refit.js']};
   const order=baselineOrder.flatMap(file=>[...(optionalBefore[file]||[]).filter(extra=>fs.existsSync(path.join(dist,extra))),file]);
   function bundle(file){
     let text=file==='assets/voices.js'?'export const CLIPS = {};\n':file==='assets/voice-dialogues.js'?'export const DIALOGUES = __WEB_DIALOGUES__;\n':read(file);
@@ -63,6 +63,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   assert.equal(gameCode.split('__WEB_DIALOGUES__').length-1,1);
   let css=read('style-v3.css')+'\n'+read('main-menu.css')+'\n'+read('induction.css');
   if(fs.existsSync(path.join(dist,'marketplace.css')))css+='\n'+read('marketplace.css');
+  css+='\n'+read('train-refit.css');
   
 
   const mime={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',svg:'image/svg+xml',woff2:'font/woff2'};
@@ -81,6 +82,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   for(let index=0;index<scripts.length;index++)new vm.Script(scripts[index],{filename:gameLabels[index].filename});
   html=replaceOne(html,'<link rel="stylesheet" href="main-menu.css">','','main menu CSS link');
   html=replaceOne(html,'<link rel="stylesheet" href="induction.css">','','induction CSS link');
+  html=replaceOne(html,'<link rel="stylesheet" href="train-refit.css">','','train refit stylesheet link');
   const marketplaceLink='<link rel="stylesheet" href="marketplace.css">';
   if(html.includes(marketplaceLink)){
     assert(fs.existsSync(path.join(dist,'marketplace.css')),'the market stylesheet exists');

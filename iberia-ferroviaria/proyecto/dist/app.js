@@ -1,6 +1,7 @@
 import * as J from './conexiones.js';
 import * as JUI from './conexiones-ui.js';
 import * as Tracks from './track-preview.js';
+import * as Refits from './train-refit.js';
 import {INDUCTION_STAGES} from './induction.js';
 import {dialogueHtml} from './dialogue-presentation.js';
 import {freshInduction, note, stageChecks, readyInduction, inductionBriefing, inductionFeedbackLine, canInductionAnswer, restoreInductionHandoff} from './induction-runtime.js';
@@ -30,6 +31,7 @@ import {Sfx, ACTIONS} from './sfx.js';
 import {faceURL} from './faces.js';
 
 JUI.bind(E,faceURL);
+Refits.bind(E);
 const $ = id => document.getElementById(id);
 const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const n = (x, d = 0) => Number(x || 0).toLocaleString('es-ES', {maximumFractionDigits: d, minimumFractionDigits: d});
@@ -72,7 +74,7 @@ const ALIASES = {ops:['network','netView','ops'],works:['network','netView','wor
 let linePicking=null,savedError='',menuOpen=true,np=null; // np: pantalla «Nueva partida» abierta (arranque, maqueta, semilla, confirmación)
 let state = E.initialState(), saved = null, screen = null, inspect = null, playing = false, speedIndex = 1, layer = 'network';
 let lastTick = 0, lastPanel = 0, lastTimeline = 0, observerMinute = 480, seenIncidents = new Set(), alertTimer = null, toastTimer = null;
-let ui = {routeTab: 'all', routeStatus: 'all', routeQuery: '', netView: 'routes', ttType: null, ttStation: '', ttLine: '', ttHour: 6, fleetTab: 'fleet', worksTab: 'conv', officeTab: 'tycoon', autoPause: true};
+let ui = {routeTab: 'all', routeStatus: 'all', routeQuery: '', netView: 'routes', ttType: null, ttStation: '', ttLine: '', ttHour: 6, fleetTab: 'fleet', refitView: 'workshop', worksTab: 'conv', officeTab: 'tycoon', autoPause: true};
 const freshMarketFilters = () => ({query: '', state: 'all', delivery: 'all', maker: 'all', family: 'all', sort: 'recommended', favorites: false, route: ''});
 ui.market = freshMarketFilters();
 ui.progressTab='campaign';ui.pressTab='paper';
@@ -869,8 +871,8 @@ function withView([head, body]) {
   return [head, `<div class="segmented">${views.map(([k, t]) => `<button class="${ui.netView === k ? 'active' : ''}" data-action="net-view" data-id="${k}">${t}</button>`).join('')}</div>` + body];
 }
 function trainsPage() {
-  const tabs = [['fleet', 'Parque y taller'], ['market', 'Trenespop'], ['orders', 'Pedidos']];
-  const [, body] = ['market', 'orders'].includes(ui.fleetTab) ? marketPage(ui.fleetTab === 'market' ? 'catalogue' : 'orders') : fleetPage();
+  const tabs = [['fleet', 'Mi parque'], ['refits', 'Reformas'], ['market', 'Trenes Pop'], ['orders', 'Pedidos']];
+  const body = ui.fleetTab === 'refits' ? Refits.pageHTML(state,ui.refitView) : (['market', 'orders'].includes(ui.fleetTab) ? marketPage(ui.fleetTab === 'market' ? 'catalogue' : 'orders')[1] : fleetPage()[1]);
   if (ui.fleetTab === 'market') return [`<header class="tp-game-strip"><button data-action="fleet-tab" data-id="fleet">‹ Mi parque</button><span>Compra material para tu red</span><button class="close" data-action="close-drawer" aria-label="Cerrar Trenespop">×</button></header>`, body];
   return [header('Trenes', 'Los que tienes y los que vienen.', 'Los AVE solo van por ancho estándar. Los Alvia, por donde les echen.'), `<div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.fleetTab === k ? 'active' : ''}" data-action="fleet-tab" data-id="${k}">${t}</button>`).join('')}</div>` + body];
 }
@@ -917,8 +919,7 @@ function fleetPage() {
       const m = MODEL[f.model];
       return `<tr class="clickable" data-action="fleet-detail" data-id="${f.id}"><td>${trainThumb(f.model)}</td><td><button class="linkish fleet-link" data-action="fleet-detail" data-id="${f.id}">${esc(m.name)}</button><small>${esc(f.origin)}${f.maker ? ' · ' + esc(f.maker) : ''} · desde ${f.born} · ${GAUGES[m.gauge]} · ${POWERS[m.power]}</small></td><td class="num">${f.qty}</td><td class="num">${E.available(state, f)}</td><td style="min-width:120px"><div class="bar ${f.condition < 50 ? '' : 'green'}"><span style="width:${f.condition}%"></span></div><small>${n(f.condition)} %</small></td></tr>`;
     }).join('')}</tbody></table><p class="note">Solo se venden o reforman trenes libres: quítalos antes de alguna línea.</p>`;
-    body += `<h2 class="section">Taller</h2>` + (state.refits.length ? `<div class="rows">${state.refits.map(r => `<div><span class="status ${r.done ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[r.model].name)} · ${r.qty} unidades</h3><p>${r.done ? 'Reforma terminada' : 'Salen del taller en ' + when(r.due)}</p></div><span></span></div>`).join('')}</div>` : '<div class="empty">El taller está vacío. Los mecánicos, encantados.</div>');
-    body += '<p class="note">Una reforma cuesta el 12 % del precio y dura cinco meses. El tren vuelve casi nuevo.</p>';
+    body += '<div class="refit-fleet-link"><p>'+state.refits.filter(r=>!r.done).reduce((n,r)=>n+r.qty,0)+' unidades en reforma · interiores de los 14 modelos</p><button class="btn" data-action="fleet-tab" data-id="refits">Abrir taller de reformas →</button></div>';
   }
   return [header('Flota y talleres', 'Los trenes que tienes, no los que te prometieron.'), body];
 }
@@ -1337,8 +1338,14 @@ function fleetDetail(id) {
   showModal(`<div class="content"><div class="kicker">Lote de material</div><h1>${esc(m.name)}</h1><div class="train3d" data-train3d="${f.model}"></div><dl class="figures"><div><dt>Unidades</dt><dd>${f.qty}</dd></div><div><dt>Libres</dt><dd>${free}</dd></div><div><dt>Estado</dt><dd>${n(f.condition)} %</dd></div></dl>
   <p class="small">${used.length ? 'Asignado a: ' + used.map(r => esc(routeName(r)) + ' (' + r.units + ')').join(', ') : 'Sin asignar.'}</p>
   <label for="fleetQty">Unidades libres a gestionar</label><input id="fleetQty" type="number" min="1" max="${free}" value="${Math.min(2, free)}">
-  <p class="callout">Reforma: ${money(m.price * .12)} por unidad · 5 meses. Venta: unos ${money(m.price * .23 * f.condition / 100)} por unidad.</p>
-  <div class="actions"><button class="btn primary" data-action="refurbish" data-id="${id}" ${!free || state.ended ? 'disabled' : ''}>Enviar a reforma</button><button class="btn danger" data-action="sell" data-id="${id}" ${!free || state.ended ? 'disabled' : ''}>Vender</button><button class="btn" data-action="close-modal">Cerrar</button></div></div>`, 'single');
+  <p class="callout">Reforma: ${money(m.price * .12 * (state.tenfe?.game?.tech.includes('contrato') ? .75 : 1))} por unidad · 5 ${state.tenfe?.game?'turnos':'meses'}. Venta: unos ${money(m.price * .23 * f.condition / 100)} por unidad.</p>
+  <div class="actions"><button class="btn primary" data-action="refit-detail" data-id="${id}">Comparar reforma</button><button class="btn danger" data-action="sell" data-id="${id}" ${!free || state.ended ? 'disabled' : ''}>Vender</button><button class="btn" data-action="close-modal">Cerrar</button></div></div>`, 'single');
+}
+function refitDialog(id){showModal(Refits.detailHTML(state,id),'single');updateRefitQuote();}
+function updateRefitQuote(){
+ const input=$('refitQty'),box=$('refitQuote');if(!input||!box)return;
+ const q=Refits.quoteHTML(state,input.dataset.fleet,+input.value);box.innerHTML=q.html;
+ const button=$('modal').querySelector('[data-action="refit-confirm"]');if(button)button.disabled=q.disabled;
 }
 function purchaseDialog(id) {
   const m = MODEL[id];
@@ -1541,6 +1548,10 @@ document.addEventListener('click', event => {
     case 'upgrade': act(() => E.upgradeRoute(state, id), 'Mejora contratada. Termina en cuatro meses.'); break;
     case 'fleet-tab': ui.fleetTab = id; renderDrawer(true); break;
     case 'fleet-detail': fleetDetail(id); break;
+    case 'refit-view': ui.refitView=id;renderDrawer(true);break;
+    case 'refit-detail': refitDialog(id);break;
+    case 'interior-preview': showModal(Refits.previewHTML(id),'single');break;
+    case 'refit-confirm': if(act(()=>E.refurbish(state,id,+$('refitQty').value),'Material enviado al taller.')){closeModal();ui.fleetTab='refits';if(screen!=='fleet')navigate('fleet');else renderDrawer(true);}break;
     case 'refurbish': if (act(() => E.refurbish(state, id, +$('fleetQty').value), 'Material enviado a reforma.')) closeModal(); break;
     case 'sell': if (act(() => E.sell(state, id, +$('fleetQty').value), 'Venta completada.')) closeModal(); break;
     case 'purchase': purchaseDialog(id); break;
@@ -1586,6 +1597,11 @@ document.addEventListener('input', event => {
   if (t.id === 'npSeed' && np) np.seed = t.value;
   if (t.id === 'npGuide' && np) np.guide=t.checked;
   if (t.id === 'buyQty') updateQuote();
+  if(t.id==='refitQty')updateRefitQuote();
+  if(t.hasAttribute('data-refit-slider')){
+    const scene=t.closest('.refit-comparison')?.querySelector('.refit-scene');
+    if(scene)scene.style.setProperty('--refit-split',Math.max(0,Math.min(100,+t.value))+'%');
+  }
   if (['lineA', 'lineB'].includes(t.id)) updateLineQuote();
   if (['svcA', 'svcB'].includes(t.id)) updateServicePreview();
 });
@@ -1634,7 +1650,7 @@ document.addEventListener('keydown', event => {
 $('modal').addEventListener('cancel', event => { if (E.pendingDecision(state) || !state.started) event.preventDefault(); });
 
 // API de lectura para verificación automatizada y accesibilidad.
-window.railwayGame = {music, voices, sfx, snapshot: () => JSON.parse(JSON.stringify(state)), engine: E, unified: U, operations: O, schedule: S, map, navigate, setLayer, selectRoute,
+window.railwayGame = {music, voices, sfx, snapshot: () => JSON.parse(JSON.stringify(state)), engine: E, unified: U, campaign: J, operations: O, schedule: S, map, navigate, setLayer, selectRoute,
   plan: () => plan().map(t => ({id: t.id, route: t.route, dep: t.dep, arrival: t.arrival, delay: t.delay, real: t.real})), minute: currentMinute, play, pause, finishDay,
   state: () => state, render, pick, setMinute: m => { if (layer === 'real') observerMinute = m; else if (state.ops.phase === 'running') state.ops.minute = m; else observerMinute = m; render(); }};
 

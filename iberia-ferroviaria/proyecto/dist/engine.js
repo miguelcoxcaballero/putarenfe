@@ -119,7 +119,18 @@ export function buy(s,model,qty,listing=null){
  return id;
 }
 export function marketplaceFavorite(s,listing){return M.favorite(s,listing);}
-export function refurbish(s,id,qty){ensurePlaying(s);const f=s.fleet.find(f=>f.id===id);qty=Number(qty);if(!f||!Number.isInteger(qty)||qty<1||available(s,f)<qty)throw Error('Solo se reforman trenes libres del lote.');spend(s,qty*MODEL[f.model].price*.12*(s.tenfe?.game?.tech.includes('contrato')?.75:1));f.qty-=qty;s.refits.push({id:'ref'+s.nextId++,model:f.model,qty,due:s.month+5,born:f.born});log(s,'Al taller',qty+' × '+MODEL[f.model].name+' · 5 meses.');}
+export function refurbishQuote(s,id,qty=1){
+ const f=s.fleet.find(f=>f.id===id);qty=Number(qty);
+ if(!f||!MODEL[f.model]||!Number.isInteger(qty)||qty<1||available(s,f)<qty)throw Error('Solo se reforman trenes libres del lote.');
+ const discount=s.tenfe?.game?.tech.includes('contrato')?.25:0,perUnit=MODEL[f.model].price*.12*(1-discount);
+ return {qty,free:available(s,f),perUnit,total:qty*perUnit,discount,duration:5,due:s.month+5};
+}
+export function refurbish(s,id,qty){
+ ensurePlaying(s);const q=refurbishQuote(s,id,qty),f=s.fleet.find(f=>f.id===id);
+ spend(s,q.total);f.qty-=q.qty;
+ s.refits.push({id:'ref'+s.nextId++,model:f.model,qty:q.qty,started:s.month,due:q.due,originalDue:q.due,cost:q.total,born:f.born,maker:f.maker||MODEL[f.model].maker,fromCondition:f.condition,interiorBefore:f.interiorRefitted===true||/^Reforma /.test(f.origin||''),interiorAfter:true,done:false});
+ log(s,'Al taller',q.qty+' × '+MODEL[f.model].name+' · 5 '+(s.tenfe?.game?'turnos':'meses')+'.');
+}
 export function sell(s,id,qty){ensurePlaying(s);const f=s.fleet.find(f=>f.id===id);qty=Number(qty);if(!f||!Number.isInteger(qty)||qty<1||available(s,f)<qty)throw Error('Solo se venden trenes libres.');const value=qty*MODEL[f.model].price*.23*(f.condition/100);s.cash+=value;f.qty-=qty;log(s,'Venta de material',qty+' × '+MODEL[f.model].name+' · '+value.toFixed(1)+' M€.');}
 // ---- Obras
 export function startProject(s,id){ensurePlaying(s);ensureCrew(s);const p=PROJECTS.find(p=>p.id===id);if(!p)throw Error('Proyecto desconocido.');if(s.projects.some(x=>x.id===id))throw Error('Ese proyecto ya está contratado.');spend(s,p.cost);if(s.tenfe?.game&&s.projects.filter(x=>!x.done).length+s.tenfe.megas.filter(x=>x.due).length>=3)throw Error('Las tres cuadrillas están ocupadas.');const due=s.tenfe?.game?s.month+Math.max(2,Math.ceil(p.duration/8)):Math.max(s.month+p.duration,(p.earliest-2022)*12);const job={id,type:'infrastructure',started:s.month,due,originalDue:due,cost:p.cost,done:false,delay:0};s.projects.push(job);log(s,'Obra adjudicada',p.name+' · fin previsto: '+dateOf(due));V.note(s,'workStart',{id,terr:workTerritory(s,job)});}
@@ -244,7 +255,7 @@ export function step(s){
   if(s.cash<due){if(o.blocked!==s.month-1)log(s,'Entrega retenida por impago',MODEL[o.model].name+': faltan '+due.toFixed(1)+' M€ en caja.');o.blocked=s.month;continue;}
   s.cash-=due;o.remaining=Math.max(0,o.remaining-due);o.delivered+=count;o.next=s.month+1;s.stats.delivered+=count;addPurchasedFleet(s,o,count);log(s,o.marketplace?.state==='used'?'Llegan los trenes de ocasión':'Trenes nuevos',count+' × '+MODEL[o.model].name+' listos para salir.');
  }
- for(const r of s.refits.filter(r=>!r.done&&s.month>=r.due)){r.done=true;s.fleet.push({id:'f'+s.nextId++,model:r.model,qty:r.qty,condition:98,born:r.born,origin:'Reforma '+r.id});s.stats.refurbished+=r.qty;log(s,'Vuelven del taller',r.qty+' unidades como nuevas. Casi.');V.note(s,'refit',{fleet:s.fleet.at(-1).id});}
+ for(const r of s.refits.filter(r=>!r.done&&s.month>=r.due)){r.done=true;s.fleet.push({id:'f'+s.nextId++,model:r.model,qty:r.qty,condition:98,born:r.born,maker:r.maker||MODEL[r.model].maker,interiorRefitted:true,origin:'Reforma '+r.id});s.stats.refurbished+=r.qty;log(s,'Vuelven del taller',r.qty+' unidades como nuevas. Casi.');V.note(s,'refit',{fleet:s.fleet.at(-1).id});}
  for(const p of s.projects.filter(p=>!p.done&&s.month>=p.due)){
   if(p.type!=='upgrade'&&p.type!=='changer'&&!p.delayChecked){p.delayChecked=true;if(random(s)<(s.tenfe?.game?.08:.22)){p.delay=s.tenfe?.game?1:3+Math.floor(random(s)*7);p.due+=p.delay;log(s,'La obra se alarga','+'+p.delay+' meses. Ha aparecido algo debajo de la vía, como siempre.');V.note(s,'delay',{work:p.id});continue;}}
   p.done=true;finishWork(s,p);
@@ -345,8 +356,8 @@ export function validateSave(input){
  for(const p of s.projects){if(!safeId(p.id)||!['upgrade','infrastructure','custom','tramo','changer'].includes(p.type)||!Number.isFinite(p.due)||!Number.isFinite(p.started))throw Error('Obra no válida.');
   if(p.work==='configuration'&&(!p.configuration||!['ib','std','mixto'].includes(p.configuration.g)||!['no','3kv','25kv'].includes(p.configuration.e)||![1,2,3].includes(p.configuration.lanes)||typeof p.closes!=='boolean'))throw Error('Configuración de obra no válida.');
   if((p.type==='infrastructure'&&!PROJECTS.some(d=>d.id===p.id))||(p.type==='upgrade'&&!routeIds.has(p.route))||(p.type==='tramo'&&(!n.t[p.target]||!I.WORKS[p.work]))||(p.type==='changer'&&!I.NODES[p.target])||(p.type==='custom'&&!n.custom.some(c=>c.id===p.target)))throw Error('Obra no válida.');}
- for(const r of s.refits)if(!safeId(r.id)||!MODEL[r.model]||!Number.isInteger(r.qty)||r.qty<1||!Number.isFinite(r.due)||!Number.isFinite(r.born))throw Error('Reforma no válida.');
- const ids=new Set();for(const f of s.fleet){if(!safeId(f.id)||ids.has(f.id)||!MODEL[f.model]||!Number.isInteger(f.qty)||f.qty<0||!Number.isFinite(f.born)||!Number.isFinite(f.condition)||f.condition<0||f.condition>100)throw Error('Flota no válida.');ids.add(f.id);}
+ for(const r of s.refits)if(!safeId(r.id)||!MODEL[r.model]||!Number.isInteger(r.qty)||r.qty<1||!Number.isFinite(r.due)||!Number.isFinite(r.born)||(r.cost!==undefined&&(!Number.isFinite(r.cost)||r.cost<0))||(r.started!==undefined&&(!Number.isFinite(r.started)||r.started>r.due))||['interiorBefore','interiorAfter','done'].some(k=>r[k]!==undefined&&typeof r[k]!=='boolean'))throw Error('Reforma no válida.');
+ const ids=new Set();for(const f of s.fleet){if(!safeId(f.id)||ids.has(f.id)||!MODEL[f.model]||!Number.isInteger(f.qty)||f.qty<0||!Number.isFinite(f.born)||!Number.isFinite(f.condition)||f.condition<0||f.condition>100||(f.interiorRefitted!==undefined&&typeof f.interiorRefitted!=='boolean'))throw Error('Flota no válida.');ids.add(f.id);}
  for(const f of s.fleet)if(available(s,f)<0)throw Error('Hay trenes asignados dos veces.');
  for(const r of s.routes.filter(r=>r.active)){const f=s.fleet.find(f=>f.id===r.fleet);if(!f||!canRun(s,r,MODEL[f.model]))throw Error('Hay un tren asignado a una línea por la que no puede circular.');}
  if(s.stations!==undefined&&(typeof s.stations!=='object'||Array.isArray(s.stations)||Object.entries(s.stations).some(([k,v])=>!CITY[k]||!Number.isInteger(v)||v<0||v>3)))throw Error('Estaciones no válidas.');
