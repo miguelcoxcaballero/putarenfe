@@ -1,7 +1,7 @@
 name: Unificar Tenfe
 on:
   push:
-    branches: [codex/unificar-tenfe, main]
+    branches: [codex/unificar-tenfe]
 permissions:
   contents: write
 jobs:

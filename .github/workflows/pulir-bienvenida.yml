@@ -1,0 +1,90 @@
+name: Construir Conexiones y taller de vías
+on:
+  push:
+    branches: [codex/pulir-bienvenida, main]
+concurrency:
+  group: conexiones-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  check:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Motor y regresiones
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          npm test
+      - name: Construir publicación
+        working-directory: iberia-ferroviaria/proyecto
+        run: npm run web:build
+      - name: Preparar Chromium
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Probar el juego publicado
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          node conexiones-ui-test.mjs
+      - name: Guardar capturas e informe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tenfe-qa
+          path: iberia-ferroviaria/outputs/tenfe-qa
+      - name: Conservar publicación comprobada
+        run: |
+          git config user.name "Tenfe build"
+          git config user.email "tenfe-build@users.noreply.github.com"
+          git add iberia-ferroviaria
+          if ! git diff --cached --quiet; then
+            git commit -m "Construye publicación verificada de Tenfe [skip ci]"
+            git push
+          fi
+
+  live:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Esperar la publicación de esta versión
+        working-directory: iberia-ferroviaria
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const digest=b=>createHash('sha256').update(b).digest('hex');
+          const expected=digest(fs.readFileSync('release.json'));
+          const url='https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/release.json';
+          let published=false;
+          for(let attempt=0;attempt<45;attempt++){
+            try{
+              const response=await fetch(url+'?version='+Date.now(),{signal:AbortSignal.timeout(15000)});
+              if(response.ok && digest(Buffer.from(await response.arrayBuffer()))===expected){published=true;break;}
+            }catch(error){console.log(error.message);}
+            console.log('Esperando Pages, intento '+(attempt+1));
+            await new Promise(resolve=>setTimeout(resolve,20000));
+          }
+          if(!published)throw new Error('Pages no ha publicado el release de este commit');
+          NODE
+      - name: Verificar páginas, assets y grabaciones por HTTPS
+        working-directory: iberia-ferroviaria
+        run: node tools/verify-pages.mjs https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/ /tmp/tenfe-pages.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tenfe-publicacion
+          path: /tmp/tenfe-pages.json

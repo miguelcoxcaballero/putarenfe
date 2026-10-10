@@ -1,18 +1,20 @@
-# Iberia Ferroviaria · Al mando de Tenfe
+# Tenfe · Conexiones
 
-**Versión 5.0: un único juego.** La herencia y el rescate forman una campaña continua de 2022 a 2050. Empiezas con la red heredada; en 2027 se activa el rescate sobre **tu misma red, flota, caja, calendario y guardado**. Ya no se abre otro motor ni otra interfaz.
+**Versión 6.0: un juego nuevo.** Las mejores mecánicas de Rescate y La herencia funcionan juntas desde el primer turno: una red propia de conexiones, cinco retos simultáneos, sucesos ilustrados y elecciones cada 12 turnos.
 
-[Jugar](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/) · [Auditorio](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html)
+[Jugar](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/) · [Reglas y mapa](docs/CONEXIONES.md) · [Auditorio](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html)
 
-Programa servicios, conecta ciudades y ajusta tarifas. Cumple encargos, investiga, firma hasta dos pactos y construye megaproyectos por fases. Los hitos se comprueban con tus viajeros reales al cerrar el mes. Las elecciones al cerrar diciembre de 2030 y 2034 dependen de la media de apoyo de seis meses: viajeros, territorios, plantilla y economía.
+Conecta capitales y territorios con AVE, Alvia y regionales. Ajusta frecuencias y tarifas, atiende incidencias en jornadas simuladas o delega la operación del turno. El consejo, los rivales, los pactos y los grandes proyectos están disponibles desde el comienzo.
 
-La interfaz reúne **Red, Flota, Dinero, Despacho, Progreso y Prensa** alrededor del mapa. La misión propone una acción concreta; el informe mensual muestra resultado, viajeros, caja, puntualidad y noticias. Puedes jugar cada jornada o cerrar el mes para avanzar. Las capas del mapa se abren desde «Capas».
+Completa cinco retos de fiabilidad, cobertura, rentabilidad, compromisos y construcción; gana dos mandatos para completar la partida. Después puedes continuar ampliando la red. Tres cuadrillas, dos pactos y recursos de investigación limitan qué puedes encargar a la vez.
 
-**Trenes Pop sigue siendo Trenespop.** Conserva su identidad, fotografías, filtros, favoritos, material usado, pedidos y pagos del 30 % / 70 %. AVE, Alvia y regionales se compran allí. Los regionales incluyen Civia, S599, S592, BCBB y Dörfler; usan la red real y respetan ancho, tensión y tracción.
+Las **63 ilustraciones de Rescate** participan en sucesos, 18 investigaciones, seis megaproyectos de cuatro fases, objetivos, elecciones, bienvenida y resultados. Las fotos de material, ciudades y personajes de La herencia permanecen. Se conservan sin modificación los **412 textos y grabaciones canónicos**.
 
-El rescate incorpora pactos comprobables, elecciones, hitos, proyectos de tres fases y adjudicaciones irregulares con inspección y restitución. Los importes se expresan en la economía de la red nacional. Las voces clásicas conservan sus **412 textos y grabaciones completos**; las nuevas pantallas de gestión tienen texto y no regeneran audio.
+**Trenes Pop sigue siendo Trenespop**, con fotografías, filtros, favoritos, segunda mano, pedidos y pagos del 30 % / 70 %. El material respeta ancho, tensión y tracción.
 
-En «Nueva partida» eliges semilla, primer turno guiado y presión electoral: **Con desafío** (una derrota termina el mandato) o **A tu ritmo** (una derrota reduce el apoyo y permite continuar). Las jornadas y el resto de la economía comparten las mismas reglas.
+El taller visual de vías compara la configuración actual y la propuesta con franjas amarillas animadas. Ofrece **27 combinaciones**: ibérico/estándar/mixto, ninguna/3 kV/25 kV y vía única/doble/triple. La preview no gasta dinero; la obra valida coste, plazo, cuadrillas y cortes antes de contratar.
+
+La guía resalta los paneles y controles reales, desenfocando el resto. Se puede pausar y reanudar; la bienvenida entra sobre el mapa sin encadenar avisos de producción ni decisiones ajenas a la guía.
 
 ## Partidas anteriores
 
@@ -22,7 +24,7 @@ El progreso se guarda en el navegador y origen actuales. Exporta desde Guardar p
 
 ## Desarrollo y comprobación
 
-La fuente editable vive en `proyecto/dist/`. `tenfe.js` añade la progresión al motor común; `partidas-anteriores.js` convierte guardados. Los archivos del rescate 4.0 se conservan como historia y pruebas, pero quedan fuera del empaquetado publicado.
+La fuente editable vive en `proyecto/dist/`. `conexiones.js` define las reglas nuevas; `tenfe.js` conecta la progresión al motor común; `partidas-anteriores.js` convierte guardados. Los datos e imágenes de Rescate se usan en Conexiones. Sus antiguos motor e interfaz independientes se conservan para migración y pruebas.
 
 Desde `proyecto/`:
 
@@ -31,9 +33,9 @@ npm test
 npm run web:build
 npm install --no-save --package-lock=false playwright@1.56.1
 npx playwright install --with-deps chromium
-npm run tenfe-ui
+npm run conexiones-ui
 ```
 
-GitHub Actions ejecuta las regresiones del motor, las reglas nuevas y el recorrido de Chromium sobre la web compilada, con pantallas de 1440, 390 y 320 píxeles. Guarda capturas y un informe en el artefacto `tenfe-qa`. Solo conserva la publicación reconstruida cuando pasan las comprobaciones. `release.json` recoge los archivos publicados y sus SHA-256.
+GitHub Actions ejecuta las regresiones del motor, las reglas nuevas y el recorrido de Chromium sobre la web compilada, con pantallas de 1440 y 390 píxeles. Guarda capturas y un informe en el artefacto `tenfe-qa`. Solo conserva la publicación reconstruida cuando pasan las comprobaciones. `release.json` recoge los archivos publicados y sus SHA-256.
 
 La aplicación de Renfe sigue en la raíz del repositorio.

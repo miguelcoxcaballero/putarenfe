@@ -20,11 +20,12 @@ export function setPolicy(s,id){if(!Object.hasOwn(POLICIES,id))throw Error('Pol�
 export function hire(s,count=20){if(!Number.isInteger(count)||count<1||count>200)throw Error('Contrata entre 1 y 200 maquinistas.');pay(s,count*.015);s.tycoon.training.push({count,due:s.month+3});}
 /** Coste de investigar: lo pagado en un piloto reciente se descuenta. */
 export function researchCost(s,id){const q=TECHS[id],c=s.verdad?.credit?.[id];return Math.max(0,q.cost-(c&&c.until>=s.month?c.amount:0));}
-export function research(s,id){const t=s.tycoon,q=Object.hasOwn(TECHS,id)?TECHS[id]:null;if(!q||t.research||t.tech.includes(id)||!q.requires.every(x=>t.tech.includes(x)))throw Error('Completa primero los requisitos y la investigación en curso.');pay(s,researchCost(s,id));if(s.verdad?.credit)delete s.verdad.credit[id];t.research={id,due:s.month+q.months};}
+export function research(s,id){const t=s.tycoon,q=Object.hasOwn(TECHS,id)?TECHS[id]:null;if(!q||t.research||t.tech.includes(id)||!q.requires.every(x=>t.tech.includes(x)))throw Error('Completa primero los requisitos y la investigación en curso.');pay(s,researchCost(s,id));if(s.verdad?.credit)delete s.verdad.credit[id];t.research={id,due:s.month+(s.tenfe?.game?Math.max(1,Math.ceil(q.months/4)):q.months)};}
 export function lobby(s,id){if(!Object.hasOwn(GROUPS,id))throw Error('Grupo desconocido.');if(s.tycoon.groups[id]>=95)throw Error('Ya están encantados. Guarda la cartera.');pay(s,8);s.tycoon.groups[id]=bound(s.tycoon.groups[id]+12);}
 export function freeGame(s,cash,rivals){if(![500,1500,5000].includes(cash)||typeof rivals!=='boolean')throw Error('Configuración del modo libre inválida.');if(s.started||s.month!==0)throw Error('El modo libre se elige al empezar.');s.cash=cash;s.tycoon.mode='free';s.tycoon.rivals=rivals;}
 function marketEntry(s,r){
  if(!s.tycoon.rivals||r.demand<15000)return null;
+ if(s.tenfe?.game)return 0;
  const from=/barcelona/.test(r.id)?0:/valencia|alicante/.test(r.id)?12:/sevilla|malaga|granada/.test(r.id)?30:72;
  return s.month>=from&&(/madrid/.test(r.id)||s.month>=72)?from:null;
 }

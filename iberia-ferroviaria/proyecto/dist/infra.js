@@ -109,6 +109,7 @@ export const hasChanger = (s, node) => s.infra.c.includes(node);
 
 /** Aplica las obras históricas cuya fecha ya ha llegado. Devuelve los titulares nuevos. */
 export function applyHistoric(s, date) {
+  if(s.tenfe?.game)return [];
   const news = new Set();
   for (const d of TRAMOS) for (const [when, ch] of d.hist || []) {
     const key = d.id + '@' + when;
@@ -128,7 +129,7 @@ export function applyHistoric(s, date) {
 
 /** Tramos cortados por una obra de cambio de ancho en curso. */
 export function closedTramos(s) {
-  return new Set(s.projects.filter(p => !p.done && p.type === 'tramo' && p.work === 'standard').map(p => p.target));
+  return new Set(s.projects.filter(p => !p.done && p.type === 'tramo' && (p.work === 'standard'||p.work==='configuration'&&p.closes)).map(p => p.target));
 }
 
 // ---------------------------------------------------------------- enrutado
@@ -155,7 +156,7 @@ function graph(s) {
   Object.defineProperty(s, '__graph', {value: g, enumerable: false, configurable: true, writable: true});
   return g;
 }
-function closedKey(s) { return s.projects.filter(p => !p.done && p.type === 'tramo' && p.work === 'standard').map(p => p.target).join(','); }
+function closedKey(s) { return s.projects.filter(p => !p.done && p.type === 'tramo' && (p.work === 'standard'||p.work==='configuration'&&p.closes)).map(p => p.target).join(','); }
 
 /** Coste (minutos) y faltas de recorrer un tramo en un modo; null si no se puede ni con faltas. */
 function traverse(s, g, e, mode, prof, relaxed) {
@@ -307,6 +308,7 @@ export function pathNodes(s, p, first) {
 
 // ---------------------------------------------------------------- obras
 export const WORKS = {
+ configuration:{label:'Mejora de la configuración de vía',verb:'Diseñar mejora',base:0,perKm:0,months:()=>1},
  renew:{label:'Renovación a 220 km/h',verb:'Renovar vía',base:8,perKm:.18,months:km=>Math.ceil(4+km/40)},
   electrify: {label: 'Electrificar a 25 kV', verb: 'Electrificar', perKm: .42, base: 6, months: km => Math.round(12 + km / 10)},
   mixed: {label: 'Tercer carril: ancho mixto', verb: 'Poner ancho mixto', perKm: .5, base: 8, months: km => Math.round(14 + km / 9)},
@@ -320,7 +322,7 @@ export function tramoWorks(s, id) {
   if (!st || !d || !st.b || d.custom) return [];
   const busy = s.projects.some(p => !p.done && p.type === 'tramo' && p.target === id);
   const out = [];
-  if (st.e === 'no') out.push('electrify');
+  if (st.e !== '25kv') out.push('electrify');
   if (st.g === 'ib') out.push('mixed', 'standard');
   if(st.b&&st.v<220)out.push('renew');
   return out.map(w => ({work: w, ...WORKS[w], cost: Math.round(WORKS[w].base + WORKS[w].perKm * d.km), duration: WORKS[w].months(d.km), busy}));
