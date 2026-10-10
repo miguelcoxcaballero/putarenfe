@@ -4,7 +4,7 @@ import {savedGames} from './nueva-partida.js';
 const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const menuPhotoCredit=()=>`<span class="menu-photo-credit">Paracuellos de la Ribera · <a href="https://commons.wikimedia.org/wiki/File:RENFE_Class_103_Paracuellos_de_la_Ribera.jpg" target="_blank" rel="noopener">David Gubler</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a></span>`;
 const backdrop=()=>'<div class="main-menu-art" role="img" aria-label="Fotografía de un AVE serie 103 cruzando el viaducto de Paracuellos de la Ribera."></div>';
-const where=game=>escapeHTML(game.where);
+const where=game=>game.date?`<time>${escapeHTML(game.where)}</time>`:escapeHTML(game.where);
 export function menuHTML(saved=null,savedError='',rescue=null){
  const [latest]=savedGames(saved);
  return `<main class="main-menu menu-home" aria-labelledby="menu-title">
