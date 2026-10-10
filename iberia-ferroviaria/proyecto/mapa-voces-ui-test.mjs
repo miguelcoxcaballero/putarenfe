@@ -125,8 +125,7 @@ try{
   if(await page.locator('#modal [data-action="decision"]:not([disabled])').count()){
    await page.locator('#modal [data-action="decision"]:not([disabled])').first().click();continue;
   }
-  await page.evaluate(()=>{const g=window.railwayGame;g.navigate('story');});
-  if(!await page.locator('.desk-decision').count()&&!await page.locator('.game-event').count())await page.evaluate(()=>window.railwayGame.navigate('story'));
+  if(!await page.locator('#navigation [data-screen="story"]').evaluate(e=>e.classList.contains('active')))await page.locator('#navigation [data-screen="story"]').click();
   const voiceCount=await page.evaluate(()=>window.__audioQA.starts.length);
   if(await page.locator('.desk-decision').count()){
    if(await page.evaluate(()=>!!window.railwayGame.voices.speaking&&!window.railwayGame.voices.source)){
