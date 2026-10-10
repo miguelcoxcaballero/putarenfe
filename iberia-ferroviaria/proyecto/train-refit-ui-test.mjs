@@ -18,13 +18,13 @@ try{
   const context=await browser.newContext({viewport:size}),page=await context.newPage();active=page;page.setDefaultTimeout(20000);page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url);await page.waitForFunction(()=>!!window.railwayGame);
   await page.locator('[data-action="new-game"]').click();await page.locator('#npSeed').fill('REFORMAS-QA');await page.locator('#npGuide').uncheck();await page.locator('[data-action="np-difficulty"][data-id="relajada"]').click();await page.locator('[data-action="np-begin"]').click();await page.locator('[data-action="welcome-close"]').click();
-  await page.locator('#navigation [data-screen="fleet"]').click();await page.locator('[data-action="fleet-tab"][data-id="refits"]').click();
+  await page.locator('#navigation [data-screen="fleet"]').click();await page.locator('#drawer .tabs [data-action="fleet-tab"][data-id="refits"]').click();
   await decode(page,'.refit-lots img');await noOverflow(page);await screenshot(page,'reformas-'+size.width);
   await page.locator('[data-action="refit-view"][data-id="catalogue"]').click();assert.equal(await page.locator('.refit-catalogue article').count(),14);assert.equal(await page.locator('.refit-catalogue img').count(),28);await decode(page,'.refit-catalogue img');await noOverflow(page);
   const beforeCatalogue=JSON.stringify(await snap(page));
   for(const id of ['r465','r599','r592','rdorf','rbcbb','s100','s112','s103','s106f','av2030','s120','s130','s730','s106v']){
    await page.locator('[data-action="interior-preview"][data-id="'+id+'"]').click();await decode(page,'#modal .refit-photo');assert.equal(await page.locator('#modal [data-action="refit-confirm"]').count(),0);
-   const slider=page.locator('#modal [data-refit-slider]');await slider.fill('73');await slider.dispatchEvent('input');assert.equal(await page.locator('#modal .refit-scene').evaluate(el=>el.style.getPropertyValue('--refit-split')),'73%');
+   const slider=page.locator('#modal [data-refit-slider]');await slider.evaluate(el=>{el.value='73';el.dispatchEvent(new Event('input',{bubbles:true}));});assert.equal(await page.locator('#modal .refit-scene').evaluate(el=>el.style.getPropertyValue('--refit-split')),'73%');
    assert(await page.locator('#modal').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'comparador sin desbordamiento');
    if(id==='s106f')await screenshot(page,'interior-avril-'+size.width);
    await page.locator('#modal [data-action="close-modal"]').click();
@@ -44,7 +44,7 @@ try{
    if(!api.engine.step(s))throw Error('El turno no avanzó');
   }api.render();});
   const complete=await snap(page),job=complete.refits.at(-1),returned=complete.fleet.find(f=>f.origin==='Reforma '+job.id);assert(job.done);assert.equal(returned.qty,2);assert.equal(returned.condition,98);assert(returned.interiorRefitted);
-  await page.evaluate(()=>window.railwayGame.navigate('fleet'));await page.locator('[data-action="fleet-tab"][data-id="refits"]').click();
+  await page.evaluate(()=>window.railwayGame.navigate('fleet'));await page.locator('#drawer .tabs [data-action="fleet-tab"][data-id="refits"]').click();
   const card=page.locator('.refit-lots article').filter({has:page.locator('[data-action="refit-detail"][data-id="'+returned.id+'"]')});assert.equal(await card.locator('img').getAttribute('data-interior'),'reformado');
   await decode(page,'.refit-lots img');check('cotización, confirmación, guardado y retorno con interior renovado en '+size.width);
   await context.close();

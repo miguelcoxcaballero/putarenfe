@@ -26,3 +26,11 @@
 @media(prefers-reduced-motion:reduce){.refit-stripes{animation:none}}
 
 .refit-catalogue article>header,.refit-catalogue article>p{padding:0 13px}.refit-catalogue article>header{padding-top:13px}.refit-catalogue article>.btn{margin:0 13px 13px}
+
+/* Explicit foregrounds keep the pale workshop cards legible in the dark game. */
+.refit-intro,.refit-lots article,.refit-catalogue article,.refit-empty,.refit-fleet-link,.refit-references{color:#392c2b}
+.refit-intro h2,.refit-lots h3,.refit-catalogue h3{color:#563440}
+.refit-intro .kicker,.refit-lots .kicker,.refit-catalogue .kicker{color:#83585b}
+.refit-intro p,.refit-lots p,.refit-catalogue p,.refit-fleet-link p,.refit-references p{color:#655551}
+.refit-references a{color:#874251}.refit-references summary{color:#58343e}
+.refit-quote em{color:#c8bba9}.refit-slider{color:#e9dfcf}
