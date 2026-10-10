@@ -39,3 +39,9 @@ npm run conexiones-ui
 GitHub Actions ejecuta las regresiones del motor, las reglas nuevas y el recorrido de Chromium sobre la web compilada, con pantallas de 1440 y 390 píxeles. Guarda capturas y un informe en el artefacto `tenfe-qa`. Solo conserva la publicación reconstruida cuando pasan las comprobaciones. `release.json` recoge los archivos publicados y sus SHA-256.
 
 La aplicación de Renfe sigue en la raíz del repositorio.
+
+### Reforma de trenes
+
+En **Flota → Reformas** puedes comparar el interior de serie y reformado de cada uno de los 14 modelos, elegir unidades libres y consultar el coste antes de enviarlas al taller. El catálogo reúne 28 imágenes creadas con IA a partir de referencias de interiores ferroviarios, enlazadas en cada comparador. Los modelos ficticios están marcados como conceptos. Los lotes reformados vuelven a los cinco turnos con interior renovado y 98 % de estado; se conserva el descuento por investigación y el guardado admite reformas anteriores.
+
+Las fuentes y criterios del arte están en [interiores-reforma-6.1.md](investigacion/interiores-reforma-6.1.md). El proceso de publicación exporta WebP de 768 × 512 desde siete láminas finales, y verifica las 28 imágenes en Chromium de escritorio y móvil. Se mantienen Trenes Pop, las 63 fotografías de eventos, las 27 configuraciones de vía y las 412 grabaciones canónicas.
