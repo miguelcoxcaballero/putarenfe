@@ -140,8 +140,8 @@
     },
     {
       "file": "conexiones.js",
-      "bytes": 29310,
-      "sha256": "e2853f2be5a7106048a69fd7c036b17e688862d7c33b21f67ad859bf524dde58"
+      "bytes": 29255,
+      "sha256": "d8b8eba84e00b4c6360c587197090d381a1347cb86d8f9f257c70f3f04d03878"
     },
     {
       "file": "tenfe.js",
@@ -155,8 +155,8 @@
     },
     {
       "file": "engine.js",
-      "bytes": 49450,
-      "sha256": "494fc5cb98e9a16148a7ba3210d69091c91da1a79c9286d8a29a96fe6daa9c5a"
+      "bytes": 49669,
+      "sha256": "74e5b5affe902febf8029d359fbcaf78903501f83708b1354f4e3181af9deb6d"
     },
     {
       "file": "operations.js",
@@ -165,8 +165,8 @@
     },
     {
       "file": "map-v3.js",
-      "bytes": 52526,
-      "sha256": "bc1a30ccfc53e49e308c7969b12949c878e66aab9e807c7ee47d8ec0f72ad5c8"
+      "bytes": 53020,
+      "sha256": "af0972c6d95672111048ab4f2ec4604176a886f1d928899a742d464989248e3d"
     },
     {
       "file": "train-art.js",
@@ -265,8 +265,8 @@
     },
     {
       "file": "app.js",
-      "bytes": 173566,
-      "sha256": "1d5ad68c940b97ec7947c72de8c8efabf9eec9d99188fb33036d76fa45986c41"
+      "bytes": 174865,
+      "sha256": "23191dde2aafed00f260070a63d59b32a7c78a4f3a751df4da7090183324b9d2"
     },
     {
       "file": "style-v3.css",
@@ -280,8 +280,8 @@
     },
     {
       "file": "induction.css",
-      "bytes": 10944,
-      "sha256": "b291aadf33b9f7b066d362863f0f910283b6328037ec887e3393d5029e5556af"
+      "bytes": 11275,
+      "sha256": "1288f96d631d0b64333dfa570b861d3d956fb168b7c0db6a5dab74e52d0fa580"
     },
     {
       "file": "marketplace.css",
