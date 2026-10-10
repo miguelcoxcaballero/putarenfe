@@ -230,6 +230,7 @@ export const RECIPES = R;
 //  'nombre' → ese efecto al pulsar · '=nombre' → ese efecto si la acción sale bien (si falla, «error»)
 //  '@open' / '@close' → lo pone el propio diálogo al abrirse o cerrarse · '!…' → depende del estado (se decide en app.js)
 export const ACTIONS = {
+ 'refit-view':'tab','refit-detail':'@open','interior-preview':'@open','refit-confirm':'=refurbish',
  'welcome-close':'dismiss',
  'np-difficulty':'tab','legacy-preview':'@open','progress-tab':'tab','press-tab':'tab','tenfe-notice':'dismiss','month-report':'nav','legacy-convert':'=continue','legacy-export':'export','tenfe-shortcut-confirm':'=decision','tenfe-next':'tap','tenfe-decision':'@open','tenfe-pact':'=contract','tenfe-mega':'=infra','tenfe-shortcut':'@open','tenfe-restitute':'=repay','tenfe-lawyer':'=contract','tenfe-tab':'tab',
  'menu-home':'@open','menu-guide':'@open','menu-settings':'@open','continue-other':'continue',
