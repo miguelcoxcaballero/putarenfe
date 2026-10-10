@@ -4,7 +4,7 @@ Un juego de gestión ferroviaria por turnos. Las mecánicas de Rescate y La here
 
 ## Red y objetivos
 19 relaciones iniciales: grandes conexiones AVE, Alvia y regionales; transversales Ebro y Mediterráneo y territorios rurales. El tablero muestra 16 núcleos de forma esquemática; las capas técnicas conservan los tramos físicos, anchos, tensión y compatibilidad del material. Se pueden crear otros servicios y líneas.
-Cinco retos simultáneos: puntualidad ≥85 %, dos servicios rurales nuevos, tres cierres rentables, dos compromisos cumplidos y un megaproyecto completo. Completar los cinco y ganar dos elecciones constituye victoria; permite seguir jugando.
+Cinco retos simultáneos: puntualidad ≥85 %, dos servicios rurales nuevos, tres cierres rentables, dos compromisos cumplidos y un megaproyecto operativo completo (el monumento no cuenta). Completar los cinco y ganar dos elecciones constituye victoria; permite seguir jugando.
 
 ## Turnos y decisiones
 Un turno liquida la previsión de la red. Se puede simular una jornada e intervenir en las incidencias, o delegar su operación con Cerrar turno.

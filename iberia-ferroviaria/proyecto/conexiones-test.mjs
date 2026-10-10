@@ -7,6 +7,7 @@ import * as J from './dist/conexiones.js';
 import * as Tracks from './dist/track-preview.js';
 import * as I from './dist/infra.js';
 import {MODEL} from './dist/data.js';
+import * as T from './dist/tycoon.js';
 const fresh=seed=>{const s=E.initialState(seed);U.begin(s,{rules:'conexiones',difficulty:'relajada'});s.started=true;s.tutorial={done:true};return s;};
 const clear=s=>{if(s.tenfe.game.event){const d=J.EVENTS.find(x=>x.id===s.tenfe.game.event.id);J.decide(s,d.id,d.choices.findIndex(x=>x.cost<=s.cash));}let n=0,d;while((d=E.pendingDecision(s))){if(++n>100)throw Error('Consejo en bucle');E.decide(s,d.id,d.choices.findIndex(x=>!x.disabled&&(x.cost||0)<=s.cash));}};
 const close=s=>{clear(s);assert(E.step(s));return s;};
@@ -43,3 +44,29 @@ for(const id of ['control','taller','teruel'])J.startMega(busy,id);assert.throws
 for(const corrupt of [false,true]){const x=fresh(33);x.cash=10000;if(corrupt)x.tenfe.game.tech=['contabilidad'];const cash=x.cash;J.shortcut(x);assert.equal(x.cash-cash,corrupt?60:45);J.legalDefence(x);assert.throws(()=>J.legalDefence(x));for(let i=0;i<15;i++)close(x);assert.equal(x.tenfe.scandal,null);assert(x.tenfe.game.news.some(n=>n.image==='juzgado'));assert(E.validateSave(x));}
 const invalid=JSON.parse(frozen);invalid.tenfe.game.deck=['evento-falso'];assert.throws(()=>E.validateSave(invalid));
 console.log('✓ Conexiones: red y reglas desde turno 1, 63 ilustraciones activas, mazo guardado sin repeticiones, elecciones, laboratorio, pactos, cuadrillas, consecuencias y 27 configuraciones de vía.');
+
+{
+ // A real campaign can be completed without inventing money, votes or unlocks.
+ const s=fresh(45);s.tenfe.difficulty='normal';
+ for(let turn=0;turn<48&&!s.ended&&!s.tenfe.game.won;turn++){
+  clear(s);
+  if(!s.tenfe.pacts.some(x=>x.id==='investigacion')&&s.cash>15)J.signPact(s,'investigacion');
+  if(!s.tenfe.pacts.some(x=>x.id==='territorio')&&s.tenfe.pacts.filter(x=>x.status==='active').length<2)J.signPact(s,'territorio');
+  if(!s.tenfe.game.tech.includes('cadenciados')&&!s.tenfe.game.research&&s.cash>=3)J.research(s,'cadenciados');
+  for(const r of [...s.routes].sort((a,b)=>(b.active?1:0)-(a.active?1:0))){
+   let best=null;
+   for(const f of s.fleet){if(!E.canRun(s,r,MODEL[f.model]))continue;
+    const free=E.available(s,f,r.id);for(let frequency=1;frequency<=Math.min(E.maxFrequency(r),6);frequency++){
+     const units=E.requiredUnits(s,r,MODEL[f.model],frequency);if(units>free)break;
+     for(const fare of [15,25,35,45,60,75,90]){const q=E.metrics(s,r,{active:true,fleet:f.id,frequency,units,fare});if(!best||q.net>best.net)best={...q,f,frequency,fare};}
+    }
+   }
+   if(best&&(!r.active?best.net>.05:r.fare!==best.fare||r.frequency!==best.frequency||r.fleet!==best.f.id)&&s.cash>=4)E.configureRoute(s,r.id,best.f.id,best.frequency,best.fare);
+  }
+  const q=J.megaQuote(s,'taller');if(!q.reason&&q.stage<4&&s.cash>=q.cost+30)J.startMega(s,'taller');
+  clear(s);assert(E.step(s));assert(E.validateSave(s));
+ }
+ assert(s.tenfe.game.won,'cinco retos y dos elecciones se pueden ganar con acciones legales');
+ assert(s.tenfe.megas.some(p=>p.id==='taller'&&p.stage===4));assert.equal(s.tenfe.elections.filter(x=>x.won).length,2);
+ console.log('✓ Partida nueva completa ganada con servicios, tarifas, pactos, investigación y taller reales: '+s.month+' turnos.');
+}

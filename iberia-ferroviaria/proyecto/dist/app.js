@@ -1229,7 +1229,7 @@ function pressPage(){
 }
 function showTenfeUpdate(report=false){
   if(menuOpen||np||tut||!state.tenfe||$('modal').open)return;
-  if(state.tenfe.game){if(state.tenfe.game.event){ui.tycoonTab='agenda';screen='story';render();}return;}
+  if(state.tenfe.game){if(state.tenfe.game.event){ui.tycoonTab='agenda';screen='story';render();$('drawer').querySelector('.body').scrollTop=0;}return;}
   const notice=state.tenfe.notices[0];
   if(notice){pause();showModal(`<div class="content tenfe-news-modal"><span class="kicker">${esc(when(notice.month))} · ${esc(notice.kind)}</span><h1>${esc(notice.title)}</h1><p>${esc(notice.body)}</p><div class="actions"><button class="btn primary" data-action="tenfe-notice" data-id="${notice.id}">Continuar</button></div></div>`,'single');return;}
   if(report&&state.tenfe.reports.length)showModal(`<div class="content tenfe-month-report">${TenfeUI.reportHTML(state)}${TenfeUI.nextHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a la red</button><button class="btn" data-action="month-report">Ver informes</button></div></div>`,'single');

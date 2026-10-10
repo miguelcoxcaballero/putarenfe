@@ -17,7 +17,7 @@ export const CHALLENGES = [
  {id:'s2',name:'El país también existe entre capitales',text:'Abre dos conexiones rurales adicionales.',test:s=>rural(s).length>=s.tenfe.ruralBase+2,reward:40},
  {id:'s3',name:'Una red que se sostiene',text:'Consigue margen positivo durante tres turnos consecutivos.',test:s=>s.tenfe.game.profit>=3,reward:40},
  {id:'s4',name:'Prometer, cumplir, repetir',text:'Cumple dos acuerdos: pactos del consejo o encargos de tu agenda.',test:s=>s.tenfe.pacts.filter(p=>p.status==='won').length+s.tycoon.completed>=2,reward:35},
- {id:'s5',name:'Algo que queda',text:'Pon en servicio un megaproyecto completo.',test:s=>s.tenfe.megas.some(p=>p.stage===4),reward:50}
+ {id:'s5',name:'Algo que queda',text:'Pon en servicio un megaproyecto que mejore la operación de tu red.',test:s=>s.tenfe.megas.some(p=>p.stage===4&&p.id!=='monumento'),reward:50}
 ];
 const countryside=['sor','ter','bad','san','sal','gij','leo'];
 export const rural = s => s.routes.filter(r=>r.active&&r.via.some(n=>countryside.includes(n)));

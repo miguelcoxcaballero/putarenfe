@@ -2,6 +2,9 @@ name: Construir Conexiones y taller de vías
 on:
   push:
     branches: [codex/pulir-bienvenida, main]
+concurrency:
+  group: conexiones-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:

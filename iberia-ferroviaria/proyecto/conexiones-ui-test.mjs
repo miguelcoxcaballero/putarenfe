@@ -58,7 +58,7 @@ try{
    await page.locator('#daybar [data-action="skip-month"]').click();
   }
   await page.waitForFunction(()=>window.railwayGame.snapshot().month===1);
-  assert.equal(await page.locator('.game-event').count(),1);assert.equal(await page.locator('.game-event img').evaluate(el=>el.complete&&el.naturalWidth>0),true);
+  assert.equal(await page.locator('.game-event').count(),1);await page.waitForFunction(()=>{const el=document.querySelector('.game-event img');return el?.complete&&el.naturalWidth>0;});
   await saveScreenshot(page,'suceso-'+size.width);
   const oldId=await page.locator('[data-action="game-event"]').first().getAttribute('data-id');
   await page.locator('[data-action="game-event"]:not([disabled])').first().click();assert.equal(await page.evaluate(()=>window.railwayGame.snapshot().tenfe.game.event),null);
