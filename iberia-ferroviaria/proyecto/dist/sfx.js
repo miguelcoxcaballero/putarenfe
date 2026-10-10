@@ -233,7 +233,7 @@ export const ACTIONS = {
  'refit-view':'tab','refit-detail':'@open','interior-preview':'@open','refit-confirm':'=refurbish',
  'welcome-close':'dismiss',
  'np-difficulty':'tab','legacy-preview':'@open','progress-tab':'tab','press-tab':'tab','tenfe-notice':'dismiss','month-report':'nav','legacy-convert':'=continue','legacy-export':'export','tenfe-shortcut-confirm':'=decision','tenfe-next':'tap','tenfe-decision':'@open','tenfe-pact':'=contract','tenfe-mega':'=infra','tenfe-shortcut':'@open','tenfe-restitute':'=repay','tenfe-lawyer':'=contract','tenfe-tab':'tab',
- 'menu-home':'@open','menu-guide':'@open','menu-settings':'@open','continue-other':'continue',
+ 'menu-load':'@open','menu-home':'@open','menu-guide':'@open','menu-settings':'@open','continue-other':'continue',
  'np-pick':'tab','np-cash':'tab','np-rivals':'tab','np-begin':'=begin','np-yes':'=begin','np-no':'dismiss','np-back':'drawerClose',
  'tutorial-recover-day':'dayEnd','tutorial-advice':'tab','tutorial-advice-close':'dismiss','tutorial-view':'tab','tutorial-quote':'@open','tutorial-answer':'decision','tutorial-focus':'focus','tutorial-hold':'decision','tutorial-finish':'celebrate','tutorial-collapse':'toggleOn',
  'tycoon-tab':'tab','tycoon-policy':'=decision','tycoon-hire':'=contract','tycoon-research':'=contract','tycoon-lobby':'=decision','tycoon-public':'=decision','tycoon-commercial':'=decision','line-map':'pickCity',
