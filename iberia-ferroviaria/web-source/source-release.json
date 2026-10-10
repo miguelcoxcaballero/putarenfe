@@ -95,8 +95,8 @@
     },
     {
       "file": "infra.js",
-      "bytes": 19354,
-      "sha256": "56656e6b5e2ffd86d6d24644043d7db0d33978bd0d93670b3df37a7bc8ce7f85"
+      "bytes": 19575,
+      "sha256": "21b358235c725a83e76ee15996da37c2b0e18137fde6331c13ea0c0c561f8eda"
     },
     {
       "file": "network.js",
@@ -110,8 +110,8 @@
     },
     {
       "file": "induction-runtime.js",
-      "bytes": 7437,
-      "sha256": "497ebe1c222a0ad7ea0d426e6a19201c997fb01b094abf2b6e0ed27ca4294d89"
+      "bytes": 8120,
+      "sha256": "baaa63bbb77a470b0f98d962ebd53a319e0170c540a1fc414405495be6908d77"
     },
     {
       "file": "encounters.js",
@@ -120,13 +120,13 @@
     },
     {
       "file": "marketplace.js",
-      "bytes": 19684,
-      "sha256": "bd67e8ba918f9bfd5a36883890c2b7a33148c3402e3cd2a4dd530a6f5a537120"
+      "bytes": 19768,
+      "sha256": "1aa8f723c5564544156a1e88c37f22c48b6f987914da302bc2f80769241a2637"
     },
     {
       "file": "tycoon.js",
-      "bytes": 32313,
-      "sha256": "4dbe379e5e2553fad658b858c874b6c20cd43776bf854d2165ec9f3349c1a1d9"
+      "bytes": 32391,
+      "sha256": "6424a977548ad6bbc4c6c4881a9a890ac9477f2b413b82d200533810fde60ce3"
     },
     {
       "file": "verdad.js",
@@ -134,14 +134,29 @@
       "sha256": "8458cae9111f60e49df40a877b7c351895478bc56df1caac4421e97291923483"
     },
     {
+      "file": "rescate-data.js",
+      "bytes": 63028,
+      "sha256": "1b311312454e9d3769819ad0f19d5af4883447683ddd49c7eab2e7006d6337bf"
+    },
+    {
+      "file": "conexiones.js",
+      "bytes": 29310,
+      "sha256": "e2853f2be5a7106048a69fd7c036b17e688862d7c33b21f67ad859bf524dde58"
+    },
+    {
       "file": "tenfe.js",
-      "bytes": 16890,
-      "sha256": "2afab64a0d4e2af7a95dcb1f283b37b99a03a3edfe8c84937bf8e6285c36e6d0"
+      "bytes": 17673,
+      "sha256": "6bd42d842e0d33ad25b8a66453189b37cff8fcff2e1e184adc5ee1d5688b7dcd"
+    },
+    {
+      "file": "track-preview.js",
+      "bytes": 5163,
+      "sha256": "66c945cd2383e405253687a2d45e1be7b92d36ff9fbdcb19a5191967e5215e94"
     },
     {
       "file": "engine.js",
-      "bytes": 46150,
-      "sha256": "3935790e46e40cabb05a033b2a4521363542a071828f97e9b0802425402524ac"
+      "bytes": 48570,
+      "sha256": "46441c2d81158725fadb67807363ceabb94e91da16f4a23421a783f8f9e6e0f8"
     },
     {
       "file": "operations.js",
@@ -195,8 +210,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 28738,
-      "sha256": "35fd222e6c1da645f89b43ded5febe25ce4430cfa8885a850f8c8bf6c4fb5055"
+      "bytes": 28918,
+      "sha256": "1833e0eb005238f4792443e709f5db10f8dcbe0dd177e3e648628426c5520885"
     },
     {
       "file": "assets/portraits.js",
@@ -210,18 +225,18 @@
     },
     {
       "file": "tycoon-ui.js",
-      "bytes": 21640,
-      "sha256": "7dbd044d55b7542b13f4504516a66563f9f1507130ae227328429f4626e98ca3"
+      "bytes": 21720,
+      "sha256": "1be3785a45269be455bd299cf0deadcf63bac37a3953f6dc1e20f87f5a40c98e"
     },
     {
       "file": "nueva-partida.js",
-      "bytes": 4267,
-      "sha256": "8c48bb74b4005dca8601183867818f14d0a7113ba8d4443ce245418af41753be"
+      "bytes": 4377,
+      "sha256": "6fbc860400be024cdb561fa5d9e2b98271becd5ca06aa6c24109b43126147520"
     },
     {
       "file": "main-menu.js",
-      "bytes": 5044,
-      "sha256": "2bfe54e73298c626e314be556132f341e1840ffdd75a6e0f061ea4b949e4edaa"
+      "bytes": 5125,
+      "sha256": "76a335de64d466532a25cc8930ce1e5d44b927fc9921ef605e3b035409be1358"
     },
     {
       "file": "induction-task-ui.js",
@@ -234,14 +249,19 @@
       "sha256": "5f8139dc3883d58ec346c0eeb102cddb431623c0424d585bb54881052f863468"
     },
     {
+      "file": "conexiones-ui.js",
+      "bytes": 11217,
+      "sha256": "d585ff713207b2d18b38b342eb98cfde933716e52f7c3155cb5da72f42ac827e"
+    },
+    {
       "file": "tenfe-ui.js",
-      "bytes": 9528,
-      "sha256": "ad90f346c1fe3974629cb694ad95764f823da65ed7263212af8d79d8c55fe98b"
+      "bytes": 9881,
+      "sha256": "6a48ac9c6ea3782560c9559a7a3748079a9ffa6b43af825ba3fe3829493e5e8e"
     },
     {
       "file": "app.js",
-      "bytes": 164505,
-      "sha256": "e94f70af9f5463e9c546663d4947d8821674c21931dfc94f65929d4b145a5c34"
+      "bytes": 172117,
+      "sha256": "9a2a6595a76395faa8560210430fad47b162db5eb57dfd42e85f90ca551829ed"
     },
     {
       "file": "style-v3.css",
@@ -255,8 +275,8 @@
     },
     {
       "file": "induction.css",
-      "bytes": 7044,
-      "sha256": "4aaaace7c0c68b477d35e16adbfda988d71b8051a09c5e2b1afd10047f37ab7c"
+      "bytes": 10944,
+      "sha256": "b291aadf33b9f7b066d362863f0f910283b6328037ec887e3393d5029e5556af"
     },
     {
       "file": "marketplace.css",
