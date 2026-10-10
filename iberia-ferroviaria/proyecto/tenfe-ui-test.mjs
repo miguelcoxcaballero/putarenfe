@@ -30,6 +30,7 @@ await (async function(){
     throw Error('Demasiados modales');
   };
   const open=async name=>{await page.locator('#navigation [data-screen="'+name+'"]').click();if(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')))await page.locator('#navigation [data-screen="'+name+'"]').click();};
+  const shop=async()=>{await open('fleet');const back=page.locator('.tp-game-strip [data-action="fleet-tab"][data-id="fleet"]');if(await back.count())await back.click();await page.locator('[data-action="fleet-tab"][data-id="market"]').click();};
   const fits=async()=>assert(await page.locator('#drawer .body').evaluate(el=>el.scrollWidth<=el.clientWidth+2),'panel sin desbordamiento');
   try{
     await page.goto(url);await page.waitForFunction(()=>!!window.railwayGame);
@@ -44,7 +45,7 @@ await (async function(){
     await page.evaluate(()=>{const s=window.railwayGame.state();s.cash=5000;s.tenfe.milestones=['andenes','regional'];window.railwayGame.render();});
     for(const section of ['network','fleet','finance','story','progress','press']){await open(section);await fits();}
     checks.push('Seis secciones, sin errores de JavaScript ni desbordamientos a 1440 px.');
-    await open('fleet');await page.locator('[data-action="fleet-tab"][data-id="market"]').click();
+    await shop();
     await page.locator('[data-action="market-family"][data-id="Regional"]').click();
     assert(await page.locator('.trenespop').count()===1);
     assert((await page.locator('.trenespop').innerText()).includes('BCBB'));
@@ -77,7 +78,7 @@ await (async function(){
     for(const width of [390,320]){
       await page.setViewportSize({width,height:844});
       for(const section of ['network','fleet','finance','story','progress','press']){await open(section);await fits();}
-      await open('fleet');await page.locator('[data-action="fleet-tab"][data-id="market"]').click();await fits();
+      await shop();await fits();
       await page.screenshot({path:path.join(out,'trenespop-'+width+'.png')});
       await page.locator('[data-action="close-drawer"]').click();
       await page.screenshot({path:path.join(out,'mapa-'+width+'.png')});
