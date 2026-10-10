@@ -178,10 +178,12 @@ function checkMusicMood() {
   lastMood = mood;
 }
 function musicDialog(refresh = false) {
+  const libraryOpen=!!$('modal').querySelector('.menu-music-library[open]');
+  const focusAction=refresh?document.activeElement?.dataset?.action:null;
   const cur = music.current?.song.id;
   const list = fam => SONGS.filter(x => x.family === fam).map(x => `<button class="track ${x.id === cur ? 'on' : ''}" data-action="music-play" data-id="${x.id}"><span class="no">${String(SONGS.indexOf(x) + 1).padStart(2, '0')}</span><span><b>${esc(x.title)}</b><em>${STYLE_LABEL[x.style]} · ${x.bpm} ppm${x.mood === 'night' ? ' · noche' : ''}</em></span><span class="eq">${x.id === cur ? '<i></i><i></i><i></i>' : '▶'}</span></button>`).join('');
   const html = `<div class="content"><div class="kicker">${menuOpen?'Sonido':'Banda sonora'}</div><h1>${menuOpen?'Opciones':'Música de Iberia Ferroviaria'}</h1>
-  <div class="tracks"><h3>${FAMILY_LABEL.estacion}</h3>${list('estacion')}<h3>${FAMILY_LABEL.red}</h3>${list('red')}</div>
+  ${menuOpen?`<details class="menu-music-library" ${libraryOpen?'open':''}><summary>Banda sonora</summary>`:''}<div class="tracks"><h3>${FAMILY_LABEL.estacion}</h3>${list('estacion')}<h3>${FAMILY_LABEL.red}</h3>${list('red')}</div>${menuOpen?'</details>':''}
   <div class="toolbar"><button class="btn ${music.enabled ? '' : 'primary'}" data-action="music-toggle">${music.enabled ? 'Apagar música' : 'Encender música'}</button><button class="btn" data-action="music-next" ${music.enabled ? '' : 'disabled'}>Siguiente pieza</button>
   <label style="margin:0">Modo</label><select id="musicMode"><option value="auto" ${music.mode === 'auto' ? 'selected' : ''}>Automático según el momento</option><option value="list" ${music.mode === 'list' ? 'selected' : ''}>Toda la lista</option><option value="repeat" ${music.mode === 'repeat' ? 'selected' : ''}>Repetir pieza</option></select></div>
   <label for="musicVolume">Volumen</label><input id="musicVolume" type="range" min="0" max="1" step="0.05" value="${music.volume}">
@@ -192,7 +194,7 @@ function musicDialog(refresh = false) {
   <label for="sfxVolume">Volumen de los efectos</label><input id="sfxVolume" type="range" min="0" max="1" step="0.05" value="${sfx.volume}">
   <div class="actions"><button class="btn primary" data-action="close-modal">Cerrar</button></div></div>`;
   if (refresh && !menuOpen) { const sc = $('modal').querySelector('.content')?.scrollTop || 0; $('modal').innerHTML = `<div class="modal single">${html}</div>`; $('modal').querySelector('.content').scrollTop = sc; }
-  else if(menuOpen){const sc=$('modal').scrollTop;showModal(menuScreenHTML(html),'main-menu-shell');if(refresh)$('modal').scrollTop=sc;}
+  else if(menuOpen){const sc=$('modal').scrollTop;showModal(menuScreenHTML(html),'main-menu-shell');if(refresh){$('modal').scrollTop=sc;if(focusAction)$('modal').querySelector('[data-action="'+focusAction+'"]')?.focus({preventScroll:true});}}
   else showModal(html, 'single');
 }
 
@@ -1196,7 +1198,7 @@ function nodeInspector() {
 }
 
 // ------------------------------------------------------------ ventanas modales
-function showModal(html, cls = '') { pause(); const was = $('modal').open; $('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons(); sfx.play(was ? 'page' : 'open'); }
+function showModal(html, cls = '') { pause(); const was = $('modal').open; $('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons(); if(cls==='main-menu-shell')$('modal').querySelector('[autofocus]')?.focus();sfx.play(was ? 'page' : 'open'); }
 function closeModal() { if ($('modal').open) $('modal').close(); }
 /** Rescate de Tenfe: modo propio con su mapa, su interfaz y su guardado; al salir vuelve a esta portada. */
 

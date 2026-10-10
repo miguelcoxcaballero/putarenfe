@@ -27,7 +27,7 @@ export function menuHTML(saved=null,savedError='',rescue=null){
  </main>`;
 }
 export function menuScreenHTML(content){
- return `<main class="main-menu menu-subscreen">${backdrop()}<div class="menu-sub-body"><button class="menu-back" data-action="menu-home"><span aria-hidden="true">‹</span> Menú principal</button>${content}</div><footer class="menu-screen-footer">${menuPhotoCredit()}</footer></main>`;
+ return `<main class="main-menu menu-subscreen">${backdrop()}<div class="menu-sub-body"><button class="menu-back" data-action="menu-home" autofocus><span aria-hidden="true">‹</span> Menú principal</button>${content}</div><footer class="menu-screen-footer">${menuPhotoCredit()}</footer></main>`;
 }
 export function menuLoadHTML(saved=null){
  const [latest]=savedGames(saved);

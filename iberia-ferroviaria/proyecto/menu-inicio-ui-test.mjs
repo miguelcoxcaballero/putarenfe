@@ -24,7 +24,7 @@ const fit=async(page,label)=>{
  assert(data.scroll<=data.client+1,label+' without horizontal overflow');
  const controls=await page.locator('.main-menu button:visible,.main-menu input:visible,.main-menu select:visible').evaluateAll(els=>els.map(e=>{const r=e.getBoundingClientRect();return {label:e.textContent||e.id,x:r.x,right:r.right,w:r.width,h:r.height};}));
  const w=page.viewportSize().width;assert(controls.every(c=>c.x>=-1&&c.right<=w+1),label+' controls fit viewport');
- assert(controls.filter(c=>c.label!=='npGuide').every(c=>c.h>=32),label+' controls are usable');
+ assert(controls.filter(c=>c.label!=='npGuide').every(c=>c.h>=32),label+' controls are usable: '+JSON.stringify(controls.filter(c=>c.label!=='npGuide'&&c.h<32)));
 };
 let page,save;
 try{
@@ -48,6 +48,8 @@ try{
  await page.keyboard.press('Escape');await home(page);
  await page.locator('[data-action=menu-settings]').click();await page.waitForSelector('#musicVolume');
  assert.equal(await page.locator('.content h1').textContent(),'Opciones');
+ await page.locator('.menu-music-library summary').click();assert(await page.locator('.tracks').isVisible());
+ await page.locator('.menu-music-library summary').click();assert.equal(await page.locator('.tracks').isVisible(),false);
  await page.locator('#musicVolume').evaluate(e=>{e.value='.35';e.dispatchEvent(new Event('input',{bubbles:true}));});
  await page.locator('[data-action=voice-toggle]').click();
  await fit(page,'Options');await screenshot(page,'menu-opciones');
