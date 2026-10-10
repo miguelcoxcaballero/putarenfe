@@ -1,7 +1,7 @@
-name: Verificar mapa, voces y talleres
+name: Verificar juego, voces y menú
 on:
   push:
-    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, main]
+    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, codex/menu-inicio-realista, main]
 concurrency:
   group: conexiones-${{ github.ref }}
   cancel-in-progress: true
@@ -22,6 +22,10 @@ jobs:
       - name: Preparar conversión de imágenes
         working-directory: iberia-ferroviaria/proyecto
         run: npm install --no-save --package-lock=false sharp@0.34.5
+      - name: Preparar fotografía local del menú
+        if: github.ref == 'refs/heads/codex/menu-inicio-realista'
+        working-directory: iberia-ferroviaria/proyecto
+        run: node ../tools/prepare-menu-photo.mjs
       - name: Motor y regresiones
         working-directory: iberia-ferroviaria/proyecto
         run: |
@@ -34,7 +38,11 @@ jobs:
         run: |
           npm install --no-save --package-lock=false playwright@1.56.1
           npx playwright install --with-deps chromium
+      - name: Probar el menú publicado
+        working-directory: iberia-ferroviaria/proyecto
+        run: node menu-inicio-ui-test.mjs
       - name: Probar el juego publicado
+        if: github.ref != 'refs/heads/codex/menu-inicio-realista'
         working-directory: iberia-ferroviaria/proyecto
         run: |
           node mapa-voces-ui-test.mjs
@@ -97,7 +105,9 @@ jobs:
         working-directory: iberia-ferroviaria/proyecto
         env:
           GAME_TEST_URL: https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/
-        run: node mapa-voces-ui-test.mjs
+        run: |
+          node mapa-voces-ui-test.mjs
+          node menu-inicio-ui-test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

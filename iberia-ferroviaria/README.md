@@ -1,6 +1,6 @@
 # Tenfe · Conexiones
 
-**Versión 6.2: mapa completo y consejo con voces.** Las mejores mecánicas de Rescate y La herencia funcionan juntas desde el primer turno: una red propia de conexiones, cinco retos simultáneos, sucesos ilustrados y elecciones cada 12 turnos.
+**Versión 6.3: nuevo menú de inicio.** Las mejores mecánicas de Rescate y La herencia funcionan juntas desde el primer turno: una red propia de conexiones, cinco retos simultáneos, sucesos ilustrados y elecciones cada 12 turnos.
 
 [Jugar](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/) · [Reglas y mapa](docs/CONEXIONES.md) · [Auditorio](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html)
 
@@ -46,3 +46,11 @@ La aplicación de Renfe sigue en la raíz del repositorio.
 En **Flota → Reformas** puedes comparar el interior de serie y reformado de cada uno de los 14 modelos, elegir unidades libres y consultar el coste antes de enviarlas al taller. El catálogo reúne 28 imágenes creadas con IA a partir de referencias de interiores ferroviarios, enlazadas en cada comparador. Los modelos ficticios están marcados como conceptos. Los lotes reformados vuelven a los cinco turnos con interior renovado y 98 % de estado; se conserva el descuento por investigación y el guardado admite reformas anteriores.
 
 Las fuentes y criterios del arte están en [interiores-reforma-6.1.md](investigacion/interiores-reforma-6.1.md). El proceso de publicación exporta WebP de 768 × 512 desde siete láminas finales, y verifica las 28 imágenes en Chromium de escritorio y móvil. Se mantienen Trenes Pop, las 63 fotografías de eventos, las 27 configuraciones de vía y las 412 grabaciones canónicas.
+
+### Menú de inicio
+
+La portada utiliza una fotografía real de un AVE serie 103 en Paracuellos de la Ribera, de David Gubler (CC BY-SA 3.0), guardada en el proyecto e incluida en la publicación. La navegación vertical da prioridad a Continuar, con Nueva partida, Cargar partida, Opciones, Cómo jugar y Ver los trenes. Carga de archivos, ajustes y nueva partida comparten el fondo y los controles. La confirmación evita sustituir el guardado por accidente. Las opciones respetan el teclado y la reducción de movimiento.
+
+La procedencia está registrada en `proyecto/dist/assets/menu-paracuellos-provenance.json`; la atribución y licencia están enlazadas en el menú. La imagen conserva CC BY-SA 3.0. El panorama ilustrado anterior y las fotos de los sucesos permanecen en el proyecto.
+
+`npm run menu-ui` comprueba la portada, carga, ajustes, dificultad, confirmación y continuidad de las partidas en escritorio y móvil, y guarda capturas en el artefacto de Actions.

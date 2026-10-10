@@ -5,7 +5,7 @@ import * as Refits from './train-refit.js';
 import {INDUCTION_STAGES} from './induction.js';
 import {dialogueHtml} from './dialogue-presentation.js';
 import {freshInduction, note, stageChecks, readyInduction, inductionBriefing, inductionFeedbackLine, canInductionAnswer, restoreInductionHandoff} from './induction-runtime.js';
-import {menuHTML} from './main-menu.js';
+import {menuHTML, menuScreenHTML, menuLoadHTML} from './main-menu.js';
 import {STARTS, newGameHTML, normalizeSeed, seedFromCode, randomSeedCode, seedCodeOf, overwrittenBy} from './nueva-partida.js';
 import * as U from './tenfe.js';
 import * as TenfeUI from './tenfe-ui.js';
@@ -180,7 +180,7 @@ function checkMusicMood() {
 function musicDialog(refresh = false) {
   const cur = music.current?.song.id;
   const list = fam => SONGS.filter(x => x.family === fam).map(x => `<button class="track ${x.id === cur ? 'on' : ''}" data-action="music-play" data-id="${x.id}"><span class="no">${String(SONGS.indexOf(x) + 1).padStart(2, '0')}</span><span><b>${esc(x.title)}</b><em>${STYLE_LABEL[x.style]} · ${x.bpm} ppm${x.mood === 'night' ? ' · noche' : ''}</em></span><span class="eq">${x.id === cur ? '<i></i><i></i><i></i>' : '▶'}</span></button>`).join('');
-  const html = `<div class="content"><div class="kicker">Banda sonora</div><h1>Música de Iberia Ferroviaria</h1>
+  const html = `<div class="content"><div class="kicker">${menuOpen?'Sonido':'Banda sonora'}</div><h1>${menuOpen?'Opciones':'Música de Iberia Ferroviaria'}</h1>
   <div class="tracks"><h3>${FAMILY_LABEL.estacion}</h3>${list('estacion')}<h3>${FAMILY_LABEL.red}</h3>${list('red')}</div>
   <div class="toolbar"><button class="btn ${music.enabled ? '' : 'primary'}" data-action="music-toggle">${music.enabled ? 'Apagar música' : 'Encender música'}</button><button class="btn" data-action="music-next" ${music.enabled ? '' : 'disabled'}>Siguiente pieza</button>
   <label style="margin:0">Modo</label><select id="musicMode"><option value="auto" ${music.mode === 'auto' ? 'selected' : ''}>Automático según el momento</option><option value="list" ${music.mode === 'list' ? 'selected' : ''}>Toda la lista</option><option value="repeat" ${music.mode === 'repeat' ? 'selected' : ''}>Repetir pieza</option></select></div>
@@ -191,7 +191,8 @@ function musicDialog(refresh = false) {
   <div class="toolbar"><button class="btn ${sfx.enabled ? '' : 'primary'}" data-action="sfx-toggle">${sfx.enabled ? 'Silenciar efectos' : 'Activar efectos'}</button></div>
   <label for="sfxVolume">Volumen de los efectos</label><input id="sfxVolume" type="range" min="0" max="1" step="0.05" value="${sfx.volume}">
   <div class="actions"><button class="btn primary" data-action="close-modal">Cerrar</button></div></div>`;
-  if (refresh) { const sc = $('modal').querySelector('.content')?.scrollTop || 0; $('modal').innerHTML = `<div class="modal single">${html}</div>`; $('modal').querySelector('.content').scrollTop = sc; }
+  if (refresh && !menuOpen) { const sc = $('modal').querySelector('.content')?.scrollTop || 0; $('modal').innerHTML = `<div class="modal single">${html}</div>`; $('modal').querySelector('.content').scrollTop = sc; }
+  else if(menuOpen){const sc=$('modal').scrollTop;showModal(menuScreenHTML(html),'main-menu-shell');if(refresh)$('modal').scrollTop=sc;}
   else showModal(html, 'single');
 }
 
@@ -1199,8 +1200,13 @@ function showModal(html, cls = '') { pause(); const was = $('modal').open; $('mo
 function closeModal() { if ($('modal').open) $('modal').close(); }
 /** Rescate de Tenfe: modo propio con su mapa, su interfaz y su guardado; al salir vuelve a esta portada. */
 
-$('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.np-screen')){event.preventDefault();sfx.play('drawerClose');npBack();}else if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
+$('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.menu-subscreen')){event.preventDefault();intro();}else if($('modal').querySelector('.np-screen')){event.preventDefault();sfx.play('drawerClose');npBack();}else if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
 $('modal').addEventListener('keydown',event=>{
+ const item=event.target.closest?.('.menu-navigation .menu-item');
+ if(item&&['ArrowDown','ArrowUp','Home','End'].includes(event.key)){
+  event.preventDefault();const items=[...$('modal').querySelectorAll('.menu-navigation .menu-item:not(:disabled)')],i=items.indexOf(item);
+  items[event.key==='Home'?0:event.key==='End'?items.length-1:(i+(event.key==='ArrowDown'?1:-1)+items.length)%items.length]?.focus();return;
+ }
   if(!np)return;
   if(event.key==='Enter'&&event.target.id==='npSeed'){event.preventDefault();sfx.expect('begin');npBegin(false);return;} // Intro en la semilla = «Empezar»
   const step={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[event.key]; // flechas entre los tres arranques, como un grupo de radio
@@ -1326,7 +1332,11 @@ function continueClassic(){
   menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);U.begin(state,{rules:'conexiones'});O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();map.reset();
   if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showWelcome(true);
 }
-function menuGuide(){if(state.tenfe?.game)return showModal(`<div class="content"><span class="kicker">Conexiones · guía del director</span><h1>Haz que el país llegue.</h1>${JUI.campaignHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a jugar</button><button class="btn" data-action="new-game">Nueva partida</button></div></div>`,'single');showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="new-game">Nueva partida</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}
+function menuGuide(){
+ if(menuOpen)return showModal(menuScreenHTML('<div class="content"><div class="kicker">Conexiones</div><h1>Cómo jugar</h1><ol class="method"><li><b>Abre servicios.</b> Selecciona una ciudad en el mapa y conecta destinos. Ajusta trenes, frecuencias y tarifas.</li><li><b>Prepara la red.</b> Cada tren necesita vías compatibles con su ancho y tracción. Compara las mejoras en el taller de vías.</li><li><b>Dirige la compañía.</b> Compra material en Trenes Pop, reforma los interiores y resuelve los sucesos del despacho.</li><li><b>Cierra el turno.</b> Juega la jornada o delega su operación. Cumple cinco retos y gana dos mandatos; hay elecciones cada 12 turnos.</li></ol><p>Activa el primer turno guiado al crear una partida. La guía señala los controles del propio juego.</p><div class="actions"><button class="btn primary" data-action="new-game">Nueva partida</button></div></div>'),'main-menu-shell');
+ if(state.tenfe?.game)return showModal(`<div class="content"><span class="kicker">Conexiones · guía del director</span><h1>Haz que el país llegue.</h1>${JUI.campaignHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a jugar</button><button class="btn" data-action="new-game">Nueva partida</button></div></div>`,'single');
+ help();
+}
 function showDecision() {
   // Un encuentro solo se enseña si su arranque y su conflicto siguen siendo verdad ahora.
   E.revalidateScene(state);
@@ -1491,6 +1501,7 @@ document.addEventListener('click', event => {
     case 'menu-home': if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;}intro();break;
     case 'menu-guide': menuGuide();break;
     case 'menu-settings': musicDialog();break;
+    case 'menu-load': showModal(menuLoadHTML(saved),'main-menu-shell');break;
     case 'continue': case 'continue-other': if (b.dataset.game === 'rescue') showLegacy(); else continueClassic(); break;
     case 'observe': menuOpen=false;closeModal(); setLayer('real'); observerMinute = 480; play(); break;
     case 'decision': {const wasModal=$('modal').open;if(voices.speaking?.where==='council')voices.stop();if(act(()=>E.decide(state,id,+b.dataset.choice))){if(wasModal)closeModal();if(wasModal&&!tut&&E.pendingDecision(state))showDecision();render();}break;}
@@ -1635,7 +1646,7 @@ document.addEventListener('change', async event => {
   if (t.id === 'maintenance') act(() => { E.ensurePlaying(state); state.maintenance = E.clamp(+t.value, .6, 1.5); });
   if (t.id === 'importSave' && t.files[0]) {
     try { if (t.files[0].size > 6e6) throw Error('El archivo es demasiado grande.'); const imported=JSON.parse(await t.files[0].text());state=imported?.v===1?convertLegacy(imported):E.validateSave(imported);U.begin(state,{rules:'conexiones'});O.ensureOps(state); state.started = true; autosave(); sfx.play('confirm'); closeModal(); inspect = null; screen = null; netKey = networkKey(); map.dirty = true; render(); toast('Partida importada.');menuOpen=false;tut=null;voices.stop();resetSessionView();render();if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showWelcome(true); }
-    catch (e) { sfx.play('error'); toast('No se pudo importar: ' + e.message); }
+    catch (e) { sfx.play('error'); const box=$('menu-import-error');if(box){box.textContent='No se pudo importar: '+e.message;box.hidden=false;}else toast('No se pudo importar: ' + e.message); }
   }
 });
 document.addEventListener('pointerdown', event => {

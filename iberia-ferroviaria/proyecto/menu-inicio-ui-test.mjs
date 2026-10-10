@@ -1,0 +1,102 @@
+// User-facing menu journeys and visual evidence on the actual published game.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import http from 'node:http';
+import {chromium} from 'playwright';
+const root=path.resolve('..'),out=path.resolve('../outputs/tenfe-qa');
+fs.mkdirSync(out,{recursive:true});
+const server=http.createServer((req,res)=>{try{
+ const p=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));
+ if(!p.startsWith(root+path.sep)&&p!==root){res.writeHead(403);res.end();return;}
+ const file=fs.statSync(p).isDirectory()?path.join(p,'index.html'):p;
+ res.writeHead(200,{'content-type':({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.mp3':'audio/mpeg','.webp':'image/webp','.jpg':'image/jpeg','.png':'image/png','.woff2':'font/woff2'})[path.extname(file)]||'application/octet-stream'});fs.createReadStream(file).pipe(res);
+}catch{res.writeHead(404);res.end();}});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const url=process.env.GAME_TEST_URL||'http://127.0.0.1:'+server.address().port+'/';
+const browser=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const KEY='iberia-ferroviaria-v2',checks=[],errors=[],external=[];
+const check=s=>{checks.push(s);console.log('✓ '+s);};
+const screenshot=async(page,name)=>{await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(750);const bytes=await page.screenshot({type:'jpeg',quality:65});fs.writeFileSync(path.join(out,name+'.jpg'),bytes);console.log('QA_IMAGE:'+name+':'+bytes.toString('base64'));};
+const home=async page=>{await page.waitForSelector('.menu-home');assert(await page.locator('#modal').evaluate(e=>e.open));};
+const fit=async(page,label)=>{
+ const data=await page.locator('#modal').evaluate(e=>({client:e.clientWidth,scroll:e.scrollWidth}));
+ assert(data.scroll<=data.client+1,label+' without horizontal overflow');
+ const controls=await page.locator('.main-menu button:visible,.main-menu input:visible,.main-menu select:visible').evaluateAll(els=>els.map(e=>{const r=e.getBoundingClientRect();return {label:e.textContent||e.id,x:r.x,right:r.right,w:r.width,h:r.height};}));
+ const w=page.viewportSize().width;assert(controls.every(c=>c.x>=-1&&c.right<=w+1),label+' controls fit viewport');
+ assert(controls.filter(c=>c.label!=='npGuide').every(c=>c.h>=32),label+' controls are usable');
+};
+let page,save;
+try{
+ const context=await browser.newContext({viewport:{width:1920,height:1080}});
+ await context.addInitScript(()=>{for(const [k,v] of [['iberia-musica',{enabled:false}],['iberia-efectos',{enabled:false}]])if(!localStorage.getItem(k))localStorage.setItem(k,JSON.stringify(v));});
+ page=await context.newPage();page.setDefaultTimeout(20000);
+ page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/^https?:/.test(r.url())&&new URL(r.url()).origin!==new URL(url).origin)external.push(r.url());});
+ await page.goto(url);await home(page);
+ assert(await page.locator('.menu-navigation [data-action=continue]').isDisabled());
+ assert.equal(await page.locator('.menu-navigation [data-action=new-game]').count(),1);
+ assert.equal(await page.locator('.menu-navigation [data-action=new-game]').evaluate(e=>e===document.activeElement),true);
+ await fit(page,'Desktop home');await screenshot(page,'menu-escritorio');
+ await page.keyboard.press('ArrowDown');assert.equal(await page.evaluate(()=>document.activeElement.dataset.action),'menu-load');
+ await page.keyboard.press('ArrowUp');await page.keyboard.press('Enter');await page.waitForSelector('.np-screen');
+ await page.keyboard.press('Escape');await home(page);await page.keyboard.press('Escape');await home(page);
+ check('Keyboard: arrows, Enter, Escape; Continue disabled without save.');
+ await page.locator('[data-action=menu-load]').click();await page.waitForSelector('#importSave');await fit(page,'Load');
+ await page.locator('#importSave').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+ await page.waitForSelector('#menu-import-error:not([hidden])');assert.match(await page.locator('#menu-import-error').textContent(),/No se pudo importar/);
+ assert.equal(await page.evaluate(k=>localStorage.getItem(k),KEY),null,'bad import does not create save');
+ await page.keyboard.press('Escape');await home(page);
+ await page.locator('[data-action=menu-settings]').click();await page.waitForSelector('#musicVolume');
+ assert.equal(await page.locator('.content h1').textContent(),'Opciones');
+ await page.locator('#musicVolume').evaluate(e=>{e.value='.35';e.dispatchEvent(new Event('input',{bubbles:true}));});
+ await page.locator('[data-action=voice-toggle]').click();
+ await fit(page,'Options');await screenshot(page,'menu-opciones');
+ await page.keyboard.press('Escape');await home(page);
+ await page.locator('[data-action=menu-guide]').click();assert.match(await page.locator('.content').textContent(),/Trenes Pop/);await fit(page,'How to play');
+ await page.locator('[data-action=menu-home]').click();await home(page);
+ await page.locator('[data-action=new-game]').click();await page.waitForSelector('#npSeed');
+ await page.locator('#npSeed').fill('MENU-REAL');await page.locator('#npGuide').uncheck();
+ await page.locator('[data-action=np-difficulty][data-id=relajada]').click();
+ assert.equal(await page.locator('#npSeed').inputValue(),'MENU-REAL');assert.equal(await page.locator('#npGuide').isChecked(),false);
+ await fit(page,'New game');await screenshot(page,'menu-nueva-partida');
+ await page.locator('[data-action=np-begin]').click();await page.waitForSelector('[data-action=welcome-close]');await page.locator('[data-action=welcome-close]').click();
+ assert.equal(await page.locator('#modal').evaluate(e=>e.open),false);
+ let state=await page.evaluate(()=>window.railwayGame.snapshot());assert.equal(state.seedCode,'MENU-REAL');assert.equal(state.tenfe.game.difficulty,'relajada');
+ assert(state.routes.length>19&&await page.locator('#map').isVisible(),'real map kept');
+ save=await page.evaluate(k=>localStorage.getItem(k),KEY);assert(save);
+ await page.reload();await home(page);assert(await page.locator('[data-action=continue]').isEnabled());
+ assert.equal(await page.locator('[data-action=continue]').evaluate(e=>e===document.activeElement),true);
+ await screenshot(page,'menu-continuar');
+ await page.locator('[data-action=new-game]').click();await page.locator('#npSeed').fill('OTRA');await page.locator('[data-action=np-begin]').click();await page.waitForSelector('.np-confirm');
+ assert.equal(await page.evaluate(k=>localStorage.getItem(k),KEY),save,'confirmation does not overwrite');
+ assert.equal(await page.locator('[data-action=np-no]').evaluate(e=>e===document.activeElement),true);
+ await screenshot(page,'menu-confirmacion');await page.locator('[data-action=np-no]').click();
+ assert.equal(await page.locator('#npSeed').inputValue(),'OTRA');await page.keyboard.press('Escape');await home(page);
+ await page.locator('[data-action=menu-load]').click();await page.locator('[data-action=continue]').click();await page.waitForSelector('[data-action=welcome-close]');await page.locator('[data-action=welcome-close]').click();
+ state=await page.evaluate(()=>window.railwayGame.snapshot());assert.equal(state.seedCode,'MENU-REAL');
+ check('New game, saved game, safe cancellation and Continue preserve progress.');
+ await page.reload();await home(page);await page.locator('[data-action=menu-settings]').click();assert.equal(await page.locator('#musicVolume').inputValue(),'0.35');
+ await page.locator('[data-action=close-modal]').click();await home(page);
+ for(const size of [{width:1440,height:900},{width:1280,height:720},{width:360,height:740},{width:390,height:844}]){
+  await page.setViewportSize(size);await home(page);await fit(page,'Home '+size.width);
+  if(size.width===390)await screenshot(page,'menu-movil');
+  await page.locator('[data-action=new-game]').click();await fit(page,'New game '+size.width);
+  if(size.width===390)await screenshot(page,'menu-nueva-movil');
+  await page.locator('[data-action=np-back]').click();await home(page);
+  await page.locator('[data-action=menu-settings]').click();await fit(page,'Options '+size.width);await page.locator('[data-action=menu-home]').click();
+ }
+ await page.emulateMedia({reducedMotion:'reduce'});await home(page);
+ assert.equal(await page.locator('.main-menu-art').evaluate(e=>getComputedStyle(e).animationName),'none');
+ check('1920, 1440, 1280, 390 and 360 px: menu, setup and options; reduced motion.');
+ await page.locator('[data-action=menu-load]').click();
+ await page.locator('#importSave').setInputFiles({name:'Tenfe.json',mimeType:'application/json',buffer:Buffer.from(save)});
+ await page.waitForSelector('[data-action=welcome-close]');await page.locator('[data-action=welcome-close]').click();
+ assert.equal(await page.evaluate(()=>window.railwayGame.snapshot().seedCode),'MENU-REAL');
+ check('JSON import reopens a real game, invalid JSON shows an inline error.');
+ await page.reload();await home(page);await page.locator('[data-action=observe]').click();await page.waitForFunction(()=>!document.getElementById('modal').open);
+ assert(await page.locator('#map').isVisible());assert.equal(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).seedCode,KEY),'MENU-REAL');
+ check('View trains opens the geographic map without replacing the saved game.');
+ assert.deepEqual(external,[],'menu assets do not request external services');assert.deepEqual(errors,[]);
+ fs.writeFileSync(path.join(out,'menu-informe.json'),JSON.stringify({url,checks,errors,external},null,2)+'\n');
+}catch(e){if(page)await screenshot(page,'fallo-menu');throw e;}
+finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

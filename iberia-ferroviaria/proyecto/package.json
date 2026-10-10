@@ -1,6 +1,6 @@
 {
   "name": "iberia-ferroviaria",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,6 +16,7 @@
     "music-test": "node music-test.mjs",
     "onboarding-ui": "node onboarding-ui-test.mjs",
     "nueva-partida-ui": "node nueva-partida-ui-test.mjs",
+    "menu-ui": "node menu-inicio-ui-test.mjs",
     "infra": "python3 tools/build_infra.py",
     "timetable": "python3 tools/build_timetable.py",
     "samples": "python3 tools/build_samples.py",
