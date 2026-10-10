@@ -46,7 +46,7 @@ await (async function(){
     for(const section of ['network','fleet','finance','story','progress','press']){await open(section);await fits();}
     checks.push('Seis secciones, sin errores de JavaScript ni desbordamientos a 1440 px.');
     await open('press');await page.locator('[data-action="press-tab"][data-id="paper"]').click();
-    assert(await page.locator('.gazette').evaluate(el=>{const c=getComputedStyle(el).color.match(/\\d+/g).map(Number);return Math.max(...c.slice(0,3))<100;}),'la prensa mantiene tinta oscura sobre papel claro');
+    assert(await page.locator('.gazette').evaluate(el=>{const c=getComputedStyle(el).color.match(/[0-9]+/g).map(Number);return Math.max(...c.slice(0,3))<100;}),'la prensa mantiene tinta oscura sobre papel claro');
     await page.screenshot({path:path.join(out,'prensa-desktop.png')});
     checks.push('Prensa y tarjetas del despacho mantienen contraste legible.');
     await shop();
