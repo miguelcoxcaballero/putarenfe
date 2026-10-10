@@ -210,8 +210,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 29018,
-      "sha256": "f804448b32c9b6d9e9665c0684fc379a297bbcbfcfd99428b62fe4e2099cc201"
+      "bytes": 29038,
+      "sha256": "f9665ed888c2d8652cdd626bc584f324a2b5b6e63fd0c65a03e179790d2856b2"
     },
     {
       "file": "assets/portraits.js",
@@ -230,13 +230,13 @@
     },
     {
       "file": "nueva-partida.js",
-      "bytes": 4377,
-      "sha256": "6fbc860400be024cdb561fa5d9e2b98271becd5ca06aa6c24109b43126147520"
+      "bytes": 3845,
+      "sha256": "682aff169888e1ff9979720e1fd192f750c814b3f699a6faf4973f4b285fc706"
     },
     {
       "file": "main-menu.js",
-      "bytes": 5125,
-      "sha256": "00236c64970971011ba676d6355efdbeeddf60ea593c9f0aadcb525cd658ae43"
+      "bytes": 3662,
+      "sha256": "437868277bd4dc6d8d598d03111d4c81d1ffab1df9a1caa4b1d973ba841f4b45"
     },
     {
       "file": "induction-task-ui.js",
@@ -265,8 +265,8 @@
     },
     {
       "file": "app.js",
-      "bytes": 174865,
-      "sha256": "23191dde2aafed00f260070a63d59b32a7c78a4f3a751df4da7090183324b9d2"
+      "bytes": 176182,
+      "sha256": "4cd354551d552f039c821582e1476dfb82139ed9ed290a4220fa31c9864b54b0"
     },
     {
       "file": "style-v3.css",
@@ -275,8 +275,8 @@
     },
     {
       "file": "main-menu.css",
-      "bytes": 16926,
-      "sha256": "daf9c48a05ef9e7afcdb25e845a9c1c64b5e5063980bb2493f0c2f07da798441"
+      "bytes": 12136,
+      "sha256": "183e72a7585d0056f5b4d5d97ab7d46347ad7b96431b29737e3e604cc5cc528e"
     },
     {
       "file": "induction.css",
@@ -314,14 +314,9 @@
       "sha256": "f4c798855d3aae3a7c71d2fcde5087e2251bce275234a5bfe6010c836717a7b4"
     },
     {
-      "file": "assets/menu-amanecer.jpg",
-      "bytes": 458003,
-      "sha256": "a5f08b2676adfcdad44f973c5004fa932753d25e9b34181c66be638dad73aceb"
-    },
-    {
-      "file": "assets/menu-amanecer.jpg",
-      "bytes": 458003,
-      "sha256": "a5f08b2676adfcdad44f973c5004fa932753d25e9b34181c66be638dad73aceb"
+      "file": "assets/menu-paracuellos.jpg",
+      "bytes": 1016492,
+      "sha256": "2f514a6caf70867a115fad197731b683e8763deb6f3550d7923334255b15462f"
     },
     {
       "file": "index.html",

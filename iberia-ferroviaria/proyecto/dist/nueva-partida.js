@@ -18,20 +18,19 @@ const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<
   }
   export function overwrittenBy(start,classic=null){return classic?'Tenfe':null;}
   export function newGameHTML({seed='',confirm=null,difficulty='normal',guide=true}={}){
-    return `<main class="main-menu np-screen tenfe-new" aria-labelledby="np-title">
-      <div class="main-menu-art" aria-hidden="true"></div><div class="main-menu-grain" aria-hidden="true"></div>
+    return `<main class="main-menu np-screen" aria-labelledby="np-title">
+      <div class="main-menu-art" aria-hidden="true"></div>
       <div class="np-body">
-        <header class="np-head"><button type="button" class="np-back" data-action="np-back" aria-label="Volver">‹</button><div><span class="kicker">Un nuevo juego · Conexiones</span><h1 id="np-title">Una red a tu manera</h1></div></header>
-        <p class="np-promise">Conecta un país. Gana viajeros. Sobrevive al despacho.</p>
-        <ol class="tenfe-journey"><li><b>01</b><span><strong>Conecta lo que importa</strong><small>AVE, Alvia y regionales en una red de capitales y territorios.</small></span></li>
- <li><b>02</b><span><strong>Decide cada turno</strong><small>Sucesos ilustrados, rivales, pactos y un laboratorio con ideas para tu red.</small></span></li>
- <li><b>03</b><span><strong>Gánate el mandato</strong><small>Cinco retos abiertos desde el inicio. Elecciones cada 12 turnos y grandes obras por fases.</small></span></li></ol>
-        <div class="tenfe-rules"><span id="difficulty-label">Ritmo de partida</span><div class="np-seg" role="group" aria-labelledby="difficulty-label">
+        <header class="np-head"><button class="menu-back np-back" data-action="np-back"><span aria-hidden="true">‹</span> Volver</button><h1 id="np-title">Nueva partida</h1><p>Conexiones · campaña ferroviaria</p></header>
+        <div class="np-configuration">
+        <fieldset class="np-field"><legend>Ritmo de partida</legend><div class="np-seg">
           <button data-action="np-difficulty" data-id="normal" class="${difficulty==='normal'?'on':''}" aria-pressed="${difficulty==='normal'}">Con desafío</button>
           <button data-action="np-difficulty" data-id="relajada" class="${difficulty==='relajada'?'on':''}" aria-pressed="${difficulty==='relajada'}">A tu ritmo</button></div>
-          <p>${difficulty==='normal'?'Perder unas elecciones termina el mandato. Cada decisión cuenta.':'Las derrotas electorales bajan el apoyo; puedes seguir jugando.'}</p>
-          <label class="tenfe-guide"><input id="npGuide" type="checkbox" ${guide?'checked':''}> Aprender con el primer turno guiado</label></div>
-        ${confirm?`<div class="np-foot np-confirm" role="alert"><p>Hay una partida de Tenfe guardada. ¿Empezar otra?</p><button class="np-no" data-action="np-no">Volver</button><button class="np-go" data-action="np-yes">Empezar otra</button></div>`:
-          `<div class="np-foot"><label class="np-seed" for="npSeed"><span>Código de partida</span><input id="npSeed" type="text" maxlength="24" placeholder="Al azar" value="${escapeHTML(seed)}" autocomplete="off" autocapitalize="characters"></label><button class="np-go" data-action="np-begin">Asumir el mando →</button></div>`}
+          <p class="np-rule-detail">${difficulty==='normal'?'Perder las elecciones termina la partida. Cumple los cinco retos y gana dos mandatos.':'Puedes seguir jugando aunque pierdas las elecciones. Los cinco retos se mantienen.'}</p></fieldset>
+          <label class="tenfe-guide"><input id="npGuide" type="checkbox" ${guide?'checked':''}> Primer turno guiado</label>
+          <label class="np-seed" for="npSeed"><span>Código de partida</span><input id="npSeed" type="text" maxlength="24" placeholder="Al azar" value="${escapeHTML(seed)}" autocomplete="off" autocapitalize="characters"><small>Usa el mismo código para repetir las condiciones iniciales.</small></label>
+        ${confirm?`<div class="np-foot np-confirm" role="alert"><p>Ya tienes una partida guardada. Empezar otra sustituirá el guardado automático.</p><button class="np-no" data-action="np-no">Cancelar</button><button class="np-go" data-action="np-yes">Empezar otra</button></div>`:
+          '<div class="np-foot"><button class="np-go" data-action="np-begin">Empezar partida</button></div>'}
+        </div>
       </div></main>`;
   }
