@@ -777,6 +777,7 @@ function mix(a, b, t) { return a + (b - a) * t; }
 
 // ------------------------------------------------------------ cajón de páginas
 function navigate(to) {
+  if(voices.speaking?.where==='council'&&(to!=='story'||screen==='story'))voices.stop();
   if (ALIASES[to]) { const [page, key, value] = ALIASES[to]; ui[key] = value; to = page; if (screen === to) { renderDrawer(true); return; } }
   if (screen === to || !PAGES[to]) { screen = null; $('drawer').classList.add('hidden'); renderNav(); renderMission(); return; }
   screen = to; inspect = null; map.selected = null; map.selectedTrain = null;
@@ -1454,14 +1455,14 @@ document.addEventListener('click', event => {
     case 'track-designer': trackChoice=null;trackDialog(id);break;
     case 'track-confirm': if(act(()=>Tracks.start(state,E,trackTarget,trackChoice),'Mejora adjudicada.'))closeModal();break;
     case 'welcome-close': $('entry-welcome')?.remove();break;
-    case 'tycoon-tab': ui.tycoonTab=id;{if(id==='research'){screen='progress';ui.progressTab='research';}else if(id==='paper'){screen='press';ui.pressTab='paper';}else if(id==='market'){screen='network';ui.netView='rivals';}else screen='story';ui.officeTab='tycoon';inspect=null;renderNav();renderMission();renderInspector();}renderDrawer(true);tutorialMark(id);break;
+    case 'tycoon-tab': if(id!=='agenda'&&voices.speaking?.where==='council')voices.stop();ui.tycoonTab=id;{if(id==='research'){screen='progress';ui.progressTab='research';}else if(id==='paper'){screen='press';ui.pressTab='paper';}else if(id==='market'){screen='network';ui.netView='rivals';}else screen='story';ui.officeTab='tycoon';inspect=null;renderNav();renderMission();renderInspector();}renderDrawer(true);tutorialMark(id);break;
     case 'tycoon-policy': {const active=state.tycoon.policies.includes(id);act(()=>T.setPolicy(state,id),`${T.POLICIES[id].name}: política ${active?'desactivada':'activada'}.`);break;}
     case 'tycoon-hire': act(()=>T.hire(state,20),`20 maquinistas en formación. Se incorporan en ${when(state.month+3)}.`);break;
     case 'tycoon-research': act(()=>T.research(state,id),`${T.TECHS[id].name} financiada. Final previsto: ${when(state.month+T.TECHS[id].months)}.`);break;
     case 'tycoon-lobby': act(()=>T.lobby(state,id),`${T.GROUPS[id][0]}: +12 de confianza. Negociación: 8 M€.`);break;
     case 'tycoon-public': case 'tycoon-commercial': act(()=>T.accept(state,id,a==='tycoon-public'?'public':'commercial'),'Compromiso aceptado. Revisa los requisitos y su fecha límite en la agenda.');break;
     case 'navigate': if($('modal').open)closeModal();navigate(b.dataset.screen); break;
-    case 'close-drawer': screen = null; render(); break;
+    case 'close-drawer': if(voices.speaking?.where==='council')voices.stop();screen = null; render(); break;
     case 'close-inspector': inspect = null; map.selected = null; map.selectedTrain = null; map.follow = false; renderInspector(); break;
     case 'close-modal': closeModal();if(menuOpen||!state.started)intro();break;
     case 'np-difficulty': np.difficulty=id;drawNewGame('[data-action="np-difficulty"][data-id="'+id+'"]');break;
@@ -1516,6 +1517,7 @@ document.addEventListener('click', event => {
     case 'sfx-toggle': if (sfx.toggle()) sfx.play('toggleOn'); musicDialog(true); break;
     case 'say': {
       const where = b.dataset.where, root = where === 'coach' ? $('coach') : where === 'modal' ? $('modal') : b.closest('.story,.desk-decision');
+      if(where==='council'&&root)heardCouncil.add(state.seedCode+'#'+state.month+'#'+root.dataset.dialogue);
       if (voices.speaking?.where === where) voices.stop();
       else { if (!voices.enabled) voices.toggle(); speakIn(root, b.dataset.person, where); }
       break;

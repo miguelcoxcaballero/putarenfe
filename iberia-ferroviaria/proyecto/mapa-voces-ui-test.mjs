@@ -90,6 +90,12 @@ try{
  await page.waitForFunction(i=>window.__audioQA.starts[i].ended,count,{timeout:Math.ceil(first.duration*1000)+15000});
  await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
  assert.equal(await page.locator('.desk-decision .say-btn').getAttribute('aria-pressed'),'false');
+ await page.evaluate(()=>window.railwayGame.voices.toggle());
+ const manual=await page.evaluate(()=>window.__audioQA.starts.length);
+ await page.locator('.desk-decision .say-btn').click();await waitVoice(page,manual);
+ await page.evaluate(()=>window.railwayGame.render());await page.waitForTimeout(200);
+ assert.equal(await page.evaluate(()=>window.__audioQA.starts.length),manual+1,'escuchar tras silenciar no duplica la lectura al redibujar');
+ await page.locator('.desk-decision .say-btn').click();
  check('Consejo: audio MP3 completo y PCM real, texto resaltado, detener, repetir y fin nativo sin cambio de tono ni velocidad.');
  const heard=new Set(samples.map(x=>x.person));
  const decisions=async()=>{for(let i=0;i<15;i++){
