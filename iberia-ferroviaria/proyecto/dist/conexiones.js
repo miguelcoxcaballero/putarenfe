@@ -81,7 +81,6 @@ export function begin(s){
  if(s.month===0){
   for(const d of I.TRAMOS)s.infra.t[d.id].lanes=d.kind==='lav'?2:1;
   s.cash=320;s.debt=60;s.orders=[];s.projects=[];s.requests=[];s.decided=[];s.event=null;
-  s.routes=s.routes.filter(r=>NETWORK.includes(r.id));
   for(const r of s.routes){r.active=false;r.units=0;r.fleet=null;r.real=false;r.frequency=2;r.baseFrequency=12;r.demand=Math.max(r.demand,24000);}
   // The starter railway is a physical network, not a historical release schedule.
   s.fleet=[['s100',8,68],['s103',8,78],['s130',10,70],['s730',6,67],['r465',6,74],['r599',6,72]].map(([model,qty,condition],i)=>({id:'f'+i,model,qty,condition,born:2010,origin:'Red inicial'}));

@@ -810,6 +810,8 @@ dialog.tour-dialog{outline:2px solid #e5a8c1;outline-offset:4px}dialog#modal.tou
 @media(max-width:760px){.board-heading{left:22px;right:22px;top:115px}.board-heading h2{font-size:22px}.board-map{inset:225px 35px 270px 35px}.board-legend{left:22px;right:22px;bottom:232px;gap:9px;font-size:9px}.board-hub{font-size:9px;padding:3px}.board-hub i{width:8px;height:8px}.board-hub span{max-width:75px;white-space:normal;text-align:center}.game-challenges,.game-research,.game-news{grid-template-columns:1fr}.track-options button{padding:11px 5px;font-size:10px}.track-badge,.track-current-label{font-size:7px;padding:6px}.track-captions{gap:10px}.track-captions strong{font-size:10px}.track-modal h1{font-size:20px}}
 @media(prefers-reduced-motion:reduce){.track-yellow-bars,.track-proposal,.board-train{animation:none}}
 
+.desk-decision .speaker>div{flex:1;min-width:0}.desk-decision .say-btn{flex:none;min-width:44px;min-height:44px}.desk-decision .say-caption{display:block;font-size:10px;color:var(--ink-3);margin-top:4px}.desk-decision .say-s.on{background:#edb94f33;border-radius:3px}.desk-decision .portrait.talking{box-shadow:0 0 0 2px #e7b96b}
+
 /* Trenespop: familiar second-hand marketplace geometry, with its own parody branding. */
 .drawer.trenespop-drawer{width:min(1464px,calc(100vw - var(--rail-w) - 40px));background:#fff;color:#29363d;border-radius:16px}
 .drawer.trenespop-drawer>.body{padding:0;background:#fff}

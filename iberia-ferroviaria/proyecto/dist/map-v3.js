@@ -84,7 +84,7 @@ export class RailMap {
       else if (this.drag?.id === e.pointerId) {
         const dx = p[0] - this.drag.x, dy = p[1] - this.drag.y;
         this.drag.moved ||= Math.hypot(dx, dy) > 4;
-        if (this.drag.moved) { this.pan.x = this.drag.px + dx; this.pan.y = this.drag.py + dy; this.follow = false; this.touch(); }
+        if (this.drag.moved) { this.home=false;this.pan.x = this.drag.px + dx; this.pan.y = this.drag.py + dy; this.follow = false; this.touch(); }
       } else this.hover = this.hit(...p);
       canvas.style.cursor = this.drag?.moved ? 'grabbing' : this.hover ? 'pointer' : 'grab';
     });
@@ -103,11 +103,12 @@ export class RailMap {
     const r = this.canvas.getBoundingClientRect();
     this.w = r.width; this.h = r.height; this.dpr = Math.min(devicePixelRatio || 1, 2);
     for (const c of [this.canvas, ...Object.values(this.caches)]) { c.width = Math.max(1, this.w * this.dpr); c.height = Math.max(1, this.h * this.dpr); }
+    if(this.home!==false)this.reset();
     this.dirty = true;
   }
   get base() { return Math.min((this.w - 40) / 13.2, (this.h - 90) / 10.6); }
   zoomAt(z, x = this.w / 2, y = this.h / 2) {
-    const before = this.zoom;
+    const before = this.zoom;this.home=false;
     this.zoom = Math.max(.7, Math.min(260, z));
     const cx = this.w * .5, cy = this.h * .5;
     this.pan.x = x - cx - (x - cx - this.pan.x) * this.zoom / before;
@@ -123,8 +124,17 @@ export class RailMap {
     return [(x - this.w * .5 - this.pan.x) / b - 3.6, 40.1 - (y - this.h * .5 - this.pan.y) / (b * 1.3)];
   }
   pxPerKm() { return this.base * this.zoom / 85; }
-  reset() { this.zoom = 1; this.pan = {x: 0, y: 0}; this.selected = null; this.selectedTrain = null; this.follow = false; this.touch(); this.dirty = true; }
-  focusAt(lon, lat, z = 10) { this.zoom = z; this.pan = {x: 0, y: 0}; const p = this.project(lon, lat); this.pan = {x: this.w * .46 - p[0], y: this.h * .5 - p[1]}; this.touch(); }
+  reset() {
+    const frame=this.opts.getViewport?.();
+    this.zoom=1;this.pan={x:0,y:0};
+    if(frame&&frame.right>frame.left&&frame.bottom>frame.top&&this.base>0){
+      this.zoom=Math.max(.35,Math.min(1.4,(frame.right-frame.left)/(14.8*this.base),(frame.bottom-frame.top)/(11.4*this.base)));
+      const scale=this.base*this.zoom;
+      this.pan={x:(frame.left+frame.right-this.w)/2-.6*scale,y:(frame.top+frame.bottom-this.h)/2-.13*scale};
+    }
+    this.home=true;this.selected=null;this.selectedTrain=null;this.follow=false;this.touch();this.dirty=true;
+  }
+  focusAt(lon, lat, z = 10) { this.home=false;this.zoom = z; this.pan = {x: 0, y: 0}; const p = this.project(lon, lat); this.pan = {x: this.w * .46 - p[0], y: this.h * .5 - p[1]}; this.touch(); }
   fit(points, max = 60) {
     if (!points.length) return;
     let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;

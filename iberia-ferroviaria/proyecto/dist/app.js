@@ -112,6 +112,11 @@ const map = new RailMap($('map'), {
     return true;
   },
   getState: () => state,
+  getViewport: () => {
+    const hud=document.querySelector('.hud').getBoundingClientRect(),day=$('daybar').getBoundingClientRect(),mission=$('mission').getBoundingClientRect();
+    const mobile=innerWidth<=760;
+    return {left:mobile?12:mission.right+20,right:innerWidth-20,top:Math.max(hud.bottom+14,mobile?mission.bottom+16:96),bottom:day.top-16};
+  },
   getView: () => ({mode: layer === 'real' ? 'real' : 'campaign', trips: viewTrips(), minute: currentMinute(), date: O.dayDate(state), dayType: dayType(), networkKey: netKey}),
   onPick: hit => pick(hit),
   getCities: () => mapCities(),
@@ -145,9 +150,11 @@ voices.on(syncSayButtons);
 /** Lee el párrafo [data-say] dentro de root con la voz del personaje y resalta cada frase. */
 function speakIn(root, person, where) {
   const el = root?.querySelector('[data-say]'); if (!el) return;
-  const spans = [...el.querySelectorAll('.say-s')], face = root.querySelector('.portrait');
-  const clear = () => { spans.forEach(x => x.classList.remove('on')); face?.classList.remove('talking'); syncSayButtons(); };
-  const ok = voices.speak(person, el.dataset.say, {mood:root.querySelector('[data-mood]')?.dataset.mood||'happy',onSentence: i => { spans.forEach((x, j) => x.classList.toggle('on', j === i)); }, onend: clear,onerror: () => { clear();toast('No se ha podido reproducir la voz. Puedes seguir leyendo el diálogo o volver a escucharlo.'); }});
+  const liveRoot = () => root.dataset.dialogue ? $('drawer').querySelector('[data-dialogue="'+root.dataset.dialogue+'"]')||root : root;
+  const sentenceSpans = () => [...liveRoot().querySelectorAll('.say-s')];
+  const face = root.querySelector('.portrait');
+  const clear = () => { sentenceSpans().forEach(x => x.classList.remove('on')); face?.classList.remove('talking'); liveRoot().querySelector('.portrait')?.classList.remove('talking'); syncSayButtons(); };
+  const ok = voices.speak(person, el.dataset.say, {mood:root.querySelector('[data-mood]')?.dataset.mood||'happy',onSentence: i => { sentenceSpans().forEach((x, j) => x.classList.toggle('on', j === i)); liveRoot().querySelector('.portrait')?.classList.add('talking'); }, onend: clear,onerror: () => { clear();toast('No se ha podido reproducir la voz. Puedes seguir leyendo el diálogo o volver a escucharlo.'); }});
   if (!ok) return;
   if (voices.speaking) voices.speaking.where = where;
   face?.classList.add('talking'); syncSayButtons();
@@ -647,14 +654,10 @@ function render() {
   if (screen) renderDrawer(); else $('drawer').classList.add('hidden');
   renderInspector();renderBoard();renderCoach();
 }
-let boardKey='';
 function renderBoard(){
- let el=$('network-board');const visible=!!state.tenfe?.game&&layer==='network'&&!menuOpen;
- $('map').style.visibility=visible?'hidden':'';
- if(!visible){el?.remove();boardKey='';return;}
- if(!el){el=document.createElement('section');el.id='network-board';el.setAttribute('aria-label','Mapa de Conexiones');$('game').prepend(el);}
- const key=networkKey()+'#'+state.month+'#'+state.ops.phase+'#'+state.tenfe.megas.map(p=>p.id+p.stage+p.due).join();
- if(key!==boardKey){boardKey=key;el.innerHTML=JUI.boardHTML(state);}
+ // The geographic canvas is the playable map in every layer.
+ $('network-board')?.remove();
+ $('map').style.visibility='';
 }
 function renderHud(){
   const b=E.balance(state),kind=dayType();
@@ -774,6 +777,7 @@ function mix(a, b, t) { return a + (b - a) * t; }
 
 // ------------------------------------------------------------ cajón de páginas
 function navigate(to) {
+  if(voices.speaking?.where==='council'&&(to!=='story'||screen==='story'))voices.stop();
   if (ALIASES[to]) { const [page, key, value] = ALIASES[to]; ui[key] = value; to = page; if (screen === to) { renderDrawer(true); return; } }
   if (screen === to || !PAGES[to]) { screen = null; $('drawer').classList.add('hidden'); renderNav(); renderMission(); return; }
   screen = to; inspect = null; map.selected = null; map.selectedTrain = null;
@@ -799,6 +803,7 @@ function renderDrawer(resetScroll = false) {
   if (focusId && $(focusId)) { $(focusId).focus(); try { $(focusId).setSelectionRange(pos, pos); } catch {} }
   if (screen === 'finance') drawChart();
   syncSayButtons();
+  councilVoice();
 }
 
 function boardRows(trips, minute, opts = {}) {
@@ -1231,7 +1236,7 @@ function pressPage(){
 }
 function showTenfeUpdate(report=false){
   if(menuOpen||np||tut||!state.tenfe||$('modal').open)return;
-  if(state.tenfe.game){if(state.tenfe.game.event){ui.tycoonTab='agenda';screen='story';render();$('drawer').querySelector('.body').scrollTop=0;}return;}
+  if(state.tenfe.game){if(state.tenfe.game.event||E.pendingDecision(state)){ui.tycoonTab='agenda';screen='story';render();$('drawer').querySelector('.body').scrollTop=0;}return;}
   const notice=state.tenfe.notices[0];
   if(notice){pause();showModal(`<div class="content tenfe-news-modal"><span class="kicker">${esc(when(notice.month))} · ${esc(notice.kind)}</span><h1>${esc(notice.title)}</h1><p>${esc(notice.body)}</p><div class="actions"><button class="btn primary" data-action="tenfe-notice" data-id="${notice.id}">Continuar</button></div></div>`,'single');return;}
   if(report&&state.tenfe.reports.length)showModal(`<div class="content tenfe-month-report">${TenfeUI.reportHTML(state)}${TenfeUI.nextHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a la red</button><button class="btn" data-action="month-report">Ver informes</button></div></div>`,'single');
@@ -1251,15 +1256,24 @@ function showWelcome(resume=false){
  el.innerHTML=`${state.tenfe?.game?'<img src="assets/rescate/portada-rescate.webp" alt="" width="480" height="270">':''}<span class="kicker">${resume?esc(state.tenfe?.game?'Turno '+J.turn(state):O.dayLabel(state)):'Bienvenido a Conexiones'}</span><h2>${resume?'De nuevo al mando.':'Un país por conectar.'}</h2><p>${resume?'Tu red, tus trenes y tus compromisos siguen aquí. Revisa el objetivo y elige tu próxima jugada.':'Recibes una red a medio gas. Conecta ciudades, decide qué promesas cumplir y haz que cada tren merezca el viaje. Cinco retos y dos mandatos: elige tu primera jugada.'}</p><button class="btn primary small" data-action="welcome-close">${resume?'Volver a mi red':'Vamos a dirigir'} →</button>`;
  $('game').appendChild(el);requestAnimationFrame(()=>el.classList.add('visible'));
 }
+const heardCouncil=new Set();
+function councilVoice(){
+ const card=$('drawer').querySelector('.desk-decision');
+ if(!card||menuOpen||tut||$('modal').open)return;
+ const key=state.seedCode+'#'+state.month+'#'+card.dataset.dialogue;
+ if(heardCouncil.has(key)||!voices.enabled)return;
+ heardCouncil.add(key);
+ speakIn(card,card.dataset.person,'council');
+}
 function deskDecisionHTML(){
  E.revalidateScene(state);const d=E.pendingDecision(state);const event=state.tenfe?.game?JUI.eventHTML(state):'';if(!d)return event;
  const person=CHARACTERS[d.person];
- return event+`<section class="desk-decision"><header><img src="${faceURL(d.person,d.mood||'happy')}" alt="" width="48" height="64"><div><span class="kicker">Consejo de dirección · decisión pendiente</span><strong>${esc(person.name)}</strong><small>${esc(person.role)}</small></div></header><h2>${esc(d.title)}</h2><p data-say="${esc(d.body)}">${sayHtml(d.body,d.person)}</p><div class="desk-options">${d.choices.map((c,i)=>`<button class="choice" data-action="decision" data-id="${d.id}" data-choice="${i}" ${c.disabled||(!c.deferred&&c.cost>0&&state.cash<c.cost)?'disabled':''}><strong>${esc(c.label)}</strong><span>${esc(c.disabled&&c.reason?c.reason:c.detail)}</span></button>`).join('')}</div></section>`;
+ return `<section class="desk-decision" data-dialogue="${esc(d.id)}" data-person="${d.person}"><header class="speaker"><img class="portrait" data-mood="${d.mood||'happy'}" src="${faceURL(d.person,d.mood||'happy')}" alt="" width="48" height="64"><div><span class="kicker">Consejo de dirección · decisión pendiente</span><strong>${esc(person.name)}</strong><small>${esc(person.role)}</small><span class="say-caption">${sayLabel('council')}</span></div>${sayButton(d.person,'council')}</header><h2>${esc(d.title)}</h2><p data-say="${esc(d.body)}">${sayHtml(d.body,d.person)}</p><div class="desk-options">${d.choices.map((c,i)=>`<button class="choice" data-action="decision" data-id="${d.id}" data-choice="${i}" ${c.disabled||(!c.deferred&&c.cost>0&&state.cash<c.cost)?'disabled':''}><strong>${esc(c.label)}</strong><span>${esc(c.disabled&&c.reason?c.reason:c.detail)}</span></button>`).join('')}</div></section>`+event;
 }
 
 function intro() { menuChrome();np=null;showModal(menuHTML(saved,savedError,rescueSaveSummary()),'main-menu-shell');$('modal').querySelector('[autofocus]')?.focus(); }
 function resetSessionView(){
- tutorialChrome();adviceLine=null;tutorialDraft=null;clearCoach();$('entry-welcome')?.remove();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
+ tutorialChrome();heardCouncil.clear();adviceLine=null;tutorialDraft=null;clearCoach();$('entry-welcome')?.remove();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
  ui.market=freshMarketFilters();
  map.selected=null;map.selectedCity=null;map.selectedTrain=null;map.selectedTramo=null;map.follow=false;map.reset();setLayer('network');resetToday();
  if(['running','review'].includes(state.ops.phase)){spawnArrivals(-1,state.ops.minute);popups=[];}
@@ -1303,13 +1317,13 @@ function startClassic(maqueta,seed,code,options={}){
   U.begin(state,{...options,rules:'conexiones'});
   O.ensureOps(state);state.ops.day=3;state.started=true;
   if(maqueta||options.guide===false)state.tutorial={done:true};
-  resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();autosave();
+  resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();map.reset();autosave();
   if(!maqueta&&options.guide!==false)startTutorial(false);else showWelcome(false);
 }
 
 function continueClassic(){
   if(!saved)return;
-  menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);U.begin(state,{rules:'conexiones'});O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();
+  menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);U.begin(state,{rules:'conexiones'});O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();map.reset();
   if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showWelcome(true);
 }
 function menuGuide(){if(state.tenfe?.game)return showModal(`<div class="content"><span class="kicker">Conexiones · guía del director</span><h1>Haz que el país llegue.</h1>${JUI.campaignHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a jugar</button><button class="btn" data-action="new-game">Nueva partida</button></div></div>`,'single');showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="new-game">Nueva partida</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}
@@ -1441,14 +1455,14 @@ document.addEventListener('click', event => {
     case 'track-designer': trackChoice=null;trackDialog(id);break;
     case 'track-confirm': if(act(()=>Tracks.start(state,E,trackTarget,trackChoice),'Mejora adjudicada.'))closeModal();break;
     case 'welcome-close': $('entry-welcome')?.remove();break;
-    case 'tycoon-tab': ui.tycoonTab=id;{if(id==='research'){screen='progress';ui.progressTab='research';}else if(id==='paper'){screen='press';ui.pressTab='paper';}else if(id==='market'){screen='network';ui.netView='rivals';}else screen='story';ui.officeTab='tycoon';inspect=null;renderNav();renderMission();renderInspector();}renderDrawer(true);tutorialMark(id);break;
+    case 'tycoon-tab': if(id!=='agenda'&&voices.speaking?.where==='council')voices.stop();ui.tycoonTab=id;{if(id==='research'){screen='progress';ui.progressTab='research';}else if(id==='paper'){screen='press';ui.pressTab='paper';}else if(id==='market'){screen='network';ui.netView='rivals';}else screen='story';ui.officeTab='tycoon';inspect=null;renderNav();renderMission();renderInspector();}renderDrawer(true);tutorialMark(id);break;
     case 'tycoon-policy': {const active=state.tycoon.policies.includes(id);act(()=>T.setPolicy(state,id),`${T.POLICIES[id].name}: política ${active?'desactivada':'activada'}.`);break;}
     case 'tycoon-hire': act(()=>T.hire(state,20),`20 maquinistas en formación. Se incorporan en ${when(state.month+3)}.`);break;
     case 'tycoon-research': act(()=>T.research(state,id),`${T.TECHS[id].name} financiada. Final previsto: ${when(state.month+T.TECHS[id].months)}.`);break;
     case 'tycoon-lobby': act(()=>T.lobby(state,id),`${T.GROUPS[id][0]}: +12 de confianza. Negociación: 8 M€.`);break;
     case 'tycoon-public': case 'tycoon-commercial': act(()=>T.accept(state,id,a==='tycoon-public'?'public':'commercial'),'Compromiso aceptado. Revisa los requisitos y su fecha límite en la agenda.');break;
     case 'navigate': if($('modal').open)closeModal();navigate(b.dataset.screen); break;
-    case 'close-drawer': screen = null; render(); break;
+    case 'close-drawer': if(voices.speaking?.where==='council')voices.stop();screen = null; render(); break;
     case 'close-inspector': inspect = null; map.selected = null; map.selectedTrain = null; map.follow = false; renderInspector(); break;
     case 'close-modal': closeModal();if(menuOpen||!state.started)intro();break;
     case 'np-difficulty': np.difficulty=id;drawNewGame('[data-action="np-difficulty"][data-id="'+id+'"]');break;
@@ -1479,7 +1493,7 @@ document.addEventListener('click', event => {
     case 'menu-settings': musicDialog();break;
     case 'continue': case 'continue-other': if (b.dataset.game === 'rescue') showLegacy(); else continueClassic(); break;
     case 'observe': menuOpen=false;closeModal(); setLayer('real'); observerMinute = 480; play(); break;
-    case 'decision': {const wasModal=$('modal').open;if(act(()=>E.decide(state,id,+b.dataset.choice))){if(wasModal)closeModal();if(wasModal&&!tut&&E.pendingDecision(state))showDecision();render();}break;}
+    case 'decision': {const wasModal=$('modal').open;if(voices.speaking?.where==='council')voices.stop();if(act(()=>E.decide(state,id,+b.dataset.choice))){if(wasModal)closeModal();if(wasModal&&!tut&&E.pendingDecision(state))showDecision();render();}break;}
     case 'claim': act(() => E.claimChapter(state), 'Financiación recibida. Tu siguiente etapa está preparada.'); setTimeout(() => { const st = document.querySelector('.story'); if (st && !state.ended) speakIn(st, CHAPTERS[state.chapter].speaker, 'story'); }, 60); break;
     case 'play': playing ? pause() : play(); break;
     case 'speed': speedIndex = +id; renderDaybar(); break;
@@ -1502,7 +1516,8 @@ document.addEventListener('click', event => {
     case 'voice-toggle': voices.toggle(); musicDialog(true); break;
     case 'sfx-toggle': if (sfx.toggle()) sfx.play('toggleOn'); musicDialog(true); break;
     case 'say': {
-      const where = b.dataset.where, root = where === 'coach' ? $('coach') : where === 'modal' ? $('modal') : b.closest('.story');
+      const where = b.dataset.where, root = where === 'coach' ? $('coach') : where === 'modal' ? $('modal') : b.closest('.story,.desk-decision');
+      if(where==='council'&&root)heardCouncil.add(state.seedCode+'#'+state.month+'#'+root.dataset.dialogue);
       if (voices.speaking?.where === where) voices.stop();
       else { if (!voices.enabled) voices.toggle(); speakIn(root, b.dataset.person, where); }
       break;

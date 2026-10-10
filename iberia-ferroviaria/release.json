@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "6.1.0",
+  "version": "6.2.0",
   "status": "complete-catalogue",
   "availableWholeDialogues": 412,
   "expectedWholeDialogues": 412,
@@ -19,7 +19,7 @@
   "game": {
     "url": "index.html",
     "bytes": 38615,
-    "sha256": "b9b0517208bddcd1f7587a8fb2405b4516fe919f5b6f18fafc21cba8eb4a34b7"
+    "sha256": "ff76b774d61b3e460f85c6fb13bab670d33c1f2d808b98126ccb16c66016c1bd"
   },
   "listening": {
     "url": "dialogos.html",
@@ -914,14 +914,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-922447757162.js",
-      "bytes": 11643347,
-      "sha256": "9224477571627c8c7241561403b05f44e8a594697a6feebf1e3e9072dea4a5c2"
+      "url": "assets/game-script-4-a111d3fdc262.js",
+      "bytes": 11645304,
+      "sha256": "a111d3fdc262720b5b6946eb04f90e4b8493dc25d1e5bd493aa06b5433ddeb35"
     },
     {
-      "url": "assets/game-style-0-82bbe6ab0171.css",
-      "bytes": 2051481,
-      "sha256": "82bbe6ab0171eed394546fc2d551a209d4711c9846ec5cab81ef06b0de1f42d2"
+      "url": "assets/game-style-0-f3056b3ba72c.css",
+      "bytes": 2051812,
+      "sha256": "f3056b3ba72cc7f169186ddb997dcf1098510dc4d2c455881c7563f045ce97f0"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -5062,23 +5062,20 @@
     "registeredEOS": true,
     "javascriptSyntax": true,
     "relativeURLs": true,
-    "browserTested": true,
-    "humanListening": false,
-    "browserWorkflow": "https://github.com/miguelcoxcaballero/putarenfe/actions/runs/38069391778",
-    "trainRefit": {
-      "status": "passed",
-      "viewports": [
-        1440,
-        390
-      ],
-      "models": 14,
-      "images": 28,
-      "quoteAndConfirmation": true,
-      "saveReload": true,
-      "returnAfterTurns": 5
-    }
+    "browserTested": false,
+    "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-922447757162.js",
+      "bytes": 11643347,
+      "sha256": "9224477571627c8c7241561403b05f44e8a594697a6feebf1e3e9072dea4a5c2"
+    },
+    {
+      "url": "assets/game-style-0-82bbe6ab0171.css",
+      "bytes": 2051481,
+      "sha256": "82bbe6ab0171eed394546fc2d551a209d4711c9846ec5cab81ef06b0de1f42d2"
+    },
     {
       "url": "assets/game-script-4-023a4bc5ab91.js",
       "bytes": 11626433,
