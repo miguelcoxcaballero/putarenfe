@@ -1551,7 +1551,7 @@ document.addEventListener('click', event => {
     case 'refit-view': ui.refitView=id;renderDrawer(true);break;
     case 'refit-detail': refitDialog(id);break;
     case 'interior-preview': showModal(Refits.previewHTML(id),'single');break;
-    case 'refit-confirm': if(act(()=>E.refurbish(state,id,+$('refitQty').value),'Material enviado al taller.')){closeModal();ui.fleetTab='refits';navigate('fleet');renderDrawer(true);}break;
+    case 'refit-confirm': if(act(()=>E.refurbish(state,id,+$('refitQty').value),'Material enviado al taller.')){closeModal();ui.fleetTab='refits';if(screen!=='fleet')navigate('fleet');else renderDrawer(true);}break;
     case 'refurbish': if (act(() => E.refurbish(state, id, +$('fleetQty').value), 'Material enviado a reforma.')) closeModal(); break;
     case 'sell': if (act(() => E.sell(state, id, +$('fleetQty').value), 'Venta completada.')) closeModal(); break;
     case 'purchase': purchaseDialog(id); break;

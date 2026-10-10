@@ -202,7 +202,7 @@ export function catalogueHTML(){
 export function jobsHTML(s){
  const rows=s.refits.slice(-12).reverse();return '<section class="refit-jobs"><h3>El trabajo del taller</h3>'+(!rows.length?'<div class="refit-empty">Elige un lote libre para empezar. Mientras se reforma, sus unidades salen temporalmente del parque.</div>':rows.map(r=>{
  const started=r.started??r.due-5,progress=r.done?100:Math.max(0,Math.min(99,(s.month-started)/Math.max(1,r.due-started)*100));
- return '<article><div>'+photo(r.model,!!r.done)+'</div><div><span class="kicker">'+(r.done?'LISTO PARA CIRCULAR':'EN EL TALLER')+'</span><h4>'+esc(MODEL[r.model].name)+' · '+r.qty+' '+(r.qty===1?'unidad':'unidades')+'</h4><p>'+(r.done?'Interior renovado · unidades devueltas al parque':'Restan '+Math.max(0,r.due-s.month)+' '+(s.tenfe?.game?'turnos':'meses'))+'</p><div class="bar green" role="progressbar" aria-valuenow="'+Math.round(progress)+'" aria-valuemin="0" aria-valuemax="100"><span style="width:'+progress+'%"></span></div></div></article>';
+ return '<article><div>'+photo(r.model,!!r.done||!!r.interiorBefore)+'</div><div><span class="kicker">'+(r.done?'LISTO PARA CIRCULAR':'EN EL TALLER')+'</span><h4>'+esc(MODEL[r.model].name)+' · '+r.qty+' '+(r.qty===1?'unidad':'unidades')+'</h4><p>'+(r.done?'Interior renovado · unidades devueltas al parque':'Restan '+Math.max(0,r.due-s.month)+' '+(s.tenfe?.game?'turnos':'meses'))+'</p><div class="bar green" role="progressbar" aria-valuenow="'+Math.round(progress)+'" aria-valuemin="0" aria-valuemax="100"><span style="width:'+progress+'%"></span></div></div></article>';
  }).join(''))+'</section>';
 }
 export function pageHTML(s,view='workshop'){
