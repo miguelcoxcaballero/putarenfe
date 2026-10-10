@@ -94,8 +94,8 @@ if (gameInput) {
           body=oneReplace(body,oldLabel,'__WEB_PREVIEW_LABEL__','one visible game preview label');
         }else{
           assert.equal(ids.length,412,'only the strict complete game has no preview label');
-          const anchor='<h2 id="menu-departures-title">¿Adónde vamos?</h2>';
-          body=oneReplace(body,anchor,anchor+'<p class="menu-preview-note" role="status">__WEB_PREVIEW_LABEL__</p>','complete game recording status');
+          const anchor='<footer class="menu-council">';
+          body=oneReplace(body,anchor,'<p class="menu-audio-status">__WEB_PREVIEW_LABEL__</p>'+anchor,'complete game recording status');
         }
         body=oneReplace(body,'__WEB_PREVIEW_LABEL__</p>','__WEB_PREVIEW_LABEL__ <a href="dialogos.html">Escuchar los diálogos</a></p>','menu listening link');
         assert(body.includes('const CLIPS = {};'),'no old sentence recordings');
@@ -210,6 +210,12 @@ for(const [sub,kind] of [['rescate','rescue-photo'],['rescate-voces','rescue-rec
     assets.push(row);(kind==='rescue-photo'?rescue.photos:rescue.recordings).push(row);
   }
 }
+const trackAtlases=[];
+for(const lanes of [1,2,3]){
+ const name='via-'+lanes+'.png',bytes=fs.readFileSync(path.join(editableProject,'dist','assets','vias',name));
+ const url='assets/vias/'+name;write(url,bytes);const row={url,bytes:bytes.length,sha256:sha(bytes),kind:'generated-track-atlas'};
+ assets.push(row);trackAtlases.push(row);
+}
 const rescueVoiceManifest=path.join(editableProject,'dist','assets','rescate-voces','manifest.json');
 if(fs.existsSync(rescueVoiceManifest)){
   const meta=JSON.parse(read(rescueVoiceManifest));rescue.expectedDialogues=meta.expected;
@@ -295,7 +301,7 @@ assert(!/<base\b/i.test(gameHTML+listeningHTML),'all asset URLs use the document
 assert.equal((listeningHTML.match(/<audio\b/g)||[]).length,1,'one native listening player');
 write('index.html',gameHTML);write('dialogos.html',listeningHTML);
 write('.nojekyll','');
-const release={schema:1,version:'5.0.0',status:partial?'partial-preview':'complete-catalogue',
+const release={schema:1,version:'6.0.0',status:partial?'partial-preview':'complete-catalogue',
   availableWholeDialogues:available,expectedWholeDialogues:412,pendingWholeDialogues:pending,pacoWholeDialogues:pacoCount,
   sourceFrozenHTMLs:{gameSHA256:sourceRelease.gameSourceSHA256,listeningSHA256:sourceRelease.listeningSourceSHA256},
   sourceManifestSHA256:sha(manifestBytes),sourceCatalogueSHA256:sourceRelease.sourceCatalogueSHA256,
@@ -303,6 +309,7 @@ const release={schema:1,version:'5.0.0',status:partial?'partial-preview':'comple
   webPlayback:'whole unchanged MP3 downloaded on demand; one source at original rate and pitch',
   game:{url:'index.html',bytes:Buffer.byteLength(gameHTML),sha256:sha(gameHTML)},
   listening:{url:'dialogos.html',bytes:Buffer.byteLength(listeningHTML),sha256:sha(listeningHTML)},
+  trackWorkshop:{configurations:27,atlases:trackAtlases.map(x=>x.url),gauges:[1668,1435,'1668/1435'],catenary:['none','3kv','25kv'],tracks:[1,2,3]},
   rescue:{photos:rescue.photos.filter(r=>r.kind==='rescue-photo').length,recordedDialogues:rescue.recordings.filter(r=>r.kind==='rescue-recording').length,expectedDialogues:rescue.expectedDialogues},
   assets,recordings,validation:{physicalMP3Hashes:true,pairedFrozenHTMLHashes:true,registeredEOS:true,
     javascriptSyntax:true,relativeURLs:true,browserTested:false,humanListening:false}};

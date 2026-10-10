@@ -133,8 +133,9 @@ console.log('✓ Reanudación del encargo: dos planes con requisitos, premios, c
 
 // Confirmar el aprendizaje nunca cambia ni inventa la rama de un encargo firmado.
 const appSource=fs.readFileSync(new URL('./dist/app.js',import.meta.url),'utf8');
-const answerHandler=appSource.slice(appSource.indexOf('function tutorialAnswer(id) {'),appSource.indexOf('function tutorialMark(key)'));
-const nextHandler=appSource.slice(appSource.indexOf('function tutorialNext() {'),appSource.indexOf('function tutorialAnswer(id) {'));
+assert(appSource.includes('function positionTour()'),'la guía señala los controles reales');
+assert(!appSource.includes('focusedTaskHTML(state,tut)'),'el juego no sustituye la interfaz por otra mesa de tutorial');
+
 for(const branch of ['public','commercial']){
  const state=E.initialState();state.started=true;O.ensureOps(state);state.tutorial=freshInduction(state);
  Object.assign(state.tutorial,{step:8,phase:'task'});const t=state.tutorial,q=state.tycoon.contracts[0];
@@ -143,14 +144,6 @@ for(const branch of ['public','commercial']){
  const html=focusedTaskHTML(state,t);
  assert(html.includes(`data-choice="${branch}"`));assert(!html.includes(`data-choice="${other}"`),'la mesa sólo confirma la rama firmada');
  assert(canInductionAnswer(state,t,branch));assert(!canInductionAnswer(state,t,other),'un evento obsoleto no admite la rama opuesta');
- const events=[],handler=vm.createContext({state,tut:t,INDUCTION_STAGES,canInductionAnswer,restoreInductionHandoff,
-  pause(){events.push('pause');},autosave(){events.push('save');},renderCoach(){events.push('render');},closeModal(){events.push('close');},inductionModalKey:''});
- vm.runInContext(answerHandler+'\n'+nextHandler,handler);
- handler.tutorialAnswer(other);assert.deepEqual(events,[]);assert.equal(t.feedback,null,'el handler publicado rechaza el clic opuesto sin voz, guardado ni cambios');
- handler.tutorialAnswer(branch);assert.equal(t.pendingAnswer,branch);assert(t.feedback);assert.deepEqual(events,['pause','save','render']);
- // La respuesta incorrecta que ya estuviera guardada también se corrige al confirmarla.
- t.pendingAnswer=other;t.feedback='Respuesta antigua.';handler.tutorialNext();
- assert.equal(t.answers.handoff,branch);assert.equal(t.feedback,null);
  delete t.answers.handoff;
  const before=JSON.stringify(state.tycoon);
  Object.assign(t,{feedback:'Una explicación antigua.',pendingAnswer:other});

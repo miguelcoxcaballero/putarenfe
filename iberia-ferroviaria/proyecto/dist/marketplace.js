@@ -23,7 +23,7 @@ export const usedStock = (model, period) => 2 + (usedModels.indexOf(model) + per
 
 /** Each used advert is a finite lot. Six-month arrivals create new lots, never refill a sold advert. */
 export function listings(s) {
-  const year = 2022 + Math.floor(s.month / 12), period = marketPeriod(s);
+  const year = (s.tenfe?.game?2050:2022 + Math.floor(s.month / 12)), period = marketPeriod(s);
   const fresh = MODELS.filter(m => m.year < 2099).map(m => ({id: 'new-' + m.id, model: m.id, maker: makerName(m), title: m.name, state: 'new', condition: 100, age: 0, priceFactor: 1, leadAdjustment: 0, seller: makerName(m) + ' · fábrica', place: 'Venta de fábrica', year: m.year, stock: 30, equivalent: false}));
   fresh.push(
     {id: 'new-dorfler-s120', model: 's120', maker: 'Dörfler', title: 'Dörfler · Alvia a medida', state: 'new', condition: 100, age: 0, priceFactor: 1.04, leadAdjustment: -4, seller: 'Dörfler · fábrica', place: 'Venta de fábrica', year: MODEL.s120.year, stock: 30, equivalent: true},
@@ -44,7 +44,7 @@ export function listing(s, id) {
 export function quoteListing(s, model, qty, id, standard) {
   const item = listing(s, id);
   if (item.model !== model) throw Error('El anuncio no corresponde a ese tren.');
-  if (2022 + Math.floor(s.month / 12) < item.year) throw Error('Este tren todavía no se vende.');
+  if ((s.tenfe?.game?2050:2022 + Math.floor(s.month / 12)) < item.year) throw Error('Este tren todavía no se vende.');
   if (qty > item.stock) throw Error(`Quedan ${item.stock} unidades en este anuncio.`);
   const unit = standard.unit * item.priceFactor, total = unit * qty;
   const lead = item.state === 'used' ? item.lead : Math.max(MODEL[model].family === 'Regional' ? 1 : 16, standard.lead + item.leadAdjustment);
@@ -107,7 +107,7 @@ function routeSelect(s, value) {
 
 /** Filtering uses the same current quote as checkout, including backlog and reserved stock. */
 export function filterListings(s, filters, quote) {
-  const query = norm(filters.query).trim(), year = 2022 + Math.floor(s.month / 12);
+  const query = norm(filters.query).trim(), year = (s.tenfe?.game?2050:2022 + Math.floor(s.month / 12));
   const route = filters.route && routeOf(s, filters.route) ? filters.route : null;
   const items = listings(s).filter(item => item.stock > 0 && item.year <= year).map(item => ({...item, q: quote(item.model, 1, item.id), fit: route ? routeFit(s, route, item.model) : null})).filter(item => {
     if (filters.state !== 'all' && filters.state && item.state !== filters.state) return false;
@@ -130,7 +130,7 @@ function select(id, label, value, options) {
   return `<label class="tp-filter"><span class="tp-sr">${label}</span><select id="${id}" aria-label="${label}">${options.map(([v, text]) => `<option value="${v}"${String(value) === String(v) ? ' selected' : ''}>${esc(text)}</option>`).join('')}</select></label>`;
 }
 export function catalogueHTML(s, filters, quote, thumb) {
-  const all = listings(s), available = all.filter(x => x.stock > 0 && x.year <= 2022 + Math.floor(s.month / 12));
+  const all = listings(s), available = all.filter(x => x.stock > 0 && x.year <= (s.tenfe?.game?2050:2022 + Math.floor(s.month / 12)));
   // Locked factory models appear in the ordinary catalogue again when their launch year arrives.
   const items = filterListings(s, filters, quote), favoriteCount = s.marketplace?.favorites?.filter(id => available.some(x => x.id === id)).length || 0;
   const route = filters.route ? routeOf(s, filters.route) : null, fits = route ? items.filter(x => x.fit?.ok).length : 0;

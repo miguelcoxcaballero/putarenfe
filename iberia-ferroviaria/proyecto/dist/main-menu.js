@@ -26,25 +26,25 @@ export function menuHTML(saved = null, savedError = '', rescue = null) {
   return `<main class="main-menu" aria-labelledby="menu-title">
     <div class="main-menu-art" role="img" aria-label="Un tren de alta velocidad entra en una estación española al amanecer, entre viaductos y colinas."></div>
     <div class="main-menu-grain" aria-hidden="true"></div>
-    <header class="menu-masthead"><span style="display:inline-flex;align-items:center;flex:none;width:84px;height:28px;">${brandLogo('Tenfe',{variant:'white'})}</span><span>Gestión ferroviaria <i>·</i> España, 2022–2050</span><span class="menu-edition">AVE · REGIONALES · POLÍTICA</span></header>
+    <header class="menu-masthead"><span style="display:inline-flex;align-items:center;flex:none;width:84px;height:28px;">${brandLogo('Tenfe',{variant:'white'})}</span><span>Gestión ferroviaria <i>·</i> Conexiones · estrategia y simulación</span><span class="menu-edition">AVE · REGIONALES · POLÍTICA</span></header>
     <div class="menu-body">
       <section class="menu-world">
-        <div class="menu-eyebrow"><span aria-hidden="true"></span>Tu próximo gran marrón</div>
-        <h1 id="menu-title">Iberia<br><em>Ferroviaria</em></h1>
-        <p class="menu-tagline">Todo un país. <br>Nueve egos. Tus vías.</p>
-        <p class="menu-premise">Dirige Tenfe, levanta una red que funcione y pelea cada viajero. Los ministros quieren fotos. Los viajeros, llegar. Charo quiere la factura.</p>
+        <div class="menu-eyebrow"><span aria-hidden="true"></span>El próximo tren lo decides tú</div>
+        <h1 id="menu-title">Tenfe<br><em>Conexiones</em></h1>
+        <p class="menu-tagline">Tu red. Tu ritmo.<br>Tu próxima gran jugada.</p>
+        <p class="menu-premise">Una red a medio gas, un consejo que pide resultados y un país por conectar. Abre servicios, compite por los viajeros y elige las promesas que puedes cumplir. Cada turno cambia tu compañía.</p>
         <div class="menu-journey" aria-label="Lo que harás en el juego"><span>Programa trenes</span><b aria-hidden="true">→</b><span>Construye tu red</span><b aria-hidden="true">→</b><span>Sobrevive al despacho</span></div>
       </section>
       <section class="menu-departures" aria-labelledby="menu-departures-title">
         <div class="menu-panel-kicker">Estación de salida <span aria-hidden="true">01</span></div>
         <h2 id="menu-departures-title">¿Adónde vamos?</h2>
         ${savedError ? `<p class="menu-save-error" role="status">${escapeHTML(savedError)}</p>` : ''}
-        <button class="menu-destination menu-campaign menu-new" data-action="new-game" autofocus>${icon('train')}<span><strong>Nueva partida</strong><small>Una compañía, de la herencia al rescate</small></span><b aria-hidden="true">→</b></button>
+        <button class="menu-destination menu-campaign menu-new" data-action="new-game" autofocus>${icon('train')}<span><strong>Nueva partida</strong><small>Cinco retos · dos mandatos · tu estrategia</small></span><b aria-hidden="true">→</b></button>
         ${latest ? `<button class="menu-destination menu-continue" data-action="continue" data-game="${latest.game}">${icon('resume')}<span><strong>Continuar</strong><small>${where(latest)}</small></span><b aria-hidden="true">→</b></button>` : ''}
         ${rescue ? `<button class="menu-other" data-action="legacy-preview">${icon('book')}<span>Recuperar Rescate anterior · semana ${rescue.week}</span><b aria-hidden="true">→</b></button>` : ''}
         <div class="menu-secondary"><button data-action="menu-guide">${icon('book')}<span>Guía del director</span></button><button data-action="menu-settings">${icon('settings')}<span>Sonido y ajustes</span></button></div>
         <button class="menu-observe" data-action="observe">${icon('eye')}<span>Solo mirar los trenes</span><b aria-hidden="true">→</b></button>
-        <p class="menu-save-note">Tu partida se guarda automáticamente en este navegador. · Versión 5.0.0</p>
+        <p class="menu-save-note">Tu partida se guarda automáticamente en este navegador. · Versión 6.0.0</p>
       </section>
     </div>
     <footer class="menu-council"><div class="menu-council-label"><strong>El consejo te espera.</strong><span>Y cada cual quiere algo distinto.</span></div><ul aria-label="Los nueve personajes de tu consejo de dirección">${cast}</ul><span class="menu-footer-note">Un billete al poder.<br>Sin derecho a devolución.</span></footer>

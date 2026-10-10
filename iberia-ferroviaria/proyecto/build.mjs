@@ -17,8 +17,8 @@ if (Object.keys(DIALOGUES).length !== DIALOGUE_CATALOGUE.length || DIALOGUE_CATA
 }
 const baselineOrder = ['assets/geography.js', 'assets/railways.js', 'assets/timetable.js', 'assets/infra.js', 'data.js', 'story.js', 'schedule.js', 'infra.js', 'network.js',
   'induction.js', 'induction-runtime.js', 'encounters.js', 'tycoon.js', 'engine.js', 'operations.js', 'map-v3.js', 'train-art.js', 'train3d.js', 'city-art.js', 'assets/samples-index.js', 'music.js', 'assets/voices.js', 'assets/voice-dialogues.js', 'voice.js', 'dialogue-presentation.js', 'sfx.js', 'assets/portraits.js', 'faces.js', 'tycoon-ui.js', 'main-menu.js', 'induction-task-ui.js', 'app.js'];
-const optionalBefore = {'data.js': ['brands.js'], 'tycoon.js': ['marketplace.js'], 'engine.js': ['verdad.js', 'tenfe.js'], 'train3d.js': ['assets/train-photos.js'], 'main-menu.js': ['nueva-partida.js'],
-  'app.js': ['partidas-anteriores.js', 'tenfe-ui.js']};
+const optionalBefore = {'data.js': ['brands.js'], 'tycoon.js': ['marketplace.js'], 'engine.js': ['verdad.js', 'rescate-data.js', 'conexiones.js', 'tenfe.js', 'track-preview.js'], 'train3d.js': ['assets/train-photos.js'], 'main-menu.js': ['nueva-partida.js'],
+  'app.js': ['partidas-anteriores.js', 'conexiones-ui.js', 'tenfe-ui.js']};
 const order = baselineOrder.flatMap(file => [...(optionalBefore[file] || []).filter(extra => fs.existsSync(path.join(dist, extra))), file]);
 
 function bundle(file) {

@@ -1,8 +1,9 @@
+import * as J from './conexiones.js';
 import * as T from './tycoon.js';
 import {MODEL, CITY} from './data.js';
 // One calendar, railway network, fleet and cash ledger. No second simulation.
   let E = null;
-  export function bind(engine) { E = engine; }
+  export function bind(engine) { E = engine; J.bind(engine); }
   const clamp = v => Math.max(0, Math.min(100, v));
   const rural = ['sor', 'ter', 'bad', 'san', 'lug', 'jae'];
   export const MILESTONES = [
@@ -37,29 +38,35 @@ import {MODEL, CITY} from './data.js';
           {id:'f'+s.nextId++,model:'r599',qty:6,condition:70,born:2009,origin:'Parque regional heredado'});
       }
     }
+    if(options.rules==='conexiones'){J.begin(s);T.offer(s);}
     return s.tenfe;
   }
   export function support(s) {
+    if(J.isNew(s))return J.support(s);
     const g=s.tycoon.groups;
     return clamp(g.riders*.34+g.territory*.2+g.staff*.2+g.treasury*.26);
   }
   export function electionMonth(s) {
+    if(J.isNew(s))return J.electionMonth(s);
     const offset=s.tenfe?.electionOffset||0;
     let due=108+offset;
     while(due<s.month || s.tenfe?.elections.some(x=>x.month===due)) due+=48;
     return due;
   }
   export function forecast(s) {
+    if(J.isNew(s))return J.forecast(s);
     const polls=s.tenfe?.polls||[];
     return polls.length ? polls.reduce((sum,p)=>sum+p.value,0)/polls.length : support(s);
   }
   export function isRural(r) { return r.via.some(id=>rural.includes(id)); }
-  export function ruralRoutes(s) { return s.routes.filter(r=>r.active && isRural(r)); }
+  export function ruralRoutes(s) {
+    if(J.isNew(s))return J.rural(s); return s.routes.filter(r=>r.active && isRural(r)); }
   export function activeCondition(s) {
     const used=s.fleet.filter(f=>s.routes.some(r=>r.active&&r.fleet===f.id));
     return used.length ? Math.min(...used.map(f=>f.condition)) : 0;
   }
   export function effects(s, r = null) {
+    if(J.isNew(s))return J.effects(s,r);
     const complete=id=>s.tenfe?.megas.some(p=>p.id===id&&p.stage===3);
     return {quality:complete('control')?3:0, cost:complete('taller')?.96:1, wear:complete('taller')?.8:1,
       demand:r&&isRural(r)&&complete('territorio')?1.12:1};
@@ -75,6 +82,7 @@ import {MODEL, CITY} from './data.js';
     s.tenfe.notices=s.tenfe.notices.filter(x=>x.id!==id);
   }
   export function pactProgress(s, pact) {
+    if(J.isNew(s))return J.pactProgress(s,pact);
     switch(pact.id) {
       case 'taller': return activeCondition(s)>=75;
       case 'territorio': return ruralRoutes(s).length>pact.base;
@@ -84,6 +92,7 @@ import {MODEL, CITY} from './data.js';
     }
   }
   export function signPact(s, id) {
+    if(J.isNew(s))return J.signPact(s,id);
     E.ensurePlaying(s);
     const u=begin(s),d=PACTS.find(p=>p.id===id);
     if(!d)throw Error('Pacto desconocido.');
@@ -97,6 +106,7 @@ import {MODEL, CITY} from './data.js';
     E.log(s,'Pacto firmado',d.name+' · '+d.requirement);
   }
   export function megaQuote(s, id) {
+    if(J.isNew(s))return J.megaQuote(s,id);
     const d=MEGAS.find(p=>p.id===id);
     if(!d)throw Error('Proyecto desconocido.');
     const p=s.tenfe?.megas.find(p=>p.id===id),stage=p?.stage||0;
@@ -104,6 +114,7 @@ import {MODEL, CITY} from './data.js';
     return {definition:d,stage,cost:d.costs[stage]||0,months:d.durations[stage]||0,reason,phase:phaseNames[stage]||'En servicio'};
   }
   export function startMega(s, id) {
+    if(J.isNew(s))return J.startMega(s,id);
     E.ensurePlaying(s);
     const u=begin(s),q=megaQuote(s,id);
     if(q.reason)throw Error(q.reason);
@@ -115,12 +126,14 @@ import {MODEL, CITY} from './data.js';
     E.log(s,'Fase adjudicada',q.definition.name+' · '+q.phase+' · '+q.cost+' M€.');
   }
   export function shortcut(s) {
+    if(J.isNew(s))return J.shortcut(s);
     E.ensurePlaying(s);const u=begin(s);
     if(u.scandal || s.month<u.cooldown)throw Error('Las cuentas de la adjudicación anterior siguen bajo revisión.');
     s.cash+=45;u.scandal={from:s.month,amount:45,delay:0,exposed:false,stage:0};
     E.log(s,'Adjudicación amañada','45 M€ en caja. La inspección revisará el expediente en seis meses.');
   }
   export function selfReport(s) {
+    if(J.isNew(s))return J.selfReport(s);
     E.ensurePlaying(s);const u=begin(s),c=u.scandal;
     if(!c)throw Error('No hay una adjudicación irregular que devolver.');
     E.spend(s,c.amount);
@@ -129,12 +142,14 @@ import {MODEL, CITY} from './data.js';
     E.log(s,'Fondos restituidos','45 M€ devueltos. Hacienda mantiene el expediente, sin sanción electoral.');
   }
   export function legalDefence(s) {
+    if(J.isNew(s))return J.legalDefence(s);
     E.ensurePlaying(s);const c=s.tenfe?.scandal;
     if(!c || c.delay)throw Error('Solo puedes pedir una revisión jurídica por expediente.');
     E.spend(s,8);c.delay=3;
     E.log(s,'Revisión jurídica','8 M€. La inspección se aplaza tres meses; las pruebas permanecen.');
   }
   export function tick(s, accounts) {
+    if(J.isNew(s))return J.tick(s,accounts);
     const u=s.tenfe;
     if(!u || u.lastMonth>=s.month)return;
     u.lastMonth=s.month;
@@ -200,6 +215,7 @@ import {MODEL, CITY} from './data.js';
     u.reports=u.reports.slice(0,12);
   }
   export function mission(s) {
+    if(J.isNew(s))return J.mission(s);
     if(s.tycoon.mode==='free')return {title:'Tu red, tus reglas',rows:[],rescue:false};
     if(s.month<60 || (s.month>=156 && s.tenfe.rescueWon)) return null;
     const b=E.balance(s);
@@ -212,6 +228,7 @@ import {MODEL, CITY} from './data.js';
     ]};
   }
   export function nextAction(s) {
+    if(J.isNew(s))return J.nextAction(s);
     if(s.ended)return {label:'Ver tu legado',action:'navigate',screen:'progress'};
     if(E.pendingDecision(s))return {label:'Decidir con el consejo',action:'tenfe-decision'};
     if(E.chapterReady(s))return {label:'Cobrar la financiación',action:'claim'};
@@ -235,6 +252,7 @@ import {MODEL, CITY} from './data.js';
   }
   export function validation(u,s) {
     if(u===undefined)return true;
+    if(u?.game)return J.valid(s);
     if(!u || u.version!==1 || !['normal','relajada'].includes(u.difficulty))return false;
     const finite = k=>Number.isFinite(u[k]) && u[k]>=0;
     if(!['since','baseline','ruralBase','lastMonth','nextId','cooldown','electionOffset'].every(finite) || u.baseline<1 || u.lastMonth>s.month || !Number.isInteger(u.nextId))return false;

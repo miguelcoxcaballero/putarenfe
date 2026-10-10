@@ -1,3 +1,6 @@
+import * as J from './conexiones.js';
+import * as JUI from './conexiones-ui.js';
+import * as Tracks from './track-preview.js';
 import {INDUCTION_STAGES} from './induction.js';
 import {dialogueHtml} from './dialogue-presentation.js';
 import {freshInduction, note, stageChecks, readyInduction, inductionBriefing, inductionFeedbackLine, canInductionAnswer, restoreInductionHandoff} from './induction-runtime.js';
@@ -6,7 +9,6 @@ import {STARTS, newGameHTML, normalizeSeed, seedFromCode, randomSeedCode, seedCo
 import * as U from './tenfe.js';
 import * as TenfeUI from './tenfe-ui.js';
 import {legacySave, summary as rescueSaveSummary, convertLegacy} from './partidas-anteriores.js';
-import {focusedTaskHTML} from './induction-task-ui.js';
 import * as T from './tycoon.js';
 import {tycoonPage,directionCount} from './tycoon-ui.js';
 // Iberia Ferroviaria 2.0 — interfaz. Mapa a pantalla completa, jornada por turnos, red de anchos y catenaria.
@@ -27,10 +29,12 @@ import {Soundtrack, SONGS, STYLE_LABEL, FAMILY_LABEL} from './music.js';
 import {Sfx, ACTIONS} from './sfx.js';
 import {faceURL} from './faces.js';
 
+JUI.bind(E,faceURL);
 const $ = id => document.getElementById(id);
 const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const n = (x, d = 0) => Number(x || 0).toLocaleString('es-ES', {maximumFractionDigits: d, minimumFractionDigits: d});
 const money = x => n(x, Math.abs(x) < 10 ? 2 : 1) + ' M€', signed = x => (x >= 0 ? '+' : '') + money(x);
+const when=month=>state.tenfe?.game?'Turno '+Math.max(1,month-state.tenfe.game.origin+1):E.dateOf(month);
 const clock = O.clockText;
 const KEY = 'iberia-ferroviaria-v2';
 const SPEEDS = [[2, '1×'], [6, '3×'], [20, '10×'], [60, '30×']];
@@ -72,7 +76,7 @@ let ui = {routeTab: 'all', routeStatus: 'all', routeQuery: '', netView: 'routes'
 const freshMarketFilters = () => ({query: '', state: 'all', delivery: 'all', maker: 'all', family: 'all', sort: 'recommended', favorites: false, route: ''});
 ui.market = freshMarketFilters();
 ui.progressTab='campaign';ui.pressTab='paper';
-O.ensureOps(state);U.begin(state);
+O.ensureOps(state);U.begin(state,{rules:'conexiones'});
 try { const raw = localStorage.getItem(KEY); if (raw) saved = E.validateSave(JSON.parse(raw)); } catch(error) { saved = null; savedError=error.message; }
 
 // ------------------------------------------------------------ vista para el mapa
@@ -344,7 +348,7 @@ function afterCityAction() {
   if (state.ops.phase === 'running') checkSurgeEvents();
   perTrip = {}; cityCache.key = null;
 }
-function reqStatus(q) { return q.serving ? `Cumpliendo · ${q.kept || 0}/${E.REQUEST_CLOSES} cierres` : `Plazo: ${E.dateOf(q.until)}`; }
+function reqStatus(q) { return q.serving ? `Cumpliendo · ${q.kept || 0}/${E.REQUEST_CLOSES} cierres` : `Plazo: ${when(q.until)}`; }
 function reqText(q) {
   const r = state.routes.find(r => r.id === q.route), dest = r ? otherEnd(r, q.city) : '';
   return {open: `Quiere tren con ${dest}, y lo quiere ya`, more: `Exige ${q.target} salidas por sentido con ${dest}`, fare: `Pide bajar a ${q.target} € el billete a ${dest}`,
@@ -401,129 +405,138 @@ function cityInspector() {
 }
 
 // ------------------------------------------------------------ tutorial guiado
-const routeById = id => state.routes.find(r => r.id === id);
-let tut = null, inductionModalKey = '', adviceLine = null, tutorialDraft = null;
-function clearCoach() { $('coach')?.remove(); $('spot')?.remove(); }
-function tutorialChrome() {
- document.body.classList.toggle('guided-turn',!!tut);
- if(tut){$('inspector').classList.add('hidden');$('inspector').innerHTML='';$('drawer').classList.add('hidden');$('drawer').innerHTML='';document.querySelector('.alert-pill')?.remove();}
-}
-function rememberTutorialDraft(){
- if(tut&&INDUCTION_STAGES[tut.step]?.id==='offer'&&$('routeForm'))tutorialDraft={fleet:$('routeFleet').value,frequency:$('frequency').value,fare:$('fare').value};
-}
-function restoreTutorialDraft(){
- if(!tutorialDraft||!$('routeForm'))return;
- $('routeFleet').value=tutorialDraft.fleet;$('frequency').value=tutorialDraft.frequency;$('fare').value=tutorialDraft.fare;updatePreview();
-}
+// La guía señala los paneles reales de la partida.
 
-function startTutorial(resume = true) {
- if(resume&&state.tutorial?.version!==1&&(state.month>0||routeById('madrid-valencia')?.frequency>=E.maxFrequency(routeById('madrid-valencia')))){menuGuide();return;}
- menuOpen=false;pause(); closeModal(); clearCoach(); inductionModalKey='';
- const old=state.tutorial;
- tut=resume&&old?.version===1&&!old.done ? old : freshInduction(state);
- tut.suspended=false;state.tutorial=tut;restoreInductionHandoff(state,tut);adviceLine=null;tutorialDraft=null;tutorialChrome();focusTutorial();autosave();renderCoach();
+const routeById = id => state.routes.find(r => r.id === id);
+const TOUR_STEPS = [
+ {id:'welcome',title:'Bienvenido al mando de Tenfe',text:'Esta es tu compañía: las vías, los trenes y las cuentas que vas a transformar. Aquí tienes el objetivo de tu mandato y una propuesta para tu siguiente jugada.',person:'minister',target:'#mission',next:'Explorar mi red',ready:()=>true},
+ {id:'network',title:'Tu red, de un vistazo',text:'Esta es la misma Red que usarás durante toda la partida. Pulsa Madrid — València para abrir su ficha y preparar tu primera mejora.',person:'adif',target:'#drawer',next:'Preparar el servicio',ready:()=>inspect?.type==='route'&&inspect.id==='madrid-valencia'},
+ {id:'offer',title:'Haz que València funcione mejor',text:'En el plan de servicio, añade una salida por sentido y cambia la tarifa. La previsión muestra el coste y los trenes necesarios; pulsa «Aplicar plan» cuando te convenza.',person:'treasury',target:'#inspector',next:'Ir al Despacho',ready:()=>{const r=routeById('madrid-valencia');return (r.frequency>tut.baseline.frequency||r.frequency>=E.maxFrequency(r))&&r.fare!==tut.baseline.fare;}},
+ {id:'decisions',title:'Las promesas también tienen un precio',text:'El consejo trabaja aquí, en tu Despacho. Lee cada propuesta y elige la opción que quieras sostener: sus efectos se aplican a esta misma compañía.',person:'president',target:'#drawer',next:'Revisar la plantilla',ready:()=>!E.pendingDecision(state)},
+ {id:'people',title:'Los trenes necesitan maquinistas',text:'Compara los disponibles con los necesarios antes de ampliar. Formar personal tarda tres turnos; contratar es opcional si la reserva ya cubre tu oferta.',person:'workshop',target:'#drawer',next:'Comparar inversiones',ready:()=>true},
+ {id:'research',title:'Ideas para tu red',text:'Este es tu laboratorio real. Compara las investigaciones ilustradas y sus requisitos. La innovación llega jugando; puedes investigar o reservarla para después.',person:'successor',target:'#drawer',next:'Continuar con la red',ready:()=>true},
+ {id:'infrastructure',title:'Una conexión que sí puedes abrir',text:'Salamanca admite un Alvia compatible por la vía existente. Elige material con unidades libres, revisa la previsión y abre el servicio: cuesta 4 M€.',person:'mayor',target:'#inspector',next:'Poner los trenes en marcha',ready:()=>!!routeById('madrid-salamanca')?.active},
+ {id:'day',title:'Prueba tu plan en una jornada',text:'Comienza la jornada. Atiende la avería en Red → Jornada, avanza hasta el último tren y consulta el parte. Después prepara el día siguiente.',person:'riders',target:'#daybar',next:'Elegir mi primer encargo',ready:()=>state.ops.completed>tut.baseline.completed&&state.ops.phase==='planning'},
+ {id:'handoff',title:'Tu primer compromiso',text:'Esta es tu Agenda. Compara objetivo, premio y plazo; acepta el encargo que puedas cumplir. La guía termina y el compromiso sigue en tu partida.',person:'president',target:'#drawer',next:'El mando es tuyo',ready:()=>state.tycoon.completed>0||state.tycoon.contracts.some(q=>['active','won'].includes(q.status))||state.tycoon.resolved.some(q=>q.result==='won')}
+];
+let tut = null, inductionModalKey = '', adviceLine = null, tutorialDraft = null, tourGeometry = '';
+function clearCoach(){
+ $('coach')?.remove();$('spot')?.remove();$('tour-shades')?.remove();
+ document.querySelectorAll('.tour-target,.tour-dialog').forEach(el=>el.classList.remove('tour-target','tour-dialog'));
+ for(const el of $('game').children)el.inert=false;
+ tourGeometry='';
 }
-function suspendTutorial() {
+function tutorialChrome(){
+ document.body.classList.toggle('guided-turn',!!tut);
+ if(!tut)for(const el of $('game').children)el.inert=false;
+}
+function rememberTutorialDraft(){}
+function restoreTutorialDraft(){}
+function tourReady(){return !!tut&&TOUR_STEPS[tut.step].ready();}
+function startTutorial(resume=true){
+ if(state.tutorial?.done)return menuGuide();
+ menuOpen=false;pause();closeModal();clearCoach();$('entry-welcome')?.remove();
+ const old=state.tutorial,r=routeById('madrid-valencia'),oldSteps=[0,1,2,4,5,6,7,7,8];
+ tut=resume&&old?.version===2&&!old.done?old:{
+  version:2,done:false,suspended:false,step:resume&&old?.version===1?oldSteps[old.step]||0:0,marks:[],
+  baseline:{frequency:old?.baseline?.frequency||r.frequency,fare:old?.baseline?.fare||r.fare,completed:old?.baseline?.completed??state.ops.completed}
+ };
+ tut.suspended=false;state.tutorial=tut;tutorialChrome();focusTutorial();autosave();renderCoach();
+}
+function suspendTutorial(){
  if(!tut)return;
- voices.stop();adviceLine=null;tutorialDraft=null; tut.suspended=true; state.tutorial=tut; autosave();tut=null;clearCoach();inductionModalKey='';closeModal();
- tutorialChrome();inspect=null;screen=null;render();toast('Guía en pausa. Retómala desde Ayuda.');
+ pause();tut.suspended=true;state.tutorial=tut;autosave();tut=null;clearCoach();tutorialChrome();
+ toast('Guía en pausa. Puedes retomarla desde Ayuda.');render();
 }
-function endTutorial() {
- voices.stop();adviceLine=null;tutorialDraft=null;const result=state.tutorial;result.done=true;result.suspended=false;tut=null;clearCoach();inductionModalKey='';tutorialChrome();autosave();render();
- showModal(`<div class="content induction-finish"><div class="kicker">Primer turno completado</div><h1>Ahora la red es responsabilidad tuya.</h1><p>Has cambiado un servicio, abierto Salamanca, comparado presupuesto y plantilla, atendido una avería y asumido un encargo. Las consecuencias se quedan en tu partida.</p><dl class="figures"><div><dt>Caja disponible</dt><dd>${money(state.cash)}</dd></div><div><dt>Servicios activos</dt><dd>${state.routes.filter(r=>r.active).length}</dd></div><div><dt>Viajeros del turno</dt><dd>${n(state.ops.last?.passengers)}</dd></div></dl><p class="callout">Tu siguiente reto: cumple el encargo del Despacho sin vaciar la caja. Revisa la demanda antes de abrir más servicios; trenes y maquinistas tardan en llegar.</p><button class="btn primary" data-action="tutorial-finish">Seguir dirigiendo</button></div>`,'single');
+function endTutorial(){
+ tut.done=true;tut.suspended=false;state.tutorial=tut;tut=null;clearCoach();tutorialChrome();autosave();render();
+ toast('El mando es tuyo. Tu red y tu primer encargo siguen en marcha.');
 }
-function tutorialNext() {
+function tutorialNext(){
+ if(!tourReady())return;
+ if(tut.step===TOUR_STEPS.length-1)return endTutorial();
+ tut.step++;autosave();focusTutorial();renderCoach();$('coach')?.querySelector('[data-action="tutorial-next"]')?.focus({preventScroll:true});
+}
+function tutorialAnswer(){}
+function tutorialMark(key){if(tut&&!tut.marks.includes(key)&&['gauge','power','salamanca','preview','people','market','research','agenda','paper','soria-quote','hold-investment','incident-resolved','report'].includes(key)){tut.marks.push(key);autosave();}}
+function officeTutorial(tab){closeModal();inspect=null;screen=tab==='research'?'progress':tab==='market'?'network':'story';ui.tycoonTab=tab;ui.officeTab='tycoon';if(tab==='research')ui.progressTab='research';if(tab==='market')ui.netView='rivals';render();tutorialMark(tab);}
+function focusTutorial(){
  if(!tut)return;
- const stage=INDUCTION_STAGES[tut.step];
- if(tut.feedback){
-  restoreInductionHandoff(state,tut);
-  const option=stage.choice?.options.find(x=>x.id===tut.pendingAnswer);
-  if(option&&option.correct!==false)tut.answers[stage.id]=option.id;
-  tut.feedback=null;delete tut.pendingAnswer;closeModal();autosave();inductionModalKey='';renderCoach();return;
+ const id=TOUR_STEPS[tut.step].id;
+ closeModal();screen=null;inspect=null;layer='network';map.dirty=true;
+ if(id==='network'){screen='network';ui.netView='routes';ui.routeTab='all';ui.routeQuery='';ui.routeStatus='all';}
+ if(id==='offer'||id==='infrastructure'){inspect={type:'route',id:id==='offer'?'madrid-valencia':'madrid-salamanca'};map.focus(inspect.id,true);}
+ if(id==='decisions'||id==='people'||id==='handoff'){screen='story';ui.officeTab='tycoon';ui.tycoonTab=id==='people'?'people':'agenda';}
+ if(id==='research'){screen='progress';ui.progressTab='research';}
+ if(id==='day'&&state.ops.phase==='running'&&!tut.marks.includes('incident-resolved')){screen='network';ui.netView='ops';}
+ render();
+ if(id==='offer'||id==='infrastructure')requestAnimationFrame(()=>$('routeForm')?.scrollIntoView({block:'start',behavior:'smooth'}));
+ if(id==='handoff'||id==='decisions')requestAnimationFrame(()=>$('drawer').querySelector('.body')?.scrollTo({top:0,behavior:'smooth'}));
+}
+function tutorialView(id){if(['gauge','power'].includes(id))setLayer(id);else if(id==='report')dayReport();else if(id==='salamanca')selectRoute('madrid-salamanca');else officeTutorial(id);}
+function tutorialAdvice(){toast(TOUR_STEPS[tut?.step||0].text);}
+function tutorialIncident(){
+ if(!tut||TOUR_STEPS[tut.step].id!=='day'||state.ops.phase!=='running'||tut.marks.includes('incident-resolved'))return;
+ const op=state.ops;let x=op.incidents.find(x=>x.id==='inc-tut');
+ if(!x){const p=plan().find(t=>!t.bus&&t.arrival>op.minute+40);if(p)op.minute=Math.max(op.minute,p.dep);x=O.injectIncident(state,op.minute);}
+ if(x){op.minute=Math.max(op.minute,x.at);seenIncidents.add(x.trip);pause();screen='network';inspect=null;ui.netView='ops';render();autosave();}
+}
+function tourTarget(){
+ if($('modal').open)return $('modal');
+ const stage=TOUR_STEPS[tut.step];
+ if(stage.id==='network'&&inspect?.id==='madrid-valencia')return $('inspector');
+ if(stage.id==='day'){
+  if(state.ops.phase==='running'&&!tut.marks.includes('incident-resolved'))return $('drawer');
+  return $('daybar');
  }
- if(tut.phase==='task') {
-  if(!readyInduction(state,tut))return;
-  pause();tut.phase='debrief';tut.line=0;clearCoach();
- }else{
-  const lines=tut.phase==='briefing'?stage.briefing:stage.debrief;
-  if(tut.phase==='debrief'&&tut.line+1<lines.length)tut.line++;
-  else if(tut.phase==='briefing'){tut.phase='task';tut.line=0;closeModal();focusTutorial();}
-  else {if(tut.step===INDUCTION_STAGES.length-1)return endTutorial();tut.step++;tut.phase='briefing';tut.line=0;tutorialDraft=null;closeModal();focusTutorial();}
- }
- voices.stop();inductionModalKey='';autosave();renderCoach();
+ return document.querySelector(stage.target);
 }
-function tutorialAnswer(id) {
- if(!tut||tut.phase!=='task')return;
- const stage=INDUCTION_STAGES[tut.step],option=stage.choice?.options.find(x=>x.id===id);
- if(!option||!canInductionAnswer(state,tut,id))return;
- tut.pendingAnswer=id;tut.feedback=option.feedback;pause();inductionModalKey='';autosave();renderCoach();
-}
-function tutorialMark(key){if(tut){const size=tut.marks.length;note(tut,key);if(tut.marks.length!==size)autosave();}}
-function officeTutorial(tab){closeModal();inspect=null;screen='story';ui.officeTab='tycoon';ui.tycoonTab=tab;render();tutorialMark(tab);}
-function focusTutorial() {
+function positionTour(){
  if(!tut)return;
- const id=INDUCTION_STAGES[tut.step].id;screen=null;inspect=id==='offer'?{type:'route',id:'madrid-valencia'}:null;
- layer=id==='diagnosis'?'gauge':'network';
- map.focus(id==='offer'?'madrid-valencia':id==='diagnosis'||id==='infrastructure'?'madrid-salamanca':'madrid-valencia',true);
- tutorialChrome();map.dirty=true;if(id==='incident'&&tut.phase==='task')tutorialIncident();
+ const coach=$('coach'),target=tourTarget();if(!coach||!target)return;
+ const inDialog=target===$('modal'),host=inDialog?$('modal').querySelector('.content'):document.body;
+ if(host&&coach.parentElement!==host)host.prepend(coach);
+ document.querySelectorAll('.tour-target,.tour-dialog').forEach(el=>{if(el!==target)el.classList.remove('tour-target','tour-dialog');});
+ target.classList.add(inDialog?'tour-dialog':'tour-target');
+ for(const el of $('game').children)el.inert=inDialog||!(el===target||el.contains(target));
+ if(inDialog){$('tour-shades')?.remove();$('spot')?.remove();coach.classList.add('in-dialog');tourGeometry='';return;}
+ coach.classList.remove('in-dialog');
+ let shades=$('tour-shades');
+ if(!shades){shades=document.createElement('div');shades.id='tour-shades';shades.setAttribute('aria-hidden','true');shades.innerHTML='<i></i><i></i><i></i><i></i>';document.body.appendChild(shades);}
+ let ring=$('spot');if(!ring){ring=document.createElement('div');ring.id='spot';ring.className='tour-ring';ring.setAttribute('aria-hidden','true');document.body.appendChild(ring);}
+ const r=target.getBoundingClientRect(),w=innerWidth,h=innerHeight,p=5;
+ const x=Math.max(4,r.left-p),y=Math.max(4,r.top-p),right=Math.min(w-4,r.right+p),bottom=Math.min(h-4,r.bottom+p);
+ const mobile=w<=600,cw=mobile?w-16:Math.min(340,w-32);coach.style.width=cw+'px';
+ const ch=Math.min(coach.offsetHeight,mobile?210:h-48);
+ let cx,cy;
+ if(mobile){cx=8;cy=y>h*.6?102:h-74-ch;}
+ else if(x>w*.45){cx=Math.max(18,x-cw-20);cy=Math.max(102,Math.min(y,h-ch-100));}
+ else if(right+cw+20<w){cx=right+20;cy=Math.max(102,Math.min(y,h-ch-100));}
+ else{cx=w-cw-18;cy=Math.max(102,y-ch-18);if(cy+ch>y)cy=Math.min(bottom+18,h-ch-90);}
+ const geometry=[x,y,right,bottom,cx,cy,cw,ch,w,h].map(Math.round).join('|');
+ if(geometry===tourGeometry)return;tourGeometry=geometry;
+ coach.style.left=Math.max(8,Math.min(cx,w-cw-8))+'px';coach.style.top=Math.max(8,cy)+'px';
+ const boxes=[[0,0,w,y],[0,y,x,bottom-y],[right,y,w-right,bottom-y],[0,bottom,w,h-bottom]];
+ [...shades.children].forEach((el,i)=>{const [left,top,width,height]=boxes[i];Object.assign(el.style,{left:left+'px',top:top+'px',width:width+'px',height:height+'px'});});
+ Object.assign(ring.style,{left:x+'px',top:y+'px',width:(right-x)+'px',height:(bottom-y)+'px'});
 }
-function tutorialView(id){
- if(!tut)return;
- if(['gauge','power'].includes(id)){layer=id;tutorialMark(id);map.dirty=true;}
- else if(id==='research'){tutorialMark('people');tutorialMark('research');}
- else if(['people','market','salamanca','report'].includes(id))tutorialMark(id);
- renderCoach();
-}
-function tutorialAdvice(index){
- if(!tut||tut.phase!=='task')return;
- const stage=INDUCTION_STAGES[tut.step],line=inductionBriefing(state,stage)[+index];if(!line||+index===0)return;
- rememberTutorialDraft();adviceLine={...line,index:+index};inductionModalKey='';renderCoach();
-}
-function tutorialIncident() {
- if(!tut||INDUCTION_STAGES[tut.step].id!=='incident'||state.ops.phase!=='running'||tut.marks.includes('incident-resolved'))return;
- const op=state.ops;
- if(tut.answers.incident&&op.resolved.includes(tut.answers.incident)){tutorialMark('incident-resolved');return;}
- if(tut.answers.incident&&op.incidents.some(x=>x.trip===tut.answers.incident))return;
- delete tut.answers.incident;let x=op.incidents.find(x=>x.id==='inc-tut');
- if(!x){
-  const p=plan().find(t=>!t.bus&&t.arrival>op.minute+40);if(p)op.minute=Math.max(op.minute,p.dep);
-  x=O.injectIncident(state,op.minute);
+function renderCoach(){
+ if(!tut)return;tutorialChrome();
+ const stage=TOUR_STEPS[tut.step],ready=tourReady();let coach=$('coach');
+ if(!coach){coach=document.createElement('aside');coach.id='coach';coach.className='tour-coach';coach.setAttribute('aria-label','Guía sobre tu partida');document.body.appendChild(coach);}
+ const key=[tut.step,ready,state.ops.phase,tut.marks.includes('incident-resolved')].join('|');
+ if(coach.dataset.key!==key){
+  const focus=document.activeElement===coach.querySelector('[data-action="tutorial-next"]');
+  coach.dataset.key=key;coach.dataset.stepId=stage.id;
+  const text=stage.id==='day'?(state.ops.phase==='review'?'Este es el parte real del día. Revisa qué pasó y pulsa «Siguiente jornada» para preparar el próximo turno.':state.ops.phase==='running'?(tut.marks.includes('incident-resolved')?'La respuesta ya está aplicada. Pulsa «Hasta el último tren» para comprobar cómo terminó la jornada.':'Esta es una incidencia de tu jornada. Compara las respuestas y decide cuánto invertir en resolverla.'):stage.text):stage.text;
+  coach.innerHTML=`<header><img src="${faceURL(stage.person,'happy')}" alt="" width="40" height="48"><div><span class="kicker">${tut.step===0?'Tu primer turno':'Guía · '+(tut.step+1)+' / '+TOUR_STEPS.length}</span><strong>${esc(CHARACTERS[stage.person].name)}</strong></div><button class="tour-pause" data-action="tutorial-skip" aria-label="Pausar guía">×</button></header><h2>${esc(stage.title)}</h2><p>${esc(text)}</p><footer><span>${ready?'Listo para seguir':'Hazlo en el panel marcado'}</span><button class="btn primary small" data-action="tutorial-next" ${ready?'':'disabled'}>${esc(stage.next)} →</button></footer>`;
+  if(focus)coach.querySelector('[data-action="tutorial-next"]')?.focus({preventScroll:true});
  }
- if(x){tut.answers.incident=x.trip;op.minute=Math.max(op.minute,x.at);seenIncidents.add(x.trip);pause();render();autosave();}
-}
-function renderCoach() {
- if(!tut)return;
- tutorialChrome();
- const stage=INDUCTION_STAGES[tut.step];if(!stage)return suspendTutorial();
- if(tut.phase!=='task'||tut.feedback||adviceLine){
-  rememberTutorialDraft();clearCoach();
-  const lines=tut.phase==='debrief'?stage.debrief:inductionBriefing(state,stage);
-  const line=adviceLine|| (tut.feedback?inductionFeedbackLine(state,tut):lines[Math.min(tut.line,lines.length-1)]);
-  const kind=adviceLine?'advice':tut.feedback?'feedback':tut.phase;
-  const key=[tut.step,kind,tut.line,tut.feedback,adviceLine?.index].join('|');
-  if(inductionModalKey===key&&$('modal').open&&$('modal').querySelector('.induction-dialog'))return;
-  inductionModalKey=key;const person=CHARACTERS[line.who];
-  showModal(`<div class="art portrait" data-mood="${line.mood}" style="${faceStyle(line.who,line.mood)}" role="img" aria-label="${esc(person.name)}"><span class="plate"><b>${esc(person.name)}</b>${esc(person.role)}</span></div><div class="content induction-dialog" data-step-id="${stage.id}" data-kind="${kind}" data-character="${line.who}"><div class="kicker">Primer turno · ${tut.step+1} / ${INDUCTION_STAGES.length}${kind==='debrief'?' · Resultado':kind==='advice'?' · Consejo':''}</div><h1>${esc(stage.title)}</h1><p data-say="${esc(line.text)}">${sayHtml(line.text,line.who)}</p><div class="actions"><button class="btn primary" data-action="${adviceLine?'tutorial-advice-close':'tutorial-next'}">${adviceLine?'Volver a la tarea':tut.feedback?'Entendido':tut.phase==='debrief'?'Continuar':'Vamos a hacerlo'}</button>${sayButton(line.who,'modal')}<button class="btn ghost" data-action="tutorial-skip">Pausar guía</button></div></div>`,'induction-shell');
-  $('modal').scrollTop=0;speakIn($('modal'),line.who,'modal');return;
- }
- // Un único espacio: la tarea incluye sus controles, y los consejos se abren a petición.
- if($('modal').open)return;
- const checks=stageChecks(state,tut),ready=readyInduction(state,tut),next=checks.find(x=>!x.done);
- const taskTitle={mandate:'Elige tu prioridad',diagnosis:'Comprueba la vía',offer:'Ajusta Madrid — València',people:'Planifica la plantilla',competition:'Decide tu inversión',infrastructure:'Abre una conexión',incident:'Atiende la avería',review:'Cierra la jornada',handoff:'Asume un encargo'}[stage.id];
- if(stage.id==='review'&&state.ops.phase==='review')tutorialMark('report');
- let coach=$('coach');if(!coach){coach=document.createElement('section');coach.id='coach';coach.className='coach induction-coach';coach.setAttribute('aria-label','Mesa de trabajo del primer turno');document.body.appendChild(coach);}
- const key=JSON.stringify([tut.step,tut.marks.filter(m=>stage.id!=='offer'||m!=='preview'),tut.answers,stage.id==='offer'?checks.slice(0,2):checks,state.cash,state.routes.map(r=>[r.id,r.active,r.frequency,r.fare]),state.tycoon.policies,state.tycoon.research,state.tycoon.training,state.tycoon.contracts,state.ops.phase,state.ops.day,state.ops.resolved]);
- if(coach.dataset.key===key)return;
- const focusId=document.activeElement?.id,scroll=coach.querySelector('.lesson-body')?.scrollTop||0;
- rememberTutorialDraft();coach.dataset.key=key;coach.dataset.step=String(tut.step);coach.dataset.stepId=stage.id;coach.dataset.kind='task';
- coach.innerHTML=`<header class="lesson-header"><span class="kicker">Primer turno · ${tut.step+1} / ${INDUCTION_STAGES.length}</span><span class="lesson-cash">${money(state.cash)}</span><button class="linkish" data-action="tutorial-skip">Pausar guía</button></header><div class="lesson-body"><h1>${esc(taskTitle)}</h1><p class="lesson-next">${ready?'Encargo resuelto. Revisa el resultado.':esc(next?.label||stage.objective)}</p><div class="lesson-controls">${focusedTaskHTML(state,tut)}</div></div><footer class="lesson-footer"><details class="lesson-advice"><summary>Consultar consejo</summary><div>${inductionBriefing(state,stage).slice(1).map((line,i)=>`<button class="btn small ghost" data-action="tutorial-advice" data-id="${i+1}"><img src="${faceURL(line.who,line.mood)}" alt="">${esc(CHARACTERS[line.who].name)}</button>`).join('')}<details class="induction-hint"><summary>Pista</summary><p>${esc(stage.hint)}</p></details></div></details>${ready?'<button class="btn primary" data-action="tutorial-next">Revisar resultado →</button>':'<span class="lesson-progress" aria-label="Progreso de la tarea">'+checks.filter(x=>x.done).length+' / '+checks.length+'</span>'}</footer>`;
- if(stage.id==='offer'){restoreTutorialDraft();updatePreview();}
- coach.querySelector('.lesson-body').scrollTop=scroll;if(focusId&&coach.querySelector('#'+focusId))$(focusId).focus({preventScroll:true});
+ positionTour();
 }
 
 // ------------------------------------------------------------ selección en el mapa
 function pick(hit) {
-  if(tut)return;
   if(linePicking&&hit?.type==='city'){
     if(!linePicking.length){linePicking.push(hit.id);toast('Origen elegido. Pulsa la ciudad de destino.');return;}
     if(linePicking[0]===hit.id){toast('Elige otra ciudad para el destino.');return;}
@@ -579,6 +592,7 @@ function play() {
   if (!state.started) return intro();
   if (state.ended) return toast('Tu mandato ha terminado.');
   E.revalidateScene(state);
+  if(state.tenfe?.game?.event){ui.tycoonTab='agenda';screen='story';render();return toast('Resuelve el suceso antes de iniciar otra jornada.');}
   if (E.pendingDecision(state)) return showDecision();
   if ($('modal').open) return;
   const op = state.ops;
@@ -629,14 +643,23 @@ function render() {
   netKey = networkKey();
   renderHud(); renderNav(); renderMission(); renderLegend(); renderDaybar();
   if (screen) renderDrawer(); else $('drawer').classList.add('hidden');
-  renderInspector();renderCoach();
+  renderInspector();renderBoard();renderCoach();
+}
+let boardKey='';
+function renderBoard(){
+ let el=$('network-board');const visible=!!state.tenfe?.game&&layer==='network'&&!menuOpen;
+ $('map').style.visibility=visible?'hidden':'';
+ if(!visible){el?.remove();boardKey='';return;}
+ if(!el){el=document.createElement('section');el.id='network-board';el.setAttribute('aria-label','Mapa de Conexiones');$('game').prepend(el);}
+ const key=networkKey()+'#'+state.month+'#'+state.ops.phase+'#'+state.tenfe.megas.map(p=>p.id+p.stage+p.due).join();
+ if(key!==boardKey){boardKey=key;el.innerHTML=JUI.boardHTML(state);}
 }
 function renderHud(){
   const b=E.balance(state),kind=dayType();
   const long=O.dayDate(state).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
-  $('date').textContent=state.ended&&state.ending==='2050'?'31 dic 2050':long[0].toUpperCase()+long.slice(1);
-  $('dateShort').textContent=O.dayLabel(state);
-  $('dayKind').textContent=state.tenfe?`Elecciones: ${E.dateOf(U.electionMonth(state)-1)}`:`Jornada ${state.ops.completed+1} · ${S.DAY_TYPES[kind]}`;
+  $('date').textContent=state.tenfe?.game?'Turno '+J.turn(state)+' · tu red en marcha':state.ended&&state.ending==='2050'?'31 dic 2050':long[0].toUpperCase()+long.slice(1);
+  $('dateShort').textContent=state.tenfe?.game?'Turno '+J.turn(state):O.dayLabel(state);
+  $('dayKind').textContent=state.tenfe?.game?Math.max(1,J.electionMonth(state)-state.month)+' turnos hasta las urnas':state.tenfe?`Elecciones: ${when(U.electionMonth(state)-1)}`:`Jornada ${state.ops.completed+1} · ${S.DAY_TYPES[kind]}`;
   const free=state.fleet.reduce((sum,f)=>sum+E.available(state,f),0);
   $('resources').innerHTML=[
     ['Caja',money(state.cash)],['Resultado / mes',`<span class="${b.net>=0?'pos':'neg'}">${signed(b.net)}</span>`],
@@ -680,7 +703,7 @@ function ongoingHTML() {
   if (!list.length) return '';
   return `<div class="requests"><div class="kicker">En curso</div>${list.map(x => {
     const target = x.route ? `data-action="route" data-id="${x.route}"` : x.city ? `data-action="city" data-id="${x.city}"` : 'data-action="navigate" data-screen="network"';
-    return `<button ${target}><b>${esc(x.label)}</b><span>${x.promise ? 'Plazo' : 'Hasta'}: ${E.dateOf(Math.max(state.month, x.until - 1))}</span></button>`;
+    return `<button ${target}><b>${esc(x.label)}</b><span>${x.promise ? 'Plazo' : 'Hasta'}: ${when(Math.max(state.month, x.until - 1))}</span></button>`;
   }).join('')}</div>`;
 }
 function renderLegend() {
@@ -758,7 +781,6 @@ function header(kicker, title, text = '') {
 }
 function renderDrawer(resetScroll = false) {
   const el = $('drawer');
-  if(tut){el.classList.add('hidden');el.innerHTML='';return;}
   if (!screen) { el.classList.add('hidden'); return; }
   const pages = {network: redPage, fleet: trainsPage, finance: moneyPage, story: officePage, progress: progressPage, press: pressPage};
   const scroll = resetScroll ? 0 : el.querySelector('.body')?.scrollTop || 0, focusId = document.activeElement?.id, pos = document.activeElement?.selectionStart;
@@ -855,7 +877,7 @@ function officePage(){
   const tab=['agenda','apoyo','pactos','people','cloacas'].includes(ui.tycoonTab)?ui.tycoonTab:'agenda';
   const tabs=[['agenda','Agenda'],['apoyo','Apoyo'],['pactos','Pactos'],['people','Políticas'],['cloacas','Cloacas']];
   const existing=id=>tycoonPage(state,id).replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
-  const body=tab==='apoyo'?TenfeUI.supportHTML(state):tab==='pactos'?TenfeUI.pactsHTML(state):tab==='cloacas'?TenfeUI.scandalHTML(state):existing(tab);
+  const body=tab==='apoyo'?TenfeUI.supportHTML(state):tab==='pactos'?TenfeUI.pactsHTML(state):tab==='cloacas'?TenfeUI.scandalHTML(state):(tab==='agenda'?deskDecisionHTML():'')+existing(tab);
   return [header('Decisiones y compromisos','Despacho'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="tycoon-tab" data-id="${id}" class="${id===tab?'active':''}">${label}</button>`).join('')}</div>`+body];
 }
 
@@ -894,7 +916,7 @@ function fleetPage() {
       const m = MODEL[f.model];
       return `<tr class="clickable" data-action="fleet-detail" data-id="${f.id}"><td>${trainThumb(f.model)}</td><td><button class="linkish fleet-link" data-action="fleet-detail" data-id="${f.id}">${esc(m.name)}</button><small>${esc(f.origin)}${f.maker ? ' · ' + esc(f.maker) : ''} · desde ${f.born} · ${GAUGES[m.gauge]} · ${POWERS[m.power]}</small></td><td class="num">${f.qty}</td><td class="num">${E.available(state, f)}</td><td style="min-width:120px"><div class="bar ${f.condition < 50 ? '' : 'green'}"><span style="width:${f.condition}%"></span></div><small>${n(f.condition)} %</small></td></tr>`;
     }).join('')}</tbody></table><p class="note">Solo se venden o reforman trenes libres: quítalos antes de alguna línea.</p>`;
-    body += `<h2 class="section">Taller</h2>` + (state.refits.length ? `<div class="rows">${state.refits.map(r => `<div><span class="status ${r.done ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[r.model].name)} · ${r.qty} unidades</h3><p>${r.done ? 'Reforma terminada' : 'Salen del taller en ' + E.dateOf(r.due)}</p></div><span></span></div>`).join('')}</div>` : '<div class="empty">El taller está vacío. Los mecánicos, encantados.</div>');
+    body += `<h2 class="section">Taller</h2>` + (state.refits.length ? `<div class="rows">${state.refits.map(r => `<div><span class="status ${r.done ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[r.model].name)} · ${r.qty} unidades</h3><p>${r.done ? 'Reforma terminada' : 'Salen del taller en ' + when(r.due)}</p></div><span></span></div>`).join('')}</div>` : '<div class="empty">El taller está vacío. Los mecánicos, encantados.</div>');
     body += '<p class="note">Una reforma cuesta el 12 % del precio y dura cinco meses. El tren vuelve casi nuevo.</p>';
   }
   return [header('Flota y talleres', 'Los trenes que tienes, no los que te prometieron.'), body];
@@ -906,7 +928,7 @@ function marketPage(view) {
     body = Marketplace.catalogueHTML(state, ui.market, (model, qty, listing) => E.purchaseQuote(state, model, qty, listing), trainThumb);
   } else {
     const orders = state.orders.filter(o => !o.historical);
-    body += orders.length ? `<div class="rows">${orders.map(o => `<div><span class="status ${o.delivered === o.qty ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[o.model].name)} · ${o.qty} unidades</h3><p>${o.marketplace ? esc(o.marketplace.maker) + ' · ' + (o.marketplace.state === 'used' ? 'ocasión, ' + o.marketplace.condition + ' %' : 'nuevo') + ' · ' : ''}${o.delivered === o.qty ? 'Pedido completo' : 'Próximo lote: ' + E.dateOf(o.next)}${o.delay ? ' · ' + o.delay + ' meses de retraso' : ''} · ${money(o.remaining)} pendiente</p><div class="bar gold"><span style="width:${o.delivered / o.qty * 100}%"></span></div></div><span class="num">${o.delivered}/${o.qty}</span></div>`).join('')}</div>` : '<div class="empty">No has encargado ni un tren. Así no se crece.</div>';
+    body += orders.length ? `<div class="rows">${orders.map(o => `<div><span class="status ${o.delivered === o.qty ? 'on' : 'works'}"></span><div><h3>${esc(MODEL[o.model].name)} · ${o.qty} unidades</h3><p>${o.marketplace ? esc(o.marketplace.maker) + ' · ' + (o.marketplace.state === 'used' ? 'ocasión, ' + o.marketplace.condition + ' %' : 'nuevo') + ' · ' : ''}${o.delivered === o.qty ? 'Pedido completo' : 'Próximo lote: ' + when(o.next)}${o.delay ? ' · ' + o.delay + ' meses de retraso' : ''} · ${money(o.remaining)} pendiente</p><div class="bar gold"><span style="width:${o.delivered / o.qty * 100}%"></span></div></div><span class="num">${o.delivered}/${o.qty}</span></div>`).join('')}</div>` : '<div class="empty">No has encargado ni un tren. Así no se crece.</div>';
     body += `<h2 class="section">Contratos heredados</h2><table><thead><tr><th>Contrato</th><th class="num">Unidades</th><th>Estado</th></tr></thead><tbody>${HISTORICAL_ORDERS.map(h => {
       const o = state.orders.find(x => x.id === h.id);
       return `<tr><td><strong>${esc(h.name)}</strong></td><td class="num">${h.qty}</td><td>${h.signed > state.month ? 'Desde ' + (2022 + Math.floor(h.signed / 12)) : h.tender ? 'Licitación' : `${o?.delivered || 0}/${h.qty} recibidos`}</td></tr>`;
@@ -923,19 +945,19 @@ function worksPage() {
   if (ui.worksTab === 'running') {
     body += running.length ? `<div class="rows">${running.map(p => {
       const st = O.constructionStatus(state, p), name = p.type === 'upgrade' ? 'Mejora de servicio · ' + routeName(routeById(p.route)) : map.workName(p);
-      return `<div><span class="status works"></span><div><h3>${esc(name)}</h3><p>${p.type === 'tramo' ? esc(I.WORKS[p.work].label) + ' · ' : ''}${st.stage} · fin previsto ${E.dateOf(p.due)}${p.delay ? ' · +' + p.delay + ' meses' : ''}</p><div class="bar gold" style="margin-top:8px"><span style="width:${st.progress * 100}%"></span></div></div><button class="btn small" data-action="visit-work" data-id="${p.id}">Ver</button></div>`;
+      return `<div><span class="status works"></span><div><h3>${esc(name)}</h3><p>${p.type === 'tramo' ? esc(I.WORKS[p.work].label) + ' · ' : ''}${st.stage} · fin previsto ${when(p.due)}${p.delay ? ' · +' + p.delay + ' meses' : ''}</p><div class="bar gold" style="margin-top:8px"><span style="width:${st.progress * 100}%"></span></div></div><button class="btn small" data-action="visit-work" data-id="${p.id}">Ver</button></div>`;
     }).join('')}</div>` : '<div class="empty">No hay ni una máquina trabajando. Adif lo agradece.</div>';
   } else if (ui.worksTab === 'projects') {
     body += `<div class="rows">${PROJECTS.map(p => {
       const job = state.projects.find(j => j.id === p.id), st = job ? O.constructionStatus(state, job) : null, km = I.TRAMOS.filter(t => t.plan === p.id).reduce((v, t) => v + t.km, 0);
-      return `<div><span class="status ${job ? (job.done ? 'on' : 'works') : 'off'}"></span><div><h3>${esc(p.name)}</h3><p>${esc(p.region)} · ${n(km)} km · ${esc(p.desc)}</p>${job ? `<div class="bar gold" style="margin-top:8px"><span style="width:${st.progress * 100}%"></span></div><p class="small">${job.done ? 'En servicio' : st.stage + ' · ' + n(st.progress * 100) + ' % · fin previsto ' + E.dateOf(job.due)}</p>` : `<p class="small muted">${p.duration} meses de obra, nunca antes de ${p.earliest}.</p>`}</div>
+      return `<div><span class="status ${job ? (job.done ? 'on' : 'works') : 'off'}"></span><div><h3>${esc(p.name)}</h3><p>${esc(p.region)} · ${n(km)} km · ${esc(p.desc)}</p>${job ? `<div class="bar gold" style="margin-top:8px"><span style="width:${st.progress * 100}%"></span></div><p class="small">${job.done ? 'En servicio' : st.stage + ' · ' + n(st.progress * 100) + ' % · fin previsto ' + when(job.due)}</p>` : `<p class="small muted">${p.duration} meses de obra, nunca antes de ${p.earliest}.</p>`}</div>
       <div style="text-align:right;white-space:nowrap">${job ? `<button class="btn small" data-action="visit-work" data-id="${p.id}">Ver</button>` : `<strong>${money(p.cost)}</strong><br><button class="btn small primary" data-action="project" data-id="${p.id}" ${state.ended ? 'disabled' : ''}>Financiar</button>`}</div></div>`;
     }).join('')}</div><div class="toolbar"><button class="btn primary" data-action="new-line" ${state.ended ? 'disabled' : ''}>Trazar una línea propia</button></div>`;
   } else if (ui.worksTab === 'changers') {
     const nodes = Object.values(I.NODES).filter(nd => state.infra.c.includes(nd.id) || I.changerPossible(state, nd.id) || state.projects.some(p => !p.done && p.type === 'changer' && p.target === nd.id));
     body += `<p class="small">Un Alvia solo cambia de ancho donde hay cambiador. Sin él, se queda mirando la vía de enfrente.</p><div class="rows">${nodes.sort((a, b) => a.name.localeCompare(b.name)).map(nd => {
       const has = state.infra.c.includes(nd.id), job = state.projects.find(p => !p.done && p.type === 'changer' && p.target === nd.id);
-      return `<div><span class="status ${has ? 'on' : job ? 'works' : 'off'}"></span><div><h3>${esc(nd.name)}</h3><p>${has ? 'En servicio' + (nd.changer && nd.changer !== nd.name ? ' · ' + esc(nd.changer) : '') : job ? 'En obras · listo en ' + E.dateOf(job.due) : 'Se cruzan los dos anchos y no hay forma de pasar'}</p></div>
+      return `<div><span class="status ${has ? 'on' : job ? 'works' : 'off'}"></span><div><h3>${esc(nd.name)}</h3><p>${has ? 'En servicio' + (nd.changer && nd.changer !== nd.name ? ' · ' + esc(nd.changer) : '') : job ? 'En obras · listo en ' + when(job.due) : 'Se cruzan los dos anchos y no hay forma de pasar'}</p></div>
       <div style="text-align:right">${has ? `<button class="btn small" data-action="node" data-id="${nd.id}">Ver</button>` : job ? '' : `<strong>${money(I.CHANGER_WORK.cost)}</strong><br><button class="btn small primary" data-action="work" data-work="changer" data-id="${nd.id}" ${state.ended ? 'disabled' : ''}>Construir</button>`}</div></div>`;
     }).join('')}</div>`;
   } else {
@@ -944,7 +966,7 @@ function worksPage() {
     <table><thead><tr><th>Tramo</th><th>Ancho</th><th>Catenaria</th><th>Obras</th></tr></thead><tbody>${list.sort((a, b) => a.name.localeCompare(b.name)).map(d => {
       const st = state.infra.t[d.id], job = state.projects.find(p => !p.done && p.type === 'tramo' && p.target === d.id);
       return `<tr><td><button class="linkish" data-action="tramo" data-id="${d.id}"><strong>${esc(d.name)}</strong></button><small>${n(d.km)} km · ${st.v} km/h</small></td><td>${chip(I.GAUGE_LABEL[st.g], GAUGE_COLOR[st.g])}</td><td>${chip(I.ELEC_LABEL[st.e], ELEC_COLOR[st.e])}</td>
-      <td>${job ? `<span class="status works">${esc(I.WORKS[job.work].label)} · ${E.dateOf(job.due)}</span>` : I.tramoWorks(state, d.id).map(w => `<button class="btn small" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended ? 'disabled' : ''}>${esc(w.verb)} · ${money(w.cost)}</button>`).join(' ')}</td></tr>`;
+      <td>${job ? `<span class="status works">${esc(I.WORKS[job.work].label)} · ${when(job.due)}</span>` : I.tramoWorks(state, d.id).map(w => `<button class="btn small" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended ? 'disabled' : ''}>${esc(w.verb)} · ${money(w.cost)}</button>`).join(' ')}</td></tr>`;
     }).join('')}</tbody></table>`;
   }
   return [header('Obras', 'Las vías del próximo capítulo.', 'Ancho, catenaria, cambiadores y líneas nuevas. Pulsa un tramo en los mapas de anchos o de electrificación para verlo de cerca.'), body];
@@ -989,14 +1011,13 @@ function storyPage() {
 }
 
 function archivePage() {
-  const body = state.log.length ? state.log.map(l => `<div class="news"><time>${E.dateOf(l.month)}</time><div><h3>${esc(l.title)}</h3><p>${esc(l.body)}</p></div></div>`).join('') : '<div class="empty">Todavía no ha pasado nada digno de mención.</div>';
+  const body = state.log.length ? state.log.map(l => `<div class="news"><time>${when(l.month)}</time><div><h3>${esc(l.title)}</h3><p>${esc(l.body)}</p></div></div>`).join('') : '<div class="empty">Todavía no ha pasado nada digno de mención.</div>';
   return [header('Diario', 'Lo que ha pasado en tu mandato.'), body];
 }
 
 // ------------------------------------------------------------ inspector
 function renderInspector() {
   const el = $('inspector');
-  if(tut){el.classList.add('hidden');el.innerHTML='';return;}
   renderMission();
   if (!inspect) { el.classList.add('hidden'); map.selected = null; map.selectedCity = null; return; }
   if (inspect.type !== 'city') map.selectedCity = null;
@@ -1047,8 +1068,8 @@ function routeInspector() {
   <div class="shares-legend"><span><i style="background:var(--wine)"></i>Tren ${n(m.share * 100)} %</span><span><i style="background:var(--gold-2)"></i>Autobús ${n(m.busShare * 100)} %</span><span><i style="background:var(--paper-3)"></i>Coche y otros ${n(m.otherShare * 100)} %</span></div>
   <dl class="figures"><div><dt>Viajeros / mes</dt><dd>${n(m.passengers)}</dd></div><div><dt>Ocupación</dt><dd>${n(m.occupancy * 100)} %</dd></div><div><dt>Resultado</dt><dd class="${m.net >= 0 ? 'pos' : 'neg'}">${signed(m.net)}</dd></div></dl>`;
   const effects = V.routeEffects(state, r.id);
-  if (effects.length) body += `<p class="callout">${effects.map(x => `${esc(x.label)} · hasta ${E.dateOf(Math.max(state.month, x.until - 1))}`).join('<br>')}</p>`;
-  if (work && work.type !== 'upgrade') body += `<h2 class="section">Obra en la línea</h2><div class="bar gold"><span style="width:${O.constructionStatus(state, work).progress * 100}%"></span></div><p class="small">${esc(map.workName(work))} · fin previsto ${E.dateOf(work.due)}</p><button class="btn small" data-action="visit-work" data-id="${work.id}">Ver la obra</button>`;
+  if (effects.length) body += `<p class="callout">${effects.map(x => `${esc(x.label)} · hasta ${when(Math.max(state.month, x.until - 1))}`).join('<br>')}</p>`;
+  if (work && work.type !== 'upgrade') body += `<h2 class="section">Obra en la línea</h2><div class="bar gold"><span style="width:${O.constructionStatus(state, work).progress * 100}%"></span></div><p class="small">${esc(map.workName(work))} · fin previsto ${when(work.due)}</p><button class="btn small" data-action="visit-work" data-id="${work.id}">Ver la obra</button>`;
   body += `<div class="toolbar">${r.real ? `<button class="btn small" data-action="route-trips" data-id="${r.id}">Ver sus trenes</button>` : ''}<button class="btn small" data-action="route-zoom" data-id="${r.id}">Encuadrar</button></div>`;
   return {kicker: r.active ? 'Relación en servicio' : r.cut ? 'Relación cortada por obras' : 'Relación por abrir', title: `${routeChip(r)} ${esc(routeName(r))}`, body};
 }
@@ -1120,7 +1141,7 @@ function workInspector() {
   const st = job ? O.constructionStatus(state, job) : null, name = def?.name || map.workName(job);
   const km = def ? I.TRAMOS.filter(t => t.plan === def.id).reduce((v, t) => v + t.km, 0) : job.type === 'tramo' || job.type === 'custom' ? I.tramoDef(state, job.target)?.km || 0 : 0;
   const body = `<p>${esc(def?.desc || (job.type === 'tramo' ? I.WORKS[job.work].label : job.type === 'changer' ? 'Cambiador de ancho para los Alvia.' : job.type === 'custom' ? 'Línea nueva de alta velocidad: ancho estándar y 25 kV.' : ''))}</p>
-  ${job ? `<dl class="figures"><div><dt>Avance</dt><dd>${n(st.progress * 100)} %</dd></div><div><dt>Fin previsto</dt><dd style="font-size:17px">${E.dateOf(job.due)}</dd></div>${km ? `<div><dt>Longitud</dt><dd>${n(km)} km</dd></div>` : ''}</dl><div class="bar gold"><span style="width:${st.progress * 100}%"></span></div>
+  ${job ? `<dl class="figures"><div><dt>Avance</dt><dd>${n(st.progress * 100)} %</dd></div><div><dt>Fin previsto</dt><dd style="font-size:17px">${when(job.due)}</dd></div>${km ? `<div><dt>Longitud</dt><dd>${n(km)} km</dd></div>` : ''}</dl><div class="bar gold"><span style="width:${st.progress * 100}%"></span></div>
   <ul class="objectives">${O.STAGES.map((nm, i) => `<li class="${i < st.stageIndex ? 'done' : ''}"><i style="${i === st.stageIndex ? 'box-shadow:inset 0 0 0 2px var(--gold);background:rgba(240,181,68,.35)' : ''}"></i><span>${nm}</span><span class="small muted">${i < st.stageIndex ? 'Hecho' : i === st.stageIndex ? 'Ahora' : ''}</span></li>`).join('')}</ul>${job.delay ? `<p class="callout red">Va ${job.delay} meses tarde. Lo normal.</p>` : ''}`
     : `<dl class="figures"><div><dt>Coste</dt><dd>${money(def.cost)}</dd></div><div><dt>Obra</dt><dd>${def.duration} meses</dd></div><div><dt>Longitud</dt><dd>${n(km)} km</dd></div></dl><button class="btn primary" data-action="project" data-id="${def.id}" ${state.ended ? 'disabled' : ''}>Financiar</button>`}
   <div class="toolbar"><button class="btn small" data-action="visit-work" data-id="${inspect.id}">Acercar</button></div>`;
@@ -1142,10 +1163,10 @@ function tramoInspector() {
   map.selectedTramo = d.id;
   const job = state.projects.find(p => !p.done && (p.target === d.id || (p.type === 'infrastructure' && d.plan === p.id)));
   const plan = d.plan && PROJECTS.find(p => p.id === d.plan), {using, waiting} = routesOnTramo(d.id), works = I.tramoWorks(state, d.id);
-  let body = `<dl class="figures"><div><dt>Longitud</dt><dd>${n(d.km)} km</dd></div><div><dt>Velocidad</dt><dd>${st.v}</dd><em>km/h</em></div></dl>
+  let body = `${st.b?Tracks.photo(st,'track-inspector-photo')+'<button class="btn primary track-open" data-action="track-designer" data-id="'+d.id+'">Diseñar mejora de vía →</button>':''}<dl class="figures"><div><dt>Longitud</dt><dd>${n(d.km)} km</dd></div><div><dt>Velocidad</dt><dd>${st.v}</dd><em>km/h</em></div></dl>
   <div class="infra-tags">${st.b ? `${chip(I.GAUGE_LONG[st.g], GAUGE_COLOR[st.g])} ${chip(I.ELEC_LONG[st.e], ELEC_COLOR[st.e])}` : chip('Proyectada', '#8a7c69')} ${chip(d.kind === 'lav' ? 'Alta velocidad' : 'Convencional', '#4a3e30')}</div>
   <p class="small">${!st.b ? (I.opensOn(d) ? 'Abre el ' + I.opensOn(d) + '.' : 'Todavía no existe.') : st.g === 'std' ? 'Ancho estándar: AVE sí; los Alvia, también.' : st.g === 'mixto' ? 'Tercer carril: pasan los dos anchos sin cambiar.' : 'Ancho ibérico: solo Alvia. Los AVE, que den la vuelta.'} ${st.b && st.e === 'no' ? 'Sin catenaria: solo el Alvia híbrido.' : ''}${st.b && st.e === '3kv' && st.g !== 'ib' ? '3 kV: solo los AVE bitensión.' : ''}</p>`;
-  if (job) { const s2 = O.constructionStatus(state, job); body += `<h2 class="section">Obra en marcha</h2><p>${esc(map.workName(job))}${job.type === 'tramo' ? ' · ' + esc(I.WORKS[job.work].label) : ''}</p><div class="bar gold"><span style="width:${s2.progress * 100}%"></span></div><p class="small">${s2.stage} · fin previsto ${E.dateOf(job.due)}</p>`; }
+  if (job) { const s2 = O.constructionStatus(state, job); body += `<h2 class="section">Obra en marcha</h2><p>${esc(map.workName(job))}${job.type === 'tramo' ? ' · ' + esc(I.WORKS[job.work].label) : ''}</p><div class="bar gold"><span style="width:${s2.progress * 100}%"></span></div><p class="small">${s2.stage} · fin previsto ${when(job.due)}</p>`; }
   else if (plan) body += `<h2 class="section">Se construye con</h2><p>${esc(plan.name)} · ${money(plan.cost)}</p><button class="btn primary" data-action="project" data-id="${plan.id}" ${state.ended ? 'disabled' : ''}>Ver el proyecto</button>`;
   else if (works.length) body += `<h2 class="section">Obras posibles</h2><div class="works-list">${works.map(w => `<button class="choice" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended || w.busy ? 'disabled' : ''}><strong>${esc(w.label)} · ${money(w.cost)}</strong><span>${w.duration} meses${w.closes ? ' · corta la línea mientras dura' : ''}${w.work === 'mixed' ? ' · pasan AVE y Alvia sin cambiar' : w.work === 'standard' ? ' · solo ancho estándar para siempre' : w.work === 'renew' ? '' : ' · ya pueden pasar los Alvia eléctricos'}</span></button>`).join('')}</div>`;
   else if (st.b) body += '<p class="small muted">Este tramo ya está como debe. Que no es poco.</p>';
@@ -1160,7 +1181,7 @@ function nodeInspector() {
   const has = state.infra.c.includes(nd.id), job = state.projects.find(p => !p.done && p.type === 'changer' && p.target === nd.id), possible = I.changerPossible(state, nd.id);
   const lines = I.allTramos(state).filter(d => d.a === nd.id || d.b === nd.id);
   let body = `<p>${has ? `Tiene cambiador de ancho${nd.changer && nd.changer !== nd.name ? ' en ' + esc(nd.changer) : ''}: los Alvia cambian de ancho aquí en un par de minutos, sin que nadie se baje.` : job ? 'Cambiador en obras. Las máquinas, a su ritmo; los Alvia, esperando.' : possible ? 'Aquí se juntan los dos anchos y no se dirigen la palabra. Sin cambiador, el Alvia llega, mira y se vuelve.' : 'Sin cambiador ni falta que hace: aquí todo es del mismo ancho.'}</p>`;
-  if (job) { const s2 = O.constructionStatus(state, job); body += `<div class="bar gold"><span style="width:${s2.progress * 100}%"></span></div><p class="small">${s2.stage} · fin previsto ${E.dateOf(job.due)}</p>`; }
+  if (job) { const s2 = O.constructionStatus(state, job); body += `<div class="bar gold"><span style="width:${s2.progress * 100}%"></span></div><p class="small">${s2.stage} · fin previsto ${when(job.due)}</p>`; }
   else if (!has && possible) body += `<button class="choice" data-action="work" data-work="changer" data-id="${nd.id}" ${state.ended ? 'disabled' : ''}><strong>Construir un cambiador · ${money(I.CHANGER_WORK.cost)}</strong><span>${I.CHANGER_WORK.months} meses</span></button>`;
   body += `<h2 class="section">Líneas</h2><div class="rows">${lines.map(d => { const st = state.infra.t[d.id]; return `<div><span class="status ${st.b ? 'on' : 'off'}"></span><div><h3><button class="linkish" data-action="tramo" data-id="${d.id}">${esc(d.name)}</button></h3><p>${st.b ? I.GAUGE_LABEL[st.g] + ' · ' + I.ELEC_LABEL[st.e] : 'Proyectada'}</p></div><span></span></div>`; }).join('')}</div>`;
   return {kicker: has ? 'Cambiador de ancho' : nd.kind === 'junction' ? 'Bifurcación' : 'Estación', title: esc(nd.name), body};
@@ -1183,7 +1204,7 @@ $('modal').addEventListener('keydown',event=>{
 $('modal').addEventListener('close', () => { if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
 // Chromium cierra el diálogo con un segundo Esc seguido aunque el primero se haya cancelado: la portada no desaparece.
 $('modal').addEventListener('close', () => { if ($('modal').open) return; if (menuOpen) intro(); else if (np) { np = null; render(); } });
-function menuChrome() { if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }
+function menuChrome() { $('entry-welcome')?.remove(); if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }
 function redPage(){
   const tabs=[['routes','Servicios'],['ops','Jornada'],['works','Obras'],['timetables','Horarios'],['rivals','Competencia']];
   const page=ui.netView==='ops'?opsPage():ui.netView==='works'?worksPage():ui.netView==='timetables'?timetablesPage():ui.netView==='rivals'?['',tycoonPage(state,'market').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'')]:networkPage();
@@ -1196,19 +1217,21 @@ function moneyPage(){
 function progressPage(){
   const tabs=[['campaign','Mandato'],['hitos','Hitos'],['research','Investigación'],['proyectos','Megaproyectos']];
   let body=ui.progressTab==='hitos'?TenfeUI.milestonesHTML(state):ui.progressTab==='research'?tycoonPage(state,'research').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,''):ui.progressTab==='proyectos'?TenfeUI.megaHTML(state):storyPage()[1];
-  if(ui.progressTab==='campaign'&&state.tenfe?.rescueStarted)body=`<div class="tenfe-rescue-summary">${state.tenfe.rescueWon?'<h2>Tenfe sale del rescate</h2><p>Tu compañía conserva su red y sigue construyendo su legado.</p>':TenfeUI.missionHTML(state)||'<h2>Tu legado sigue en marcha</h2>'}</div>`+body;
+  if(state.tenfe?.game){if(ui.progressTab==='campaign')body=JUI.campaignHTML(state);if(ui.progressTab==='research')body=JUI.researchHTML(state)+body;}
+  if(!state.tenfe?.game&&ui.progressTab==='campaign'&&state.tenfe?.rescueStarted)body=`<div class="tenfe-rescue-summary">${state.tenfe.rescueWon?'<h2>Tenfe sale del rescate</h2><p>Tu compañía conserva su red y sigue construyendo su legado.</p>':TenfeUI.missionHTML(state)||'<h2>Tu legado sigue en marcha</h2>'}</div>`+body;
   if(state.ending==='election')body=`<p class="callout"><strong>Fin del mandato.</strong> Las urnas han elegido otra dirección. Puedes revisar tu red o comenzar una nueva partida.</p>`+body;
-  return [header('De la herencia al legado','Progreso'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="progress-tab" data-id="${id}" class="${ui.progressTab===id?'active':''}">${label}</button>`).join('')}</div>`+body];
+  return [header('Objetivos abiertos desde el primer turno','Progreso'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="progress-tab" data-id="${id}" class="${ui.progressTab===id?'active':''}">${label}</button>`).join('')}</div>`+body];
 }
 function pressPage(){
   const tabs=[['paper','Gaceta'],['journal','Diario'],['reports','Informes']];
-  const body=ui.pressTab==='journal'?archivePage()[1]:ui.pressTab==='reports'?(state.tenfe.reports.map(r=>`<section class="tenfe-report">${TenfeUI.reportHTML(state,r)}</section>`).join('')||TenfeUI.reportHTML(state)):tycoonPage(state,'paper').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
+  const body=ui.pressTab==='paper'&&state.tenfe?.game?JUI.newsHTML(state):ui.pressTab==='journal'?archivePage()[1]:ui.pressTab==='reports'?(state.tenfe.reports.map(r=>`<section class="tenfe-report">${TenfeUI.reportHTML(state,r)}</section>`).join('')||TenfeUI.reportHTML(state)):tycoonPage(state,'paper').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
   return [header('Lo que ocurrió en tu red','Prensa'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="press-tab" data-id="${id}" class="${ui.pressTab===id?'active':''}">${label}</button>`).join('')}</div>`+body];
 }
 function showTenfeUpdate(report=false){
   if(menuOpen||np||tut||!state.tenfe||$('modal').open)return;
+  if(state.tenfe.game){if(state.tenfe.game.event){ui.tycoonTab='agenda';screen='story';render();}return;}
   const notice=state.tenfe.notices[0];
-  if(notice){pause();showModal(`<div class="content tenfe-news-modal"><span class="kicker">${esc(E.dateOf(notice.month))} · ${esc(notice.kind)}</span><h1>${esc(notice.title)}</h1><p>${esc(notice.body)}</p><div class="actions"><button class="btn primary" data-action="tenfe-notice" data-id="${notice.id}">Continuar</button></div></div>`,'single');return;}
+  if(notice){pause();showModal(`<div class="content tenfe-news-modal"><span class="kicker">${esc(when(notice.month))} · ${esc(notice.kind)}</span><h1>${esc(notice.title)}</h1><p>${esc(notice.body)}</p><div class="actions"><button class="btn primary" data-action="tenfe-notice" data-id="${notice.id}">Continuar</button></div></div>`,'single');return;}
   if(report&&state.tenfe.reports.length)showModal(`<div class="content tenfe-month-report">${TenfeUI.reportHTML(state)}${TenfeUI.nextHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a la red</button><button class="btn" data-action="month-report">Ver informes</button></div></div>`,'single');
   else if(state.ended){ui.progressTab='campaign';screen='progress';render();}
 }
@@ -1216,11 +1239,25 @@ function showLegacy(){
   pause();voices.stop();
   const old=legacySave();if(!old){toast('No hay un rescate anterior válido guardado.');return;}
   let preview;try{preview=convertLegacy(old);}catch(error){toast(error.message);return;}
-  showModal(`<div class="content"><span class="kicker">Partida anterior · semana ${old.week}</span><h1>Recuperar tu compañía</h1><p>Tu rescate pasa a la misma red y motor del juego actual. El original queda guardado y puedes exportarlo.</p><dl class="figures"><div><dt>Caja convertida</dt><dd>${money(preview.cash)}</dd></div><div><dt>Deuda convertida</dt><dd>${money(preview.debt)}</dd></div><div><dt>Fecha</dt><dd>${E.dateOf(preview.month)}</dd></div></dl><ul>${preview.tenfe.legacy.notes.map(note=>`<li>${esc(note)}</li>`).join('')}</ul>${saved?'<p class="callout">Recuperar sustituye tu partida activa de Tenfe. Exporta esa partida antes si quieres conservar ambas.</p>':''}<div class="actions"><button class="btn primary" data-action="legacy-convert">Recuperar y jugar</button><button class="btn" data-action="legacy-export">Exportar original</button><button class="btn" data-action="menu-home">Volver</button></div></div>`,'single');
+  showModal(`<div class="content"><span class="kicker">Partida anterior · semana ${old.week}</span><h1>Recuperar tu compañía</h1><p>Tu rescate pasa a la misma red y motor del juego actual. El original queda guardado y puedes exportarlo.</p><dl class="figures"><div><dt>Caja convertida</dt><dd>${money(preview.cash)}</dd></div><div><dt>Deuda convertida</dt><dd>${money(preview.debt)}</dd></div><div><dt>Fecha</dt><dd>${when(preview.month)}</dd></div></dl><ul>${preview.tenfe.legacy.notes.map(note=>`<li>${esc(note)}</li>`).join('')}</ul>${saved?'<p class="callout">Recuperar sustituye tu partida activa de Tenfe. Exporta esa partida antes si quieres conservar ambas.</p>':''}<div class="actions"><button class="btn primary" data-action="legacy-convert">Recuperar y jugar</button><button class="btn" data-action="legacy-export">Exportar original</button><button class="btn" data-action="menu-home">Volver</button></div></div>`,'single');
 }
+
+function showWelcome(resume=false){
+ $('entry-welcome')?.remove();
+ if(tut||menuOpen||!state.started)return;
+ const el=document.createElement('section');el.id='entry-welcome';el.className='entry-welcome';el.setAttribute('aria-label',resume?'De nuevo al mando':'Bienvenido a Tenfe');
+ el.innerHTML=`${state.tenfe?.game?'<img src="assets/rescate/portada-rescate.webp" alt="" width="480" height="270">':''}<span class="kicker">${resume?esc(state.tenfe?.game?'Turno '+J.turn(state):O.dayLabel(state)):'Bienvenido a Conexiones'}</span><h2>${resume?'De nuevo al mando.':'Un país por conectar.'}</h2><p>${resume?'Tu red, tus trenes y tus compromisos siguen aquí. Revisa el objetivo y elige tu próxima jugada.':'Recibes una red a medio gas. Conecta ciudades, decide qué promesas cumplir y haz que cada tren merezca el viaje. Cinco retos y dos mandatos: elige tu primera jugada.'}</p><button class="btn primary small" data-action="welcome-close">${resume?'Volver a mi red':'Vamos a dirigir'} →</button>`;
+ $('game').appendChild(el);requestAnimationFrame(()=>el.classList.add('visible'));
+}
+function deskDecisionHTML(){
+ E.revalidateScene(state);const d=E.pendingDecision(state);const event=state.tenfe?.game?JUI.eventHTML(state):'';if(!d)return event;
+ const person=CHARACTERS[d.person];
+ return event+`<section class="desk-decision"><header><img src="${faceURL(d.person,d.mood||'happy')}" alt="" width="48" height="64"><div><span class="kicker">Consejo de dirección · decisión pendiente</span><strong>${esc(person.name)}</strong><small>${esc(person.role)}</small></div></header><h2>${esc(d.title)}</h2><p data-say="${esc(d.body)}">${sayHtml(d.body,d.person)}</p><div class="desk-options">${d.choices.map((c,i)=>`<button class="choice" data-action="decision" data-id="${d.id}" data-choice="${i}" ${c.disabled||(!c.deferred&&c.cost>0&&state.cash<c.cost)?'disabled':''}><strong>${esc(c.label)}</strong><span>${esc(c.disabled&&c.reason?c.reason:c.detail)}</span></button>`).join('')}</div></section>`;
+}
+
 function intro() { menuChrome();np=null;showModal(menuHTML(saved,savedError,rescueSaveSummary()),'main-menu-shell');$('modal').querySelector('[autofocus]')?.focus(); }
 function resetSessionView(){
- tutorialChrome();adviceLine=null;tutorialDraft=null;clearCoach();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
+ tutorialChrome();adviceLine=null;tutorialDraft=null;clearCoach();$('entry-welcome')?.remove();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
  ui.market=freshMarketFilters();
  map.selected=null;map.selectedCity=null;map.selectedTrain=null;map.selectedTramo=null;map.follow=false;map.reset();setLayer('network');resetToday();
  if(['running','review'].includes(state.ops.phase)){spawnArrivals(-1,state.ops.minute);popups=[];}
@@ -1261,29 +1298,28 @@ function startClassic(maqueta,seed,code,options={}){
   menuOpen=false;np=null;voices.stop();clearCoach();inductionModalKey='';tut=null;savedError='';
   state=E.initialState(seed);state.seedCode=code;
   if(maqueta)T.freeGame(state,maqueta.cash,maqueta.rivals);
-  U.begin(state,options);
+  U.begin(state,{...options,rules:'conexiones'});
   O.ensureOps(state);state.ops.day=3;state.started=true;
   if(maqueta||options.guide===false)state.tutorial={done:true};
   resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();autosave();
-  if(!maqueta)showDecision();
+  if(!maqueta&&options.guide!==false)startTutorial(false);else showWelcome(false);
 }
 
 function continueClassic(){
   if(!saved)return;
-  menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);U.begin(state);O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();
-  if(E.pendingDecision(state))showDecision();else if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showTenfeUpdate(false);
+  menuOpen=false;np=null;tut=null;voices.stop();state=E.validateSave(saved);U.begin(state,{rules:'conexiones'});O.ensureOps(state);state.started=true;resetSessionView();closeModal();netKey=networkKey();map.dirty=true;render();
+  if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showWelcome(true);
 }
-function menuGuide(){showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="new-game">Nueva partida</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}
+function menuGuide(){if(state.tenfe?.game)return showModal(`<div class="content"><span class="kicker">Conexiones · guía del director</span><h1>Haz que el país llegue.</h1>${JUI.campaignHTML(state)}<div class="actions"><button class="btn primary" data-action="close-modal">Volver a jugar</button><button class="btn" data-action="new-game">Nueva partida</button></div></div>`,'single');showModal(`<div class="content"><div class="kicker">Antes de asumir el mando</div><h1>No basta con comprar trenes.</h1><ol class="method"><li><b>La red decide.</b> El AVE necesita ancho estándar y catenaria. El Alvia cambia de ancho; el híbrido también pasa por vías sin electrificar.</li><li><b>La oferta se paga.</b> Compara viajeros, tarifa, margen y trenes necesarios antes de subir frecuencias.</li><li><b>El tiempo importa.</b> Los maquinistas se forman en tres meses; las obras y los pedidos tardan más. Cada jornada afecta a tu partida.</li><li><b>Todos piden algo.</b> El Gobierno, Hacienda, la plantilla, las ciudades y los viajeros tienen intereses distintos.</li></ol><p>La campaña incluye un primer turno guiado con nueve personajes, decisiones y objetivos reales. Puedes pausarlo y retomarlo.</p><div class="actions"><button class="btn primary" data-action="new-game">Nueva partida</button><button class="btn" data-action="menu-home">Volver al menú</button></div></div>`,'single');}
 function showDecision() {
   // Un encuentro solo se enseña si su arranque y su conflicto siguen siendo verdad ahora.
   E.revalidateScene(state);
   const d = E.pendingDecision(state); if (!d) { render(); return; }
   const person = CHARACTERS[d.person];
-  showModal(`<div class="art portrait" data-mood="${d.mood||'happy'}" style="${faceStyle(d.person, d.mood)}" role="img" aria-label="${esc(person.name)}"><span class="plate"><b>${esc(person.name)}</b>${esc(person.role)}</span></div><div class="content"><div class="kicker">${esc(E.dateOf(state.month))} · ${d.event ? 'Imprevisto' : 'Consejo de dirección'}</div><h1>${esc(d.title)}</h1><p data-say="${esc(d.body)}">${sayHtml(d.body,d.person)}</p>${d.instance ? `<p class="small decision-instance"><b>${esc(d.instance)}</b></p>` : ''}<p class="small speaker">${sayButton(d.person, 'modal')} <span class="say-caption" aria-hidden="true">${sayLabel('modal')}</span></p>${d.choices.map((c, i) => `<button class="choice" data-action="decision" data-id="${d.id}" data-choice="${i}" ${c.disabled || (!c.deferred && c.cost > 0 && state.cash < c.cost) ? 'disabled' : ''}><strong>${esc(c.label)}</strong><span>${esc(c.disabled && c.reason ? c.reason : c.detail)}</span></button>`).join('')}</div>`);
+  showModal(`<div class="art portrait" data-mood="${d.mood||'happy'}" style="${faceStyle(d.person, d.mood)}" role="img" aria-label="${esc(person.name)}"><span class="plate"><b>${esc(person.name)}</b>${esc(person.role)}</span></div><div class="content"><div class="kicker">${esc(when(state.month))} · ${d.event ? 'Imprevisto' : 'Consejo de dirección'}</div><h1>${esc(d.title)}</h1><p data-say="${esc(d.body)}">${sayHtml(d.body,d.person)}</p>${d.instance ? `<p class="small decision-instance"><b>${esc(d.instance)}</b></p>` : ''}<p class="small speaker">${sayButton(d.person, 'modal')} <span class="say-caption" aria-hidden="true">${sayLabel('modal')}</span></p>${d.choices.map((c, i) => `<button class="choice" data-action="decision" data-id="${d.id}" data-choice="${i}" ${c.disabled || (!c.deferred && c.cost > 0 && state.cash < c.cost) ? 'disabled' : ''}><strong>${esc(c.label)}</strong><span>${esc(c.disabled && c.reason ? c.reason : c.detail)}</span></button>`).join('')}</div>`);
   speakIn($('modal'), d.person, 'modal');
 }
 function dayReport() {
-  if(tut){tutorialMark('report');renderCoach();return;}
   tutorialMark('report');
   const l = state.ops.last; if (!l) return;
   const r = state.routes.find(r => r.id === l.busiest);
@@ -1314,7 +1350,7 @@ function marketListingDialog(id) {
 }
 function updateQuote() {
   const button=$('modal').querySelector('[data-action="confirm-buy"]');
-  try { const q = E.purchaseQuote(state, $('buyQty').dataset.model, +$('buyQty').value, $('buyQty').dataset.listing); $('purchaseQuote').innerHTML = `<dl class="figures"><div><dt>Total</dt><dd>${money(q.total)}</dd></div><div><dt>${q.lead === 0 ? 'A pagar ahora' : 'Anticipo (30 %)'}</dt><dd>${money(q.deposit)}</dd></div><div><dt>${q.lead === 0 ? 'Entrega' : 'Primer lote'}</dt><dd style="font-size:18px">${q.lead === 0 ? 'Ahora mismo' : E.dateOf(state.month + q.lead)}</dd></div></dl>${q.item && q.last > q.lead ? `<p class="tp-detail-note">Último lote previsto: ${E.dateOf(state.month + q.last)}.</p>` : ''}${state.cash < q.deposit ? '<p class="callout red">No hay caja suficiente para el pago inicial.</p>' : ''}`; if(button)button.disabled=state.ended||state.cash<q.deposit; }
+  try { const q = E.purchaseQuote(state, $('buyQty').dataset.model, +$('buyQty').value, $('buyQty').dataset.listing); $('purchaseQuote').innerHTML = `<dl class="figures"><div><dt>Total</dt><dd>${money(q.total)}</dd></div><div><dt>${q.lead === 0 ? 'A pagar ahora' : 'Anticipo (30 %)'}</dt><dd>${money(q.deposit)}</dd></div><div><dt>${q.lead === 0 ? 'Entrega' : 'Primer lote'}</dt><dd style="font-size:18px">${q.lead === 0 ? 'Ahora mismo' : when(state.month + q.lead)}</dd></div></dl>${q.item && q.last > q.lead ? `<p class="tp-detail-note">Último lote previsto: ${when(state.month + q.last)}.</p>` : ''}${state.cash < q.deposit ? '<p class="callout red">No hay caja suficiente para el pago inicial.</p>' : ''}`; if(button)button.disabled=state.ended||state.cash<q.deposit; }
   catch (e) { $('purchaseQuote').innerHTML = `<p class="callout red">${esc(e.message)}</p>`;if(button)button.disabled=true; }
 }
 function placeOptions(id, selected, withJunctions = true) {
@@ -1347,7 +1383,7 @@ function help() {
   <li><b>Arregla la vía.</b> En los mapas de <b>Anchos</b> y <b>Electrificación</b>, pulsa un tramo: electrifica, pon tercer carril o pásalo a ancho estándar. Pulsa un rombo o una bifurcación para construir cambiadores.</li>
   <li><b>Juega la jornada.</b> El reloj va del primer tren al último. Atiende las incidencias y los momentos de mucha demanda.</li>
   <li><b>Crece.</b> Compra trenes, financia líneas nuevas y cumple los capítulos para recibir dinero.</li></ol>
-  <p class="small">Atajos: <kbd>Espacio</kbd> pausa · <kbd>1</kbd>–<kbd>4</kbd> velocidad · <kbd>+</kbd>/<kbd>−</kbd> zoom · <kbd>Esc</kbd> cerrar.</p><div class="actions"><button class="btn primary" data-action="close-modal">Entendido</button><button class="btn" data-action="tutorial-start">${state.tutorial?.done?'Consultar la guía':state.tutorial?.version===1?'Retomar primer turno':'Hacer el turno guiado'}</button></div>
+  <p class="small">Atajos: <kbd>Espacio</kbd> pausa · <kbd>1</kbd>–<kbd>4</kbd> velocidad · <kbd>+</kbd>/<kbd>−</kbd> zoom · <kbd>Esc</kbd> cerrar.</p><div class="actions"><button class="btn primary" data-action="close-modal">Entendido</button><button class="btn" data-action="tutorial-start">${state.tutorial?.done?'Consultar la guía':[1,2].includes(state.tutorial?.version)?'Retomar primer turno':'Hacer el turno guiado'}</button></div>
   <p class="credits">Horarios de Renfe Data (CC BY 4.0). Vías © colaboradores de OpenStreetMap (ODbL). Contornos de Natural Earth.</p></div>`, 'single');
 }
 function realTripModal(id) { inspect = {type: 'train', id}; map.selectedTrain = id; screen = null; if (layer !== 'real' && !plan().some(t => t.id === id)) setLayer('real'); render(); }
@@ -1361,13 +1397,22 @@ function setLayer(l) {
   if (layer === 'real') toast('Horario real: todos los AVE y Alvia publicados para un día ' + S.DAY_TYPES[dayType()].toLowerCase() + '. Mirar no cuesta dinero.');
 }
 /** Confirma una obra de vía o un cambiador con su presupuesto y lo que corta. */
+let trackTarget=null,trackChoice=null;
+function trackDialog(id,desired=null){
+ trackTarget=id;trackChoice=desired||Tracks.normalized(state.infra.t[id]);
+ const d=I.tramoDef(state,id);let q,reason='';try{q=Tracks.quote(state,id,trackChoice);}catch(error){reason=error.message;}
+ if(!reason&&state.cash<q.cost)reason='Falta caja para esta mejora.';
+ if(!reason&&state.ended)reason='Mandato terminado.';
+ if(!reason&&state.tenfe?.game&&state.projects.filter(p=>!p.done).length+state.tenfe.megas.filter(p=>p.due).length>=3)reason='Las tres cuadrillas están ocupadas.';
+ showModal(`<div class="content track-modal"><span class="kicker">Taller de vías</span><h1>${esc(d.name)}</h1>${Tracks.designer(state,id,trackChoice)}${q?`<dl class="figures"><div><dt>Coste</dt><dd>${money(q.cost)}</dd></div><div><dt>Plazo</dt><dd>${q.months} ${state.tenfe?.game?'turnos':'meses'}</dd></div></dl>${q.closes?'<p class="callout red">Esta conversión corta la vía mientras dure la obra. Los servicios afectados quedan suspendidos y sus trenes libres.</p>':''}`:''}${reason?`<p class="callout">${esc(reason)}</p>`:''}<div class="actions"><button class="btn primary" data-action="track-confirm" ${reason?'disabled':''}>Adjudicar mejora</button><button class="btn" data-action="close-modal">Volver</button></div></div>`,'single');
+}
 function workDialog(kind, target) {
   if(kind==='electrify'&&/Torralba.*Soria/i.test(I.tramoDef(state,target)?.name||''))tutorialMark('soria-quote');
   let q;
   try { q = E.workQuote(state, kind, target); } catch (e) { sfx.play('error'); return toast(e.message); }
   const place = kind === 'changer' ? I.NODES[target].name : I.tramoDef(state, target).name;
   showModal(`<div class="content"><div class="kicker">${esc(q.label)}</div><h1>${esc(place)}</h1>
-  <dl class="figures"><div><dt>Coste</dt><dd>${money(q.cost)}</dd></div><div><dt>Obra</dt><dd>${q.months} meses</dd></div><div><dt>Termina</dt><dd style="font-size:18px">${E.dateOf(state.month + q.months)}</dd></div></dl>
+  ${kind!=='changer'?Tracks.comparison(state.infra.t[target],Tracks.resulting(state.infra.t[target],kind)):''}<dl class="figures"><div><dt>Coste</dt><dd>${money(q.cost)}</dd></div><div><dt>Obra</dt><dd>${q.months} meses</dd></div><div><dt>Termina</dt><dd style="font-size:18px">${when(state.month + q.months)}</dd></div></dl>
   ${q.closes ? `<p class="callout red">La línea se corta mientras dure la obra.${q.affected.length ? ' Se suspenden: ' + q.affected.map(r => esc(routeName(r))).join(', ') + '.' : ''}</p>` : ''}
   <p class="small">${kind === 'renew' ? 'Renovación de vía para elevar el límite a 220 km/h; el tren respeta su velocidad máxima y los demás tramos.' : kind === 'electrify' ? 'Catenaria de 25 kV: permite material eléctrico compatible con el ancho. La obra no cambia el ancho de la vía.' : kind === 'mixed' ? 'Un tercer carril: pasan los dos anchos y no se corta el tráfico.' : kind === 'standard' ? 'Fuera el ancho ibérico: el AVE entra hasta la cocina, pero solo por ancho estándar.' : 'Los Alvia podrán cambiar de ancho aquí.'}${['mixed', 'standard'].includes(kind) && state.infra.t[target]?.e === '3kv' ? ' Sigue a 3 kV: solo AVE bitensión.' : ''}</p>
   <div class="actions"><button class="btn primary" data-action="confirm-work" data-work="${kind}" data-id="${esc(target)}">Adjudicar · ${money(q.cost)}</button><button class="btn" data-action="close-modal">Cancelar</button></div></div>`, 'single');
@@ -1378,13 +1423,20 @@ document.addEventListener('click', event => {
   if (!b || b.disabled) return;
   const a = b.dataset.action, id = b.dataset.id;
   clickSound(a, b);
+  if(a!=='welcome-close')$('entry-welcome')?.remove();
   if(tut&&a==='skip-month'){toast('Termina el primer turno o páusalo antes de delegar el mes.');return;}
-  if(tut&&a==='day-end'&&INDUCTION_STAGES[tut.step].id==='incident'&&!readyInduction(state,tut)){toast('Atiende la avería antes de cerrar esta jornada de iniciación.');return;}
+  if(tut&&a==='day-end'&&TOUR_STEPS[tut.step].id==='day'&&!tut.marks.includes('incident-resolved')){toast('Atiende la avería antes de cerrar esta jornada de iniciación.');return;}
   switch (a) {
-    case 'tycoon-tab': ui.tycoonTab=id;if(!tut){if(id==='research'){screen='progress';ui.progressTab='research';}else if(id==='paper'){screen='press';ui.pressTab='paper';}else if(id==='market'){screen='network';ui.netView='rivals';}else screen='story';ui.officeTab='tycoon';inspect=null;renderNav();renderMission();renderInspector();}renderDrawer(true);tutorialMark(id);break;
+    case 'game-event': act(()=>J.decide(state,id,+b.dataset.choice),'Decisión aplicada a tu compañía.');break;
+    case 'game-research': act(()=>J.research(state,id),'Investigación financiada.');break;
+    case 'track-select': {trackChoice={...trackChoice,[b.dataset.key]:b.dataset.key==='lanes'?+b.dataset.value:b.dataset.value};trackDialog(trackTarget,trackChoice);break;}
+    case 'track-designer': trackChoice=null;trackDialog(id);break;
+    case 'track-confirm': if(act(()=>Tracks.start(state,E,trackTarget,trackChoice),'Mejora adjudicada.'))closeModal();break;
+    case 'welcome-close': $('entry-welcome')?.remove();break;
+    case 'tycoon-tab': ui.tycoonTab=id;{if(id==='research'){screen='progress';ui.progressTab='research';}else if(id==='paper'){screen='press';ui.pressTab='paper';}else if(id==='market'){screen='network';ui.netView='rivals';}else screen='story';ui.officeTab='tycoon';inspect=null;renderNav();renderMission();renderInspector();}renderDrawer(true);tutorialMark(id);break;
     case 'tycoon-policy': {const active=state.tycoon.policies.includes(id);act(()=>T.setPolicy(state,id),`${T.POLICIES[id].name}: política ${active?'desactivada':'activada'}.`);break;}
-    case 'tycoon-hire': act(()=>T.hire(state,20),`20 maquinistas en formación. Se incorporan en ${E.dateOf(state.month+3)}.`);break;
-    case 'tycoon-research': act(()=>T.research(state,id),`${T.TECHS[id].name} financiada. Final previsto: ${E.dateOf(state.month+T.TECHS[id].months)}.`);break;
+    case 'tycoon-hire': act(()=>T.hire(state,20),`20 maquinistas en formación. Se incorporan en ${when(state.month+3)}.`);break;
+    case 'tycoon-research': act(()=>T.research(state,id),`${T.TECHS[id].name} financiada. Final previsto: ${when(state.month+T.TECHS[id].months)}.`);break;
     case 'tycoon-lobby': act(()=>T.lobby(state,id),`${T.GROUPS[id][0]}: +12 de confianza. Negociación: 8 M€.`);break;
     case 'tycoon-public': case 'tycoon-commercial': act(()=>T.accept(state,id,a==='tycoon-public'?'public':'commercial'),'Compromiso aceptado. Revisa los requisitos y su fecha límite en la agenda.');break;
     case 'navigate': if($('modal').open)closeModal();navigate(b.dataset.screen); break;
@@ -1419,17 +1471,17 @@ document.addEventListener('click', event => {
     case 'menu-settings': musicDialog();break;
     case 'continue': case 'continue-other': if (b.dataset.game === 'rescue') showLegacy(); else continueClassic(); break;
     case 'observe': menuOpen=false;closeModal(); setLayer('real'); observerMinute = 480; play(); break;
-    case 'decision': if (act(() => E.decide(state, id, +b.dataset.choice))) { closeModal(); if (E.pendingDecision(state)) showDecision(); else if (!state.tutorial?.done && !state.tutorial?.suspended && !tut && (state.month === 0||state.tutorial?.version===1)) startTutorial(); } break;
+    case 'decision': {const wasModal=$('modal').open;if(act(()=>E.decide(state,id,+b.dataset.choice))){if(wasModal)closeModal();if(wasModal&&!tut&&E.pendingDecision(state))showDecision();render();}break;}
     case 'claim': act(() => E.claimChapter(state), 'Financiación recibida. Tu siguiente etapa está preparada.'); setTimeout(() => { const st = document.querySelector('.story'); if (st && !state.ended) speakIn(st, CHAPTERS[state.chapter].speaker, 'story'); }, 60); break;
     case 'play': playing ? pause() : play(); break;
     case 'speed': speedIndex = +id; renderDaybar(); break;
-    case 'day-start': if (layer === 'real') setLayer('network'); play(); break;
+    case 'day-start': if (layer === 'real') setLayer('network'); play();tutorialIncident();renderBoard();break;
     case 'day-end': pause(); if (state.ops.phase === 'running') { state.ops.minute = O.dayBounds(plan()).last; finishDay(); } break;
     case 'day-review': dayReport(); break;
     case 'day-next': try { const monthBefore=state.month; O.nextDay(state); sfx.result(true); closeModal(); seenIncidents = new Set(); autosave(); render(); if (E.pendingDecision(state)) showDecision(); else showTenfeUpdate(state.month!==monthBefore); } catch (e) { sfx.result(false); toast(e.message); } break;
-    case 'skip-month': pause();E.revalidateScene(state);if(E.pendingDecision(state)){showDecision();break;}try { const paidBefore = state.stats.requests || 0; if (O.skipMonth(state)) { sfx.result(true); autosave(); render(); const paid = (state.stats.requests || 0) - paidBefore; toast('Mes cerrado. Cuentas liquidadas.' + (paid ? ` ${paid} petición${paid > 1 ? 'es' : ''} cobrada${paid > 1 ? 's' : ''}.` : '')); if (E.pendingDecision(state)) showDecision();else showTenfeUpdate(true); } else sfx.intent = null; } catch (e) { sfx.result(false); toast(e.message); } break;
+    case 'skip-month': pause();E.revalidateScene(state);if(state.tenfe?.game?.event){ui.tycoonTab='agenda';screen='story';render();toast('Elige cómo resolver el suceso del turno.');break;}if(E.pendingDecision(state)){showDecision();break;}try { const paidBefore = state.stats.requests || 0; if (O.skipMonth(state)) { sfx.result(true); autosave(); render(); const paid = (state.stats.requests || 0) - paidBefore; toast('Mes cerrado. Cuentas liquidadas.' + (paid ? ` ${paid} petición${paid > 1 ? 'es' : ''} cobrada${paid > 1 ? 's' : ''}.` : '')); if (state.tenfe?.game)showTenfeUpdate(true);else if(E.pendingDecision(state)) showDecision();else showTenfeUpdate(true); } else sfx.intent = null; } catch (e) { sfx.result(false); toast(e.message); } break;
     case 'open-incidents': document.querySelector('.alert-pill')?.remove(); navigate('ops'); if (screen !== 'ops') navigate('ops'); break;
-    case 'respond': if(act(() => O.resolveIncident(state, id, b.dataset.option), O.RESPONSES[b.dataset.option].note)&&tut?.answers.incident===id)tutorialMark('incident-resolved'); break;
+    case 'respond': if(act(()=>O.resolveIncident(state,id,b.dataset.option),O.RESPONSES[b.dataset.option].note)&&tut&&TOUR_STEPS[tut.step].id==='day'){tutorialMark('incident-resolved');screen=null;inspect=null;render();}break;
     case 'route': selectRoute(id); break;
     case 'city': { const c = CITY[id]; document.querySelector('.alert-pill')?.remove(); inspect = {type: 'city', id}; screen = null; map.selectedCity = id; if (c && map.zoom < 1.4) map.focusAt(c.lon, c.lat, 1.6); render(); break; }
     case 'freq-up': case 'freq-down': { const r = routeById(id), step = Math.max(1, Math.round(E.maxFrequency(r) * .1)); act(() => setService(r, r.frequency + (a === 'freq-up' ? step : -step))); break; }
@@ -1550,7 +1602,7 @@ document.addEventListener('change', async event => {
   if (t.id === 'musicMode') music.setMode(t.value);
   if (t.id === 'maintenance') act(() => { E.ensurePlaying(state); state.maintenance = E.clamp(+t.value, .6, 1.5); });
   if (t.id === 'importSave' && t.files[0]) {
-    try { if (t.files[0].size > 6e6) throw Error('El archivo es demasiado grande.'); const imported=JSON.parse(await t.files[0].text());state=imported?.v===1?convertLegacy(imported):E.validateSave(imported);U.begin(state);O.ensureOps(state); state.started = true; autosave(); sfx.play('confirm'); closeModal(); inspect = null; screen = null; netKey = networkKey(); map.dirty = true; render(); toast('Partida importada.');menuOpen=false;tut=null;voices.stop();resetSessionView();render();if (E.pendingDecision(state)) showDecision();else if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial(); }
+    try { if (t.files[0].size > 6e6) throw Error('El archivo es demasiado grande.'); const imported=JSON.parse(await t.files[0].text());state=imported?.v===1?convertLegacy(imported):E.validateSave(imported);U.begin(state,{rules:'conexiones'});O.ensureOps(state); state.started = true; autosave(); sfx.play('confirm'); closeModal(); inspect = null; screen = null; netKey = networkKey(); map.dirty = true; render(); toast('Partida importada.');menuOpen=false;tut=null;voices.stop();resetSessionView();render();if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showWelcome(true); }
     catch (e) { sfx.play('error'); toast('No se pudo importar: ' + e.message); }
   }
 });
@@ -1570,7 +1622,7 @@ $('resetMap').onclick = () => { sfx.play('resetMap'); map.reset(); };
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && !$('modal').open && ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) document.activeElement.blur();
   else if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName) || $('modal').open) return;
-  if(tut){if(tut.phase==='task'&&event.key==='Escape')suspendTutorial();return;}
+  if(tut){if(event.key==='Escape')suspendTutorial();return;}
   if (event.code === 'Space') { event.preventDefault(); sfx.play(playing ? 'pause' : state.started && state.ops.phase === 'planning' && layer !== 'real' ? 'departure' : 'resume'); playing ? pause() : play();if(tut)tutorialIncident(); }
   if (['1','2','3','4','5','6'].includes(event.key)) { event.preventDefault();navigate(Object.keys(PAGES)[+event.key-1]); }
   if(event.key.toLowerCase()==='t'){ui.fleetTab='market';navigate('fleet');}

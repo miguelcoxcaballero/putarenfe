@@ -57,6 +57,10 @@ export function validInduction(t,s){
  if(t===undefined||t===null)return true;
  if(typeof t!=='object'||typeof t.done!=='boolean')return false;
  if(t.version===undefined)return true;
+ if(t.version===2){
+  const base=t.baseline,allowed=['gauge','power','salamanca','preview','people','market','research','agenda','paper','soria-quote','hold-investment','incident-resolved','report'];
+  return typeof t.suspended==='boolean'&&Number.isInteger(t.step)&&t.step>=0&&t.step<9&&Array.isArray(t.marks)&&t.marks.length<=allowed.length&&new Set(t.marks).size===t.marks.length&&t.marks.every(k=>allowed.includes(k))&&!!base&&Number.isInteger(base.frequency)&&base.frequency>=1&&base.frequency<=(s?.routes?.find(r=>r.id==='madrid-valencia')?.baseFrequency||12)&&Number.isFinite(base.fare)&&base.fare>=1.5&&base.fare<=150&&Number.isInteger(base.completed)&&base.completed>=0;
+ }
  if(t.version!==1||typeof t.suspended!=='boolean'||!Number.isInteger(t.step)||t.step<0||t.step>=INDUCTION_STAGES.length||!['briefing','task','debrief'].includes(t.phase))return false;
  const stage=INDUCTION_STAGES[t.step],lines=t.phase==='debrief'?stage.debrief:stage.briefing;
  if(!Number.isInteger(t.line)||t.line<0||t.line>=(t.phase==='task'?1:lines.length))return false;

@@ -1,46 +1,45 @@
-/* Primer turno: una mesa de trabajo, una tarea y una voz cada vez. */
-body.guided-turn #game>.hud,body.guided-turn #navigation,body.guided-turn .map-tools,body.guided-turn #mission,body.guided-turn #inspector,body.guided-turn #drawer,body.guided-turn #legend,body.guided-turn #daybar,body.guided-turn .alert-pill{display:none!important}
-body.guided-turn #map{pointer-events:none;filter:brightness(.72) saturate(.65)}
-.induction-shell .content{display:flex;flex-direction:column;justify-content:center}
-.induction-dialog p[data-say]{font-size:17px;line-height:1.65;color:var(--ink-2)}
-.induction-dialog .actions{flex-wrap:wrap;gap:10px;margin-top:18px}
-.coach.induction-coach{position:fixed;display:flex;flex-direction:column;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(720px,calc(100vw - 48px));max-width:none;max-height:calc(100dvh - 48px);padding:0;border:1px solid var(--frame);border-radius:12px;overflow:hidden;background:var(--paper);color:var(--ink);box-shadow:0 20px 100px #160f0a80;z-index:25}
-.lesson-header{display:flex;align-items:center;gap:18px;flex-shrink:0;padding:20px 28px 16px;border-bottom:1px solid var(--frame);background:var(--paper-2)}
-.lesson-header .kicker{margin:0;flex:1}.lesson-cash{font:600 12px var(--mono);color:var(--wine)}.lesson-header .linkish{font-size:12px;white-space:nowrap}
-.lesson-body{padding:24px 28px;overflow:auto;overscroll-behavior:contain;min-height:0}
-.lesson-body>h1{font:600 30px/1.15 var(--serif);margin:0 0 10px}.lesson-next{font-size:15px;line-height:1.5;color:var(--ink-2);margin:0 0 20px;max-width:56ch}
-.lesson-controls p{font-size:14px;line-height:1.5}.lesson-controls .figures{gap:20px;margin:16px 0}.lesson-controls .figures dd{font-size:25px}.lesson-controls .figures dt{font-size:11px}
-.lesson-controls table{font-size:13px;width:100%}.lesson-controls th,.lesson-controls td{padding:12px 10px;white-space:normal}.lesson-controls .btn{white-space:normal;line-height:1.45}.lesson-controls .actions,.lesson-controls .toolbar{flex-wrap:wrap;gap:10px}
-.lesson-controls .options{margin:16px 0}.lesson-controls .option{font-size:13px}.lesson-controls .option ul{margin:0}
-.lesson-controls .policy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.lesson-controls .policy-grid article{padding:16px;border:1px solid var(--frame);background:var(--paper-2)}.lesson-controls .policy-grid h3{font:600 19px var(--serif);margin:0 0 8px}
-.lesson-controls label{font-size:13px}.lesson-controls input[type=range]{width:100%}.lesson-controls select{max-width:100%;width:100%}.lesson-controls .callout{font-size:13px;line-height:1.6}
-.lesson-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 28px;flex-shrink:0;border-top:1px solid var(--frame);background:var(--paper-2)}
-.lesson-progress{font:500 12px var(--mono);color:var(--ink-3)}
-.lesson-advice{font-size:12px;max-width:70%}.lesson-advice>summary{cursor:pointer;font-weight:600;color:var(--wine)}.lesson-advice>div{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px}
-.lesson-advice .btn{display:flex;align-items:center;gap:8px;padding:6px 10px}.lesson-advice .btn img{width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:center 25%}
-.induction-hint{font-size:12px;line-height:1.5;width:100%}.induction-hint summary{cursor:pointer;color:var(--wine)}.induction-hint p{margin:8px 0 0;max-width:55ch}
-.induction-question{border:0;padding:0;margin:16px 0 0}.induction-question legend{font-weight:600;font-size:15px;line-height:1.5;margin-bottom:10px}.induction-question button{display:block;text-align:left;width:100%;margin:8px 0;background:var(--paper-2);padding:12px 14px;white-space:normal}.induction-question button b,.induction-question button span{display:block}.induction-question button span{font-size:12px;line-height:1.5;font-weight:400;margin-top:4px}
-.induction-finish dd{font-size:24px}.induction-finish .figures{gap:18px}
-@media(max-width:760px){
- dialog#modal:has(.induction-shell){max-height:94dvh;width:calc(100vw - 20px);overflow:auto}
- .induction-shell .art.portrait{height:170px;min-height:170px;background-position:center 24%;margin:0}
- .induction-shell .plate{max-width:240px;left:16px;right:auto;bottom:12px}
- .induction-shell .content{padding:22px 20px 24px;overflow:visible}
- .induction-shell .content>h1{font-size:25px;line-height:1.15}.induction-dialog p[data-say]{font-size:15px;line-height:1.55}
- .coach.induction-coach{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:9px}
- .lesson-header{padding:16px;gap:10px}.lesson-header .kicker{font-size:9px}.lesson-cash{font-size:10px}.lesson-header .linkish{font-size:11px}
- .lesson-body{padding:20px 18px}.lesson-body>h1{font-size:25px}.lesson-next{font-size:14px;margin-bottom:16px}
- .lesson-controls .policy-grid{grid-template-columns:1fr}.lesson-controls .figures{gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-controls table{font-size:12px}.lesson-controls th,.lesson-controls td{padding:10px 6px}
- .lesson-footer{padding:14px 18px;gap:8px}.lesson-footer>.btn{font-size:12px;padding:10px 12px}.lesson-advice{max-width:65%}
- .induction-finish .figures{grid-template-columns:1fr;gap:10px}
-}
-@media(prefers-reduced-motion:reduce){.main-menu *{transition:none!important;animation:none!important}}
-.lesson-investments td span{display:block;margin-top:5px;color:var(--ink-2);font-size:12px;line-height:1.5}
-.lesson-investment-options{display:grid;gap:8px;margin-bottom:14px}.lesson-investment{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:12px 14px;border:1px solid var(--frame);background:var(--paper-2)}.lesson-investment>div{display:grid;gap:4px}.lesson-investment span{font-size:12px;color:var(--ink-2)}.lesson-investment .btn{font-size:12px;padding:8px 12px}
-.lesson-contracts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lesson-contracts article{border:1px solid var(--frame);padding:16px;background:var(--paper-2)}.lesson-contracts h5{font:600 20px var(--serif);margin:0 0 12px}.lesson-contracts .btn{width:100%;font-size:12px}
-.lesson-optional{font-size:12px;line-height:1.5;margin:16px 0}.lesson-optional summary{cursor:pointer;color:var(--wine)}.lesson-complete{padding:18px 20px;border:1px solid var(--frame);background:var(--paper-2)}.lesson-complete>span{color:var(--green);margin-right:8px}.lesson-controls h4{font:600 21px var(--serif);margin:0 0 16px}
-.lesson-responses{display:grid;gap:8px}.lesson-responses .lesson-choice{text-align:left;padding:14px 16px}.lesson-responses b,.lesson-responses span{display:block}.lesson-responses span{font-size:12px;margin-top:6px;font-weight:400}
-.lesson-facts dd{overflow-wrap:anywhere;font-family:var(--serif);font-size:22px!important}.lesson-route-form input[type=number]{width:140px}.lesson-route-form .btn{margin-top:12px}
-@media(max-width:430px){.lesson-contracts{grid-template-columns:1fr}.lesson-facts{gap:12px}.lesson-facts dd{font-size:19px!important}}
 
-.lesson-controls .pos{color:#286241}.lesson-controls .neg{color:#9e302d}
+/* A guide over the actual game: one clear panel and a softly blurred surround. */
+body.guided-turn #drawer,body.guided-turn #inspector{transition:none}
+.tour-coach{position:fixed;z-index:43;display:block;width:340px;max-height:calc(100dvh - 48px);overflow:auto;padding:18px;background:#20252df5;color:#f2f1ed;border:1px solid #ffffff35;border-radius:12px;box-shadow:0 12px 38px #0005;font-family:var(--sans);transition:left 220ms cubic-bezier(.2,.7,.2,1),top 220ms cubic-bezier(.2,.7,.2,1);overscroll-behavior:contain;animation:tour-enter 220ms ease-out}
+.tour-coach>header{display:flex;align-items:center;gap:12px;margin-bottom:12px}.tour-coach header img{width:40px;height:48px;object-fit:cover;border-radius:7px;background:#ffffff0c}.tour-coach header div{flex:1}.tour-coach header strong{display:block;font-size:12px;margin-top:3px}.tour-coach .kicker{font-size:9px;letter-spacing:1px;color:#e5a8c1}.tour-coach h2{font:650 20px/1.25 var(--sans);margin:0 0 9px}.tour-coach p{font-size:12px;line-height:1.6;margin:0;color:#c7cbd1}.tour-coach footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:16px}.tour-coach footer>span{font-size:10px;color:#9ca6b3}.tour-coach .btn{font-size:11px;padding:9px 12px}.tour-pause{width:28px;height:28px;border:0;border-radius:6px;background:#ffffff08;color:#c7cbd1;font-size:20px;cursor:pointer}
+#tour-shades{position:fixed;inset:0;z-index:40;pointer-events:none}#tour-shades i{position:fixed;display:block;background:#0b111a59;backdrop-filter:blur(3px) brightness(.8);pointer-events:auto;transition:left 200ms ease,top 200ms ease,width 200ms ease,height 200ms ease}
+.tour-ring{position:fixed;z-index:42;pointer-events:none;border:2px solid #e5a8c1;border-radius:12px;box-shadow:0 0 0 3px #e5a8c11a;transition:left 200ms ease,top 200ms ease,width 200ms ease,height 200ms ease}
+dialog.tour-dialog{outline:2px solid #e5a8c1;outline-offset:4px}dialog#modal.tour-dialog::backdrop{backdrop-filter:blur(3px);background:#0b111a80}
+.tour-coach.in-dialog{position:relative!important;left:auto!important;top:auto!important;width:100%!important;margin:0 0 20px;box-shadow:none;max-height:210px;animation:none;background:#ffffff06}
+@keyframes tour-enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.desk-decision{padding:16px 0 24px;border-bottom:1px solid var(--rule-2);margin-bottom:22px}.desk-decision>header{display:flex;align-items:center;gap:14px}.desk-decision header img{width:48px;height:64px;object-fit:cover;border-radius:7px}.desk-decision header strong,.desk-decision header small{display:block}.desk-decision .kicker{font-size:9px;color:#e5a8c1}.desk-decision header small{font-size:11px;color:var(--ink-3)}.desk-decision h2{margin:14px 0 10px}.desk-decision p{font-size:13px;line-height:1.65}.desk-options{display:grid;gap:8px}.desk-options .choice{display:block;text-align:left;width:100%;padding:14px;background:#ffffff06;border:1px solid var(--rule-2);border-radius:8px;color:var(--ink);cursor:pointer}.desk-options .choice:disabled{opacity:.5}.desk-options .choice:hover:not(:disabled){background:#ffffff0c;border-color:#e5a8c1}.desk-options .choice strong,.desk-options .choice span{display:block}.desk-options .choice strong{font-size:13px}.desk-options .choice span{font-size:11px;line-height:1.6;margin-top:5px;color:var(--ink-2)}
+.entry-welcome{position:absolute;top:100px;left:310px;z-index:8;width:min(380px,calc(100vw - 36px));padding:22px;background:#20252df5;border:1px solid #ffffff28;border-radius:12px;color:#f2f1ed;box-shadow:0 12px 36px #0004;opacity:0;transform:translateY(8px);transition:opacity 240ms ease,transform 240ms ease}.entry-welcome.visible{opacity:1;transform:translateY(0)}.entry-welcome .kicker{font-size:10px;letter-spacing:1px;color:#e5a8c1}.entry-welcome h2{font:650 25px/1.2 var(--sans);margin:9px 0 12px}.entry-welcome p{font-size:13px;line-height:1.7;color:#c7cbd1;margin-bottom:18px}
+.menu-audio-status{font-size:10px;color:#b5bbc1;margin:16px 0 10px;align-self:flex-end}.menu-audio-status a{color:inherit;text-underline-offset:3px}
+@media(max-width:900px){.entry-welcome{left:18px;top:100px}}
+@media(max-width:600px){body.guided-turn #drawer,body.guided-turn #inspector{bottom:300px}.tour-coach{max-height:210px;padding:12px 14px;border-radius:9px}.tour-coach>header{margin-bottom:8px;gap:9px}.tour-coach header img{width:28px;height:34px}.tour-coach header strong{font-size:10px}.tour-coach h2{font-size:17px;margin-bottom:6px}.tour-coach p{font-size:11px;line-height:1.5}.tour-coach footer{margin-top:10px;gap:6px}.tour-coach footer>span{font-size:9px}.tour-coach .btn{font-size:10px;padding:8px 10px}.tour-coach.in-dialog{max-height:190px}.entry-welcome{left:8px;right:8px;width:auto;padding:18px}.entry-welcome h2{font-size:23px}.menu-audio-status{font-size:9px;align-self:flex-start}}
+@media(prefers-reduced-motion:reduce){.tour-coach,.tour-ring,#tour-shades i,.entry-welcome{transition:none!important;animation:none!important}.tour-coach{scroll-behavior:auto}.entry-welcome{transform:none}}
+
+/* Conexiones: the shared railway, illustrated consequences, and visual track workshop. */
+#network-board{position:absolute;inset:0 0 0 0;z-index:1;color:#eef4ef;background:radial-gradient(ellipse at 40% 65%,#234946 0,transparent 55%),linear-gradient(155deg,#172b32,#14302c 80%);overflow:hidden}
+.board-heading{position:absolute;top:110px;left:95px;right:420px;pointer-events:none}
+.board-heading h2{font:600 clamp(20px,2.5vw,34px)/1.15 var(--serif);margin:7px 0}.board-heading p{color:#b8cec8;font-size:12px}
+.board-map{position:absolute;inset:195px 440px 150px 105px}.board-map svg{width:100%;height:100%;overflow:visible}.board-hit{cursor:pointer}.board-hit:hover{stroke:#ffffff30}
+.board-hub{position:absolute;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:5px;border:0;padding:7px;background:transparent;color:#ccd8cf;font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer;min-height:44px}
+.board-hub i{width:11px;height:11px;border-radius:50%;background:#23413e;border:2px solid #8aa59b;box-shadow:0 0 0 5px #183732}
+.board-hub.connected i{background:#f3e4be;border-color:#fff;box-shadow:0 0 0 5px #25483d}.board-hub:hover i,.board-hub:focus-visible i{box-shadow:0 0 0 8px #ffbd6570}
+.board-legend{position:absolute;left:95px;bottom:120px;display:flex;flex-wrap:wrap;gap:17px;font-size:11px;color:#b8cec8}.board-legend span{display:flex;align-items:center;gap:6px}.board-legend i{width:8px;height:8px;border-radius:50%}
+.board-train{animation:board-travel 8s linear infinite}@keyframes board-travel{to{stroke-dashoffset:-100}}
+.game-photo{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px}
+.game-event{overflow:hidden;border:1px solid #53625d;border-radius:14px;margin:0 0 20px;background:#24302d}.game-event>.game-photo{border-radius:0;max-height:260px}.game-event>div{padding:20px}.game-event h2{margin:8px 0 12px}.game-event p{font-size:14px;line-height:1.6}.game-event-options{display:grid;gap:9px}
+.game-challenges,.game-research,.game-news{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px 0}
+.game-challenges article,.game-research article,.game-news article{overflow:hidden;border:1px solid #45544e;border-radius:12px;background:#222d29;min-width:0}.game-challenges article>div,.game-research article>div,.game-news article>div{padding:15px}.game-challenges h3,.game-research h3,.game-news h3{margin:8px 0;font-size:16px}.game-challenges p,.game-research p,.game-news p{font-size:12px;line-height:1.55}.game-research .btn{display:block;margin-top:14px}.game-research .done{border-color:#78bf98}.game-lab{border-bottom:1px solid #46544e;padding-bottom:22px;margin-bottom:26px}.game-lab>h2{margin-top:9px}.game-megas .tenfe-phase{display:grid;grid-template-columns:1fr 1fr}.game-megas .tenfe-phase span{font-size:10px}.game-result{margin:20px 0}
+.entry-welcome>img{width:calc(100% + 40px);margin:-20px -20px 15px;max-height:150px;object-fit:cover;border-radius:12px 12px 0 0}
+.track-photo{background-image:var(--track-image);background-size:300% 300%;background-position:var(--track-column) var(--track-row);width:100%;aspect-ratio:3/2;background-repeat:no-repeat;border-radius:10px}
+.track-inspector-photo{margin:0 0 14px}.track-open{width:100%;margin-bottom:20px}.track-scene{position:relative;overflow:hidden;border-radius:12px;isolation:isolate}.track-scene .track-photo{border-radius:0;aspect-ratio:3/2}
+.track-proposal{position:absolute;inset:0;clip-path:inset(0 0 0 50%);animation:track-wipe .5s cubic-bezier(.22,.6,.25,1)}.track-yellow-bars{position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 20px,#ffe16938 20px 24px,transparent 24px 44px);animation:track-bars 2.4s linear infinite;pointer-events:none;border-left:3px solid #ffd86c}
+.track-badge,.track-current-label{position:absolute;bottom:14px;font-size:9px;font-weight:800;letter-spacing:.06em;background:#ffe079;color:#292720;padding:7px 10px;border-radius:5px}
+.track-badge{right:12px}.track-current-label{left:12px;background:#182621dc;color:#fff}
+.track-captions{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:15px 0}.track-captions small{display:block;color:#96b4a7;font-size:10px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}.track-captions strong{font-size:12px;line-height:1.6}
+.track-modal h1{font-size:25px}.track-options{border:0;padding:0;margin:19px 0}.track-options legend{font-size:11px;letter-spacing:.04em;margin-bottom:8px;color:#c5cfc5}
+.track-options>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.track-options button{border:1px solid #546259;padding:13px 9px;color:#dce8dc;background:#29352f;border-radius:8px;font-size:11px;font-weight:650;min-height:44px;cursor:pointer}.track-options button.selected{border-color:#ffe07a;background:#ffe07a;color:#22271e}
+.track-modal .figures{margin:20px 0}
+@keyframes track-bars{to{background-position:62px 0}}@keyframes track-wipe{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 50%)}}
+@media(max-width:1200px){.board-map{inset:195px 330px 150px 90px}.board-heading{right:340px}.board-hub{font-size:10px}}
+@media(max-width:760px){.board-heading{left:22px;right:22px;top:115px}.board-heading h2{font-size:22px}.board-map{inset:225px 35px 270px 35px}.board-legend{left:22px;right:22px;bottom:232px;gap:9px;font-size:9px}.board-hub{font-size:9px;padding:3px}.board-hub i{width:8px;height:8px}.board-hub span{max-width:75px;white-space:normal;text-align:center}.game-challenges,.game-research,.game-news{grid-template-columns:1fr}.track-options button{padding:11px 5px;font-size:10px}.track-badge,.track-current-label{font-size:7px;padding:6px}.track-captions{gap:10px}.track-captions strong{font-size:10px}.track-modal h1{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.track-yellow-bars,.track-proposal,.board-train{animation:none}}

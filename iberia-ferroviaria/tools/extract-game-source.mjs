@@ -26,14 +26,14 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   const read=file=>{const bytes=fs.readFileSync(path.join(dist,file));sources.push({file,bytes:bytes.length,sha256:sha(bytes)});return bytes.toString('utf8');};
   const baselineOrder=['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
     'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
-  const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'engine.js':['verdad.js','tenfe.js'],'train3d.js':['assets/train-photos.js'],'main-menu.js':['nueva-partida.js'],
-    'app.js':['partidas-anteriores.js','tenfe-ui.js']};
+  const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'engine.js':['verdad.js','rescate-data.js','conexiones.js','tenfe.js','track-preview.js'],'train3d.js':['assets/train-photos.js'],'main-menu.js':['nueva-partida.js'],
+    'app.js':['partidas-anteriores.js','conexiones-ui.js','tenfe-ui.js']};
   const order=baselineOrder.flatMap(file=>[...(optionalBefore[file]||[]).filter(extra=>fs.existsSync(path.join(dist,extra))),file]);
   function bundle(file){
     let text=file==='assets/voices.js'?'export const CLIPS = {};\n':file==='assets/voice-dialogues.js'?'export const DIALOGUES = __WEB_DIALOGUES__;\n':read(file);
     if(file==='main-menu.js'){
-      const anchor='<h2 id="menu-departures-title">¿Adónde vamos?</h2>';
-      text=replaceOne(text,anchor,anchor+'<p class="menu-preview-note" role="status">__WEB_PREVIEW_LABEL__ <a href="dialogos.html">Escuchar los diálogos</a></p>','menu preview placement');
+      const anchor='<footer class="menu-council">';
+      text=replaceOne(text,anchor,'<p class="menu-audio-status">__WEB_PREVIEW_LABEL__ · <a href="dialogos.html">Auditorio</a></p>'+anchor,'menu preview placement');
     }
     if(file==='app.js'){
       const anchor="onerror: () => { clear();toast('No se ha podido reproducir la voz. Puedes seguir leyendo el diálogo o volver a escucharlo.'); }";
@@ -64,7 +64,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   let css=read('style-v3.css')+'\n'+read('main-menu.css')+'\n'+read('induction.css');
   if(fs.existsSync(path.join(dist,'marketplace.css')))css+='\n'+read('marketplace.css');
   
-  css+='\n.menu-preview-note{padding:9px 12px;margin:10px 0 15px;border:1px solid #cda85d66;border-radius:8px;background:#f8e7ba;color:#493019;font-size:12px;line-height:1.5;}\n';
+
   const mime={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',svg:'image/svg+xml',woff2:'font/woff2'};
   css=css.replace(/url\('assets\/([^']+)'\)/g,(_,asset)=>{
     const bytes=fs.readFileSync(path.join(dist,'assets',asset));sources.push({file:'assets/'+asset,bytes:bytes.length,sha256:sha(bytes)});
