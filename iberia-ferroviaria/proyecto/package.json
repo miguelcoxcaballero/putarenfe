@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node build.mjs",
     "web:build": "node ../tools/build-web.mjs",
-    "test": "node rescate-test.mjs && node red-test.mjs && node marketplace-test.mjs && node test.mjs && node campaign-test.mjs && node tenfe-test.mjs",
+    "test": "node rescate-test.mjs && node red-test.mjs && node marketplace-test.mjs && node test.mjs && node campaign-test.mjs && node tenfe-test.mjs && node campaign-test.mjs --tenfe",
     "red-test": "node red-test.mjs",
     "red-ui": "node red-ui-test.mjs",
     "rescate-test": "node rescate-test.mjs",
@@ -26,6 +26,7 @@
     "voice-conversations": "node voice-conversation-ui-test.mjs",
     "voice-listening": "node voice-listening-ui-test.mjs",
     "tenfe-test": "node tenfe-test.mjs",
-    "tenfe-ui": "node tenfe-ui-test.mjs"
+    "tenfe-ui": "node tenfe-ui-test.mjs",
+    "tenfe-campaign": "node campaign-test.mjs --tenfe"
   }
 }
