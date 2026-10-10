@@ -1392,7 +1392,7 @@ document.addEventListener('click', event => {
     case 'close-inspector': inspect = null; map.selected = null; map.selectedTrain = null; map.follow = false; renderInspector(); break;
     case 'close-modal': closeModal();if(menuOpen||!state.started)intro();break;
     case 'np-difficulty': np.difficulty=id;drawNewGame('[data-action="np-difficulty"][data-id="'+id+'"]');break;
-    case 'tenfe-next': {const next=U.nextAction(state);if(next.action==='tenfe-decision')showDecision();else if(next.action==='claim')act(()=>E.claimChapter(state),'Financiación recibida.');else if(next.action==='route')selectRoute(next.id);else if(next.action==='tycoon-tab'){ui.tycoonTab=next.id;ui.progressTab=next.id;screen=next.id==='research'?'progress':'story';render();}else if(next.action==='tenfe-tab'){ui.progressTab=next.id;screen='progress';render();}else navigate(next.screen);break;}
+    case 'tenfe-next': {if($('modal').open)closeModal();const next=U.nextAction(state);if(next.action==='tenfe-decision')showDecision();else if(next.action==='claim')act(()=>E.claimChapter(state),'Financiación recibida.');else if(next.action==='route')selectRoute(next.id);else if(next.action==='tycoon-tab'){ui.tycoonTab=next.id;ui.progressTab=next.id;screen=next.id==='research'?'progress':'story';render();}else if(next.action==='tenfe-tab'){ui.progressTab=next.id;screen='progress';render();}else navigate(next.screen);break;}
     case 'tenfe-decision': showDecision();break;
     case 'tenfe-pact': act(()=>U.signPact(state,id),'Pacto firmado. Cumple los requisitos antes del plazo.');break;
     case 'tenfe-mega': act(()=>U.startMega(state,id),'Fase encargada. Puedes gestionar tu red mientras avanza.');break;
@@ -1404,7 +1404,7 @@ document.addEventListener('click', event => {
     case 'progress-tab': ui.progressTab=id;renderDrawer(true);break;
     case 'press-tab': ui.pressTab=id;renderDrawer(true);break;
     case 'tenfe-notice': U.dismiss(state,id);autosave();closeModal();showTenfeUpdate(true);break;
-    case 'month-report': closeModal();ui.pressTab='reports';navigate('press');break;
+    case 'month-report': closeModal();ui.pressTab='reports';if(screen==='press')screen=null;navigate('press');break;
     case 'legacy-preview': showLegacy();break;
     case 'legacy-convert': {const old=legacySave();if(!old)break;try{const converted=convertLegacy(old);state=converted;O.ensureOps(state);saved=state;menuOpen=false;np=null;tut=null;voices.stop();resetSessionView();closeModal();netKey=networkKey();map.dirty=true;autosave();render();toast('Partida recuperada. El original sigue guardado.');}catch(e){toast(e.message);}break;}
     case 'legacy-export': {const raw=state.tenfe?.legacy?.raw||legacySave();if(!raw)break;const url=URL.createObjectURL(new Blob([JSON.stringify(raw,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='Tenfe-Rescate-original.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);break;}

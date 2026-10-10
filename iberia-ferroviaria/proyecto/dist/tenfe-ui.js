@@ -9,7 +9,7 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
   const button=(label,action,id='',disabled=false,extra='')=>`<button class="btn small" data-action="${action}" data-id="${esc(id)}" ${disabled?'disabled':''} ${extra}>${esc(label)}</button>`;
   export function nextHTML(s) {
     const n=U.nextAction(s);
-    return `<div class="tenfe-next"><span>Siguiente</span>${button(n.label,n.action,n.id,false,n.screen?`data-screen="${n.screen}"`:'')}</div>`;
+    return `<div class="tenfe-next"><span>Siguiente</span>${button(n.label,'tenfe-next')}</div>`;
   }
   export function missionHTML(s) {
     const m=U.mission(s);
