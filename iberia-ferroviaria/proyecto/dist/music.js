@@ -1148,7 +1148,7 @@ export class Soundtrack {
     if (this.needsRestart) this.rebuildOutput();
     const ctx = this.init(); if (!ctx) return null;
     // Mobile browsers require a source during the gesture, before downloads.
-    if (this.unlockedContext !== ctx) {
+    if (this.unlockedContext !== ctx || ctx.state !== 'running') {
       try {
         const source = ctx.createBufferSource();
         source.buffer = ctx.createBuffer(1, 1, ctx.sampleRate);

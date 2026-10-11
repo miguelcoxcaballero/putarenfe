@@ -130,6 +130,7 @@ try{
    await page.locator('[data-action="close-modal"]').click();await gameReady(page);
    assert.equal(await page.evaluate(()=>window.__oldCtx!==window.railwayGame.music.ctx),true);
    assert.equal(await page.evaluate(()=>window.railwayGame.sfx.ctx===window.railwayGame.music.ctx),true);
+   assert.equal(await page.evaluate(()=>document.getElementById('modal').open),false,'el clic para cerrar sobrevive a la reconexión');
    await capture(page,'musica-tras-salida-cerrada');
    await page.evaluate(()=>{const ctx=window.railwayGame.music.ctx,t=ctx.currentTime;Object.defineProperty(ctx,'currentTime',{get:()=>t});});
    await page.locator('#musicBtn').click();await page.waitForTimeout(2200);

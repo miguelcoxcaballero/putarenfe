@@ -97,3 +97,5 @@ dialog#modal:has(.main-menu-shell)::backdrop{background:#111c26;backdrop-filter:
 
 .menu-audio-toggle{font:inherit;color:inherit;background:transparent;border:1px solid #ffffff42;border-radius:4px;padding:6px 10px;cursor:pointer}
 .menu-audio-toggle:hover,.menu-audio-toggle:focus-visible{background:#ffffff16;border-color:#ffffff85}
+
+.track:not(.on) .eq i,.track.on .eq .eq-play{display:none}

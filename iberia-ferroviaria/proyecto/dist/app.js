@@ -170,7 +170,14 @@ function renderMusicButton() {
   b.innerHTML = `${icon('music')}<span>${music.enabled ? 'Música' : 'Silencio'}</span>`;
   b.title = music.current ? `${music.ctx?.state === 'running' && music.current.ready ? 'Sonando' : 'Preparando sonido'}: ${music.current.song.title}` : music.enabled ? 'Banda sonora' : 'Música apagada';
   b.classList.toggle('on', !!music.current);
-  if ($('modal').open && $('modal').querySelector('.tracks') && !['musicVolume','voiceVolume','sfxVolume'].includes(document.activeElement?.id)) musicDialog(true);
+  // Keep the controls themselves stable while pointer/key activation resumes audio.
+  // Replacing the modal during pointerdown loses the subsequent click.
+  $('modal').querySelectorAll('.tracks [data-action="music-play"]').forEach(el => {
+    el.classList.toggle('on', el.dataset.id === music.current?.song.id);
+  });
+  const toggle = $('modal').querySelector('[data-action="music-toggle"]');
+  if (toggle) { toggle.textContent = music.enabled ? 'Apagar música' : 'Encender música'; toggle.classList.toggle('primary', !music.enabled); }
+  const next = $('modal').querySelector('[data-action="music-next"]'); if (next) next.disabled = !music.enabled;
 }
 music.on(renderMusicButton);
 function unlockGameAudio(event) {
@@ -194,7 +201,7 @@ function musicDialog(refresh = false) {
   const libraryOpen=!!$('modal').querySelector('.menu-music-library[open]');
   const focusAction=refresh?document.activeElement?.dataset?.action:null;
   const cur = music.current?.song.id;
-  const list = fam => SONGS.filter(x => x.family === fam).map(x => `<button class="track ${x.id === cur ? 'on' : ''}" data-action="music-play" data-id="${x.id}"><span class="no">${String(SONGS.indexOf(x) + 1).padStart(2, '0')}</span><span><b>${esc(x.title)}</b><em>${STYLE_LABEL[x.style]} · ${x.bpm} ppm${x.mood === 'night' ? ' · noche' : ''}</em></span><span class="eq">${x.id === cur ? '<i></i><i></i><i></i>' : '▶'}</span></button>`).join('');
+  const list = fam => SONGS.filter(x => x.family === fam).map(x => `<button class="track ${x.id === cur ? 'on' : ''}" data-action="music-play" data-id="${x.id}"><span class="no">${String(SONGS.indexOf(x) + 1).padStart(2, '0')}</span><span><b>${esc(x.title)}</b><em>${STYLE_LABEL[x.style]} · ${x.bpm} ppm${x.mood === 'night' ? ' · noche' : ''}</em></span><span class="eq"><i></i><i></i><i></i><span class="eq-play">▶</span></span></button>`).join('');
   const html = `<div class="content"><div class="kicker">${menuOpen?'Sonido':'Banda sonora'}</div><h1>${menuOpen?'Opciones':'Música de Iberia Ferroviaria'}</h1>
   ${menuOpen?`<details class="menu-music-library" ${libraryOpen?'open':''}><summary>Banda sonora</summary>`:''}<div class="tracks"><h3>${FAMILY_LABEL.estacion}</h3>${list('estacion')}<h3>${FAMILY_LABEL.red}</h3>${list('red')}</div>${menuOpen?'</details>':''}
   <div class="toolbar"><button class="btn ${music.enabled ? '' : 'primary'}" data-action="music-toggle">${music.enabled ? 'Apagar música' : 'Encender música'}</button><button class="btn" data-action="music-next" ${music.enabled ? '' : 'disabled'}>Siguiente pieza</button>
