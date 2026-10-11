@@ -1,3 +1,4 @@
+import * as N from './narration-runtime.js';
 import * as J from './conexiones.js';
 import * as JUI from './conexiones-ui.js';
 import * as Tracks from './track-preview.js';
@@ -130,6 +131,8 @@ function musicMood() {
 }
 const music = new Soundtrack(musicMood);
 const voices = new Voices(music);
+const narrator = new N.Narrator(voices,{getState:()=>state});
+let messageAction='';
 const sfx = new Sfx(music);
 // ------------------------------------------------------------ voces de los personajes
 /** Texto con cada frase en su propio span, para el subtítulo resaltado mientras se lee. */
@@ -137,7 +140,7 @@ function sayHtml(text, person) { return dialogueHtml(text, person); }
 function sayLabel(where) { return voices.speaking?.where === where ? 'Detener voz' : 'Escuchar diálogo'; }
 function sayButton(person, where) { const active = voices.speaking?.where === where, label = sayLabel(where); return `<button class="say-btn" data-action="say" data-person="${person}" data-where="${where}" aria-label="${label}" title="${label}" aria-pressed="${active}">${active ? glyph('stopsq') : glyph('speaker')}</button>`; }
 function syncSayButtons() {
-  document.querySelectorAll('.say-btn').forEach(button => {
+  document.querySelectorAll('.say-btn:not(.narration-control)').forEach(button => {
     const active = voices.speaking?.where === button.dataset.where, label = sayLabel(button.dataset.where);
     button.title = label; button.setAttribute('aria-label', label); button.setAttribute('aria-pressed', String(active));
     if (button.dataset.sayText !== undefined) button.textContent = label;
@@ -199,14 +202,14 @@ function musicDialog(refresh = false) {
 }
 
 // ------------------------------------------------------------ utilidades de UI
-function toast(text) { $('toast').textContent = text; $('toast').classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 4200); }
+function toast(text,options={}) { return narrator.toast(text,{action:messageAction,...options}); }
 function autosave(announce = false) {
   try { state.savedAt = Date.now(); localStorage.setItem(KEY, JSON.stringify(state)); saved = state; if (announce) toast('Partida guardada en este navegador.'); return true; }
   catch { if (announce) toast('El navegador no permite guardar aquí. Exporta la partida.'); return false; }
 }
 function act(fn, message) {
   try { fn(); if (message) toast(message); netKey = networkKey(); map.dirty = true; afterCityAction(); autosave(); render(); sfx.result(true); return true; }
-  catch (error) { toast(error.message); sfx.result(false); return false; }
+  catch (error) { toast(error.message,{error:true}); sfx.result(false); return false; }
 }
 /** Efecto de sonido de cada botón (ver ACTIONS en sfx.js): al pulsar, al salir bien la acción o según el estado. */
 const hashOf = x => [...String(x)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
@@ -433,6 +436,7 @@ const TOUR_STEPS = [
 ];
 let tut = null, inductionModalKey = '', adviceLine = null, tutorialDraft = null, tourGeometry = '';
 function clearCoach(){
+ narrator.cancel('guide');
  $('coach')?.remove();$('spot')?.remove();$('tour-shades')?.remove();
  document.querySelectorAll('.tour-target,.tour-dialog').forEach(el=>el.classList.remove('tour-target','tour-dialog'));
  for(const el of $('game').children)el.inert=false;
@@ -541,9 +545,11 @@ function renderCoach(){
   const focus=document.activeElement===coach.querySelector('[data-action="tutorial-next"]');
   coach.dataset.key=key;coach.dataset.stepId=stage.id;
   const text=stage.id==='day'?(state.ops.phase==='review'?'Este es el parte real del día. Revisa qué pasó y pulsa «Siguiente jornada» para preparar el próximo turno.':state.ops.phase==='running'?(tut.marks.includes('incident-resolved')?'La respuesta ya está aplicada. Pulsa «Hasta el último tren» para comprobar cómo terminó la jornada.':'Esta es una incidencia de tu jornada. Compara las respuestas y decide cuánto invertir en resolverla.'):stage.text):stage.text;
-  coach.innerHTML=`<header><img src="${faceURL(stage.person,'happy')}" alt="" width="40" height="48"><div><span class="kicker">${tut.step===0?'Tu primer turno':'Guía · '+(tut.step+1)+' / '+TOUR_STEPS.length}</span><strong>${esc(CHARACTERS[stage.person].name)}</strong></div><button class="tour-pause" data-action="tutorial-skip" aria-label="Pausar guía">×</button></header><h2>${esc(stage.title)}</h2><p>${esc(text)}</p><footer><span>${ready?'Listo para seguir':'Hazlo en el panel marcado'}</span><button class="btn primary small" data-action="tutorial-next" ${ready?'':'disabled'}>${esc(stage.next)} →</button></footer>`;
+  coach.innerHTML=`<header><img class="portrait" src="${faceURL(stage.person,'happy')}" alt="" width="40" height="48"><div><span class="kicker">${tut.step===0?'Tu primer turno':'Guía · '+(tut.step+1)+' / '+TOUR_STEPS.length}</span><strong>${esc(CHARACTERS[stage.person].name)}</strong></div>${N.controls(N.keyForText(text))}<button class="tour-pause" data-action="tutorial-skip" aria-label="Pausar guía">×</button></header><h2>${esc(stage.title)}</h2><p data-say="${esc(text)}">${N.speechHTML(N.keyForText(text))}</p><footer><span>${ready?'Listo para seguir':'Hazlo en el panel marcado'}</span><button class="btn primary small" data-action="tutorial-next" ${ready?'':'disabled'}>${esc(stage.next)} →</button></footer>`;
   if(focus)coach.querySelector('[data-action="tutorial-next"]')?.focus({preventScroll:true});
  }
+ const guideText=coach.querySelector('[data-say]').dataset.say;
+ narrator.guide(N.keyForText(guideText),coach,'guide:'+state.seedCode+':'+N.keyForText(guideText));
  positionTour();
 }
 
@@ -625,6 +631,7 @@ function checkIncidents() {
   }
 }
 function showAlert(x, rr) {
+  if(!screen)narrator.toast(x.reason+(x.place?' · '+x.place:''),{key:x.type==='surge'?'surge-alert':'incident-alert'});
   const r = rr || state.routes.find(r => r.id === x.route);
   if(screen){
     document.querySelector('.alert-pill')?.remove();renderNav();
@@ -656,6 +663,7 @@ function render() {
   renderHud(); renderNav(); renderMission(); renderLegend(); renderDaybar();
   if (screen) renderDrawer(); else $('drawer').classList.add('hidden');
   renderInspector();renderBoard();renderCoach();
+  narrator.updates(state,{skip:menuOpen||!!tut});narrator.sync();
 }
 function renderBoard(){
  // The geographic canvas is the playable map in every layer.
@@ -807,6 +815,7 @@ function renderDrawer(resetScroll = false) {
   if (screen === 'finance') drawChart();
   syncSayButtons();
   councilVoice();
+  narrator.events(el,state.seedCode+'#'+state.month);narrator.sync();
 }
 
 function boardRows(trips, minute, opts = {}) {
@@ -1021,7 +1030,7 @@ function storyPage() {
 }
 
 function archivePage() {
-  const body = state.log.length ? state.log.map(l => `<div class="news"><time>${when(l.month)}</time><div><h3>${esc(l.title)}</h3><p>${esc(l.body)}</p></div></div>`).join('') : '<div class="empty">Todavía no ha pasado nada digno de mención.</div>';
+  const body = state.log.length ? state.log.map(l => `<div class="news"><time>${when(l.month)}</time><div><h3>${esc(l.title)}</h3>${N.card(N.keyForText(l.body)||N.newsKey(l),{details:l.body})}</div></div>`).join('') : '<div class="empty">Todavía no ha pasado nada digno de mención.</div>';
   return [header('Diario', 'Lo que ha pasado en tu mandato.'), body];
 }
 
@@ -1198,8 +1207,8 @@ function nodeInspector() {
 }
 
 // ------------------------------------------------------------ ventanas modales
-function showModal(html, cls = '') { pause(); const was = $('modal').open; $('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons(); if(cls==='main-menu-shell')$('modal').querySelector('[autofocus]')?.focus();sfx.play(was ? 'page' : 'open'); }
-function closeModal() { if ($('modal').open) $('modal').close(); }
+function showModal(html, cls = '') { pause(); const was = $('modal').open;narrator.releaseModalToasts();$('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons();narrator.modal($('modal'),{fresh:!was}); if(cls==='main-menu-shell')$('modal').querySelector('[autofocus]')?.focus();sfx.play(was ? 'page' : 'open'); }
+function closeModal() { narrator.releaseModalToasts();narrator.cancel('modal');narrator.cancel('modal-toast');if ($('modal').open) $('modal').close(); }
 /** Rescate de Tenfe: modo propio con su mapa, su interfaz y su guardado; al salir vuelve a esta portada. */
 
 $('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.menu-subscreen')){event.preventDefault();intro();}else if($('modal').querySelector('.np-screen')){event.preventDefault();sfx.play('drawerClose');npBack();}else if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
@@ -1216,10 +1225,10 @@ $('modal').addEventListener('keydown',event=>{
   event.preventDefault();const ids=STARTS.map(start=>start.id),id=ids[(ids.indexOf(np.pick)+step+ids.length)%ids.length];
   sfx.play('tab');np.pick=id;np.confirm=null;drawNewGame(`[data-action="np-pick"][data-id="${id}"]`);
 });
-$('modal').addEventListener('close', () => { if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
+$('modal').addEventListener('close', () => { narrator.releaseModalToasts();narrator.cancel('modal');narrator.cancel('modal-toast');if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
 // Chromium cierra el diálogo con un segundo Esc seguido aunque el primero se haya cancelado: la portada no desaparece.
 $('modal').addEventListener('close', () => { if ($('modal').open) return; if (menuOpen) intro(); else if (np) { np = null; render(); } });
-function menuChrome() { $('entry-welcome')?.remove(); if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }
+function menuChrome() { narrator.reset(); $('entry-welcome')?.remove(); if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }
 function redPage(){
   const tabs=[['routes','Servicios'],['ops','Jornada'],['works','Obras'],['timetables','Horarios'],['rivals','Competencia']];
   const page=ui.netView==='ops'?opsPage():ui.netView==='works'?worksPage():ui.netView==='timetables'?timetablesPage():ui.netView==='rivals'?['',tycoonPage(state,'market').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'')]:networkPage();
@@ -1239,7 +1248,7 @@ function progressPage(){
 }
 function pressPage(){
   const tabs=[['paper','Gaceta'],['journal','Diario'],['reports','Informes']];
-  const body=ui.pressTab==='paper'&&state.tenfe?.game?JUI.newsHTML(state):ui.pressTab==='journal'?archivePage()[1]:ui.pressTab==='reports'?(state.tenfe.reports.map(r=>`<section class="tenfe-report">${TenfeUI.reportHTML(state,r)}</section>`).join('')||TenfeUI.reportHTML(state)):tycoonPage(state,'paper').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
+  const body=ui.pressTab==='paper'&&state.tenfe?.game?JUI.newsHTML(state):ui.pressTab==='journal'?archivePage()[1]:ui.pressTab==='reports'?(N.card('turn-report')+state.tenfe.reports.map(r=>`<section class="tenfe-report">${TenfeUI.reportHTML(state,r)}</section>`).join('')||TenfeUI.reportHTML(state)):tycoonPage(state,'paper').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
   return [header('Lo que ocurrió en tu red','Prensa'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="press-tab" data-id="${id}" class="${ui.pressTab===id?'active':''}">${label}</button>`).join('')}</div>`+body];
 }
 function showTenfeUpdate(report=false){
@@ -1258,11 +1267,11 @@ function showLegacy(){
 }
 
 function showWelcome(resume=false){
- $('entry-welcome')?.remove();
+ narrator.cancel('welcome');$('entry-welcome')?.remove();
  if(tut||menuOpen||!state.started)return;
  const el=document.createElement('section');el.id='entry-welcome';el.className='entry-welcome';el.setAttribute('aria-label',resume?'De nuevo al mando':'Bienvenido a Tenfe');
- el.innerHTML=`${state.tenfe?.game?'<img src="assets/rescate/portada-rescate.webp" alt="" width="480" height="270">':''}<span class="kicker">${resume?esc(state.tenfe?.game?'Turno '+J.turn(state):O.dayLabel(state)):'Bienvenido a Conexiones'}</span><h2>${resume?'De nuevo al mando.':'Un país por conectar.'}</h2><p>${resume?'Tu red, tus trenes y tus compromisos siguen aquí. Revisa el objetivo y elige tu próxima jugada.':'Recibes una red a medio gas. Conecta ciudades, decide qué promesas cumplir y haz que cada tren merezca el viaje. Cinco retos y dos mandatos: elige tu primera jugada.'}</p><button class="btn primary small" data-action="welcome-close">${resume?'Volver a mi red':'Vamos a dirigir'} →</button>`;
- $('game').appendChild(el);requestAnimationFrame(()=>el.classList.add('visible'));
+ el.innerHTML=`${state.tenfe?.game?'<img src="assets/rescate/portada-rescate.webp" alt="" width="480" height="270">':''}<span class="kicker">${resume?esc(state.tenfe?.game?'Turno '+J.turn(state):O.dayLabel(state)):'Bienvenido a Conexiones'}</span><h2>${resume?'De nuevo al mando.':'Un país por conectar.'}</h2>${N.header(resume?'welcome-resume':'welcome')}<p data-say="${esc(N.message(resume?'welcome-resume':'welcome').text)}">${N.speechHTML(resume?'welcome-resume':'welcome')}</p><button class="btn primary small" data-action="welcome-close">${resume?'Volver a mi red':'Vamos a dirigir'} →</button>`;
+ $('game').appendChild(el);narrator.welcome(resume?'welcome-resume':'welcome',el);requestAnimationFrame(()=>el.classList.add('visible'));
 }
 const heardCouncil=new Set();
 function councilVoice(){
@@ -1281,6 +1290,7 @@ function deskDecisionHTML(){
 
 function intro() { menuChrome();np=null;showModal(menuHTML(saved,savedError,rescueSaveSummary()),'main-menu-shell');$('modal').querySelector('[autofocus]')?.focus(); }
 function resetSessionView(){
+ narrator.reset();
  tutorialChrome();heardCouncil.clear();adviceLine=null;tutorialDraft=null;clearCoach();$('entry-welcome')?.remove();inductionModalKey='';screen=null;inspect=null;playing=false;linePicking=null;seenIncidents=new Set();document.querySelector('.alert-pill')?.remove();clearTimeout(alertTimer);
  ui.market=freshMarketFilters();
  map.selected=null;map.selectedCity=null;map.selectedTrain=null;map.selectedTramo=null;map.follow=false;map.reset();setLayer('network');resetToday();
@@ -1456,17 +1466,19 @@ document.addEventListener('click', event => {
   const b = event.target.closest('[data-action]');
   if (!b || b.disabled) return;
   const a = b.dataset.action, id = b.dataset.id;
-  clickSound(a, b);
-  if(a!=='welcome-close')$('entry-welcome')?.remove();
+  messageAction=a;clickSound(a, b);
+  if(!['welcome-close','narration-replay','narration-dismiss'].includes(a)){narrator.cancel('welcome');$('entry-welcome')?.remove();}
   if(tut&&a==='skip-month'){toast('Termina el primer turno o páusalo antes de delegar el mes.');return;}
   if(tut&&a==='day-end'&&TOUR_STEPS[tut.step].id==='day'&&!tut.marks.includes('incident-resolved')){toast('Atiende la avería antes de cerrar esta jornada de iniciación.');return;}
   switch (a) {
+    case 'narration-replay': narrator.replay(b);break;
+    case 'narration-dismiss': narrator.dismiss(b);break;
     case 'game-event': act(()=>J.decide(state,id,+b.dataset.choice),'Decisión aplicada a tu compañía.');break;
     case 'game-research': act(()=>J.research(state,id),'Investigación financiada.');break;
     case 'track-select': {trackChoice={...trackChoice,[b.dataset.key]:b.dataset.key==='lanes'?+b.dataset.value:b.dataset.value};trackDialog(trackTarget,trackChoice);break;}
     case 'track-designer': trackChoice=null;trackDialog(id);break;
     case 'track-confirm': if(act(()=>Tracks.start(state,E,trackTarget,trackChoice),'Mejora adjudicada.'))closeModal();break;
-    case 'welcome-close': $('entry-welcome')?.remove();break;
+    case 'welcome-close': narrator.cancel('welcome');$('entry-welcome')?.remove();break;
     case 'tycoon-tab': if(id!=='agenda'&&voices.speaking?.where==='council')voices.stop();ui.tycoonTab=id;{if(id==='research'){screen='progress';ui.progressTab='research';}else if(id==='paper'){screen='press';ui.pressTab='paper';}else if(id==='market'){screen='network';ui.netView='rivals';}else screen='story';ui.officeTab='tycoon';inspect=null;renderNav();renderMission();renderInspector();}renderDrawer(true);tutorialMark(id);break;
     case 'tycoon-policy': {const active=state.tycoon.policies.includes(id);act(()=>T.setPolicy(state,id),`${T.POLICIES[id].name}: política ${active?'desactivada':'activada'}.`);break;}
     case 'tycoon-hire': act(()=>T.hire(state,20),`20 maquinistas en formación. Se incorporan en ${when(state.month+3)}.`);break;
@@ -1648,7 +1660,7 @@ document.addEventListener('change', async event => {
   if (t.id === 'maintenance') act(() => { E.ensurePlaying(state); state.maintenance = E.clamp(+t.value, .6, 1.5); });
   if (t.id === 'importSave' && t.files[0]) {
     try { if (t.files[0].size > 6e6) throw Error('El archivo es demasiado grande.'); const imported=JSON.parse(await t.files[0].text());state=imported?.v===1?convertLegacy(imported):E.validateSave(imported);U.begin(state,{rules:'conexiones'});O.ensureOps(state); state.started = true; autosave(); sfx.play('confirm'); closeModal(); inspect = null; screen = null; netKey = networkKey(); map.dirty = true; render(); toast('Partida importada.');menuOpen=false;tut=null;voices.stop();resetSessionView();render();if(state.tutorial&&!state.tutorial.done&&!state.tutorial.suspended)startTutorial();else showWelcome(true); }
-    catch (e) { sfx.play('error'); const box=$('menu-import-error');if(box){box.textContent='No se pudo importar: '+e.message;box.hidden=false;}else toast('No se pudo importar: ' + e.message); }
+    catch (e) { sfx.play('error'); const box=$('menu-import-error');if(box){box.innerHTML=N.card('error-save',{details:'No se pudo importar: '+e.message});box.hidden=false;narrator.enqueue('error-save',{where:'modal',root:box,visible:()=>box.isConnected,priority:80});}else toast('No se pudo importar: ' + e.message); }
   }
 });
 document.addEventListener('pointerdown', event => {
@@ -1678,7 +1690,7 @@ document.addEventListener('keydown', event => {
 $('modal').addEventListener('cancel', event => { if (E.pendingDecision(state) || !state.started) event.preventDefault(); });
 
 // API de lectura para verificación automatizada y accesibilidad.
-window.railwayGame = {music, voices, sfx, snapshot: () => JSON.parse(JSON.stringify(state)), engine: E, unified: U, campaign: J, operations: O, schedule: S, map, navigate, setLayer, selectRoute,
+window.railwayGame = {music, voices, narrator, sfx, snapshot: () => JSON.parse(JSON.stringify(state)), engine: E, unified: U, campaign: J, operations: O, schedule: S, map, navigate, setLayer, selectRoute,
   plan: () => plan().map(t => ({id: t.id, route: t.route, dep: t.dep, arrival: t.arrival, delay: t.delay, real: t.real})), minute: currentMinute, play, pause, finishDay,
   state: () => state, render, pick, setMinute: m => { if (layer === 'real') observerMinute = m; else if (state.ops.phase === 'running') state.ops.minute = m; else observerMinute = m; render(); }};
 

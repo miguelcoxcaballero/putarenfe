@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "6.4.0",
+  "version": "6.5.0",
   "status": "complete-catalogue",
   "availableWholeDialogues": 412,
   "expectedWholeDialogues": 412,
@@ -18,13 +18,13 @@
   "webPlayback": "whole unchanged MP3 downloaded on demand; one source at original rate and pitch",
   "game": {
     "url": "index.html",
-    "bytes": 38615,
-    "sha256": "50d828c4ac46f858492c1e804a154947b0036fb110b452e308784a9378646f32"
+    "bytes": 38616,
+    "sha256": "cb26e58b52d997e5fa9c21ec57c69548f5d752882b47277fb8adc247a71c9605"
   },
   "listening": {
     "url": "dialogos.html",
-    "bytes": 298216,
-    "sha256": "a8829c04594266de630e656266450a22b8bb49c83481d4ee62e775f7c1ebb2ba"
+    "bytes": 356421,
+    "sha256": "d4a1df076b891df2d7865b2ba6099ad3e099c11cbc92705980ad48aae5342097"
   },
   "trainWorkshop": {
     "models": 14,
@@ -67,6 +67,1284 @@
     "photos": 63,
     "recordedDialogues": 3,
     "expectedDialogues": 70
+  },
+  "narration": {
+    "messages": 126,
+    "aliases": 132,
+    "characters": [
+      "treasury",
+      "minister",
+      "workshop",
+      "president",
+      "successor",
+      "riders",
+      "mayor",
+      "adif",
+      "rival"
+    ],
+    "recordings": [
+      {
+        "id": "105womj",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/105womj-b6522566a02b.mp3",
+        "bytes": 92685,
+        "sha256": "b6522566a02bb068c0ac08204b3109e10618086441a084009644668c63c843d4",
+        "duration": 4.608,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "108jvvt",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/108jvvt-ce9377911ba0.mp3",
+        "bytes": 86445,
+        "sha256": "ce9377911ba0cf857b419e464e524e7457c9be51d2c0fa8966d064d6addaa2c0",
+        "duration": 4.296,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "10etk1",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/10etk1-138203fcd8d3.mp3",
+        "bytes": 118605,
+        "sha256": "138203fcd8d360aed4d1e42c8e11cf2cb1a9bdfa1f5ac51f31cef52d41b3e06a",
+        "duration": 5.904,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "10lg3qz",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/10lg3qz-d5fce156b9df.mp3",
+        "bytes": 38445,
+        "sha256": "d5fce156b9dfe226c7894f9683e8e67cd248bcf5bb7f55cbc5a00fb54ba1c9a0",
+        "duration": 1.896,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "10mafk8",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/10mafk8-1ad9c9cb11f7.mp3",
+        "bytes": 38445,
+        "sha256": "1ad9c9cb11f7af177d138420dc5d1672dab287d35b70a5484efcdcb3ee96412d",
+        "duration": 1.896,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "10tdlbm",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/10tdlbm-12ca9337f96f.mp3",
+        "bytes": 121485,
+        "sha256": "12ca9337f96fdf4a9aaa7d9c91e8d1eb9917aa8b8b26f168828f2061d6561f57",
+        "duration": 6.048,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "10zql86",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/10zql86-e7225731a0ce.mp3",
+        "bytes": 73485,
+        "sha256": "e7225731a0ce02715487509d90269aff4774d7aeaf9467ae60925d89a00e1922",
+        "duration": 3.648,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "11nyrqf",
+        "person": "successor",
+        "kind": "character-narration",
+        "url": "assets/narracion/11nyrqf-ba7e55f97267.mp3",
+        "bytes": 75405,
+        "sha256": "ba7e55f972677bcf9817ebf0c500435c291b48af4ee6acdadfa23fe49fdab0c4",
+        "duration": 3.744,
+        "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+      },
+      {
+        "id": "13xiw39",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/13xiw39-1388ce9701cb.mp3",
+        "bytes": 75405,
+        "sha256": "1388ce9701cbb367fd25f0faef3006467f7054d0ae8327954ec6a8eb2cfa2a0a",
+        "duration": 3.744,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "1483vae",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1483vae-cf14b41d2e73.mp3",
+        "bytes": 163245,
+        "sha256": "cf14b41d2e730ca238abe321c9b3d2244e0ad1332812b841a6fe5ba60d4d8bc2",
+        "duration": 8.136,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "15v4kyi",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/15v4kyi-a0dabec476df.mp3",
+        "bytes": 238605,
+        "sha256": "a0dabec476df196f56836a5bc20a01f932f313070336cc40cd8e5dffb3137811",
+        "duration": 11.904,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "16esy5d",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/16esy5d-8681d987a707.mp3",
+        "bytes": 52845,
+        "sha256": "8681d987a707ececfabd0d8bdd9ba2fd43bdfb1620de73c7843012bc032c1a84",
+        "duration": 2.616,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "16kbrlp",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/16kbrlp-0b97cf992198.mp3",
+        "bytes": 118605,
+        "sha256": "0b97cf9921981ef094dab477b31ff325757c89455fdfd8ac897e86a608389594",
+        "duration": 5.904,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "172w67w",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/172w67w-92daedd27073.mp3",
+        "bytes": 22605,
+        "sha256": "92daedd27073e7656466e2ce6d1a7b51d223dfa7df4c788bae8f56f2864fa978",
+        "duration": 1.104,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "17moyt9",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/17moyt9-507755ee8af2.mp3",
+        "bytes": 153645,
+        "sha256": "507755ee8af25f94508284b01fc8b80f5afc52a078ca07c46c1dae1fa8ff1289",
+        "duration": 7.656,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "17zoeay",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/17zoeay-70944fea5f16.mp3",
+        "bytes": 131085,
+        "sha256": "70944fea5f16b624efff0418719ff8ecd497a845df841f5030eaa06d65aaecce",
+        "duration": 6.528,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "183rirt",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/183rirt-1e6d0a0720ef.mp3",
+        "bytes": 207885,
+        "sha256": "1e6d0a0720ef42d315c43c027ab4a2589f73cbe908013c8819e7041d53dfa404",
+        "duration": 10.368,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "189i77z",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/189i77z-130dd4504b3d.mp3",
+        "bytes": 67245,
+        "sha256": "130dd4504b3d1bdc153cab9890edcee5c7e9bf63493b612d065c2e020f293ac4",
+        "duration": 3.336,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "18gbjqp",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/18gbjqp-6b92a3f43582.mp3",
+        "bytes": 123405,
+        "sha256": "6b92a3f43582d7181c4f6d2656e87891bd9ed04d43d7d07d42e9eb29ee696fa4",
+        "duration": 6.144,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "19rkr6e",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/19rkr6e-b72d47e9ae93.mp3",
+        "bytes": 116685,
+        "sha256": "b72d47e9ae93ce5b51eeb36a902854bd1a46c0c785aa037ba4dd23d13536e963",
+        "duration": 5.808,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1a4635k",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/1a4635k-5a3791dbe22f.mp3",
+        "bytes": 168045,
+        "sha256": "5a3791dbe22f3cc0b7f933865f1a3385029e256d1e3cdb46d7b495225a1f417f",
+        "duration": 8.376,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "1aqdpp",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/1aqdpp-c512b9a28141.mp3",
+        "bytes": 118605,
+        "sha256": "c512b9a281417b69a0ace127e816f4a014274a58c3f3b89452ce7371e336dfbe",
+        "duration": 5.904,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "1ay1154",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1ay1154-df63e8410f4c.mp3",
+        "bytes": 35085,
+        "sha256": "df63e8410f4c0d5c4ef3f8a3c91212c4fc0f6200a25a442ed975c2369e627e16",
+        "duration": 1.728,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1bavpbn",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/1bavpbn-7c90a5cc2a63.mp3",
+        "bytes": 195405,
+        "sha256": "7c90a5cc2a63b42c703e5f8c24df65fbe249485e3df31cccb57566ebbff1c876",
+        "duration": 9.744,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1c72nkh",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/1c72nkh-2f4cd902c485.mp3",
+        "bytes": 201645,
+        "sha256": "2f4cd902c485ba3b5a09a0a1634588c048864cd9282250f6cfa2907bc92c0314",
+        "duration": 10.056,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "1cdnhpz",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1cdnhpz-16cc3f4e84ee.mp3",
+        "bytes": 134445,
+        "sha256": "16cc3f4e84eeaef76c0e408ba9dfcc47686c9e6c387f8e17cf2038b2e39754a0",
+        "duration": 6.696,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "1cza3cy",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1cza3cy-2a0bc0600ee3.mp3",
+        "bytes": 35085,
+        "sha256": "2a0bc0600ee3b132e97067a78a02d9f41e06f5572e5d069dfc9a5155347b9c47",
+        "duration": 1.728,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1g3hje4",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/1g3hje4-548a2cbd1a75.mp3",
+        "bytes": 123405,
+        "sha256": "548a2cbd1a75f034a3a6fa5126d4bbd9083f0816cd4a47a2663a08e476295c02",
+        "duration": 6.144,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "1gztmjr",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/1gztmjr-d00c4a39c907.mp3",
+        "bytes": 135885,
+        "sha256": "d00c4a39c907d4cc3f02ec4dac012f2d3848081b85ff91139235afa084a14dc8",
+        "duration": 6.768,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "1hyhg1r",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1hyhg1r-4a6af5f9f0da.mp3",
+        "bytes": 128205,
+        "sha256": "4a6af5f9f0daded1a02fdc79cd53169f1eb8c671c452c3397fe8bd4896815341",
+        "duration": 6.384,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1i0ko0r",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/1i0ko0r-b7c3698fe14d.mp3",
+        "bytes": 192045,
+        "sha256": "b7c3698fe14d7e8e6ad0097ec4e2a38f7b1e252cd77dca3aac7477062b2c0cfb",
+        "duration": 9.576,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "1i3jjia",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1i3jjia-5838c4f5f09c.mp3",
+        "bytes": 83085,
+        "sha256": "5838c4f5f09c57f2a1fdb1d3eeab358b0e8d031dd9b4bb9b4aa27b98062431e7",
+        "duration": 4.128,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1ic5dv1",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1ic5dv1-15b4ac32abfa.mp3",
+        "bytes": 123405,
+        "sha256": "15b4ac32abfae6c84021d4a05dd595aed0742abbd017475451e573487b720d73",
+        "duration": 6.144,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1irqu12",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1irqu12-fe9f0312783e.mp3",
+        "bytes": 49485,
+        "sha256": "fe9f0312783e41088ab8822823bea03ed6122fe9da46bb376c0e0cc31fb13a1b",
+        "duration": 2.448,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1iuahn",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1iuahn-8247aac276e5.mp3",
+        "bytes": 25485,
+        "sha256": "8247aac276e5eadf72b844b287ac87cb376590cd1d1a9f18c0e501483aee480d",
+        "duration": 1.248,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1j56v1e",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1j56v1e-71ce3390ced1.mp3",
+        "bytes": 137805,
+        "sha256": "71ce3390ced1b05a5d495c1c6b532355a8f78af07134771a670409a78b5715ac",
+        "duration": 6.864,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1j597zv",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1j597zv-061c8f5a2475.mp3",
+        "bytes": 102285,
+        "sha256": "061c8f5a24757cf6a4eeef77d80ec237f6645e104cfc741998efad3df298ff5a",
+        "duration": 5.088,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1kds8j4",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1kds8j4-e44f96347506.mp3",
+        "bytes": 52845,
+        "sha256": "e44f96347506413801214bf1325d177032eb57f92027b5e0a35be6048016a348",
+        "duration": 2.616,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1kkzhvs",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1kkzhvs-75d1291354a7.mp3",
+        "bytes": 32205,
+        "sha256": "75d1291354a708e4268892539e8a7300ad9c9804693b9d83598878c2d4c3c834",
+        "duration": 1.584,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1ldu2wy",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/1ldu2wy-48212842f764.mp3",
+        "bytes": 68685,
+        "sha256": "48212842f764cf8e63165fed732904489ed696e0b903fac70e65f912b6c7f96a",
+        "duration": 3.408,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "1loervm",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1loervm-859bcc2bad3b.mp3",
+        "bytes": 133005,
+        "sha256": "859bcc2bad3b4283bab10be8ea7cf86c080e3aaaa44d8dfd995604ba5de2f351",
+        "duration": 6.624,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "1lrcmxv",
+        "person": "successor",
+        "kind": "character-narration",
+        "url": "assets/narracion/1lrcmxv-fef3202e1f87.mp3",
+        "bytes": 182445,
+        "sha256": "fef3202e1f87ea9f7ac124cafb00daa80de25ff5807d37665b685a6bb46a64fc",
+        "duration": 9.096,
+        "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+      },
+      {
+        "id": "1mbezrn",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/1mbezrn-cdb482807e08.mp3",
+        "bytes": 116685,
+        "sha256": "cdb482807e0869f57dbda5262b9c40fd72156fb12a4d1aa4a3764ed6066b95e5",
+        "duration": 5.808,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1nggnxv",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1nggnxv-60f2b621fa19.mp3",
+        "bytes": 96045,
+        "sha256": "60f2b621fa1937e2b6d9842529a631bf231905cd4e7bd3d575eb439155f83cf6",
+        "duration": 4.776,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "1omnr3a",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/1omnr3a-49473c0beab3.mp3",
+        "bytes": 129645,
+        "sha256": "49473c0beab31bfa0aeb4f927fb27af96e1fb5f79acbefd57c19cba93ace4388",
+        "duration": 6.456,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1ovmveg",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/1ovmveg-49c008476dea.mp3",
+        "bytes": 59085,
+        "sha256": "49c008476dea27c940e378a1a05836dc1ad20dffcd6c5dcef50a5822d7159a16",
+        "duration": 2.928,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "1qybgm5",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1qybgm5-7049db998649.mp3",
+        "bytes": 179085,
+        "sha256": "7049db998649fcfa1c2e69f78f8c77d83567ef7480af4d72a068067d4ce5c24f",
+        "duration": 8.928,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "1r91i5j",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1r91i5j-b173ddb52a60.mp3",
+        "bytes": 123405,
+        "sha256": "b173ddb52a60ec6ffde6599acbc9ff05bb373b376f59036f98869f40b2bcec9f",
+        "duration": 6.144,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1s1cnw8",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1s1cnw8-2dbef39ffce5.mp3",
+        "bytes": 111885,
+        "sha256": "2dbef39ffce519d21b7316134e87dd0aa49c69d60598ed0b42cf19f4e783cecc",
+        "duration": 5.568,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "1s4357c",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1s4357c-6c7ba03c84f2.mp3",
+        "bytes": 126285,
+        "sha256": "6c7ba03c84f2d363a1ebfbb4857dd1801331ed7d555153dc24402ccd39c77d85",
+        "duration": 6.288,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1si7e4z",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1si7e4z-89e5d5cafda6.mp3",
+        "bytes": 63885,
+        "sha256": "89e5d5cafda65b7d72f5364b8a4ab303b41a4062860896fefe885662f02106f2",
+        "duration": 3.168,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1st0ene",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/1st0ene-f16039eb92db.mp3",
+        "bytes": 72045,
+        "sha256": "f16039eb92db8835cdb1ac8a33f197a173d8b87a95d4af7576992fa83872fa30",
+        "duration": 3.576,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "1t5gklf",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/1t5gklf-62b27ecc473a.mp3",
+        "bytes": 238605,
+        "sha256": "62b27ecc473a3053b333201475435641420c8f600385f2855d220e7c6fac209d",
+        "duration": 11.904,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1tw27hy",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/1tw27hy-0e5292c4b36c.mp3",
+        "bytes": 107085,
+        "sha256": "0e5292c4b36cfd7bac7ed74e6d7f208892fa80407e4ef2f4f286c8dc277072da",
+        "duration": 5.328,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "1tw59rp",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1tw59rp-d8a47d4323cd.mp3",
+        "bytes": 153645,
+        "sha256": "d8a47d4323cd8a78854f6b857cc601a59978bec6014f031a41c35bae797ce707",
+        "duration": 7.656,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1ugmy6s",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1ugmy6s-ced9f0a097ce.mp3",
+        "bytes": 48045,
+        "sha256": "ced9f0a097ce32eaec1b4d59bb92ba5b1f22fc5ff3fa74222ba3a92b83842979",
+        "duration": 2.376,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "1uurf2x",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/1uurf2x-205dbd99d027.mp3",
+        "bytes": 128205,
+        "sha256": "205dbd99d027174d9b31c85820b0961cfdc878a8f92ea36dc429a6d87d046c2a",
+        "duration": 6.384,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "1wt46h3",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/1wt46h3-931ef868b3c2.mp3",
+        "bytes": 59085,
+        "sha256": "931ef868b3c2f0dc0179ee20f341ac39acf09277a00b2b0633cff8c6d02cd502",
+        "duration": 2.928,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1x6rbs7",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1x6rbs7-590e6a6fc5e0.mp3",
+        "bytes": 121485,
+        "sha256": "590e6a6fc5e0cafb008774043d7861aee012dbeaa73d90a0b8150d0e916023d5",
+        "duration": 6.048,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1xcy5cl",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1xcy5cl-352c2ed7c971.mp3",
+        "bytes": 144045,
+        "sha256": "352c2ed7c971aa6920aea9f2e1ea5db43f9c7af97de76d8d6bd6151681c38038",
+        "duration": 7.176,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1xk2mkk",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1xk2mkk-c99c96f0bab6.mp3",
+        "bytes": 62925,
+        "sha256": "c99c96f0bab6ec64db8661540602d195340812c2185ab109d005beac5f5f642b",
+        "duration": 3.12,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1xtp558",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1xtp558-3a449197e200.mp3",
+        "bytes": 159885,
+        "sha256": "3a449197e2006dc4d9cab32a37d219334c8617e89212310044b57efc18836106",
+        "duration": 7.968,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1y9gzq6",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/1y9gzq6-523696cc4a39.mp3",
+        "bytes": 94605,
+        "sha256": "523696cc4a3968a67ef2b6c9210a68d13319c19c32a34b2198fd8cdb5befcf2d",
+        "duration": 4.704,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1yj7c3h",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/1yj7c3h-5eac5b2add53.mp3",
+        "bytes": 63885,
+        "sha256": "5eac5b2add53fd81de915a92e39a5cbcbd0b2f45302838fdb3a2ad5df47494b5",
+        "duration": 3.168,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "1ynxtqd",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/1ynxtqd-7c2d2e691f6f.mp3",
+        "bytes": 161805,
+        "sha256": "7c2d2e691f6f02856e0f1178bbe04bf72bab3904812ba66dd79cb5487241b921",
+        "duration": 8.064,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "1yqtuio",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/1yqtuio-2136b152abe6.mp3",
+        "bytes": 107085,
+        "sha256": "2136b152abe65866f4e538a91f94223138c4394fb0cc18b74442a5c2f9ca0a91",
+        "duration": 5.328,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1yyfatf",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1yyfatf-b36c859daa69.mp3",
+        "bytes": 131085,
+        "sha256": "b36c859daa69befaf40fe5f7a9ac0802b2760db66c7da502655d0e0771153a6b",
+        "duration": 6.528,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "2aslvf",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/2aslvf-5e61673e65c5.mp3",
+        "bytes": 81645,
+        "sha256": "5e61673e65c55fd9a658b89dbc53436f91cd3e212431867dc9bfdb7a2f63ae81",
+        "duration": 4.056,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "2lfz45",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/2lfz45-1b03f6582184.mp3",
+        "bytes": 41805,
+        "sha256": "1b03f65821846ea23039f6f182d3fae2f36de5928dc2633e2733c319b67ca396",
+        "duration": 2.064,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "4f6g6w",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/4f6g6w-2367330e99fb.mp3",
+        "bytes": 48045,
+        "sha256": "2367330e99fb50f570073b67a4e19a84637fbeec059a725b20ebc989c52049b9",
+        "duration": 2.376,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "5idiq4",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/5idiq4-da95a8768d00.mp3",
+        "bytes": 25485,
+        "sha256": "da95a8768d00d8e1d9241b96b1aa708d2b9dae6a050a33588a730def88b80c34",
+        "duration": 1.248,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "5j95sj",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/5j95sj-6f902f17ea4c.mp3",
+        "bytes": 102285,
+        "sha256": "6f902f17ea4cbf0a30a5b8624ef1252587bdaf3f70237790540b21e04fc5ec05",
+        "duration": 5.088,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "5k9hh8",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/5k9hh8-eb5dc891af6b.mp3",
+        "bytes": 124845,
+        "sha256": "eb5dc891af6b2ddef8740d435f29fe8d34b87660257cded11bbf1166f3eee863",
+        "duration": 6.216,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "5qkcq6",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/5qkcq6-9b0445ee1858.mp3",
+        "bytes": 150285,
+        "sha256": "9b0445ee18581858fd730605beb1a01500583619866f54b8f43d55aac0121578",
+        "duration": 7.488,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "5xxo93",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/5xxo93-806e89b80de0.mp3",
+        "bytes": 27405,
+        "sha256": "806e89b80de00261c0057045baf1f22cd136168dc235c47996cbdf06f9b8c9ff",
+        "duration": 1.344,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "6bqkl7",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/6bqkl7-685816f68775.mp3",
+        "bytes": 111885,
+        "sha256": "685816f6877570777233cce156ab0612dfed5c59124e951f2cfd27790ee96b64",
+        "duration": 5.568,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "6zqr88",
+        "person": "successor",
+        "kind": "character-narration",
+        "url": "assets/narracion/6zqr88-861f84058277.mp3",
+        "bytes": 27405,
+        "sha256": "861f840582776313a3ab1db286d915e8a455a0cf886a80bff5f707b7d1e5ea34",
+        "duration": 1.344,
+        "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+      },
+      {
+        "id": "7agmuj",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/7agmuj-398019237146.mp3",
+        "bytes": 118605,
+        "sha256": "398019237146a5b5a9f057b497a1f90998a91a1ec48e778eba05d1f64f1e8fd3",
+        "duration": 5.904,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "7j6irp",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/7j6irp-d6750ce9b65a.mp3",
+        "bytes": 116685,
+        "sha256": "d6750ce9b65af27b8d2633b9523402e4b925028778b04513b9c684ea6a6fb8ca",
+        "duration": 5.808,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "8egmuq",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/8egmuq-e5530d2b978b.mp3",
+        "bytes": 195405,
+        "sha256": "e5530d2b978b3555b01f7a8d15b4a9cac58da20eb599d936250d0ce9567e7f71",
+        "duration": 9.744,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "8fp7c1",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/8fp7c1-eb4bced9f2b0.mp3",
+        "bytes": 220845,
+        "sha256": "eb4bced9f2b092ced8c5af60c04a5d542799dda392d275aaad297be2f5ad10f5",
+        "duration": 11.016,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "8pq6eu",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/8pq6eu-5662074702b1.mp3",
+        "bytes": 205005,
+        "sha256": "5662074702b1114481f5943ad2f1e15b4ddcdfa88232488c2e8f63a56fc1b0e6",
+        "duration": 10.224,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "8x3wc4",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/8x3wc4-1cb6f44e86bb.mp3",
+        "bytes": 76845,
+        "sha256": "1cb6f44e86bbdd432e522d5a4e65e74f0e21fdead3c3248d6d8c85545921901d",
+        "duration": 3.816,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "9onzg5",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/9onzg5-4aa5cc98a935.mp3",
+        "bytes": 96045,
+        "sha256": "4aa5cc98a9350004b0061b8318d2995e144739426d2ff609d40da29311aa4656",
+        "duration": 4.776,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "9pzfbh",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/9pzfbh-5bfa8dc804f1.mp3",
+        "bytes": 105645,
+        "sha256": "5bfa8dc804f1b5a3aaf43bb0f88bce31856d29648bbe432c4475c73c005a2325",
+        "duration": 5.256,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "bs7is1",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/bs7is1-a7c71233624f.mp3",
+        "bytes": 61005,
+        "sha256": "a7c71233624f6b23d25904fa1b12545ce67fc1714622df869e8c189421f49521",
+        "duration": 3.024,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "btgf5d",
+        "person": "successor",
+        "kind": "character-narration",
+        "url": "assets/narracion/btgf5d-b192e4cc9911.mp3",
+        "bytes": 94605,
+        "sha256": "b192e4cc99115e7f584017109c803cb543bd3c89a6622491ae4bac598f80e2d1",
+        "duration": 4.704,
+        "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+      },
+      {
+        "id": "d37d38",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/d37d38-c73b83174fa8.mp3",
+        "bytes": 73485,
+        "sha256": "c73b83174fa84b1ebdfa1a5d9670d4fbadbf7b4f6c058655dfa354ec4258fcde",
+        "duration": 3.648,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "f5t0nk",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/f5t0nk-1e3a30d20c56.mp3",
+        "bytes": 41805,
+        "sha256": "1e3a30d20c56f910eb04404ea1cf610a94be6f59f5f76fd3fca032c3b45658b7",
+        "duration": 2.064,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "g2r4l6",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/g2r4l6-94a748a0ee1c.mp3",
+        "bytes": 100845,
+        "sha256": "94a748a0ee1c9d1a9cf243ca69dc07dc7416d86f170aa2395ae88c9574f026a7",
+        "duration": 5.016,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "h27bh4",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/h27bh4-775844f23d65.mp3",
+        "bytes": 123405,
+        "sha256": "775844f23d6503bb2d2179fc1a38f9582e845d881c571fe2c43f74b3d418c61b",
+        "duration": 6.144,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "hvqo98",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/hvqo98-600efb7051f4.mp3",
+        "bytes": 61005,
+        "sha256": "600efb7051f4c49a31eb80369ee0854abcc151cf70432bd81c0a1387b8a5eef4",
+        "duration": 3.024,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "i1wnfy",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/i1wnfy-1e1dd998dfbe.mp3",
+        "bytes": 203085,
+        "sha256": "1e1dd998dfbea59e7615c086c95c1ca852ae516e618b2d1efcdb4a6d748d00ac",
+        "duration": 10.128,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "ihw86s",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/ihw86s-52e0a68bba5a.mp3",
+        "bytes": 133005,
+        "sha256": "52e0a68bba5a3b66b2b258fcc742635f14ff4fb174b01aee7fd9cfd91bd19228",
+        "duration": 6.624,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "ilws3n",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/ilws3n-25138c4ee911.mp3",
+        "bytes": 121485,
+        "sha256": "25138c4ee911b98e50a8790f3225c24542267756cc5a3d37ca34bf393f4190ee",
+        "duration": 6.048,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "j3cea0",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/j3cea0-c347638fefd8.mp3",
+        "bytes": 67245,
+        "sha256": "c347638fefd87b8e0bfed557c2f8b12b7f2488c8a1621494ed9646a914f9dc45",
+        "duration": 3.336,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "j7oj1t",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/j7oj1t-fc8353019a46.mp3",
+        "bytes": 51405,
+        "sha256": "fc8353019a46db58f816f20a97a2297755cdb23bfb41301584504223e365d3d5",
+        "duration": 2.544,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "jjyia",
+        "person": "rival",
+        "kind": "character-narration",
+        "url": "assets/narracion/jjyia-0d727e414be1.mp3",
+        "bytes": 118605,
+        "sha256": "0d727e414be1f230136be01e14e7229f4d559f1845bee6a6cf52d56b1c76689e",
+        "duration": 5.904,
+        "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+      },
+      {
+        "id": "k39mlo",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/k39mlo-b984ea96041b.mp3",
+        "bytes": 94605,
+        "sha256": "b984ea96041b9ec79bddf99d0b473fd88d86b1eed1a05097cfe0ad83d12f8e7a",
+        "duration": 4.704,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "kd7wuj",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/kd7wuj-78818d5bd3a9.mp3",
+        "bytes": 113805,
+        "sha256": "78818d5bd3a9d9bafdb5f84c0792be5dc4fe2755754929e078f6735a31b4cd4b",
+        "duration": 5.664,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "kvvvag",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/kvvvag-d9542a6b2b2a.mp3",
+        "bytes": 63885,
+        "sha256": "d9542a6b2b2ad29f44267c8200a269f97dc3900e2776cd2716eeb6ff50c29252",
+        "duration": 3.168,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "lyj78v",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/lyj78v-ea4fd3b539e5.mp3",
+        "bytes": 128205,
+        "sha256": "ea4fd3b539e5025feb92b9188e01d37297ba1642692e4168ad98cf3b4e29dfac",
+        "duration": 6.384,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "m4wqg4",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/m4wqg4-50eb73283740.mp3",
+        "bytes": 52845,
+        "sha256": "50eb732837407b30ff86b3abee75ab0ba5fcf2f476331f0d088e26fb07887040",
+        "duration": 2.616,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "makofu",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/makofu-6f3df83740ce.mp3",
+        "bytes": 203085,
+        "sha256": "6f3df83740ce0b0bb2014e2ecc6491ebd61b19b5eb293171eeae2c1c86944433",
+        "duration": 10.128,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "nosrpn",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/nosrpn-7c975bc59e01.mp3",
+        "bytes": 190605,
+        "sha256": "7c975bc59e0171396fce37db816c9a046f2f4cd006814318e6261d656cb72eb2",
+        "duration": 9.504,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "o098zi",
+        "person": "president",
+        "kind": "character-narration",
+        "url": "assets/narracion/o098zi-c904269297a1.mp3",
+        "bytes": 121485,
+        "sha256": "c904269297a1371d4f0d8d02602787411b75b8091fa31601d37b41b6d0ce53cf",
+        "duration": 6.048,
+        "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "o3rckk",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/o3rckk-9d1796d40b8c.mp3",
+        "bytes": 73485,
+        "sha256": "9d1796d40b8c59139fe1f24fdf410d690b0b78f198b948c9c38ec9875d78e903",
+        "duration": 3.648,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "obts2",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/obts2-e138f9c7c9ef.mp3",
+        "bytes": 63885,
+        "sha256": "e138f9c7c9ef51235f3fae169b9eb093130969f537ae6cdf67cd44065e6258f9",
+        "duration": 3.168,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "p13ef8",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/p13ef8-c4a6bc3481ff.mp3",
+        "bytes": 27405,
+        "sha256": "c4a6bc3481ff19d7d97310dd521b01f44228dc4c3dd74c5927e5a561664763df",
+        "duration": 1.344,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "q396fy",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/q396fy-9aee5798140a.mp3",
+        "bytes": 129645,
+        "sha256": "9aee5798140a8348a3a9807f02365006d5a4a84599d3609e0d70d8f155663f88",
+        "duration": 6.456,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "q74fkx",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/q74fkx-f3d15d34d4f3.mp3",
+        "bytes": 100845,
+        "sha256": "f3d15d34d4f31c7627ae7478ab17d061f835674541d654f1f56bdf5878278af4",
+        "duration": 5.016,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "qtut45",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/qtut45-39fe40075ffc.mp3",
+        "bytes": 172845,
+        "sha256": "39fe40075ffc8f352ac4dc9354001da0ae2ecf8694798292281fee7961cb609d",
+        "duration": 8.616,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "qv10z6",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/qv10z6-90204216a279.mp3",
+        "bytes": 62445,
+        "sha256": "90204216a2797feb9a319e709481fd61ed6c87cbfb0a145401ba037af11ef527",
+        "duration": 3.096,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "r8ymxn",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/r8ymxn-b41b3d1bc99f.mp3",
+        "bytes": 33645,
+        "sha256": "b41b3d1bc99fd0fea8c8866db38ca210ba238f3577355909535c318850fc7332",
+        "duration": 1.656,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "rrjo6v",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/rrjo6v-590b1b815302.mp3",
+        "bytes": 33645,
+        "sha256": "590b1b8153021660259bdb901dc7adfde18ae3d29d59e66aff168dc46aa1459a",
+        "duration": 1.656,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "tagqcm",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/tagqcm-e5002251f5d6.mp3",
+        "bytes": 124845,
+        "sha256": "e5002251f5d6a736d4fd9157d18ff37634d4c1a925f70986b670c8595795c7dc",
+        "duration": 6.216,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "tg8gdo",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/tg8gdo-ff86f1e04ed5.mp3",
+        "bytes": 139245,
+        "sha256": "ff86f1e04ed590a025016fda6e2f44fe2bca36449fe5b846d2e892a70b6adde6",
+        "duration": 6.936,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "towia",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/towia-a6dd93606c9e.mp3",
+        "bytes": 159885,
+        "sha256": "a6dd93606c9ed9d52ce93e8f2099770381b6b5fd9e6f449140d0087748202eab",
+        "duration": 7.968,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
+        "id": "tu0kv0",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/tu0kv0-02a030777327.mp3",
+        "bytes": 140685,
+        "sha256": "02a030777327a4957ddee192d5a6bba58ff8628f721b7133485ae95f57b82918",
+        "duration": 7.008,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "twgj8x",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/twgj8x-eb06fcec0489.mp3",
+        "bytes": 128205,
+        "sha256": "eb06fcec0489df0367bcfdd845689caec9979f1440a0dcd63461f0829a88a991",
+        "duration": 6.384,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "w6d3gr",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/w6d3gr-05d2c4070c6f.mp3",
+        "bytes": 65805,
+        "sha256": "05d2c4070c6f2961064b82451dc5309ef73c120fc453bcfbbf4e08d3938d6a69",
+        "duration": 3.264,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+      },
+      {
+        "id": "x7elr2",
+        "person": "mayor",
+        "kind": "character-narration",
+        "url": "assets/narracion/x7elr2-360c5e82a3b2.mp3",
+        "bytes": 59085,
+        "sha256": "360c5e82a3b22cb54ff499a385d69326040369a80563863a588d8e9a20de5683",
+        "duration": 2.928,
+        "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+      },
+      {
+        "id": "yd39ss",
+        "person": "minister",
+        "kind": "character-narration",
+        "url": "assets/narracion/yd39ss-7a3cb2067990.mp3",
+        "bytes": 113805,
+        "sha256": "7a3cb20679908b70524f2478bbd0a104dd8e2f37a53b6659d8110a5bfdce3ee5",
+        "duration": 5.664,
+        "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "yggb50",
+        "person": "treasury",
+        "kind": "character-narration",
+        "url": "assets/narracion/yggb50-e07338ccb754.mp3",
+        "bytes": 110445,
+        "sha256": "e07338ccb754d82fb4ddf5451cfebaff6c8ad4a539d67a9d0bb1417be30393dc",
+        "duration": 5.496,
+        "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+      },
+      {
+        "id": "z6hb8h",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/z6hb8h-50515b5f85b5.mp3",
+        "bytes": 145485,
+        "sha256": "50515b5f85b57faf3e38555f9904a341ce9d900dc163c37b76d039dc5bdc7e45",
+        "duration": 7.248,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "zqgiqy",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/zqgiqy-439ddd1cc682.mp3",
+        "bytes": 124845,
+        "sha256": "439ddd1cc6825102d629a2901d2034868ba9bb0ed2a2bd712e1c415c2f09c6f6",
+        "duration": 6.216,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      }
+    ],
+    "wholeMessages": true
   },
   "assets": [
     {
@@ -416,6 +1694,1272 @@
       "bytes": 6234,
       "sha256": "b20e81423aac20b7ab251450dfbb29ae7f87602797931a90705b2563c71a64b7",
       "kind": "manufacturer-photo-provenance"
+    },
+    {
+      "id": "105womj",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/105womj-b6522566a02b.mp3",
+      "bytes": 92685,
+      "sha256": "b6522566a02bb068c0ac08204b3109e10618086441a084009644668c63c843d4",
+      "duration": 4.608,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "108jvvt",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/108jvvt-ce9377911ba0.mp3",
+      "bytes": 86445,
+      "sha256": "ce9377911ba0cf857b419e464e524e7457c9be51d2c0fa8966d064d6addaa2c0",
+      "duration": 4.296,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "10etk1",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/10etk1-138203fcd8d3.mp3",
+      "bytes": 118605,
+      "sha256": "138203fcd8d360aed4d1e42c8e11cf2cb1a9bdfa1f5ac51f31cef52d41b3e06a",
+      "duration": 5.904,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "10lg3qz",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/10lg3qz-d5fce156b9df.mp3",
+      "bytes": 38445,
+      "sha256": "d5fce156b9dfe226c7894f9683e8e67cd248bcf5bb7f55cbc5a00fb54ba1c9a0",
+      "duration": 1.896,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "10mafk8",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/10mafk8-1ad9c9cb11f7.mp3",
+      "bytes": 38445,
+      "sha256": "1ad9c9cb11f7af177d138420dc5d1672dab287d35b70a5484efcdcb3ee96412d",
+      "duration": 1.896,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "10tdlbm",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/10tdlbm-12ca9337f96f.mp3",
+      "bytes": 121485,
+      "sha256": "12ca9337f96fdf4a9aaa7d9c91e8d1eb9917aa8b8b26f168828f2061d6561f57",
+      "duration": 6.048,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "10zql86",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/10zql86-e7225731a0ce.mp3",
+      "bytes": 73485,
+      "sha256": "e7225731a0ce02715487509d90269aff4774d7aeaf9467ae60925d89a00e1922",
+      "duration": 3.648,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "11nyrqf",
+      "person": "successor",
+      "kind": "character-narration",
+      "url": "assets/narracion/11nyrqf-ba7e55f97267.mp3",
+      "bytes": 75405,
+      "sha256": "ba7e55f972677bcf9817ebf0c500435c291b48af4ee6acdadfa23fe49fdab0c4",
+      "duration": 3.744,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+    },
+    {
+      "id": "13xiw39",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/13xiw39-1388ce9701cb.mp3",
+      "bytes": 75405,
+      "sha256": "1388ce9701cbb367fd25f0faef3006467f7054d0ae8327954ec6a8eb2cfa2a0a",
+      "duration": 3.744,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1483vae",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1483vae-cf14b41d2e73.mp3",
+      "bytes": 163245,
+      "sha256": "cf14b41d2e730ca238abe321c9b3d2244e0ad1332812b841a6fe5ba60d4d8bc2",
+      "duration": 8.136,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "15v4kyi",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/15v4kyi-a0dabec476df.mp3",
+      "bytes": 238605,
+      "sha256": "a0dabec476df196f56836a5bc20a01f932f313070336cc40cd8e5dffb3137811",
+      "duration": 11.904,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "16esy5d",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/16esy5d-8681d987a707.mp3",
+      "bytes": 52845,
+      "sha256": "8681d987a707ececfabd0d8bdd9ba2fd43bdfb1620de73c7843012bc032c1a84",
+      "duration": 2.616,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "16kbrlp",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/16kbrlp-0b97cf992198.mp3",
+      "bytes": 118605,
+      "sha256": "0b97cf9921981ef094dab477b31ff325757c89455fdfd8ac897e86a608389594",
+      "duration": 5.904,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "172w67w",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/172w67w-92daedd27073.mp3",
+      "bytes": 22605,
+      "sha256": "92daedd27073e7656466e2ce6d1a7b51d223dfa7df4c788bae8f56f2864fa978",
+      "duration": 1.104,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "17moyt9",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/17moyt9-507755ee8af2.mp3",
+      "bytes": 153645,
+      "sha256": "507755ee8af25f94508284b01fc8b80f5afc52a078ca07c46c1dae1fa8ff1289",
+      "duration": 7.656,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "17zoeay",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/17zoeay-70944fea5f16.mp3",
+      "bytes": 131085,
+      "sha256": "70944fea5f16b624efff0418719ff8ecd497a845df841f5030eaa06d65aaecce",
+      "duration": 6.528,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "183rirt",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/183rirt-1e6d0a0720ef.mp3",
+      "bytes": 207885,
+      "sha256": "1e6d0a0720ef42d315c43c027ab4a2589f73cbe908013c8819e7041d53dfa404",
+      "duration": 10.368,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "189i77z",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/189i77z-130dd4504b3d.mp3",
+      "bytes": 67245,
+      "sha256": "130dd4504b3d1bdc153cab9890edcee5c7e9bf63493b612d065c2e020f293ac4",
+      "duration": 3.336,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "18gbjqp",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/18gbjqp-6b92a3f43582.mp3",
+      "bytes": 123405,
+      "sha256": "6b92a3f43582d7181c4f6d2656e87891bd9ed04d43d7d07d42e9eb29ee696fa4",
+      "duration": 6.144,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "19rkr6e",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/19rkr6e-b72d47e9ae93.mp3",
+      "bytes": 116685,
+      "sha256": "b72d47e9ae93ce5b51eeb36a902854bd1a46c0c785aa037ba4dd23d13536e963",
+      "duration": 5.808,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1a4635k",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/1a4635k-5a3791dbe22f.mp3",
+      "bytes": 168045,
+      "sha256": "5a3791dbe22f3cc0b7f933865f1a3385029e256d1e3cdb46d7b495225a1f417f",
+      "duration": 8.376,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "1aqdpp",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/1aqdpp-c512b9a28141.mp3",
+      "bytes": 118605,
+      "sha256": "c512b9a281417b69a0ace127e816f4a014274a58c3f3b89452ce7371e336dfbe",
+      "duration": 5.904,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1ay1154",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1ay1154-df63e8410f4c.mp3",
+      "bytes": 35085,
+      "sha256": "df63e8410f4c0d5c4ef3f8a3c91212c4fc0f6200a25a442ed975c2369e627e16",
+      "duration": 1.728,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1bavpbn",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/1bavpbn-7c90a5cc2a63.mp3",
+      "bytes": 195405,
+      "sha256": "7c90a5cc2a63b42c703e5f8c24df65fbe249485e3df31cccb57566ebbff1c876",
+      "duration": 9.744,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1c72nkh",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/1c72nkh-2f4cd902c485.mp3",
+      "bytes": 201645,
+      "sha256": "2f4cd902c485ba3b5a09a0a1634588c048864cd9282250f6cfa2907bc92c0314",
+      "duration": 10.056,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "1cdnhpz",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1cdnhpz-16cc3f4e84ee.mp3",
+      "bytes": 134445,
+      "sha256": "16cc3f4e84eeaef76c0e408ba9dfcc47686c9e6c387f8e17cf2038b2e39754a0",
+      "duration": 6.696,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1cza3cy",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1cza3cy-2a0bc0600ee3.mp3",
+      "bytes": 35085,
+      "sha256": "2a0bc0600ee3b132e97067a78a02d9f41e06f5572e5d069dfc9a5155347b9c47",
+      "duration": 1.728,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1g3hje4",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/1g3hje4-548a2cbd1a75.mp3",
+      "bytes": 123405,
+      "sha256": "548a2cbd1a75f034a3a6fa5126d4bbd9083f0816cd4a47a2663a08e476295c02",
+      "duration": 6.144,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1gztmjr",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/1gztmjr-d00c4a39c907.mp3",
+      "bytes": 135885,
+      "sha256": "d00c4a39c907d4cc3f02ec4dac012f2d3848081b85ff91139235afa084a14dc8",
+      "duration": 6.768,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "1hyhg1r",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1hyhg1r-4a6af5f9f0da.mp3",
+      "bytes": 128205,
+      "sha256": "4a6af5f9f0daded1a02fdc79cd53169f1eb8c671c452c3397fe8bd4896815341",
+      "duration": 6.384,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1i0ko0r",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/1i0ko0r-b7c3698fe14d.mp3",
+      "bytes": 192045,
+      "sha256": "b7c3698fe14d7e8e6ad0097ec4e2a38f7b1e252cd77dca3aac7477062b2c0cfb",
+      "duration": 9.576,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1i3jjia",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1i3jjia-5838c4f5f09c.mp3",
+      "bytes": 83085,
+      "sha256": "5838c4f5f09c57f2a1fdb1d3eeab358b0e8d031dd9b4bb9b4aa27b98062431e7",
+      "duration": 4.128,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1ic5dv1",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1ic5dv1-15b4ac32abfa.mp3",
+      "bytes": 123405,
+      "sha256": "15b4ac32abfae6c84021d4a05dd595aed0742abbd017475451e573487b720d73",
+      "duration": 6.144,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1irqu12",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1irqu12-fe9f0312783e.mp3",
+      "bytes": 49485,
+      "sha256": "fe9f0312783e41088ab8822823bea03ed6122fe9da46bb376c0e0cc31fb13a1b",
+      "duration": 2.448,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1iuahn",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1iuahn-8247aac276e5.mp3",
+      "bytes": 25485,
+      "sha256": "8247aac276e5eadf72b844b287ac87cb376590cd1d1a9f18c0e501483aee480d",
+      "duration": 1.248,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1j56v1e",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1j56v1e-71ce3390ced1.mp3",
+      "bytes": 137805,
+      "sha256": "71ce3390ced1b05a5d495c1c6b532355a8f78af07134771a670409a78b5715ac",
+      "duration": 6.864,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1j597zv",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1j597zv-061c8f5a2475.mp3",
+      "bytes": 102285,
+      "sha256": "061c8f5a24757cf6a4eeef77d80ec237f6645e104cfc741998efad3df298ff5a",
+      "duration": 5.088,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1kds8j4",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1kds8j4-e44f96347506.mp3",
+      "bytes": 52845,
+      "sha256": "e44f96347506413801214bf1325d177032eb57f92027b5e0a35be6048016a348",
+      "duration": 2.616,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1kkzhvs",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1kkzhvs-75d1291354a7.mp3",
+      "bytes": 32205,
+      "sha256": "75d1291354a708e4268892539e8a7300ad9c9804693b9d83598878c2d4c3c834",
+      "duration": 1.584,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1ldu2wy",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/1ldu2wy-48212842f764.mp3",
+      "bytes": 68685,
+      "sha256": "48212842f764cf8e63165fed732904489ed696e0b903fac70e65f912b6c7f96a",
+      "duration": 3.408,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1loervm",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1loervm-859bcc2bad3b.mp3",
+      "bytes": 133005,
+      "sha256": "859bcc2bad3b4283bab10be8ea7cf86c080e3aaaa44d8dfd995604ba5de2f351",
+      "duration": 6.624,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1lrcmxv",
+      "person": "successor",
+      "kind": "character-narration",
+      "url": "assets/narracion/1lrcmxv-fef3202e1f87.mp3",
+      "bytes": 182445,
+      "sha256": "fef3202e1f87ea9f7ac124cafb00daa80de25ff5807d37665b685a6bb46a64fc",
+      "duration": 9.096,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+    },
+    {
+      "id": "1mbezrn",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/1mbezrn-cdb482807e08.mp3",
+      "bytes": 116685,
+      "sha256": "cdb482807e0869f57dbda5262b9c40fd72156fb12a4d1aa4a3764ed6066b95e5",
+      "duration": 5.808,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1nggnxv",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1nggnxv-60f2b621fa19.mp3",
+      "bytes": 96045,
+      "sha256": "60f2b621fa1937e2b6d9842529a631bf231905cd4e7bd3d575eb439155f83cf6",
+      "duration": 4.776,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1omnr3a",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/1omnr3a-49473c0beab3.mp3",
+      "bytes": 129645,
+      "sha256": "49473c0beab31bfa0aeb4f927fb27af96e1fb5f79acbefd57c19cba93ace4388",
+      "duration": 6.456,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1ovmveg",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/1ovmveg-49c008476dea.mp3",
+      "bytes": 59085,
+      "sha256": "49c008476dea27c940e378a1a05836dc1ad20dffcd6c5dcef50a5822d7159a16",
+      "duration": 2.928,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1qybgm5",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1qybgm5-7049db998649.mp3",
+      "bytes": 179085,
+      "sha256": "7049db998649fcfa1c2e69f78f8c77d83567ef7480af4d72a068067d4ce5c24f",
+      "duration": 8.928,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1r91i5j",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1r91i5j-b173ddb52a60.mp3",
+      "bytes": 123405,
+      "sha256": "b173ddb52a60ec6ffde6599acbc9ff05bb373b376f59036f98869f40b2bcec9f",
+      "duration": 6.144,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1s1cnw8",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1s1cnw8-2dbef39ffce5.mp3",
+      "bytes": 111885,
+      "sha256": "2dbef39ffce519d21b7316134e87dd0aa49c69d60598ed0b42cf19f4e783cecc",
+      "duration": 5.568,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1s4357c",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1s4357c-6c7ba03c84f2.mp3",
+      "bytes": 126285,
+      "sha256": "6c7ba03c84f2d363a1ebfbb4857dd1801331ed7d555153dc24402ccd39c77d85",
+      "duration": 6.288,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1si7e4z",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1si7e4z-89e5d5cafda6.mp3",
+      "bytes": 63885,
+      "sha256": "89e5d5cafda65b7d72f5364b8a4ab303b41a4062860896fefe885662f02106f2",
+      "duration": 3.168,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1st0ene",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/1st0ene-f16039eb92db.mp3",
+      "bytes": 72045,
+      "sha256": "f16039eb92db8835cdb1ac8a33f197a173d8b87a95d4af7576992fa83872fa30",
+      "duration": 3.576,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1t5gklf",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/1t5gklf-62b27ecc473a.mp3",
+      "bytes": 238605,
+      "sha256": "62b27ecc473a3053b333201475435641420c8f600385f2855d220e7c6fac209d",
+      "duration": 11.904,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1tw27hy",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/1tw27hy-0e5292c4b36c.mp3",
+      "bytes": 107085,
+      "sha256": "0e5292c4b36cfd7bac7ed74e6d7f208892fa80407e4ef2f4f286c8dc277072da",
+      "duration": 5.328,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "1tw59rp",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1tw59rp-d8a47d4323cd.mp3",
+      "bytes": 153645,
+      "sha256": "d8a47d4323cd8a78854f6b857cc601a59978bec6014f031a41c35bae797ce707",
+      "duration": 7.656,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1ugmy6s",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1ugmy6s-ced9f0a097ce.mp3",
+      "bytes": 48045,
+      "sha256": "ced9f0a097ce32eaec1b4d59bb92ba5b1f22fc5ff3fa74222ba3a92b83842979",
+      "duration": 2.376,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "1uurf2x",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/1uurf2x-205dbd99d027.mp3",
+      "bytes": 128205,
+      "sha256": "205dbd99d027174d9b31c85820b0961cfdc878a8f92ea36dc429a6d87d046c2a",
+      "duration": 6.384,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "1wt46h3",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/1wt46h3-931ef868b3c2.mp3",
+      "bytes": 59085,
+      "sha256": "931ef868b3c2f0dc0179ee20f341ac39acf09277a00b2b0633cff8c6d02cd502",
+      "duration": 2.928,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1x6rbs7",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1x6rbs7-590e6a6fc5e0.mp3",
+      "bytes": 121485,
+      "sha256": "590e6a6fc5e0cafb008774043d7861aee012dbeaa73d90a0b8150d0e916023d5",
+      "duration": 6.048,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1xcy5cl",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1xcy5cl-352c2ed7c971.mp3",
+      "bytes": 144045,
+      "sha256": "352c2ed7c971aa6920aea9f2e1ea5db43f9c7af97de76d8d6bd6151681c38038",
+      "duration": 7.176,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1xk2mkk",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1xk2mkk-c99c96f0bab6.mp3",
+      "bytes": 62925,
+      "sha256": "c99c96f0bab6ec64db8661540602d195340812c2185ab109d005beac5f5f642b",
+      "duration": 3.12,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1xtp558",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1xtp558-3a449197e200.mp3",
+      "bytes": 159885,
+      "sha256": "3a449197e2006dc4d9cab32a37d219334c8617e89212310044b57efc18836106",
+      "duration": 7.968,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1y9gzq6",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/1y9gzq6-523696cc4a39.mp3",
+      "bytes": 94605,
+      "sha256": "523696cc4a3968a67ef2b6c9210a68d13319c19c32a34b2198fd8cdb5befcf2d",
+      "duration": 4.704,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1yj7c3h",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/1yj7c3h-5eac5b2add53.mp3",
+      "bytes": 63885,
+      "sha256": "5eac5b2add53fd81de915a92e39a5cbcbd0b2f45302838fdb3a2ad5df47494b5",
+      "duration": 3.168,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "1ynxtqd",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/1ynxtqd-7c2d2e691f6f.mp3",
+      "bytes": 161805,
+      "sha256": "7c2d2e691f6f02856e0f1178bbe04bf72bab3904812ba66dd79cb5487241b921",
+      "duration": 8.064,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "1yqtuio",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/1yqtuio-2136b152abe6.mp3",
+      "bytes": 107085,
+      "sha256": "2136b152abe65866f4e538a91f94223138c4394fb0cc18b74442a5c2f9ca0a91",
+      "duration": 5.328,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "1yyfatf",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1yyfatf-b36c859daa69.mp3",
+      "bytes": 131085,
+      "sha256": "b36c859daa69befaf40fe5f7a9ac0802b2760db66c7da502655d0e0771153a6b",
+      "duration": 6.528,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "2aslvf",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/2aslvf-5e61673e65c5.mp3",
+      "bytes": 81645,
+      "sha256": "5e61673e65c55fd9a658b89dbc53436f91cd3e212431867dc9bfdb7a2f63ae81",
+      "duration": 4.056,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "2lfz45",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/2lfz45-1b03f6582184.mp3",
+      "bytes": 41805,
+      "sha256": "1b03f65821846ea23039f6f182d3fae2f36de5928dc2633e2733c319b67ca396",
+      "duration": 2.064,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "4f6g6w",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/4f6g6w-2367330e99fb.mp3",
+      "bytes": 48045,
+      "sha256": "2367330e99fb50f570073b67a4e19a84637fbeec059a725b20ebc989c52049b9",
+      "duration": 2.376,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "5idiq4",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/5idiq4-da95a8768d00.mp3",
+      "bytes": 25485,
+      "sha256": "da95a8768d00d8e1d9241b96b1aa708d2b9dae6a050a33588a730def88b80c34",
+      "duration": 1.248,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "5j95sj",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/5j95sj-6f902f17ea4c.mp3",
+      "bytes": 102285,
+      "sha256": "6f902f17ea4cbf0a30a5b8624ef1252587bdaf3f70237790540b21e04fc5ec05",
+      "duration": 5.088,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "5k9hh8",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/5k9hh8-eb5dc891af6b.mp3",
+      "bytes": 124845,
+      "sha256": "eb5dc891af6b2ddef8740d435f29fe8d34b87660257cded11bbf1166f3eee863",
+      "duration": 6.216,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "5qkcq6",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/5qkcq6-9b0445ee1858.mp3",
+      "bytes": 150285,
+      "sha256": "9b0445ee18581858fd730605beb1a01500583619866f54b8f43d55aac0121578",
+      "duration": 7.488,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "5xxo93",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/5xxo93-806e89b80de0.mp3",
+      "bytes": 27405,
+      "sha256": "806e89b80de00261c0057045baf1f22cd136168dc235c47996cbdf06f9b8c9ff",
+      "duration": 1.344,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "6bqkl7",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/6bqkl7-685816f68775.mp3",
+      "bytes": 111885,
+      "sha256": "685816f6877570777233cce156ab0612dfed5c59124e951f2cfd27790ee96b64",
+      "duration": 5.568,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "6zqr88",
+      "person": "successor",
+      "kind": "character-narration",
+      "url": "assets/narracion/6zqr88-861f84058277.mp3",
+      "bytes": 27405,
+      "sha256": "861f840582776313a3ab1db286d915e8a455a0cf886a80bff5f707b7d1e5ea34",
+      "duration": 1.344,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+    },
+    {
+      "id": "7agmuj",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/7agmuj-398019237146.mp3",
+      "bytes": 118605,
+      "sha256": "398019237146a5b5a9f057b497a1f90998a91a1ec48e778eba05d1f64f1e8fd3",
+      "duration": 5.904,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "7j6irp",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/7j6irp-d6750ce9b65a.mp3",
+      "bytes": 116685,
+      "sha256": "d6750ce9b65af27b8d2633b9523402e4b925028778b04513b9c684ea6a6fb8ca",
+      "duration": 5.808,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "8egmuq",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/8egmuq-e5530d2b978b.mp3",
+      "bytes": 195405,
+      "sha256": "e5530d2b978b3555b01f7a8d15b4a9cac58da20eb599d936250d0ce9567e7f71",
+      "duration": 9.744,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "8fp7c1",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/8fp7c1-eb4bced9f2b0.mp3",
+      "bytes": 220845,
+      "sha256": "eb4bced9f2b092ced8c5af60c04a5d542799dda392d275aaad297be2f5ad10f5",
+      "duration": 11.016,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "8pq6eu",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/8pq6eu-5662074702b1.mp3",
+      "bytes": 205005,
+      "sha256": "5662074702b1114481f5943ad2f1e15b4ddcdfa88232488c2e8f63a56fc1b0e6",
+      "duration": 10.224,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "8x3wc4",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/8x3wc4-1cb6f44e86bb.mp3",
+      "bytes": 76845,
+      "sha256": "1cb6f44e86bbdd432e522d5a4e65e74f0e21fdead3c3248d6d8c85545921901d",
+      "duration": 3.816,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "9onzg5",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/9onzg5-4aa5cc98a935.mp3",
+      "bytes": 96045,
+      "sha256": "4aa5cc98a9350004b0061b8318d2995e144739426d2ff609d40da29311aa4656",
+      "duration": 4.776,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "9pzfbh",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/9pzfbh-5bfa8dc804f1.mp3",
+      "bytes": 105645,
+      "sha256": "5bfa8dc804f1b5a3aaf43bb0f88bce31856d29648bbe432c4475c73c005a2325",
+      "duration": 5.256,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "bs7is1",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/bs7is1-a7c71233624f.mp3",
+      "bytes": 61005,
+      "sha256": "a7c71233624f6b23d25904fa1b12545ce67fc1714622df869e8c189421f49521",
+      "duration": 3.024,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "btgf5d",
+      "person": "successor",
+      "kind": "character-narration",
+      "url": "assets/narracion/btgf5d-b192e4cc9911.mp3",
+      "bytes": 94605,
+      "sha256": "b192e4cc99115e7f584017109c803cb543bd3c89a6622491ae4bac598f80e2d1",
+      "duration": 4.704,
+      "referenceSHA256": "d74224f4d66c013bc76601872f0084ed24279d9d828f3bedc02ac3b2825e071b"
+    },
+    {
+      "id": "d37d38",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/d37d38-c73b83174fa8.mp3",
+      "bytes": 73485,
+      "sha256": "c73b83174fa84b1ebdfa1a5d9670d4fbadbf7b4f6c058655dfa354ec4258fcde",
+      "duration": 3.648,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "f5t0nk",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/f5t0nk-1e3a30d20c56.mp3",
+      "bytes": 41805,
+      "sha256": "1e3a30d20c56f910eb04404ea1cf610a94be6f59f5f76fd3fca032c3b45658b7",
+      "duration": 2.064,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "g2r4l6",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/g2r4l6-94a748a0ee1c.mp3",
+      "bytes": 100845,
+      "sha256": "94a748a0ee1c9d1a9cf243ca69dc07dc7416d86f170aa2395ae88c9574f026a7",
+      "duration": 5.016,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "h27bh4",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/h27bh4-775844f23d65.mp3",
+      "bytes": 123405,
+      "sha256": "775844f23d6503bb2d2179fc1a38f9582e845d881c571fe2c43f74b3d418c61b",
+      "duration": 6.144,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "hvqo98",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/hvqo98-600efb7051f4.mp3",
+      "bytes": 61005,
+      "sha256": "600efb7051f4c49a31eb80369ee0854abcc151cf70432bd81c0a1387b8a5eef4",
+      "duration": 3.024,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "i1wnfy",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/i1wnfy-1e1dd998dfbe.mp3",
+      "bytes": 203085,
+      "sha256": "1e1dd998dfbea59e7615c086c95c1ca852ae516e618b2d1efcdb4a6d748d00ac",
+      "duration": 10.128,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "ihw86s",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/ihw86s-52e0a68bba5a.mp3",
+      "bytes": 133005,
+      "sha256": "52e0a68bba5a3b66b2b258fcc742635f14ff4fb174b01aee7fd9cfd91bd19228",
+      "duration": 6.624,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "ilws3n",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/ilws3n-25138c4ee911.mp3",
+      "bytes": 121485,
+      "sha256": "25138c4ee911b98e50a8790f3225c24542267756cc5a3d37ca34bf393f4190ee",
+      "duration": 6.048,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "j3cea0",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/j3cea0-c347638fefd8.mp3",
+      "bytes": 67245,
+      "sha256": "c347638fefd87b8e0bfed557c2f8b12b7f2488c8a1621494ed9646a914f9dc45",
+      "duration": 3.336,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "j7oj1t",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/j7oj1t-fc8353019a46.mp3",
+      "bytes": 51405,
+      "sha256": "fc8353019a46db58f816f20a97a2297755cdb23bfb41301584504223e365d3d5",
+      "duration": 2.544,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "jjyia",
+      "person": "rival",
+      "kind": "character-narration",
+      "url": "assets/narracion/jjyia-0d727e414be1.mp3",
+      "bytes": 118605,
+      "sha256": "0d727e414be1f230136be01e14e7229f4d559f1845bee6a6cf52d56b1c76689e",
+      "duration": 5.904,
+      "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+    },
+    {
+      "id": "k39mlo",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/k39mlo-b984ea96041b.mp3",
+      "bytes": 94605,
+      "sha256": "b984ea96041b9ec79bddf99d0b473fd88d86b1eed1a05097cfe0ad83d12f8e7a",
+      "duration": 4.704,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "kd7wuj",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/kd7wuj-78818d5bd3a9.mp3",
+      "bytes": 113805,
+      "sha256": "78818d5bd3a9d9bafdb5f84c0792be5dc4fe2755754929e078f6735a31b4cd4b",
+      "duration": 5.664,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "kvvvag",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/kvvvag-d9542a6b2b2a.mp3",
+      "bytes": 63885,
+      "sha256": "d9542a6b2b2ad29f44267c8200a269f97dc3900e2776cd2716eeb6ff50c29252",
+      "duration": 3.168,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "lyj78v",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/lyj78v-ea4fd3b539e5.mp3",
+      "bytes": 128205,
+      "sha256": "ea4fd3b539e5025feb92b9188e01d37297ba1642692e4168ad98cf3b4e29dfac",
+      "duration": 6.384,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "m4wqg4",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/m4wqg4-50eb73283740.mp3",
+      "bytes": 52845,
+      "sha256": "50eb732837407b30ff86b3abee75ab0ba5fcf2f476331f0d088e26fb07887040",
+      "duration": 2.616,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "makofu",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/makofu-6f3df83740ce.mp3",
+      "bytes": 203085,
+      "sha256": "6f3df83740ce0b0bb2014e2ecc6491ebd61b19b5eb293171eeae2c1c86944433",
+      "duration": 10.128,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "nosrpn",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/nosrpn-7c975bc59e01.mp3",
+      "bytes": 190605,
+      "sha256": "7c975bc59e0171396fce37db816c9a046f2f4cd006814318e6261d656cb72eb2",
+      "duration": 9.504,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "o098zi",
+      "person": "president",
+      "kind": "character-narration",
+      "url": "assets/narracion/o098zi-c904269297a1.mp3",
+      "bytes": 121485,
+      "sha256": "c904269297a1371d4f0d8d02602787411b75b8091fa31601d37b41b6d0ce53cf",
+      "duration": 6.048,
+      "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "o3rckk",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/o3rckk-9d1796d40b8c.mp3",
+      "bytes": 73485,
+      "sha256": "9d1796d40b8c59139fe1f24fdf410d690b0b78f198b948c9c38ec9875d78e903",
+      "duration": 3.648,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "obts2",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/obts2-e138f9c7c9ef.mp3",
+      "bytes": 63885,
+      "sha256": "e138f9c7c9ef51235f3fae169b9eb093130969f537ae6cdf67cd44065e6258f9",
+      "duration": 3.168,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "p13ef8",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/p13ef8-c4a6bc3481ff.mp3",
+      "bytes": 27405,
+      "sha256": "c4a6bc3481ff19d7d97310dd521b01f44228dc4c3dd74c5927e5a561664763df",
+      "duration": 1.344,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "q396fy",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/q396fy-9aee5798140a.mp3",
+      "bytes": 129645,
+      "sha256": "9aee5798140a8348a3a9807f02365006d5a4a84599d3609e0d70d8f155663f88",
+      "duration": 6.456,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "q74fkx",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/q74fkx-f3d15d34d4f3.mp3",
+      "bytes": 100845,
+      "sha256": "f3d15d34d4f31c7627ae7478ab17d061f835674541d654f1f56bdf5878278af4",
+      "duration": 5.016,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "qtut45",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/qtut45-39fe40075ffc.mp3",
+      "bytes": 172845,
+      "sha256": "39fe40075ffc8f352ac4dc9354001da0ae2ecf8694798292281fee7961cb609d",
+      "duration": 8.616,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "qv10z6",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/qv10z6-90204216a279.mp3",
+      "bytes": 62445,
+      "sha256": "90204216a2797feb9a319e709481fd61ed6c87cbfb0a145401ba037af11ef527",
+      "duration": 3.096,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "r8ymxn",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/r8ymxn-b41b3d1bc99f.mp3",
+      "bytes": 33645,
+      "sha256": "b41b3d1bc99fd0fea8c8866db38ca210ba238f3577355909535c318850fc7332",
+      "duration": 1.656,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "rrjo6v",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/rrjo6v-590b1b815302.mp3",
+      "bytes": 33645,
+      "sha256": "590b1b8153021660259bdb901dc7adfde18ae3d29d59e66aff168dc46aa1459a",
+      "duration": 1.656,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "tagqcm",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/tagqcm-e5002251f5d6.mp3",
+      "bytes": 124845,
+      "sha256": "e5002251f5d6a736d4fd9157d18ff37634d4c1a925f70986b670c8595795c7dc",
+      "duration": 6.216,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "tg8gdo",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/tg8gdo-ff86f1e04ed5.mp3",
+      "bytes": 139245,
+      "sha256": "ff86f1e04ed590a025016fda6e2f44fe2bca36449fe5b846d2e892a70b6adde6",
+      "duration": 6.936,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "towia",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/towia-a6dd93606c9e.mp3",
+      "bytes": 159885,
+      "sha256": "a6dd93606c9ed9d52ce93e8f2099770381b6b5fd9e6f449140d0087748202eab",
+      "duration": 7.968,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
+      "id": "tu0kv0",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/tu0kv0-02a030777327.mp3",
+      "bytes": 140685,
+      "sha256": "02a030777327a4957ddee192d5a6bba58ff8628f721b7133485ae95f57b82918",
+      "duration": 7.008,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "twgj8x",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/twgj8x-eb06fcec0489.mp3",
+      "bytes": 128205,
+      "sha256": "eb06fcec0489df0367bcfdd845689caec9979f1440a0dcd63461f0829a88a991",
+      "duration": 6.384,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "w6d3gr",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/w6d3gr-05d2c4070c6f.mp3",
+      "bytes": 65805,
+      "sha256": "05d2c4070c6f2961064b82451dc5309ef73c120fc453bcfbbf4e08d3938d6a69",
+      "duration": 3.264,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
+    },
+    {
+      "id": "x7elr2",
+      "person": "mayor",
+      "kind": "character-narration",
+      "url": "assets/narracion/x7elr2-360c5e82a3b2.mp3",
+      "bytes": 59085,
+      "sha256": "360c5e82a3b22cb54ff499a385d69326040369a80563863a588d8e9a20de5683",
+      "duration": 2.928,
+      "referenceSHA256": "26667538b41ee7e1f4ba65e4867aaf28278ce9d54fdd72bd323768268f8c8964"
+    },
+    {
+      "id": "yd39ss",
+      "person": "minister",
+      "kind": "character-narration",
+      "url": "assets/narracion/yd39ss-7a3cb2067990.mp3",
+      "bytes": 113805,
+      "sha256": "7a3cb20679908b70524f2478bbd0a104dd8e2f37a53b6659d8110a5bfdce3ee5",
+      "duration": 5.664,
+      "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+    },
+    {
+      "id": "yggb50",
+      "person": "treasury",
+      "kind": "character-narration",
+      "url": "assets/narracion/yggb50-e07338ccb754.mp3",
+      "bytes": 110445,
+      "sha256": "e07338ccb754d82fb4ddf5451cfebaff6c8ad4a539d67a9d0bb1417be30393dc",
+      "duration": 5.496,
+      "referenceSHA256": "e2ca720f34522122ec05be170ca471f9316fc2d1c7ddff18178cb92df3e74188"
+    },
+    {
+      "id": "z6hb8h",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/z6hb8h-50515b5f85b5.mp3",
+      "bytes": 145485,
+      "sha256": "50515b5f85b57faf3e38555f9904a341ce9d900dc163c37b76d039dc5bdc7e45",
+      "duration": 7.248,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "id": "zqgiqy",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/zqgiqy-439ddd1cc682.mp3",
+      "bytes": 124845,
+      "sha256": "439ddd1cc6825102d629a2901d2034868ba9bb0ed2a2bd712e1c415c2f09c6f6",
+      "duration": 6.216,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
+      "url": "assets/narracion/manifest.json",
+      "bytes": 344127,
+      "sha256": "08414354ce08bb72940bdb97c9dcc92c2134224f533c615f24f047445d043d15",
+      "kind": "character-narration-manifest"
     },
     {
       "url": "assets/rescate/cloacas.webp",
@@ -1044,14 +3588,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-d005e85b8238.js",
-      "bytes": 11653116,
-      "sha256": "d005e85b8238e46d26a20d92ed4607f1ce5d323e35c655735c67db0c1f43f963"
+      "url": "assets/game-script-4-f0075ef456d3.js",
+      "bytes": 11703398,
+      "sha256": "f0075ef456d32218cfaa963daa19f7a02ab6160e0df4145049ee05c5ca49e8ac"
     },
     {
-      "url": "assets/game-style-0-f52617004e01.css",
-      "bytes": 2181247,
-      "sha256": "f52617004e01b4e1aff4a7a91837b62d05ab2c91df7b356943290760a3fe867c"
+      "url": "assets/game-style-0-8ad7d7c4b8f0.css",
+      "bytes": 2185182,
+      "sha256": "8ad7d7c4b8f0982961f14929ae249c9df2e655d43333b482b7cf68edabd8f03a"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -5196,6 +7740,16 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-d005e85b8238.js",
+      "bytes": 11653116,
+      "sha256": "d005e85b8238e46d26a20d92ed4607f1ce5d323e35c655735c67db0c1f43f963"
+    },
+    {
+      "url": "assets/game-style-0-f52617004e01.css",
+      "bytes": 2181247,
+      "sha256": "f52617004e01b4e1aff4a7a91837b62d05ab2c91df7b356943290760a3fe867c"
+    },
     {
       "url": "assets/game-style-0-57fd76697ea9.css",
       "bytes": 2181000,

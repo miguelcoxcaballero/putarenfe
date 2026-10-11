@@ -1,12 +1,12 @@
 {
   "name": "iberia-ferroviaria",
-  "version": "6.4.0",
+  "version": "6.5.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
     "web:build": "node ../tools/build-web.mjs",
-    "test": "node rescate-test.mjs && node red-test.mjs && node marketplace-test.mjs && node test.mjs && node campaign-test.mjs && node tenfe-test.mjs && node campaign-test.mjs --tenfe && node conexiones-test.mjs && node train-refit-test.mjs",
+    "test": "node rescate-test.mjs && node red-test.mjs && node marketplace-test.mjs && node test.mjs && node campaign-test.mjs && node tenfe-test.mjs && node campaign-test.mjs --tenfe && node conexiones-test.mjs && node train-refit-test.mjs && node narration-test.mjs",
     "red-test": "node red-test.mjs",
     "red-ui": "node red-ui-test.mjs",
     "rescate-test": "node rescate-test.mjs",
@@ -31,7 +31,8 @@
     "tenfe-campaign": "node campaign-test.mjs --tenfe",
     "conexiones-ui": "node conexiones-ui-test.mjs",
     "refit-ui": "node train-refit-ui-test.mjs",
-    "fabricantes-ui": "node fabricantes-ui-test.mjs"
+    "fabricantes-ui": "node fabricantes-ui-test.mjs",
+    "narracion-ui": "node narracion-ui-test.mjs"
   },
   "devDependencies": {
     "sharp": "0.34.5"

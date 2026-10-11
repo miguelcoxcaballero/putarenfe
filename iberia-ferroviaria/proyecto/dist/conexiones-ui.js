@@ -1,4 +1,5 @@
 
+import {card,newsKey,message} from './narration-runtime.js';
 import * as J from './conexiones.js';
 let E,face;
 export function bind(engine,faceURL){E=engine;face=faceURL;}
@@ -9,7 +10,7 @@ const picture=(image,alt='')=>'<img class="game-photo" src="assets/rescate/'+ima
 const button=(label,action,id,disabled=false,extra='')=>'<button class="btn small" data-action="'+action+'" data-id="'+esc(id||'')+'" '+(disabled?'disabled':'')+' '+extra+'>'+esc(label)+'</button>';
 export function eventHTML(s){
  const event=J.EVENTS.find(x=>x.id===s.tenfe.game.event?.id);if(!event)return '';
- return '<article class="game-event" aria-labelledby="event-title">'+picture(event.image,event.title)+'<div><span class="kicker">Suceso del turno '+J.turn(s)+'</span><h2 id="event-title">'+esc(event.title)+'</h2><p>'+esc(event.body)+'</p><div class="game-event-options">'+event.choices.map((x,i)=>'<button class="choice" data-action="game-event" data-id="'+event.id+'" data-choice="'+i+'" '+(s.cash<x.cost||s.ended?'disabled':'')+'><strong>'+esc(x.label)+' · '+money(x.cost)+'</strong><span>'+esc(x.detail)+'</span></button>').join('')+'</div></div></article>';
+ return '<article class="game-event" data-narration-key="event-'+event.id+'" data-person="'+message('event-'+event.id).person+'" aria-labelledby="event-title">'+picture(event.image,event.title)+'<div><span class="kicker">Suceso del turno '+J.turn(s)+'</span><h2 id="event-title">'+esc(event.title)+'</h2>'+card('event-'+event.id)+'<div class="game-event-options">'+event.choices.map((x,i)=>'<button class="choice" data-action="game-event" data-id="'+event.id+'" data-choice="'+i+'" '+(s.cash<x.cost||s.ended?'disabled':'')+'><strong>'+esc(x.label)+' · '+money(x.cost)+'</strong><span>'+esc(x.detail)+'</span></button>').join('')+'</div></div></article>';
 }
 export function missionHTML(s){
  const g=s.tenfe.game,won=g.challenges.length,mandates=s.tenfe.elections.filter(x=>x.won).length;
@@ -18,7 +19,7 @@ export function missionHTML(s){
 export function campaignHTML(s){
  const g=s.tenfe.game;
  return '<div class="tenfe-title"><span class="kicker">Tu mandato · Conexiones</span><h2>Cinco retos, una compañía</h2><p>Resuelve un suceso por turno, amplía una red fiable y gana dos elecciones. El mapa, el consejo, el laboratorio y Trenes Pop están disponibles desde el principio.</p></div>'+
- (g.won?'<article class="game-result">'+picture('fin-victoria')+'<h2>Tu red ya es un legado.</h2><p>Has ganado. Puedes seguir dirigiendo y ampliando sin límite de fecha.</p></article>':s.ended?'<article class="game-result">'+picture('fin-derrota')+'<h2>El consejo cambia de dirección.</h2><p>Revisa tu red y los informes antes de probar una estrategia nueva.</p></article>':'')+
+ (g.won?'<article class="game-result">'+picture('fin-victoria')+'<h2>Tu red ya es un legado.</h2>'+card('victory')+'</article>':s.ended?'<article class="game-result">'+picture('fin-derrota')+'<h2>El consejo cambia de dirección.</h2>'+card('defeat')+'</article>':'')+
  '<div class="game-challenges">'+J.CHALLENGES.map(d=>'<article>'+picture('etapa-'+d.id)+'<div><span class="kicker">'+(g.challenges.includes(d.id)?'✓ Cumplido':'Objetivo abierto')+'</span><h3>'+esc(d.name)+'</h3><p>'+esc(d.text)+'</p><strong>'+money(d.reward)+' al cumplir</strong></div></article>').join('')+'</div>'+
  '<section class="callout"><strong>Cómo se juega</strong><p>Un turno liquida la operación de tu red y avanza pedidos, obras y formación. Puedes observar una jornada con trenes e incidencias o delegar el turno. Hay tres cuadrillas para obras y fases, dos pactos activos y una investigación por laboratorio. Las elecciones llegan cada 12 turnos; se usa la media de apoyo de los últimos tres cierres. Los cinco retos y dos victorias electorales completan la partida.</p></section>';
 }
@@ -47,7 +48,7 @@ export function pactsHTML(s){
  }).join('')+'</div>';
 }
 export function newsHTML(s){
- return '<h2>Tu red, en imágenes</h2><p>Los sucesos, objetivos, investigaciones y obras conservan sus ilustraciones y sus consecuencias.</p>'+eventHTML(s)+'<div class="game-news">'+s.tenfe.game.news.map(x=>'<article>'+picture(x.image)+'<div><span class="kicker">Turno '+x.turn+'</span><h3>'+esc(x.title)+'</h3><p>'+esc(x.body)+'</p></div></article>').join('')+'</div>';
+ return '<h2>Tu red, en imágenes</h2><p>Los sucesos, objetivos, investigaciones y obras conservan sus ilustraciones y sus consecuencias.</p>'+eventHTML(s)+'<div class="game-news">'+s.tenfe.game.news.map(x=>'<article>'+picture(x.image)+'<div><span class="kicker">Turno '+x.turn+'</span><h3>'+esc(x.title)+'</h3>'+card(newsKey(x),{details:x.body})+'</div></article>').join('')+'</div>';
 }
 export function boardHTML(s){
  const nodes=Object.fromEntries(J.HUBS.map(x=>[x.id,x])),routes=s.routes.filter(r=>J.NETWORK.includes(r.id)),colors={AVE:'#ffbd65',Alvia:'#85bbff',Regional:'#8ce0b6'};

@@ -23,7 +23,7 @@ export function menuHTML(saved=null,savedError='',rescue=null){
  ${!latest?'<p class="menu-save-note" id="menu-no-save">Sin partida guardada en este navegador.</p>':''}
  ${rescue?`<button class="menu-legacy" data-action="legacy-preview">Recuperar Rescate anterior · semana ${Number(rescue.week)||1}</button>`:''}
  </div>
- <footer class="menu-council"><span class="menu-version">Versión 6.4.0</span><a href="dialogos.html" target="_blank" rel="noopener">Auditorio</a>${menuPhotoCredit()}</footer>
+ <footer class="menu-council"><span class="menu-version">Versión 6.5.0</span><a href="dialogos.html" target="_blank" rel="noopener">Auditorio</a>${menuPhotoCredit()}</footer>
  </main>`;
 }
 export function menuScreenHTML(content){

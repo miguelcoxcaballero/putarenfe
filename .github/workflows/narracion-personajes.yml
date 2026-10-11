@@ -1,0 +1,84 @@
+name: Grabar narración de los personajes
+on:
+  push:
+    branches: [codex/narracion-personajes]
+    paths:
+      - iberia-ferroviaria/proyecto/dist/narration-data.js
+      - iberia-ferroviaria/proyecto/tools/build_narration_voices.py
+      - .github/workflows/narracion-personajes.yml
+permissions:
+  contents: write
+env:
+  HF_HUB_DISABLE_PROGRESS_BARS: 1
+  HF_HUB_DISABLE_TELEMETRY: 1
+  HF_HUB_DISABLE_XET: 1
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: iberia-ferroviaria/proyecto/tools/requirements-qwen-voices.txt
+      - name: Preparar codificador de audio
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Instalar entorno aislado de grabación
+        working-directory: iberia-ferroviaria/proyecto
+        run: python -m pip install --progress-bar off -r tools/requirements-qwen-voices.txt
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/tenfe-narration-model
+          key: qwen-narration-5d83992436eae1d760afd27aff78a71d676296fc
+      - name: Preparar y comprobar el modelo fijado
+        working-directory: iberia-ferroviaria/proyecto
+        run: python tools/build_narration_voices.py --prepare --model /tmp/tenfe-narration-model
+      - name: Grabar mensajes completos con las voces del reparto
+        working-directory: iberia-ferroviaria/proyecto
+        run: python -u tools/build_narration_voices.py --model /tmp/tenfe-narration-model --stage /tmp/tenfe-narration-stage --shard ${{ matrix.shard }} --shards 6
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: narration-takes-${{ matrix.shard }}
+          path: |
+            /tmp/tenfe-narration-stage/*.mp3
+            /tmp/tenfe-narration-stage/manifest.json
+          retention-days: 3
+  package:
+    needs: record
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/narracion-personajes
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: narration-takes-*
+          path: /tmp/tenfe-narration-takes
+      - name: Verificar y reunir el catálogo completo
+        working-directory: iberia-ferroviaria/proyecto
+        run: python tools/build_narration_voices.py --package --stage /tmp/tenfe-narration-takes
+      - name: Conservar tomas completas y procedencia
+        run: |
+          git config user.name "Tenfe audio"
+          git config user.email "tenfe-audio@users.noreply.github.com"
+          git add iberia-ferroviaria/proyecto/dist/assets/narracion iberia-ferroviaria/proyecto/dist/assets/narration-voices.js
+          git commit -m "Conserva narraciones completas verificadas del reparto [skip ci]"
+          git push

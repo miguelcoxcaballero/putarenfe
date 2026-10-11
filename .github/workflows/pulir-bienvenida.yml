@@ -1,7 +1,7 @@
 name: Verificar juego, voces y menú
 on:
   push:
-    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, codex/menu-inicio-realista, codex/fotos-fabricantes, codex/interiores-referenciados, main]
+    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, codex/menu-inicio-realista, codex/fotos-fabricantes, codex/interiores-referenciados, codex/narracion-personajes, main]
 concurrency:
   group: conexiones-${{ github.ref }}
   cancel-in-progress: true
@@ -11,7 +11,7 @@ jobs:
   check:
     if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,14 +47,23 @@ jobs:
       - name: Probar el juego publicado
         if: github.ref != 'refs/heads/codex/menu-inicio-realista' && github.ref != 'refs/heads/codex/fotos-fabricantes' && github.ref != 'refs/heads/codex/interiores-referenciados'
         working-directory: iberia-ferroviaria/proyecto
-        run: |
-          node mapa-voces-ui-test.mjs
-          node train-refit-ui-test.mjs
-          node conexiones-ui-test.mjs
+        run: node mapa-voces-ui-test.mjs
+      - name: Probar reformas sin cambiar la flota
+        if: github.ref != 'refs/heads/codex/menu-inicio-realista' && github.ref != 'refs/heads/codex/fotos-fabricantes' && github.ref != 'refs/heads/codex/interiores-referenciados'
+        working-directory: iberia-ferroviaria/proyecto
+        run: node train-refit-ui-test.mjs
+      - name: Probar la guía y las acciones del juego
+        if: github.ref != 'refs/heads/codex/menu-inicio-realista' && github.ref != 'refs/heads/codex/fotos-fabricantes' && github.ref != 'refs/heads/codex/interiores-referenciados'
+        working-directory: iberia-ferroviaria/proyecto
+        run: node conexiones-ui-test.mjs
       - name: Comprobar interiores referenciados y reforma completa
         if: github.ref == 'refs/heads/codex/interiores-referenciados'
         working-directory: iberia-ferroviaria/proyecto
         run: node train-refit-ui-test.mjs
+      - name: Comprobar mensajes narrados y audio nativo
+        if: github.ref == 'refs/heads/codex/narracion-personajes'
+        working-directory: iberia-ferroviaria/proyecto
+        run: node narracion-ui-test.mjs
       - name: Guardar capturas e informe
         if: always()
         uses: actions/upload-artifact@v4
@@ -74,7 +83,7 @@ jobs:
   live:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -117,6 +126,7 @@ jobs:
           node menu-inicio-ui-test.mjs
           node fabricantes-ui-test.mjs
           node train-refit-ui-test.mjs
+          node narracion-ui-test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

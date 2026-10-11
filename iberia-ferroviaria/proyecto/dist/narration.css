@@ -1,0 +1,31 @@
+/* Messages belong to the cast and share the game's controls and panels. */
+.narration-card{padding:12px 0;color:inherit;font-size:13px;line-height:1.5}
+.narration-speaker{display:flex;align-items:center;gap:9px;margin-bottom:8px;text-align:left}
+.narration-speaker .portrait{width:40px;height:48px;object-fit:cover;border-radius:7px;flex-shrink:0}
+.narration-speaker>div{min-width:0;flex:1}.narration-speaker strong,.narration-speaker small{display:block}
+.narration-speaker strong{font-size:13px}.narration-speaker small{font-size:10px;opacity:.8}
+.narration-control{display:inline-flex;width:auto;height:auto;flex-shrink:0;align-items:center;justify-content:center;gap:5px;min-height:36px;min-width:36px;white-space:nowrap;color:inherit;border:1px solid currentColor;border-radius:6px;cursor:pointer;background:transparent;padding:5px 8px;font:inherit;font-size:11px}
+.narration-card p{margin:7px 0}.narration-s.on{color:#ffd884;background:#b4862526;border-radius:3px}
+.narration-details{border-top:1px solid #ffffff26;margin-top:9px;padding-top:7px;font-size:11px}
+.narration-details>span{text-transform:uppercase;letter-spacing:.8px;font-size:9px;opacity:.75}
+.narration-details p{overflow-wrap:anywhere}
+.narration-card.talking .portrait,.tour-coach.talking .portrait{box-shadow:0 0 0 2px #f0c06a}
+#toast{transition:opacity 180ms ease,transform 180ms ease;left:auto;right:18px;bottom:112px;transform:translateY(14px);max-width:min(420px,calc(100vw - 28px));width:420px;padding:0;text-align:left;border-radius:12px;background:transparent;box-shadow:none;max-height:min(60vh,560px);overflow-y:auto;pointer-events:none}
+#toast.show{transform:translateY(0)}#toast .narration-toast{pointer-events:none}#toast .narration-control,#toast .narration-dismiss{pointer-events:auto}
+.narration-toast{position:relative;padding:12px 14px;background:#242a33;color:#f5eee2;border:1px solid #ffffff24;border-radius:11px;box-shadow:0 8px 28px #0005;margin:8px 0}
+.narration-toast .narration-card{padding:0 23px 0 0}.narration-toast .narration-speaker{padding-right:0}
+.narration-dismiss{position:absolute;right:4px;top:4px;min-width:30px;min-height:30px;border:0;background:transparent;color:#e8dfcf;font-size:21px;cursor:pointer}
+#modal .narration-toast p,#modal .narration-toast h3{color:#f5eee2}
+#modal .narration-card:not(.narration-toast .narration-card){border-bottom:1px solid #ffffff25;margin:10px 0 15px}
+#modal .narration-card .narration-speaker strong{color:inherit}
+.tour-coach .narration-control{margin-left:auto;max-width:85px;color:#efd8ad;flex-shrink:0}.tour-coach .narration-s.on{color:#ffd884;background:#b4862526}
+.entry-welcome .narration-speaker{margin:9px 0 8px}.entry-welcome .narration-speaker small{max-width:170px}.entry-welcome .narration-control{color:#efd8ad}
+.entry-welcome .narration-s.on{color:#ffd884;background:#b4862526}
+.game-event .narration-card{padding:0}.game-event .narration-speaker{padding-top:10px}
+.game-news .narration-card{padding:4px 0}.game-news .narration-card>h3{font-size:14px}
+@media(max-width:600px){#toast{right:12px;bottom:172px;max-height:40vh;width:calc(100vw - 24px)}.narration-toast{padding:10px}.narration-speaker{gap:7px}.narration-speaker strong{font-size:12px}.narration-button-label{display:none}.narration-control{min-width:36px}.narration-speaker small{font-size:9px}.narration-card{font-size:12px}.tour-coach .narration-control{min-width:34px}}
+@media(prefers-reduced-motion:reduce){#toast{transition:none}}
+
+.tour-narration{display:flex;justify-content:flex-end;margin:-6px 0 8px}.entry-welcome .narration-speaker{margin:14px 0 6px}.entry-welcome .narration-speaker img{width:40px;height:48px;object-fit:cover;border-radius:6px}.tour-coach .narration-control{color:#efd8ad}.narration-card .portrait{object-fit:cover}
+
+.tour-coach .narration-button-label{display:none}.tour-coach .narration-control{padding:5px;min-width:36px}.tour-coach header .narration-control{margin-left:0}

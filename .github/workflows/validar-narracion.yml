@@ -1,0 +1,32 @@
+name: Validar control de narración
+on:
+  push:
+    branches: [codex/narracion-personajes]
+    paths:
+      - iberia-ferroviaria/proyecto/dist/sfx.js
+      - iberia-ferroviaria/proyecto/dist/app.js
+      - iberia-ferroviaria/proyecto/dist/voice.js
+      - iberia-ferroviaria/proyecto/dist/narration-runtime.js
+      - iberia-ferroviaria/proyecto/narration-test.mjs
+      - .github/workflows/validar-narracion.yml
+concurrency:
+  group: narracion-runtime-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Sintaxis y regresiones del motor y reproducción
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          node --check dist/app.js
+          node --check dist/narration-runtime.js
+          node --check narracion-ui-test.mjs
+          node narration-test.mjs
