@@ -886,7 +886,6 @@ function opsPage() {
   const kind = dayType();
   const head = header('Centro de control · ' + S.DAY_TYPES[kind], op.phase === 'planning' ? 'Prepara la jornada.' : op.phase === 'running' ? 'El día está en marcha.' : 'La jornada ha terminado.', esc(O.dayLabel(state)) + '.');
   const body = `${T.staffing(state)<1?'<div class="callout red"><p>Faltan maquinistas: se cancelan salidas. La formación tarda tres meses.</p><button class="btn small" data-action="tycoon-tab" data-id="people">Preparar plantilla</button></div>':''}<dl class="figures"><div><dt>Reloj</dt><dd class="mono">${clock(m)}</dd></div><div><dt>En circulación</dt><dd>${n(moving)}</dd></div><div><dt>Programadas</dt><dd>${n(trips.length)}</dd></div><div><dt>Puntualidad</dt><dd>${done.length ? n((1 - late / done.length) * 100) + ' %' : '—'}</dd></div><div><dt>Primera / última</dt><dd class="mono" style="font-size:19px">${clock(b.first)} · ${clock(b.last)}</dd></div></dl>
-  ${op.phase==='planning'?'<p class="callout">Una jornada permite atender incidencias. Para avanzar obras y formación, <b>Delegar mes</b> liquida las cuentas y comprueba los compromisos sin jugar todos sus días.</p>':''}
   ${reached.length ? `<h2 class="section">Incidencias</h2>${reached.map(x => {
     const r = state.routes.find(r => r.id === x.route), choice = op.choices?.[x.trip], solved = op.resolved.includes(x.trip);
     return `<div class="incident"><div class="split"><strong>${incidentGlyph(x)} ${esc(x.reason)}</strong><span class="status ${solved ? 'on' : 'late'}">${solved ? esc(O.RESPONSES[choice || 'team'].label) : 'Pendiente'}</span></div>
@@ -1030,7 +1029,7 @@ function worksPage() {
     }).join('')}</div>`;
   } else {
     const list = I.allTramos(state).filter(d => state.infra.t[d.id]?.b && (I.tramoWorks(state, d.id).length || state.projects.some(p => !p.done && p.type === 'tramo' && p.target === d.id)));
-    body += `<p class="small">Tramos que admiten obra: catenaria donde no hay, tercer carril para que pasen los dos anchos o ancho estándar para siempre (más barato, pero corta la línea mientras dura).</p>
+    body += `
     <table><thead><tr><th>Tramo</th><th>Ancho</th><th>Catenaria</th><th>Obras</th></tr></thead><tbody>${list.sort((a, b) => a.name.localeCompare(b.name)).map(d => {
       const st = state.infra.t[d.id], job = state.projects.find(p => !p.done && p.type === 'tramo' && p.target === d.id);
       return `<tr><td><button class="linkish" data-action="tramo" data-id="${d.id}"><strong>${esc(d.name)}</strong></button><small>${n(d.km)} km · ${st.v} km/h</small></td><td>${chip(I.GAUGE_LABEL[st.g], GAUGE_COLOR[st.g])}</td><td>${chip(I.ELEC_LABEL[st.e], ELEC_COLOR[st.e])}</td>

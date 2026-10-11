@@ -50,7 +50,7 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
     const u=s.tenfe,b=E.balance(s);
     return `<div class="tenfe-title"><span class="kicker">Crece jugando</span><h2>La red se gana</h2></div>
       <dl class="figures"><div><dt>Viajeros / mes</dt><dd>${number(b.passengers)}</dd></div><div><dt>Hitos alcanzados</dt><dd>${u.milestones.length} / 4</dd></div></dl>
-      <p class="small">Los objetivos crecen desde la red que recibiste. Se comprueban al cerrar el mes.</p>
+
       <div class="tenfe-hitos">${U.MILESTONES.map((m,i)=>{
         const target=Math.ceil(u.baseline*m.factor),done=u.milestones.includes(m.id);
         return `<article class="${done?'done':''}"><span class="tenfe-step">${done?'✓':String(i+1).padStart(2,'0')}</span><div><h3>${m.name}</h3><p>${m.unlock} · +${m.reward} M€</p><div class="meter"><span style="width:${Math.min(100,b.passengers/target*100)}%"></span></div><small>${number(Math.min(b.passengers,target))} / ${number(target)} viajeros por mes</small></div></article>`;
