@@ -147,7 +147,7 @@ export class Narrator{
  }
  modal(root,{fresh=true}={}){
   if(root.querySelector('.main-menu-shell')&&!root.querySelector('.method'))return;
-  if(root.querySelector('[data-say]'))return;
+  if(root.querySelector('[data-action="say"],.say-s')){this.cancel('modal');this.cancel('modal-toast');return;}
   const content=root.querySelector('.content')||root.querySelector('.modal');if(!content)return;
   const title=content.querySelector('h1')?.textContent||'';
   let key=root.querySelector('.tenfe-news-modal')?newsKey({title}):root.querySelector('.tenfe-month-report')?'turn-report':
@@ -158,10 +158,11 @@ export class Narrator{
    root.querySelector('#importSave')?'save-info':root.querySelector('.method')||/Haz que el país|Cómo jugar/.test(title)?'help-info':null;
   if(!key&&content.querySelector('p'))key='message-info';
   if(!key)return;
-  if(fresh){this.modalEpisode++;this.cancel('modal');this.cancel('modal-toast');}
+  if(fresh||this.modalKey!==key){this.modalEpisode++;this.cancel('modal');this.cancel('modal-toast');}
+  this.modalKey=key;
   const box=globalThis.document.createElement('div');box.innerHTML=card(key);const node=box.firstElementChild;
   node.dataset.narrationWhere='modal';(content.querySelector('h1')||content.firstElementChild)?.after(node);
-  this.enqueue(key,{where:'modal',root:()=>root.querySelector('.narration-card'),visible:()=>root.open,once:'modal:'+this.modalEpisode+':'+key,priority:60});this.sync();
+  this.enqueue(key,{where:'modal',root:()=>root.querySelector('[data-narration-where="modal"]'),visible:()=>root.open&&!!root.querySelector('[data-narration-where="modal"]'),once:'modal:'+this.modalEpisode+':'+key,priority:60});this.sync();
  }
  events(root,scope){
   for(const node of root.querySelectorAll('.game-event[data-narration-key]')){

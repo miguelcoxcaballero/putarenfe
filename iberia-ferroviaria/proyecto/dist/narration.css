@@ -27,3 +27,5 @@
 @media(prefers-reduced-motion:reduce){#toast{transition:none}}
 
 .tour-narration{display:flex;justify-content:flex-end;margin:-6px 0 8px}.entry-welcome .narration-speaker{margin:14px 0 6px}.entry-welcome .narration-speaker img{width:40px;height:48px;object-fit:cover;border-radius:6px}.tour-coach .narration-control{color:#efd8ad}.narration-card .portrait{object-fit:cover}
+
+.tour-coach .narration-button-label{display:none}.tour-coach .narration-control{padding:5px;min-width:36px}.tour-coach header .narration-control{margin-left:0}
