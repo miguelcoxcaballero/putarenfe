@@ -1,3 +1,4 @@
+import {card,newsKey,keyForText} from './narration-runtime.js';
 import * as JUI from './conexiones-ui.js';
 import * as E from './engine.js';
 import * as U from './tenfe.js';
@@ -83,7 +84,7 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
     if(!report)return '<p class="empty">Tu primer informe llega al cerrar el mes.</p>';
     return `<div class="tenfe-title"><span class="kicker">${when(s,report.month)}</span><h2>Así cambió tu compañía</h2></div>
       <dl class="figures"><div><dt>Resultado</dt><dd class="${report.net>=0?'pos':'neg'}">${money(report.net)}</dd></div><div><dt>Caja final</dt><dd>${money(report.cash)}</dd></div><div><dt>Viajeros</dt><dd>${number(report.passengers)}</dd></div><div><dt>Puntualidad</dt><dd>${number(report.punctuality,1)} %</dd></div></dl>
-      <div class="tenfe-report-news">${report.news.map(n=>`<div><strong>${esc(n.title)}</strong><p>${esc(n.body)}</p></div>`).join('')}</div>
+      <div class="tenfe-report-news">${report.news.map(n=>`<div><strong>${esc(n.title)}</strong>${card(keyForText(n.body)||newsKey(n),{details:n.body})}</div>`).join('')}</div>
       <div class="tenfe-report-foot"><span>${report.active} servicios · ${report.orders} pedidos pendientes</span><b>Apoyo ${number(report.support,1)} %</b></div>`;
   }
   export function forecastHTML(s) {

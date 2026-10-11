@@ -1030,7 +1030,7 @@ function storyPage() {
 }
 
 function archivePage() {
-  const body = state.log.length ? state.log.map(l => `<div class="news"><time>${when(l.month)}</time><div><h3>${esc(l.title)}</h3><p>${esc(l.body)}</p></div></div>`).join('') : '<div class="empty">Todavía no ha pasado nada digno de mención.</div>';
+  const body = state.log.length ? state.log.map(l => `<div class="news"><time>${when(l.month)}</time><div><h3>${esc(l.title)}</h3>${N.card(N.keyForText(l.body)||N.newsKey(l),{details:l.body})}</div></div>`).join('') : '<div class="empty">Todavía no ha pasado nada digno de mención.</div>';
   return [header('Diario', 'Lo que ha pasado en tu mandato.'), body];
 }
 
@@ -1248,7 +1248,7 @@ function progressPage(){
 }
 function pressPage(){
   const tabs=[['paper','Gaceta'],['journal','Diario'],['reports','Informes']];
-  const body=ui.pressTab==='paper'&&state.tenfe?.game?JUI.newsHTML(state):ui.pressTab==='journal'?archivePage()[1]:ui.pressTab==='reports'?(state.tenfe.reports.map(r=>`<section class="tenfe-report">${TenfeUI.reportHTML(state,r)}</section>`).join('')||TenfeUI.reportHTML(state)):tycoonPage(state,'paper').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
+  const body=ui.pressTab==='paper'&&state.tenfe?.game?JUI.newsHTML(state):ui.pressTab==='journal'?archivePage()[1]:ui.pressTab==='reports'?(N.card('turn-report')+state.tenfe.reports.map(r=>`<section class="tenfe-report">${TenfeUI.reportHTML(state,r)}</section>`).join('')||TenfeUI.reportHTML(state)):tycoonPage(state,'paper').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
   return [header('Lo que ocurrió en tu red','Prensa'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="press-tab" data-id="${id}" class="${ui.pressTab===id?'active':''}">${label}</button>`).join('')}</div>`+body];
 }
 function showTenfeUpdate(report=false){

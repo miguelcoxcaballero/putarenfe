@@ -18,12 +18,12 @@
 #modal .narration-toast p,#modal .narration-toast h3{color:#f5eee2}
 #modal .narration-card:not(.narration-toast .narration-card){border-bottom:1px solid #ffffff25;margin:10px 0 15px}
 #modal .narration-card .narration-speaker strong{color:inherit}
-.tour-coach .narration-control{margin-left:auto;max-width:85px;color:#7a3c49;flex-shrink:0}.tour-coach .narration-s.on{color:#7a3c49;background:#ead5a5}
-.entry-welcome .narration-speaker{margin:9px 0 8px}.entry-welcome .narration-speaker small{max-width:170px}.entry-welcome .narration-control{color:#7a3c49}
-.entry-welcome .narration-s.on{color:#7a3c49;background:#ead5a5}
+.tour-coach .narration-control{margin-left:auto;max-width:85px;color:#efd8ad;flex-shrink:0}.tour-coach .narration-s.on{color:#ffd884;background:#b4862526}
+.entry-welcome .narration-speaker{margin:9px 0 8px}.entry-welcome .narration-speaker small{max-width:170px}.entry-welcome .narration-control{color:#efd8ad}
+.entry-welcome .narration-s.on{color:#ffd884;background:#b4862526}
 .game-event .narration-card{padding:0}.game-event .narration-speaker{padding-top:10px}
 .game-news .narration-card{padding:4px 0}.game-news .narration-card>h3{font-size:14px}
 @media(max-width:600px){#toast{right:12px;bottom:172px;max-height:40vh;width:calc(100vw - 24px)}.narration-toast{padding:10px}.narration-speaker{gap:7px}.narration-speaker strong{font-size:12px}.narration-button-label{display:none}.narration-control{min-width:36px}.narration-speaker small{font-size:9px}.narration-card{font-size:12px}.tour-coach .narration-control{min-width:34px}}
 @media(prefers-reduced-motion:reduce){#toast{transition:none}}
 
-.tour-narration{display:flex;justify-content:flex-end;margin:-6px 0 8px}.entry-welcome .narration-speaker{margin:14px 0 6px}.entry-welcome .narration-speaker img{width:40px;height:48px;object-fit:cover;border-radius:6px}.tour-coach .narration-control{color:#7a3c49}.narration-card .portrait{object-fit:cover}
+.tour-narration{display:flex;justify-content:flex-end;margin:-6px 0 8px}.entry-welcome .narration-speaker{margin:14px 0 6px}.entry-welcome .narration-speaker img{width:40px;height:48px;object-fit:cover;border-radius:6px}.tour-coach .narration-control{color:#efd8ad}.narration-card .portrait{object-fit:cover}

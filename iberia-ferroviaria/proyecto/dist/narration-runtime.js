@@ -27,12 +27,15 @@ export function toastKey(text,{error=false,action=''}={}){
  if(/^Petición incumplida/.test(raw))return 'request-lost';
  if(/^Momento del día cumplido/.test(raw))return 'surge-success';
  if(/^Horario real/.test(raw))return 'real-timetable';
- if(/maquinistas.*formación/.test(raw))return 'training-result';
- if(/política (activada|desactivada)/.test(raw))return 'policy-result';
+ if(/maquinistas.*formación/i.test(raw))return 'training-result';
+ if(/política (activada|desactivada)/i.test(raw))return 'policy-result';
  if(/financiada.*Final previsto/.test(raw))return 'research-result';
  if(/^Solo hay trenes|^Conexión abierta/.test(raw))return 'service-result';
  if(/Incidencia:/.test(raw))return 'incident-alert';
  if(/Revisa la ciudad en el mapa/.test(raw))return 'surge-alert';
+ if(['market-favorite','buy','market-buy','buy-new'].includes(action))return 'purchase-info';
+ if(['hire','tycoon-train'].includes(action))return 'training-result';
+ if(action==='route-trips')return 'service-result';
  if(/confianza|M€|cobrad[ao]|premio|financiación/i.test(raw)||['borrow','repay','tycoon-lobby'].includes(action))return 'finance-result';
  return 'message-info';
 }

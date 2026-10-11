@@ -6,7 +6,7 @@ import http from 'node:http';
 import {chromium} from 'playwright';
 const root=path.resolve('..'),out=path.resolve('../outputs/tenfe-qa');
 fs.mkdirSync(out,{recursive:true});
-const release=JSON.parse(fs.readFileSync('../release.json')),takes=new Map(release.recordings.map(x=>[x.id,x]));
+const release=JSON.parse(fs.readFileSync('../release.json')),takes=new Map([...release.recordings,...(release.narration?.recordings||[])].map(x=>[x.id,x]));
 const errors=[],checks=[],samples=[];
 const server=http.createServer((req,res)=>{try{
  const p=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));
@@ -46,7 +46,7 @@ const start=async page=>{
  await page.goto(url);await page.waitForFunction(()=>!!window.railwayGame);
  await page.locator('[data-action="new-game"]').click();await page.locator('#npSeed').fill('MAPA-VOCES');
  await page.locator('#npGuide').uncheck();await page.locator('[data-action="np-difficulty"][data-id="relajada"]').click();
- await page.locator('[data-action="np-begin"]').click();await page.locator('[data-action="welcome-close"]').click();
+ await page.locator('[data-action="np-begin"]').click();await page.locator('[data-action="welcome-close"]').click();await page.evaluate(()=>window.__audioQA.starts=[]);
 };
 const waitVoice=async(page,index)=>{await page.waitForFunction(i=>window.__audioQA.starts.length>i,index,{timeout:45000});
  await page.waitForFunction(i=>!!window.__audioQA.starts[i].decode?.sha256,index);
