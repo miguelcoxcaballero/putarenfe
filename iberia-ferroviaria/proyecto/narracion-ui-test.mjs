@@ -107,6 +107,21 @@ try{
    await page.evaluate(()=>window.railwayGame.narrator.reset());
   }
   await page.evaluate(()=>window.railwayGame.voices.stop());
+  // Confirm an actual refit: its success message must survive the dialog closing.
+  await page.evaluate(()=>{const g=window.railwayGame;g.narrator.reset();g.state().cash=1000;g.state().tenfe.game.event=null;});
+  await page.locator('#navigation [data-screen="fleet"]').click();
+  await page.locator('[data-action="fleet-tab"][data-id="refits"]').click();
+  const freeId=await page.evaluate(()=>{const g=window.railwayGame,s=g.state();return s.fleet.find(f=>g.engine.available(s,f)>0)?.id;});assert(freeId,'a free unit can actually be renovated');
+  const button=page.locator('[data-action="refit-detail"][data-id="'+freeId+'"]');assert(await button.count());
+  await button.click();await heard(page,'refit-info');
+  const cashBefore=await page.evaluate(()=>window.railwayGame.state().cash);
+  const refitIndex=await page.evaluate(()=>window.__audioQA.starts.length);
+  await page.locator('[data-action="refit-confirm"]').click();
+  assert.equal(await page.locator('#modal').evaluate(e=>e.open),false);
+  await heard(page,'refit-started',refitIndex);
+  assert(await page.evaluate(before=>window.railwayGame.state().cash<before,cashBefore),'the actual refit is charged once');
+  assert.equal(await page.locator('#toast .narration-card[data-narration-key="refit-started"]').count(),1,'confirmation survives closing the workshop');
+  await page.locator('#toast [data-action="narration-dismiss"]').click();
   assert.deepEqual(await page.evaluate(()=>window.__audioQA.system),[]);
   await context.close();
  }

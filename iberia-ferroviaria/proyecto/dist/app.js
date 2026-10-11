@@ -1207,8 +1207,8 @@ function nodeInspector() {
 }
 
 // ------------------------------------------------------------ ventanas modales
-function showModal(html, cls = '') { pause(); const was = $('modal').open; $('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons();narrator.modal($('modal'),{fresh:!was}); if(cls==='main-menu-shell')$('modal').querySelector('[autofocus]')?.focus();sfx.play(was ? 'page' : 'open'); }
-function closeModal() { narrator.cancel('modal');narrator.cancel('modal-toast');if ($('modal').open) $('modal').close(); }
+function showModal(html, cls = '') { pause(); const was = $('modal').open;narrator.releaseModalToasts();$('modal').innerHTML = `<div class="modal ${cls}">${html}</div>`; if (!was) $('modal').showModal(); mountViewers($('modal')); syncSayButtons();narrator.modal($('modal'),{fresh:!was}); if(cls==='main-menu-shell')$('modal').querySelector('[autofocus]')?.focus();sfx.play(was ? 'page' : 'open'); }
+function closeModal() { narrator.releaseModalToasts();narrator.cancel('modal');narrator.cancel('modal-toast');if ($('modal').open) $('modal').close(); }
 /** Rescate de Tenfe: modo propio con su mapa, su interfaz y su guardado; al salir vuelve a esta portada. */
 
 $('modal').addEventListener('cancel',event=>{if($('modal').querySelector('.menu-subscreen')){event.preventDefault();intro();}else if($('modal').querySelector('.np-screen')){event.preventDefault();sfx.play('drawerClose');npBack();}else if($('modal').querySelector('.main-menu-shell'))event.preventDefault();else if($('modal').querySelector('.induction-dialog')){event.preventDefault();suspendTutorial();}});
@@ -1225,7 +1225,7 @@ $('modal').addEventListener('keydown',event=>{
   event.preventDefault();const ids=STARTS.map(start=>start.id),id=ids[(ids.indexOf(np.pick)+step+ids.length)%ids.length];
   sfx.play('tab');np.pick=id;np.confirm=null;drawNewGame(`[data-action="np-pick"][data-id="${id}"]`);
 });
-$('modal').addEventListener('close', () => { narrator.cancel('modal');narrator.cancel('modal-toast');if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
+$('modal').addEventListener('close', () => { narrator.releaseModalToasts();narrator.cancel('modal');narrator.cancel('modal-toast');if (!$('modal').open && voices.speaking?.where === 'modal') voices.stop(); sfx.play('close'); });
 // Chromium cierra el diálogo con un segundo Esc seguido aunque el primero se haya cancelado: la portada no desaparece.
 $('modal').addEventListener('close', () => { if ($('modal').open) return; if (menuOpen) intro(); else if (np) { np = null; render(); } });
 function menuChrome() { narrator.reset(); $('entry-welcome')?.remove(); if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }

@@ -122,6 +122,12 @@ export class Narrator{
   const instance=root.dataset.narrationInstance;this.queue=this.queue.filter(q=>q.toastInstance!==instance);
   if(this.current?.toastInstance===instance)this.voices.stop();root.remove();this.updateTray();
  }
+ releaseModalToasts(root=globalThis.document?.getElementById('modal')){
+  const tray=globalThis.document?.getElementById('toast');if(!tray||!root)return;
+  for(const node of root.querySelectorAll('.narration-toast')){node.dataset.narrationWhere='toast';tray.appendChild(node);tray.classList.add('show');}
+  for(const q of this.queue)if(q.where==='modal-toast')q.where='toast';
+  if(this.current?.where==='modal-toast'){this.current.where='toast';if(this.voices.speaking)this.voices.speaking.where='narration-toast';}
+ }
  updateTray(){const tray=globalThis.document?.getElementById('toast');if(tray&&!tray.querySelector('.narration-toast'))tray.classList.remove('show');}
  toast(text,options={}){
   const key=options.key||toastKey(text,options),doc=globalThis.document;if(!doc)return this.enqueue(key,{where:'toast'});
