@@ -1041,28 +1041,30 @@ function worksPage() {
 }
 
 function financePage() {
-  const b = E.balance(state), commit = state.orders.filter(o => !o.historical).reduce((v, o) => v + o.remaining, 0), works = state.projects.filter(p => !p.done).length;
-  const body = `<dl class="figures"><div><dt>Tesorería</dt><dd>${money(state.cash)}</dd></div><div><dt>Resultado mensual</dt><dd class="${b.net >= 0 ? 'pos' : 'neg'}">${signed(b.net)}</dd></div><div><dt>Deuda</dt><dd>${money(state.debt)}</dd></div><div><dt>Pedidos pendientes</dt><dd>${money(commit)}</dd></div></dl>
-  <h2 class="section">Cuenta del mes</h2><table><tbody>${[['Billetes', b.revenue], ['Ayudas a los Alvia y apoyo público', b.subsidy], ['Operación, canon, mantenimiento y sede', -b.cost], ['Resultado', b.net]].map(([t, v], i) => `<tr><td>${i === 3 ? '<strong>' + t + '</strong>' : t}</td><td class="num ${v >= 0 ? 'pos' : 'neg'}">${i === 3 ? '<strong>' + signed(v) + '</strong>' : signed(v)}</td></tr>`).join('')}</tbody></table>
-  <h2 class="section">Tesorería</h2>${state.history.length >= 2 ? '<canvas id="cashChart" class="chart" role="img" aria-label="Gráfico de tesorería mensual"></canvas>' : '<p class="small muted">La gráfica sale cuando cierres el primer mes. Hacienda tampoco tiene prisa.</p>'}
-  <h2 class="section">Financiación y mantenimiento</h2><div class="toolbar"><button class="btn" data-action="borrow" ${state.debt >= 1500 || state.ended ? 'disabled' : ''}>Pedir 100 M€</button><button class="btn" data-action="repay" ${state.debt < 100 || state.cash < 100 || state.ended ? 'disabled' : ''}>Devolver 100 M€</button></div>
-  <label for="maintenance">Esfuerzo de mantenimiento: <strong>${n(state.maintenance * 100)} %</strong></label><input id="maintenance" type="range" min="0.6" max="1.5" step="0.1" value="${state.maintenance}" ${state.ended ? 'disabled' : ''}>
-  ${works ? `<p class="note">${works} obra${works === 1 ? '' : 's'} en marcha: ya están pagadas.</p>` : ''}`;
-  return [header('Finanzas', 'Que las cuentas también lleguen.'), body];
+  const b = E.balance(state), commit = state.orders.filter(o => !o.historical).reduce((v, o) => v + o.remaining, 0), unit = state.tenfe?.game ? 'turno' : 'mes';
+  const tile = (ic, label, value, cls = '') => `<div class="vtile ${cls}">${glyph(ic)}<small>${label}</small><b>${value}</b></div>`;
+  const max = Math.max(1, b.revenue + b.subsidy, b.cost);
+  const bar = (label, v, cls) => `<div class="vflow ${cls}"><span>${label}</span><div><i style="width:${Math.min(100, Math.abs(v) / max * 100)}%"></i></div><b>${signed(v)}</b></div>`;
+  const body = `<div class="vtiles">${tile('coin', 'Caja', money(state.cash))}${tile('finance', 'Resultado / ' + unit, signed(b.net), b.net >= 0 ? 'ok' : 'bad')}${tile('archive', 'Deuda', money(state.debt))}${tile('market', 'Pedidos', money(commit))}</div>
+  <div class="vflows">${bar('Billetes', b.revenue, 'ok')}${bar('Ayudas', b.subsidy, 'ok')}${bar('Costes', -b.cost, 'bad')}</div>
+  ${state.history.length >= 2 ? '<canvas id="cashChart" class="chart" role="img" aria-label="Gráfico de tesorería"></canvas>' : '<div class="vempty">📈<p>La gráfica aparece al cerrar el primer turno</p></div>'}
+  <div class="vtools"><button class="btn" data-action="borrow" ${state.debt >= 1500 || state.ended ? 'disabled' : ''}>＋ 100 M€ de crédito</button><button class="btn" data-action="repay" ${state.debt < 100 || state.cash < 100 || state.ended ? 'disabled' : ''}>－ Devolver 100 M€</button></div>
+  <label class="vslider" for="maintenance"><span>🔧 Mantenimiento</span><input id="maintenance" type="range" min="0.6" max="1.5" step="0.1" value="${state.maintenance}" ${state.ended ? 'disabled' : ''}><b>${n(state.maintenance * 100)} %</b></label>`;
+  return [header('Finanzas', 'Dinero'), body];
 }
 function drawChart() {
   const el = $('cashChart'); if (!el) return;
   const w = el.clientWidth || 700, h = 190, dpr = 2; el.width = w * dpr; el.height = h * dpr;
   const c = el.getContext('2d'); c.scale(dpr, dpr);
   const data = state.history.map(x => x.cash);
-  c.font = '11px Figtree'; c.fillStyle = '#8a7c69';
+  c.font = '11px "IBM Plex Mono"'; c.fillStyle = '#9fb2c8';
   if (data.length < 2) { c.fillText('La gráfica aparece al cerrar el primer mes.', 8, 30); return; }
   const min = Math.min(0, ...data), max = Math.max(100, ...data), y = v => h - 22 - (v - min) / (max - min || 1) * (h - 40);
-  c.strokeStyle = 'rgba(74,56,36,.15)';
+  c.strokeStyle = 'rgba(120,200,255,.12)';
   for (let i = 0; i <= 3; i++) { const v = min + (max - min) / 3 * i; c.beginPath(); c.moveTo(48, y(v)); c.lineTo(w, y(v)); c.stroke(); c.fillText(n(v), 0, y(v) + 4); }
-  const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, 'rgba(138,42,70,.3)'); g.addColorStop(1, 'rgba(138,42,70,0)');
+  const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, 'rgba(90,209,255,.35)'); g.addColorStop(1, 'rgba(90,209,255,0)');
   c.beginPath(); data.forEach((v, i) => { const x = 50 + i / (data.length - 1) * (w - 55); i ? c.lineTo(x, y(v)) : c.moveTo(x, y(v)); });
-  c.strokeStyle = '#8a2a46'; c.lineWidth = 2; c.stroke(); c.lineTo(w - 5, h - 22); c.lineTo(50, h - 22); c.fillStyle = g; c.fill();
+  c.strokeStyle = '#5ad1ff'; c.lineWidth = 2; c.stroke(); c.lineTo(w - 5, h - 22); c.lineTo(50, h - 22); c.fillStyle = g; c.fill();
 }
 
 function storyPage() {

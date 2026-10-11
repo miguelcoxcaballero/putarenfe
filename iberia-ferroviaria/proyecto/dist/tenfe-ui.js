@@ -90,6 +90,5 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
   export function forecastHTML(s) {
     const b=E.balance(s),orders=s.orders.filter(o=>!o.historical&&o.delivered<o.qty),three=s.cash+b.net*3;
     const obligations=orders.filter(o=>o.next<=s.month+3).reduce((sum,o)=>sum+Math.min(o.qty-o.delivered,Math.max(0,4-(o.next-s.month))*2)*o.unit*(1-(o.marketplace?.depositRate??.3)),0);
-    return `<h2 class="section">Tres meses por delante</h2><dl class="figures"><div><dt>Caja proyectada</dt><dd class="${three-obligations>=0?'pos':'neg'}">${money(three-obligations)}</dd></div><div><dt>Entregas previstas</dt><dd>${money(obligations)}</dd></div></dl>
-      <p class="small">Estimación con el margen actual y los lotes de pedidos previstos en tres meses. No incluye nuevas compras, averías ni recompensas por cumplir objetivos.</p>`;
+    return `<div class="vtiles two"><div class="vtile ${three-obligations>=0?'ok':'bad'}"><small>Caja en 3 turnos</small><b>${money(three-obligations)}</b></div><div class="vtile"><small>Entregas previstas</small><b>${money(obligations)}</b></div></div>`;
   }
