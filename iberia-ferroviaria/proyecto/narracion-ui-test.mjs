@@ -113,7 +113,7 @@ try{
   // Confirm an actual refit: its success message must survive the dialog closing.
   await page.evaluate(()=>{const g=window.railwayGame;g.narrator.reset();g.state().cash=1000;g.state().tenfe.game.event=null;});
   await page.locator('#navigation [data-screen="fleet"]').click();
-  await page.locator('[data-action="fleet-tab"][data-id="refits"]').click();
+  await page.locator('#drawer .tabs [data-action="fleet-tab"][data-id="refits"]').click();
   const freeId=await page.evaluate(()=>{const g=window.railwayGame,s=g.state();return s.fleet.find(f=>g.engine.available(s,f)>0)?.id;});assert(freeId,'a free unit can actually be renovated');
   const button=page.locator('[data-action="refit-detail"][data-id="'+freeId+'"]');assert(await button.count());
   await button.click();await heard(page,'refit-info');
