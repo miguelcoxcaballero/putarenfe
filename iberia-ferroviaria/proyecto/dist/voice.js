@@ -1,6 +1,7 @@
 // Voces grabadas de los personajes. Las tomas completas conservan la interpretación
 // de todo el diálogo; las frases también deben estar grabadas. Una ausencia se informa.
 import {CLIPS} from './assets/voices.js';
+import {NARRATION_VOICES} from './assets/narration-voices.js';
 import {DIALOGUES} from './assets/voice-dialogues.js';
 
 export const CAST = {
@@ -69,7 +70,7 @@ export class Voices {
     try { saved = JSON.parse(localStorage.getItem('iberia-voz') || '{}'); } catch {}
     this.enabled = saved.enabled ?? true; this.volume = saved.volume ?? 1;
   }
-  get neural() { return Object.keys(DIALOGUES).length > 0 || Object.keys(CLIPS).length > 0; }
+  get neural() { return Object.keys(DIALOGUES).length > 0 || Object.keys(NARRATION_VOICES).length > 0 || Object.keys(CLIPS).length > 0; }
   get available() { return this.neural; }
   save() { try { localStorage.setItem('iberia-voz', JSON.stringify({enabled: this.enabled, volume: this.volume})); } catch {} }
   on(fn) { this.listeners.add(fn); }
@@ -143,8 +144,14 @@ export class Voices {
       this.buffers.delete(key); this.buffers.set(key, recent);
       return recent;
     }
-    const decoded = Promise.resolve().then(() => {
-      const entry = (kind === 'D' ? DIALOGUES : CLIPS)[id], data = typeof entry === 'string' ? entry : entry?.src;
+    const decoded = Promise.resolve().then(async () => {
+      const entry = kind === 'D' ? (DIALOGUES[id] || NARRATION_VOICES[id]) : CLIPS[id];
+      if (entry?.url) {
+        const response = await fetch(new URL(entry.url, document.baseURI));
+        if (!response.ok) throw new Error('No se ha podido descargar la grabación: HTTP ' + response.status);
+        return this.music.ctx.decodeAudioData(await response.arrayBuffer());
+      }
+      const data = typeof entry === 'string' ? entry : entry?.src;
       if (!data) throw new Error('Grabación ausente');
       const bin = atob(data), bytes = new Uint8Array(bin.length);
       for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
@@ -169,7 +176,7 @@ export class Voices {
     this.lastError = null;
     if (!this.enabled) { onend?.({reason:'disabled'}); return false; }
     const parts = sentences(text), ids = parts.map(p => clipId(person, p)), dialogueId = clipId(person, text);
-    const whole = !!DIALOGUES[dialogueId], mode = whole ? 'dialogue' : 'fragments';
+    const whole = !!(DIALOGUES[dialogueId] || NARRATION_VOICES[dialogueId]), mode = whole ? 'dialogue' : 'fragments';
     const errorInfo = (code, message, extra = {}) => ({code, message, person, dialogueId, mode, ...extra});
     const reject = error => { this.lastError = error; this.emit(); onerror?.(error); onend?.({reason:'error', error}); return false; };
     if (!whole && (!parts.length || ids.some(id => !CLIPS[id]))) {

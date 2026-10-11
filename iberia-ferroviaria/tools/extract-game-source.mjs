@@ -25,9 +25,9 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   const dist=path.join(project,'dist'),sources=[];
   const read=file=>{const bytes=fs.readFileSync(path.join(dist,file));sources.push({file,bytes:bytes.length,sha256:sha(bytes)});return bytes.toString('utf8');};
   const baselineOrder=['assets/geography.js','assets/railways.js','assets/timetable.js','assets/infra.js','data.js','story.js','schedule.js','infra.js','network.js',
-    'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
+    'induction.js','induction-runtime.js','encounters.js','tycoon.js','engine.js','operations.js','map-v3.js','train-art.js','train3d.js','city-art.js','assets/samples-index.js','music.js','assets/voices.js','assets/voice-dialogues.js','assets/narration-voices.js','voice.js','dialogue-presentation.js','sfx.js','assets/portraits.js','faces.js','tycoon-ui.js','main-menu.js','induction-task-ui.js','app.js'];
   const optionalBefore={'data.js':['brands.js'],'tycoon.js':['marketplace.js'],'engine.js':['verdad.js','rescate-data.js','conexiones.js','tenfe.js','track-preview.js'],'train3d.js':['assets/train-photos.js'],'main-menu.js':['nueva-partida.js'],
-    'app.js':['partidas-anteriores.js','conexiones-ui.js','tenfe-ui.js','train-refit.js']};
+    'app.js':['narration-data.js','narration-runtime.js','partidas-anteriores.js','conexiones-ui.js','tenfe-ui.js','train-refit.js']};
   const order=baselineOrder.flatMap(file=>[...(optionalBefore[file]||[]).filter(extra=>fs.existsSync(path.join(dist,extra))),file]);
   function bundle(file){
     let text=file==='assets/voices.js'?'export const CLIPS = {};\n':file==='assets/voice-dialogues.js'?'export const DIALOGUES = __WEB_DIALOGUES__;\n':read(file);
@@ -42,10 +42,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
     }
     if(file==='voice.js'){
       assert(!/speechSynthesis|SpeechSynthesisUtterance/.test(text),'no browser voice fallback');
-      text=replaceOne(text,'const decoded = Promise.resolve().then(() => {','const decoded = Promise.resolve().then(async () => {','decode promise');
-      text=replaceOne(text,
-        "const entry = (kind === 'D' ? DIALOGUES : CLIPS)[id], data = typeof entry === 'string' ? entry : entry?.src;",
-        "const entry = (kind === 'D' ? DIALOGUES : CLIPS)[id];\n      if (entry?.url) {\n        const response = await fetch(new URL(entry.url, document.baseURI));\n        if (!response.ok) throw new Error('No se ha podido descargar la grabación: HTTP ' + response.status);\n        return this.music.ctx.decodeAudioData(await response.arrayBuffer());\n      }\n      const data = typeof entry === 'string' ? entry : entry?.src;",'web URL bytes');
+      assert(text.includes('NARRATION_VOICES[id]')&&text.includes('await response.arrayBuffer()'),'whole-message URL playback');
     }
     const dir=path.posix.dirname(file),resolve=spec=>path.posix.normalize(path.posix.join(dir,spec));
     text=text.replace(/^import\s+\*\s+as\s+(\w+)\s+from\s+'([^']+)';?\s*$/gm,(_,name,spec)=>`const ${name} = __m[${JSON.stringify(resolve(spec))}];`);
@@ -64,6 +61,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   let css=read('style-v3.css')+'\n'+read('main-menu.css')+'\n'+read('induction.css');
   if(fs.existsSync(path.join(dist,'marketplace.css')))css+='\n'+read('marketplace.css');
   css+='\n'+read('train-refit.css');
+  css+='\n'+read('narration.css');
   
 
   const mime={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',svg:'image/svg+xml',woff2:'font/woff2'};
@@ -83,6 +81,7 @@ export async function refreshGameSource({project=path.join(ownRoot,'proyecto'),s
   html=replaceOne(html,'<link rel="stylesheet" href="main-menu.css">','','main menu CSS link');
   html=replaceOne(html,'<link rel="stylesheet" href="induction.css">','','induction CSS link');
   html=replaceOne(html,'<link rel="stylesheet" href="train-refit.css">','','train refit stylesheet link');
+  html=replaceOne(html,'<link rel="stylesheet" href="narration.css">','','narration stylesheet link');
   const marketplaceLink='<link rel="stylesheet" href="marketplace.css">';
   if(html.includes(marketplaceLink)){
     assert(fs.existsSync(path.join(dist,'marketplace.css')),'the market stylesheet exists');

@@ -1,4 +1,5 @@
 
+import {card,newsKey,message} from './narration-runtime.js';
 import * as J from './conexiones.js';
 let E,face;
 export function bind(engine,faceURL){E=engine;face=faceURL;}
@@ -9,7 +10,7 @@ const picture=(image,alt='')=>'<img class="game-photo" src="assets/rescate/'+ima
 const button=(label,action,id,disabled=false,extra='')=>'<button class="btn small" data-action="'+action+'" data-id="'+esc(id||'')+'" '+(disabled?'disabled':'')+' '+extra+'>'+esc(label)+'</button>';
 export function eventHTML(s){
  const event=J.EVENTS.find(x=>x.id===s.tenfe.game.event?.id);if(!event)return '';
- return '<article class="game-event" aria-labelledby="event-title">'+picture(event.image,event.title)+'<div><span class="kicker">Suceso del turno '+J.turn(s)+'</span><h2 id="event-title">'+esc(event.title)+'</h2><p>'+esc(event.body)+'</p><div class="game-event-options">'+event.choices.map((x,i)=>'<button class="choice" data-action="game-event" data-id="'+event.id+'" data-choice="'+i+'" '+(s.cash<x.cost||s.ended?'disabled':'')+'><strong>'+esc(x.label)+' · '+money(x.cost)+'</strong><span>'+esc(x.detail)+'</span></button>').join('')+'</div></div></article>';
+ return '<article class="game-event" data-narration-key="event-'+event.id+'" data-person="'+message('event-'+event.id).person+'" aria-labelledby="event-title">'+picture(event.image,event.title)+'<div><span class="kicker">Suceso del turno '+J.turn(s)+'</span><h2 id="event-title">'+esc(event.title)+'</h2>'+card('event-'+event.id)+'<div class="game-event-options">'+event.choices.map((x,i)=>'<button class="choice" data-action="game-event" data-id="'+event.id+'" data-choice="'+i+'" '+(s.cash<x.cost||s.ended?'disabled':'')+'><strong>'+esc(x.label)+' · '+money(x.cost)+'</strong><span>'+esc(x.detail)+'</span></button>').join('')+'</div></div></article>';
 }
 export function missionHTML(s){
  const g=s.tenfe.game,won=g.challenges.length,mandates=s.tenfe.elections.filter(x=>x.won).length;
@@ -47,7 +48,7 @@ export function pactsHTML(s){
  }).join('')+'</div>';
 }
 export function newsHTML(s){
- return '<h2>Tu red, en imágenes</h2><p>Los sucesos, objetivos, investigaciones y obras conservan sus ilustraciones y sus consecuencias.</p>'+eventHTML(s)+'<div class="game-news">'+s.tenfe.game.news.map(x=>'<article>'+picture(x.image)+'<div><span class="kicker">Turno '+x.turn+'</span><h3>'+esc(x.title)+'</h3><p>'+esc(x.body)+'</p></div></article>').join('')+'</div>';
+ return '<h2>Tu red, en imágenes</h2><p>Los sucesos, objetivos, investigaciones y obras conservan sus ilustraciones y sus consecuencias.</p>'+eventHTML(s)+'<div class="game-news">'+s.tenfe.game.news.map(x=>'<article>'+picture(x.image)+'<div><span class="kicker">Turno '+x.turn+'</span><h3>'+esc(x.title)+'</h3>'+card(newsKey(x),{details:x.body})+'</div></article>').join('')+'</div>';
 }
 export function boardHTML(s){
  const nodes=Object.fromEntries(J.HUBS.map(x=>[x.id,x])),routes=s.routes.filter(r=>J.NETWORK.includes(r.id)),colors={AVE:'#ffbd65',Alvia:'#85bbff',Regional:'#8ce0b6'};
