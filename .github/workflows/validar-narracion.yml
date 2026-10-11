@@ -3,6 +3,7 @@ on:
   push:
     branches: [codex/narracion-personajes]
     paths:
+      - iberia-ferroviaria/proyecto/dist/sfx.js
       - iberia-ferroviaria/proyecto/dist/app.js
       - iberia-ferroviaria/proyecto/dist/voice.js
       - iberia-ferroviaria/proyecto/dist/narration-runtime.js
