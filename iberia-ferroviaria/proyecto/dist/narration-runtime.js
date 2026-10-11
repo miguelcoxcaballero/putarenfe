@@ -104,7 +104,7 @@ export class Narrator{
  }
  positionTray(){
   const doc=globalThis.document,tray=doc?.getElementById('toast'),bar=doc?.getElementById('daybar');if(!tray||!bar)return;
-  const r=bar.getBoundingClientRect();if(r.height&&r.top>=0)tray.style.bottom=Math.max(12,globalThis.innerHeight-r.top+12)+'px';
+  const r=bar.getBoundingClientRect();if(r.height&&r.top>=0)tray.style.bottom=Math.max(12,globalThis.innerHeight-r.top+28)+'px';
  }
  sync(){
   this.positionTray();

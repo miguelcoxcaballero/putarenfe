@@ -86,7 +86,7 @@ try{
   await heard(page,'refit-started');assert.equal(await page.locator('#toast .narration-speaker strong').textContent(),'Fermín Bogie');
   await fit(page,'.narration-toast');
   const placement=await page.evaluate(()=>({bottom:document.querySelector('#toast').getBoundingClientRect().bottom,controls:document.querySelector('#daybar').getBoundingClientRect().top}));
-  assert(placement.bottom<=placement.controls-8,'notifications never cover the clock or turn controls');
+  assert(placement.bottom<=placement.controls-8,'notifications never cover the clock or turn controls: '+JSON.stringify(placement));
   await screenshot(page,'narracion-taller-'+size.width);
   assert.deepEqual(await page.evaluate(()=>window.railwayGame.snapshot()),before,'listening never changes the economy');
   await page.locator('#toast [data-action="narration-dismiss"]').click();await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
