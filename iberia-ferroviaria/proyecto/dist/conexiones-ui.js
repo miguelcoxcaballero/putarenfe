@@ -7,6 +7,8 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const money=x=>Number(x||0).toLocaleString('es-ES',{maximumFractionDigits:1})+' M€';
 const number=x=>Number(x||0).toLocaleString('es-ES',{maximumFractionDigits:0});
 const picture=(image,alt='')=>'<img class="game-photo" src="assets/rescate/'+image+'.webp" alt="'+esc(alt)+'" loading="lazy" width="640" height="360">';
+const chip=(icon,text,cls='')=>'<span class="vchip '+cls+'"><i>'+icon+'</i>'+esc(text)+'</span>';
+const vcard=(image,title,{badge='',done=false,cls=''}={},body='')=>'<article class="vcard '+(done?'done ':'')+cls+'"><div class="vcard-media">'+picture(image,title)+(badge?'<span class="vbadge">'+badge+'</span>':'')+'<h3>'+esc(title)+'</h3></div><div class="vcard-body">'+body+'</div></article>';
 const button=(label,action,id,disabled=false,extra='')=>'<button class="btn small" data-action="'+action+'" data-id="'+esc(id||'')+'" '+(disabled?'disabled':'')+' '+extra+'>'+esc(label)+'</button>';
 export function eventHTML(s){
  const event=J.EVENTS.find(x=>x.id===s.tenfe.game.event?.id);if(!event)return '';
@@ -17,38 +19,41 @@ export function missionHTML(s){
  return '<span class="kicker">Conexiones · turno '+J.turn(s)+'</span><h2>'+(g.won?'Una red que merece continuar':'Un país por conectar')+'</h2><p class="small">'+won+'/5 retos · '+mandates+'/2 mandatos</p><ul>'+J.CHALLENGES.map(d=>'<li class="'+(g.challenges.includes(d.id)?'done':'')+'"><i></i><span>'+esc(d.name)+'</span><span>'+ (g.challenges.includes(d.id)?'✓':'○')+'</span></li>').join('')+'</ul><p class="small muted">Tu red, tus tarifas y tus decisiones cuentan desde el primer turno.</p>';
 }
 export function campaignHTML(s){
- const g=s.tenfe.game;
- return '<div class="tenfe-title"><span class="kicker">Tu mandato · Conexiones</span><h2>Cinco retos, una compañía</h2><p>Resuelve un suceso por turno, amplía una red fiable y gana dos elecciones. El mapa, el consejo, el laboratorio y Trenes Pop están disponibles desde el principio.</p></div>'+
- (g.won?'<article class="game-result">'+picture('fin-victoria')+'<h2>Tu red ya es un legado.</h2>'+card('victory')+'</article>':s.ended?'<article class="game-result">'+picture('fin-derrota')+'<h2>El consejo cambia de dirección.</h2>'+card('defeat')+'</article>':'')+
- '<div class="game-challenges">'+J.CHALLENGES.map(d=>'<article>'+picture('etapa-'+d.id)+'<div><span class="kicker">'+(g.challenges.includes(d.id)?'✓ Cumplido':'Objetivo abierto')+'</span><h3>'+esc(d.name)+'</h3><p>'+esc(d.text)+'</p><strong>'+money(d.reward)+' al cumplir</strong></div></article>').join('')+'</div>'+
- '<section class="callout"><strong>Cómo se juega</strong><p>Un turno liquida la operación de tu red y avanza pedidos, obras y formación. Puedes observar una jornada con trenes e incidencias o delegar el turno. Hay tres cuadrillas para obras y fases, dos pactos activos y una investigación por laboratorio. Las elecciones llegan cada 12 turnos; se usa la media de apoyo de los últimos tres cierres. Los cinco retos y dos victorias electorales completan la partida.</p></section>';
+ const g=s.tenfe.game,won=s.tenfe.elections.filter(x=>x.won).length;
+ const result=g.won?'<article class="game-result">'+picture('fin-victoria')+'<h2>Tu red ya es un legado.</h2>'+card('victory')+'</article>':s.ended?'<article class="game-result">'+picture('fin-derrota')+'<h2>El consejo cambia de dirección.</h2>'+card('defeat')+'</article>':'';
+ const summary='<div class="vsummary"><div class="vring" style="--p:'+(g.challenges.length*20)+'%"><b>'+g.challenges.length+'/5</b><small>retos</small></div><div class="vring" style="--p:'+(won*50)+'%"><b>'+won+'/2</b><small>elecciones</small></div></div>';
+ return result+summary+'<div class="vgrid">'+J.CHALLENGES.map(d=>{const ok=g.challenges.includes(d.id);return vcard('etapa-'+d.id,d.name,{badge:ok?'✓':'+'+number(d.reward)+' M€',done:ok},'<p>'+esc(d.text)+'</p>');}).join('')+'</div>';
 }
 export function researchHTML(s){
- const g=s.tenfe.game;
- return '<section class="game-lab"><span class="kicker">Laboratorio de la red · '+number(g.stars)+' puntos de innovación</span><h2>Ideas que cambian tu servicio</h2><p class="small">Cada cierre aporta 3 puntos; con ≥85 % de puntualidad, 2 más. Los hitos y sucesos aportan innovación adicional.</p>'+
- (g.research?'<p class="callout">Investigando '+esc(J.RESEARCH.find(x=>x.id===g.research.id).name)+' · faltan '+(g.research.due-s.month)+' turnos.</p>':'')+
- '<div class="game-research">'+J.RESEARCH.map(d=>{const q=J.researchQuote(s,d.id),owned=g.tech.includes(d.id);return '<article class="'+(owned?'done':'')+'">'+picture('tech-'+d.id)+'<div><small>'+esc(d.branch)+' · nivel '+d.tier+'</small><h3>'+esc(d.name)+'</h3><p>'+esc(d.effect)+'</p><small>'+d.stars+' innovación · '+money(d.cost)+' · '+d.turns+' turnos</small>'+button(owned?'✓ Terminada':'Investigar','game-research',d.id,!!q.reason)+(q.reason&&!owned?'<p class="small muted">'+esc(q.reason)+'</p>':'')+'</div></article>';}).join('')+'</div></section>';
+ const g=s.tenfe.game,cur=g.research&&J.RESEARCH.find(x=>x.id===g.research.id);
+ const head='<div class="vsummary">'+chip('★',number(g.stars)+' innovación','big')+(cur?'<div class="vprogress"><span>'+esc(cur.name)+'</span><div class="meter"><span style="width:'+Math.max(5,100-(g.research.due-s.month)/cur.turns*100)+'%"></span></div><small>'+(g.research.due-s.month)+' turnos</small></div>':'')+'</div>';
+ return head+'<div class="vgrid">'+J.RESEARCH.map(d=>{const q=J.researchQuote(s,d.id),owned=g.tech.includes(d.id);
+  return vcard('tech-'+d.id,d.name,{badge:owned?'✓':'N'+d.tier,done:owned},'<p>'+esc(d.effect)+'</p><div class="vchips">'+chip('★',d.stars)+chip('€',money(d.cost))+chip('⏱',d.turns+' t')+'</div>'+(owned?'':button('Investigar','game-research',d.id,!!q.reason,q.reason?'title="'+esc(q.reason)+'"':'')));}).join('')+'</div>';
 }
 export function megaHTML(s){
- return '<h2>Grandes obras, efectos desde cada fase</h2><p class="small">Tres cuadrillas compartidas entre obras de vía y fases de megaproyectos. Hasta tres fases simultáneas; cada proyecto avanza de una en una.</p><div class="tenfe-megas game-megas">'+J.PROJECTS.map(d=>{
- const p=s.tenfe.megas.find(x=>x.id===d.id),q=J.megaQuote(s,d.id),reason=q.reason||(s.cash<q.cost?'Falta caja':s.ended?'Mandato terminado':'');
- return '<article>'+picture(d.image)+'<div><h3>'+esc(d.name)+'</h3><p>'+esc(d.effect)+'</p><div class="tenfe-phase">'+d.stages.map((x,i)=>'<span class="'+(i<(p?.stage||0)?'done':i===(p?.stage||0)?'now':'')+'">'+esc(x.name)+'</span>').join('')+'</div><p class="small">'+(p?.due?'Faltan '+(p.due-s.month)+' turnos':q.stage===4?'En servicio':esc(q.phase)+' · '+money(q.cost)+' · '+q.months+' turnos')+'</p>'+button(q.stage===4?'✓ Terminado':'Encargar fase','tenfe-mega',d.id,!!reason)+(reason?'<small class="action-reason">'+esc(reason)+'</small>':'')+'</div></article>';
+ return '<div class="vgrid wide">'+J.PROJECTS.map(d=>{
+  const p=s.tenfe.megas.find(x=>x.id===d.id),q=J.megaQuote(s,d.id),reason=q.reason||(s.cash<q.cost?'Falta caja':s.ended?'Mandato terminado':''),stage=p?.stage||0;
+  const steps='<div class="vsteps">'+d.stages.map((x,i)=>'<i class="'+(i<stage?'done':i===stage?'now':'')+'" title="'+esc(x.name)+'"></i>').join('')+'</div>';
+  const status=p?.due?chip('⏱','Faltan '+(p.due-s.month)+' t'):q.stage===4?chip('✓','En servicio','ok'):'<div class="vchips">'+chip('€',money(q.cost))+chip('⏱',q.months+' t')+'</div>';
+  return vcard(d.image,d.name,{badge:stage+'/4',done:q.stage===4},'<p>'+esc(d.effect)+'</p>'+steps+status+(q.stage===4||p?.due?'':button('Encargar fase','tenfe-mega',d.id,!!reason,reason?'title="'+esc(reason)+'"':'')));
  }).join('')+'</div>';
 }
 export function supportHTML(s){
- const g=s.tenfe.game,rows=[['riders','Viajeros',34],['territory','Territorios',20],['staff','Plantilla',20],['treasury','Economía',26]];
- return picture('elecciones')+'<h2>Una red que se gana el apoyo</h2><dl class="figures"><div><dt>Encuesta de 3 cierres</dt><dd>'+J.forecast(s).toFixed(1)+' %</dd></div><div><dt>Próximas urnas</dt><dd>'+Math.max(1,J.electionMonth(s)-s.month)+' turnos</dd></div></dl><p class="small">Se renueva con 50 % de apoyo. Viajeros y plantilla valoran el servicio; los territorios, la cobertura; la economía, tus cuentas.</p>'+
- '<div class="tenfe-group-list">'+rows.map(([k,name,weight])=>'<div><span><strong>'+name+'</strong><small>'+weight+' % del voto</small></span><div class="meter"><span style="width:'+s.tycoon.groups[k]+'%"></span></div><b>'+Math.round(s.tycoon.groups[k])+' %</b></div>').join('')+'</div>'+
- '<h3>Mandatos</h3>'+(s.tenfe.elections.map(x=>'<p>'+ (x.won?'✓':'×')+' Cierre '+(x.month-g.origin)+' · '+x.support.toFixed(1)+' %</p>').join('')||'<p>Primera elección al cerrar el turno 12.</p>');
+ const g=s.tenfe.game,rows=[['riders','Viajeros',34,'👥'],['territory','Territorios',20,'🏘'],['staff','Plantilla',20,'🛠'],['treasury','Economía',26,'💶']],f=J.forecast(s);
+ return '<div class="vbanner">'+picture('elecciones')+'<div><div class="vring '+(f>=50?'ok':'bad')+'" style="--p:'+Math.min(100,f)+'%"><b>'+f.toFixed(0)+'%</b><small>apoyo</small></div>'+chip('🗳','Urnas en '+Math.max(1,J.electionMonth(s)-s.month)+' turnos','big')+'</div></div>'+
+ '<div class="vbars">'+rows.map(([k,name,weight,ic])=>{const v=Math.round(s.tycoon.groups[k]);return '<div class="vbar '+(v>=50?'ok':'bad')+'"><span>'+ic+' '+name+' <small>'+weight+'%</small></span><div class="meter"><span style="width:'+v+'%"></span></div><b>'+v+'</b></div>';}).join('')+'</div>'+
+ (s.tenfe.elections.length?'<div class="vchips">'+s.tenfe.elections.map(x=>chip(x.won?'✓':'×',x.support.toFixed(0)+'%',x.won?'ok':'bad')).join('')+'</div>':'');
 }
 export function pactsHTML(s){
- return '<h2>Dos pactos, compromisos reales</h2><p class="small">Están disponibles desde el primer turno. Una promesa cumplida vale más que una inauguración.</p><div class="tenfe-pacts">'+J.PACTS.map(d=>{
- const p=s.tenfe.pacts.find(x=>x.id===d.id),reason=s.tenfe.pacts.filter(x=>x.status==='active').length>=2?'Ya hay dos pactos activos':s.cash<d.cost?'Falta caja':s.ended?'Mandato terminado':'';
- return '<article><img src="'+face(d.person,'happy')+'" width="56" height="72" alt=""><div><h3>'+esc(d.name)+'</h3><p>'+esc(d.requirement)+'</p><small>'+(d.advance?'Anticipo '+money(d.advance):'Coste '+money(d.cost))+' · premio '+money(d.reward)+' · '+d.months+' turnos</small>'+(p?'<p>'+ (p.status==='active'?p.kept+'/3 cierres · '+Math.max(0,p.until-s.month)+' turnos restantes':p.status==='won'?'✓ Cumplido':'× Incumplido')+'</p>':'')+'</div><div>'+(p?'':button('Firmar pacto','tenfe-pact',d.id,!!reason))+'</div></article>';
+ const active=s.tenfe.pacts.filter(x=>x.status==='active').length;
+ return '<div class="vsummary">'+chip('🤝',active+'/2 activos','big')+'</div><div class="vlist">'+J.PACTS.map(d=>{
+  const p=s.tenfe.pacts.find(x=>x.id===d.id),reason=active>=2?'Ya hay dos pactos activos':s.cash<d.cost?'Falta caja':s.ended?'Mandato terminado':'';
+  const state=p?(p.status==='active'?chip('⏳',p.kept+'/3 · '+Math.max(0,p.until-s.month)+' t'):p.status==='won'?chip('✓','Cumplido','ok'):chip('×','Incumplido','bad')):button('Firmar','tenfe-pact',d.id,!!reason,reason?'title="'+esc(reason)+'"':'');
+  return '<article class="vrow"><img src="'+face(d.person,'happy')+'" width="52" height="64" alt=""><div><h3>'+esc(d.name)+'</h3><p>'+esc(d.requirement)+'</p><div class="vchips">'+chip('€',d.advance?'+'+money(d.advance):money(d.cost))+chip('🏆',money(d.reward))+chip('⏱',d.months+' t')+'</div></div><div class="vrow-end">'+state+'</div></article>';
  }).join('')+'</div>';
 }
 export function newsHTML(s){
- return '<h2>Tu red, en imágenes</h2><p>Los sucesos, objetivos, investigaciones y obras conservan sus ilustraciones y sus consecuencias.</p>'+eventHTML(s)+'<div class="game-news">'+s.tenfe.game.news.map(x=>'<article>'+picture(x.image)+'<div><span class="kicker">Turno '+x.turn+'</span><h3>'+esc(x.title)+'</h3>'+card(newsKey(x),{details:x.body})+'</div></article>').join('')+'</div>';
+ return eventHTML(s)+(s.tenfe.game.news.length?'<div class="vgrid">'+s.tenfe.game.news.map(x=>vcard(x.image,x.title,{badge:'T'+x.turn},card(newsKey(x),{details:x.body}))).join('')+'</div>':'<div class="vempty">📰<p>Sin noticias todavía</p></div>');
 }
 export function boardHTML(s){
  const nodes=Object.fromEntries(J.HUBS.map(x=>[x.id,x])),routes=s.routes.filter(r=>J.NETWORK.includes(r.id)),colors={AVE:'#ffbd65',Alvia:'#85bbff',Regional:'#8ce0b6'};
@@ -61,10 +66,10 @@ export function boardHTML(s){
  '<div class="board-map"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Conexiones ferroviarias">'+edges+'</svg>'+J.HUBS.map(x=>'<button class="board-hub '+(s.routes.some(r=>r.active&&r.ends.includes(x.id))?'connected':'')+'" style="left:'+x.x+'%;top:'+x.y+'%" data-action="city" data-id="'+x.id+'"><i></i><span>'+esc(x.name)+'</span></button>').join('')+'</div><div class="board-legend"><span><i style="background:#ffbd65"></i>AVE</span><span><i style="background:#85bbff"></i>Alvia</span><span><i style="background:#8ce0b6"></i>Regional</span><span>··· Conexión por abrir</span></div>';
 }
 
+
 export function scandalHTML(s){
- const u=s.tenfe,c=u.scandal,amount=u.game.tech.includes('contabilidad')?60:45;
- return picture('cloacas')+'<h2>El dinero fácil deja huella</h2><p>El atajo entrega '+amount+' M€ de financiación irregular. La inspección llega tras 6 turnos y la restitución de lo recibido más 15 M€ de multa, tras 12. Revisar el expediente aplaza ambos plazos.</p>'+
- (c?'<dl class="figures"><div><dt>Fondos recibidos</dt><dd>'+money(c.amount)+'</dd></div><div><dt>Expediente</dt><dd>'+ (c.exposed?'Público':'En revisión')+'</dd></div></dl><div class="toolbar">'+button('Restituir fondos','tenfe-restitute','',s.cash<Math.max(0,c.amount-(u.game.tech.includes('destructora')?10:0))||s.ended)+button('Revisión · 8 M€','tenfe-lawyer','',!!c.delay||s.cash<8||s.ended)+'</div>':
- button('Revisar el atajo','tenfe-shortcut','',s.ended||s.month<u.cooldown))+
- '<p class="small">Sospecha: '+Math.round(u.game.risk)+' / 100. La investigación, la prensa y la devolución de fondos tienen consecuencias en tu apoyo.</p>';
+ const u=s.tenfe,c=u.scandal,amount=u.game.tech.includes('contabilidad')?60:45,risk=Math.round(u.game.risk);
+ return '<div class="vbanner">'+picture('cloacas')+'<div><div class="vring '+(risk<50?'ok':'bad')+'" style="--p:'+risk+'%"><b>'+risk+'</b><small>sospecha</small></div></div></div>'+
+ (c?'<div class="vchips">'+chip('€',money(c.amount))+chip('⚖',c.exposed?'Público':'En revisión',c.exposed?'bad':'')+'</div><div class="toolbar">'+button('Restituir fondos','tenfe-restitute','',s.cash<Math.max(0,c.amount-(u.game.tech.includes('destructora')?10:0))||s.ended)+button('Revisión · 8 M€','tenfe-lawyer','',!!c.delay||s.cash<8||s.ended)+'</div>':
+ '<div class="vchips">'+chip('€','+'+amount+' M€')+chip('🔎','Inspección en 6 t')+chip('⚖','Multa 15 M€','bad')+'</div>'+button('Revisar el atajo','tenfe-shortcut','',s.ended||s.month<u.cooldown));
 }
