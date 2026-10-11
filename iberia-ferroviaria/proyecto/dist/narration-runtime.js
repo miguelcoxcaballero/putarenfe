@@ -104,6 +104,7 @@ export class Narrator{
  }
  positionTray(){
   const doc=globalThis.document,tray=doc?.getElementById('toast'),bar=doc?.getElementById('daybar');if(!tray||!bar)return;
+  if(tray.dataset.tour)return;
   const r=bar.getBoundingClientRect();if(r.height&&r.top>=0)tray.style.bottom=Math.max(12,globalThis.innerHeight-r.top+28)+'px';
  }
  sync(){
@@ -143,8 +144,8 @@ export class Narrator{
   const node=doc.createElement('article'),instance=String(++this.sequence);
   node.className='narration-toast';node.dataset.narrationInstance=instance;node.dataset.narrationWhere=inModal?'modal-toast':'toast';
   node.innerHTML=card(key,{details:String(text)})+'<button class="narration-dismiss" data-action="narration-dismiss" aria-label="Cerrar mensaje">×</button>';
-  tray.appendChild(node);if(!inModal){tray.classList.add('show');this.positionTray();}
-  const expires=()=>setTimeout(()=>{node.remove();this.updateTray();},4200);
+  tray.appendChild(node);if(!inModal){tray.classList.add('show');this.positionTray();const all=()=>tray.querySelectorAll('.narration-toast');while(all().length>3)all()[1].remove();}
+  const expires=()=>setTimeout(()=>{node.remove();this.updateTray();},!inModal&&tray.querySelectorAll('.narration-toast').length>1?1200:4200);
   const started=this.enqueue(key,{where:node.dataset.narrationWhere,root:()=>node.querySelector('.narration-card'),visible:()=>node.isConnected,priority:options.error?50:20,onend:expires});
   const req=this.queue.find(q=>q.sequence===this.sequence);if(req)req.toastInstance=instance;
   if(!started)expires();return node;

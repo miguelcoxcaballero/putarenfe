@@ -442,7 +442,7 @@ function cityInspector() {
 
 const routeById = id => state.routes.find(r => r.id === id);
 const TOUR_STEPS = [
- {id:'welcome',title:'Bienvenido al mando de Tenfe',text:'Esta es tu compañía: las vías, los trenes y las cuentas que vas a transformar. Aquí tienes el objetivo de tu mandato y una propuesta para tu siguiente jugada.',person:'minister',target:'#mission',next:'Explorar mi red',ready:()=>true},
+ {id:'welcome',title:'Bienvenido al mando de Tenfe',text:'Esta es tu compañía: las vías, los trenes y las cuentas que vas a transformar. Aquí tienes el objetivo de tu mandato y una propuesta para tu siguiente jugada.',person:'minister',target:'#objective',next:'Explorar mi red',ready:()=>true},
  {id:'network',title:'Tu red, de un vistazo',text:'Esta es la misma Red que usarás durante toda la partida. Pulsa Madrid — València para abrir su ficha y preparar tu primera mejora.',person:'adif',target:'#drawer',next:'Preparar el servicio',ready:()=>inspect?.type==='route'&&inspect.id==='madrid-valencia'},
  {id:'offer',title:'Haz que València funcione mejor',text:'En el plan de servicio, añade una salida por sentido y cambia la tarifa. La previsión muestra el coste y los trenes necesarios; pulsa «Aplicar plan» cuando te convenza.',person:'treasury',target:'#inspector',next:'Ir al Despacho',ready:()=>{const r=routeById('madrid-valencia');return (r.frequency>tut.baseline.frequency||r.frequency>=E.maxFrequency(r))&&r.fare!==tut.baseline.fare;}},
  {id:'decisions',title:'Las promesas también tienen un precio',text:'El consejo trabaja aquí, en tu Despacho. Lee cada propuesta y elige la opción que quieras sostener: sus efectos se aplican a esta misma compañía.',person:'president',target:'#drawer',next:'Revisar la plantilla',ready:()=>!E.pendingDecision(state)},
@@ -452,9 +452,17 @@ const TOUR_STEPS = [
  {id:'day',title:'Prueba tu plan en una jornada',text:'Comienza la jornada. Atiende la avería en Red → Jornada, avanza hasta el último tren y consulta el parte. Después prepara el día siguiente.',person:'riders',target:'#daybar',next:'Elegir mi primer encargo',ready:()=>state.ops.completed>tut.baseline.completed&&state.ops.phase==='planning'},
  {id:'handoff',title:'Tu primer compromiso',text:'Esta es tu Agenda. Compara objetivo, premio y plazo; acepta el encargo que puedas cumplir. La guía termina y el compromiso sigue en tu partida.',person:'president',target:'#drawer',next:'El mando es tuyo',ready:()=>state.tycoon.completed>0||state.tycoon.contracts.some(q=>['active','won'].includes(q.status))||state.tycoon.resolved.some(q=>q.result==='won')}
 ];
-let tut = null, inductionModalKey = '', adviceLine = null, tutorialDraft = null, tourGeometry = '';
+let tutScrolled = -1, tut = null, inductionModalKey = '', adviceLine = null, tutorialDraft = null, tourGeometry = '';
+function releaseTray(){const t=$('toast');if(t?.dataset.tour){delete t.dataset.tour;Object.assign(t.style,{left:'',top:'',right:'',bottom:''});narrator.positionTray?.();}}
+function placeTray(avoid){
+ const t=$('toast');if(!t)return;const w=innerWidth,h=innerHeight,tw=Math.min(420,w-24),th=Math.min(Math.max(t.offsetHeight,120),h*.4);
+ const hit=(x,y)=>avoid.some(r=>r&&x<r.right+8&&x+tw>r.left-8&&y<r.bottom+8&&y+th>r.top-8);
+ const spots=[[w-tw-18,h-th-170],[18,h-th-170],[w-tw-18,104],[18,104],[(w-tw)/2,h-th-170]];
+ const [x,y]=spots.find(([x,y])=>!hit(x,y))||spots[0];
+ t.dataset.tour='1';Object.assign(t.style,{left:Math.max(8,x)+'px',top:Math.max(8,y)+'px',right:'auto',bottom:'auto'});
+}
 function clearCoach(){
- narrator.cancel('guide');
+ narrator.cancel('guide');releaseTray();
  $('coach')?.remove();$('spot')?.remove();$('tour-shades')?.remove();
  document.querySelectorAll('.tour-target,.tour-dialog').forEach(el=>el.classList.remove('tour-target','tour-dialog'));
  for(const el of $('game').children)el.inert=false;
@@ -533,7 +541,7 @@ function positionTour(){
  document.querySelectorAll('.tour-target,.tour-dialog').forEach(el=>{if(el!==target)el.classList.remove('tour-target','tour-dialog');});
  target.classList.add(inDialog?'tour-dialog':'tour-target');
  for(const el of $('game').children)el.inert=inDialog||!(el===target||el.contains(target));
- if(inDialog){$('tour-shades')?.remove();$('spot')?.remove();coach.classList.add('in-dialog');tourGeometry='';return;}
+ if(inDialog){$('tour-shades')?.remove();$('spot')?.remove();coach.classList.add('in-dialog');tourGeometry='';releaseTray();return;}
  coach.classList.remove('in-dialog');
  let shades=$('tour-shades');
  if(!shades){shades=document.createElement('div');shades.id='tour-shades';shades.setAttribute('aria-hidden','true');shades.innerHTML='<i></i><i></i><i></i><i></i>';document.body.appendChild(shades);}
@@ -553,6 +561,7 @@ function positionTour(){
  const boxes=[[0,0,w,y],[0,y,x,bottom-y],[right,y,w-right,bottom-y],[0,bottom,w,h-bottom]];
  [...shades.children].forEach((el,i)=>{const [left,top,width,height]=boxes[i];Object.assign(el.style,{left:left+'px',top:top+'px',width:width+'px',height:height+'px'});});
  Object.assign(ring.style,{left:x+'px',top:y+'px',width:(right-x)+'px',height:(bottom-y)+'px'});
+ placeTray([coach.getBoundingClientRect(),{left:x,top:y,right,bottom}]);
 }
 function renderCoach(){
  if(!tut)return;tutorialChrome();
@@ -569,6 +578,7 @@ function renderCoach(){
  const guideText=coach.querySelector('[data-say]').dataset.say;
  narrator.guide(N.keyForText(guideText),coach,'guide:'+state.seedCode+':'+N.keyForText(guideText));
  positionTour();
+ if(tut&&tutScrolled!==tut.step&&['offer','infrastructure'].includes(stage.id)&&inspect?.type==='route'){const f=$('routeForm');if(f){tutScrolled=tut.step;requestAnimationFrame(()=>{f.scrollIntoView({block:'center'});positionTour();});}}
 }
 
 // ------------------------------------------------------------ selección en el mapa
@@ -649,7 +659,6 @@ function checkIncidents() {
   }
 }
 function showAlert(x, rr) {
-  if(!screen)narrator.toast(x.reason+(x.place?' · '+x.place:''),{key:x.type==='surge'?'surge-alert':'incident-alert'});
   const r = rr || state.routes.find(r => r.id === x.route);
   if(screen){
     document.querySelector('.alert-pill')?.remove();renderNav();
@@ -694,16 +703,27 @@ function renderHud(){
   const long=O.dayDate(state).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
   $('date').textContent=state.tenfe?.game?'Turno '+J.turn(state)+' · tu red en marcha':state.ended&&state.ending==='2050'?'31 dic 2050':long[0].toUpperCase()+long.slice(1);
   $('dateShort').textContent=state.tenfe?.game?'Turno '+J.turn(state):O.dayLabel(state);
-  $('dayKind').textContent=state.tenfe?.game?Math.max(1,J.electionMonth(state)-state.month)+' turnos hasta las urnas':state.tenfe?`Elecciones: ${when(U.electionMonth(state)-1)}`:`Jornada ${state.ops.completed+1} · ${S.DAY_TYPES[kind]}`;
-  const free=state.fleet.reduce((sum,f)=>sum+E.available(state,f),0);
+  const toPolls=state.tenfe?.game?Math.max(1,J.electionMonth(state)-state.month):99;
+  $('dayKind').textContent=toPolls<=3?'Urnas en '+toPolls+(toPolls===1?' turno':' turnos'):'';
+  renderObjective();
   $('resources').innerHTML=[
-    ['Caja',money(state.cash)],[state.tenfe?.game?'Resultado / turno':'Resultado / mes',`<span class="${b.net>=0?'pos':'neg'}">${signed(b.net)}</span>`],
-    ['Apoyo',state.tenfe?`${n(U.forecast(state),1)}<small>%</small>`:`${n(state.satisfaction)}<small>%</small>`],
-    ['Puntualidad',`${n(b.punctuality,1)}<small>%</small>`],['Trenes libres',n(free)]
+    ['Caja',money(state.cash)],
+    ['Puntualidad',`${n(b.punctuality,0)}<small>%</small>`],
+    ['Apoyo',state.tenfe?`${n(U.forecast(state),0)}<small>%</small>`:`${n(state.satisfaction)}<small>%</small>`]
   ].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+  document.querySelector('.hud .clock')?.classList.toggle('hidden',state.ops.phase!=='running');
   renderClock();
 }
 
+function renderObjective(){
+  let el=$('objective');
+  if(!el){el=document.createElement('div');el.id='objective';el.className='objective';document.querySelector('.hud .when')?.after(el);}
+  if(!state.started){el.innerHTML='';return;}
+  const g=state.tenfe?.game,done=g?g.challenges.length:0;
+  const head=tut?`Guía ${tut.step+1}/${TOUR_STEPS.length}`:`Turno ${g?J.turn(state):state.month+1}`;
+  const goal=tut?TOUR_STEPS[tut.step].title:(state.tenfe?U.nextAction(state).label:'Abrir agenda');
+  el.innerHTML=`<button class="objective-main" data-action="${tut?'tutorial-focus':'tenfe-next'}" aria-label="Objetivo: ${esc(goal)}"><small>${esc(head)}</small><strong>${esc(goal)}</strong></button>${g?`<button class="objective-goals" data-action="navigate" data-screen="progress" aria-label="${done} de 5 retos cumplidos"><i style="--p:${done*20}%"></i>${done}/5</button>`:''}`;
+}
 function renderClock() {
   const m = currentMinute(), d = O.daylight(state, m);
   $('clock').textContent = clock(m);
@@ -720,7 +740,7 @@ function renderNav() {
 }
 function renderMission(){
   const el=$('mission');
-  el.classList.toggle('hidden',!!screen||(!!inspect&&innerWidth<1200)||!state.started);
+  el.classList.add('hidden');if(!tut||TOUR_STEPS[tut.step].target!=='#mission')return;
   const rescue=state.tenfe?TenfeUI.missionHTML(state):'';
   const c=CHAPTERS[state.chapter];
   const objectives=c?`<div class="kicker">Tu mandato · ${c.years}</div><h2>${esc(c.title)}</h2><ul>${c.objectives.slice(0,4).map(([k,target,title])=>{
@@ -750,19 +770,25 @@ function renderLegend() {
   }[layer] || [[FAMILY_COLOR.AVE, 'AVE'], [FAMILY_COLOR.Alvia, 'Alvia'], ['#8a7c69', layer === 'real' ? 'Trazado aproximado' : 'Por abrir', true]];
   const extra = layer === 'gauge' ? '<span><i class="rombo"></i>Cambiador de ancho</span><span class="muted">Pulsa un tramo o un cambiador</span>' : layer === 'power' ? '<span class="muted">Pulsa un tramo para electrificarlo</span>' : layer === 'speed' ? '<span class="muted">Pulsa un tramo para renovarlo</span>' : layer === 'works' ? '' :
     '<span><i class="dot" style="border-color:#3f9d5a"></i>Ciudad conectada</span><span><i class="dot" style="border-color:#f0b544"></i>Parcial</span><span><i class="dot" style="border-color:#9c8b74"></i>Sin tren</span><span><i class="pin">!</i>Petición</span><span><i class="crowd">▮▮▮</i>Trenes llenos</span>' + `<span class="muted">${layer === 'real' ? 'AVE y Alvia publicados · ' + S.DAY_TYPES[dayType()] : 'Pulsa una ciudad'}</span>`;
-  $('legend').innerHTML = items.map(([c, t, d]) => `<span><i class="${d ? 'dash' : ''}" style="background:${c};color:${c.startsWith('linear') ? GAUGE_COLOR.std : c}"></i>${t}</span>`).join('') + extra;
+  const legendHTML = items.map(([c, t, d]) => `<span><i class="${d ? 'dash' : ''}" style="background:${c};color:${c.startsWith('linear') ? GAUGE_COLOR.std : c}"></i>${t}</span>`).join('') + extra;
+  $('legend').innerHTML='';$('legend').classList.add('hidden');
+  let inLayers=document.querySelector('.map-layers .layer-legend');
+  if(!inLayers){inLayers=document.createElement('div');inLayers.className='layer-legend';document.querySelector('.map-layers .layer-switch')?.appendChild(inLayers);}
+  if(inLayers)inLayers.innerHTML=legendHTML;
 }
 function renderDaybar() {
   const op = state.ops, trips = plan(), b = O.dayBounds(trips);
   const observer = layer === 'real';
   const delegationHint=state.ended?'El mandato ha terminado.':E.pendingDecision(state)?'Hay una decisión pendiente. Resuélvela antes de delegar el mes.':'Liquida el resto del mes y avanza obras, formación y encargos con cuentas reales.';
   const primary = op.phase === 'planning' ? ['day-start', 'Comienza la jornada'] : op.phase === 'running' ? ['day-end', 'Hasta el último tren'] : ['day-review', 'Ver parte del día'];
-  $('daybar').innerHTML = `<div class="turn"><small>${observer ? 'Observación del horario real' : op.phase === 'planning' ? 'Preparación' : op.phase === 'running' ? 'Jornada en curso' : 'Jornada cerrada'}</small><strong>${observer ? S.DAY_TYPES[dayType()] : clock(b.first) + ' → ' + clock(b.last)}</strong><span>${observer ? n(realTrips(dayType()).length) + ' circulaciones publicadas' : n(trips.length) + ' circulaciones · ' + n(trips.filter(t => t.bus).length) + ' en autobús'}</span></div>
-  <div class="timeline" id="timeline" title="${observer ? 'Pulsa para cambiar la hora de observación' : 'Ritmo del día: trenes en circulación'}"><canvas id="timelineCanvas"></canvas></div>
+  const running=op.phase==='running'||observer;
+  const close=op.phase !== 'running' && !observer ? `<button class="btn ${op.phase==='planning'?'':'primary'}" data-action="skip-month" title="${delegationHint}" ${state.ended?'disabled':''}>${state.tenfe?.game?'Cerrar turno':'Cerrar el mes'}</button>` : '';
+  $('daybar').classList?.toggle('compact',!running);
+  $('daybar').innerHTML = running ? `${observer ? '<div class="turn"><small>Observación del horario real</small></div>' : ''}<div class="timeline" id="timeline" title="${observer ? 'Pulsa para cambiar la hora de observación' : 'Ritmo del día'}"><canvas id="timelineCanvas"></canvas></div>
   <div class="controls"><div class="speed" role="group" aria-label="Velocidad">${SPEEDS.map(([, label], i) => `<button class="${i === speedIndex ? 'active' : ''}" data-action="speed" data-id="${i}">${label}</button>`).join('')}</div>
   <button class="play" data-action="play" aria-label="${playing ? 'Pausar' : 'Reproducir'}">${playing ? '❚❚' : '▶'}</button>
-  ${observer ? '' : `<button class="btn primary" data-action="${primary[0]}">${primary[1]}</button>`}
-  ${op.phase !== 'running' && !observer ? `<button class="btn" data-action="skip-month" title="${delegationHint}" ${state.ended?'disabled':''}>${state.tenfe?.game?'Cerrar turno':'Cerrar el mes'}</button>` : ''}</div>`;
+  ${observer ? '' : `<button class="btn primary" data-action="${primary[0]}">${primary[1]}</button>`}</div>`
+  : `<div class="controls"><button class="btn ${op.phase==='planning'?'primary':''}" data-action="${primary[0]}">${primary[1]}</button>${close}</div>`;
   drawTimeline();
 }
 function drawTimeline() {
@@ -813,7 +839,9 @@ function navigate(to) {
   renderNav(); renderMission(); renderInspector(); renderDrawer(true);
 }
 function header(kicker, title, text = '') {
-  return `<header><div><div class="kicker">${kicker}</div><h1>${title}</h1>${text ? `<p>${text}</p>` : ''}</div><button class="close" data-action="close-drawer" aria-label="Cerrar">×</button></header>`;
+  const words = x => String(x || '').replace(/<[^>]+>/g, '').trim().split(/\s+/).filter(Boolean).length;
+  const name = !kicker || (title && words(title) <= words(kicker)) ? title : kicker;
+  return `<header><div><h1>${name}</h1></div><button class="close" data-action="close-drawer" aria-label="Cerrar">×</button></header>`;
 }
 function renderDrawer(resetScroll = false) {
   const el = $('drawer');
@@ -889,13 +917,13 @@ function networkPage() {
   const row = r => {
     const [cls, label] = statusOf(r), m = r.active ? E.metrics(state, r) : null, trips = r.real ? (S.routeStats(r.id, 'L')?.trips || 0) : null, o = E.routeOptions(state, r);
     const can = [['ave', 'AVE'], ['alvia', 'Alvia'], ['hybrid', 'Híbrido']].map(([k, t]) => `<i class="can ${o[k].ok ? 'ok' : ''}">${t}</i>`).join('');
-    return `<tr class="clickable" data-action="route" data-id="${r.id}"><td>${routeChip(r)}</td><td><button class="linkish route-link" data-action="route" data-id="${r.id}">${esc(routeName(r))}</button><small>${n(r.km)} km ${can}</small></td>
-    <td class="num">${trips !== null ? n(trips) : '<span class="muted">—</span>'}</td><td><span class="status ${workOn(r) ? 'works' : cls}">${workOn(r) ? 'Con obras' : label}</span>${r.active ? `<small>${r.frequency}/${E.maxFrequency(r)} por sentido</small>` : ''}</td>
-    <td class="num">${m ? n(m.passengers) : '—'}</td><td class="num ${m ? (m.net >= 0 ? 'pos' : 'neg') : ''}">${m ? signed(m.net) : '—'}</td></tr>`;
+    return `<tr class="clickable" data-action="route" data-id="${r.id}"><td>${routeChip(r)}</td><td><button class="linkish route-link" data-action="route" data-id="${r.id}">${esc(routeName(r))}</button></td>
+    <td><span class="status ${workOn(r) ? 'works' : cls}">${workOn(r) ? 'Con obras' : r.active ? r.frequency + (r.frequency === 1 ? ' salida' : ' salidas') : label}</span></td>
+    <td class="num ${m ? (m.net >= 0 ? 'pos' : 'neg') : ''}">${m ? signed(m.net) : ''}</td></tr>`;
   };
   let body = `<div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.routeTab === k ? 'active' : ''}" data-action="route-tab" data-id="${k}">${t}</button>`).join('')}</div>
   <div class="toolbar"><input type="search" id="routeSearch" placeholder="Busca una ciudad" value="${esc(ui.routeQuery)}" aria-label="Buscar relación"><select id="routeStatus" aria-label="Estado">${statuses.map(([k, t]) => `<option value="${k}" ${ui.routeStatus === k ? 'selected' : ''}>${t}</option>`).join('')}</select><button class="btn" data-action="new-service" ${state.ended ? 'disabled' : ''}>Relación nueva</button></div>`;
-  body += `<p class="small muted">${list.length} relaciones · pulsa un nombre para comparar material, tarifas y frecuencias. Los resultados son previsiones mensuales.</p><table><thead><tr><th></th><th>Relación</th><th class="num">Trenes / día</th><th>Estado</th><th class="num">Viajeros / mes</th><th class="num">Resultado</th></tr></thead><tbody>${list.map(row).join('')}</tbody></table><p class="small muted table-hint">Desplaza la tabla para consultar todas las columnas.</p>`;
+  body += `<table class="route-list"><thead><tr><th></th><th>Relación</th><th>Estado</th><th class="num">Resultado</th></tr></thead><tbody>${list.map(row).join('')}</tbody></table>`;
   if (!list.length) body += '<div class="empty">No hay relaciones con estos filtros.<p><button class="btn small" data-action="route-tab" data-id="all" data-clear="true">Mostrar toda la red</button></p></div>';
   return [header('Red y servicios', 'AVE donde se pueda; Alvia donde no.', 'Lo que puede circular depende del ancho y la catenaria de cada tramo. Abrir un servicio cuesta 4 M€.'), body];
 }
@@ -1574,6 +1602,7 @@ document.addEventListener('click', event => {
     case 'music-next': music.next(); break;
     case 'tutorial-next': tutorialNext(); break;
     case 'tutorial-skip': suspendTutorial(); break;
+    case 'tutorial-focus': focusTutorial(); renderCoach(); break;
     case 'tutorial-collapse': if(tut){tut.compact=!tut.compact;autosave();renderCoach();}break;
     case 'tutorial-advice': tutorialAdvice(id);break;
     case 'tutorial-advice-close': adviceLine=null;voices.stop();closeModal();inductionModalKey='';renderCoach();break;
