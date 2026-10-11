@@ -67,6 +67,17 @@ const fit=async(page,selector)=>{
  }
 };
 const screenshot=async(page,name)=>{const bytes=await page.screenshot({type:'jpeg',quality:55});fs.writeFileSync(path.join(out,name+'.jpg'),bytes);console.log('QA_IMAGE:'+name+':'+bytes.toString('base64'));};
+// Short notifications can finish naturally while a public-page screenshot is
+// being encoded. Dismiss the real control atomically or verify native completion.
+const dismissToast=async page=>{
+ const result=await page.evaluate(()=>{
+  const button=document.querySelector('#toast [data-action="narration-dismiss"]');
+  if(button){button.click();return 'dismissed';}
+  return window.__audioQA.starts.at(-1)?.ended?'ended':null;
+ });
+ assert(result,'the message can be dismissed or has ended its complete recording');
+ await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
+};
 let page;
 try{
  for(const size of [{width:1440,height:960},{width:390,height:844}]){
@@ -89,7 +100,7 @@ try{
   assert(placement.bottom<=placement.controls-8,'notifications never cover the clock or turn controls: '+JSON.stringify(placement));
   await screenshot(page,'narracion-taller-'+size.width);
   assert.deepEqual(await page.evaluate(()=>window.railwayGame.snapshot()),before,'listening never changes the economy');
-  await page.locator('#toast [data-action="narration-dismiss"]').click();await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
+  await dismissToast(page);await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
   await page.evaluate(()=>window.railwayGame.narrator.toast('No hay caja suficiente.',{error:true}));
   await heard(page,'error-money');assert.equal(await page.locator('#toast .narration-speaker strong').textContent(),'Charo Tijera');
   await page.evaluate(()=>window.railwayGame.voices.toggle());await page.waitForFunction(()=>!window.railwayGame.voices.speaking);
@@ -124,7 +135,7 @@ try{
   await heard(page,'refit-started',refitIndex);
   assert(await page.evaluate(before=>window.railwayGame.state().cash<before,cashBefore),'the actual refit is charged once');
   assert.equal(await page.locator('#toast .narration-card[data-narration-key="refit-started"]').count(),1,'confirmation survives closing the workshop');
-  await page.locator('#toast [data-action="narration-dismiss"]').click();
+  await dismissToast(page);
   assert.deepEqual(await page.evaluate(()=>window.__audioQA.system),[]);
   await context.close();
  }
