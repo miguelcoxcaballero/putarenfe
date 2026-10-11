@@ -95,7 +95,7 @@ dialog#modal:has(.main-menu-shell)::backdrop{background:#111c26;backdrop-filter:
 @media(min-width:761px) and (max-height:720px){.main-menu{padding-top:24px;padding-bottom:18px}.menu-home-body{padding-top:0;padding-bottom:24px}.menu-brand{margin-bottom:20px}.menu-wordmark{font-size:68px}.menu-subtitle{font-size:16px;margin-top:10px}.menu-item{font-size:17px;min-height:45px;padding:10px 16px}.menu-sub-body,.np-body{justify-content:flex-start;padding-top:0}.np-configuration{padding:22px 26px}.np-head .menu-back{margin-bottom:12px}.np-body{gap:18px}.menu-back{margin-bottom:16px}}
 @media(prefers-reduced-motion:reduce){.main-menu-art,.menu-home-body{animation:none}.menu-item{transition:none}}
 
-.menu-audio-toggle{font:inherit;color:inherit;background:transparent;border:1px solid #ffffff42;border-radius:4px;padding:6px 10px;cursor:pointer}
+.menu-audio-toggle{min-height:44px;min-width:110px;font:inherit;color:inherit;background:transparent;border:1px solid #ffffff42;border-radius:4px;padding:6px 10px;cursor:pointer}
 .menu-audio-toggle:hover,.menu-audio-toggle:focus-visible{background:#ffffff16;border-color:#ffffff85}
 
 .track:not(.on) .eq i,.track.on .eq .eq-play{display:none}
