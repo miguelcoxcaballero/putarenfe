@@ -1,26 +1,38 @@
 [
   {
-    "id": "rdorf",
-    "page": "https://commons.wikimedia.org/wiki/File:Interior_Stadler_FLIRT_of_Go-Ahead_Baden-W%C3%BCrttemberg.jpg",
-    "commons": "Interior Stadler FLIRT of Go-Ahead Baden-Württemberg.jpg",
-    "notes": "Concepto Dörfler LIRIO, referencia real del salón de pasajeros FLIRT (Go-Ahead). Seleccionada después de descartar la cabina de conducción de Arriva."
-  },
-  {
-    "id": "s106",
-    "page": "https://www.lavozdegalicia.es/album/galicia/2024/01/09/interior-trenes-avril/01101704819435399546521.htm",
-    "image": "https://img.lavdg.com/sc/9yXfoHFIzcwovSv8iy-rFzGvfbE%3D/480x/2024/01/09/00121704814441931309377/Foto/j_20240109_154618000.jpg",
-    "notes": "Renfe, foto 2/5, producción AVE106 Estándar 3+2 y pantallas táctiles. S106 fijo y variable comparten referencia de salón; no confundir con Confort 2+2 ni render del prototipo."
-  },
-  {
-    "id": "s106-option8",
+    "id": "s106-option9",
     "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
-    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106_8.jpg",
-    "notes": "Foto Renfe, mayo 2024. Inspeccionar clase antes de aceptar."
+    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-9.jpg",
+    "notes": "Fotografía Renfe de producción, mayo 2024; pendiente de selección visual de salón Estándar 3+2."
   },
   {
     "id": "s106-option10",
     "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
-    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106_10.jpg",
-    "notes": "Foto Renfe, mayo 2024. Inspeccionar clase antes de aceptar."
+    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-10.jpg",
+    "notes": "Fotografía Renfe de producción, mayo 2024; pendiente de selección visual de salón Estándar 3+2."
+  },
+  {
+    "id": "s106-option11",
+    "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
+    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-11.jpg",
+    "notes": "Fotografía Renfe de producción, mayo 2024; pendiente de selección visual de salón Estándar 3+2."
+  },
+  {
+    "id": "s106-option12",
+    "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
+    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-12.jpg",
+    "notes": "Fotografía Renfe de producción, mayo 2024; pendiente de selección visual de salón Estándar 3+2."
+  },
+  {
+    "id": "s106-option13",
+    "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
+    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-13.jpg",
+    "notes": "Fotografía Renfe de producción, mayo 2024; pendiente de selección visual de salón Estándar 3+2."
+  },
+  {
+    "id": "s106-option14",
+    "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
+    "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-14.jpg",
+    "notes": "Fotografía Renfe de producción, mayo 2024; pendiente de selección visual de salón Estándar 3+2."
   }
 ]
