@@ -19,7 +19,7 @@
   "game": {
     "url": "index.html",
     "bytes": 38616,
-    "sha256": "60cf8e6feb5939480a24f328728fcdefd15598a37fb592ddbf90d1467eaccf9a"
+    "sha256": "78503ecfb1ba0c8fbcfa5d71ac155227334629fe23b79a590fdf621c8e26ab5d"
   },
   "listening": {
     "url": "dialogos.html",
@@ -3588,14 +3588,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-9bcfcf5a1eae.js",
-      "bytes": 11712429,
-      "sha256": "9bcfcf5a1eae212b15caf0b75e19461022d61c14efd9a758a457ebe924446a8f"
+      "url": "assets/game-script-4-31e274fe4042.js",
+      "bytes": 11710761,
+      "sha256": "31e274fe40429559ff3df59c1c5742154a54e87a8de60d63813ee10ac63c51c8"
     },
     {
-      "url": "assets/game-style-0-003a036f147e.css",
-      "bytes": 2188098,
-      "sha256": "003a036f147e674a3dd6a40fe59c42b13039846e2dd8a48552e0599117c818ac"
+      "url": "assets/game-style-0-c40706b44491.css",
+      "bytes": 2206708,
+      "sha256": "c40706b44491f48e1db4e64d201fab8149f0fbc0c2e65986b3a37792dc1746cd"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -7740,6 +7740,16 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-9bcfcf5a1eae.js",
+      "bytes": 11712429,
+      "sha256": "9bcfcf5a1eae212b15caf0b75e19461022d61c14efd9a758a457ebe924446a8f"
+    },
+    {
+      "url": "assets/game-style-0-003a036f147e.css",
+      "bytes": 2188098,
+      "sha256": "003a036f147e674a3dd6a40fe59c42b13039846e2dd8a48552e0599117c818ac"
+    },
     {
       "url": "assets/game-script-4-5befab2d0afd.js",
       "bytes": 11710615,

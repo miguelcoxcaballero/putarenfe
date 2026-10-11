@@ -230,8 +230,8 @@
     },
     {
       "file": "tycoon-ui.js",
-      "bytes": 21720,
-      "sha256": "1be3785a45269be455bd299cf0deadcf63bac37a3953f6dc1e20f87f5a40c98e"
+      "bytes": 21557,
+      "sha256": "9c6d88213cbf9add123d1ec70ac1e0376bf1ea793630a65d32c414ae3ea2c3a3"
     },
     {
       "file": "nueva-partida.js",
@@ -265,28 +265,28 @@
     },
     {
       "file": "conexiones-ui.js",
-      "bytes": 11273,
-      "sha256": "cd6fc30840383ce9e2031c4ea4849af661e3e00578c3d7ff8297fef889c004eb"
+      "bytes": 10328,
+      "sha256": "6c54cb2a807e7b6d5e4e3db29c4175ec8412c79642f638158c98bab7ff35d2c6"
     },
     {
       "file": "tenfe-ui.js",
-      "bytes": 9980,
-      "sha256": "47f2f7498101f4745040f7d5fe7e4ca4723736bba0c4e5f50b2b8cc4c1f5168c"
+      "bytes": 9677,
+      "sha256": "8aa09b6bdddff166bc3db802f63360507dda8cbfe310e26e869a246e9d719492"
     },
     {
       "file": "train-refit.js",
-      "bytes": 20598,
-      "sha256": "95bc51ff911bf03115e18cc9e7850a0964a1289459b51e2d16a8517187700ccd"
+      "bytes": 20399,
+      "sha256": "b7b0edac3eeaeea1342c378ad6aab27e2bf5a01c299d596586ebcf25a09503e6"
     },
     {
       "file": "app.js",
-      "bytes": 180669,
-      "sha256": "c24706b187558be85c7e9962d5c238d353fbd85b6fe4dd9b4206961c75ddecb2"
+      "bytes": 180611,
+      "sha256": "73c422c7ba8585ae3dbd3686a707df4862ce9830d959a3092ebd5b316723916b"
     },
     {
       "file": "style-v3.css",
-      "bytes": 82162,
-      "sha256": "6773fe89662e019222189052b8dca42e86be9519fd76f1a6a63d804c23060f0e"
+      "bytes": 100772,
+      "sha256": "0194382a3ea43332d4bd19d2c013475406959c86bdd731ca213760e39870e171"
     },
     {
       "file": "main-menu.css",
