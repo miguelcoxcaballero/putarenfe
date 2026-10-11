@@ -812,3 +812,46 @@ h2.section{font:700 15px var(--sans)!important;letter-spacing:.06em;text-transfo
 .refit-overview b{color:var(--cyan)!important;font-family:var(--mono)}.refit-intro p,.refit-overview{color:var(--txt-2)!important}
 .refit-lots article,.refit-catalogue article,.refit-empty,.refit-fleet-link,.refit-references{background:#ffffff06!important;border:1px solid var(--line)!important;color:var(--txt)!important;border-radius:14px!important}
 .refit-lots h3,.refit-catalogue h3{color:var(--txt)!important}
+
+/* 6.6 · Sin cajas dentro de cajas: el panel es la única superficie. Dentro, solo tipografía, espacio, fotos y líneas finas. */
+.drawer .vcard,.inspector .vcard{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible}
+.drawer .vcard:hover{transform:none;box-shadow:none}
+.drawer .vcard.done{box-shadow:none!important}
+.vcard-media{border-radius:10px;overflow:hidden}
+.vcard-body{padding:8px 2px 0!important}
+.vbadge{background:#05080daa!important;border:0!important;border-radius:6px!important}
+.vchips{gap:14px!important}
+.vchip{padding:0!important;border:0!important;background:none!important;border-radius:0!important;color:var(--txt-2)!important;font:600 12px var(--mono)!important}
+.vchip i{color:var(--cyan)}.vchip.big{font-size:14px!important;color:var(--txt)!important}.vchip.ok{color:var(--okc)!important}.vchip.bad{color:#ff9b9b!important}
+.vtile,.drawer .figures>div,.inspector .figures>div{background:none!important;border:0!important;border-radius:0!important;padding:0!important}
+.vtiles,.drawer .figures,.inspector .figures{gap:28px!important;padding:6px 0 18px!important;border-bottom:1px solid #ffffff12}
+.vtile .ic{position:static!important;width:18px!important;height:18px!important;margin-bottom:6px}
+.vtile b,.drawer .figures dd{font-size:26px!important}
+.vrow{background:none!important;border:0!important;border-radius:0!important;padding:14px 0!important;border-bottom:1px solid #ffffff12!important}
+.vrow img{border-radius:50%!important;width:48px!important;height:48px!important}
+.vprogress,.vslider{background:none!important;border:0!important;padding:0!important}
+.vbanner{border:0!important;border-radius:12px!important}
+.drawer .tabs{background:none!important;border:0!important;border-bottom:1px solid #ffffff14!important;border-radius:0!important;padding:0!important;gap:22px!important;margin-bottom:20px!important}
+.drawer .tabs button{padding:12px 0!important;border-radius:0!important;background:none!important;box-shadow:none!important;border-bottom:2px solid transparent!important;color:var(--txt-2)!important}
+.drawer .tabs button.active{color:var(--txt)!important;background:none!important;border-bottom-color:var(--cyan)!important;box-shadow:none!important}
+.drawer .tabs .tabs,.drawer .body .tabs+.tabs,.drawer .segmented{border-bottom:0!important;gap:18px!important}
+.drawer td{background:none!important;border-bottom:1px solid #ffffff10!important;border-radius:0!important}.drawer table{border-spacing:0!important}
+.drawer tr.clickable:hover td{background:#ffffff06!important}
+.drawer .callout,.inspector .callout{background:none!important;border:0!important;border-left:2px solid var(--cyan)!important;border-radius:0!important;padding:2px 0 2px 12px!important}
+.drawer .callout.red{border-left-color:#ff7a7a!important}
+.drawer .incident{background:none!important;border:0!important;border-left:3px solid #ff7a7a!important;border-radius:0!important;padding:4px 0 4px 14px!important}
+.drawer .board{border:0!important;border-radius:0!important}.drawer .board .row.head{background:none!important}
+.refit-intro{background:none!important;border:0!important;padding:0 0 12px!important}
+.refit-lots article,.refit-catalogue article,.refit-empty,.refit-fleet-link,.refit-references{background:none!important;border:0!important;border-radius:0!important}
+.drawer .pressure-card,.drawer .tycoon-contract,.drawer .market-row,.drawer .mandate-card,.drawer .policy-grid article{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;border-bottom:1px solid #ffffff12!important}
+.inspector .conn,.inspector .req,.inspector .option,.inspector .conn.off,.inspector .conn.locked{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;border-bottom:1px solid #ffffff10!important;padding-left:0!important;padding-right:0!important}
+.inspector .req.red{background:none!important;color:#ff9b9b}.inspector .req.gold{background:none!important}
+.drawer .btn:not(.primary),.inspector .btn:not(.primary){background:none!important;border:0!important;color:var(--cyan)!important;padding-left:0!important;padding-right:0!important;box-shadow:none!important}
+.drawer .btn:not(.primary):hover,.inspector .btn:not(.primary):hover{color:#fff!important;text-decoration:underline;text-underline-offset:4px}
+.drawer .vcard-body .btn:not(.primary){align-self:flex-start;text-align:left}
+.drawer select,.drawer input[type=search],.drawer input[type=text]{background:none!important;border:0!important;border-bottom:1px solid #ffffff24!important;border-radius:0!important;padding-left:0!important}
+.drawer .desk-decision,.drawer .desk-options .choice{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.drawer .desk-options .choice{border-left:2px solid var(--line-2)!important;padding:8px 0 8px 14px!important}.drawer .desk-options .choice:hover{border-left-color:var(--cyan)!important}
+.drawer .figures>div,.inspector .figures>div,.vtile{border-left:0!important;border-right:0!important}
+.drawer .board,.drawer .board .row,.drawer .board .row span{background:none!important;box-shadow:none!important}.drawer .board .row{border-bottom:1px solid #ffffff10!important}
+.drawer .figures dd{white-space:nowrap;font-size:22px!important}
