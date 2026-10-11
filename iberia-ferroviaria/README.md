@@ -1,6 +1,6 @@
 # Tenfe · Conexiones
 
-**Versión 6.3: nuevo menú de inicio.** Las mejores mecánicas de Rescate y La herencia funcionan juntas desde el primer turno: una red propia de conexiones, cinco retos simultáneos, sucesos ilustrados y elecciones cada 12 turnos.
+**Versión 6.3.1: fotos de fabricantes corregidas y nuevo menú de inicio.** Las mejores mecánicas de Rescate y La herencia funcionan juntas desde el primer turno: una red propia de conexiones, cinco retos simultáneos, sucesos ilustrados y elecciones cada 12 turnos.
 
 [Jugar](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/) · [Reglas y mapa](docs/CONEXIONES.md) · [Auditorio](https://miguelcoxcaballero.github.io/putarenfe/iberia-ferroviaria/dialogos.html)
 
@@ -54,3 +54,9 @@ La portada utiliza una fotografía real de un AVE serie 103 en Paracuellos de la
 La procedencia está registrada en `proyecto/dist/assets/menu-paracuellos-provenance.json`; la atribución y licencia están enlazadas en el menú. La imagen conserva CC BY-SA 3.0. El panorama ilustrado anterior y las fotos de los sucesos permanecen en el proyecto.
 
 `npm run menu-ui` comprueba la portada, carga, ajustes, dificultad, confirmación y continuidad de las partidas en escritorio y móvil, y guarda capturas en el artefacto de Actions.
+
+### Fotografías de fabricantes
+
+Dörfler LIRIO 4 y BCBB Fuxing usan nuevas ediciones con IA sobre la fotografía de la serie 112: se conservan la cámara, el taller, la grúa, el foso y la iluminación. Cada tren conserva su propio frontal y librea. Las miniaturas y las fichas de Trenes Pop utilizan la misma imagen corregida, con una URL de versión para renovar la caché.
+
+Las dos imágenes finales editables y su procedencia están en `proyecto/dist/assets/fabricantes/`. `tools/build-manufacturer-photos.mjs` verifica esos originales y la referencia, exporta los WebP completos de 1536 × 1024 y publica sus SHA-256. `npm run fabricantes-ui` comprueba los cuatro anuncios de ambas marcas y sus fichas en escritorio y móvil.

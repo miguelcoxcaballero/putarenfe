@@ -1,6 +1,6 @@
 # Fotos generadas y referencias de trenes
 
-Las 25 imágenes del catálogo se generaron con `image_gen.imagegen`. Representan trenes en un taller compartido con vigas azules y grúa amarilla; las marcas y rotulaciones visibles pertenecen a la parodia del juego. No son fotografías documentales de unidades reales. El tren AV 2030 es un diseño ficticio; AVArato usa una imagen propia de la serie 106 con su logo y rotulación.
+Las 25 imágenes de series del catálogo se generaron con `image_gen.imagegen`. Representan trenes en un taller compartido con vigas azules y grúa amarilla; las marcas y rotulaciones visibles pertenecen a la parodia del juego. No son fotografías documentales de unidades reales. El tren AV 2030 es un diseño ficticio; AVArato usa una imagen propia de la serie 106 con su logo y rotulación.
 
 El [manifiesto editable](../proyecto/dist/assets/train-photos/manifest.json) registra cada WebP, sus bytes, SHA256, archivo de generación y referencias. Las 25 fotos suman **6.337.308 bytes**; este manifiesto tiene SHA256 `40cdb110d8460d273c2e613b814fd57cb396bb399f3d409875f51b52ac52106c`. Los originales de referencia y los PNG completos de generación no se distribuyen en el juego. La compresión a WebP conserva el encuadre completo.
 
@@ -56,3 +56,12 @@ Algunas entradas reutilizan una imagen de una familia afín. La serie etiquetada
 | Serie 599 | 598 |
 
 La serie 460 conserva el aviso «Fotografía en preparación»: todavía no se dispone de una referencia frontal identificada suficiente para presentar una imagen fiel. No se le atribuye la foto de Civia ni de otra serie.
+
+## Fabricantes Dörfler y BCBB — revisión 6.3.1
+
+Además de las 25 imágenes de series, estos dos fabricantes tienen fotografías propias. Sus ediciones finales se generaron con `image_gen.imagegen` usando la serie 112 como placa exacta del taller y las imágenes anteriores de cada fabricante como referencia del vehículo. Se mantienen la perspectiva, los elementos del taller y la luz; cada tren conserva su diseño y la librea ficticia Tenfe.
+
+- Dörfler LIRIO 4: concepto inspirado en Stadler FLIRT, con frontal corto y acoplador visible.
+- BCBB Fuxing: concepto inspirado en CR400AF, con morro largo y faros rasgados.
+
+Son imágenes generadas de conceptos del juego. No acreditan una unidad real de esos fabricantes. La procedencia de las imágenes anteriores se conserva en Git y en `proyecto/dist/assets/fabricantes/manifest.json`. Ese archivo identifica los originales finales aprobados, la referencia común y los SHA-256 de los WebP publicados. Las imágenes completas se exportan a 1536 × 1024 sin recorte.

@@ -1,7 +1,7 @@
 name: Verificar juego, voces y menú
 on:
   push:
-    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, codex/menu-inicio-realista, main]
+    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, codex/menu-inicio-realista, codex/fotos-fabricantes, main]
 concurrency:
   group: conexiones-${{ github.ref }}
   cancel-in-progress: true
@@ -41,8 +41,11 @@ jobs:
       - name: Probar el menú publicado
         working-directory: iberia-ferroviaria/proyecto
         run: node menu-inicio-ui-test.mjs
+      - name: Comprobar fotografías de fabricantes
+        working-directory: iberia-ferroviaria/proyecto
+        run: node fabricantes-ui-test.mjs
       - name: Probar el juego publicado
-        if: github.ref != 'refs/heads/codex/menu-inicio-realista'
+        if: github.ref != 'refs/heads/codex/menu-inicio-realista' && github.ref != 'refs/heads/codex/fotos-fabricantes'
         working-directory: iberia-ferroviaria/proyecto
         run: |
           node mapa-voces-ui-test.mjs
@@ -108,6 +111,7 @@ jobs:
         run: |
           node mapa-voces-ui-test.mjs
           node menu-inicio-ui-test.mjs
+          node fabricantes-ui-test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
