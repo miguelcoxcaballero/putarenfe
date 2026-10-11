@@ -11,7 +11,7 @@ function photograph(value) {
 }
 
 /** Fotos propias de fabricante con nombre fijo (assets/rescate/). Mientras no existan, se ve la serie equivalente. */
-const MAKER_PHOTOS = {bcbb: ['assets/rescate/tren-bcbb.webp', 'BCBB · Fuxing Regional', '103'], dorfler: ['assets/rescate/tren-dorfler.webp', 'Dörfler · LIRIO 4', '120']};
+const MAKER_PHOTOS = {bcbb: ['assets/rescate/tren-bcbb.webp?v=6.3.1', 'BCBB · Fuxing Regional', '103'], dorfler: ['assets/rescate/tren-dorfler.webp?v=6.3.1', 'Dörfler · LIRIO 4', '120']};
 /** Una miniatura utiliza la misma fotografía que la ficha del material. */
 export function trainThumb(value) {
   const maker = MAKER_PHOTOS[String(MODEL[value]?.photo || value || '').toLowerCase()];

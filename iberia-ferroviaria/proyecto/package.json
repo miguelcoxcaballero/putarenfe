@@ -1,6 +1,6 @@
 {
   "name": "iberia-ferroviaria",
-  "version": "6.3.0",
+  "version": "6.3.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -30,7 +30,8 @@
     "tenfe-ui": "node tenfe-ui-test.mjs",
     "tenfe-campaign": "node campaign-test.mjs --tenfe",
     "conexiones-ui": "node conexiones-ui-test.mjs",
-    "refit-ui": "node train-refit-ui-test.mjs"
+    "refit-ui": "node train-refit-ui-test.mjs",
+    "fabricantes-ui": "node fabricantes-ui-test.mjs"
   },
   "devDependencies": {
     "sharp": "0.34.5"

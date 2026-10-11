@@ -180,8 +180,8 @@
     },
     {
       "file": "train3d.js",
-      "bytes": 2661,
-      "sha256": "9db785331ed157ae43f278f53bd8437b9d930bafa757e3caee63ed5ec50ba84c"
+      "bytes": 2677,
+      "sha256": "b0328502d582b9ccb3abaa89cbc607f0bfd3858bbd2aa340d4910961047717dd"
     },
     {
       "file": "city-art.js",
@@ -236,7 +236,7 @@
     {
       "file": "main-menu.js",
       "bytes": 3662,
-      "sha256": "437868277bd4dc6d8d598d03111d4c81d1ffab1df9a1caa4b1d973ba841f4b45"
+      "sha256": "411b6a9c5303c2c318ef4b6bc990904d9670fd45bf8daf072a114f7042c11192"
     },
     {
       "file": "induction-task-ui.js",
