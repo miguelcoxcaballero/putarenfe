@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "6.3.0",
+  "version": "6.3.1",
   "status": "complete-catalogue",
   "availableWholeDialogues": 412,
   "expectedWholeDialogues": 412,
@@ -19,7 +19,7 @@
   "game": {
     "url": "index.html",
     "bytes": 38615,
-    "sha256": "e69bada9a4e775dfce6871e0ff2e9d16177ca309a61bdc60cb451e41a5164f8d"
+    "sha256": "3d5e25b058d7ab9baa171089dac3f1997497678740a9058911fb4adfe2258495"
   },
   "listening": {
     "url": "dialogos.html",
@@ -286,6 +286,12 @@
       "bytes": 62846,
       "sha256": "8d6d88e6cfa857ca2f5104783d1a4dfee25a84aa896f0610df01f3605bfbb889",
       "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/fabricantes/manifest.json",
+      "bytes": 6234,
+      "sha256": "b20e81423aac20b7ab251450dfbb29ae7f87602797931a90705b2563c71a64b7",
+      "kind": "manufacturer-photo-provenance"
     },
     {
       "url": "assets/rescate/cloacas.webp",
@@ -655,14 +661,14 @@
     },
     {
       "url": "assets/rescate/tren-bcbb.webp",
-      "bytes": 179814,
-      "sha256": "aa23e089453170475652fcde47db494cf21a96172033f661672d5808f1b1ed25",
+      "bytes": 224052,
+      "sha256": "d8463cabbf7bf009f8e23c3f198f4a3edcbafd813da782859c8724c71ab7c7eb",
       "kind": "rescue-photo"
     },
     {
       "url": "assets/rescate/tren-dorfler.webp",
-      "bytes": 193870,
-      "sha256": "7abf3fd93c6ec150f5d7ee4af8b9f28bf375b3c3c6c694bb63bc278d1ef77c56",
+      "bytes": 244068,
+      "sha256": "7fc0bfe771ddc955419b0f420c94543f39d8bddc329125785d5d60bdf2a5be04",
       "kind": "rescue-photo"
     },
     {
@@ -914,9 +920,9 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-663c930bf61e.js",
-      "bytes": 11644675,
-      "sha256": "663c930bf61eb94d21a398f2cf0db3204e8582527ba82181a11d58088f8b4492"
+      "url": "assets/game-script-4-7bac7f69d63e.js",
+      "bytes": 11644691,
+      "sha256": "7bac7f69d63e69121fa940fa52dddab5cd80d24b992de3592f46670f454b7df9"
     },
     {
       "url": "assets/game-style-0-57fd76697ea9.css",
@@ -5066,6 +5072,11 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-663c930bf61e.js",
+      "bytes": 11644675,
+      "sha256": "663c930bf61eb94d21a398f2cf0db3204e8582527ba82181a11d58088f8b4492"
+    },
     {
       "url": "assets/game-script-4-a111d3fdc262.js",
       "bytes": 11645304,

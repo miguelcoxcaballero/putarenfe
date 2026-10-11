@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "version": "6.3.1",
+  "method": "image_gen.imagegen",
+  "setting": "Taller compartido de la serie 112: cámara, grúa, columnas, foso y luz conservados",
+  "backgroundReference": {
+    "editableSource": "dist/assets/train-photos/112.webp",
+    "sha256": "5665c1a463ddc9f44e24acf90065995eaaabf282f76cc2659e5dc4da09032dd5"
+  },
+  "photos": [
+    {
+      "id": "dorfler",
+      "label": "Dörfler · LIRIO 4",
+      "finalImage": "dorfler-final.png",
+      "sourceGitBlob": "03400255cfbea26f02b0fdb3d8a6f62250b6def4",
+      "url": "assets/rescate/tren-dorfler.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "editedFrom": {
+        "gitBlob": "fae291a2aa21d93bf52a45fa9f6e344068a72d13",
+        "commit": "256282bb190c50a161cb8dc82311c6f3cb43a3b2",
+        "path": "iberia-ferroviaria/proyecto/dist/assets/rescate/tren-dorfler.webp"
+      },
+      "vehicleConcept": "Regional eléctrico inspirado en Stadler FLIRT, frontal corto, acoplador visible y librea Tenfe blanca y morada",
+      "prompt": "Edit the SECOND attached photograph (Dörfler LIRIO 4 white and purple regional train), using the FIRST attached photograph (Tenfe S112) as the EXACT workshop photographic plate and locked camera reference. Deliver ONE 1536x1024 landscape photograph with the Dörfler train replacing only the S112 train in the FIRST photograph. Keep the FIRST photograph's workshop IDENTICAL, not a similar different factory: exactly the same blue columns, white wall panels, horizontal pipes, blue/red tool cabinets on the left, same single thin yellow crane across the upper right, the same ceiling skylights and white lamps, same right-rear open doorway with green trees, same floor, same uninterrupted yellow right walkway line, same rails and same illuminated concrete inspection pit. Do NOT carry over the different crane, different pit, yellow/black borders, lower camera or workers from the second photo. Do not add people or railings. Lock the first image's camera height, perspective, lens, three-quarter angle, vanishing point and framing. Front end toward the lower-left foreground, side receding on the same rails toward the upper-right doorway. Use the SECOND image ONLY for the train's identity: Dörfler regional EMU inspired by Stadler FLIRT, short blunt compact sloping nose, tall black curved panoramic windshield, paired round lamps in swept-back light clusters, black exposed central automatic coupler, low-floor articulated body, white and deep purple Tenfe livery. Preserve those regional characteristics; no high-speed long pointed nose and no Talgo cab. Show a complete uncut front, full coupler and believable bogies aligned on the exact first-image rails, a comparable foreground size and roof clearance to the first photo while respecting the much shorter nose. Keep the background pixel-faithful wherever it remains visible. Match FIRST image's neutral daylight exposure, restrained realistic reflections and mild weathering. Real photograph, seamless lighting, physically credible geometry, no illustrations, no collage, no borders, no labels.",
+      "sourceSHA256": "aa350e37c0e39e27f69292d64edf33e0a9c8653ed24eb8e63b2e52ac2eeca6ec",
+      "bytes": 244068,
+      "sha256": "7fc0bfe771ddc955419b0f420c94543f39d8bddc329125785d5d60bdf2a5be04"
+    },
+    {
+      "id": "bcbb",
+      "label": "BCBB · Fuxing",
+      "finalImage": "bcbb-final.png",
+      "sourceGitBlob": "85fb9bab832e3f53a6526e84aa55ff2931fb5b46",
+      "url": "assets/rescate/tren-bcbb.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "editedFrom": {
+        "gitBlob": "d0b997800fb6026365f0001e3974d5a543ccd297",
+        "commit": "256282bb190c50a161cb8dc82311c6f3cb43a3b2",
+        "path": "iberia-ferroviaria/proyecto/dist/assets/rescate/tren-bcbb.webp"
+      },
+      "vehicleConcept": "Tren inspirado en CR400AF Fuxing, morro afilado, faros rasgados y librea Tenfe blanca y morada",
+      "prompt": "EDIT THE THIRD attached photograph (BCBB white and purple Chinese Fuxing train), using the FIRST photograph (Tenfe S112) as the EXACT photographic plate and camera reference. The second attached photograph is unrelated Dörfler and must NOT be used. Deliver ONE finished 1536x1024 landscape photograph of the BCBB Fuxing train replacing only the train in the first photograph. This is a continuity correction for a train shop catalogue: keep the first photograph's workshop IDENTICAL, not merely similar: same blue structural columns in exactly the same positions, same wall panels and horizontal pipes, same single thin yellow overhead crane beam in the upper right, same roof skylights, same red and blue tool cabinets at left, same open door at right rear showing green trees, same concrete floor and single uninterrupted yellow walkway line at right, same illuminated inspection pit and rails. Do not add people, extra cranes, black-yellow pit borders or yellow railings. Freeze the camera and backdrop from the FIRST photo, including its front three-quarter perspective, camera height, lens, vanishing point and framing; the train points toward the lower-left foreground and recedes to the upper-right open doorway on the SAME track. The BCBB must retain the distinctive smooth, pointed Fuxing/CR400AF nose and large black curved cab window, sleek eye-shaped headlights, underbody bogies, white and deep purple fictional Tenfe livery from the THIRD image. Preserve vehicle identity; do not recreate the Talgo S112 nose. Place the replacement on the exact rails of the first image with wheels at physically correct heights, full nose visible, similar foreground size and top clearance to the S112 photo, body receding along the same vanishing point. Match the first photo's natural diffuse daylight, modest weathering, realistic reflections and shadows, camera exposure and neutral colours. Pixel-faithful background wherever it was visible in the first image. Render an actual believable workshop photograph, no illustration, no collage, no split views, no frames or labels.",
+      "sourceSHA256": "a54f6a958f6ac51053c7392dcf4a935c386eed0fd20e5fd9f26331e608dcd1aa",
+      "bytes": 224052,
+      "sha256": "d8463cabbf7bf009f8e23c3f198f4a3edcbafd813da782859c8724c71ab7c7eb"
+    }
+  ]
+}
