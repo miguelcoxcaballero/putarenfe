@@ -60,6 +60,7 @@ export function newsKey(row){
 export class Narrator{
  constructor(voices,{getState=()=>null}={}){
   this.voices=voices;this.getState=getState;this.queue=[];this.current=null;this.seen=new Set();this.log=[];this.sequence=0;this.session='';this.modalEpisode=0;this.pumpTimer=null;
+  this.resize=()=>this.positionTray();globalThis.addEventListener?.('resize',this.resize);
   voices.on(()=>{this.sync();if(!voices.enabled)this.clear(false);else this.schedule();});
  }
  reset(){
@@ -101,7 +102,12 @@ export class Narrator{
   if(ok&&this.voices.speaking)this.voices.speaking.where='narration-'+q.where;
   this.sync();
  }
+ positionTray(){
+  const doc=globalThis.document,tray=doc?.getElementById('toast'),bar=doc?.getElementById('daybar');if(!tray||!bar)return;
+  const r=bar.getBoundingClientRect();if(r.height&&r.top>=0)tray.style.bottom=Math.max(12,globalThis.innerHeight-r.top+12)+'px';
+ }
  sync(){
+  this.positionTray();
   const doc=globalThis.document;if(!doc)return;const active=this.voices.speaking;
   for(const button of doc.querySelectorAll('[data-action="narration-replay"]')){
    const key=button.dataset.narrationKey,m=MESSAGES[key];if(!m)continue;
@@ -124,7 +130,7 @@ export class Narrator{
  }
  releaseModalToasts(root=globalThis.document?.getElementById('modal')){
   const tray=globalThis.document?.getElementById('toast');if(!tray||!root)return;
-  for(const node of root.querySelectorAll('.narration-toast')){node.dataset.narrationWhere='toast';tray.appendChild(node);tray.classList.add('show');}
+  for(const node of root.querySelectorAll('.narration-toast')){node.dataset.narrationWhere='toast';tray.appendChild(node);tray.classList.add('show');}this.positionTray();
   for(const q of this.queue)if(q.where==='modal-toast')q.where='toast';
   if(this.current?.where==='modal-toast'){this.current.where='toast';if(this.voices.speaking)this.voices.speaking.where='narration-toast';}
  }
@@ -137,7 +143,7 @@ export class Narrator{
   const node=doc.createElement('article'),instance=String(++this.sequence);
   node.className='narration-toast';node.dataset.narrationInstance=instance;node.dataset.narrationWhere=inModal?'modal-toast':'toast';
   node.innerHTML=card(key,{details:String(text)})+'<button class="narration-dismiss" data-action="narration-dismiss" aria-label="Cerrar mensaje">×</button>';
-  tray.appendChild(node);if(!inModal)tray.classList.add('show');
+  tray.appendChild(node);if(!inModal){tray.classList.add('show');this.positionTray();}
   const expires=()=>setTimeout(()=>{node.remove();this.updateTray();},4200);
   const started=this.enqueue(key,{where:node.dataset.narrationWhere,root:()=>node.querySelector('.narration-card'),visible:()=>node.isConnected,priority:options.error?50:20,onend:expires});
   const req=this.queue.find(q=>q.sequence===this.sequence);if(req)req.toastInstance=instance;

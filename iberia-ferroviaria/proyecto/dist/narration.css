@@ -4,14 +4,14 @@
 .narration-speaker .portrait{width:40px;height:48px;object-fit:cover;border-radius:7px;flex-shrink:0}
 .narration-speaker>div{min-width:0;flex:1}.narration-speaker strong,.narration-speaker small{display:block}
 .narration-speaker strong{font-size:13px}.narration-speaker small{font-size:10px;opacity:.8}
-.narration-control{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:36px;min-width:36px;white-space:nowrap;color:inherit;border:1px solid currentColor;border-radius:6px;cursor:pointer;background:transparent;padding:5px 8px;font:inherit;font-size:11px}
+.narration-control{display:inline-flex;width:auto;height:auto;flex-shrink:0;align-items:center;justify-content:center;gap:5px;min-height:36px;min-width:36px;white-space:nowrap;color:inherit;border:1px solid currentColor;border-radius:6px;cursor:pointer;background:transparent;padding:5px 8px;font:inherit;font-size:11px}
 .narration-card p{margin:7px 0}.narration-s.on{color:#ffd884;background:#b4862526;border-radius:3px}
 .narration-details{border-top:1px solid #ffffff26;margin-top:9px;padding-top:7px;font-size:11px}
 .narration-details>span{text-transform:uppercase;letter-spacing:.8px;font-size:9px;opacity:.75}
 .narration-details p{overflow-wrap:anywhere}
 .narration-card.talking .portrait,.tour-coach.talking .portrait{box-shadow:0 0 0 2px #f0c06a}
 #toast{left:auto;right:18px;bottom:112px;transform:translateY(14px);max-width:min(420px,calc(100vw - 28px));width:420px;padding:0;text-align:left;border-radius:12px;background:transparent;box-shadow:none;max-height:min(60vh,560px);overflow-y:auto;pointer-events:none}
-#toast.show{transform:translateY(0)}#toast .narration-toast{pointer-events:auto}
+#toast.show{transform:translateY(0)}#toast .narration-toast{pointer-events:none}#toast .narration-control,#toast .narration-dismiss{pointer-events:auto}
 .narration-toast{position:relative;padding:12px 14px;background:#242a33;color:#f5eee2;border:1px solid #ffffff24;border-radius:11px;box-shadow:0 8px 28px #0005;margin:8px 0}
 .narration-toast .narration-card{padding:0 23px 0 0}.narration-toast .narration-speaker{padding-right:0}
 .narration-dismiss{position:absolute;right:4px;top:4px;min-width:30px;min-height:30px;border:0;background:transparent;color:#e8dfcf;font-size:21px;cursor:pointer}
