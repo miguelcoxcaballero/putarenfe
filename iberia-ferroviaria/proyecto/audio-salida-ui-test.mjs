@@ -11,12 +11,12 @@ const url=process.env.GAME_TEST_URL||'http://127.0.0.1:'+server.address().port+'
 const browser=await chromium.launch({headless:!process.env.AUDIO_SYSTEM_CAPTURE,ignoreDefaultArgs:['--mute-audio'],args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 function observe(){
  const connect=AudioNode.prototype.connect,taps=new WeakMap();
- window.__outputTaps=taps;window.__audioErrors=[];window.__outputEdges=0;
+ window.__outputTaps=taps;window.__audioErrors=[];window.__outputEdges=0;const edges=new WeakMap();
  window.addEventListener('unhandledrejection',e=>window.__audioErrors.push(String(e.reason)));
  AudioNode.prototype.connect=function(dest,...rest){
   const result=connect.call(this,dest,...rest);
   if(dest===this.context.destination){
-   window.__outputEdges++;
+   window.__outputEdges++;edges.set(this.context,(edges.get(this.context)||0)+1);
    let tap=taps.get(this.context);if(!tap){tap=this.context.createMediaStreamDestination();taps.set(this.context,tap);}
    connect.call(this,tap,rest[0]||0);
   }
@@ -30,7 +30,7 @@ function observe(){
   rec.start();await new Promise(r=>setTimeout(r,seconds*1000));rec.stop();await done;
   const bytes=await new Blob(chunks).arrayBuffer(),buf=await ctx.decodeAudioData(bytes.slice(0)),pcm=buf.getChannelData(0);let sq=0,peak=0;
   for(const x of pcm){sq+=x*x;peak=Math.max(peak,Math.abs(x));}
-  return{rms:Math.sqrt(sq/pcm.length),peak,bytes:bytes.byteLength,duration:buf.duration,state:ctx.state,musicEnabled:g.music.enabled,musicVolume:g.music.volume,musicReady:g.music.current?.ready,musicPosition:g.music.position,outputEdges:window.__outputEdges,voiceEnabled:g.voices.enabled,sfxEnabled:g.sfx.enabled};
+  return{rms:Math.sqrt(sq/pcm.length),peak,bytes:bytes.byteLength,duration:buf.duration,state:ctx.state,musicEnabled:g.music.enabled,musicVolume:g.music.volume,musicReady:g.music.current?.ready,musicPosition:g.music.position,outputEdges:edges.get(ctx),voiceEnabled:g.voices.enabled,sfxEnabled:g.sfx.enabled};
  };
 }
 const reports=[];
@@ -81,6 +81,13 @@ try{
 
   await page.locator('#npGuide').uncheck();await page.locator('[data-action="np-difficulty"][data-id="relajada"]').click();
   await page.locator('[data-action="np-begin"]').click();await voiceReady(page);await capture(page,method+'-musica-y-bienvenida');
+  if(method==='pointer'){
+   await page.evaluate(async()=>{window.__interruptedCtx=window.railwayGame.music.ctx;await window.__interruptedCtx.close();});
+   await page.locator('#entry-welcome').click({position:{x:24,y:24}});
+   await gameReady(page);await voiceReady(page);
+   assert.equal(await page.evaluate(()=>window.railwayGame.voices.source.context===window.railwayGame.music.ctx&&window.railwayGame.music.ctx!==window.__interruptedCtx),true,'la narración continúa en la nueva salida');
+   await capture(page,'bienvenida-tras-interrupcion');
+  }
   assert.equal(await page.evaluate(()=>window.railwayGame.music.ducked),true);
 
   if(method==='pointer'){
@@ -111,10 +118,26 @@ try{
    await page.locator('#musicBtn').click();
    for(const selector of ['#musicVolume','#voiceVolume','#sfxVolume'])assert.equal(await page.locator(selector).count(),1);
    await page.evaluate(()=>{const g=window.railwayGame;g.voices.enabled=false;g.voices.setVolume(0);g.sfx.enabled=false;g.sfx.setVolume(0);g.music.toggle();g.music.setVolume(0);});
+   await page.evaluate(()=>{window.__oldCtx=window.railwayGame.music.ctx;});
    await page.locator('[data-action="audio-reset"]').click();await gameReady(page);
+   assert.equal(await page.evaluate(()=>window.__oldCtx!==window.railwayGame.music.ctx&&window.__oldCtx.state==='closed'),true,'restablecer sustituye la salida bloqueada');
    const restored=await page.evaluate(()=>{const g=window.railwayGame;return [g.music.enabled,g.music.volume,g.voices.enabled,g.voices.volume,g.sfx.enabled,g.sfx.volume];});
    assert.deepEqual(restored,[true,.55,true,1,true,.7]);
    await page.waitForTimeout(700);await capture(page,'sonido-restablecido');
+
+   // Cerrar la conexión del dispositivo antes de un gesto dejaba mudos todos los canales.
+   await page.evaluate(async()=>{window.__oldCtx=window.railwayGame.music.ctx;await window.__oldCtx.close();});
+   await page.locator('[data-action="close-modal"]').click();await gameReady(page);
+   assert.equal(await page.evaluate(()=>window.__oldCtx!==window.railwayGame.music.ctx),true);
+   assert.equal(await page.evaluate(()=>window.railwayGame.sfx.ctx===window.railwayGame.music.ctx),true);
+   await capture(page,'musica-tras-salida-cerrada');
+   await page.evaluate(()=>{const ctx=window.railwayGame.music.ctx,t=ctx.currentTime;Object.defineProperty(ctx,'currentTime',{get:()=>t});});
+   await page.locator('#musicBtn').click();await page.waitForTimeout(2200);
+   assert.equal(await page.evaluate(()=>window.railwayGame.music.needsRestart),true,'detecta una salida cuyo reloj no avanza');
+   await page.locator('[data-action="close-modal"]').click();await gameReady(page);
+   await capture(page,'musica-tras-reloj-bloqueado');
+   await page.evaluate(()=>{window.railwayGame.music.toggle();window.railwayGame.voices.stop();});await page.waitForTimeout(1700);
+   await capture(page,'efectos-tras-salida-cerrada',()=>page.evaluate(()=>window.railwayGame.sfx.play('departure')));
 
   }
   assert.deepEqual(errors,[]);assert.deepEqual(await page.evaluate(()=>window.__audioErrors),[]);

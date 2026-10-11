@@ -163,19 +163,22 @@ function speakIn(root, person, where) {
   face?.classList.add('talking'); syncSayButtons();
 }
 function renderMusicButton() {
+  document.querySelectorAll('[data-action="audio-activate"]').forEach(el => {
+    el.textContent = music.ctx?.state === 'running' && !music.needsRestart ? 'Reactivar sonido' : 'Activar sonido';
+  });
   const b = $('musicBtn'); if (!b) return;
   b.innerHTML = `${icon('music')}<span>${music.enabled ? 'Música' : 'Silencio'}</span>`;
-  b.title = music.current ? `Sonando: ${music.current.song.title}` : music.enabled ? 'Banda sonora' : 'Música apagada';
+  b.title = music.current ? `${music.ctx?.state === 'running' && music.current.ready ? 'Sonando' : 'Preparando sonido'}: ${music.current.song.title}` : music.enabled ? 'Banda sonora' : 'Música apagada';
   b.classList.toggle('on', !!music.current);
-  if ($('modal').open && $('modal').querySelector('.tracks') && document.activeElement?.id !== 'musicVolume') musicDialog(true);
+  if ($('modal').open && $('modal').querySelector('.tracks') && !['musicVolume','voiceVolume','sfxVolume'].includes(document.activeElement?.id)) musicDialog(true);
 }
 music.on(renderMusicButton);
 function unlockGameAudio(event) {
   if (!event.isTrusted) return;
-  sfx.arm(); // El contexto se reanuda dentro del gesto, antes de iniciar voces o cargar muestras.
-  if (music.enabled) music.start();
+  music.unlock();
+  sfx.arm();
 }
-['pointerdown','pointerup','keydown','click'].forEach(type => document.addEventListener(type, unlockGameAudio, {capture:true}));
+['pointerdown','pointerup','touchend','keydown','click'].forEach(type => document.addEventListener(type, unlockGameAudio, {capture:true}));
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && music.ctx) music.init();
 });
@@ -1545,11 +1548,11 @@ document.addEventListener('click', event => {
     case 'station-up': act(() => E.upgradeStation(state, id), 'Estación mejorada.'); celebrate(id, 'Estación mejorada', E.STATION_LEVELS[state.stations?.[id] || 0]); break;
     case 'music': musicDialog(); break;
     case 'music-play': { const song = SONGS.find(x => x.id === id); if (song) { if (music.mode === 'auto') music.setMode('list'); music.play(song); } break; }
-    case 'audio-reset': {
+    case 'audio-activate': case 'audio-reset': {
       voices.enabled = true; voices.setVolume(1);
       sfx.enabled = true; sfx.setVolume(.7);
-      music.enabled = true; music.setVolume(.55); music.start();
-      sfx.arm(); sfx.play('confirm'); musicDialog(true); break;
+      music.enabled = true; music.setVolume(.55); music.restart();
+      sfx.arm(); sfx.play('confirm'); if (b.dataset.action === 'audio-reset') musicDialog(true); break;
     }
     case 'music-toggle': music.toggle(); break;
     case 'voice-toggle': voices.toggle(); musicDialog(true); break;

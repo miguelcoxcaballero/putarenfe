@@ -1,7 +1,7 @@
-name: Verificar y restaurar sonido
+name: Verificar audio compatible con Brave y móviles
 on:
   push:
-    branches: [codex/audio-restaurado, main]
+    branches: [codex/audio-compatible, main]
 concurrency:
   group: audio-restaurado-${{ github.ref }}
   cancel-in-progress: true
@@ -27,9 +27,11 @@ jobs:
         working-directory: iberia-ferroviaria/proyecto
         run: |
           npm install --no-save --package-lock=false sharp@0.34.5 playwright@1.56.1
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium firefox webkit
+          sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+          echo 'deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main' | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
           sudo apt-get update -qq
-          sudo apt-get install -y -qq pulseaudio ffmpeg xvfb
+          sudo apt-get install -y -qq brave-browser pulseaudio ffmpeg xvfb
       - name: Construir la versión corregida
         if: github.ref != 'refs/heads/main'
         working-directory: iberia-ferroviaria/proyecto
@@ -63,6 +65,7 @@ jobs:
           pactl load-module module-null-sink sink_name=tenfe sink_properties=device.description=Tenfe
           pactl set-default-sink tenfe
           xvfb-run -a node audio-salida-ui-test.mjs
+          xvfb-run -a node audio-compatibilidad-ui-test.mjs
       - name: Verificar narraciones completas y controles
         working-directory: iberia-ferroviaria/proyecto
         env:
@@ -86,6 +89,6 @@ jobs:
           git add iberia-ferroviaria
           git reset -- iberia-ferroviaria/outputs/audio-qa
           if ! git diff --cached --quiet; then
-            git commit -m "Construye Tenfe 6.5.1 con salida de audio verificada [skip ci]"
+            git commit -m "Construye Tenfe 6.5.2 con salida de audio verificada [skip ci]"
             git push
           fi

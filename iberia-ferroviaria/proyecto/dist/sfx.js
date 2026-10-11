@@ -230,7 +230,7 @@ export const RECIPES = R;
 //  'nombre' → ese efecto al pulsar · '=nombre' → ese efecto si la acción sale bien (si falla, «error»)
 //  '@open' / '@close' → lo pone el propio diálogo al abrirse o cerrarse · '!…' → depende del estado (se decide en app.js)
 export const ACTIONS = {
- 'narration-replay':'say','narration-dismiss':'dismiss','audio-reset':'confirm',
+ 'narration-replay':'say','narration-dismiss':'dismiss','audio-reset':'confirm','audio-activate':'confirm',
  'refit-view':'tab','refit-detail':'@open','interior-preview':'@open','refit-confirm':'=refurbish',
  'welcome-close':'dismiss',
  'np-difficulty':'tab','legacy-preview':'@open','progress-tab':'tab','press-tab':'tab','tenfe-notice':'dismiss','month-report':'nav','legacy-convert':'=continue','legacy-export':'export','tenfe-shortcut-confirm':'=decision','tenfe-next':'tap','tenfe-decision':'@open','tenfe-pact':'=contract','tenfe-mega':'=infra','tenfe-shortcut':'@open','tenfe-restitute':'=repay','tenfe-lawyer':'=contract','tenfe-tab':'tab',
@@ -274,7 +274,8 @@ export class Sfx {
   init() {
     if (!this.armed) return false;
     this.music.init?.();
-    if (this.bus) return true;
+    if (this.bus && this.ctx === this.music.ctx) return true;
+    if (this.bus) { for (const node of this.bus.nodes || []) try { node.disconnect(); } catch {} this.bus = null; this.last = {t:-1,p:0}; }
     if (!this.music.ctx) return false;
     this.attach(this.music.ctx, this.music.output || this.music.ctx.destination);
     loadInstruments(this.ctx, UI_SAMPLES);
@@ -288,7 +289,7 @@ export class Sfx {
     comp.threshold.value = -18; comp.ratio.value = 3; comp.attack.value = .003; comp.release.value = .15;
     hp.type = 'highpass'; hp.frequency.value = 300; rev.buffer = hallIR(ctx, 1.2, [.9, .7, .4], .012, [7, 11, 17, 23, 29, 37]); send.gain.value = .22;
     dry.connect(out); dry.connect(send); send.connect(hp); hp.connect(rev); rev.connect(out); out.connect(comp); comp.connect(dest);
-    this.bus = {ctx, out, dry, send, missing: {}};
+    this.bus = {ctx, out, dry, send, nodes:[out,comp,dry,send,hp,rev], missing: {}};
     return this.bus;
   }
   setVolume(v) { this.volume = audioVolume(v, this.volume); if (this.bus) this.bus.out.gain.setTargetAtTime(this.enabled ? this.volume * MAKEUP : 0, this.ctx.currentTime, .05); this.save(); }
