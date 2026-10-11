@@ -7,7 +7,7 @@
 // de salidas repiquetea como las paletas de los antiguos indicadores, las palancas de capa suenan a cabina de
 // enclavamiento, los + y − suben y bajan con la frecuencia y los errores responden con un «no» suave.
 // Las capas son muestras reales (grupo «ui» del banco: VCSL y Virtuosity Drums, CC0) y síntesis muy breve.
-import {instrument, loadInstruments, prefetchInstruments, hallIR, chord} from './music.js';
+import {instrument, loadInstruments, prefetchInstruments, hallIR, chord, audioVolume} from './music.js';
 
 export const UI_SAMPLES = ['ui_wood', 'ui_woodf', 'ui_clave', 'ui_paper', 'ui_tri', 'ui_finger', 'ui_shimmer', 'ui_anvil', 'ui_chime', 'ui_vibe'];
 const PENTA = [0, 2, 4, 7, 9];
@@ -230,7 +230,7 @@ export const RECIPES = R;
 //  'nombre' → ese efecto al pulsar · '=nombre' → ese efecto si la acción sale bien (si falla, «error»)
 //  '@open' / '@close' → lo pone el propio diálogo al abrirse o cerrarse · '!…' → depende del estado (se decide en app.js)
 export const ACTIONS = {
- 'narration-replay':'say','narration-dismiss':'dismiss',
+ 'narration-replay':'say','narration-dismiss':'dismiss','audio-reset':'confirm',
  'refit-view':'tab','refit-detail':'@open','interior-preview':'@open','refit-confirm':'=refurbish',
  'welcome-close':'dismiss',
  'np-difficulty':'tab','legacy-preview':'@open','progress-tab':'tab','press-tab':'tab','tenfe-notice':'dismiss','month-report':'nav','legacy-convert':'=continue','legacy-export':'export','tenfe-shortcut-confirm':'=decision','tenfe-next':'tap','tenfe-decision':'@open','tenfe-pact':'=contract','tenfe-mega':'=infra','tenfe-shortcut':'@open','tenfe-restitute':'=repay','tenfe-lawyer':'=contract','tenfe-tab':'tab',
@@ -261,7 +261,8 @@ export class Sfx {
     music.on?.(() => { this.tr = keyOf(music.current?.song); }); // los efectos se afinan con la pieza que suena
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem('iberia-efectos') || '{}'); } catch {}
-    this.volume = saved.volume ?? .7; this.enabled = saved.enabled ?? true;
+    saved = saved && typeof saved === 'object' ? saved : {};
+    this.volume = audioVolume(saved.volume, .7); this.enabled = typeof saved.enabled === 'boolean' ? saved.enabled : true;
     // las muestras de los efectos se piden (versión web) y se decodifican ya, en un contexto fuera de línea, para que
     // el primer clic suene completo (los búferes decodificados sirven luego en el contexto real)
     const warm = () => { try { return loadInstruments(new OfflineAudioContext(1, 1, 44100), UI_SAMPLES); } catch { return null; } };
@@ -271,11 +272,11 @@ export class Sfx {
   /** Se arma con el primer gesto del jugador (los navegadores no dejan sonar antes). */
   arm() { this.armed = true; this.init(); }
   init() {
-    if (this.bus) return true;
     if (!this.armed) return false;
     this.music.init?.();
+    if (this.bus) return true;
     if (!this.music.ctx) return false;
-    this.attach(this.music.ctx, this.music.ctx.destination);
+    this.attach(this.music.ctx, this.music.output || this.music.ctx.destination);
     loadInstruments(this.ctx, UI_SAMPLES);
     return true;
   }
@@ -290,7 +291,7 @@ export class Sfx {
     this.bus = {ctx, out, dry, send, missing: {}};
     return this.bus;
   }
-  setVolume(v) { this.volume = v; if (this.bus) this.bus.out.gain.setTargetAtTime(this.enabled ? v * MAKEUP : 0, this.ctx.currentTime, .05); this.save(); }
+  setVolume(v) { this.volume = audioVolume(v, this.volume); if (this.bus) this.bus.out.gain.setTargetAtTime(this.enabled ? this.volume * MAKEUP : 0, this.ctx.currentTime, .05); this.save(); }
   /** Muestras que aún no estaban listas cuando sonó un efecto (se tocó su sustituto sintetizado). */
   get missing() { return this.bus?.missing || {}; }
   /** Activa o silencia los efectos; al silenciar deja terminar el clic del propio interruptor. */

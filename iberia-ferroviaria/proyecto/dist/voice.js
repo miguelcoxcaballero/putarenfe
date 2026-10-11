@@ -1,3 +1,4 @@
+import {audioVolume} from './music.js';
 // Voces grabadas de los personajes. Las tomas completas conservan la interpretación
 // de todo el diálogo; las frases también deben estar grabadas. Una ausencia se informa.
 import {CLIPS} from './assets/voices.js';
@@ -68,13 +69,15 @@ export class Voices {
     this.timers = new Set(); this.stings = new Set(); this.lastError = null;
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem('iberia-voz') || '{}'); } catch {}
-    this.enabled = saved.enabled ?? true; this.volume = saved.volume ?? 1;
+    saved = saved && typeof saved === 'object' ? saved : {};
+    this.enabled = typeof saved.enabled === 'boolean' ? saved.enabled : true; this.volume = audioVolume(saved.volume, 1);
   }
   get neural() { return Object.keys(DIALOGUES).length > 0 || Object.keys(NARRATION_VOICES).length > 0 || Object.keys(CLIPS).length > 0; }
   get available() { return this.neural; }
   save() { try { localStorage.setItem('iberia-voz', JSON.stringify({enabled: this.enabled, volume: this.volume})); } catch {} }
   on(fn) { this.listeners.add(fn); }
   emit() { for (const fn of this.listeners) fn(this); }
+  setVolume(v) { this.volume = audioVolume(v, this.volume); if (this.output) this.output.gain.setTargetAtTime(this.volume, this.music.ctx.currentTime, .05); this.save(); this.emit(); }
   toggle() { this.enabled = !this.enabled; this.save(); if (!this.enabled) this.stop(); this.emit(); }
   later(fn, delay, token = this.token) {
     const timer = setTimeout(() => { this.timers.delete(timer); if (token === this.token) fn(); }, delay);
@@ -100,13 +103,14 @@ export class Voices {
   }
   duck(on) {
     const m = this.music;
+    if (m?.duck) { m.duck(on); return; }
     if (!m?.master || !m.ctx) return;
     m.master.gain.setTargetAtTime(on ? m.volume * .28 : m.volume, m.ctx.currentTime, .25);
   }
   sting(kind) {
     const m = this.music; if (!m) return 0;
     m.init?.(); const ctx = m.ctx; if (!ctx) return 0;
-    const out = ctx.createGain(); out.gain.value = .22 * this.volume; out.connect(ctx.destination);
+    const out = ctx.createGain(); out.gain.value = .22 * this.volume; out.connect(m.output || ctx.destination);
     let activeTones = 0; const tones = new Set();
     const cue = {stop: () => {
       for (const o of [...tones]) { const ended = o.onended; o.onended = null; try { o.stop(); } catch {} ended?.(); }
@@ -203,7 +207,7 @@ export class Voices {
         this.source = src; this.output = g; src.buffer = buf;
         src.playbackRate.value = 1;
         if (src.detune) src.detune.value = 0;
-        g.gain.value = this.volume; src.connect(g); g.connect(ctx.destination);
+        g.gain.value = this.volume; src.connect(g); g.connect(this.music.output || ctx.destination);
         this.guard = this.later(() => finish(errorInfo('AUDIO_TIMEOUT', 'La reproducción no ha podido terminar.')), buf.duration * 1000 + 5000, token);
         src.onended = () => {
           if (token !== this.token || this.source !== src) return;

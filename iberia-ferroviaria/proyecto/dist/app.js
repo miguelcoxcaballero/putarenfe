@@ -167,11 +167,18 @@ function renderMusicButton() {
   b.innerHTML = `${icon('music')}<span>${music.enabled ? 'Música' : 'Silencio'}</span>`;
   b.title = music.current ? `Sonando: ${music.current.song.title}` : music.enabled ? 'Banda sonora' : 'Música apagada';
   b.classList.toggle('on', !!music.current);
-  if ($('modal').open && $('modal').querySelector('.tracks')) musicDialog(true);
+  if ($('modal').open && $('modal').querySelector('.tracks') && document.activeElement?.id !== 'musicVolume') musicDialog(true);
 }
 music.on(renderMusicButton);
-document.addEventListener('pointerdown', () => { if (music.enabled && !music.current) music.start(); }, {once: true});
-['pointerdown', 'keydown', 'click'].forEach(type => document.addEventListener(type, () => sfx.arm(), {once: true, capture: true}));
+function unlockGameAudio(event) {
+  if (!event.isTrusted) return;
+  sfx.arm(); // El contexto se reanuda dentro del gesto, antes de iniciar voces o cargar muestras.
+  if (music.enabled) music.start();
+}
+['pointerdown','pointerup','keydown','click'].forEach(type => document.addEventListener(type, unlockGameAudio, {capture:true}));
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && music.ctx) music.init();
+});
 let lastMood = null;
 function checkMusicMood() {
   if (!music.current || music.mode !== 'auto') return;
@@ -189,13 +196,14 @@ function musicDialog(refresh = false) {
   ${menuOpen?`<details class="menu-music-library" ${libraryOpen?'open':''}><summary>Banda sonora</summary>`:''}<div class="tracks"><h3>${FAMILY_LABEL.estacion}</h3>${list('estacion')}<h3>${FAMILY_LABEL.red}</h3>${list('red')}</div>${menuOpen?'</details>':''}
   <div class="toolbar"><button class="btn ${music.enabled ? '' : 'primary'}" data-action="music-toggle">${music.enabled ? 'Apagar música' : 'Encender música'}</button><button class="btn" data-action="music-next" ${music.enabled ? '' : 'disabled'}>Siguiente pieza</button>
   <label style="margin:0">Modo</label><select id="musicMode"><option value="auto" ${music.mode === 'auto' ? 'selected' : ''}>Automático según el momento</option><option value="list" ${music.mode === 'list' ? 'selected' : ''}>Toda la lista</option><option value="repeat" ${music.mode === 'repeat' ? 'selected' : ''}>Repetir pieza</option></select></div>
-  <label for="musicVolume">Volumen</label><input id="musicVolume" type="range" min="0" max="1" step="0.05" value="${music.volume}">
+  <label for="musicVolume">Volumen de la música</label><input id="musicVolume" type="range" min="0" max="1" step="0.05" value="${music.volume}">
   <h3 class="sub">Voces de los personajes</h3>
   <div class="toolbar"><button class="btn ${voices.enabled ? '' : 'primary'}" data-action="voice-toggle">${voices.enabled ? 'Silenciar personajes' : 'Activar voces'}</button></div>
+  <label for="voiceVolume">Volumen de las voces</label><input id="voiceVolume" type="range" min="0" max="1" step="0.05" value="${voices.volume}">
   <h3 class="sub">Efectos de sonido</h3>
   <div class="toolbar"><button class="btn ${sfx.enabled ? '' : 'primary'}" data-action="sfx-toggle">${sfx.enabled ? 'Silenciar efectos' : 'Activar efectos'}</button></div>
   <label for="sfxVolume">Volumen de los efectos</label><input id="sfxVolume" type="range" min="0" max="1" step="0.05" value="${sfx.volume}">
-  <div class="actions"><button class="btn primary" data-action="close-modal">Cerrar</button></div></div>`;
+  <div class="actions"><button class="btn" data-action="audio-reset">Restablecer sonido</button><button class="btn primary" data-action="close-modal">Cerrar</button></div></div>`;
   if (refresh && !menuOpen) { const sc = $('modal').querySelector('.content')?.scrollTop || 0; $('modal').innerHTML = `<div class="modal single">${html}</div>`; $('modal').querySelector('.content').scrollTop = sc; }
   else if(menuOpen){const sc=$('modal').scrollTop;showModal(menuScreenHTML(html),'main-menu-shell');if(refresh){$('modal').scrollTop=sc;if(focusAction)$('modal').querySelector('[data-action="'+focusAction+'"]')?.focus({preventScroll:true});}}
   else showModal(html, 'single');
@@ -1537,6 +1545,12 @@ document.addEventListener('click', event => {
     case 'station-up': act(() => E.upgradeStation(state, id), 'Estación mejorada.'); celebrate(id, 'Estación mejorada', E.STATION_LEVELS[state.stations?.[id] || 0]); break;
     case 'music': musicDialog(); break;
     case 'music-play': { const song = SONGS.find(x => x.id === id); if (song) { if (music.mode === 'auto') music.setMode('list'); music.play(song); } break; }
+    case 'audio-reset': {
+      voices.enabled = true; voices.setVolume(1);
+      sfx.enabled = true; sfx.setVolume(.7);
+      music.enabled = true; music.setVolume(.55); music.start();
+      sfx.arm(); sfx.play('confirm'); musicDialog(true); break;
+    }
     case 'music-toggle': music.toggle(); break;
     case 'voice-toggle': voices.toggle(); musicDialog(true); break;
     case 'sfx-toggle': if (sfx.toggle()) sfx.play('toggleOn'); musicDialog(true); break;
@@ -1631,6 +1645,7 @@ document.addEventListener('input', event => {
   if (t.id === 'sfxVolume') sfx.setVolume(+t.value);
   if (['routeFleet', 'frequency', 'fare'].includes(t.id)) {tutorialMark('preview');updatePreview();rememberTutorialDraft();if(tut&&$('coach')?.querySelector('.lesson-progress')){const c=stageChecks(state,tut);$('coach').querySelector('.lesson-progress').textContent=c.filter(x=>x.done).length+' / '+c.length;}}
   if (t.id === 'musicVolume') music.setVolume(+t.value);
+  if (t.id === 'voiceVolume') voices.setVolume(+t.value);
   if (t.id === 'routeSearch') { ui.routeQuery = t.value; renderDrawer(); }
   if (t.id === 'marketSearch') { ui.market.query = t.value; renderDrawer(); }
   if (t.id === 'ttStation') { ui.ttStation = t.value; ui.ttStationId = undefined; renderDrawer(); }

@@ -1083,6 +1083,10 @@ export function renderSong(song, sampleRate = 44100, keep = null) {
   return renderEvents(keep ? events.filter(keep) : events, length, song.bpm, sampleRate, false, DIRECTIONS[song.id]?.scene);
 }
 
+/** Volumen persistido válido; un valor roto nunca silencia el grafo con NaN. */
+export function audioVolume(value, fallback) {
+  return typeof value === 'number' && Number.isFinite(value) ? clamp(value, 0, 1) : fallback;
+}
 /** Reproductor en tiempo real con programación anticipada y fundidos entre piezas. */
 export class Soundtrack {
   constructor(getMood) {
@@ -1090,24 +1094,45 @@ export class Soundtrack {
     this.substituted = substituted; // instrumentos que han sonado con su sustituto sintetizado (debería quedar vacío)
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem('iberia-musica') || '{}'); } catch {}
-    this.volume = saved.volume ?? .55; this.enabled = saved.enabled ?? true; this.mode = saved.mode || 'auto';
+    saved = saved && typeof saved === 'object' ? saved : {};
+    this.volume = audioVolume(saved.volume, .55); this.enabled = typeof saved.enabled === 'boolean' ? saved.enabled : true; this.mode = ['auto','repeat','list'].includes(saved.mode) ? saved.mode : 'auto';
+    this.ducked = false; this.lastError = null;
     this.autoMood = null; this.autoHistory = [];
   }
   save() { try { localStorage.setItem('iberia-musica', JSON.stringify({volume: this.volume, enabled: this.enabled, mode: this.mode})); } catch {} }
   on(fn) { this.listeners.add(fn); }
   emit() { for (const fn of this.listeners) fn(this); }
   init() {
-    if (this.ctx) { if (this.ctx.state === 'suspended') this.ctx.resume(); return; }
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    this.ctx = new AC();
-    this.master = this.ctx.createGain(); this.master.gain.value = this.volume;
-    const makeup = this.ctx.createGain(); makeup.gain.value = MIX_GAIN;
-    this.master.connect(makeup); makeup.connect(masterChain(this.ctx, this.ctx.destination));
+    if (!this.ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      this.ctx = new AC();
+      // Una sola salida audible: música, personajes y efectos conservan sus volúmenes.
+      this.output = this.ctx.createGain(); this.output.connect(this.ctx.destination);
+      this.master = this.ctx.createGain(); this.applyVolume(true);
+      const makeup = this.ctx.createGain(); makeup.gain.value = MIX_GAIN;
+      this.master.connect(makeup); makeup.connect(masterChain(this.ctx, this.output));
+    }
+    if (this.ctx.state === 'suspended' || this.ctx.state === 'interrupted') {
+      // Cada gesto puede desbloquearlo; el primero puede haber llegado antes de que
+      // el navegador permita reproducir (táctil, teclado, regreso de otra pestaña).
+      try { this.ctx.resume()?.catch(error => { this.lastError = error; }); }
+      catch (error) { this.lastError = error; }
+    }
+    return this.ctx;
   }
+  applyVolume(immediate = false) {
+    if (!this.master) return;
+    const level = this.enabled ? this.volume * (this.ducked ? .28 : 1) : 0;
+    const param = this.master.gain, now = this.ctx.currentTime;
+    param.cancelScheduledValues(now);
+    if (immediate) param.setValueAtTime(level, now);
+    else param.setTargetAtTime(level, now, this.ducked ? .25 : .1);
+  }
+  duck(on) { this.ducked = !!on; this.applyVolume(); }
   start() { this.init(); if (this.enabled && !this.current) this.next(); }
-  setVolume(v) { this.volume = v; if (this.master) this.master.gain.setTargetAtTime(v, this.ctx.currentTime, .1); this.save(); this.emit(); }
-  toggle() { this.enabled = !this.enabled; this.save(); if (this.enabled) { this.init(); this.next(); } else this.stop(); this.emit(); }
+  setVolume(v) { this.volume = audioVolume(v, this.volume); this.applyVolume(); this.save(); this.emit(); }
+  toggle() { this.enabled = !this.enabled; this.applyVolume(); this.save(); if (this.enabled) { this.init(); this.next(); } else this.stop(); this.emit(); }
   setMode(m) { this.mode = m; this.save(); this.emit(); }
   pick() {
     const mood = this.getMood?.() || 'estacion', last = this.current?.song.id;
@@ -1139,7 +1164,7 @@ export class Soundtrack {
     this.init();
     if (!this.ctx) return;
     this.stop(1.2);
-    this.enabled = true; this.save();
+    this.enabled = true; this.applyVolume(); this.save();
     const gain = this.ctx.createGain(); gain.gain.value = 0; gain.connect(this.master);
     const mix = makeMix(this.ctx, gain, song.bpm, DIRECTIONS[song.id]?.scene), {events, length} = arrange(song), names = instrumentsOf(events);
     const cur = this.current = {song, gain, mix, events, length, t0: 0, i: 0, ready: false};
