@@ -150,6 +150,7 @@ export class Narrator{
   if(!started)expires();return node;
  }
  guide(key,root,once){
+  if(this.current?.where==='guide'&&this.current.key!==key||this.queue.some(q=>q.where==='guide'&&q.key!==key))this.cancel('guide');
   root.dataset.narrationKey=key;root.dataset.narrationWhere='guide';
   this.enqueue(key,{where:'guide',root:()=>globalThis.document?.getElementById('coach'),visible:()=>!!globalThis.document?.getElementById('coach'),once,priority:90,interrupt:true});this.sync();
  }

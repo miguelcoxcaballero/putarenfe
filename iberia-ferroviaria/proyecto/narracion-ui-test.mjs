@@ -151,6 +151,9 @@ try{
   }await ctx.close();return results;
  },release.narration.recordings);
  assert.equal(pcm.length,takes.size);assert(pcm.every(x=>x.rms>.00001));assert.equal(new Set(pcm.map(x=>x.person)).size,9);
+ await audit.goto(new URL('dialogos.html',url).href);
+ const room=await audit.evaluate(()=>JSON.parse(document.getElementById('dialogue-data').textContent));
+ for(const take of release.narration.recordings){const row=room.rows.find(x=>x.id===take.id);assert(row?.available);assert.equal(row.person,take.person);assert.equal(row.sha256,take.sha256);assert.equal(room.audio[take.id],take.url,'game and auditorium use the same complete take');}
  await auditContext.close();check('Every '+pcm.length+' extra whole recording decodes to finite audible PCM; all nine characters are present.');
  assert.deepEqual(errors,[]);
  fs.writeFileSync(path.join(out,'narracion-informe.json'),JSON.stringify({status:'passed',url,checks,samples,errors,decoded:pcm},null,2));

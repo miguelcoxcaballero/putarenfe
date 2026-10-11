@@ -48,6 +48,11 @@ assert.equal(player.started.length,before,'reactivation does not play notificati
 narrator.enqueue('saved',{once:'session-once'});await tick();narrator.reset();await tick();
 assert.equal(narrator.enqueue('saved',{once:'session-once'}),true,'a new session receives its own welcome and notifications');
 await tick();narrator.reset();
+narrator.enqueue('guide-welcome',{where:'guide',once:'heard-guide'});await tick();player.end();await tick();
+narrator.enqueue('guide-day-review',{where:'guide'});await tick();assert(player.speaking);
+narrator.guide('guide-welcome',{dataset:{}},'heard-guide');await tick();
+assert.equal(player.speaking,null,'returning to an already heard stage still cancels the previous explanation');
+narrator.reset();
 if(!process.env.NARRATION_PREPRODUCTION){
 const dir='./dist/assets/narracion/',meta=JSON.parse(fs.readFileSync(dir+'manifest.json'));
 assert.equal(meta.recorded,unique.size);assert.equal(meta.expected,unique.size);

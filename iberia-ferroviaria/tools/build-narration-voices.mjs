@@ -40,7 +40,7 @@ export async function buildNarrationVoices(project,output){
   const url='assets/narracion/'+take.file;assert.equal(NARRATION_VOICES[take.id].url,url);
   write(url,bytes);const record={id:take.id,person:take.person,kind:'character-narration',url,bytes:bytes.length,sha256:take.sha256,duration:take.duration,referenceSHA256:take.reference_sha256};
   assets.push(record);recordings.push(record);dialogues[take.id]={url};
-  rows.push({id:take.id,person:take.person,mood:m.mood,kind:'Narración del equipo',title:m.key,text:m.text,available:true,duration:take.duration,sha256:take.sha256});
+  rows.push({id:take.id,person:take.person,mood:m.mood,kind:'Narración del equipo',title:(m.text.split(/[.!?]/,1)[0].slice(0,85)),messageKey:m.key,text:m.text,available:true,duration:take.duration,sha256:take.sha256});
  }
  assert.equal(expected.size,0,'every message has a complete take');
  assert.equal(Object.keys(NARRATION_VOICES).length,recordings.length);
