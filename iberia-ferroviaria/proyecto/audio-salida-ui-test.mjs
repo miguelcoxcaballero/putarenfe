@@ -6,7 +6,7 @@ const root=path.resolve('..'),out=path.resolve('../outputs/audio-qa');fs.mkdirSy
 const server=http.createServer((req,res)=>{try{const p=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!p.startsWith(root+path.sep))throw Error('path');const file=fs.statSync(p).isDirectory()?path.join(p,'index.html'):p;res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.json':'application/json','.mp3':'audio/mpeg','.webp':'image/webp','.png':'image/png','.woff2':'font/woff2'})[path.extname(file)]||'application/octet-stream');fs.createReadStream(file).pipe(res);}catch{res.writeHead(404);res.end();}});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const url=process.env.GAME_TEST_URL||'http://127.0.0.1:'+server.address().port+'/';
-const browser=await chromium.launch();
+const browser=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 function observe(){
  const connect=AudioNode.prototype.connect,taps=new WeakMap();
  window.__outputTaps=taps;window.__audioErrors=[];
@@ -34,7 +34,7 @@ const reports=[];
 try{
  for(const method of ['pointer','keyboard']){
   const context=await browser.newContext();await context.addInitScript(observe);const page=await context.newPage();
-  const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(url);await page.waitForFunction(()=>!!window.railwayGame);
+  const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE_ERROR:'+e.message);});await page.goto(url);await page.waitForFunction(()=>!!window.railwayGame);
   if(method==='pointer')await page.locator('[data-action="new-game"]').click();
   else {await page.locator('[data-action="new-game"]').focus();await page.keyboard.press('Enter');}
   await page.waitForTimeout(7000);
