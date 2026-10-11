@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import path from 'node:path';
 const sharp=createRequire(path.resolve('iberia-ferroviaria/proyecto/package.json'))('sharp');
-const refs=JSON.parse(fs.readFileSync('iberia-ferroviaria/docs/interior-reference-sources.json','utf8'));
+const refs=JSON.parse(fs.readFileSync('iberia-ferroviaria/docs/interior-reference-sources-extra.json','utf8'));
 const headers={'User-Agent':'TenfeInteriorReferenceResearch/1.0 (https://github.com/miguelcoxcaballero/putarenfe)'};
 const clean=s=>String(s??'').replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').trim();
 async function request(url){const r=await fetch(url,{headers,signal:AbortSignal.timeout(45000)});if(!r.ok)throw Error(r.status+' '+url);return r;}
@@ -26,7 +26,7 @@ for(const ref of refs){
   if(!image)throw Error('No se encontró imagen de referencia');
   image=image.replace(/&amp;/g,'&');
  }
- if(ref.id==='s106')image=image.replace('/480x/','/1200x/');
+
  const b=Buffer.from(await(await request(image)).arrayBuffer()),m=await sharp(b).metadata();
  meta.image=image;meta.sha256=createHash('sha256').update(b).digest('hex');meta.width=m.width;meta.height=m.height;meta.bytes=b.length;
  console.log('REFERENCE_META:'+JSON.stringify(meta));

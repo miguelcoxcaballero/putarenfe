@@ -5,7 +5,7 @@ on:
     paths:
       - .github/workflows/interiores-referencias.yml
       - iberia-ferroviaria/tools/research-interior-references.mjs
-      - iberia-ferroviaria/docs/interior-reference-sources.json
+      - iberia-ferroviaria/docs/interior-reference-sources*.json
 permissions:
   contents: read
 jobs:
