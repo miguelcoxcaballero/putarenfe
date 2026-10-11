@@ -284,6 +284,8 @@ function publishSource(entry,kind){
     script=oneReplace(script,'__WEB_PREVIEW_LABEL__',gameLabel,'one generated game label');
     script=externalizeTrainPhotos(script);
     script=externalizeManufacturerLogos(script);
+    const interiorURLs=Object.fromEntries(interiorAssets.filter(row=>row.kind==='generated-train-interior').map(row=>[row.url,row.url+'?v='+row.sha256.slice(0,12)]));
+    script='globalThis.TENFE_INTERIOR_IMAGES='+JSON.stringify(interiorURLs)+';\n'+script;
     new vm.Script(script,{filename:entry.filename});bytes=Buffer.from(script);
   }
   if(entry.filename.endsWith('.js'))new vm.Script(bytes.toString('utf8'),{filename:entry.filename});
@@ -305,7 +307,7 @@ assert(!/<base\b/i.test(gameHTML+listeningHTML),'all asset URLs use the document
 assert.equal((listeningHTML.match(/<audio\b/g)||[]).length,1,'one native listening player');
 write('index.html',gameHTML);write('dialogos.html',listeningHTML);
 write('.nojekyll','');
-const release={schema:1,version:'6.3.1',status:partial?'partial-preview':'complete-catalogue',
+const release={schema:1,version:'6.4.0',status:partial?'partial-preview':'complete-catalogue',
   availableWholeDialogues:available,expectedWholeDialogues:412,pendingWholeDialogues:pending,pacoWholeDialogues:pacoCount,
   sourceFrozenHTMLs:{gameSHA256:sourceRelease.gameSourceSHA256,listeningSHA256:sourceRelease.listeningSourceSHA256},
   sourceManifestSHA256:sha(manifestBytes),sourceCatalogueSHA256:sourceRelease.sourceCatalogueSHA256,
@@ -313,7 +315,7 @@ const release={schema:1,version:'6.3.1',status:partial?'partial-preview':'comple
   webPlayback:'whole unchanged MP3 downloaded on demand; one source at original rate and pitch',
   game:{url:'index.html',bytes:Buffer.byteLength(gameHTML),sha256:sha(gameHTML)},
   listening:{url:'dialogos.html',bytes:Buffer.byteLength(listeningHTML),sha256:sha(listeningHTML)},
-  trainWorkshop:{models:14,images:28,duration:5,costFraction:.12,restoredCondition:98,art:'AI recreations based on linked interior references; three fictional models marked as concepts'},
+  trainWorkshop:{models:14,images:28,duration:5,costFraction:.12,restoredCondition:98,resolution:[1536,1024],photographicReferences:12,approvedViews:26,art:'Individual edits using actual attached photographs; paired camera and cabin geometry; three fictional models marked as concepts'},
   trackWorkshop:{configurations:27,atlases:trackAtlases.map(x=>x.url),gauges:[1668,1435,'1668/1435'],catenary:['none','3kv','25kv'],tracks:[1,2,3]},
   rescue:{photos:rescue.photos.filter(r=>r.kind==='rescue-photo').length,recordedDialogues:rescue.recordings.filter(r=>r.kind==='rescue-recording').length,expectedDialogues:rescue.expectedDialogues},
   assets,recordings,validation:{physicalMP3Hashes:true,pairedFrozenHTMLHashes:true,registeredEOS:true,

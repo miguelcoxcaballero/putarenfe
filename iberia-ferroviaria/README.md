@@ -45,7 +45,7 @@ La aplicación de Renfe sigue en la raíz del repositorio.
 
 En **Flota → Reformas** puedes comparar el interior de serie y reformado de cada uno de los 14 modelos, elegir unidades libres y consultar el coste antes de enviarlas al taller. El catálogo reúne 28 imágenes creadas con IA a partir de referencias de interiores ferroviarios, enlazadas en cada comparador. Los modelos ficticios están marcados como conceptos. Los lotes reformados vuelven a los cinco turnos con interior renovado y 98 % de estado; se conserva el descuento por investigación y el guardado admite reformas anteriores.
 
-Las fuentes y criterios del arte están en [interiores-reforma-6.1.md](investigacion/interiores-reforma-6.1.md). El proceso de publicación exporta WebP de 768 × 512 desde siete láminas finales, y verifica las 28 imágenes en Chromium de escritorio y móvil. Se mantienen Trenes Pop, las 63 fotografías de eventos, las 27 configuraciones de vía y las 412 grabaciones canónicas.
+Las fotografías seleccionadas y sus autores están en [interiores-referenciados-6.4.md](investigacion/interiores-referenciados-6.4.md). Cada interior se ha generado individualmente adjuntando la fotografía real; su reforma utiliza como entrada la imagen de serie aceptada para conservar cámara y geometría. Hay 26 originales de 1536 × 1024 y 28 vistas: ambos anchos del Avril comparten el salón Estándar. El proceso verifica los originales, exporta WebP completos y publica su procedencia y SHA-256. Chromium comprueba las 14 parejas, el comparador y una reforma completa en escritorio y móvil, tanto localmente como en Pages. Se mantienen Trenes Pop, las 63 fotografías de eventos, las 27 configuraciones de vía y las 412 grabaciones canónicas.
 
 ### Menú de inicio
 

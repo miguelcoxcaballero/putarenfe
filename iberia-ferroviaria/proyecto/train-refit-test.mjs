@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import * as E from './dist/engine.js';
 import * as U from './dist/tenfe.js';
 import * as J from './dist/conexiones.js';
@@ -10,10 +11,14 @@ const fresh=()=>{const s=E.initialState(44);U.begin(s,{rules:'conexiones',diffic
 const clear=s=>{if(s.tenfe.game.event){const d=J.EVENTS.find(x=>x.id===s.tenfe.game.event.id);J.decide(s,d.id,d.choices.findIndex(x=>x.cost<=s.cash));}let d,n=0;while((d=E.pendingDecision(s))){assert(++n<100);E.decide(s,d.id,d.choices.findIndex(x=>!x.disabled&&(x.cost||0)<=s.cash));}};
 const close=s=>{clear(s);assert(E.step(s));};
 assert.deepEqual(Object.keys(R.INTERIORS).sort(),MODELS.map(m=>m.id).sort());
+const source=JSON.parse(fs.readFileSync('./dist/assets/interiores/source-manifest.json','utf8'));
+assert.equal(source.sources.length,26);assert.equal(source.references.length,12);
+for(const image of source.sources){const bytes=fs.readFileSync('./dist/'+image.path);assert.equal(createHash('sha1').update(Buffer.from('blob '+bytes.length+'\0')).update(bytes).digest('hex'),image.gitBlobSHA);assert(image.prompt&&image.input);}
 const urls=[];
-for(const m of MODELS){const d=R.INTERIORS[m.id];assert(d.references.length);assert([0,1].includes(d.row));assert(fs.existsSync('./dist/assets/interiores/'+d.atlas));urls.push(d.before,d.after);assert(R.previewHTML(m.id).includes(m.name));}
+for(const m of MODELS){const d=R.INTERIORS[m.id];assert(d.references.length);assert(source.references.some(r=>r.id===d.referenceId&&r.page===d.references[0]));for(const p of [d.sourceBefore,d.sourceAfter])assert(source.sources.some(x=>x.path===p));urls.push(d.before,d.after);assert(R.previewHTML(m.id).includes(m.name));}
 assert.equal(new Set(urls).size,28);assert.equal(Object.values(R.INTERIORS).filter(x=>x.concept).length,3);
 assert(R.INTERIORS.s106f.layout.includes('3+2'));assert(R.INTERIORS.s106v.layout.includes('3+2'));
+assert.equal(R.INTERIORS.s106f.sourceBefore,R.INTERIORS.s106v.sourceBefore);assert.equal(R.INTERIORS.s106f.sourceAfter,R.INTERIORS.s106v.sourceAfter);
 let s=fresh();const f=s.fleet.find(f=>E.available(s,f)>=2);assert(f);const id=f.id,free=E.available(s,f),before=JSON.stringify(s);
 const q=E.refurbishQuote(s,id,2);assert.equal(q.perUnit,MODEL[f.model].price*.12);assert.equal(q.total,q.perUnit*2);assert.equal(q.duration,5);assert.equal(q.due,s.month+5);
 assert.equal(JSON.stringify(s),before,'la cotización es solo lectura');

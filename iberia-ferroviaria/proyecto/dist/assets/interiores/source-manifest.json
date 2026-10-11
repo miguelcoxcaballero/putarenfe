@@ -1,0 +1,533 @@
+{
+  "schema": 1,
+  "version": "6.4.0",
+  "models": 14,
+  "uniqueGeneratedViews": 26,
+  "photographicReferences": 12,
+  "method": "Each before image was generated with the actual selected photograph attached; each after image was generated with its accepted before image attached. Individually reviewed full-resolution views, without atlas crops.",
+  "reform": "Propuesta del juego; no representa una reforma oficial de todos los modelos.",
+  "references": [
+    {
+      "id": "r465",
+      "page": "https://commons.wikimedia.org/wiki/File:RENFE_Civia_-_Interior_-_2014-07-24.jpg",
+      "commons": "RENFE Civia - Interior - 2014-07-24.jpg",
+      "notes": "Civia, salón abierto y asientos 2+2; contrastado con la ficha Renfe de la unidad 465.",
+      "author": "Mike1979 Russia",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "date": "2014-07-24 20:17:52",
+      "description": "This   file was uploaded  with Commonist.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/a/ad/RENFE_Civia_-_Interior_-_2014-07-24.jpg",
+      "sha256": "f7b410c0609c2c6a6437e1786c42e068eb2beef587124452698a04b8ce7ee5e5",
+      "width": 5431,
+      "height": 3621,
+      "bytes": 2441022
+    },
+    {
+      "id": "r592",
+      "page": "https://commons.wikimedia.org/wiki/File:CP_Class_0592_interior_(24588476403).jpg",
+      "commons": "CP Class 0592 interior (24588476403).jpg",
+      "notes": "Serie 592 de origen Renfe en CP: referencia estructural del salón regional y asientos reversibles; no confundir con 592 de Cercanías.",
+      "author": "tak.wing",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "date": "2016-01-28 08:37",
+      "description": "Train interior of the Portuguese train type 0592",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/CP_Class_0592_interior_%2824588476403%29.jpg",
+      "sha256": "c673085f669bdea7b274d7b7581f3f3577c90d56d090c1e9cbf17e6ee7207bdd",
+      "width": 3968,
+      "height": 2232,
+      "bytes": 3570242
+    },
+    {
+      "id": "r599",
+      "page": "https://commons.wikimedia.org/wiki/File:J28_705_Renfe-599%2C_innen.jpg",
+      "commons": "J28 705 Renfe-599, innen.jpg",
+      "notes": "599, salón Media Distancia 2+2; fotografía identificada por Falk2.",
+      "author": "Falk2",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2017-05-29 18:05",
+      "description": "Endwagen, am Übergangsende sind die Sitze in Abteilform angeordnet und mit Tischen versehen. Die Fenster mit der fluoreszierenden Umrandung sind Notausstiege.\nDie Einrichtung ist der der wenig später gebauten Reihe 449 sehr ähnlich.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/J28_705_Renfe-599%2C_innen.jpg",
+      "sha256": "3e8f53f5ba669b13422fe991c90cd7f8a4d5a6040de562a34956444ffe38d340",
+      "width": 5937,
+      "height": 3958,
+      "bytes": 4723352
+    },
+    {
+      "id": "rbcbb",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_Class_interior_of_CR400AF-B-2208_20230920.jpg",
+      "commons": "Second Class interior of CR400AF-B-2208 20230920.jpg",
+      "notes": "Concepto BCBB: referencia real CR400AF Fuxing, segunda clase 3+2, coherente con el exterior.",
+      "author": "颐园居",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2023-09-20 14:35:21",
+      "description": "​复兴号CR400AF-B-2208动车组的二等座车厢内部",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/3/37/Second_Class_interior_of_CR400AF-B-2208_20230920.jpg",
+      "sha256": "bf006f72238ff98d0d43aee1e4054c3e44546546c33144881269dd2f1dac1a46",
+      "width": 3840,
+      "height": 2560,
+      "bytes": 7060986
+    },
+    {
+      "id": "s100",
+      "page": "https://commons.wikimedia.org/wiki/File:202201_Turista_Class_Interior_of_Renfe_S-100.jpg",
+      "commons": "202201 Turista Class Interior of Renfe S-100.jpg",
+      "notes": "S100, Turista 2+2; no usar Preferente.",
+      "author": "MNXANL",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2022-01-05 07:49:51",
+      "description": "202201 Turista Class Interior of Renfe S-100",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/5f/202201_Turista_Class_Interior_of_Renfe_S-100.jpg",
+      "sha256": "05a232a45d7095bc59a718c1c23d66aa237e7a51a3298fc030af660a9ed06713",
+      "width": 4032,
+      "height": 3024,
+      "bytes": 3351417
+    },
+    {
+      "id": "s103",
+      "page": "https://commons.wikimedia.org/wiki/File:202112_Turista_Class_at_Renfe_S-103.jpg",
+      "commons": "202112 Turista Class at Renfe S-103.jpg",
+      "notes": "S103 Velaro, Turista 2+2; foto MNXANL identificada por clase.",
+      "author": "MNXANL",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2021-12-30 19:51:03",
+      "description": "With 2+2 Configuration",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/fb/202112_Turista_Class_at_Renfe_S-103.jpg",
+      "sha256": "98008f76a25cd87b2f3d8586884fa2c7d2076869fc8d054553768195f400f7b0",
+      "width": 4032,
+      "height": 3024,
+      "bytes": 3257657
+    },
+    {
+      "id": "s112",
+      "page": "https://www.flickr.com/photos/39820345@N06/5640733426/",
+      "notes": "S112, remolque Turista 2+2, Costa Martínez, 18/04/2011. Referencia visual, original no redistribuido.",
+      "image": "https://live.staticflickr.com/5262/5640733426_cd061fbcdb_b.jpg",
+      "sha256": "7f664cba380bc518aa7f2537462baedf7cdaa9602f2a0574257d1f92f6313242",
+      "width": 1023,
+      "height": 685,
+      "bytes": 146476,
+      "author": "Costa Martínez",
+      "license": "Todos los derechos reservados; referencia visual, original no redistribuido",
+      "date": "2011-04-18"
+    },
+    {
+      "id": "s120",
+      "page": "https://europe-train-lab.jp/www/portfolio/europe/spain/train/alvia/s120.html",
+      "image": "https://europe-train-lab.jp/www/portfolio/images/europe/spain/renfe/alvia/alvia-s120/m-3-1-d.jpg",
+      "notes": "S120, fotografía del apartado 2ª clase: moqueta azul y disposición 2+2.",
+      "sha256": "985a271b523ee29abb43c1fb435562bda15195f4049c20231201acb751d93ac7",
+      "width": 660,
+      "height": 440,
+      "bytes": 152566,
+      "author": "Europe / World Train Lab",
+      "license": "Copyright; referencia visual, original no redistribuido"
+    },
+    {
+      "id": "s130",
+      "page": "https://commons.wikimedia.org/wiki/File:Alvia-Mad-Gijon-150913.jpg",
+      "commons": "Alvia-Mad-Gijon-150913.jpg",
+      "notes": "S130 Alvia clase Turista, 2+2, antes de la reforma de Renfe.",
+      "author": "FDV",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "date": "2013-09-15",
+      "description": "Renfe Class 130 Economy class interior.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/52/Alvia-Mad-Gijon-150913.jpg",
+      "sha256": "8cf93c70f5fbce873ec801ca3df6fb77c20ae526a2fac35cff4b30eec38e31e3",
+      "width": 1920,
+      "height": 1440,
+      "bytes": 492960
+    },
+    {
+      "id": "s730",
+      "page": "https://commons.wikimedia.org/wiki/File:2025-08-06%2C_Interior_of_Renfe_S-730.jpg",
+      "commons": "2025-08-06, Interior of Renfe S-730.jpg",
+      "notes": "Salón de viajeros Talgo 250 híbrido, Turista 2+2; tapicería verde en la foto seleccionada.",
+      "author": "Patrycja Rosa (ptrcnull)",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "date": "2025-08-06 17:42:36",
+      "description": "Interior of Talgo 250 Hybrid train (Renfe S-730)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/2025-08-06%2C_Interior_of_Renfe_S-730.jpg",
+      "sha256": "30cca0fc421de0362d23ceb706eca809e39eeafad78b630939bd88fac1dd69b7",
+      "width": 6024,
+      "height": 4020,
+      "bytes": 11483404
+    },
+    {
+      "id": "rdorf",
+      "page": "https://commons.wikimedia.org/wiki/File:Interior_Stadler_FLIRT_of_Go-Ahead_Baden-W%C3%BCrttemberg.jpg",
+      "commons": "Interior Stadler FLIRT of Go-Ahead Baden-Württemberg.jpg",
+      "notes": "Dörfler es un concepto del juego: referencia del salón de pasajeros FLIRT de Go-Ahead Baden-Württemberg.",
+      "author": "Smiley.toerist",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2022-05-26 13:21:12",
+      "description": "Een interieur van een Stadler FLIRT of Go-Ahead Baden-Württemberg",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Interior_Stadler_FLIRT_of_Go-Ahead_Baden-W%C3%BCrttemberg.jpg",
+      "sha256": "92ddcc8432a6ad305b5818e1405ad1048bad73e3b78eaa10146b954db566bdb3",
+      "width": 5472,
+      "height": 3648,
+      "bytes": 4925597
+    },
+    {
+      "id": "s106",
+      "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
+      "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-13.jpg",
+      "notes": "Salón Estándar 3+2: detalle del bloque de tres asientos y mesa enfrentada. Misma referencia para ambos anchos. Se descartan las fotos de Confort 2+2.",
+      "sha256": "d480360f9044574792cb6c3482dd92e72e50b949e7dad25be6d3d980538bda4a",
+      "width": 2048,
+      "height": 1378,
+      "bytes": 341817,
+      "author": "Renfe",
+      "date": "2024-05-05",
+      "license": "Fotografía de prensa Renfe; referencia visual, original no redistribuido"
+    }
+  ],
+  "sources": [
+    {
+      "path": "assets/interiores/final/r465-actual.png",
+      "gitBlobSHA": "b8cdc75d36ce82bd1fc6cacf8a9c28546f628ea6",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r465",
+      "state": "before",
+      "prompt": "Edit the attached REAL photographic reference of Renfe Civia 465 into a clean documentary photograph of its CURRENT, unrefurbished passenger cabin for a railway game. This is a restrained photographic retouch, NOT a redesigned train. Preserve this exact camera position, perspective, window locations, grey moulded seat shells, separate grey headrests, mauve-grey fabric seat inserts, metal seat supports, continuous open gangway, straight stainless handrails with red joints, white curved wall panels, baggage racks, ceiling lights, real 2+2 seating geometry and long clear aisle. Remove all people and their belongings, carefully reconstruct only the small areas they occluded. Neutralize posters and displays into plain unobtrusive panels, no gibberish text. Retain the everyday original upholstery and flooring, realistic soft wear but no damage. Do not add handles, armrests, partitions, rows or seats that are not in the real photo. Crisp realistic natural daylight, physically straight parallel rails and panel joints, no warped or fused chair legs. Output ONE photograph, landscape 3:2, 1536 by 1024, no collage, labels, border, watermarks or decorative graphics.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "f7b410c0609c2c6a6437e1786c42e068eb2beef587124452698a04b8ce7ee5e5"
+      }
+    },
+    {
+      "path": "assets/interiores/final/r465-reformado.png",
+      "gitBlobSHA": "19a3e8416afee200d22ab10cfb40680623b03a81",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r465",
+      "state": "after",
+      "prompt": "Edit this exact attached Civia 465 cabin photograph to show a plausible finished INTERIOR REFURBISHMENT. Pixel-aligned before/after photograph: keep the camera, crop, perspective, sunlight and shadows, all seat shapes, seat count, seat orientations, window frames, white wall shells, floor footprint, gangway and every stainless handrail in exactly the same location. Make only surface-material updates: replace each mauve-grey fabric cushion insert with fresh uniform deep burgundy woven upholstery, retain grey plastic seat shells and their separate grey headrests, renew the grey slip-resistant floor with a clean even finer texture, replace the existing ceiling light fixtures' lighting with neutral white LED without changing their housings, clean the white panels and steel. Existing blank screens remain simple dark screens. The broad foreground vestibule must stay empty and accessible. Do not redesign seats, add or remove armrests, windows, poles, seats, panels or partitions. No people, no textual graphics, no luxury rendering. Retain precise real-world joints and supports. ONE 1536x1024 landscape 3:2 documentary photograph, no collage, borders or labels.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "b8cdc75d36ce82bd1fc6cacf8a9c28546f628ea6"
+      }
+    },
+    {
+      "path": "assets/interiores/final/r592-actual.png",
+      "gitBlobSHA": "9e405eeca5fe0aa830baddd3130f75928f6a0e8c",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r592",
+      "state": "before",
+      "prompt": "Use this attached REAL photograph of a Spanish-built Renfe-series 592 regional diesel train cabin (this example operates for CP in Portugal) as the visual reference for the game's S592 Camello interior. Faithful restrained photographic retouch. Preserve these original reversible tall upholstered 2+2 seats, the raised passenger saloon behind the low vestibule partitions, central stainless steel pole, window positions, straight tubular baggage racks and old cream ceiling with paired fluorescent fixtures and round vents. Preserve exact camera perspective and the visible 2+2 layout. Remove the few passengers and white headrest cloths including the CP logos, carefully exposing matching original dark blue fabric underneath. Keep existing blue seats and sober slightly aged grey floor, do not add new furniture. Neutralize tiny notices into plain plates without fake writing. Crop/reframe minimally into a ONE 3:2 landscape documentary photograph, 1536x1024, extending only the plain vestibule floor if necessary. Real photographic materials, daylight, no symmetry hallucination, no distorted/fused seats, poles or windows, no collage, labels, borders or watermarks.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "c673085f669bdea7b274d7b7581f3f3577c90d56d090c1e9cbf17e6ee7207bdd"
+      }
+    },
+    {
+      "path": "assets/interiores/final/r592-reformado.png",
+      "gitBlobSHA": "3a414f7b7115f83e15fc249aaaf0f8656163a43f",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r592",
+      "state": "after",
+      "prompt": "Edit the attached S592 Camello regional cabin photograph to show a realistic renovation of the SAME cabin. Exact before/after alignment: identical 1536x1024 camera framing, all window edges, partitions, central pole, floor junctions, reversible seat shapes, arms and row positions unchanged. Change only visible surface finishes: replace blue seat upholstery with fresh muted burgundy durable woven fabric, renew grey non-slip flooring, clean the cream wall panels, illuminate existing fluorescent fixture housings with neutral LED tubes. Retain the characteristic old Camello ceiling vents, luggage racks and open low partitions. Leave the pole, rack rods, fittings and seat frames in their exact positions. This is a modest sensible refurbishment, not a redesigned or luxury interior. Keep exterior landscape and daylight identical. No new monitors, objects, people, text, collage or labels. ONE landscape 3:2 photograph, preserve physically credible joints and supports.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "9e405eeca5fe0aa830baddd3130f75928f6a0e8c"
+      }
+    },
+    {
+      "path": "assets/interiores/final/r599-actual.png",
+      "gitBlobSHA": "ddc423b2c6a7458315271fbafb5eeca58d912cdc",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r599",
+      "state": "before",
+      "prompt": "Retouch this attached REAL identified Renfe 599 Media Distancia cabin photograph for the game. Preserve the exact cabin architecture: table bays with 2+2 blue high-back seats, pale seat frames, white cloth headrests, cream curved walls, wide windows, fluorescent emergency window edging, overhead curved open luggage shelves, cream ceiling lights, the narrow central aisle and open connecting doorway with another saloon visible beyond it. Do not replace it with a generic symmetrical cabin. Remove all people, newspapers, magazines, water bottle and bags, reconstruct only the small occluded areas. Keep empty clean white headrest cloths, original dark blue upholstery and original pale grey floor. Keep all table shapes and edges precisely straight, both emergency red handles in their existing locations. Blank any tiny brand lettering or screen text rather than inventing writing. Preserve the photo's perspective and crop, gentle neutral correction of its warm cast, realistic documentary daylight. ONE landscape 3:2 1536x1024 photograph, not a collage, no borders, labels or watermark, no warped seat frames or duplicate armrests.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "3e8f53f5ba669b13422fe991c90cd7f8a4d5a6040de562a34956444ffe38d340"
+      }
+    },
+    {
+      "path": "assets/interiores/final/r599-reformado.png",
+      "gitBlobSHA": "74d78c53928c4b003a01b27e554b35b4bc64d1bf",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r599",
+      "state": "after",
+      "prompt": "Edit ONLY surface finishes of this exact attached Renfe 599 cabin photograph for a plausible completed refurbishment. Maintain pixel-aligned camera/crop/perspective, same windows, doorway and saloon beyond, every seat, table, armrest and shelf in precisely its current position. Keep the white headrest cloths and cream seat shells. Reupholster the blue fabric in muted burgundy woven fabric with a small subtle texture; renew grey floor with a clean durable finely speckled charcoal-grey finish; clean panels and table laminates; change illumination in existing fixtures to neutral white LED, retain daylight and landscape. Leave emergency window edging and red emergency handles as they are. No new furniture, no seat-count or layout changes, no distorted or duplicated legs or arms, no people, no invented screen text. ONE realistic 1536x1024 landscape 3:2 photograph, no collage, border or labels.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "ddc423b2c6a7458315271fbafb5eeca58d912cdc"
+      }
+    },
+    {
+      "path": "assets/interiores/final/rbcbb-actual.png",
+      "gitBlobSHA": "86680e6b4869df9dfa2c72dc5d16da71d8888107",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rbcbb",
+      "state": "before",
+      "prompt": "Edit this attached REAL CR400AF Fuxing second-class cabin photograph into a clean cabin reference for the game's fictional BCBB Fuxing Regional concept. Preserve this precise real physical architecture, offset central aisle and 3+2 seating: TWO seats to the LEFT of the aisle, THREE seats to the RIGHT, exactly as in this photograph. Keep every visible row and seat frame, beige-brown speckled cloth, beige seat backs with folding tray tables, black seat handles, window positions, open overhead luggage racks, the real oval ceiling lights and straight LED strips. Remove people and bags from the racks; replace advertising on seat backs and headrest cloths with plain blank surfaces, retain white headrest covers. Blank screen content, avoid invented text. Keep the same camera viewpoint and photographic perspective, faithful natural materials, straight window and tray edges, no duplicated/melted armrests or chair frames. This is based on the authentic cabin, not a speculative luxury train. ONE 1536x1024 landscape 3:2 photo, no labels, collage, border or watermark.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "bf006f72238ff98d0d43aee1e4054c3e44546546c33144881269dd2f1dac1a46"
+      }
+    },
+    {
+      "path": "assets/interiores/final/rbcbb-reformado.png",
+      "gitBlobSHA": "486264edb14253d6abb29add0083bc34f07ac13d",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rbcbb",
+      "state": "after",
+      "prompt": "Edit this EXACT attached Fuxing-based BCBB cabin photograph for a sensible interior refurbishment, keep pixel-aligned camera, perspective and architecture. TWO seats on LEFT, THREE on RIGHT unchanged in every row. Keep every seat shell, folding tray table, black handle, window, rack and oval ceiling fixture exactly where it is. Change brown patterned seat fabric to fresh muted deep teal railway upholstery with a very fine subtle weave; retain plain white headrest cloths and beige seat backs and tray tables. Renew the straight central aisle floor in clean charcoal-grey non-slip material. Clean wall and ceiling surfaces and maintain existing LED fixture geometry and warm-white natural illumination. Keep screens dark and blank. No new objects, no extra armrests, no missing middle seats, no merged tray/seat structures, no people, no imaginary writing. ONE realistic documentary 1536x1024 landscape 3:2 photograph, no collage, labels or borders.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "86680e6b4869df9dfa2c72dc5d16da71d8888107"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s100-actual.png",
+      "gitBlobSHA": "c75174da92cdf551e230dce4b6817db162a95665",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s100",
+      "state": "before",
+      "prompt": "Retouch this attached real Renfe S100 AVE Turista 2+2 cabin photograph. Preserve its actual distinctive mustard-yellow upholstered reclining seats with separate rounded headrest side cushions, brown straight armrests, pale wooden table bays, broad rectangular windows, beige wall panels, long metal baggage rack tubes, ribbed ceiling and brown ceiling panel strips. Preserve the real camera perspective and seat positions, do not turn it into a generic modern Velaro. Remove people in the distance and faint reflected people, remove tiny Renfe lettering from otherwise plain white headrest cloths, no fake text. Keep original yellow upholstery, warm original lighting, slightly used but intact floor. Correct photographic noise gently and make material detail clear without over-sharpening. ONE landscape 3:2 1536x1024 photograph, minimal crop adaptation from the original 4:3 view, straight aligned table hinges and seats, no fused components, no new furniture, collage, border or labels.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "05a232a45d7095bc59a718c1c23d66aa237e7a51a3298fc030af660a9ed06713"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s100-reformado.png",
+      "gitBlobSHA": "0c225044a685fe670db7843dfaa77591daf868fb",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s100",
+      "state": "after",
+      "prompt": "Edit this exact attached S100 AVE cabin photograph to show a completed modest refurbishment while retaining its recognizable first-generation architecture. Pixel-aligned before/after: same camera and crop, seat positions, rounded headrest wing cushions, seat controls and brown armrests, wood table edges and hinges, window frames, luggage tubes, ribbed ceiling and brown ceiling bands all unchanged. Replace mustard-yellow fabric only with fresh deep burgundy woven upholstery over the SAME cushion shapes. Keep white cloth headrest covers. Renew visible floor with a dark grey durable textile covering; clean tables and wall panels; replace lighting inside existing long light housings with neutral white LED without moving fixtures. Preserve train outside and reflections aligned to the windows. No new devices or furniture, no missing/extra armrests, no people or text, ONE realistic 1536x1024 landscape 3:2 photograph, no labels or collage.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "c75174da92cdf551e230dce4b6817db162a95665"
+      }
+    },
+    {
+      "path": "assets/interiores/final/rdorf-actual.png",
+      "gitBlobSHA": "2cf6e92256e60577d6a1c9b00c40d0b33831ae7e",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rdorf",
+      "state": "before",
+      "prompt": "Use this attached REAL Stadler FLIRT passenger-saloon photograph as the physical reference for the game's fictional Dörfler LIRIO regional concept. Faithful photographic retouch of the SAME real cabin architecture: low floor with small rise toward the next saloon, real 2+2 seat groups on each side, two flip-up seats mounted along the LEFT foreground wall and the RIGHT foreground fold-up seat group, pale grey moulded seat-back shells with oval grab handles, large windows, continuous glass luggage shelves, lemon-yellow bulkhead, central straight ceiling light, actual aisle and gangway positions. Remove passengers and signage lettering, replace only the distracting animal-pattern cloth with sober dark grey fine woven cloth while keeping all existing cushion shapes. Reconstruct the modest motion blur into sharp credible fittings and chair supports; no new seat rows or fake symmetrical furniture. Keep windows and moving green countryside in the same locations. ONE landscape 3:2 1536x1024 documentary photo, empty cabin, no invented text, collage, border or labels.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "92ddcc8432a6ad305b5818e1405ad1048bad73e3b78eaa10146b954db566bdb3"
+      }
+    },
+    {
+      "path": "assets/interiores/final/rdorf-reformado.png",
+      "gitBlobSHA": "1698fe9275a73f60acba6cea6636fda7bcd74edf",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rdorf",
+      "state": "after",
+      "prompt": "Edit this EXACT attached FLIRT-based Dörfler cabin photograph for an interior refurbishment. Lock the original camera, crop and all structural geometry for a before/after slider. Keep all seats including foreground fold-up seats and their wall-mount hinges, every grey shell and oval grab handle, window frame, glass shelf, yellow bulkhead and small change in floor level in identical positions. Replace dark grey seat fabric with fresh muted deep teal woven fabric ONLY on currently upholstered cushions. Renew the light speckled grey low-floor surface with a clean even non-slip finish and retain yellow step edges. Clean the light wall panels, renew neutral LED illumination inside the existing straight central light fixture. Keep views outside unchanged and no people. No redesigned seats, additional poles, missing hinges, merged seat backs or extra armrests. ONE documentary photograph 1536x1024 landscape 3:2, no text, labels, collage or border.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "2cf6e92256e60577d6a1c9b00c40d0b33831ae7e"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s103-actual.png",
+      "gitBlobSHA": "70e56178b7fd7f316c41959be6e2754f02527b27",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "before",
+      "prompt": "Retouch this attached REAL Renfe S103 Velaro Turista 2+2 passenger cabin photograph. Preserve the actual black leather reclining seat design with horizontal cushion seams, silver armrest supports, four seats per row and narrow central aisle, large broad windows and blinds, grey moulded walls, two pale table bays in the foreground, long silver luggage shelves and the characteristic perforated ribbed ceiling panel. Keep exact camera position and geometric layout. Remove objects on tables and advertising text from white headrest cloths so they are plain white. Keep black original leather upholstery with natural fine creases; clean photographic noise and slightly lift exposure while retaining realistic station/night light. No passengers, no new equipment, no seat or table shape changes, no fake lettering. Straight table edges and panel joints, clear physically connected chair arms and supports. ONE 1536x1024 landscape 3:2 documentary photo with minimum crop adaptation, no collage, labels, borders or watermark.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "98008f76a25cd87b2f3d8586884fa2c7d2076869fc8d054553768195f400f7b0"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s103-reformado.png",
+      "gitBlobSHA": "ac780be26951f825e61f967eba17c35b2bffe19d",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "after",
+      "prompt": "Show the refurbished version of this exact attached S103 Velaro interior photograph. Keep camera, crop, perspective, four seats per row in 2+2, each seat shape and horizontal cushion seam, armrest, headrest cloth, silver frame, window and blind, table edge, ceiling perforation, luggage shelf and monitor in its identical position. Change only black leather upholstery to fresh restrained burgundy leather with natural fine grain over the same existing cushion geometry; retain plain white headrest cloths. Replace brown checker aisle carpet with uniform dark grey railway-grade textile flooring, clean the panels and tables and give the existing long light fixtures a neutral-white LED output. Keep station/night view outside exactly the same. No new seats or electronics, no merged seat legs or supports, no people or typography. ONE 1536x1024 3:2 landscape photograph, precise geometry suitable for aligned before/after overlay, no labels or border.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "70e56178b7fd7f316c41959be6e2754f02527b27"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s112-actual.png",
+      "gitBlobSHA": "b28b10423a3c40829086cf450f5c9da0cd51e498",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s112",
+      "state": "before",
+      "prompt": "Use this attached REAL photograph explicitly identified as Renfe S112 Talgo Pato Turista to produce a faithful clean game interior photo. Keep the actual SHORT Talgo coach scale, 2+2 tall narrow grey-blue cloth seats, wooden table bays, slim windows with thick pale frame edges, wooden end bulkhead and connecting doorway, straight grey aisle with pale edge strips, curved cream ceiling with paired broad light bands, low continuous metal-and-glass luggage shelves. Keep exact seat row count and camera viewpoint. Retain plain white cloth headrest covers but remove lettering. Remove passengers/objects in the distant gangway. Simplify the decorative printed window-pillar panels into subdued brown mottled panels without identifiable artwork or writing; keep their exact physical positions. Screen faces plain dark, no fake text. Preserve grey-blue original fabric and normal fluorescent lighting, no upgrade yet. Realistic straight edges, connected armrests and seat supports. ONE 1536x1024 3:2 landscape photo, no collage, labels, border or watermark.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "7f664cba380bc518aa7f2537462baedf7cdaa9602f2a0574257d1f92f6313242"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s112-reformado.png",
+      "gitBlobSHA": "b00d2deceaa86bb36bfbd9b5794f496c29850049",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s112",
+      "state": "after",
+      "prompt": "Edit this exact attached S112 Talgo Pato photograph for a plausible complete interior refurbishment. Keep identical camera/crop and every structural element: short 2+2 saloon, tall narrow cushion shapes, headrest cloths, rows and armrests, table edges and hinges, wooden bulkhead, mottled brown pillars, windows, gangway, racks and ceiling fixtures. Change only grey-blue upholstery to fresh muted burgundy finely woven fabric over the existing seat geometry. Keep white headrest covers. Renew floor and central aisle runner in dark grey durable textile with retained pale aisle edge strips; clean wood and panels; update the existing broad fluorescent light bands to neutral-white LED within the same housings. Maintain daylight and exterior station view. Straight physically credible chair supports and furniture joints, no added seats, screens or handles, no people or fake text. ONE aligned before/after 1536x1024 landscape 3:2 photo, no collage, labels or border.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "b28b10423a3c40829086cf450f5c9da0cd51e498"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s120-actual.png",
+      "gitBlobSHA": "098d2e807521e31bd2431f54fc31ee9613607058",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s120",
+      "state": "before",
+      "prompt": "Use this attached real Europe Train Lab photograph from its Renfe S120 Alvia SECOND CLASS section as a faithful visual reference. Recreate the same photographed 2+2 passenger cabin in sharper documentary detail, preserving tall royal-blue fabric seats with subtle tiny dot pattern, cream seat shells and arms, plain white cloth headrest covers, two foreground pale table bays with metal hinges, straight dark carpet aisle, wide windows, distinctive curved exposed ceiling cross-ribs and long lights above each window side, overhead racks and end gangway. Keep seat row count, camera perspective, window spacing, ceiling ribs and all table/support geometry based directly on the reference. Remove tiny advertising lettering, website lettering and logos so surfaces stay plain, no fake text. Current unrefurbished cabin, original blue upholstery and gently used floor, normal soft interior lighting, no people, no new furniture. ONE landscape 3:2 1536x1024 photo, no collage, labels or border, no merged chairs or extra armrests.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "985a271b523ee29abb43c1fb435562bda15195f4049c20231201acb751d93ac7"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s120-reformado.png",
+      "gitBlobSHA": "1bd9d8d98a6f59b7511d422ef89c71f29f5a7465",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s120",
+      "state": "after",
+      "prompt": "Edit ONLY upholstery, floor and lighting of this exact attached S120 Alvia passenger-cabin photograph for the refurbished view. Retain pixel-aligned camera/crop, tall original 2+2 seat shapes, every cream armrest and shell, white cloth headrest cover, table hinge and support, window and curved ceiling rib and rack in their exact original locations. Change royal blue patterned fabric to fresh muted burgundy fine woven fabric; keep plain white headrest cloths. Renew the dark mottled aisle carpet into uniform charcoal-grey railway-grade textile flooring. Clean cream panels and tables and modernize the light output in existing side light housings to neutral white LED. Preserve outside train view and windows, don't add devices, sockets or chairs. No people, fake lettering, duplicate armrests, bent table hinges or merged legs. ONE 1536x1024 3:2 landscape documentary photograph for an aligned before/after overlay, no collage or labels.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "098d2e807521e31bd2431f54fc31ee9613607058"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s130-actual.png",
+      "gitBlobSHA": "ab4cc56c794ccf71697c9f4cfdfdce2073c82ed9",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s130",
+      "state": "before",
+      "prompt": "Retouch this attached REAL Renfe S130 Alvia Turista photograph (FDV, Madrid-Gijon 2013). Keep this exact short Talgo coach and camera looking toward the BACKS of the 2+2 seats: green-blue patterned upholstery, pale cream rigid seat backs, correctly folded tray tables with their hinges, black elastic mesh pockets below, narrow armrest pads, white headrest strips, blue-grey carpet aisle, wide windows and open ribbed baggage racks, ceiling lights and end doorway. Remove people, visible shoes, reflections of people and all bags; reconstruct only occluded seat areas consistently with adjacent real seats. Remove tiny lettering, retain blank dark ceiling monitor and existing small fittings. Preserve exact perspective, realistic texture of current original fabric, straight tray edges, genuine connected supports, no added seats or symmetry changes. ONE 1536x1024 3:2 landscape documentary photograph with minimal crop adaptation, no collage, text labels, borders or watermarks.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "8cf93c70f5fbce873ec801ca3df6fb77c20ae526a2fac35cff4b30eec38e31e3"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s130-reformado.png",
+      "gitBlobSHA": "9d44304f9d6f94f7279b5ff3662a2623d7d583ac",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s130",
+      "state": "after",
+      "prompt": "Edit the SAME attached S130 Alvia cabin photograph into a credible refurbished view inspired by Renfe's documented S130/S730 programme: cloth replaced with leather, old carpet replaced with durable Flotex-type floor, lighting modernized to LED. Keep exact camera/crop, 2+2 rows, cream rigid seat-back shells and tray tables, black mesh pockets, every hinge, armrest and seat support, window edge, luggage rack, ceiling monitor and doorway in exactly the same positions. Replace ONLY green patterned upholstery and upholstered armrest pads with restrained charcoal-grey leather with fine natural grain; retain white headrest strips. Renew visible aisle floor in uniform dark grey durable textile covering, retain pale aisle-edge lines. Clean cream panels and renew neutral-white light within existing fixtures. No geometry changes, no additional seats or screens, no erased mesh pockets or invented handles, no people or lettering. ONE aligned 1536x1024 landscape 3:2 documentary photograph, no collage, labels or border.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "ab4cc56c794ccf71697c9f4cfdfdce2073c82ed9"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s730-actual.png",
+      "gitBlobSHA": "d4ad40793c19847553ff95f0730d93365b3ec842",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s730",
+      "state": "before",
+      "prompt": "Edit this attached REAL photograph of a Renfe S730 Talgo hybrid passenger saloon (Patrycja Rosa, 2025) into a clean documentary CURRENT cabin view for the game. Keep the exact characteristic short Talgo 2+2 cabin, green-turquoise fine patterned tall seat cushions, pale cream shells and armrests, real headrest shapes, wide windows with partly lowered pale roller blinds, straight blue-grey aisle carpet and its edge strips, ribbed baggage shelves, pale curved ceiling with long light strips and two ceiling monitors, far glass doorway and gangway. Replace the printed advertising on white headrest cloths with plain white fabric. Remove any people, bags and reflections of people; keep monitors dark and plain. Correct exposure and photographic noise mildly while preserving everyday original fabric and floor. Do not invent armrests, redraw seat shapes or alter the window-to-seat relationship. ONE 1536x1024 3:2 landscape photograph, no collage, labels, borders or watermark, physically straight shelving and connected seat frames.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "30cca0fc421de0362d23ceb706eca809e39eeafad78b630939bd88fac1dd69b7"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s730-reformado.png",
+      "gitBlobSHA": "cd625b6c9311426216c82130fbd0def7fa3518a9",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s730",
+      "state": "after",
+      "prompt": "Edit this EXACT attached S730 Talgo hybrid cabin photograph into a plausible refurbished view inspired by Renfe's S730 renovation: leather upholstery similar to S106, durable Flotex-type grey floor, LED lighting. Pixel-aligned camera/crop and every seat in identical position. Retain the original 2+2 seating, all tall cushion shapes, cream shells and armrests, plain white headrest cloths, window blinds, baggage racks, monitors and gangway. Replace only turquoise patterned seat fabric with sober fresh charcoal-grey leather with a fine grain and restrained natural creases, fitting exactly the same cushions; do not redesign the seats. Renew aisle in uniform dark grey durable textile flooring with the same edge strips, clean light panels and emit neutral-white light from existing housings. Keep daylight unchanged. No added equipment, duplicate arms, malformed hinges or missing seats, no people, fake text or graphics. ONE 1536x1024 landscape 3:2 documentary photo, no collage, labels or border.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "d4ad40793c19847553ff95f0730d93365b3ec842"
+      }
+    },
+    {
+      "path": "assets/interiores/final/av2030-actual.png",
+      "gitBlobSHA": "4b53fb127f742403b50f520795fc9c84bd2c372e",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "before",
+      "prompt": "Use this attached REAL S103 Velaro second-class photographic reference as the structural basis for the fictional AV2030 high-speed concept in a railway game. The game concept should remain physically grounded: preserve exact 2+2 seat arrangement, original seat shapes, armrest frames, table bays, windows and blinds, perforated ceiling panel, long silver luggage shelves and monitors, camera perspective and aisle geometry from the real photo. Create the concept's initial standard finish by changing black leather to sober slate-blue fine woven upholstery on the SAME seat cushions, no futuristic furniture. Retain plain white headrest cloths without advertising. Keep medium-grey slightly used aisle carpet, warm-white original lighting and clean light-grey walls. Remove table objects and printed text, screens blank dark, no people. Lift low photographic exposure moderately. ONE 1536x1024 landscape 3:2 documentary-style photo, no invented seats, handles, warped joints, holograms or graphics, no labels, collage or border.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "98008f76a25cd87b2f3d8586884fa2c7d2076869fc8d054553768195f400f7b0"
+      }
+    },
+    {
+      "path": "assets/interiores/final/av2030-reformado.png",
+      "gitBlobSHA": "876a7c21d3f72cf0116b83274eb0b25fbbfc00fa",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "after",
+      "prompt": "Edit this exact attached fictional AV2030 cabin photograph for the refurbished view of the SAME Velaro-based concept. Lock camera, perspective and crop for a before/after slider. Keep 2+2 seat shapes, rows, each horizontal cushion seam, all arms and silver supports, white headrest covers, tables, windows and blinds, ceiling ribs and baggage shelves identical. Replace slate-blue fabric with fresh muted deep teal fine woven upholstery, keep all same cushion geometries. Renew checker-grey aisle carpet to clean uniform dark grey railway textile, clean light wall panels and tables, renew neutral-white LED output inside existing fixture housings. Keep screens dark and no added electronics or luxury furniture. No people, lettering, extra chairs, merged armrests or legs. ONE 1536x1024 3:2 landscape documentary-style photograph, no collage, label or border.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "4b53fb127f742403b50f520795fc9c84bd2c372e"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s106-actual.png",
+      "gitBlobSHA": "212cdc50e54a56c420aa7d4d9eab049629c00582",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s106",
+      "state": "before",
+      "prompt": "Make a restrained photographic retouch of this attached REAL Renfe S106 Avril STANDARD-class photograph, issued by Renfe in 2024. Keep this exact camera angle and identifiable wide-body 3+2 cabin: this photograph shows the THREE-seat table bay on one side, with THREE seats facing THREE across the narrow folded table system. Preserve all six visible main seats, their real light grey centre backrest panels and darker charcoal leather side bolsters and seat cushions, dark padded headrests, tall grey handles, straight thin armrests, visible low seat support rails, folded wood-effect tables and integrated monitor stands, broad windows, baggage shelf and light fixture geometry. Preserve the real photograph's exact furniture arrangement and the partly visible adjacent seats at the crop edges; do not invent an aisle or change 3 seats into 2. Remove only small brand lettering from headrests and tiny text from seat-number displays, keep plain surfaces and blank dark displays where visible. Keep wood-look floor and original grey two-tone leather, no refurbishment yet. Subtle photographic exposure/detail correction, real joints and natural material grain. ONE 1536x1024 landscape 3:2 photograph, minimal crop adjustment, no collage, labels, borders or watermark, no distorted chairs or duplicate handles.",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "d480360f9044574792cb6c3482dd92e72e50b949e7dad25be6d3d980538bda4a"
+      }
+    },
+    {
+      "path": "assets/interiores/final/s106-reformado.png",
+      "gitBlobSHA": "de9f15abbaae3d7cbff0a89cfe123f37a7cfadf2",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s106",
+      "state": "after",
+      "prompt": "Edit this EXACT attached production S106 Avril Standard-class cabin photograph into a plausible refurbishment. Perfectly matched before/after camera, crop, perspective and all physical structures. Keep the TWO facing banks of THREE seats each visible in this real 3+2 wide-body cabin, exact seat shapes, original charcoal side bolsters and seat cushions, all metal arms and tall handles, headrest shapes, folded tables and monitor stands, low support rails, windows and ceiling fittings in identical locations. Change ONLY the light grey central upholstered backrest panels and dark padded headrest covers into fresh restrained deep burgundy leather with fine grain; keep charcoal leather sides and seat cushions. Replace the wood-look floor with a clean subtle grey non-slip railway floor, retaining all support rails and fixings. Clean wall panels and renew neutral-white LED lighting within existing fixtures. Do not add an aisle, move chairs, alter any hinged furniture, unfold tables, duplicate arms or redesign window geometry. No people or textual graphics. ONE photorealistic 1536x1024 landscape 3:2 photograph, no collage, border or labels.",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "212cdc50e54a56c420aa7d4d9eab049629c00582"
+      }
+    }
+  ]
+}
