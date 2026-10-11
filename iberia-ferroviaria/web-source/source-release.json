@@ -199,9 +199,14 @@
       "sha256": "0ee3ec252d7cae0faf1091c18c59334f3c4ffab5adf4e67432864b8731b7ad0c"
     },
     {
+      "file": "assets/narration-voices.js",
+      "bytes": 12331,
+      "sha256": "86fb95197fad69cded135a9e4fdbc4e4e2eb071615fe5a42bf9e01f0cae3964f"
+    },
+    {
       "file": "voice.js",
-      "bytes": 13355,
-      "sha256": "19c82f1ef5c94b99e4a71095c2526575f0363bb858340608d5a650d575829ab5"
+      "bytes": 13838,
+      "sha256": "56487c3afad13aacadca14678e9cdfbdd52aa6c51876253f8a768f9186d8dd64"
     },
     {
       "file": "dialogue-presentation.js",
@@ -210,8 +215,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 29038,
-      "sha256": "f9665ed888c2d8652cdd626bc584f324a2b5b6e63fd0c65a03e179790d2856b2"
+      "bytes": 29095,
+      "sha256": "4e816c821ee6f68b18bc7f59d65bc8190ffbe8170e304be678fe98789effdbee"
     },
     {
       "file": "assets/portraits.js",
@@ -236,12 +241,22 @@
     {
       "file": "main-menu.js",
       "bytes": 3662,
-      "sha256": "61484ade7b0116a27153088ea74c4d5e80884eb34666fa8f4f1682f6dbe28d7a"
+      "sha256": "e1ed6398dc93dccf5a645a309fda7b84202c9aa4aba9de4451db58a089d86399"
     },
     {
       "file": "induction-task-ui.js",
       "bytes": 16024,
       "sha256": "88bb39e28922d1d73366855e648b40561ac5e1c5c8e139190007f71306b1479f"
+    },
+    {
+      "file": "narration-data.js",
+      "bytes": 21184,
+      "sha256": "141f00c278a4b3bffca21525a7dcfbd18da915bae93fb752ad019a8f7ee5911a"
+    },
+    {
+      "file": "narration-runtime.js",
+      "bytes": 14761,
+      "sha256": "942316e0f4a6732051dd337a80f462a27316635bdc0037017b46a0966fa10327"
     },
     {
       "file": "partidas-anteriores.js",
@@ -250,13 +265,13 @@
     },
     {
       "file": "conexiones-ui.js",
-      "bytes": 11217,
-      "sha256": "d585ff713207b2d18b38b342eb98cfde933716e52f7c3155cb5da72f42ac827e"
+      "bytes": 11273,
+      "sha256": "cd6fc30840383ce9e2031c4ea4849af661e3e00578c3d7ff8297fef889c004eb"
     },
     {
       "file": "tenfe-ui.js",
-      "bytes": 9881,
-      "sha256": "6a48ac9c6ea3782560c9559a7a3748079a9ffa6b43af825ba3fe3829493e5e8e"
+      "bytes": 9980,
+      "sha256": "47f2f7498101f4745040f7d5fe7e4ca4723736bba0c4e5f50b2b8cc4c1f5168c"
     },
     {
       "file": "train-refit.js",
@@ -265,8 +280,8 @@
     },
     {
       "file": "app.js",
-      "bytes": 176182,
-      "sha256": "4cd354551d552f039c821582e1476dfb82139ed9ed290a4220fa31c9864b54b0"
+      "bytes": 177481,
+      "sha256": "128531a4c937cbc18a4d7cade0fde8ae259a8611bec8e01bfd843399252a8705"
     },
     {
       "file": "style-v3.css",
@@ -292,6 +307,11 @@
       "file": "train-refit.css",
       "bytes": 6276,
       "sha256": "9fcf752fcd2f139aff2ff91fe7cc2936c5edd217acb7d1b7056ec7437576fa9e"
+    },
+    {
+      "file": "narration.css",
+      "bytes": 3934,
+      "sha256": "04ae881409096a42592c313d0bbd673b96907aa005c95caa9bbcf3611a0732f3"
     },
     {
       "file": "assets/fonts/fraunces.woff2",
@@ -320,8 +340,8 @@
     },
     {
       "file": "index.html",
-      "bytes": 2962,
-      "sha256": "935eab62a088db71ad1d3f5d55ad39536342901078b5cec682aa35290144d9e1"
+      "bytes": 3007,
+      "sha256": "e8fd8968062286d922df2c80edbabd33ff3d9d26cc84d4e78d8650197fd9ab26"
     },
     {
       "file": "assets/muestras-ui.js",
