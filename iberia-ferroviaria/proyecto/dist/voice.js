@@ -67,7 +67,7 @@ export class Voices {
   constructor(music) {
     this.music = music; this.token = 0; this.speaking = null; this.listeners = new Set(); this.source = null; this.output = null; this.guard = null; this.buffers = new Map(); this.log = [];
     this.timers = new Set(); this.stings = new Set(); this.lastError = null; this.resumePlayback = null; this.waitingForOutput = null;
-    music.onContext?.(() => this.resumePlayback?.());
+    music?.onContext?.(() => this.resumePlayback?.());
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem('iberia-voz') || '{}'); } catch {}
     saved = saved && typeof saved === 'object' ? saved : {};
