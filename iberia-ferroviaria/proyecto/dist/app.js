@@ -66,6 +66,9 @@ const ICONS = {
   archive: '<rect x="4" y="5" width="16" height="4" rx="1"/><path d="M5.5 9v10h13V9M10 12.5h4"/>',
   music: '<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
   save: '<path d="M5 5h11l3 3v11H5zM8 5v5h7V5M8 19v-5h8v5"/>',
+  coin: '<circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2a3.2 3.2 0 0 0-5.6 1.3c0 3.1 5.6 1.4 5.6 4.3a3.2 3.2 0 0 1-5.6 1M12 6v1.6M12 16.4V18"/>',
+  people: '<circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/>',
+  punctual: '<circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M9.5 3.5h5"/>',
   help: '<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9M12 16.6v.4"/>',
 };
 const PAGES = {network: 'Red', fleet: 'Flota', finance: 'Dinero', story: 'Despacho', progress: 'Progreso', press: 'Prensa'};
@@ -707,10 +710,10 @@ function renderHud(){
   $('dayKind').textContent=toPolls<=3?'Urnas en '+toPolls+(toPolls===1?' turno':' turnos'):'';
   renderObjective();
   $('resources').innerHTML=[
-    ['Caja',money(state.cash)],
-    ['Puntualidad',`${n(b.punctuality,0)}<small>%</small>`],
-    ['Apoyo',state.tenfe?`${n(U.forecast(state),0)}<small>%</small>`:`${n(state.satisfaction)}<small>%</small>`]
-  ].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+    ['coin','Caja',money(state.cash),''],
+    ['punctual','Puntualidad',`${n(b.punctuality,0)}<small>%</small>`,b.punctuality>=85?'ok':'warn'],
+    ['people','Apoyo',state.tenfe?`${n(U.forecast(state),0)}<small>%</small>`:`${n(state.satisfaction)}<small>%</small>`,(state.tenfe?U.forecast(state):state.satisfaction)>=50?'ok':'warn']
+  ].map(([ic,k,v,cls])=>`<div class="res ${cls}" title="${k}">${glyph(ic)}<dt>${k}</dt><dd>${v}</dd></div>`).join('');
   document.querySelector('.hud .clock')?.classList.toggle('hidden',state.ops.phase!=='running');
   renderClock();
 }
