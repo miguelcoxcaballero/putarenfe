@@ -35,6 +35,10 @@ try{
    const slider=page.locator('#modal [data-refit-slider]');await slider.evaluate(el=>{el.value='73';el.dispatchEvent(new Event('input',{bubbles:true}));});assert.equal(await page.locator('#modal .refit-scene').evaluate(el=>el.style.getPropertyValue('--refit-split')),'73%');
    assert(await page.locator('#modal').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'comparador sin desbordamiento');
    await page.locator('#modal .refit-references summary').click();assert(await page.locator('#modal .refit-references a').first().getAttribute('href'));assert((await page.locator('#modal .refit-references').innerText()).includes('Fotografía de referencia:'));
+   assert(await page.locator('#modal .refit-references').evaluate(panel=>{
+    const luminance=colour=>{const values=colour.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});return values[0]*.2126+values[1]*.7152+values[2]*.0722;};
+    const bg=luminance(getComputedStyle(panel).backgroundColor);return [...panel.querySelectorAll('p,a,summary')].every(el=>{const fg=luminance(getComputedStyle(el).color);return (Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)>=4.5;});
+   }),'referencias y créditos con contraste legible');
    if(id==='s106f'||(size.width===1440&&['r465','r599','rdorf','rbcbb','s130'].includes(id)))await screenshot(page,'interior-'+id+'-'+size.width);
    await page.locator('#modal [data-action="close-modal"]').click();
   }
