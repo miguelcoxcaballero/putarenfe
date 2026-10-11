@@ -57,7 +57,7 @@ assert.equal(manifest.version,JSON.parse(fs.readFileSync('dist/assets/fabricante
     assert.equal(await loadImage(page.locator('.tp-detail-photo img:not([hidden])').first(),photo),src,'misma foto en miniatura y ficha');
     assert(await page.locator('#modal').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'ficha sin desbordamiento');
     if(id===ids[0])await screenshot(page,'fabricante-'+photo.id+'-'+size.width);
-    await page.locator('#modal [data-action="close-modal"]').click();
+    await page.locator('#modal [data-action="close-modal"]').first().click();
    }
    assert(await page.locator('#drawer .body').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'catálogo sin desbordamiento');
    checks.push(maker+': ambos anuncios, miniatura, ficha y SHA actual en '+size.width+' px');console.log('✓ '+checks.at(-1));
