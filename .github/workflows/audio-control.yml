@@ -1,0 +1,30 @@
+name: Verificar control de sonido en el menú
+on:
+  push:
+    branches: [codex/audio-control]
+permissions:
+  contents: write
+jobs:
+  menu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - working-directory: iberia-ferroviaria/proyecto
+        run: |
+          npm install --no-save --package-lock=false sharp@0.34.5 playwright@1.56.1
+          npx playwright install --with-deps chromium
+          npm run web:build
+          node menu-inicio-ui-test.mjs
+      - name: Conservar la interfaz verificada
+        run: |
+          git config user.name "Tenfe build"
+          git config user.email "tenfe-build@users.noreply.github.com"
+          git add iberia-ferroviaria
+          if ! git diff --cached --quiet; then
+            git commit -m "Amplía el control de sonido a 44 píxeles para ratón y táctil [skip ci]"
+            git push
+          fi
