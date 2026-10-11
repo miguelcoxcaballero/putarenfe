@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "6.5.1",
+  "version": "6.5.2",
   "status": "complete-catalogue",
   "availableWholeDialogues": 412,
   "expectedWholeDialogues": 412,
@@ -19,7 +19,7 @@
   "game": {
     "url": "index.html",
     "bytes": 38616,
-    "sha256": "6d01989b40301e2de508bb2de6252e5121decef285795eb5af40216e6edb0978"
+    "sha256": "f9642d77d9e26a4435fd2e002b02d953ef27d0f198b83372b1e230845f9fbaaf"
   },
   "listening": {
     "url": "dialogos.html",
@@ -3588,14 +3588,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-625a40ad46b9.js",
-      "bytes": 11706191,
-      "sha256": "625a40ad46b9bb7cb76f1f9d38e7fdb5a615d28242c41c6a0f7397ddc45473d9"
+      "url": "assets/game-script-4-5befab2d0afd.js",
+      "bytes": 11710615,
+      "sha256": "5befab2d0afdde14518d3a03586d84655ead47bee26feb75b6611502df13daef"
     },
     {
-      "url": "assets/game-style-0-8ad7d7c4b8f0.css",
-      "bytes": 2185182,
-      "sha256": "8ad7d7c4b8f0982961f14929ae249c9df2e655d43333b482b7cf68edabd8f03a"
+      "url": "assets/game-style-0-bce52d025a8e.css",
+      "bytes": 2185493,
+      "sha256": "bce52d025a8e054fe26c20f7b6541ae12dc687d2a7e73290c7bdb9e60c4cabbf"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -7740,6 +7740,16 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-625a40ad46b9.js",
+      "bytes": 11706191,
+      "sha256": "625a40ad46b9bb7cb76f1f9d38e7fdb5a615d28242c41c6a0f7397ddc45473d9"
+    },
+    {
+      "url": "assets/game-style-0-8ad7d7c4b8f0.css",
+      "bytes": 2185182,
+      "sha256": "8ad7d7c4b8f0982961f14929ae249c9df2e655d43333b482b7cf68edabd8f03a"
+    },
     {
       "url": "assets/game-script-4-f0075ef456d3.js",
       "bytes": 11703398,

@@ -1096,30 +1096,83 @@ export class Soundtrack {
     try { saved = JSON.parse(localStorage.getItem('iberia-musica') || '{}'); } catch {}
     saved = saved && typeof saved === 'object' ? saved : {};
     this.volume = audioVolume(saved.volume, .55); this.enabled = typeof saved.enabled === 'boolean' ? saved.enabled : true; this.mode = ['auto','repeat','list'].includes(saved.mode) ? saved.mode : 'auto';
-    this.ducked = false; this.lastError = null;
+    this.ducked = false; this.lastError = null; this.contextListeners = new Set(); this.unlockedContext = null; this.clockCheck = null; this.needsRestart = false;
     this.autoMood = null; this.autoHistory = [];
   }
   save() { try { localStorage.setItem('iberia-musica', JSON.stringify({volume: this.volume, enabled: this.enabled, mode: this.mode})); } catch {} }
   on(fn) { this.listeners.add(fn); }
   emit() { for (const fn of this.listeners) fn(this); }
+  onContext(fn) { this.contextListeners.add(fn); }
   init() {
+    // iOS gives Web Audio an ambient session; use the music playback session.
+    try { if (navigator.audioSession && navigator.audioSession.type !== 'playback') navigator.audioSession.type = 'playback'; } catch {}
+    if (this.ctx?.state === 'closed') this.rebuildOutput();
     if (!this.ctx) {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return null;
-      this.ctx = new AC();
-      // Una sola salida audible: música, personajes y efectos conservan sus volúmenes.
-      this.output = this.ctx.createGain(); this.output.connect(this.ctx.destination);
-      this.master = this.ctx.createGain(); this.applyVolume(true);
-      const makeup = this.ctx.createGain(); makeup.gain.value = MIX_GAIN;
-      this.master.connect(makeup); makeup.connect(masterChain(this.ctx, this.output));
+      try {
+        const ctx = new AC({latencyHint:'interactive'});
+        const output = ctx.createGain(), master = ctx.createGain();
+        output.gain.value = 1; output.connect(ctx.destination);
+        const makeup = ctx.createGain(); makeup.gain.value = MIX_GAIN;
+        master.connect(makeup); makeup.connect(masterChain(ctx, output));
+        this.ctx = ctx; this.output = output; this.master = master;
+        this.applyVolume(true); this.lastError = null;
+        ctx.onstatechange = () => { if (this.ctx === ctx) this.emit(); };
+        for (const fn of this.contextListeners) fn(ctx);
+      } catch (error) { this.lastError = error; return null; }
     }
-    if (this.ctx.state === 'suspended' || this.ctx.state === 'interrupted') {
-      // Cada gesto puede desbloquearlo; el primero puede haber llegado antes de que
-      // el navegador permita reproducir (táctil, teclado, regreso de otra pestaña).
-      try { this.ctx.resume()?.catch(error => { this.lastError = error; }); }
+    const ctx = this.ctx;
+    if (ctx.state === 'suspended' || ctx.state === 'interrupted') {
+      try { ctx.resume()?.catch(error => { if (this.ctx === ctx) { this.lastError = error; this.emit(); } }); }
       catch (error) { this.lastError = error; }
     }
-    return this.ctx;
+    return ctx;
+  }
+  rebuildOutput() {
+    const old = this.ctx;
+    this.stop(0);
+    clearTimeout(this.clockCheck); this.clockCheck = null;
+    this.unlockedContext = null; this.needsRestart = false;
+    this.ctx = null; this.master = null;
+    try { this.output?.disconnect(); } catch {}
+    this.output = null;
+    if (old) {
+      old.onstatechange = null;
+      if (old.state !== 'closed') try { old.close()?.catch(() => {}); } catch {}
+    }
+  }
+  /** Run synchronously inside the player's click, key or touch. */
+  unlock(previousSong = null) {
+    const song = previousSong || this.current?.song;
+    if (this.needsRestart) this.rebuildOutput();
+    const ctx = this.init(); if (!ctx) return null;
+    // Mobile browsers require a source during the gesture, before downloads.
+    if (this.unlockedContext !== ctx || ctx.state !== 'running') {
+      try {
+        const source = ctx.createBufferSource();
+        source.buffer = ctx.createBuffer(1, 1, ctx.sampleRate);
+        source.connect(this.output);
+        source.onended = () => { source.disconnect(); if (this.ctx === ctx) this.unlockedContext = ctx; };
+        source.start(0);
+      } catch (error) { this.lastError = error; }
+    }
+    if (!this.clockCheck) {
+      const time = ctx.currentTime;
+      this.clockCheck = setTimeout(() => {
+        this.clockCheck = null;
+        if (this.ctx !== ctx || document.visibilityState !== 'visible') return;
+        // "running" can conceal a stalled device clock after interruption.
+        this.needsRestart = ctx.state === 'closed' || ctx.state !== 'running' || ctx.currentTime <= time;
+        this.emit();
+      }, 1800);
+    }
+    if (this.enabled && !this.current) this.play(song || this.pick());
+    return ctx;
+  }
+  restart() {
+    const song = this.current?.song;
+    this.rebuildOutput(); this.unlock(song);
   }
   applyVolume(immediate = false) {
     if (!this.master) return;
@@ -1157,20 +1210,21 @@ export class Soundtrack {
   }
   stop(fade = 1.5) {
     const cur = this.current; this.current = null; clearInterval(this.timer);
-    if (cur && this.ctx) { cur.gain.gain.setTargetAtTime(0, this.ctx.currentTime, fade / 4); setTimeout(() => { try { cur.gain.disconnect(); } catch {} cur.mix.dispose(); }, fade * 1000 + 6000); }
+    if (cur && this.ctx) { cur.gain.gain.setTargetAtTime(0, this.ctx.currentTime, Math.max(.001, fade / 4)); setTimeout(() => { try { cur.gain.disconnect(); } catch {} cur.mix.dispose(); }, fade * 1000 + 6000); }
     this.emit();
   }
   play(song) {
     this.init();
     if (!this.ctx) return;
+    const ctx = this.ctx;
     this.stop(1.2);
     this.enabled = true; this.applyVolume(); this.save();
     const gain = this.ctx.createGain(); gain.gain.value = 0; gain.connect(this.master);
     const mix = makeMix(this.ctx, gain, song.bpm, DIRECTIONS[song.id]?.scene), {events, length} = arrange(song), names = instrumentsOf(events);
     const cur = this.current = {song, gain, mix, events, length, t0: 0, i: 0, ready: false};
     // las muestras se cargan y decodifican la primera vez; mientras, la pieza ya figura como «sonando»
-    loadInstruments(this.ctx, names).then(() => {
-      if (this.current !== cur) return;
+    loadInstruments(ctx, names).then(() => {
+      if (this.current !== cur || this.ctx !== ctx) return;
       releaseInstruments(new Set(names));
       cur.t0 = this.ctx.currentTime + .15; cur.ready = true;
       gain.gain.setTargetAtTime(1, this.ctx.currentTime, .4);

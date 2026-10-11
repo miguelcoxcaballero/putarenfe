@@ -66,7 +66,8 @@ export function recordedPause(raw, mood='happy', person='minister') {
 export class Voices {
   constructor(music) {
     this.music = music; this.token = 0; this.speaking = null; this.listeners = new Set(); this.source = null; this.output = null; this.guard = null; this.buffers = new Map(); this.log = [];
-    this.timers = new Set(); this.stings = new Set(); this.lastError = null;
+    this.timers = new Set(); this.stings = new Set(); this.lastError = null; this.resumePlayback = null; this.waitingForOutput = null;
+    music?.onContext?.(() => this.resumePlayback?.());
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem('iberia-voz') || '{}'); } catch {}
     saved = saved && typeof saved === 'object' ? saved : {};
@@ -89,7 +90,8 @@ export class Voices {
     this.timers.clear();
   }
   releaseSource(stop = true) {
-    const src = this.source, out = this.output; this.source = null; this.output = null;
+    this.waitingForOutput?.(); this.waitingForOutput = null;
+    const src = this.source, out = this.output; this.source = null; this.output = null; this.resumePlayback = null;
     if (src) { src.onended = null; if (stop) { try { src.stop(); } catch {} } try { src.disconnect?.(); } catch {} }
     try { out?.disconnect?.(); } catch {}
   }
@@ -187,7 +189,7 @@ export class Voices {
       return reject(errorInfo('MISSING_RECORDING', 'No está disponible la grabación de este diálogo.', {missingIds:ids.filter(id => !CLIPS[id])}));
     }
     try { this.music?.init?.(); } catch (error) { return reject(errorInfo('AUDIO_UNAVAILABLE', 'No se ha podido iniciar el audio.', {detail:String(error?.message || error)})); }
-    const ctx = this.music?.ctx;
+    let ctx = this.music?.ctx;
     if (!ctx) return reject(errorInfo('AUDIO_UNAVAILABLE', 'No se ha podido iniciar el audio.'));
     const token = ++this.token;
     this.speaking = {person, onend, mode, dialogueId, alignment:whole ? 'approximate' : 'sentence-start'};
@@ -203,7 +205,21 @@ export class Voices {
     const play = (buf, i = 0) => {
       if (token !== this.token) return;
       try {
+        ctx = this.music.ctx;
+        this.waitingForOutput?.(); this.waitingForOutput = null;
+        if (ctx.state && ctx.state !== 'running') {
+          const waitingContext = ctx;
+          const ready = () => { if (waitingContext.state === 'running' && token === this.token) play(buf, i); };
+          waitingContext.addEventListener('statechange', ready);
+          this.waitingForOutput = () => waitingContext.removeEventListener('statechange', ready);
+          this.resumePlayback = () => play(buf, i);
+          return;
+        }
         const src = ctx.createBufferSource(), g = ctx.createGain();
+        this.resumePlayback = () => {
+          if (token !== this.token) return;
+          this.clearTimers(); this.releaseSource(); play(buf, i);
+        };
         this.source = src; this.output = g; src.buffer = buf;
         src.playbackRate.value = 1;
         if (src.detune) src.detune.value = 0;
