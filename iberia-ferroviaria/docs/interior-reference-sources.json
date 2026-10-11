@@ -1,0 +1,73 @@
+[
+  {
+    "id": "r465",
+    "page": "https://commons.wikimedia.org/wiki/File:RENFE_Civia_-_Interior_-_2014-07-24.jpg",
+    "commons": "RENFE Civia - Interior - 2014-07-24.jpg",
+    "notes": "Civia, salón abierto y asientos 2+2; contrastado con la ficha Renfe de la unidad 465."
+  },
+  {
+    "id": "r592",
+    "page": "https://commons.wikimedia.org/wiki/File:CP_Class_0592_interior_(24588476403).jpg",
+    "commons": "CP Class 0592 interior (24588476403).jpg",
+    "notes": "Serie 592 de origen Renfe en CP: referencia estructural del salón regional y asientos reversibles; no confundir con 592 de Cercanías."
+  },
+  {
+    "id": "r599",
+    "page": "https://commons.wikimedia.org/wiki/File:J28_705_Renfe-599%2C_innen.jpg",
+    "commons": "J28 705 Renfe-599, innen.jpg",
+    "notes": "599, salón Media Distancia 2+2; fotografía identificada por Falk2."
+  },
+  {
+    "id": "rdorf",
+    "page": "https://commons.wikimedia.org/wiki/File:Arriva_Stadler_FLIRT3_cabin_(28838243098).jpg",
+    "commons": "Arriva Stadler FLIRT3 cabin (28838243098).jpg",
+    "notes": "Concepto Dörfler: referencia real de FLIRT3 Arriva; no es una serie real llamada LIRIO."
+  },
+  {
+    "id": "rbcbb",
+    "page": "https://commons.wikimedia.org/wiki/File:Second_Class_interior_of_CR400AF-B-2208_20230920.jpg",
+    "commons": "Second Class interior of CR400AF-B-2208 20230920.jpg",
+    "notes": "Concepto BCBB: referencia real CR400AF Fuxing, segunda clase 3+2, coherente con el exterior."
+  },
+  {
+    "id": "s100",
+    "page": "https://commons.wikimedia.org/wiki/File:202201_Turista_Class_Interior_of_Renfe_S-100.jpg",
+    "commons": "202201 Turista Class Interior of Renfe S-100.jpg",
+    "notes": "S100, Turista 2+2; no usar Preferente."
+  },
+  {
+    "id": "s103",
+    "page": "https://commons.wikimedia.org/wiki/File:202112_Turista_Class_at_Renfe_S-103.jpg",
+    "commons": "202112 Turista Class at Renfe S-103.jpg",
+    "notes": "S103 Velaro, Turista 2+2; foto MNXANL identificada por clase."
+  },
+  {
+    "id": "s112",
+    "page": "https://www.flickr.com/photos/39820345@N06/5640733426/",
+    "notes": "S112, remolque Turista 2+2, Costa Martínez, 18/04/2011. Referencia visual, original no redistribuido."
+  },
+  {
+    "id": "s120",
+    "page": "https://europe-train-lab.jp/www/portfolio/europe/spain/train/alvia/s120.html",
+    "image": "https://europe-train-lab.jp/www/portfolio/images/europe/spain/renfe/alvia/alvia-s120/m-3-1-d.jpg",
+    "notes": "S120, fotografía del apartado 2ª clase: moqueta azul y disposición 2+2."
+  },
+  {
+    "id": "s130",
+    "page": "https://commons.wikimedia.org/wiki/File:Alvia-Mad-Gijon-150913.jpg",
+    "commons": "Alvia-Mad-Gijon-150913.jpg",
+    "notes": "S130 Alvia clase Turista, 2+2, antes de la reforma de Renfe."
+  },
+  {
+    "id": "s730",
+    "page": "https://commons.wikimedia.org/wiki/File:2025-08-06%2C_Interior_of_Renfe_S-730.jpg",
+    "commons": "2025-08-06, Interior of Renfe S-730.jpg",
+    "notes": "S730 Talgo 250 híbrido, coche de viajeros; contrastar clase y reforma al inspeccionar la foto."
+  },
+  {
+    "id": "s106",
+    "page": "https://www.lavozdegalicia.es/album/galicia/2024/01/09/interior-trenes-avril/01101704819435399546521.htm",
+    "image": "https://img.lavdg.com/sc/9yXfoHFIzcwovSv8iy-rFzGvfbE%3D/480x/2024/01/09/00121704814441931309377/Foto/j_20240109_154618000.jpg",
+    "notes": "Renfe, foto 2/5, producción AVE106 Estándar 3+2 y pantallas táctiles. S106 fijo y variable comparten referencia de salón; no confundir con Confort 2+2 ni render del prototipo."
+  }
+]

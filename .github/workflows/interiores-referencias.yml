@@ -1,0 +1,30 @@
+name: Investigar fotografías de interiores
+on:
+  push:
+    branches: [codex/interiores-referenciados]
+    paths:
+      - .github/workflows/interiores-referencias.yml
+      - iberia-ferroviaria/tools/research-interior-references.mjs
+      - iberia-ferroviaria/docs/interior-reference-sources.json
+permissions:
+  contents: read
+jobs:
+  references:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Preparar imágenes de referencia
+        working-directory: iberia-ferroviaria/proyecto
+        run: npm install --no-save --package-lock=false sharp@0.34.5
+      - name: Descargar fotografías y registrar procedencia
+        run: node iberia-ferroviaria/tools/research-interior-references.mjs
+      - name: Guardar referencias temporales para revisión
+        uses: actions/upload-artifact@v4
+        with:
+          name: interior-references
+          retention-days: 3
+          path: /tmp/tenfe-interior-references
