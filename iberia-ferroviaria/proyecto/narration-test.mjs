@@ -14,7 +14,7 @@ for(const [key,m]of Object.entries(MESSAGES)){
  else unique.set(id,m);
 }
 for(const event of EVENTS){const m=MESSAGES['event-'+event.id];assert(m);assert.equal(m.text,event.body,'entire event body is spoken');}
-assert.equal(Object.keys(STATIC_MESSAGES).filter(k=>k.startsWith('guide-')).length,12);
+assert.equal(Object.values(STATIC_MESSAGES).filter(m=>m.kind==='guía').length,12);
 for(const [key,m]of Object.entries(STATIC_MESSAGES))assert.equal(keyForText(m.text),key);
 assert.equal(toastKey('Material enviado al taller.'),'refit-started');
 assert.equal(toastKey('No hay caja suficiente.',{error:true}),'error-money');

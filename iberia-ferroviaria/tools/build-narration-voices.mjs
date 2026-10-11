@@ -21,6 +21,8 @@ export async function buildNarrationVoices(project,output){
  assert.equal(meta.takes.length,expected.size);assert.equal(meta.browser_speech_synthesis,false);
  assert.equal(meta.model.repository,'Qwen/Qwen3-TTS-12Hz-0.6B-Base');
  assert.equal(meta.model.revision,'5d83992436eae1d760afd27aff78a71d676296fc');
+ const frozen=JSON.parse(fs.readFileSync(path.join(project,'../web-source/source-release.json'),'utf8'));
+ assert.equal(meta.model.fingerprint,frozen.modelFingerprint,'same pinned cast model');
  assert.equal(meta.model.files.length,13);assert.equal(meta.precision,'mixed-bf16-talker');
  const write=(url,bytes)=>{const file=path.join(output,url);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes);};
  const assets=[],recordings=[],rows=[],dialogues={};
