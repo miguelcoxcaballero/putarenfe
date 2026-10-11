@@ -1,0 +1,28 @@
+name: Diagnosticar salida real de audio
+on:
+  push:
+    branches: [codex/audio-salida]
+permissions:
+  contents: read
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Preparar Chromium
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Grabar la salida con las preferencias por defecto
+        working-directory: iberia-ferroviaria/proyecto
+        run: node audio-salida-ui-test.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audio-salida
+          path: iberia-ferroviaria/outputs/audio-qa
