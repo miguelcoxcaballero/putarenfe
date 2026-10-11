@@ -195,8 +195,8 @@
     },
     {
       "file": "music.js",
-      "bytes": 95644,
-      "sha256": "8c62edf7302d755bfddf240e8fa355261b91c93e7ad2fa0b751730fed23cdccc"
+      "bytes": 98066,
+      "sha256": "1b4a7e2e01246c48b37189ae24582fee5d50e08871ac4af590b7a24573074282"
     },
     {
       "file": "assets/narration-voices.js",
@@ -205,8 +205,8 @@
     },
     {
       "file": "voice.js",
-      "bytes": 14245,
-      "sha256": "5b4e3d32b7e32eb8cfa32755adb8cad8cf210c16f8ed00570fdc900c83dbc1e7"
+      "bytes": 15145,
+      "sha256": "a360a5da93e281d7048feb058d9e8dd6e3528a7a808cc39bc4590b7f71f991e9"
     },
     {
       "file": "dialogue-presentation.js",
@@ -215,8 +215,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 29297,
-      "sha256": "bfb1564e858655606edbf333795724396c34089ed39288d36b38eccbb600a8f1"
+      "bytes": 29529,
+      "sha256": "a764a971d6503fdd98919c565fc7f823538ff5bbb9914e81da7dd61fd4cfb706"
     },
     {
       "file": "assets/portraits.js",
@@ -240,8 +240,8 @@
     },
     {
       "file": "main-menu.js",
-      "bytes": 3662,
-      "sha256": "eb2fa7ec9c64999d1069760a8084f3f0545a59cfc390ae000db4a8fe183c1cee"
+      "bytes": 3748,
+      "sha256": "bd9b2895c037a42136a9c292263e3af0831f0b52aa727bd036fe3c671e63b267"
     },
     {
       "file": "induction-task-ui.js",
@@ -280,8 +280,8 @@
     },
     {
       "file": "app.js",
-      "bytes": 178288,
-      "sha256": "b0fb42ad66e8c71dde8966c7d5e133035e0eca92085f6bc1eea48940d03971a6"
+      "bytes": 179072,
+      "sha256": "b0c8046b7a7f66913a9bd7dbc25d29eabcbd0895a4254bdc13dc94f93eb69066"
     },
     {
       "file": "style-v3.css",
@@ -290,8 +290,8 @@
     },
     {
       "file": "main-menu.css",
-      "bytes": 12136,
-      "sha256": "183e72a7585d0056f5b4d5d97ab7d46347ad7b96431b29737e3e604cc5cc528e"
+      "bytes": 12447,
+      "sha256": "4a44b11c1ebf886a9c2e66fff70c625bc1b6cc9e6ff25be143ab49ebf7762a2e"
     },
     {
       "file": "induction.css",
