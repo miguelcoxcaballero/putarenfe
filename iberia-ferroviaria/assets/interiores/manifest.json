@@ -1,0 +1,868 @@
+{
+  "schema": 1,
+  "version": "6.4.0",
+  "method": "Each before image was generated with the actual selected photograph attached; each after image was generated with its accepted before image attached. Individually reviewed full-resolution views, without atlas crops.",
+  "reform": "Propuesta del juego; no representa una reforma oficial de todos los modelos.",
+  "references": [
+    {
+      "id": "r465",
+      "page": "https://commons.wikimedia.org/wiki/File:RENFE_Civia_-_Interior_-_2014-07-24.jpg",
+      "commons": "RENFE Civia - Interior - 2014-07-24.jpg",
+      "notes": "Civia, salón abierto y asientos 2+2; contrastado con la ficha Renfe de la unidad 465.",
+      "author": "Mike1979 Russia",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "date": "2014-07-24 20:17:52",
+      "description": "This   file was uploaded  with Commonist.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/a/ad/RENFE_Civia_-_Interior_-_2014-07-24.jpg",
+      "sha256": "f7b410c0609c2c6a6437e1786c42e068eb2beef587124452698a04b8ce7ee5e5",
+      "width": 5431,
+      "height": 3621,
+      "bytes": 2441022
+    },
+    {
+      "id": "r592",
+      "page": "https://commons.wikimedia.org/wiki/File:CP_Class_0592_interior_(24588476403).jpg",
+      "commons": "CP Class 0592 interior (24588476403).jpg",
+      "notes": "Serie 592 de origen Renfe en CP: referencia estructural del salón regional y asientos reversibles; no confundir con 592 de Cercanías.",
+      "author": "tak.wing",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "date": "2016-01-28 08:37",
+      "description": "Train interior of the Portuguese train type 0592",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/CP_Class_0592_interior_%2824588476403%29.jpg",
+      "sha256": "c673085f669bdea7b274d7b7581f3f3577c90d56d090c1e9cbf17e6ee7207bdd",
+      "width": 3968,
+      "height": 2232,
+      "bytes": 3570242
+    },
+    {
+      "id": "r599",
+      "page": "https://commons.wikimedia.org/wiki/File:J28_705_Renfe-599%2C_innen.jpg",
+      "commons": "J28 705 Renfe-599, innen.jpg",
+      "notes": "599, salón Media Distancia 2+2; fotografía identificada por Falk2.",
+      "author": "Falk2",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2017-05-29 18:05",
+      "description": "Endwagen, am Übergangsende sind die Sitze in Abteilform angeordnet und mit Tischen versehen. Die Fenster mit der fluoreszierenden Umrandung sind Notausstiege.\nDie Einrichtung ist der der wenig später gebauten Reihe 449 sehr ähnlich.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/J28_705_Renfe-599%2C_innen.jpg",
+      "sha256": "3e8f53f5ba669b13422fe991c90cd7f8a4d5a6040de562a34956444ffe38d340",
+      "width": 5937,
+      "height": 3958,
+      "bytes": 4723352
+    },
+    {
+      "id": "rbcbb",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_Class_interior_of_CR400AF-B-2208_20230920.jpg",
+      "commons": "Second Class interior of CR400AF-B-2208 20230920.jpg",
+      "notes": "Concepto BCBB: referencia real CR400AF Fuxing, segunda clase 3+2, coherente con el exterior.",
+      "author": "颐园居",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2023-09-20 14:35:21",
+      "description": "​复兴号CR400AF-B-2208动车组的二等座车厢内部",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/3/37/Second_Class_interior_of_CR400AF-B-2208_20230920.jpg",
+      "sha256": "bf006f72238ff98d0d43aee1e4054c3e44546546c33144881269dd2f1dac1a46",
+      "width": 3840,
+      "height": 2560,
+      "bytes": 7060986
+    },
+    {
+      "id": "s100",
+      "page": "https://commons.wikimedia.org/wiki/File:202201_Turista_Class_Interior_of_Renfe_S-100.jpg",
+      "commons": "202201 Turista Class Interior of Renfe S-100.jpg",
+      "notes": "S100, Turista 2+2; no usar Preferente.",
+      "author": "MNXANL",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2022-01-05 07:49:51",
+      "description": "202201 Turista Class Interior of Renfe S-100",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/5f/202201_Turista_Class_Interior_of_Renfe_S-100.jpg",
+      "sha256": "05a232a45d7095bc59a718c1c23d66aa237e7a51a3298fc030af660a9ed06713",
+      "width": 4032,
+      "height": 3024,
+      "bytes": 3351417
+    },
+    {
+      "id": "s103",
+      "page": "https://commons.wikimedia.org/wiki/File:202112_Turista_Class_at_Renfe_S-103.jpg",
+      "commons": "202112 Turista Class at Renfe S-103.jpg",
+      "notes": "S103 Velaro, Turista 2+2; foto MNXANL identificada por clase.",
+      "author": "MNXANL",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2021-12-30 19:51:03",
+      "description": "With 2+2 Configuration",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/fb/202112_Turista_Class_at_Renfe_S-103.jpg",
+      "sha256": "98008f76a25cd87b2f3d8586884fa2c7d2076869fc8d054553768195f400f7b0",
+      "width": 4032,
+      "height": 3024,
+      "bytes": 3257657
+    },
+    {
+      "id": "s112",
+      "page": "https://www.flickr.com/photos/39820345@N06/5640733426/",
+      "notes": "S112, remolque Turista 2+2, Costa Martínez, 18/04/2011. Referencia visual, original no redistribuido.",
+      "image": "https://live.staticflickr.com/5262/5640733426_cd061fbcdb_b.jpg",
+      "sha256": "7f664cba380bc518aa7f2537462baedf7cdaa9602f2a0574257d1f92f6313242",
+      "width": 1023,
+      "height": 685,
+      "bytes": 146476,
+      "author": "Costa Martínez",
+      "license": "Todos los derechos reservados; referencia visual, original no redistribuido",
+      "date": "2011-04-18"
+    },
+    {
+      "id": "s120",
+      "page": "https://europe-train-lab.jp/www/portfolio/europe/spain/train/alvia/s120.html",
+      "image": "https://europe-train-lab.jp/www/portfolio/images/europe/spain/renfe/alvia/alvia-s120/m-3-1-d.jpg",
+      "notes": "S120, fotografía del apartado 2ª clase: moqueta azul y disposición 2+2.",
+      "sha256": "985a271b523ee29abb43c1fb435562bda15195f4049c20231201acb751d93ac7",
+      "width": 660,
+      "height": 440,
+      "bytes": 152566,
+      "author": "Europe / World Train Lab",
+      "license": "Copyright; referencia visual, original no redistribuido"
+    },
+    {
+      "id": "s130",
+      "page": "https://commons.wikimedia.org/wiki/File:Alvia-Mad-Gijon-150913.jpg",
+      "commons": "Alvia-Mad-Gijon-150913.jpg",
+      "notes": "S130 Alvia clase Turista, 2+2, antes de la reforma de Renfe.",
+      "author": "FDV",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "date": "2013-09-15",
+      "description": "Renfe Class 130 Economy class interior.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/52/Alvia-Mad-Gijon-150913.jpg",
+      "sha256": "8cf93c70f5fbce873ec801ca3df6fb77c20ae526a2fac35cff4b30eec38e31e3",
+      "width": 1920,
+      "height": 1440,
+      "bytes": 492960
+    },
+    {
+      "id": "s730",
+      "page": "https://commons.wikimedia.org/wiki/File:2025-08-06%2C_Interior_of_Renfe_S-730.jpg",
+      "commons": "2025-08-06, Interior of Renfe S-730.jpg",
+      "notes": "Salón de viajeros Talgo 250 híbrido, Turista 2+2; tapicería verde en la foto seleccionada.",
+      "author": "Patrycja Rosa (ptrcnull)",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "date": "2025-08-06 17:42:36",
+      "description": "Interior of Talgo 250 Hybrid train (Renfe S-730)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/2025-08-06%2C_Interior_of_Renfe_S-730.jpg",
+      "sha256": "30cca0fc421de0362d23ceb706eca809e39eeafad78b630939bd88fac1dd69b7",
+      "width": 6024,
+      "height": 4020,
+      "bytes": 11483404
+    },
+    {
+      "id": "rdorf",
+      "page": "https://commons.wikimedia.org/wiki/File:Interior_Stadler_FLIRT_of_Go-Ahead_Baden-W%C3%BCrttemberg.jpg",
+      "commons": "Interior Stadler FLIRT of Go-Ahead Baden-Württemberg.jpg",
+      "notes": "Dörfler es un concepto del juego: referencia del salón de pasajeros FLIRT de Go-Ahead Baden-Württemberg.",
+      "author": "Smiley.toerist",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "date": "2022-05-26 13:21:12",
+      "description": "Een interieur van een Stadler FLIRT of Go-Ahead Baden-Württemberg",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Interior_Stadler_FLIRT_of_Go-Ahead_Baden-W%C3%BCrttemberg.jpg",
+      "sha256": "92ddcc8432a6ad305b5818e1405ad1048bad73e3b78eaa10146b954db566bdb3",
+      "width": 5472,
+      "height": 3648,
+      "bytes": 4925597
+    },
+    {
+      "id": "s106",
+      "page": "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
+      "image": "https://zdopravy.cz/wp-content/uploads/2024/05/ave106-13.jpg",
+      "notes": "Salón Estándar 3+2: detalle del bloque de tres asientos y mesa enfrentada. Misma referencia para ambos anchos. Se descartan las fotos de Confort 2+2.",
+      "sha256": "d480360f9044574792cb6c3482dd92e72e50b949e7dad25be6d3d980538bda4a",
+      "width": 2048,
+      "height": 1378,
+      "bytes": 341817,
+      "author": "Renfe",
+      "date": "2024-05-05",
+      "license": "Fotografía de prensa Renfe; referencia visual, original no redistribuido"
+    }
+  ],
+  "sources": [
+    {
+      "path": "assets/interiores/final/r465-actual.png",
+      "gitBlobSHA": "b8cdc75d36ce82bd1fc6cacf8a9c28546f628ea6",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r465",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "f7b410c0609c2c6a6437e1786c42e068eb2beef587124452698a04b8ce7ee5e5"
+      },
+      "sha256": "3cb012ca3158acc5328f3458c4901741f75b269b245aeebc2b82f050e79375b1"
+    },
+    {
+      "path": "assets/interiores/final/r465-reformado.png",
+      "gitBlobSHA": "19a3e8416afee200d22ab10cfb40680623b03a81",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r465",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "b8cdc75d36ce82bd1fc6cacf8a9c28546f628ea6"
+      },
+      "sha256": "c4a4d7582f916b03c8829ab7169676db11fc7362132975d5c79d2256ab59b880"
+    },
+    {
+      "path": "assets/interiores/final/r592-actual.png",
+      "gitBlobSHA": "9e405eeca5fe0aa830baddd3130f75928f6a0e8c",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r592",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "c673085f669bdea7b274d7b7581f3f3577c90d56d090c1e9cbf17e6ee7207bdd"
+      },
+      "sha256": "44eefa8d6aa12d740fddcd3cacacd823b1432c88f116b141bd9df59e27d957de"
+    },
+    {
+      "path": "assets/interiores/final/r592-reformado.png",
+      "gitBlobSHA": "3a414f7b7115f83e15fc249aaaf0f8656163a43f",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r592",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "9e405eeca5fe0aa830baddd3130f75928f6a0e8c"
+      },
+      "sha256": "d759c3e481eb7726769d27410cb96efb024f37f757bebc0c1d27aae3c80a392c"
+    },
+    {
+      "path": "assets/interiores/final/r599-actual.png",
+      "gitBlobSHA": "ddc423b2c6a7458315271fbafb5eeca58d912cdc",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r599",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "3e8f53f5ba669b13422fe991c90cd7f8a4d5a6040de562a34956444ffe38d340"
+      },
+      "sha256": "92d448e6eb318508349308acedd6f7db0f38e582186319a546aa5f4bc68f9b95"
+    },
+    {
+      "path": "assets/interiores/final/r599-reformado.png",
+      "gitBlobSHA": "74d78c53928c4b003a01b27e554b35b4bc64d1bf",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "r599",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "ddc423b2c6a7458315271fbafb5eeca58d912cdc"
+      },
+      "sha256": "47927648980f605f63a3dabf29e20d023c74cd0e13b5650e563147fb09927247"
+    },
+    {
+      "path": "assets/interiores/final/rbcbb-actual.png",
+      "gitBlobSHA": "86680e6b4869df9dfa2c72dc5d16da71d8888107",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rbcbb",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "bf006f72238ff98d0d43aee1e4054c3e44546546c33144881269dd2f1dac1a46"
+      },
+      "sha256": "b380cd6ea7672c7f4cf4303af48a337846d60f52401c6c22847c9ccbaa2cbd78"
+    },
+    {
+      "path": "assets/interiores/final/rbcbb-reformado.png",
+      "gitBlobSHA": "486264edb14253d6abb29add0083bc34f07ac13d",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rbcbb",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "86680e6b4869df9dfa2c72dc5d16da71d8888107"
+      },
+      "sha256": "0933290513c72bd9c1da6fa35f56ada1c836a1cec43fa9f53271e1eb77d510f7"
+    },
+    {
+      "path": "assets/interiores/final/s100-actual.png",
+      "gitBlobSHA": "c75174da92cdf551e230dce4b6817db162a95665",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s100",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "05a232a45d7095bc59a718c1c23d66aa237e7a51a3298fc030af660a9ed06713"
+      },
+      "sha256": "46e97e56c1f00893927e3331dc56c580bf245b4627fb00a0fd461ff692d19ecb"
+    },
+    {
+      "path": "assets/interiores/final/s100-reformado.png",
+      "gitBlobSHA": "0c225044a685fe670db7843dfaa77591daf868fb",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s100",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "c75174da92cdf551e230dce4b6817db162a95665"
+      },
+      "sha256": "50f5bb19fee3b693eeafd7ed8d7b0074212140f0afb0840ae1b8ba29b71618e1"
+    },
+    {
+      "path": "assets/interiores/final/rdorf-actual.png",
+      "gitBlobSHA": "2cf6e92256e60577d6a1c9b00c40d0b33831ae7e",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rdorf",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "92ddcc8432a6ad305b5818e1405ad1048bad73e3b78eaa10146b954db566bdb3"
+      },
+      "sha256": "ca7ae334c3dfa99eb8e88fc3ec5da63063972cebb0b7294ad4ac3ae3f07528b4"
+    },
+    {
+      "path": "assets/interiores/final/rdorf-reformado.png",
+      "gitBlobSHA": "1698fe9275a73f60acba6cea6636fda7bcd74edf",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "rdorf",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "2cf6e92256e60577d6a1c9b00c40d0b33831ae7e"
+      },
+      "sha256": "6fde166e54cdbf9b5e4f173e02796a6547583c7b4b9b65cf8c0cd79b91e25ab6"
+    },
+    {
+      "path": "assets/interiores/final/s103-actual.png",
+      "gitBlobSHA": "70e56178b7fd7f316c41959be6e2754f02527b27",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "98008f76a25cd87b2f3d8586884fa2c7d2076869fc8d054553768195f400f7b0"
+      },
+      "sha256": "5750fd5191257a5b53dcf36e8ca41198a73825a55a79243ca6b8aa5a2a02b355"
+    },
+    {
+      "path": "assets/interiores/final/s103-reformado.png",
+      "gitBlobSHA": "ac780be26951f825e61f967eba17c35b2bffe19d",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "70e56178b7fd7f316c41959be6e2754f02527b27"
+      },
+      "sha256": "9d5abd913f24d1b8350384b917bcb17a15e650dcd3f29b107bc4984867294be7"
+    },
+    {
+      "path": "assets/interiores/final/s112-actual.png",
+      "gitBlobSHA": "b28b10423a3c40829086cf450f5c9da0cd51e498",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s112",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "7f664cba380bc518aa7f2537462baedf7cdaa9602f2a0574257d1f92f6313242"
+      },
+      "sha256": "98ab3541780389f2cb1f415069f28b439d11a470ba9b9b390bb5cb441a0017fe"
+    },
+    {
+      "path": "assets/interiores/final/s112-reformado.png",
+      "gitBlobSHA": "b00d2deceaa86bb36bfbd9b5794f496c29850049",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s112",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "b28b10423a3c40829086cf450f5c9da0cd51e498"
+      },
+      "sha256": "177933c4c3cd449c338618a20ad8bf792c15f1577312f40769e61923d76440ac"
+    },
+    {
+      "path": "assets/interiores/final/s120-actual.png",
+      "gitBlobSHA": "098d2e807521e31bd2431f54fc31ee9613607058",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s120",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "985a271b523ee29abb43c1fb435562bda15195f4049c20231201acb751d93ac7"
+      },
+      "sha256": "d23b959fccf3a0f72605db65472e339d213bc342839dc09a26a6ba8e187782cc"
+    },
+    {
+      "path": "assets/interiores/final/s120-reformado.png",
+      "gitBlobSHA": "1bd9d8d98a6f59b7511d422ef89c71f29f5a7465",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s120",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "098d2e807521e31bd2431f54fc31ee9613607058"
+      },
+      "sha256": "6e38d9720e969d1589770e24e21494210285c920a03efaaad9def663761f48b9"
+    },
+    {
+      "path": "assets/interiores/final/s130-actual.png",
+      "gitBlobSHA": "ab4cc56c794ccf71697c9f4cfdfdce2073c82ed9",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s130",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "8cf93c70f5fbce873ec801ca3df6fb77c20ae526a2fac35cff4b30eec38e31e3"
+      },
+      "sha256": "70224ab3c68792a9ef38c86dde900f8a2270dbe890b36148c6fa04e94b2fd513"
+    },
+    {
+      "path": "assets/interiores/final/s130-reformado.png",
+      "gitBlobSHA": "9d44304f9d6f94f7279b5ff3662a2623d7d583ac",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s130",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "ab4cc56c794ccf71697c9f4cfdfdce2073c82ed9"
+      },
+      "sha256": "85d7e9d0bb5bb96b66494c4ee54f6f0fd25ab357be45329aadc41ed8c6af6849"
+    },
+    {
+      "path": "assets/interiores/final/s730-actual.png",
+      "gitBlobSHA": "d4ad40793c19847553ff95f0730d93365b3ec842",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s730",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "30cca0fc421de0362d23ceb706eca809e39eeafad78b630939bd88fac1dd69b7"
+      },
+      "sha256": "c18738205fe2ecc15db81ab998869473d6e8c3e14799e33fc02e37882f2b20bd"
+    },
+    {
+      "path": "assets/interiores/final/s730-reformado.png",
+      "gitBlobSHA": "cd625b6c9311426216c82130fbd0def7fa3518a9",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s730",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "d4ad40793c19847553ff95f0730d93365b3ec842"
+      },
+      "sha256": "90a372e5824b769e32d71f53ae822bcd31ff5ee2ed28b7133030c643b914f8ec"
+    },
+    {
+      "path": "assets/interiores/final/av2030-actual.png",
+      "gitBlobSHA": "4b53fb127f742403b50f520795fc9c84bd2c372e",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "98008f76a25cd87b2f3d8586884fa2c7d2076869fc8d054553768195f400f7b0"
+      },
+      "sha256": "3c612640563ba778707ade70c0fc7adfbd4591a52ab46139385cd778293724ed"
+    },
+    {
+      "path": "assets/interiores/final/av2030-reformado.png",
+      "gitBlobSHA": "876a7c21d3f72cf0116b83274eb0b25fbbfc00fa",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s103",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "4b53fb127f742403b50f520795fc9c84bd2c372e"
+      },
+      "sha256": "61b33e4fa56f9bd6faad6d91a6fb0a00392bfed0a797e1048512cc126d57008b"
+    },
+    {
+      "path": "assets/interiores/final/s106-actual.png",
+      "gitBlobSHA": "212cdc50e54a56c420aa7d4d9eab049629c00582",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s106",
+      "state": "before",
+      "input": {
+        "kind": "real-photograph",
+        "sha256": "d480360f9044574792cb6c3482dd92e72e50b949e7dad25be6d3d980538bda4a"
+      },
+      "sha256": "19987aedf3ccc13fcf1d60cc795129df18a0eebdf6b77f0d31d9449f6fff89f2"
+    },
+    {
+      "path": "assets/interiores/final/s106-reformado.png",
+      "gitBlobSHA": "de9f15abbaae3d7cbff0a89cfe123f37a7cfadf2",
+      "width": 1536,
+      "height": 1024,
+      "referenceId": "s106",
+      "state": "after",
+      "input": {
+        "kind": "accepted-before-image",
+        "gitBlobSHA": "212cdc50e54a56c420aa7d4d9eab049629c00582"
+      },
+      "sha256": "11e57fc4de3ea7c127ebefa9c950283c4ab2c70ecf12918cde0198fae27c8568"
+    }
+  ],
+  "images": [
+    {
+      "url": "assets/interiores/r465-actual.webp",
+      "model": "r465",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 173578,
+      "sha256": "6fc10600d240c9bbbe90135e6aed9ee66b7c95a47b277c88b9304fbb56540722",
+      "sourceSHA256": "3cb012ca3158acc5328f3458c4901741f75b269b245aeebc2b82f050e79375b1",
+      "referenceId": "r465",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r465-reformado.webp",
+      "model": "r465",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 189250,
+      "sha256": "06d8d0eed6f9cf080dc5232181f89c917f5919b12deeee54ed5091dae3dced4f",
+      "sourceSHA256": "c4a4d7582f916b03c8829ab7169676db11fc7362132975d5c79d2256ab59b880",
+      "referenceId": "r465",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r592-actual.webp",
+      "model": "r592",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 163484,
+      "sha256": "816932df9f94b5c8e4f6be8d3aad925fe0005b5814e138bb06f5ed68cb33db9e",
+      "sourceSHA256": "44eefa8d6aa12d740fddcd3cacacd823b1432c88f116b141bd9df59e27d957de",
+      "referenceId": "r592",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r592-reformado.webp",
+      "model": "r592",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 292174,
+      "sha256": "01a54cd57a5ad0193dcfc5381b1d86327226f0bbe3fc73c4f39506b088d1f1a3",
+      "sourceSHA256": "d759c3e481eb7726769d27410cb96efb024f37f757bebc0c1d27aae3c80a392c",
+      "referenceId": "r592",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r599-actual.webp",
+      "model": "r599",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 169902,
+      "sha256": "5daae320c98a7ee90071bc5c89cab71805ee648fca9cf13ee542f73ef15896cf",
+      "sourceSHA256": "92d448e6eb318508349308acedd6f7db0f38e582186319a546aa5f4bc68f9b95",
+      "referenceId": "r599",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/r599-reformado.webp",
+      "model": "r599",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 200278,
+      "sha256": "793762556d3a831dc30acf20f0fd50f7f59a2f3dac9afbeb56d94a2bb9acceb9",
+      "sourceSHA256": "47927648980f605f63a3dabf29e20d023c74cd0e13b5650e563147fb09927247",
+      "referenceId": "r599",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rdorf-actual.webp",
+      "model": "rdorf",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 245916,
+      "sha256": "67c8bc9e174d017977400062bb9f994478a5f68027dd71bf0ff6a6dc16c60449",
+      "sourceSHA256": "ca7ae334c3dfa99eb8e88fc3ec5da63063972cebb0b7294ad4ac3ae3f07528b4",
+      "referenceId": "rdorf",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rdorf-reformado.webp",
+      "model": "rdorf",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 280386,
+      "sha256": "a978864a8e46225bbfe03e0e5f860d152ae91ea7a9be9db0781768d859fed69f",
+      "sourceSHA256": "6fde166e54cdbf9b5e4f173e02796a6547583c7b4b9b65cf8c0cd79b91e25ab6",
+      "referenceId": "rdorf",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rbcbb-actual.webp",
+      "model": "rbcbb",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 185834,
+      "sha256": "91320489fd4c553d5bfb32b2149881a9cb9dc83927d1e9eadb79b545a900d4b1",
+      "sourceSHA256": "b380cd6ea7672c7f4cf4303af48a337846d60f52401c6c22847c9ccbaa2cbd78",
+      "referenceId": "rbcbb",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/rbcbb-reformado.webp",
+      "model": "rbcbb",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 188002,
+      "sha256": "fae95743257b7a2e41b5412fcbf6e3608e969c06751c2393a4f16a8fe8eae7de",
+      "sourceSHA256": "0933290513c72bd9c1da6fa35f56ada1c836a1cec43fa9f53271e1eb77d510f7",
+      "referenceId": "rbcbb",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/av2030-actual.webp",
+      "model": "av2030",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 190896,
+      "sha256": "18380326ec4ce901708144ff588fbe98feb1785d33852c5bcbaee1241b28bb9c",
+      "sourceSHA256": "3c612640563ba778707ade70c0fc7adfbd4591a52ab46139385cd778293724ed",
+      "referenceId": "s103",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/av2030-reformado.webp",
+      "model": "av2030",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 184648,
+      "sha256": "4a6fd22881fadb2ced771bcb068fbe42760cfaf34614c87f3e574582ab82eca7",
+      "sourceSHA256": "61b33e4fa56f9bd6faad6d91a6fb0a00392bfed0a797e1048512cc126d57008b",
+      "referenceId": "s103",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s100-actual.webp",
+      "model": "s100",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 261544,
+      "sha256": "0ad7f63bc10e5365056ca932fa3c859eed575b7ea799a3e26f1514ffab0362ac",
+      "sourceSHA256": "46e97e56c1f00893927e3331dc56c580bf245b4627fb00a0fd461ff692d19ecb",
+      "referenceId": "s100",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s100-reformado.webp",
+      "model": "s100",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 269054,
+      "sha256": "4dec4cb98bcb5c14b7781a6e57539c53758abbc7f3ab5d8de23d11d5d6cf6f64",
+      "sourceSHA256": "50f5bb19fee3b693eeafd7ed8d7b0074212140f0afb0840ae1b8ba29b71618e1",
+      "referenceId": "s100",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s103-actual.webp",
+      "model": "s103",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 159242,
+      "sha256": "703d06820232e31a0253ad4296c98296d08bae64ec366dc0d8e8173df623b241",
+      "sourceSHA256": "5750fd5191257a5b53dcf36e8ca41198a73825a55a79243ca6b8aa5a2a02b355",
+      "referenceId": "s103",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s103-reformado.webp",
+      "model": "s103",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 166298,
+      "sha256": "42eb3b25696daf6dd72db6adcc34071badbab3161ebcd57fc91a41351098385e",
+      "sourceSHA256": "9d5abd913f24d1b8350384b917bcb17a15e650dcd3f29b107bc4984867294be7",
+      "referenceId": "s103",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s112-actual.webp",
+      "model": "s112",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 262286,
+      "sha256": "9c83bbcab23adf063da76d595d0721887c98cdbd3407dc8501df23c51c4de38c",
+      "sourceSHA256": "98ab3541780389f2cb1f415069f28b439d11a470ba9b9b390bb5cb441a0017fe",
+      "referenceId": "s112",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s112-reformado.webp",
+      "model": "s112",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 287466,
+      "sha256": "04c913d311f502a8615362046d550423d743f38b2917802c6eebf2a06d2cac25",
+      "sourceSHA256": "177933c4c3cd449c338618a20ad8bf792c15f1577312f40769e61923d76440ac",
+      "referenceId": "s112",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s120-actual.webp",
+      "model": "s120",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 238962,
+      "sha256": "855b1bc4a15cd0154906449de291a2a6492d0d9d8c2806657283b080e026201b",
+      "sourceSHA256": "d23b959fccf3a0f72605db65472e339d213bc342839dc09a26a6ba8e187782cc",
+      "referenceId": "s120",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s120-reformado.webp",
+      "model": "s120",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 296494,
+      "sha256": "fe0ffb8383ced0b6565778ecaeb436fa079fc35cdbe084acf6cc57dcaed3e69f",
+      "sourceSHA256": "6e38d9720e969d1589770e24e21494210285c920a03efaaad9def663761f48b9",
+      "referenceId": "s120",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s130-actual.webp",
+      "model": "s130",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 274304,
+      "sha256": "e2d818bac199225bee0094b34c76e51d7f508480e0b0402ad17b599438b8b3cf",
+      "sourceSHA256": "70224ab3c68792a9ef38c86dde900f8a2270dbe890b36148c6fa04e94b2fd513",
+      "referenceId": "s130",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s130-reformado.webp",
+      "model": "s130",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 239284,
+      "sha256": "9b323167b2b7f201a567f685c05636776dfe648b6733c9cbad51263dd9f45d62",
+      "sourceSHA256": "85d7e9d0bb5bb96b66494c4ee54f6f0fd25ab357be45329aadc41ed8c6af6849",
+      "referenceId": "s130",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s730-actual.webp",
+      "model": "s730",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 217880,
+      "sha256": "ceb88e4584a62cf058852d1f95f05689dff4e38122304c3b7758c1fa181a0874",
+      "sourceSHA256": "c18738205fe2ecc15db81ab998869473d6e8c3e14799e33fc02e37882f2b20bd",
+      "referenceId": "s730",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s730-reformado.webp",
+      "model": "s730",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 169914,
+      "sha256": "e39104c7710e6aa435678ac40245a8103abb3446ec2cc99d1a212d6ca18b6d62",
+      "sourceSHA256": "90a372e5824b769e32d71f53ae822bcd31ff5ee2ed28b7133030c643b914f8ec",
+      "referenceId": "s730",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106f-actual.webp",
+      "model": "s106f",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 251436,
+      "sha256": "93de9496aba9f7f4e4176543b30a93013a04b21c2edcd3b889c004a18c71eb2e",
+      "sourceSHA256": "19987aedf3ccc13fcf1d60cc795129df18a0eebdf6b77f0d31d9449f6fff89f2",
+      "referenceId": "s106",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106f-reformado.webp",
+      "model": "s106f",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 247216,
+      "sha256": "ed3b2d350a26d410556a150bce77278f794a81b181d452575fb29b3210e86017",
+      "sourceSHA256": "11e57fc4de3ea7c127ebefa9c950283c4ab2c70ecf12918cde0198fae27c8568",
+      "referenceId": "s106",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106v-actual.webp",
+      "model": "s106v",
+      "interior": "actual",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 251436,
+      "sha256": "93de9496aba9f7f4e4176543b30a93013a04b21c2edcd3b889c004a18c71eb2e",
+      "sourceSHA256": "19987aedf3ccc13fcf1d60cc795129df18a0eebdf6b77f0d31d9449f6fff89f2",
+      "referenceId": "s106",
+      "kind": "generated-train-interior"
+    },
+    {
+      "url": "assets/interiores/s106v-reformado.webp",
+      "model": "s106v",
+      "interior": "reformado",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 247216,
+      "sha256": "ed3b2d350a26d410556a150bce77278f794a81b181d452575fb29b3210e86017",
+      "sourceSHA256": "11e57fc4de3ea7c127ebefa9c950283c4ab2c70ecf12918cde0198fae27c8568",
+      "referenceId": "s106",
+      "kind": "generated-train-interior"
+    }
+  ]
+}

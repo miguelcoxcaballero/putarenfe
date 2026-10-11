@@ -5,181 +5,259 @@ export function bind(engine){E=engine;}
 export const INTERIORS={
   "r465": {
     "id": "r465",
-    "atlas": "interiores-01.png",
-    "row": 0,
     "before": "assets/interiores/r465-actual.webp",
     "after": "assets/interiores/r465-reformado.webp",
     "layout": "Civia · salón abierto, asientos 2+2 y pasamanos",
     "concept": false,
     "references": [
+      "https://commons.wikimedia.org/wiki/File:RENFE_Civia_-_Interior_-_2014-07-24.jpg",
       "https://www.renfe.com/es/es/cercanias/cercanias-madrid/rodajes/unidad-465",
       "https://vialibre-ffe.com/multi_galeria.asp?gal=257"
-    ]
+    ],
+    "referenceId": "r465",
+    "sourceBefore": "assets/interiores/final/r465-actual.png",
+    "sourceAfter": "assets/interiores/final/r465-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "Mike1979 Russia",
+    "referenceLicense": "CC BY-SA 3.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
   },
   "r592": {
     "id": "r592",
-    "atlas": "interiores-01.png",
-    "row": 1,
     "before": "assets/interiores/r592-actual.webp",
     "after": "assets/interiores/r592-reformado.webp",
     "layout": "Camello · salón clásico de Media Distancia, 2+2",
     "concept": false,
     "references": [
-      "https://commons.wikimedia.org/wiki/File:RENFE_592_-_Interior_-_2014-08-13_01.jpg"
-    ]
+      "https://commons.wikimedia.org/wiki/File:CP_Class_0592_interior_(24588476403).jpg"
+    ],
+    "referenceId": "r592",
+    "sourceBefore": "assets/interiores/final/r592-actual.png",
+    "sourceAfter": "assets/interiores/final/r592-reformado.png",
+    "referenceNote": "La fotografía muestra un 592 de origen Renfe en servicio con CP: se conserva su salón regional y sus asientos reversibles.",
+    "referenceCredit": "tak.wing",
+    "referenceLicense": "CC BY-SA 2.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
   },
   "r599": {
     "id": "r599",
-    "atlas": "interiores-02.png",
-    "row": 0,
     "before": "assets/interiores/r599-actual.webp",
     "after": "assets/interiores/r599-reformado.webp",
     "layout": "Media Distancia · asientos azules 2+2",
     "concept": false,
     "references": [
+      "https://commons.wikimedia.org/wiki/File:J28_705_Renfe-599%2C_innen.jpg",
       "https://www.renfe.com/es/es/grupo-renfe/grupo-renfe/flota-de-trenes/s-599"
-    ]
+    ],
+    "referenceId": "r599",
+    "sourceBefore": "assets/interiores/final/r599-actual.png",
+    "sourceAfter": "assets/interiores/final/r599-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "Falk2",
+    "referenceLicense": "CC BY-SA 4.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   "rdorf": {
     "id": "rdorf",
-    "atlas": "interiores-02.png",
-    "row": 1,
     "before": "assets/interiores/rdorf-actual.webp",
     "after": "assets/interiores/rdorf-reformado.webp",
     "layout": "Concepto regional inspirado en FLIRT · piso bajo, 2+2",
     "concept": true,
     "references": [
-      "https://www.stadlerrail.com/solutions/references/flirt-db-arriva-nl-limburg",
-      "https://www.bahnbilder.de/bild/Schweiz~Wagen~Inneneinrichtungen/1142282/blick-auf-zwei-sitze-der-2.html"
-    ]
+      "https://commons.wikimedia.org/wiki/File:Interior_Stadler_FLIRT_of_Go-Ahead_Baden-W%C3%BCrttemberg.jpg",
+      "https://www.stadlerrail.com/solutions/references/flirt-db-arriva-nl-limburg"
+    ],
+    "referenceId": "rdorf",
+    "sourceBefore": "assets/interiores/final/rdorf-actual.png",
+    "sourceAfter": "assets/interiores/final/rdorf-reformado.png",
+    "referenceNote": "Concepto del juego basado en un salón real de Stadler FLIRT.",
+    "referenceCredit": "Smiley.toerist",
+    "referenceLicense": "CC BY-SA 4.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   "rbcbb": {
     "id": "rbcbb",
-    "atlas": "interiores-03.png",
-    "row": 0,
     "before": "assets/interiores/rbcbb-actual.webp",
     "after": "assets/interiores/rbcbb-reformado.webp",
-    "layout": "Concepto regional inspirado en Fuxing CR200J · 3+2",
+    "layout": "Concepto inspirado en Fuxing CR400AF · segunda clase 3+2",
     "concept": true,
     "references": [
-      "https://www.crrcgc.cc/pz/2024-09/04/article_2024090408395645706.html",
-      "https://commons.wikimedia.org/wiki/File:Interiors_of_CR200J_second_class_coach_20190218.jpg"
-    ]
+      "https://commons.wikimedia.org/wiki/File:Second_Class_interior_of_CR400AF-B-2208_20230920.jpg"
+    ],
+    "referenceId": "rbcbb",
+    "sourceBefore": "assets/interiores/final/rbcbb-actual.png",
+    "sourceAfter": "assets/interiores/final/rbcbb-reformado.png",
+    "referenceNote": "Concepto del juego basado en un salón real de Fuxing CR400AF.",
+    "referenceCredit": "颐园居",
+    "referenceLicense": "CC BY-SA 4.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   "av2030": {
     "id": "av2030",
-    "atlas": "interiores-03.png",
-    "row": 1,
     "before": "assets/interiores/av2030-actual.webp",
     "after": "assets/interiores/av2030-reformado.webp",
     "layout": "Concepto de alta velocidad inspirado en Velaro · 2+2",
     "concept": true,
     "references": [
+      "https://commons.wikimedia.org/wiki/File:202112_Turista_Class_at_Renfe_S-103.jpg",
       "https://grupo.renfe.com/es/es/conoce-renfe/nuestros-trenes",
       "https://europe-train-lab.jp/www/portfolio/europe/spain/train/ave/s103.html"
-    ]
+    ],
+    "referenceId": "s103",
+    "sourceBefore": "assets/interiores/final/av2030-actual.png",
+    "sourceAfter": "assets/interiores/final/av2030-reformado.png",
+    "referenceNote": "Concepto del juego basado en el salón real del S103 Velaro, con otros acabados.",
+    "referenceCredit": "MNXANL",
+    "referenceLicense": "CC BY-SA 4.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   "s100": {
     "id": "s100",
-    "atlas": "interiores-04.png",
-    "row": 0,
     "before": "assets/interiores/s100-actual.webp",
     "after": "assets/interiores/s100-reformado.webp",
     "layout": "AVE de primera generación · salón Turista 2+2",
     "concept": false,
     "references": [
-      "https://grupo.renfe.com/es/es/conoce-renfe/nuestros-trenes/s-100",
-      "https://commons.wikimedia.org/wiki/File:202201_Turista_Class_Interior_of_Renfe_S-100.jpg"
-    ]
+      "https://commons.wikimedia.org/wiki/File:202201_Turista_Class_Interior_of_Renfe_S-100.jpg",
+      "https://grupo.renfe.com/es/es/conoce-renfe/nuestros-trenes/s-100"
+    ],
+    "referenceId": "s100",
+    "sourceBefore": "assets/interiores/final/s100-actual.png",
+    "sourceAfter": "assets/interiores/final/s100-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "MNXANL",
+    "referenceLicense": "CC BY-SA 4.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   "s103": {
     "id": "s103",
-    "atlas": "interiores-04.png",
-    "row": 1,
     "before": "assets/interiores/s103-actual.webp",
     "after": "assets/interiores/s103-reformado.webp",
     "layout": "Velaro · salón Estándar 2+2",
     "concept": false,
     "references": [
+      "https://commons.wikimedia.org/wiki/File:202112_Turista_Class_at_Renfe_S-103.jpg",
       "https://europe-train-lab.jp/www/portfolio/europe/spain/train/ave/s103.html"
-    ]
+    ],
+    "referenceId": "s103",
+    "sourceBefore": "assets/interiores/final/s103-actual.png",
+    "sourceAfter": "assets/interiores/final/s103-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "MNXANL",
+    "referenceLicense": "CC BY-SA 4.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   "s112": {
     "id": "s112",
-    "atlas": "interiores-05.png",
-    "row": 0,
     "before": "assets/interiores/s112-actual.webp",
     "after": "assets/interiores/s112-reformado.webp",
     "layout": "Talgo Pato · coche corto, Turista 2+2",
     "concept": false,
     "references": [
+      "https://www.flickr.com/photos/39820345@N06/5640733426/",
       "https://vialibre-ffe.com/noticias.asp?not=37029"
-    ]
+    ],
+    "referenceId": "s112",
+    "sourceBefore": "assets/interiores/final/s112-actual.png",
+    "sourceAfter": "assets/interiores/final/s112-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "Costa Martínez",
+    "referenceLicense": "Todos los derechos reservados; referencia visual, original no redistribuido",
+    "referenceLicenseUrl": null
   },
   "s120": {
     "id": "s120",
-    "atlas": "interiores-05.png",
-    "row": 1,
     "before": "assets/interiores/s120-actual.webp",
     "after": "assets/interiores/s120-reformado.webp",
     "layout": "CAF Alvia · salón Turista 2+2",
     "concept": false,
     "references": [
-      "https://grupo.renfe.com/es/es/conoce-renfe/nuestros-trenes/s-120",
-      "https://europe-train-lab.jp/www/portfolio/europe/spain/train/alvia/s120.html"
-    ]
+      "https://europe-train-lab.jp/www/portfolio/europe/spain/train/alvia/s120.html",
+      "https://grupo.renfe.com/es/es/conoce-renfe/nuestros-trenes/s-120"
+    ],
+    "referenceId": "s120",
+    "sourceBefore": "assets/interiores/final/s120-actual.png",
+    "sourceAfter": "assets/interiores/final/s120-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "Europe / World Train Lab",
+    "referenceLicense": "Copyright; referencia visual, original no redistribuido",
+    "referenceLicenseUrl": null
   },
   "s130": {
     "id": "s130",
-    "atlas": "interiores-06.png",
-    "row": 0,
     "before": "assets/interiores/s130-actual.webp",
     "after": "assets/interiores/s130-reformado.webp",
     "layout": "Talgo Patito · coche corto, Turista 2+2",
     "concept": false,
     "references": [
+      "https://commons.wikimedia.org/wiki/File:Alvia-Mad-Gijon-150913.jpg",
       "https://grupo.renfe.com/es/es/conoce-renfe/nuestros-trenes/s-130",
       "https://europe-train-lab.jp/www/portfolio/europe/spain/train/alvia/s130.html",
       "https://www.renfe.com/es/es/grupo-renfe/comunicacion/renfe-al-dia/sala-de-prensa/renfe-presenta-trabajos-renovacion-alvia-s-setecientos-treinta"
-    ]
+    ],
+    "referenceId": "s130",
+    "sourceBefore": "assets/interiores/final/s130-actual.png",
+    "sourceAfter": "assets/interiores/final/s130-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "FDV",
+    "referenceLicense": "CC BY-SA 3.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
   },
   "s730": {
     "id": "s730",
-    "atlas": "interiores-06.png",
-    "row": 1,
     "before": "assets/interiores/s730-actual.webp",
     "after": "assets/interiores/s730-reformado.webp",
     "layout": "Talgo híbrido · coche de viajeros, Turista 2+2",
     "concept": false,
     "references": [
+      "https://commons.wikimedia.org/wiki/File:2025-08-06%2C_Interior_of_Renfe_S-730.jpg",
       "https://grupo.renfe.com/es/es/conoce-renfe/nuestros-trenes/s-730-dual",
       "https://www.trenvista.net/noticias/renfe-presenta-la-reforma-de-las-series-130-y-730/"
-    ]
+    ],
+    "referenceId": "s730",
+    "sourceBefore": "assets/interiores/final/s730-actual.png",
+    "sourceAfter": "assets/interiores/final/s730-reformado.png",
+    "referenceNote": "",
+    "referenceCredit": "Patrycja Rosa (ptrcnull)",
+    "referenceLicense": "CC BY 4.0",
+    "referenceLicenseUrl": "https://creativecommons.org/licenses/by/4.0"
   },
   "s106f": {
     "id": "s106f",
-    "atlas": "interiores-07.png",
-    "row": 0,
     "before": "assets/interiores/s106f-actual.webp",
     "after": "assets/interiores/s106f-reformado.webp",
     "layout": "Avril fijo · caja ancha, Estándar 3+2",
     "concept": false,
     "references": [
+      "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
       "https://www.renfe.com/es/es/viajar/el-viaje/a-bordo/tipos-asiento"
-    ]
+    ],
+    "referenceId": "s106",
+    "sourceBefore": "assets/interiores/final/s106-actual.png",
+    "sourceAfter": "assets/interiores/final/s106-reformado.png",
+    "referenceNote": "Detalle del bloque de tres asientos del salón Estándar 3+2. Los Avril fijo y variable comparten el mismo interior.",
+    "referenceCredit": "Renfe",
+    "referenceLicense": "Fotografía de prensa Renfe; referencia visual, original no redistribuido",
+    "referenceLicenseUrl": null
   },
   "s106v": {
     "id": "s106v",
-    "atlas": "interiores-07.png",
-    "row": 1,
     "before": "assets/interiores/s106v-actual.webp",
     "after": "assets/interiores/s106v-reformado.webp",
     "layout": "Avril variable · caja ancha, Estándar 3+2",
     "concept": false,
     "references": [
+      "https://zdopravy.cz/obrazem-novy-spanelsky-rychlovlak-na-startu-vyjede-ve-dvou-verzich-lisit-se-budou-barvou-a-poctem-mist-204857/",
       "https://www.renfe.com/es/es/grupo-renfe/comunicacion/renfe-al-dia/sala-de-prensa/renfe-pone-venta-61000-billetes-semanales-servicios-alta-velocidad-asturias-galicia",
       "https://www.renfe.com/es/es/viajar/el-viaje/a-bordo/tipos-asiento"
-    ]
+    ],
+    "referenceId": "s106",
+    "sourceBefore": "assets/interiores/final/s106-actual.png",
+    "sourceAfter": "assets/interiores/final/s106-reformado.png",
+    "referenceNote": "Detalle del bloque de tres asientos del salón Estándar 3+2. Los Avril fijo y variable comparten el mismo interior.",
+    "referenceCredit": "Renfe",
+    "referenceLicense": "Fotografía de prensa Renfe; referencia visual, original no redistribuido",
+    "referenceLicenseUrl": null
   }
 };
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -187,14 +265,15 @@ const money=x=>Number(x).toLocaleString('es-ES',{minimumFractionDigits:2,maximum
 export function isRefitted(f){return f?.interiorRefitted===true||/^Reforma /.test(f?.origin||'');}
 export function photo(id,reformed=false,extra=''){
  const d=INTERIORS[id];if(!d)throw Error('Este modelo no tiene interior registrado.');
- const path=reformed?d.after:d.before,src=globalThis.TENFE_INTERIOR_IMAGES?.[path]||path;
- return '<img class="refit-photo '+extra+'" src="'+esc(src)+'" alt="'+esc(MODEL[id].name+' · '+(reformed?'interior reformado':'interior de serie'))+'" data-model="'+id+'" data-interior="'+(reformed?'reformado':'actual')+'" loading="lazy" decoding="async" width="768" height="512">';
+ const path=reformed?d.after:d.before,src=globalThis.TENFE_INTERIOR_IMAGES?.[path]||(path+'?v=6.4.0');
+ return '<img class="refit-photo '+extra+'" src="'+esc(src)+'" alt="'+esc(MODEL[id].name+' · '+(reformed?'interior reformado':'interior de serie'))+'" data-model="'+id+'" data-interior="'+(reformed?'reformado':'actual')+'" loading="lazy" decoding="async" width="1536" height="1024">';
 }
 export function comparison(id,currentReformed=false){
  return '<section class="refit-comparison" aria-label="Antes y después de la reforma"><div class="refit-scene" style="--refit-split:50%">'+photo(id,currentReformed,'refit-before')+'<div class="refit-after">'+photo(id,true)+'<i class="refit-stripes" aria-hidden="true"></i></div><i class="refit-divider" aria-hidden="true"><span>↔</span></i><span class="refit-badge current">ACTUAL</span><span class="refit-badge proposed">REFORMADO</span></div><label class="refit-slider"><span>Desliza para comparar</span><input type="range" min="0" max="100" value="50" step="1" data-refit-slider aria-label="Comparar interior actual y reformado"></label></section>';
 }
 function references(id){
- const d=INTERIORS[id];return '<details class="refit-references"><summary>Ver referencias del interior</summary><p>'+esc(d.layout)+'</p><p>Recreaciones con IA. La propuesta conserva la distribución de asientos, ventanas y pasillo del modelo.</p><ul>'+d.references.map((url,i)=>'<li><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Referencia '+(i+1)+' · '+esc(new URL(url).hostname)+'</a></li>').join('')+'</ul></details>';
+ const d=INTERIORS[id],license=d.referenceLicenseUrl?'<a href="'+esc(d.referenceLicenseUrl)+'" target="_blank" rel="noopener noreferrer">'+esc(d.referenceLicense)+'</a>':esc(d.referenceLicense);
+ return '<details class="refit-references"><summary>Ver referencias del interior</summary><p>'+esc(d.layout)+'</p><p>Recreación con IA basada en una fotografía real. La reforma es una propuesta del juego y conserva la distribución del salón.</p>'+(d.referenceNote?'<p>'+esc(d.referenceNote)+'</p>':'')+'<p>Fotografía de referencia: '+esc(d.referenceCredit)+' · '+license+'</p><ul>'+d.references.map((url,i)=>'<li><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+(i===0?'Fotografía utilizada':'Ficha del modelo')+' · '+esc(new URL(url).hostname)+'</a></li>').join('')+'</ul></details>';
 }
 export function catalogueHTML(){
  return '<div class="refit-catalogue">'+MODELS.map(m=>{const d=INTERIORS[m.id];return '<article><header><span class="kicker">'+esc(m.family)+(d.concept?' · CONCEPTO':'')+'</span><h3>'+esc(m.name)+'</h3></header><div class="refit-photo-pair"><figure>'+photo(m.id,false)+'<figcaption>De serie</figcaption></figure><figure>'+photo(m.id,true)+'<figcaption>Reformado</figcaption></figure></div><p>'+esc(d.layout)+'</p><button class="btn small" data-action="interior-preview" data-id="'+m.id+'">Comparar interiores →</button></article>';}).join('')+'</div>';

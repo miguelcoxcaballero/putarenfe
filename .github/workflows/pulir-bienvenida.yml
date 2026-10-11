@@ -1,7 +1,7 @@
 name: Verificar juego, voces y menú
 on:
   push:
-    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, codex/menu-inicio-realista, codex/fotos-fabricantes, main]
+    branches: [codex/pulir-bienvenida, codex/reforma-trenes, codex/restaurar-mapa-voces, codex/menu-inicio-realista, codex/fotos-fabricantes, codex/interiores-referenciados, main]
 concurrency:
   group: conexiones-${{ github.ref }}
   cancel-in-progress: true
@@ -45,12 +45,16 @@ jobs:
         working-directory: iberia-ferroviaria/proyecto
         run: node fabricantes-ui-test.mjs
       - name: Probar el juego publicado
-        if: github.ref != 'refs/heads/codex/menu-inicio-realista' && github.ref != 'refs/heads/codex/fotos-fabricantes'
+        if: github.ref != 'refs/heads/codex/menu-inicio-realista' && github.ref != 'refs/heads/codex/fotos-fabricantes' && github.ref != 'refs/heads/codex/interiores-referenciados'
         working-directory: iberia-ferroviaria/proyecto
         run: |
           node mapa-voces-ui-test.mjs
           node train-refit-ui-test.mjs
           node conexiones-ui-test.mjs
+      - name: Comprobar interiores referenciados y reforma completa
+        if: github.ref == 'refs/heads/codex/interiores-referenciados'
+        working-directory: iberia-ferroviaria/proyecto
+        run: node train-refit-ui-test.mjs
       - name: Guardar capturas e informe
         if: always()
         uses: actions/upload-artifact@v4
@@ -112,6 +116,7 @@ jobs:
           node mapa-voces-ui-test.mjs
           node menu-inicio-ui-test.mjs
           node fabricantes-ui-test.mjs
+          node train-refit-ui-test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

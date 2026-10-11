@@ -236,7 +236,7 @@
     {
       "file": "main-menu.js",
       "bytes": 3662,
-      "sha256": "411b6a9c5303c2c318ef4b6bc990904d9670fd45bf8daf072a114f7042c11192"
+      "sha256": "61484ade7b0116a27153088ea74c4d5e80884eb34666fa8f4f1682f6dbe28d7a"
     },
     {
       "file": "induction-task-ui.js",
@@ -260,8 +260,8 @@
     },
     {
       "file": "train-refit.js",
-      "bytes": 14809,
-      "sha256": "75f80a661f1cdad8c8239e2508f0f0159120f971e622a783ec4c1292b261f1ca"
+      "bytes": 20598,
+      "sha256": "95bc51ff911bf03115e18cc9e7850a0964a1289459b51e2d16a8517187700ccd"
     },
     {
       "file": "app.js",
@@ -290,8 +290,8 @@
     },
     {
       "file": "train-refit.css",
-      "bytes": 6029,
-      "sha256": "599dd33427edb4fc87264ebbc00b1ce28ccf34910cc777bccda9a2ad451c84e4"
+      "bytes": 6276,
+      "sha256": "9fcf752fcd2f139aff2ff91fe7cc2936c5edd217acb7d1b7056ec7437576fa9e"
     },
     {
       "file": "assets/fonts/fraunces.woff2",

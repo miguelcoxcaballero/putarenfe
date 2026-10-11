@@ -969,3 +969,8 @@ dialog#modal:has(.trenespop-modal){background:#fff;border-color:#d1dbe0;border-r
 #refitQty{color:#352a2c!important;background:#fff8ed!important;width:110px;min-height:44px;padding:10px 12px;font-size:17px;font-weight:700}
 .refit-modal>.kicker{color:#dda1b5}
 @media(max-width:600px){.refit-intro{padding:12px}.refit-intro h2{font-size:20px;line-height:1.25;margin:5px 0 8px}.refit-intro p{font-size:12px;line-height:1.45;margin:8px 0 12px}.refit-overview{font-size:10px;gap:8px 12px}.refit-overview b{font-size:16px}}
+
+/* Reference credits stay readable inside the dark modal. */
+#modal .refit-references,#modal .refit-references p,#modal .refit-references li{color:#655551}
+#modal .refit-references summary{color:#58343e}
+#modal .refit-references a{color:#874251}
