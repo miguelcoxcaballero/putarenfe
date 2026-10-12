@@ -691,6 +691,7 @@ function render() {
   O.ensureOps(state);
   netKey = networkKey();
   renderHud(); renderNav(); renderMission(); renderLegend(); renderDaybar();
+  document.body?.classList?.toggle?.('panel-open', !!screen);
   if (screen) renderDrawer(); else $('drawer').classList.add('hidden');
   renderInspector();renderBoard();renderCoach();
   narrator.updates(state,{skip:menuOpen||!!tut});narrator.sync();
@@ -867,6 +868,12 @@ function renderDrawer(resetScroll = false) {
   narrator.events(el,state.seedCode+'#'+state.month);narrator.sync();
 }
 
+// Panel de salidas con el aspecto de las pantallas de Adif.
+function adifBoard(rows, {station = '', title = 'Salidas', sub = 'Departures', action = 'train'} = {}) {
+  const top = `<div class="adif-top"><div class="adif-title"><b>${title}</b><small>${sub}</small></div>${station ? `<span class="adif-station">${esc(station)}</span>` : ''}<span class="adif-clock">${clock(currentMinute()).slice(0, 5)}</span></div>`;
+  const body = rows.map(r => `<div class="adif-row"><span class="adif-time">${r.time}</span><button class="adif-dest" data-action="${r.action || action}" data-id="${esc(r.id)}">${esc(r.dest)}</button><span class="adif-train"><i style="--c:${r.color || '#82155b'}">${esc(r.product)}</i>${r.number ? `<em>${esc(r.number)}</em>` : ''}</span><span class="adif-obs ${r.late ? 'late' : ''}">${esc(r.obs || '')}</span></div>`).join('') || '<div class="adif-row adif-empty"><span></span><span>Sin más salidas hoy</span></div>';
+  return `<div class="adif-board">${top}<div class="adif-head"><span>Hora</span><span>Destino</span><span>Tren</span><span>Observaciones</span></div>${body}</div>`;
+}
 function boardRows(trips, minute, opts = {}) {
   return trips.map(t => {
     const r = state.routes.find(r => r.id === t.route);
@@ -895,7 +902,7 @@ function opsPage() {
   <div class="toolbar"><label style="margin:0">Prioridad de explotación</label><select id="dayPriority" ${op.phase !== 'planning' ? 'disabled' : ''}><option value="balanced" ${op.priority === 'balanced' ? 'selected' : ''}>Equilibrio entre coste y puntualidad</option><option value="punctual" ${op.priority === 'punctual' ? 'selected' : ''}>Refuerzo de puntualidad · 9.000 €/día</option></select>
   <label style="margin:0 0 0 auto"><input type="checkbox" id="autoPause" ${ui.autoPause ? 'checked' : ''}> Pausar ante incidencias</label></div>
   <h2 class="section">Próximas salidas</h2>
-  <div class="board"><div class="row head"><span>Hora</span><span>Línea</span><span>Recorrido</span><span>Estado</span></div>${boardRows(next, m) || '<div class="row"><span></span><span></span><span>No quedan salidas programadas.</span></div>'}</div>
+  ${adifBoard(next.map(t => { const r = state.routes.find(r => r.id === t.route); const code = t.line !== undefined && t.line !== null ? S.lineCode(t.line) : (r ? familyOf(r) || r.code : 'R'); return {time: clock(t.dep), id: t.id, dest: String(t.name || '').split('→').at(-1).trim(), product: t.bus ? 'BUS' : code, color: t.bus ? '#c98a1c' : '#82155b', number: t.number || '', obs: m < t.dep ? (t.delay > 5 ? '+' + t.delay + ' min' : 'En hora') : m < t.arrival ? 'En marcha' : 'Salido', late: t.delay > 5}; }))}
   ${!trips.length ? '<div class="empty">No hay servicios abiertos.<p><button class="btn primary" data-action="navigate" data-screen="network">Elegir un servicio en Red</button></p></div>' : ''}
 `;
   return [head, body];
@@ -965,7 +972,7 @@ function timetablesPage() {
     for (const t of all) { const j = t.trip.stations.indexOf(station.i); if (j < 0 || j === t.trip.stations.length - 1) continue; const dep = t.trip.times[j * 2 + 1]; if (dep >= from) deps.push({t, dep}); }
     deps.sort((a, b) => a.dep - b.dep);
     body += `<div class="group-title"><h2>${esc(station.name)}</h2><span>${n(deps.length)} salidas desde las ${String(ui.ttHour).padStart(2, '0')}:00</span><button class="btn small" data-action="station-map" data-id="${station.i}">Ver en el mapa</button></div>
-    <div class="board"><div class="row head"><span>Salida</span><span>Tren</span><span>Destino</span><span>Número</span></div>${deps.slice(0, 80).map(({t, dep}) => `<div class="row"><span>${clock(dep)}</span><span>${chip(S.lineCode(t.line), S.LINES[t.line].color)}</span><button class="dest" data-action="real-trip" data-id="${t.id}">${esc(S.STATIONS[t.trip.stations.at(-1)].name)}</button><span>${esc(t.trip.number || '—')}</span></div>`).join('')}</div>${deps.length > 80 ? '<p class="note">Se muestran 80 salidas. Cambia la hora para ver más.</p>' : ''}`;
+    ${adifBoard(deps.slice(0, 80).map(({t, dep}) => ({time: clock(dep), id: t.id, action: 'real-trip', dest: S.STATIONS[t.trip.stations.at(-1)].name, product: S.lineCode(t.line), number: t.trip.number || '', obs: ''})), {station: station.name})}${deps.length > 80 ? '<p class="note">Se muestran 80 salidas. Cambia la hora para ver más.</p>' : ''}`;
   }
   if (!station && stations.length === 0) {
     const busiest = S.STATIONS.filter(s => s.traffic).sort((a, b) => b.traffic - a.traffic).slice(0, 12);
@@ -1200,7 +1207,7 @@ function stationInspector() {
   const body = `<dl class="figures"><div><dt>Circulaciones</dt><dd>${n(st.traffic)}</dd><em>en laborable</em></div><div><dt>Código</dt><dd class="mono" style="font-size:18px">${esc(st.id)}</dd></div></dl>
   <p>${[...lines.entries()].sort((a, b) => b[1] - a[1]).map(([l]) => chip(S.lineCode(l), S.LINES[l].color)).join(' ')}</p>
   <h3>Próximas salidas ${layer === 'real' || state.ops.phase !== 'running' ? '(horario oficial)' : '(tu jornada)'}</h3>
-  <div class="board">${deps.slice(0, 14).map(({t, dep}) => `<div class="row" style="grid-template-columns:50px 64px 1fr"><span>${clock(dep)}</span><span>${chip(t.bus ? 'BUS' : S.lineCode(t.line), t.bus ? '#c98a1c' : S.LINES[t.line].color)}</span><button class="dest" data-action="train" data-id="${esc(t.id)}">${esc(S.STATIONS[t.trip.stations.at(-1)].name)}${t.delay > 5 ? ` <span class="late">+${t.delay}</span>` : ''}</button></div>`).join('') || '<div class="row"><span></span><span></span><span>Sin más salidas hoy</span></div>'}</div>
+  ${adifBoard(deps.slice(0, 14).map(({t, dep}) => ({time: clock(dep), id: t.id, dest: S.STATIONS[t.trip.stations.at(-1)].name, product: t.bus ? 'BUS' : S.lineCode(t.line), color: t.bus ? '#c98a1c' : '#82155b', number: t.trip?.number || '', obs: t.delay > 5 ? '+' + t.delay + ' min' : 'En hora', late: t.delay > 5})), {station: st.name})}
   <div class="toolbar"><button class="btn small" data-action="station-map" data-id="${st.i}">Acercar</button><button class="btn small" data-action="station-timetable" data-id="${st.i}">Panel completo</button></div>`;
   return {kicker: 'Estación', title: esc(st.name), body};
 }

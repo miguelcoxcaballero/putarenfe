@@ -868,3 +868,93 @@ dialog .modal:not(.main-menu-shell) .kicker{color:var(--cyan)!important;letter-s
 .modal:not(.main-menu-shell) .actions{border-top:1px solid #ffffff12;padding-top:14px;margin-top:18px}
 .inspector .body>div,.inspector .forecast,.inspector .preview,.inspector .plan,.inspector .route-preview{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 .inspector .figures{border-bottom:1px solid #ffffff12}
+
+/* 6.6 · Estilo clásico: carbón y crema, titulares con serifa, latón y burdeos. Sin brillos ni neones.
+   Los menús se abren en grande; dentro, nada de cajas. */
+:root{--g1:#17191d;--g2:#1b1e23;--line:#ffffff1a;--line-2:#ffffff30;--cyan:#c9a35b;--mag:#8c2f45;--mag-2:#74263a;--okc:#9fcf9f;--warnc:#e0a85c;--txt:#f1ebe0;--txt-2:#b9b1a4}
+/* Barra superior: una sola franja, sin cajas dentro */
+.hud{left:18px!important;right:18px!important;top:14px!important;background:var(--g1)!important;border:1px solid var(--line)!important;border-radius:10px!important;padding:8px 18px!important;box-shadow:0 8px 24px #0006!important;align-items:center!important;gap:0!important}
+.hud .when,.hud .clock,.objective-main,.objective-goals,.resources .res{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+.objective{gap:0!important;max-width:none}
+.objective-main{padding:2px 22px 2px 0!important}.objective-main::before{display:none!important}
+.objective-main small{color:var(--cyan)!important;font:600 10px var(--sans)!important;letter-spacing:.16em}
+.objective-main strong{font:500 19px var(--serif)!important;color:var(--txt)}
+.objective-goals{padding:0 22px!important;border-left:1px solid var(--line)!important;font:600 15px var(--sans)!important;font-variant-numeric:tabular-nums}
+.objective-goals i{background:conic-gradient(var(--cyan) var(--p),#ffffff1c 0)!important}
+.resources{gap:0!important}.resources .res{padding:2px 22px!important;border-left:1px solid var(--line)!important}
+.resources .res .ic{stroke:var(--txt-2)!important}.resources .res.warn .ic{stroke:var(--warnc)!important}.resources .res.ok .ic{stroke:var(--txt-2)!important}
+.resources dd{font:500 21px var(--serif)!important;letter-spacing:0}.resources dt{font:600 9px var(--sans)!important;letter-spacing:.16em;color:var(--txt-2)}
+/* Dock */
+.rail{background:var(--g1)!important;border:1px solid var(--line)!important;border-radius:10px!important;box-shadow:0 8px 24px #0006!important}
+.rail button{font:600 10px var(--sans)!important;letter-spacing:.14em;color:var(--txt-2)!important}
+.rail button.active{background:none!important;box-shadow:none!important;color:var(--txt)!important}
+.rail button.active::after{background:var(--cyan)!important;box-shadow:none!important;left:24%;right:24%}
+.rail .badge{background:var(--cyan)!important;box-shadow:none!important}
+/* Botones */
+.btn{border-radius:6px!important;box-shadow:none!important;letter-spacing:.03em}
+.btn.primary{background:var(--mag)!important;color:#fbf3e6!important;box-shadow:none!important}.btn.primary:hover{background:#9d3650!important;filter:none}
+.btn:hover{box-shadow:none!important}
+.daybar.compact{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+.daybar.compact .btn{text-transform:none;font:600 14px var(--sans)!important;letter-spacing:.02em;padding:13px 20px!important;box-shadow:0 8px 24px #0007!important}
+.daybar.compact .btn:not(.primary){background:var(--g1)!important;border:1px solid var(--line-2)!important;color:var(--txt)!important}
+/* Menús en grande */
+.drawer{top:92px!important;bottom:96px!important;left:50%!important;right:auto!important;transform:translateX(-50%);width:min(1320px,calc(100vw - 48px))!important;background:var(--g1)!important;border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:0 30px 90px #000c!important}
+.drawer::before,.inspector::before{display:none!important}
+.drawer>header{padding:28px 40px 6px!important}.drawer>header h1{font:500 34px var(--serif)!important;letter-spacing:0}
+.drawer>.body{padding:0 40px 40px!important}
+.drawer .tabs{gap:30px!important}.drawer .tabs button{font:600 11px var(--sans)!important;letter-spacing:.16em;text-transform:uppercase}
+.drawer .tabs button.active{border-bottom-color:var(--cyan)!important}
+.drawer h2.section,.drawer h2{font:500 20px var(--serif)!important;letter-spacing:0;text-transform:none;color:var(--txt)!important;margin:26px 0 12px!important}
+.vgrid{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))!important;gap:30px 26px!important}.vgrid.wide{grid-template-columns:repeat(auto-fill,minmax(400px,1fr))!important}
+.vcard-media{aspect-ratio:16/9!important;border-radius:8px!important}
+.vcard-media h3{font:500 21px/1.2 var(--serif)!important;left:18px;right:18px;bottom:14px}
+.vcard-body p{font-size:13.5px!important}
+.vbadge{font:600 11px var(--sans)!important;color:var(--txt)!important}
+.vcard.done .vbadge{background:#9fcf9fdd!important;color:#17191d!important}
+.vbanner .game-photo{height:280px!important}
+.vring{width:96px;height:96px;background:conic-gradient(var(--cyan) var(--p),#ffffff14 0)}.vring b{font:500 24px var(--serif)!important}
+.vtile b,.drawer .figures dd,.inspector .figures dd{font:500 30px var(--serif)!important}
+.vchip{font:600 12.5px var(--sans)!important}
+.vprogress .meter span,.vbar .meter span{background:var(--cyan)!important}
+.inspector{background:var(--g1)!important;border-radius:12px!important;width:min(460px,calc(100vw - 36px))!important}
+.inspector>header h2{font:500 26px var(--serif)!important}
+dialog .modal:not(.main-menu-shell){background:var(--g1)!important;border-radius:12px!important}
+.modal:not(.main-menu-shell) h1{font:500 32px var(--serif)!important}
+.tour-coach{background:var(--g1)!important;border:1px solid var(--line-2)!important;box-shadow:0 20px 60px #000b!important}
+.tour-coach h2{font:500 22px var(--serif)!important}
+.tour-ring{border-color:var(--cyan)!important;box-shadow:0 0 0 3px #c9a35b33!important}
+.narration-toast{background:var(--g1)!important}
+.map-layers summary,.zoom{background:var(--g1)!important}
+/* Pantallas de Adif para las salidas */
+.board{font-family:var(--sans)!important;background:#172338!important;color:#fff!important;border-radius:8px!important;overflow:hidden;padding:0!important;box-shadow:0 10px 30px #0006}
+.board .row{background:#172338;border:0!important;padding:12px 18px!important;font:600 15px var(--sans);color:#fff}
+.board .row:nth-child(odd){background:#20314a!important}
+.board .row.head{background:#d6ecd8!important;color:#0f2439!important;font:700 12px var(--sans)!important;letter-spacing:.06em;text-transform:none;padding:12px 18px!important}
+.board .row>span:first-child{font:700 18px var(--sans);font-variant-numeric:tabular-nums;color:#fff}
+.board .row.head>span:first-child{font:700 12px var(--sans);color:#0f2439}
+.board .row>span:last-child{color:#8ad3a6}
+.drawer .board,.drawer .board .row,.city-body .board .row{box-shadow:none}
+.drawer .board .row:nth-child(odd){background:#20314a!important}.drawer .board .row:not(.head):nth-child(even){background:#172338!important}.drawer .board .row.head{background:#d6ecd8!important}
+/* Pantalla de Adif (réplica de las pantallas informativas de las estaciones). */
+.adif-board{font-family:var(--sans);background:#172338;color:#fff;border-radius:8px;overflow:hidden;margin:10px 0 18px;font-feature-settings:"tnum" 1}
+.adif-top{display:flex;align-items:center;gap:18px;padding:14px 20px;background:#0f2439;border-bottom:1px solid #d6ecd822}
+.adif-title b{display:block;font:700 26px/1 var(--sans);color:#fff}.adif-title small{display:block;margin-top:3px;font:500 13px var(--sans);color:#c8d2de;font-style:italic}
+.adif-station{flex:1;font:600 15px var(--sans);color:#c8d2de;text-transform:uppercase;letter-spacing:.06em}
+.adif-clock{margin-left:auto;font:700 30px var(--sans);color:#8ad3a6;letter-spacing:.04em}
+.adif-head{display:grid;grid-template-columns:92px 1fr 150px 150px;gap:14px;padding:9px 20px;background:#d6ecd8;color:#0f2439;font:700 12px var(--sans);letter-spacing:.04em;text-transform:uppercase}
+.adif-row{display:grid;grid-template-columns:92px 1fr 150px 150px;gap:14px;align-items:center;padding:12px 20px;background:#172338;border-bottom:1px solid #d6ecd814}
+.adif-row:nth-of-type(even){background:#20314a}
+.adif-time{font:500 26px/1 var(--sans);color:#fff;letter-spacing:.02em}
+.adif-dest{all:unset;cursor:pointer;font:500 23px/1.1 var(--sans);color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.adif-dest:hover{color:#8ad3a6}
+.adif-train{display:flex;align-items:center;gap:8px}.adif-train i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;min-width:52px;padding:4px 8px;border-radius:6px;background:var(--c);color:#fff;font:800 13px var(--sans);letter-spacing:.04em}
+.adif-train em{font-style:normal;font:600 15px var(--sans);color:#c8d2de}
+.adif-obs{font:500 18px var(--sans);color:#8ad3a6}.adif-obs.late{color:#ffcf6b}
+.adif-empty span{color:#c8d2de;font-size:16px}
+.inspector .adif-head,.inspector .adif-row{grid-template-columns:62px 1fr 74px;gap:10px;padding:10px 14px}.inspector .adif-head span:last-child,.inspector .adif-row .adif-obs{display:none}
+.inspector .adif-time{font-size:19px}.inspector .adif-dest{font-size:16px}.inspector .adif-title b{font-size:19px}.inspector .adif-clock{font-size:21px}.inspector .adif-train i{min-width:40px;font-size:11px}.inspector .adif-train em{display:none}
+@media(max-width:700px){.adif-head,.adif-row{grid-template-columns:62px 1fr 70px;gap:10px;padding:10px 12px}.adif-head span:last-child,.adif-obs{display:none}.adif-time{font-size:19px}.adif-dest{font-size:16px}.adif-train em{display:none}}
+body.panel-open .daybar,body.panel-open .map-tools,body.panel-open .alert-pill{display:none!important}
+body:has(#drawer:not(.hidden)) .daybar,body:has(#drawer:not(.hidden)) .map-tools,body:has(#drawer:not(.hidden)) .alert-pill,body:has(#drawer:not(.hidden)) #toast,body:has(#drawer:not(.hidden)) #inspector{display:none!important}
+.drawer .figures>div::before,.drawer .figures>div::after,.vtile::before,.tabs button.active::before,.drawer .tabs button::before,.drawer .tabs button::after{display:none!important;content:none!important}
+.drawer .figures dt::before,.drawer .figures dd::before{display:none!important}
+.figures div::before{display:none!important}.figures div{padding-left:0!important}

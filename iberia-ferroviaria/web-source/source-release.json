@@ -280,13 +280,13 @@
     },
     {
       "file": "app.js",
-      "bytes": 180521,
-      "sha256": "0df2f2049d1c0be6b8d8d350bb56de6c9f441b9fdbec3a219ddec16be2290931"
+      "bytes": 181533,
+      "sha256": "ffae57041da38af7a8df58a0d47d65329f06006c02b2830e83fef9ae02962e49"
     },
     {
       "file": "style-v3.css",
-      "bytes": 108068,
-      "sha256": "cdc3f665e8a05153d96bd6ef3b6f151371638e5bebe52e4660bec57992b1e1bf"
+      "bytes": 117999,
+      "sha256": "096def6f6baf8ebd1515bbfda353a626f06f40f25864c47bd448d2fdc85a23d9"
     },
     {
       "file": "main-menu.css",
