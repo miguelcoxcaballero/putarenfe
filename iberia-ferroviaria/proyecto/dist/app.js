@@ -1468,7 +1468,7 @@ function updateServicePreview() {
   el.innerHTML = optionRow('AVE', I.plan(state, way, P.ave)) + optionRow('Alvia', I.plan(state, way, P.alvia)) + optionRow('Alvia híbrido', I.plan(state, way, P.hybrid));
 }
 function saveDialog() {
-  showModal(`<div class="content"><div class="kicker">Guardar</div><h1>Tu partida, a salvo.</h1><p>Se guarda sola en este navegador. Exporta una copia para llevártela a otro equipo.</p><div class="actions"><button class="btn primary" data-action="save-now">Guardar ahora</button><button class="btn" data-action="export">Exportar (.json)</button></div><label for="importSave">Importar una partida</label><input id="importSave" type="file" accept="application/json,.json">${seedCodeOf(state) ? `<p class="small muted seed-code">Semilla <b class="mono">${esc(seedCodeOf(state))}</b></p>` : ''}</div>`, 'single');
+  showModal(`<div class="content"><div class="kicker">Guardar</div><h1>Tu partida, a salvo.</h1><div class="actions"><button class="btn primary" data-action="save-now">Guardar ahora</button><button class="btn" data-action="export">Exportar (.json)</button></div><label for="importSave">Importar una partida</label><input id="importSave" type="file" accept="application/json,.json">${seedCodeOf(state) ? `<p class="small muted seed-code">Semilla <b class="mono">${esc(seedCodeOf(state))}</b></p>` : ''}</div>`, 'single');
 }
 function help() {
   showModal(`<div class="content"><div class="kicker">Cómo jugar</div><h1>Un día, un turno.</h1><ol class="method">

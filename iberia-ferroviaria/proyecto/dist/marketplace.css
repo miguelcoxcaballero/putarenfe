@@ -120,3 +120,72 @@ dialog#modal:has(.trenespop-modal){background:#fff;border-color:#d1dbe0;border-r
   .trenespop-modal .content{padding:17px 18px 21px}.tp-detail h1{font-size:23px;margin-top:17px}.tp-seller{padding:14px 0 11px;gap:8px}.tp-seller-mark{width:42px;height:42px}.tp-seller-mark .brand-logo{width:38px;height:22px}.tp-seller strong{font-size:11px}.tp-seller span{font-size:9px}.tp-seller .tp-heart{top:19px}.tp-description{font-size:12px;line-height:1.6}.tp-detail-tags{gap:5px;margin-bottom:14px}.tp-detail-tags>span{font-size:10px;padding:5px 8px}.trenespop-modal .figures{gap:12px 17px;justify-content:flex-start}.trenespop-modal .figures div{min-width:99px}.trenespop-modal .figures dd{font-size:22px}.trenespop-modal .actions{display:flex;flex-wrap:wrap;gap:8px}.tp-primary,.tp-secondary{padding-left:17px;padding-right:17px;font-size:12px}.tp-detail-note{font-size:10px}
 }
 @media(max-width:350px){.trenespop{padding-left:12px;padding-right:12px}.tp-categories{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}.tp-results h2{font-size:18px}.tp-price{font-size:18px}.tp-card-body{padding:8px 0}.tp-card-bottom{gap:2px}.tp-card-bottom .brand-logo{width:52px;height:19px}}
+
+/* Trenes Pop · modo noche de Wallapop: mismo diseño, fondo oscuro, verde de marca y texto claro. */
+.drawer.trenespop-drawer{background:#1a2221!important;color:#f3f6f5!important}
+.drawer.trenespop-drawer>.body{background:#1a2221!important}
+.drawer.trenespop-drawer>.tp-game-strip{border-bottom:1px solid #2d3836!important;background:#1a2221!important}
+.tp-game-strip>button:first-child{color:#13c1ac!important}
+.drawer.trenespop-drawer>.tp-game-strip>.close{color:#c9d4d2!important}
+.drawer.trenespop-drawer>.tp-game-strip>.close:hover{background:#1a2221!important;color:#13c1ac!important}
+.trenespop{--tp-teal:#13c1ac!important;--tp-deep:#13c1ac!important;--tp-ink:#3a4644!important;--tp-muted:#3a4644!important;background:#1a2221!important}
+.trenespop button:focus-visible,.trenespop select:focus-visible,.trenespop input:focus-visible,.trenespop-modal button:focus-visible,.trenespop-modal input:focus-visible{outline:3px solid #13c1ac!important}
+.tp-header{border-bottom:1px solid #2d3836!important}
+.tp-search{background:#1a2221!important;border:1px solid #2d3836!important}
+.tp-search input[type=search]{color:#f3f6f5!important}
+.tp-search>button{color:#13c1ac!important}
+.tp-search>button:hover{background:#13c1ac2b!important}
+.tp-favorites.active{color:#13c1ac!important}
+.tp-favorites.active svg{stroke:#13c1ac!important;fill:#13c1ac!important}
+.tp-categories{border-bottom:1px solid #2d3836!important}
+.tp-categories>span{color:#a9b8b6!important}
+.tp-categories>span:before{border:1.6px solid #3a4644!important}
+.tp-categories button.active{color:#13c1ac!important}
+.tp-categories button.active:after{background:#13c1ac!important}
+.tp-filters{border-bottom:1px solid #2d3836!important}
+.tp-filter select{border:1px solid #2d3836!important;background-color:#1a2221!important;color:#c9d4d2!important}
+.tp-filter select:hover{border-color:#13c1ac!important}
+.tp-clear{color:#13c1ac!important}
+.tp-breadcrumb span{color:#7f908d!important}
+.tp-results h2{color:#f3f6f5!important}
+.tp-card{background:#1a2221!important}
+.tp-photo{background:#1a2221!important}
+.tp-state{background:#1a2221!important}
+.tp-state.new{background:#13c1ac2b!important;color:#13c1ac!important}
+.tp-heart{border:1px solid #2d3836!important;background:#1a2221!important}
+.tp-heart:hover{background:#1a2221!important;border-color:#13c1ac!important}
+.tp-price{color:#f3f6f5!important}
+.tp-title:hover{color:#13c1ac!important}
+.tp-spec{color:#a9b8b6!important}
+.tp-delivery{color:#13c1ac!important}
+.tp-fit.ok{color:#13c1ac!important}
+.tp-card-bottom{border-top:1px solid #2d3836!important}
+.tp-card-bottom>span{color:#8fa09d!important}
+.tp-empty{color:#a9b8b6!important}
+.tp-empty h3{color:#f3f6f5!important}
+.tp-footer{border-top:1px solid #2d3836!important}
+.modal.trenespop-modal{background:#1a2221!important;color:#f3f6f5!important}
+dialog#modal:has(.trenespop-modal){background:#1a2221!important;border-color:#2d3836!important}
+.tp-back{color:#13c1ac!important}
+.tp-detail-photo{background:#1a2221!important}
+.tp-seller{border-bottom:1px solid #2d3836!important}
+.tp-seller-mark{border:1px solid #2d3836!important;background:#1a2221!important}
+.tp-detail h1{color:#f3f6f5!important}
+.tp-description{color:#a9b8b6!important}
+.tp-detail-tags>span{background:#1a2221!important}
+.trenespop-modal input[type=number]{background:#1a2221!important;border:1px solid #2d3836!important;color:#f3f6f5!important}
+.trenespop-modal .figures dd{color:#f3f6f5!important}
+.tp-primary{background:#13c1ac!important;color:#13c1ac!important}
+.tp-primary:hover{background:#13c1ac2b!important}
+.tp-secondary{background:#1a2221!important;border:1px solid #2d3836!important}
+.drawer.trenespop-drawer,.trenespop{background:#121817!important;color:#f3f6f5!important}
+.trenespop{--tp-ink:#f3f6f5;--tp-muted:#a9b8b6;--tp-teal:#13c1ac;--tp-deep:#13c1ac}
+.trenespop input,.trenespop select{background:#1f2827!important;color:#f3f6f5!important;border-color:#2d3836!important}
+.trenespop input::placeholder{color:#8fa09d}
+.trenespop h1,.trenespop h2,.trenespop h3,.trenespop strong,.trenespop .tp-title,.trenespop .tp-price{color:#f3f6f5!important}
+.trenespop p,.trenespop small,.trenespop .tp-breadcrumb,.trenespop .tp-delivery{color:#a9b8b6!important}
+.trenespop .tp-primary,.trenespop .tp-search button{background:#13c1ac!important;color:#0d1413!important}
+.trenespop .tp-card{background:#1a2221!important;border-color:#2d3836!important}
+.drawer .trenespop select,.trenespop .tp-filter select,.trenespop .tp-filters select{background:#1f2827!important;border:1px solid #2d3836!important;border-radius:999px!important;padding:9px 34px 9px 16px!important;color:#f3f6f5!important;font-size:14px}
+.drawer .trenespop select:hover{border-color:#13c1ac!important}
+.drawer .trenespop .btn:not(.primary){background:#1f2827!important;border:1px solid #2d3836!important;border-radius:999px!important;color:#f3f6f5!important;padding:9px 16px!important}

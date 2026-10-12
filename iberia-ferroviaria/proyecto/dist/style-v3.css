@@ -855,3 +855,16 @@ h2.section{font:700 15px var(--sans)!important;letter-spacing:.06em;text-transfo
 .drawer .figures>div,.inspector .figures>div,.vtile{border-left:0!important;border-right:0!important}
 .drawer .board,.drawer .board .row,.drawer .board .row span{background:none!important;box-shadow:none!important}.drawer .board .row{border-bottom:1px solid #ffffff10!important}
 .drawer .figures dd{white-space:nowrap;font-size:22px!important}
+/* Ventanas y fichas: mismo cristal que los paneles, dentro sin cajas. */
+dialog .modal:not(.main-menu-shell){background:linear-gradient(180deg,var(--g2),var(--g1))!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:0 30px 80px #000c!important;color:var(--txt)}
+dialog .modal:not(.main-menu-shell) .kicker{color:var(--cyan)!important;letter-spacing:.14em}
+.modal:not(.main-menu-shell) h1{font:700 26px var(--sans)!important;color:var(--txt)}
+.modal:not(.main-menu-shell) .choice,.modal:not(.main-menu-shell) .callout,.modal:not(.main-menu-shell) .req,.modal:not(.main-menu-shell) .option,.modal:not(.main-menu-shell) .conn,.modal:not(.main-menu-shell) .figures>div,.modal:not(.main-menu-shell) .narration-card{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.modal:not(.main-menu-shell) .choice{border-left:2px solid var(--line-2)!important;padding:10px 0 10px 14px!important;margin:4px 0}
+.modal:not(.main-menu-shell) .choice:hover{border-left-color:var(--cyan)!important;background:#ffffff05!important}
+.modal:not(.main-menu-shell) .figures{display:flex!important;gap:28px!important;border-bottom:1px solid #ffffff12;padding-bottom:14px}
+.modal:not(.main-menu-shell) .figures dd{font:600 24px var(--mono)!important}.modal:not(.main-menu-shell) .figures dt{font:700 9px var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-2)!important}
+.modal:not(.main-menu-shell) .btn:not(.primary){background:none!important;border:0!important;color:var(--cyan)!important;box-shadow:none!important}
+.modal:not(.main-menu-shell) .actions{border-top:1px solid #ffffff12;padding-top:14px;margin-top:18px}
+.inspector .body>div,.inspector .forecast,.inspector .preview,.inspector .plan,.inspector .route-preview{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.inspector .figures{border-bottom:1px solid #ffffff12}
