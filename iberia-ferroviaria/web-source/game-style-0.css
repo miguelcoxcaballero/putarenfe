@@ -813,6 +813,62 @@ h2.section{font:700 15px var(--sans)!important;letter-spacing:.06em;text-transfo
 .refit-lots article,.refit-catalogue article,.refit-empty,.refit-fleet-link,.refit-references{background:#ffffff06!important;border:1px solid var(--line)!important;color:var(--txt)!important;border-radius:14px!important}
 .refit-lots h3,.refit-catalogue h3{color:var(--txt)!important}
 
+/* 6.6 · Sin cajas dentro de cajas: el panel es la única superficie. Dentro, solo tipografía, espacio, fotos y líneas finas. */
+.drawer .vcard,.inspector .vcard{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible}
+.drawer .vcard:hover{transform:none;box-shadow:none}
+.drawer .vcard.done{box-shadow:none!important}
+.vcard-media{border-radius:10px;overflow:hidden}
+.vcard-body{padding:8px 2px 0!important}
+.vbadge{background:#05080daa!important;border:0!important;border-radius:6px!important}
+.vchips{gap:14px!important}
+.vchip{padding:0!important;border:0!important;background:none!important;border-radius:0!important;color:var(--txt-2)!important;font:600 12px var(--mono)!important}
+.vchip i{color:var(--cyan)}.vchip.big{font-size:14px!important;color:var(--txt)!important}.vchip.ok{color:var(--okc)!important}.vchip.bad{color:#ff9b9b!important}
+.vtile,.drawer .figures>div,.inspector .figures>div{background:none!important;border:0!important;border-radius:0!important;padding:0!important}
+.vtiles,.drawer .figures,.inspector .figures{gap:28px!important;padding:6px 0 18px!important;border-bottom:1px solid #ffffff12}
+.vtile .ic{position:static!important;width:18px!important;height:18px!important;margin-bottom:6px}
+.vtile b,.drawer .figures dd{font-size:26px!important}
+.vrow{background:none!important;border:0!important;border-radius:0!important;padding:14px 0!important;border-bottom:1px solid #ffffff12!important}
+.vrow img{border-radius:50%!important;width:48px!important;height:48px!important}
+.vprogress,.vslider{background:none!important;border:0!important;padding:0!important}
+.vbanner{border:0!important;border-radius:12px!important}
+.drawer .tabs{background:none!important;border:0!important;border-bottom:1px solid #ffffff14!important;border-radius:0!important;padding:0!important;gap:22px!important;margin-bottom:20px!important}
+.drawer .tabs button{padding:12px 0!important;border-radius:0!important;background:none!important;box-shadow:none!important;border-bottom:2px solid transparent!important;color:var(--txt-2)!important}
+.drawer .tabs button.active{color:var(--txt)!important;background:none!important;border-bottom-color:var(--cyan)!important;box-shadow:none!important}
+.drawer .tabs .tabs,.drawer .body .tabs+.tabs,.drawer .segmented{border-bottom:0!important;gap:18px!important}
+.drawer td{background:none!important;border-bottom:1px solid #ffffff10!important;border-radius:0!important}.drawer table{border-spacing:0!important}
+.drawer tr.clickable:hover td{background:#ffffff06!important}
+.drawer .callout,.inspector .callout{background:none!important;border:0!important;border-left:2px solid var(--cyan)!important;border-radius:0!important;padding:2px 0 2px 12px!important}
+.drawer .callout.red{border-left-color:#ff7a7a!important}
+.drawer .incident{background:none!important;border:0!important;border-left:3px solid #ff7a7a!important;border-radius:0!important;padding:4px 0 4px 14px!important}
+.drawer .board{border:0!important;border-radius:0!important}.drawer .board .row.head{background:none!important}
+.refit-intro{background:none!important;border:0!important;padding:0 0 12px!important}
+.refit-lots article,.refit-catalogue article,.refit-empty,.refit-fleet-link,.refit-references{background:none!important;border:0!important;border-radius:0!important}
+.drawer .pressure-card,.drawer .tycoon-contract,.drawer .market-row,.drawer .mandate-card,.drawer .policy-grid article{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;border-bottom:1px solid #ffffff12!important}
+.inspector .conn,.inspector .req,.inspector .option,.inspector .conn.off,.inspector .conn.locked{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;border-bottom:1px solid #ffffff10!important;padding-left:0!important;padding-right:0!important}
+.inspector .req.red{background:none!important;color:#ff9b9b}.inspector .req.gold{background:none!important}
+.drawer .btn:not(.primary),.inspector .btn:not(.primary){background:none!important;border:0!important;color:var(--cyan)!important;padding-left:0!important;padding-right:0!important;box-shadow:none!important}
+.drawer .btn:not(.primary):hover,.inspector .btn:not(.primary):hover{color:#fff!important;text-decoration:underline;text-underline-offset:4px}
+.drawer .vcard-body .btn:not(.primary){align-self:flex-start;text-align:left}
+.drawer select,.drawer input[type=search],.drawer input[type=text]{background:none!important;border:0!important;border-bottom:1px solid #ffffff24!important;border-radius:0!important;padding-left:0!important}
+.drawer .desk-decision,.drawer .desk-options .choice{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.drawer .desk-options .choice{border-left:2px solid var(--line-2)!important;padding:8px 0 8px 14px!important}.drawer .desk-options .choice:hover{border-left-color:var(--cyan)!important}
+.drawer .figures>div,.inspector .figures>div,.vtile{border-left:0!important;border-right:0!important}
+.drawer .board,.drawer .board .row,.drawer .board .row span{background:none!important;box-shadow:none!important}.drawer .board .row{border-bottom:1px solid #ffffff10!important}
+.drawer .figures dd{white-space:nowrap;font-size:22px!important}
+/* Ventanas y fichas: mismo cristal que los paneles, dentro sin cajas. */
+dialog .modal:not(.main-menu-shell){background:linear-gradient(180deg,var(--g2),var(--g1))!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:0 30px 80px #000c!important;color:var(--txt)}
+dialog .modal:not(.main-menu-shell) .kicker{color:var(--cyan)!important;letter-spacing:.14em}
+.modal:not(.main-menu-shell) h1{font:700 26px var(--sans)!important;color:var(--txt)}
+.modal:not(.main-menu-shell) .choice,.modal:not(.main-menu-shell) .callout,.modal:not(.main-menu-shell) .req,.modal:not(.main-menu-shell) .option,.modal:not(.main-menu-shell) .conn,.modal:not(.main-menu-shell) .figures>div,.modal:not(.main-menu-shell) .narration-card{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.modal:not(.main-menu-shell) .choice{border-left:2px solid var(--line-2)!important;padding:10px 0 10px 14px!important;margin:4px 0}
+.modal:not(.main-menu-shell) .choice:hover{border-left-color:var(--cyan)!important;background:#ffffff05!important}
+.modal:not(.main-menu-shell) .figures{display:flex!important;gap:28px!important;border-bottom:1px solid #ffffff12;padding-bottom:14px}
+.modal:not(.main-menu-shell) .figures dd{font:600 24px var(--mono)!important}.modal:not(.main-menu-shell) .figures dt{font:700 9px var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-2)!important}
+.modal:not(.main-menu-shell) .btn:not(.primary){background:none!important;border:0!important;color:var(--cyan)!important;box-shadow:none!important}
+.modal:not(.main-menu-shell) .actions{border-top:1px solid #ffffff12;padding-top:14px;margin-top:18px}
+.inspector .body>div,.inspector .forecast,.inspector .preview,.inspector .plan,.inspector .route-preview{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.inspector .figures{border-bottom:1px solid #ffffff12}
+
 /* Full-screen game menu. Local photograph; no external request at startup. */
 dialog#modal:has(.main-menu-shell){inset:0;margin:0;width:100vw;max-width:none;height:100vh;height:100dvh;max-height:none;border:0;border-radius:0;background:#111c26;color:#edf2f5;box-shadow:none;overflow:auto}
 dialog#modal:has(.main-menu-shell)::backdrop{background:#111c26;backdrop-filter:none}
@@ -1085,6 +1141,75 @@ dialog#modal:has(.trenespop-modal){background:#fff;border-color:#d1dbe0;border-r
   .trenespop-modal .content{padding:17px 18px 21px}.tp-detail h1{font-size:23px;margin-top:17px}.tp-seller{padding:14px 0 11px;gap:8px}.tp-seller-mark{width:42px;height:42px}.tp-seller-mark .brand-logo{width:38px;height:22px}.tp-seller strong{font-size:11px}.tp-seller span{font-size:9px}.tp-seller .tp-heart{top:19px}.tp-description{font-size:12px;line-height:1.6}.tp-detail-tags{gap:5px;margin-bottom:14px}.tp-detail-tags>span{font-size:10px;padding:5px 8px}.trenespop-modal .figures{gap:12px 17px;justify-content:flex-start}.trenespop-modal .figures div{min-width:99px}.trenespop-modal .figures dd{font-size:22px}.trenespop-modal .actions{display:flex;flex-wrap:wrap;gap:8px}.tp-primary,.tp-secondary{padding-left:17px;padding-right:17px;font-size:12px}.tp-detail-note{font-size:10px}
 }
 @media(max-width:350px){.trenespop{padding-left:12px;padding-right:12px}.tp-categories{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}.tp-results h2{font-size:18px}.tp-price{font-size:18px}.tp-card-body{padding:8px 0}.tp-card-bottom{gap:2px}.tp-card-bottom .brand-logo{width:52px;height:19px}}
+
+/* Trenes Pop · modo noche de Wallapop: mismo diseño, fondo oscuro, verde de marca y texto claro. */
+.drawer.trenespop-drawer{background:#1a2221!important;color:#f3f6f5!important}
+.drawer.trenespop-drawer>.body{background:#1a2221!important}
+.drawer.trenespop-drawer>.tp-game-strip{border-bottom:1px solid #2d3836!important;background:#1a2221!important}
+.tp-game-strip>button:first-child{color:#13c1ac!important}
+.drawer.trenespop-drawer>.tp-game-strip>.close{color:#c9d4d2!important}
+.drawer.trenespop-drawer>.tp-game-strip>.close:hover{background:#1a2221!important;color:#13c1ac!important}
+.trenespop{--tp-teal:#13c1ac!important;--tp-deep:#13c1ac!important;--tp-ink:#3a4644!important;--tp-muted:#3a4644!important;background:#1a2221!important}
+.trenespop button:focus-visible,.trenespop select:focus-visible,.trenespop input:focus-visible,.trenespop-modal button:focus-visible,.trenespop-modal input:focus-visible{outline:3px solid #13c1ac!important}
+.tp-header{border-bottom:1px solid #2d3836!important}
+.tp-search{background:#1a2221!important;border:1px solid #2d3836!important}
+.tp-search input[type=search]{color:#f3f6f5!important}
+.tp-search>button{color:#13c1ac!important}
+.tp-search>button:hover{background:#13c1ac2b!important}
+.tp-favorites.active{color:#13c1ac!important}
+.tp-favorites.active svg{stroke:#13c1ac!important;fill:#13c1ac!important}
+.tp-categories{border-bottom:1px solid #2d3836!important}
+.tp-categories>span{color:#a9b8b6!important}
+.tp-categories>span:before{border:1.6px solid #3a4644!important}
+.tp-categories button.active{color:#13c1ac!important}
+.tp-categories button.active:after{background:#13c1ac!important}
+.tp-filters{border-bottom:1px solid #2d3836!important}
+.tp-filter select{border:1px solid #2d3836!important;background-color:#1a2221!important;color:#c9d4d2!important}
+.tp-filter select:hover{border-color:#13c1ac!important}
+.tp-clear{color:#13c1ac!important}
+.tp-breadcrumb span{color:#7f908d!important}
+.tp-results h2{color:#f3f6f5!important}
+.tp-card{background:#1a2221!important}
+.tp-photo{background:#1a2221!important}
+.tp-state{background:#1a2221!important}
+.tp-state.new{background:#13c1ac2b!important;color:#13c1ac!important}
+.tp-heart{border:1px solid #2d3836!important;background:#1a2221!important}
+.tp-heart:hover{background:#1a2221!important;border-color:#13c1ac!important}
+.tp-price{color:#f3f6f5!important}
+.tp-title:hover{color:#13c1ac!important}
+.tp-spec{color:#a9b8b6!important}
+.tp-delivery{color:#13c1ac!important}
+.tp-fit.ok{color:#13c1ac!important}
+.tp-card-bottom{border-top:1px solid #2d3836!important}
+.tp-card-bottom>span{color:#8fa09d!important}
+.tp-empty{color:#a9b8b6!important}
+.tp-empty h3{color:#f3f6f5!important}
+.tp-footer{border-top:1px solid #2d3836!important}
+.modal.trenespop-modal{background:#1a2221!important;color:#f3f6f5!important}
+dialog#modal:has(.trenespop-modal){background:#1a2221!important;border-color:#2d3836!important}
+.tp-back{color:#13c1ac!important}
+.tp-detail-photo{background:#1a2221!important}
+.tp-seller{border-bottom:1px solid #2d3836!important}
+.tp-seller-mark{border:1px solid #2d3836!important;background:#1a2221!important}
+.tp-detail h1{color:#f3f6f5!important}
+.tp-description{color:#a9b8b6!important}
+.tp-detail-tags>span{background:#1a2221!important}
+.trenespop-modal input[type=number]{background:#1a2221!important;border:1px solid #2d3836!important;color:#f3f6f5!important}
+.trenespop-modal .figures dd{color:#f3f6f5!important}
+.tp-primary{background:#13c1ac!important;color:#13c1ac!important}
+.tp-primary:hover{background:#13c1ac2b!important}
+.tp-secondary{background:#1a2221!important;border:1px solid #2d3836!important}
+.drawer.trenespop-drawer,.trenespop{background:#121817!important;color:#f3f6f5!important}
+.trenespop{--tp-ink:#f3f6f5;--tp-muted:#a9b8b6;--tp-teal:#13c1ac;--tp-deep:#13c1ac}
+.trenespop input,.trenespop select{background:#1f2827!important;color:#f3f6f5!important;border-color:#2d3836!important}
+.trenespop input::placeholder{color:#8fa09d}
+.trenespop h1,.trenespop h2,.trenespop h3,.trenespop strong,.trenespop .tp-title,.trenespop .tp-price{color:#f3f6f5!important}
+.trenespop p,.trenespop small,.trenespop .tp-breadcrumb,.trenespop .tp-delivery{color:#a9b8b6!important}
+.trenespop .tp-primary,.trenespop .tp-search button{background:#13c1ac!important;color:#0d1413!important}
+.trenespop .tp-card{background:#1a2221!important;border-color:#2d3836!important}
+.drawer .trenespop select,.trenespop .tp-filter select,.trenespop .tp-filters select{background:#1f2827!important;border:1px solid #2d3836!important;border-radius:999px!important;padding:9px 34px 9px 16px!important;color:#f3f6f5!important;font-size:14px}
+.drawer .trenespop select:hover{border-color:#13c1ac!important}
+.drawer .trenespop .btn:not(.primary){background:#1f2827!important;border:1px solid #2d3836!important;border-radius:999px!important;color:#f3f6f5!important;padding:9px 16px!important}
 
 /* Visual workshop: the original and refurbished interior share one viewpoint. */
 .refit-intro{padding:18px;background:linear-gradient(125deg,#f7f0df,#eee7da);border:1px solid #ded2be;border-radius:12px;margin:12px 0 18px}

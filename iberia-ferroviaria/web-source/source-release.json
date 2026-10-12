@@ -280,13 +280,13 @@
     },
     {
       "file": "app.js",
-      "bytes": 180611,
-      "sha256": "73c422c7ba8585ae3dbd3686a707df4862ce9830d959a3092ebd5b316723916b"
+      "bytes": 180521,
+      "sha256": "0df2f2049d1c0be6b8d8d350bb56de6c9f441b9fdbec3a219ddec16be2290931"
     },
     {
       "file": "style-v3.css",
-      "bytes": 100772,
-      "sha256": "0194382a3ea43332d4bd19d2c013475406959c86bdd731ca213760e39870e171"
+      "bytes": 108068,
+      "sha256": "cdc3f665e8a05153d96bd6ef3b6f151371638e5bebe52e4660bec57992b1e1bf"
     },
     {
       "file": "main-menu.css",
@@ -300,8 +300,8 @@
     },
     {
       "file": "marketplace.css",
-      "bytes": 14930,
-      "sha256": "a9d09a6e1d0191b0bd8e898662f20d34d88df2f123d05018ec05141ab07c8c8d"
+      "bytes": 19825,
+      "sha256": "665f7f36cc510f9197af89d7f80553a58b40f9c278b61356e144ca665e75ca94"
     },
     {
       "file": "train-refit.css",
