@@ -255,8 +255,8 @@
     },
     {
       "file": "narration-runtime.js",
-      "bytes": 14953,
-      "sha256": "c82f38d1f5920435607780ddbf12e16e81180bc5a9568890aade967f9663a031"
+      "bytes": 15410,
+      "sha256": "69f4580ccb1b2681e3eae137f2c545caec7c32fcfa787bcbe33cfb8aa5bc1b54"
     },
     {
       "file": "partidas-anteriores.js",
@@ -265,8 +265,8 @@
     },
     {
       "file": "conexiones-ui.js",
-      "bytes": 10328,
-      "sha256": "6c54cb2a807e7b6d5e4e3db29c4175ec8412c79642f638158c98bab7ff35d2c6"
+      "bytes": 10420,
+      "sha256": "43a2291c348044f14f228129448e7485b434de2111a4c18e7f47b56f6bc6fdad"
     },
     {
       "file": "tenfe-ui.js",
@@ -280,18 +280,18 @@
     },
     {
       "file": "app.js",
-      "bytes": 181533,
-      "sha256": "ffae57041da38af7a8df58a0d47d65329f06006c02b2830e83fef9ae02962e49"
+      "bytes": 180688,
+      "sha256": "9e68bd1194ee6b733fc468125174195e7ad2fe081dfbcce8f27ff5bf29d62119"
     },
     {
       "file": "style-v3.css",
-      "bytes": 117999,
-      "sha256": "096def6f6baf8ebd1515bbfda353a626f06f40f25864c47bd448d2fdc85a23d9"
+      "bytes": 122116,
+      "sha256": "b964f8163d0a770aec2920c74ba56d10f6bd8641c5766f4ce2b7128790259590"
     },
     {
       "file": "main-menu.css",
-      "bytes": 12479,
-      "sha256": "4709f27b07f0e6ebd79585615b110eb6257d3eaa771cdaba1b86c357c50c9e8d"
+      "bytes": 13816,
+      "sha256": "acadf20cfc9bda6a2547ccef3888fc20766aa942de8e6f67d0d5440d3863b35e"
     },
     {
       "file": "induction.css",

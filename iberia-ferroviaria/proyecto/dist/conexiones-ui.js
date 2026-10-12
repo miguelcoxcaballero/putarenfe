@@ -22,16 +22,16 @@ export function campaignHTML(s){
  const g=s.tenfe.game,won=s.tenfe.elections.filter(x=>x.won).length;
  const result=g.won?'<article class="game-result">'+picture('fin-victoria')+'<h2>Tu red ya es un legado.</h2>'+card('victory')+'</article>':s.ended?'<article class="game-result">'+picture('fin-derrota')+'<h2>El consejo cambia de dirección.</h2>'+card('defeat')+'</article>':'';
  const summary='<div class="vsummary"><div class="vring" style="--p:'+(g.challenges.length*20)+'%"><b>'+g.challenges.length+'/5</b><small>retos</small></div><div class="vring" style="--p:'+(won*50)+'%"><b>'+won+'/2</b><small>elecciones</small></div></div>';
- return result+summary+'<div class="vgrid">'+J.CHALLENGES.map(d=>{const ok=g.challenges.includes(d.id);return vcard('etapa-'+d.id,d.name,{badge:ok?'✓':'+'+number(d.reward)+' M€',done:ok},'<p>'+esc(d.text)+'</p>');}).join('')+'</div>';
+ return result+summary+'<div class="vgrid game-challenges">'+J.CHALLENGES.map(d=>{const ok=g.challenges.includes(d.id);return vcard('etapa-'+d.id,d.name,{badge:ok?'✓':'+'+number(d.reward)+' M€',done:ok},'<p>'+esc(d.text)+'</p>');}).join('')+'</div>';
 }
 export function researchHTML(s){
  const g=s.tenfe.game,cur=g.research&&J.RESEARCH.find(x=>x.id===g.research.id);
  const head='<div class="vsummary">'+chip('★',number(g.stars)+' innovación','big')+(cur?'<div class="vprogress"><span>'+esc(cur.name)+'</span><div class="meter"><span style="width:'+Math.max(5,100-(g.research.due-s.month)/cur.turns*100)+'%"></span></div><small>'+(g.research.due-s.month)+' turnos</small></div>':'')+'</div>';
- return head+'<div class="vgrid">'+J.RESEARCH.map(d=>{const q=J.researchQuote(s,d.id),owned=g.tech.includes(d.id);
+ return head+'<div class="vgrid game-research">'+J.RESEARCH.map(d=>{const q=J.researchQuote(s,d.id),owned=g.tech.includes(d.id);
   return vcard('tech-'+d.id,d.name,{badge:owned?'✓':'N'+d.tier,done:owned},'<p>'+esc(d.effect)+'</p><div class="vchips">'+chip('★',d.stars)+chip('€',money(d.cost))+chip('⏱',d.turns+' t')+'</div>'+(owned?'':button('Investigar','game-research',d.id,!!q.reason,q.reason?'title="'+esc(q.reason)+'"':'')));}).join('')+'</div>';
 }
 export function megaHTML(s){
- return '<div class="vgrid wide">'+J.PROJECTS.map(d=>{
+ return '<div class="vgrid wide tenfe-megas game-megas">'+J.PROJECTS.map(d=>{
   const p=s.tenfe.megas.find(x=>x.id===d.id),q=J.megaQuote(s,d.id),reason=q.reason||(s.cash<q.cost?'Falta caja':s.ended?'Mandato terminado':''),stage=p?.stage||0;
   const steps='<div class="vsteps">'+d.stages.map((x,i)=>'<i class="'+(i<stage?'done':i===stage?'now':'')+'" title="'+esc(x.name)+'"></i>').join('')+'</div>';
   const status=p?.due?chip('⏱','Faltan '+(p.due-s.month)+' t'):q.stage===4?chip('✓','En servicio','ok'):'<div class="vchips">'+chip('€',money(q.cost))+chip('⏱',q.months+' t')+'</div>';
@@ -41,19 +41,19 @@ export function megaHTML(s){
 export function supportHTML(s){
  const g=s.tenfe.game,rows=[['riders','Viajeros',34,'👥'],['territory','Territorios',20,'🏘'],['staff','Plantilla',20,'🛠'],['treasury','Economía',26,'💶']],f=J.forecast(s);
  return '<div class="vbanner">'+picture('elecciones')+'<div><div class="vring '+(f>=50?'ok':'bad')+'" style="--p:'+Math.min(100,f)+'%"><b>'+f.toFixed(0)+'%</b><small>apoyo</small></div>'+chip('🗳','Urnas en '+Math.max(1,J.electionMonth(s)-s.month)+' turnos','big')+'</div></div>'+
- '<div class="vbars">'+rows.map(([k,name,weight,ic])=>{const v=Math.round(s.tycoon.groups[k]);return '<div class="vbar '+(v>=50?'ok':'bad')+'"><span>'+ic+' '+name+' <small>'+weight+'%</small></span><div class="meter"><span style="width:'+v+'%"></span></div><b>'+v+'</b></div>';}).join('')+'</div>'+
+ '<div class="vbars tenfe-group-list">'+rows.map(([k,name,weight,ic])=>{const v=Math.round(s.tycoon.groups[k]);return '<div class="vbar '+(v>=50?'ok':'bad')+'"><span>'+ic+' '+name+' <small>'+weight+'%</small></span><div class="meter"><span style="width:'+v+'%"></span></div><b>'+v+'</b></div>';}).join('')+'</div>'+
  (s.tenfe.elections.length?'<div class="vchips">'+s.tenfe.elections.map(x=>chip(x.won?'✓':'×',x.support.toFixed(0)+'%',x.won?'ok':'bad')).join('')+'</div>':'');
 }
 export function pactsHTML(s){
  const active=s.tenfe.pacts.filter(x=>x.status==='active').length;
- return '<div class="vsummary">'+chip('🤝',active+'/2 activos','big')+'</div><div class="vlist">'+J.PACTS.map(d=>{
+ return '<div class="vsummary">'+chip('🤝',active+'/2 activos','big')+'</div><div class="vlist tenfe-pacts">'+J.PACTS.map(d=>{
   const p=s.tenfe.pacts.find(x=>x.id===d.id),reason=active>=2?'Ya hay dos pactos activos':s.cash<d.cost?'Falta caja':s.ended?'Mandato terminado':'';
   const state=p?(p.status==='active'?chip('⏳',p.kept+'/3 · '+Math.max(0,p.until-s.month)+' t'):p.status==='won'?chip('✓','Cumplido','ok'):chip('×','Incumplido','bad')):button('Firmar','tenfe-pact',d.id,!!reason,reason?'title="'+esc(reason)+'"':'');
   return '<article class="vrow"><img src="'+face(d.person,'happy')+'" width="52" height="64" alt=""><div><h3>'+esc(d.name)+'</h3><p>'+esc(d.requirement)+'</p><div class="vchips">'+chip('€',d.advance?'+'+money(d.advance):money(d.cost))+chip('🏆',money(d.reward))+chip('⏱',d.months+' t')+'</div></div><div class="vrow-end">'+state+'</div></article>';
  }).join('')+'</div>';
 }
 export function newsHTML(s){
- return eventHTML(s)+(s.tenfe.game.news.length?'<div class="vgrid">'+s.tenfe.game.news.map(x=>vcard(x.image,x.title,{badge:'T'+x.turn},card(newsKey(x),{details:x.body}))).join('')+'</div>':'<div class="vempty">📰<p>Sin noticias todavía</p></div>');
+ return eventHTML(s)+(s.tenfe.game.news.length?'<div class="vgrid game-news">'+s.tenfe.game.news.map(x=>vcard(x.image,x.title,{badge:'T'+x.turn},card(newsKey(x),{details:x.body}))).join('')+'</div>':'<div class="vempty">📰<p>Sin noticias todavía</p></div>');
 }
 export function boardHTML(s){
  const nodes=Object.fromEntries(J.HUBS.map(x=>[x.id,x])),routes=s.routes.filter(r=>J.NETWORK.includes(r.id)),colors={AVE:'#ffbd65',Alvia:'#85bbff',Regional:'#8ce0b6'};

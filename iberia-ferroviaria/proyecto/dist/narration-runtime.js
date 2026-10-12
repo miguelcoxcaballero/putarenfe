@@ -106,6 +106,9 @@ export class Narrator{
   const doc=globalThis.document,tray=doc?.getElementById('toast'),bar=doc?.getElementById('daybar');if(!tray||!bar)return;
   if(tray.dataset.tour)return;
   const r=bar.getBoundingClientRect();if(r.height&&r.top>=0)tray.style.bottom=Math.max(12,globalThis.innerHeight-r.top+28)+'px';
+  // Con una ficha abierta a la derecha, el aviso se coloca a su izquierda para no taparla.
+  const ins=doc.getElementById('inspector'),ir=ins&&!ins.classList.contains('hidden')?ins.getBoundingClientRect():null;
+  tray.style.right=ir&&ir.width&&ir.left>440?Math.round(globalThis.innerWidth-ir.left+16)+'px':'';
  }
  sync(){
   this.positionTray();
@@ -144,6 +147,7 @@ export class Narrator{
   const node=doc.createElement('article'),instance=String(++this.sequence);
   node.className='narration-toast';node.dataset.narrationInstance=instance;node.dataset.narrationWhere=inModal?'modal-toast':'toast';
   node.innerHTML=card(key,{details:String(text)})+'<button class="narration-dismiss" data-action="narration-dismiss" aria-label="Cerrar mensaje">×</button>';
+  node.dataset.narrationKey=key;for(const old of tray.querySelectorAll(':scope>.narration-toast'))if(old.dataset.narrationKey===key)old.remove();
   tray.appendChild(node);if(!inModal){tray.classList.add('show');this.positionTray();const all=()=>tray.querySelectorAll('.narration-toast');while(all().length>3)all()[1].remove();}
   const expires=()=>setTimeout(()=>{node.remove();this.updateTray();},!inModal&&tray.querySelectorAll('.narration-toast').length>1?1200:4200);
   const started=this.enqueue(key,{where:node.dataset.narrationWhere,root:()=>node.querySelector('.narration-card'),visible:()=>node.isConnected,priority:options.error?50:20,onend:expires});

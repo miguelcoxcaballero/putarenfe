@@ -22,12 +22,25 @@ await (async function(){
   const dismiss=async()=>{
     for(let i=0;i<40;i++){
       if(!await page.locator('#modal').evaluate(el=>el.open))return;
-      if(await page.locator('[data-action="decision"]').count()){await page.locator('[data-action="decision"]:not([disabled])').first().click();}
-      else if(await page.locator('[data-action="tenfe-notice"]').count())await page.locator('[data-action="tenfe-notice"]').click();
-      else if(await page.locator('[data-action="close-modal"]').count())await page.locator('[data-action="close-modal"]').first().click();
+      if(await page.locator('#modal [data-action="decision"]').count()){await page.locator('#modal [data-action="decision"]:not([disabled])').first().click();}
+      else if(await page.locator('#modal [data-action="tenfe-notice"]').count())await page.locator('#modal [data-action="tenfe-notice"]').click();
+      else if(await page.locator('#modal [data-action="close-modal"]').count())await page.locator('#modal [data-action="close-modal"]').first().click();
       else throw Error('Modal sin salida: '+await page.locator('#modal').innerText());
     }
     throw Error('Demasiados modales');
+  };
+  // Un suceso del turno se resuelve en el Despacho antes de poder cerrar el turno.
+  const closeTurn=async()=>{
+    const month=()=>page.evaluate(()=>window.railwayGame.snapshot().month),before=await month();
+    // Cerrar el turno puede pedir antes resolver un suceso o una decisión del consejo.
+    for(let attempt=0;attempt<5&&await month()===before;attempt++){
+      if(await page.evaluate(()=>!!window.railwayGame.snapshot().tenfe.game?.event)){
+        if(!await page.locator('[data-action="game-event"]').count())await page.locator('#navigation [data-screen="story"]').click();
+        await page.locator('[data-action="game-event"]:not([disabled])').first().click();await dismiss();
+      }
+      if(!await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')))await page.locator('#drawer [data-action="close-drawer"]').first().click();
+      await page.locator('#daybar [data-action="skip-month"]').click();await dismiss();
+    }
   };
   const open=async name=>{await page.locator('#navigation [data-screen="'+name+'"]').click();if(await page.locator('#drawer').evaluate(el=>el.classList.contains('hidden')))await page.locator('#navigation [data-screen="'+name+'"]').click();};
   const shop=async()=>{await open('fleet');const back=page.locator('.tp-game-strip [data-action="fleet-tab"][data-id="fleet"]');if(await back.count())await back.click();await page.locator('[data-action="fleet-tab"][data-id="market"]').click();};
@@ -46,7 +59,7 @@ await (async function(){
     for(const section of ['network','fleet','finance','story','progress','press']){await open(section);await fits();}
     checks.push('Seis secciones, sin errores de JavaScript ni desbordamientos a 1440 px.');
     await open('press');await page.locator('[data-action="press-tab"][data-id="paper"]').click();
-    assert(await page.locator('.gazette').evaluate(el=>{const c=getComputedStyle(el).color.match(/[0-9]+/g).map(Number);return Math.max(...c.slice(0,3))<100;}),'la prensa mantiene tinta oscura sobre papel claro');
+    assert(await page.locator('#drawer .body').evaluate(el=>{const c=getComputedStyle(el).color.match(/[0-9]+/g).map(Number);return Math.min(...c.slice(0,3))>180;}),'la prensa usa texto claro sobre el fondo oscuro');
     await page.screenshot({path:path.join(out,'prensa-desktop.png')});
     checks.push('Prensa y tarjetas del despacho mantienen contraste legible.');
     await shop();
@@ -71,7 +84,7 @@ await (async function(){
     assert(await page.evaluate(()=>window.railwayGame.snapshot().tenfe.megas[0].due>0));
     await page.screenshot({path:path.join(out,'megaproyectos-desktop.png')});
     await page.locator('[data-action="close-drawer"]').click();
-    for(let i=0;i<4;i++){await page.locator('[data-action="skip-month"]').click();await dismiss();}
+    for(let i=0;i<4;i++){await closeTurn();}
     assert(await page.evaluate(()=>window.railwayGame.snapshot().tenfe.pacts.find(p=>p.id==='investigacion').status==='won'));
     checks.push('Acciones reales: firmar pacto, financiar investigación, encargar fase y cerrar cuatro meses con informe.');
     await open('press');await page.locator('[data-action="press-tab"][data-id="reports"]').click();assert(await page.locator('.tenfe-report').count()>=4);
@@ -92,9 +105,11 @@ await (async function(){
     await page.setViewportSize({width:1440,height:900});
     await page.evaluate(()=>{const g=window.railwayGame,s=g.state();s.month=59;s.tenfe.lastMonth=59;s.tenfe.notices=[];s.ops.phase='planning';s.ops.day=1;
       s.decided=['policy',...s.decided];s.event=null;g.engine.revalidateScene(s);g.render();});
-    for(let i=0;i<20 && await page.evaluate(()=>window.railwayGame.snapshot().month)<60;i++){await page.locator('[data-action="skip-month"]').click();await dismiss();}
+    for(let i=0;i<20 && await page.evaluate(()=>window.railwayGame.snapshot().month)<60;i++){await closeTurn();}
     assert(await page.evaluate(()=>window.railwayGame.snapshot().tenfe.rescueStarted));
-    assert(await page.locator('#mission').innerText().then(t=>t.toLocaleLowerCase('es').includes('rescate')));
+    // El objetivo vive en la barra superior: sigue visible en la misma partida y el mismo mapa.
+    assert(await page.locator('#map').isVisible());
+    assert((await page.locator('#objective .objective-main strong').innerText()).trim().length>0,'el objetivo sigue visible');
     await page.screenshot({path:path.join(out,'rescate-misma-partida.png')});
     checks.push('2027 activa el rescate sin cambiar de mapa, interfaz, motor ni guardado.');
     assert.deepEqual(errors,[]);

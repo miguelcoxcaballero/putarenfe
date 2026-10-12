@@ -436,7 +436,7 @@ function cityInspector() {
   <h3 class="sub">Estación · ${E.STATION_LEVELS[level]}</h3>
   <div class="stations">${[0, 1, 2, 3].map(l => `<div class="${l <= level ? 'have' : ''}">${stationIcon(l, l === level)}<span>${E.STATION_LEVELS[l]}</span></div>`).join('')}</div>
   ${level < 3 ? `<button class="btn primary" data-action="station-up" data-id="${id}" ${state.ended ? 'disabled' : ''}>Mejorar a «${E.STATION_LEVELS[level + 1]}» · ${E.stationCost(state, id)} M€</button><p class="small muted">+6 % de demanda y más fiabilidad en todas sus conexiones.</p>` : '<p class="small">Estación al máximo nivel.</p>'}
-  ${deps.length ? `<h3 class="sub">Próximas salidas</h3><div class="board">${boardRows(deps, m)}</div>` : ''}`;
+  ${deps.length ? `<h3 class="sub">Próximas salidas</h3>${adifBoard(planRows(deps, m), {station: c.name})}` : ''}`;
   return {kicker: 'Ciudad', title: esc(c.name), body, cls: 'city'};
 }
 
@@ -874,17 +874,14 @@ function adifBoard(rows, {station = '', title = 'Salidas', sub = 'Departures', a
   const body = rows.map(r => `<div class="adif-row"><span class="adif-time">${r.time}</span><button class="adif-dest" data-action="${r.action || action}" data-id="${esc(r.id)}">${esc(r.dest)}</button><span class="adif-train"><i style="--c:${r.color || '#82155b'}">${esc(r.product)}</i>${r.number ? `<em>${esc(r.number)}</em>` : ''}</span><span class="adif-obs ${r.late ? 'late' : ''}">${esc(r.obs || '')}</span></div>`).join('') || '<div class="adif-row adif-empty"><span></span><span>Sin más salidas hoy</span></div>';
   return `<div class="adif-board">${top}<div class="adif-head"><span>Hora</span><span>Destino</span><span>Tren</span><span>Observaciones</span></div>${body}</div>`;
 }
-function boardRows(trips, minute, opts = {}) {
+/** Filas del tablero de Adif para los trenes de tu jornada. */
+function planRows(trips, m) {
   return trips.map(t => {
     const r = state.routes.find(r => r.id === t.route);
-    const color = t.line !== undefined && t.line !== null ? S.LINES[t.line]?.color : r ? routeColor(r) : '#8a2a46';
-    const code = t.line !== undefined && t.line !== null ? S.lineCode(t.line) : r?.code || 'R';
-    const dep = opts.at !== undefined ? opts.at(t) : t.dep;
-    const status = minute < dep ? (t.delay > 5 ? `<span class="late">+${t.delay} min</span>` : '<span class="ok">En hora</span>') : minute < t.arrival ? `<span class="run">En marcha${t.delay > 5 ? ' · +' + t.delay : ''}</span>` : '<span>Llegado</span>';
-    return `<div class="row"><span>${clock(dep)}</span><span>${chip(t.bus ? 'BUS' : code, t.bus ? '#c98a1c' : color)}</span><button class="dest" data-action="train" data-id="${esc(t.id)}">${esc(opts.dest ? opts.dest(t) : t.name)}${t.number ? ` <span class="muted">${esc(t.number)}</span>` : ''}</button><span>${status}</span></div>`;
-  }).join('');
+    const code = t.line !== undefined && t.line !== null ? S.lineCode(t.line) : (r ? familyOf(r) || r.code : 'R');
+    return {time: clock(t.dep), id: t.id, dest: String(t.name || '').split('→').at(-1).trim(), product: t.bus ? 'BUS' : code, color: t.bus ? '#c98a1c' : '#82155b', number: t.number || '', obs: m < t.dep ? (t.delay > 5 ? '+' + t.delay + ' min' : 'En hora') : m < t.arrival ? 'En marcha' : 'Salido', late: t.delay > 5};
+  });
 }
-
 function opsPage() {
   const op = state.ops, trips = plan(), b = O.dayBounds(trips), m = currentMinute();
   const moving = trips.filter(t => m >= t.dep && m < t.arrival).length, done = trips.filter(t => t.arrival <= m), late = done.filter(t => t.delay > 5).length;
@@ -902,7 +899,7 @@ function opsPage() {
   <div class="toolbar"><label style="margin:0">Prioridad de explotación</label><select id="dayPriority" ${op.phase !== 'planning' ? 'disabled' : ''}><option value="balanced" ${op.priority === 'balanced' ? 'selected' : ''}>Equilibrio entre coste y puntualidad</option><option value="punctual" ${op.priority === 'punctual' ? 'selected' : ''}>Refuerzo de puntualidad · 9.000 €/día</option></select>
   <label style="margin:0 0 0 auto"><input type="checkbox" id="autoPause" ${ui.autoPause ? 'checked' : ''}> Pausar ante incidencias</label></div>
   <h2 class="section">Próximas salidas</h2>
-  ${adifBoard(next.map(t => { const r = state.routes.find(r => r.id === t.route); const code = t.line !== undefined && t.line !== null ? S.lineCode(t.line) : (r ? familyOf(r) || r.code : 'R'); return {time: clock(t.dep), id: t.id, dest: String(t.name || '').split('→').at(-1).trim(), product: t.bus ? 'BUS' : code, color: t.bus ? '#c98a1c' : '#82155b', number: t.number || '', obs: m < t.dep ? (t.delay > 5 ? '+' + t.delay + ' min' : 'En hora') : m < t.arrival ? 'En marcha' : 'Salido', late: t.delay > 5}; }))}
+  ${adifBoard(planRows(next, m))}
   ${!trips.length ? '<div class="empty">No hay servicios abiertos.<p><button class="btn primary" data-action="navigate" data-screen="network">Elegir un servicio en Red</button></p></div>' : ''}
 `;
   return [head, body];
@@ -987,7 +984,7 @@ function fleetPage() {
     const total = state.fleet.reduce((v, f) => v + f.qty, 0), free = state.fleet.reduce((v, f) => v + E.available(state, f), 0);
     const count = fam => state.fleet.filter(f => MODEL[f.model].family === fam).reduce((v, f) => v + f.qty, 0);
     body += `<dl class="figures"><div><dt>Unidades</dt><dd>${n(total)}</dd></div><div><dt>AVE</dt><dd>${n(count('AVE'))}</dd></div><div><dt>Alvia + regionales</dt><dd>${n(count('Alvia')+count('Regional'))}</dd></div><div><dt>Libres</dt><dd>${n(free)}</dd></div></dl>
-    <table><thead><tr><th style="width:150px"></th><th>Material</th><th class="num">Parque</th><th class="num">Libres</th><th>Estado</th></tr></thead><tbody>${state.fleet.filter(f => f.qty > 0).map(f => {
+    <table class="fleet-table"><thead><tr><th style="width:260px"></th><th>Material</th><th class="num">Parque</th><th class="num">Libres</th><th>Estado</th></tr></thead><tbody>${state.fleet.filter(f => f.qty > 0).map(f => {
       const m = MODEL[f.model];
       return `<tr class="clickable" data-action="fleet-detail" data-id="${f.id}"><td>${trainThumb(f.model)}</td><td><button class="linkish fleet-link" data-action="fleet-detail" data-id="${f.id}">${esc(m.name)}</button><small>${esc(f.origin)}${f.maker ? ' · ' + esc(f.maker) : ''} · desde ${f.born} · ${GAUGES[m.gauge]} · ${POWERS[m.power]}</small></td><td class="num">${f.qty}</td><td class="num">${E.available(state, f)}</td><td style="min-width:120px"><div class="bar ${f.condition < 50 ? '' : 'green'}"><span style="width:${f.condition}%"></span></div><small>${n(f.condition)} %</small></td></tr>`;
     }).join('')}</tbody></table><p class="note">Solo se venden o reforman trenes libres: quítalos antes de alguna línea.</p>`;
