@@ -1,0 +1,81 @@
+{
+ "schema": 1,
+ "images": [
+  {
+   "name": "autobus-tenfe.webp",
+   "width": 1536,
+   "height": 1024,
+   "bytes": 213166,
+   "quality": 80,
+   "sha256": "c041c249cbafc287f3047e344fd68172e35794e6faafa1d09bd1bdf28d1612c1",
+   "copies": [
+    "iberia-ferroviaria/proyecto/dist/assets/rescate/autobus-tenfe.webp",
+    "iberia-ferroviaria/assets/rescate/autobus-tenfe.webp"
+   ],
+   "source": {
+    "ai_generated": true,
+    "tool": "image_gen",
+    "sha256": "17cd0ddd1586daafebbea43ca68fe98ee703eec1f00f163e46f90493155a1695",
+    "width": 1536,
+    "height": 1024
+   }
+  },
+  {
+   "name": "autobus-aume.webp",
+   "width": 1280,
+   "height": 720,
+   "bytes": 149602,
+   "quality": 80,
+   "sha256": "346067fb9828de8353aa8a4f44eb74ed1ff014a3c2bf28daf51fe7e2db1e5251",
+   "copies": [
+    "iberia-ferroviaria/proyecto/dist/assets/rescate/autobus-aume.webp",
+    "iberia-ferroviaria/assets/rescate/autobus-aume.webp"
+   ],
+   "source": {
+    "ai_generated": true,
+    "tool": "image_gen",
+    "sha256": "7d7cbe5bc4916a56146a06c669caa5a6f58d37f5c254d2aca47e5e11b47b073a",
+    "width": 1672,
+    "height": 941
+   }
+  },
+  {
+   "name": "autobus-tenfe-rescate.webp",
+   "width": 1280,
+   "height": 720,
+   "bytes": 168420,
+   "quality": 80,
+   "sha256": "8dfe6528292db1b38d8ca8678cd2ff4f91e314f382417da27c78a008a6930201",
+   "copies": [
+    "iberia-ferroviaria/proyecto/dist/assets/rescate/autobus-tenfe-rescate.webp",
+    "iberia-ferroviaria/assets/rescate/autobus-tenfe-rescate.webp"
+   ],
+   "source": {
+    "ai_generated": true,
+    "tool": "image_gen",
+    "sha256": "5d50a19736410a258755d206df71a008b2654610e3f7eb5821c6dcc03f456eda",
+    "width": 1672,
+    "height": 941
+   }
+  },
+  {
+   "name": "viajeros-tirados.webp",
+   "width": 1280,
+   "height": 720,
+   "bytes": 176512,
+   "quality": 80,
+   "sha256": "51d971ec8b57824071f27279643966f267412bf86d57825f3320761a24e32132",
+   "copies": [
+    "iberia-ferroviaria/proyecto/dist/assets/rescate/viajeros-tirados.webp",
+    "iberia-ferroviaria/assets/rescate/viajeros-tirados.webp"
+   ],
+   "source": {
+    "ai_generated": true,
+    "tool": "image_gen",
+    "sha256": "de471ee47f68cf4bc5fa845c38c7cf6d60b5264373ef790c4eb18e9448a74746",
+    "width": 1672,
+    "height": 941
+   }
+  }
+ ]
+}

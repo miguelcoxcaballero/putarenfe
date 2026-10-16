@@ -19,12 +19,12 @@
   "game": {
     "url": "index.html",
     "bytes": 38616,
-    "sha256": "86031496edcc69e5cce5e0f8b74ca427b9f8b7e9e724420f0cbd3c702ccef2c9"
+    "sha256": "4aafa1ab1606588649ddffe8da8058b2c8124ec512e722ddd832efbb6e9065ea"
   },
   "listening": {
     "url": "dialogos.html",
-    "bytes": 356429,
-    "sha256": "f899f970e21b85b0d379b606da23b3ced1c4a274903c1ff190dd3b96a15da73d"
+    "bytes": 358554,
+    "sha256": "ed95e9706f3e9894a02f55b0526cf248e6c6c9418f1270efc730bf4724e1d3a2"
   },
   "trainWorkshop": {
     "models": 14,
@@ -64,39 +64,14 @@
     ]
   },
   "rescue": {
-    "photos": 63,
+    "photos": 67,
     "recordedDialogues": 3,
     "expectedDialogues": 70
   },
   "narration": {
     "messages": 130,
-    "recorded": 126,
-    "pending": [
-      {
-        "key": "breakdown-abandon",
-        "person": "riders",
-        "id": "1igs004",
-        "text": "Le habla Marisa Andén. Trescientas personas en mitad del campo, sin tren, sin autobús y sin noticias. Esto no se olvida: ni en la encuesta ni en las urnas."
-      },
-      {
-        "key": "breakdown-alert",
-        "person": "adif",
-        "id": "5w4asg",
-        "text": "Tren parado en plena vía: avería de material. El viajero espera una solución y el reloj no se para."
-      },
-      {
-        "key": "breakdown-aume",
-        "person": "rival",
-        "id": "vvvq16",
-        "text": "Jajaja. ¿Otro tren tirado, compañero? Tranquilo, que para eso está Autocares Meseta. Mis autocares ya van a recoger a tus viajeros. La factura te la mando al despacho, y a cada uno le doy una tarjeta, por si se cansan de esperar trenes."
-      },
-      {
-        "key": "breakdown-ownbus",
-        "person": "workshop",
-        "id": "a9rrzs",
-        "text": "Autobuses de la casa en camino. Los viajeros llegan por carretera y el tren, al taller. Al menos esta vez no le hemos dado el gusto al de los autocares."
-      }
-    ],
+    "recorded": 130,
+    "pending": [],
     "aliases": 136,
     "characters": [
       "treasury",
@@ -439,6 +414,16 @@
         "sha256": "15b4ac32abfae6c84021d4a05dd595aed0742abbd017475451e573487b720d73",
         "duration": 6.144,
         "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
+      },
+      {
+        "id": "1igs004",
+        "person": "riders",
+        "kind": "character-narration",
+        "url": "assets/narracion/1igs004-ca07c951ff53.mp3",
+        "bytes": 161805,
+        "sha256": "ca07c951ff538ce4db6d6c3ed41c0f76d32cbf797ece551b95b4ff7b455b22bf",
+        "duration": 8.064,
+        "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
       },
       {
         "id": "1irqu12",
@@ -851,6 +836,16 @@
         "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
       },
       {
+        "id": "5w4asg",
+        "person": "adif",
+        "kind": "character-narration",
+        "url": "assets/narracion/5w4asg-ee954531d23e.mp3",
+        "bytes": 147405,
+        "sha256": "ee954531d23e2425cd662d1b61f046466b6c1cd89b98dcbe3c0ac18ba4f2b8f4",
+        "duration": 7.344,
+        "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+      },
+      {
         "id": "5xxo93",
         "person": "adif",
         "kind": "character-narration",
@@ -959,6 +954,16 @@
         "sha256": "5bfa8dc804f1b5a3aaf43bb0f88bce31856d29648bbe432c4475c73c005a2325",
         "duration": 5.256,
         "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+      },
+      {
+        "id": "a9rrzs",
+        "person": "workshop",
+        "kind": "character-narration",
+        "url": "assets/narracion/a9rrzs-521a081c3ada.mp3",
+        "bytes": 203085,
+        "sha256": "521a081c3ada62d7d81e00bd756325c7c696ff7ca15c7e846cb0b95ce5a4df15",
+        "duration": 10.128,
+        "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
       },
       {
         "id": "bs7is1",
@@ -1309,6 +1314,16 @@
         "sha256": "eb06fcec0489df0367bcfdd845689caec9979f1440a0dcd63461f0829a88a991",
         "duration": 6.384,
         "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+      },
+      {
+        "id": "vvvq16",
+        "person": "rival",
+        "kind": "character-narration",
+        "url": "assets/narracion/vvvq16-3599ec2796de.mp3",
+        "bytes": 255885,
+        "sha256": "3599ec2796ded7aa6311fd936f195bdb11760e3f37b02bef3e3cc27b6f7aeebe",
+        "duration": 12.768,
+        "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
       },
       {
         "id": "w6d3gr",
@@ -2053,6 +2068,16 @@
       "referenceSHA256": "8f701f6992f23c4db9841f5b9551bb6a8de7a903b64f9983674c1f7713306575"
     },
     {
+      "id": "1igs004",
+      "person": "riders",
+      "kind": "character-narration",
+      "url": "assets/narracion/1igs004-ca07c951ff53.mp3",
+      "bytes": 161805,
+      "sha256": "ca07c951ff538ce4db6d6c3ed41c0f76d32cbf797ece551b95b4ff7b455b22bf",
+      "duration": 8.064,
+      "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
+    },
+    {
       "id": "1irqu12",
       "person": "treasury",
       "kind": "character-narration",
@@ -2463,6 +2488,16 @@
       "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
     },
     {
+      "id": "5w4asg",
+      "person": "adif",
+      "kind": "character-narration",
+      "url": "assets/narracion/5w4asg-ee954531d23e.mp3",
+      "bytes": 147405,
+      "sha256": "ee954531d23e2425cd662d1b61f046466b6c1cd89b98dcbe3c0ac18ba4f2b8f4",
+      "duration": 7.344,
+      "referenceSHA256": "a081179a7c4030e52ab2006036102ce7d573d11f2e04afefbed8e9a399b453a0"
+    },
+    {
       "id": "5xxo93",
       "person": "adif",
       "kind": "character-narration",
@@ -2571,6 +2606,16 @@
       "sha256": "5bfa8dc804f1b5a3aaf43bb0f88bce31856d29648bbe432c4475c73c005a2325",
       "duration": 5.256,
       "referenceSHA256": "cedd0014d333783dbf4917d6a9433670e7bc312159fba974ee66a82bc1664ca4"
+    },
+    {
+      "id": "a9rrzs",
+      "person": "workshop",
+      "kind": "character-narration",
+      "url": "assets/narracion/a9rrzs-521a081c3ada.mp3",
+      "bytes": 203085,
+      "sha256": "521a081c3ada62d7d81e00bd756325c7c696ff7ca15c7e846cb0b95ce5a4df15",
+      "duration": 10.128,
+      "referenceSHA256": "467d025baf38fea7070513e778961e9259b616b364ac10ed6c02580302b6f763"
     },
     {
       "id": "bs7is1",
@@ -2923,6 +2968,16 @@
       "referenceSHA256": "4b1227c7439e836ef3900af30239d19918e1dfe9c37c9f28ef0f5a365174ffdf"
     },
     {
+      "id": "vvvq16",
+      "person": "rival",
+      "kind": "character-narration",
+      "url": "assets/narracion/vvvq16-3599ec2796de.mp3",
+      "bytes": 255885,
+      "sha256": "3599ec2796ded7aa6311fd936f195bdb11760e3f37b02bef3e3cc27b6f7aeebe",
+      "duration": 12.768,
+      "referenceSHA256": "9ad1d8938adede2a651c7b75679338124548b33a18c3da778b591532f278737c"
+    },
+    {
       "id": "w6d3gr",
       "person": "workshop",
       "kind": "character-narration",
@@ -2984,9 +3039,27 @@
     },
     {
       "url": "assets/narracion/manifest.json",
-      "bytes": 344127,
-      "sha256": "08414354ce08bb72940bdb97c9dcc92c2134224f533c615f24f047445d043d15",
+      "bytes": 355924,
+      "sha256": "74e15c173884ca70995e12c04e2202ffc02c945feb4f3741eec1e301d52f4d6c",
       "kind": "character-narration-manifest"
+    },
+    {
+      "url": "assets/rescate/autobus-aume.webp",
+      "bytes": 149602,
+      "sha256": "346067fb9828de8353aa8a4f44eb74ed1ff014a3c2bf28daf51fe7e2db1e5251",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/autobus-tenfe-rescate.webp",
+      "bytes": 168420,
+      "sha256": "8dfe6528292db1b38d8ca8678cd2ff4f91e314f382417da27c78a008a6930201",
+      "kind": "rescue-photo"
+    },
+    {
+      "url": "assets/rescate/autobus-tenfe.webp",
+      "bytes": 213166,
+      "sha256": "c041c249cbafc287f3047e344fd68172e35794e6faafa1d09bd1bdf28d1612c1",
+      "kind": "rescue-photo"
     },
     {
       "url": "assets/rescate/cloacas.webp",
@@ -3367,6 +3440,12 @@
       "kind": "rescue-photo"
     },
     {
+      "url": "assets/rescate/viajeros-tirados.webp",
+      "bytes": 176512,
+      "sha256": "51d971ec8b57824071f27279643966f267412bf86d57825f3320761a24e32132",
+      "kind": "rescue-photo"
+    },
+    {
       "url": "assets/rescate-voces/manifest.json",
       "bytes": 2716,
       "sha256": "5a12b457c4009cfa99550e3255986d458d9536644d8de4d26cc2a5bf0087764e",
@@ -3615,9 +3694,9 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-c810e6d77de7.js",
-      "bytes": 11726346,
-      "sha256": "c810e6d77de77c3c9dd59f17fed28fde49097953d3c5fe085b3d74f25ad21bed"
+      "url": "assets/game-script-4-88d86b32c9ec.js",
+      "bytes": 11726729,
+      "sha256": "88d86b32c9ec0c2f27acb58ae1aebe5aa0d456bc6ba327432fab5b121c4ba877"
     },
     {
       "url": "assets/game-style-0-d25e12f86ebe.css",
@@ -7767,6 +7846,11 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-c810e6d77de7.js",
+      "bytes": 11726346,
+      "sha256": "c810e6d77de77c3c9dd59f17fed28fde49097953d3c5fe085b3d74f25ad21bed"
+    },
     {
       "url": "assets/game-script-4-9a5b50df7668.js",
       "bytes": 11711387,
