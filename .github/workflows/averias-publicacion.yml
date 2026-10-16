@@ -1,0 +1,39 @@
+name: Comprobar imágenes y voces de averías
+on:
+  push:
+    branches: [codex/averias-recursos]
+    paths:
+      - .github/workflows/averias-publicacion.yml
+permissions:
+  contents: write
+jobs:
+  publicacion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Preparar y comprobar las cuatro imágenes
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          npm install --no-save --package-lock=false sharp@0.34.5
+          node ../../.codex-averias/convert-images.mjs
+      - name: Ejecutar las comprobaciones solicitadas y construir
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          node narration-test.mjs
+          node averia-test.mjs
+          node test.mjs
+          node ../tools/build-web.mjs
+          node ../../.codex-averias/audit-publication.mjs
+      - name: Conservar exclusivamente recursos e informes de publicación
+        run: |
+          git config user.name "Tenfe build"
+          git config user.email "tenfe-build@users.noreply.github.com"
+          git add iberia-ferroviaria/proyecto/dist/assets/rescate iberia-ferroviaria/assets/rescate
+          git add iberia-ferroviaria/assets iberia-ferroviaria/index.html iberia-ferroviaria/dialogos.html iberia-ferroviaria/release.json iberia-ferroviaria/web-source
+          git add iberia-ferroviaria/investigacion/voces/narracion-averias/images-report.json iberia-ferroviaria/investigacion/voces/narracion-averias/publication-report.json
+          git commit -m "Compila recursos de averías y verifica 130 voces completas [skip ci]"
+          git push

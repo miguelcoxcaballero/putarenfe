@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+const root=path.resolve('../..'),game=path.join(root,'iberia-ferroviaria'),base='1e9f77c6d5fb275ed31c9b307e998d6d385f6894';
+const release=JSON.parse(fs.readFileSync(path.join(game,'release.json'),'utf8'));
+assert.equal(release.narration.recorded,130);assert.equal(release.narration.messages,130);assert.deepEqual(release.narration.pending,[]);
+assert.equal(release.availableWholeDialogues,412);assert.equal(release.expectedWholeDialogues,412);
+const baseRelease=JSON.parse(execFileSync('git',['show',base+':iberia-ferroviaria/release.json'],{cwd:root,encoding:'utf8'}));
+assert.deepEqual(release.recordings,baseRelease.recordings,'the frozen 412 whole dialogue records remain exactly unchanged');
+const oldManifest=JSON.parse(execFileSync('git',['show',base+':iberia-ferroviaria/proyecto/dist/assets/narracion/manifest.json'],{cwd:root,encoding:'utf8'}));
+const nextManifest=JSON.parse(fs.readFileSync(path.join(game,'proyecto/dist/assets/narracion/manifest.json'),'utf8'));
+const next=new Map(nextManifest.takes.map(t=>[t.id,t]));
+for(const take of oldManifest.takes)assert.deepEqual(next.get(take.id),take,'preserved original take '+take.id);
+const report={schema:1,baseline:base,recorded:130,messages:130,pending:[],frozen_dialogues_unchanged:412,original_narrations_unchanged:126,tests:['node narration-test.mjs','node averia-test.mjs','node test.mjs','node ../tools/build-web.mjs'],no_model_or_raw_audio_committed:true};
+fs.writeFileSync(path.join(game,'investigacion/voces/narracion-averias/publication-report.json'),JSON.stringify(report,null,1)+'\n');
+console.log('PUBLICATION_VERIFIED:'+JSON.stringify(report));

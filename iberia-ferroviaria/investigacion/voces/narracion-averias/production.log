@@ -1,0 +1,15 @@
+NARRATION_SHARD 0 total 130 selected 130 pending 4
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+CAST_READY adif
+CAST_READY riders
+CAST_READY rival
+CAST_READY workshop
+TAKE_OK 0 1 / 4 1igs004 riders 8.06 seconds; inference 55.08
+TAKE_OK 0 2 / 4 5w4asg adif 7.34 seconds; inference 47.28
+TAKE_OK 0 3 / 4 a9rrzs workshop 10.13 seconds; inference 60.62
+TAKE_OK 0 4 / 4 vvvq16 rival 12.77 seconds; inference 96.46
+NARRATION_SHARD_COMPLETE 0 130
