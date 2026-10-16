@@ -6,6 +6,7 @@ on:
       - .github/workflows/averias-publicacion.yml
       - .codex-averias/convert-images.mjs
       - .codex-averias/audit-publication.mjs
+      - iberia-ferroviaria/proyecto/narration-test.mjs
 permissions:
   contents: write
 jobs:
