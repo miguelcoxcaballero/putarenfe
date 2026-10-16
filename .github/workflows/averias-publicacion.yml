@@ -4,6 +4,8 @@ on:
     branches: [codex/averias-recursos]
     paths:
       - .github/workflows/averias-publicacion.yml
+      - .codex-averias/convert-images.mjs
+      - .codex-averias/audit-publication.mjs
 permissions:
   contents: write
 jobs:
@@ -27,6 +29,7 @@ jobs:
           node averia-test.mjs
           node test.mjs
           node ../tools/build-web.mjs
+          git -C ../.. fetch --depth=1 origin 1e9f77c6d5fb275ed31c9b307e998d6d385f6894
           node ../../.codex-averias/audit-publication.mjs
       - name: Conservar exclusivamente recursos e informes de publicación
         run: |
