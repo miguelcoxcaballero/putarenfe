@@ -1,0 +1,217 @@
+{
+ "schema": 1,
+ "recorded": 130,
+ "preserved": 126,
+ "new": [
+  {
+   "key": "breakdown-abandon",
+   "id": "1igs004",
+   "person": "riders",
+   "raw": "Le habla Marisa Andén. Trescientas personas en mitad del campo, sin tren, sin autobús y sin noticias. Esto no se olvida: ni en la encuesta ni en las urnas.",
+   "mood": "angry",
+   "effective_text": "Le habla Marisa Andén. Trescientas personas en mitad del campo, sin tren, sin autobús y sin noticias. Esto no se olvida: ni en la encuesta ni en las urnas!",
+   "file": "1igs004-ca07c951ff53.mp3",
+   "duration": 8.064,
+   "bytes": 161805,
+   "sha256": "ca07c951ff538ce4db6d6c3ed41c0f76d32cbf797ece551b95b4ff7b455b22bf",
+   "seed": 424242,
+   "eos": {
+    "status": "observed",
+    "batch_index": 0,
+    "input_tokens": 0,
+    "sequence_tokens": 101,
+    "generated_tokens_including_padding": 101,
+    "effective_generated_tokens": 101,
+    "first_eos_index": 100,
+    "eos_found": true,
+    "last_effective_token": 2150,
+    "padding_tokens_after_eos": 0,
+    "max_new_tokens": 306,
+    "token_limit_without_eos": false
+   },
+   "mp3_lufs": -21.83,
+   "mp3_true_peak_dbfs": -2.13
+  },
+  {
+   "key": "breakdown-alert",
+   "id": "5w4asg",
+   "person": "adif",
+   "raw": "Tren parado en plena vía: avería de material. El viajero espera una solución y el reloj no se para.",
+   "mood": "worried",
+   "effective_text": "Tren parado en plena vía… avería de material. El viajero espera una solución y el reloj no se para…",
+   "file": "5w4asg-ee954531d23e.mp3",
+   "duration": 7.344,
+   "bytes": 147405,
+   "sha256": "ee954531d23e2425cd662d1b61f046466b6c1cd89b98dcbe3c0ac18ba4f2b8f4",
+   "seed": 424242,
+   "eos": {
+    "status": "observed",
+    "batch_index": 0,
+    "input_tokens": 0,
+    "sequence_tokens": 92,
+    "generated_tokens_including_padding": 92,
+    "effective_generated_tokens": 92,
+    "first_eos_index": 91,
+    "eos_found": true,
+    "last_effective_token": 2150,
+    "padding_tokens_after_eos": 0,
+    "max_new_tokens": 223,
+    "token_limit_without_eos": false
+   },
+   "mp3_lufs": -21.45,
+   "mp3_true_peak_dbfs": -2.5
+  },
+  {
+   "key": "breakdown-ownbus",
+   "id": "a9rrzs",
+   "person": "workshop",
+   "raw": "Autobuses de la casa en camino. Los viajeros llegan por carretera y el tren, al taller. Al menos esta vez no le hemos dado el gusto al de los autocares.",
+   "mood": "determined",
+   "effective_text": "Autobuses de la casa en camino. Los viajeros llegan por carretera y el tren, al taller. Al menos esta vez no le hemos dado el gusto al de los autocares.",
+   "file": "a9rrzs-521a081c3ada.mp3",
+   "duration": 10.128,
+   "bytes": 203085,
+   "sha256": "521a081c3ada62d7d81e00bd756325c7c696ff7ca15c7e846cb0b95ce5a4df15",
+   "seed": 424242,
+   "eos": {
+    "status": "observed",
+    "batch_index": 0,
+    "input_tokens": 0,
+    "sequence_tokens": 127,
+    "generated_tokens_including_padding": 127,
+    "effective_generated_tokens": 127,
+    "first_eos_index": 126,
+    "eos_found": true,
+    "last_effective_token": 2150,
+    "padding_tokens_after_eos": 0,
+    "max_new_tokens": 314,
+    "token_limit_without_eos": false
+   },
+   "mp3_lufs": -21.46,
+   "mp3_true_peak_dbfs": -2.2
+  },
+  {
+   "key": "breakdown-aume",
+   "id": "vvvq16",
+   "person": "rival",
+   "raw": "Jajaja. ¿Otro tren tirado, compañero? Tranquilo, que para eso está Autocares Meseta. Mis autocares ya van a recoger a tus viajeros. La factura te la mando al despacho, y a cada uno le doy una tarjeta, por si se cansan de esperar trenes.",
+   "mood": "proud",
+   "effective_text": "Jajaja. ¿Otro tren tirado, compañero? Tranquilo, que para eso está Autocares Meseta. Mis autocares ya van a recoger a tus viajeros. La factura te la mando al despacho, y a cada uno le doy una tarjeta, por si se cansan de esperar trenes.",
+   "file": "vvvq16-3599ec2796de.mp3",
+   "duration": 12.768,
+   "bytes": 255885,
+   "sha256": "3599ec2796ded7aa6311fd936f195bdb11760e3f37b02bef3e3cc27b6f7aeebe",
+   "seed": 424242,
+   "eos": {
+    "status": "observed",
+    "batch_index": 0,
+    "input_tokens": 0,
+    "sequence_tokens": 160,
+    "generated_tokens_including_padding": 160,
+    "effective_generated_tokens": 160,
+    "first_eos_index": 159,
+    "eos_found": true,
+    "last_effective_token": 2150,
+    "padding_tokens_after_eos": 0,
+    "max_new_tokens": 423,
+    "token_limit_without_eos": false
+   },
+   "mp3_lufs": -21.46,
+   "mp3_true_peak_dbfs": -1.96
+  }
+ ],
+ "precision": "mixed-bf16-talker",
+ "model": {
+  "repository": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+  "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+  "files": [
+   {
+    "path": ".gitattributes",
+    "bytes": 1519,
+    "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+   },
+   {
+    "path": "README.md",
+    "bytes": 3640,
+    "sha256": "181187b6057906bd960bc7f938d0b7a16652509776a0d52c4885b4ae5ccda0ea"
+   },
+   {
+    "path": "config.json",
+    "bytes": 4494,
+    "sha256": "2e714c787c8edb98b05432685cddb634add2de4d4e645f653d68251ef72ba011"
+   },
+   {
+    "path": "generation_config.json",
+    "bytes": 245,
+    "sha256": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa"
+   },
+   {
+    "path": "merges.txt",
+    "bytes": 1671839,
+    "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+   },
+   {
+    "path": "model.safetensors",
+    "bytes": 1829344272,
+    "sha256": "180b3b10eb1c9f1b4db7806d5475bae3071c0243c299d49926bab1da3b6946f6"
+   },
+   {
+    "path": "preprocessor_config.json",
+    "bytes": 127,
+    "sha256": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119"
+   },
+   {
+    "path": "speech_tokenizer/config.json",
+    "bytes": 2336,
+    "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167"
+   },
+   {
+    "path": "speech_tokenizer/configuration.json",
+    "bytes": 76,
+    "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd"
+   },
+   {
+    "path": "speech_tokenizer/model.safetensors",
+    "bytes": 682293092,
+    "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+   },
+   {
+    "path": "speech_tokenizer/preprocessor_config.json",
+    "bytes": 234,
+    "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb"
+   },
+   {
+    "path": "tokenizer_config.json",
+    "bytes": 7344,
+    "sha256": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670"
+   },
+   {
+    "path": "vocab.json",
+    "bytes": 2776833,
+    "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+   }
+  ],
+  "fingerprint": "3db3533efbdebdb25290007f64a4ec50b67c1661c0e4c1191db644b43803aeff"
+ },
+ "reference_pack": "investigacion/voces/referencias-qwen-3.6.3",
+ "mastering": {
+  "schema": 1,
+  "mode": "speech",
+  "mp3_bitrate": "160k",
+  "target_lufs": -21.0,
+  "maximum_true_peak_dbfs": -1.5,
+  "outer_silence_threshold_relative_db": -60,
+  "leading_margin_ms": 80,
+  "trailing_margin_ms": 120,
+  "processing": "Exterior silence only, static gain and bounded lookahead peak guard; no internal pause removal, EQ, pitch, tempo or broadband compression.",
+  "peak_guard": {
+   "threshold_dbfs": -1.8,
+   "maximum_peak_reduction_db": 6,
+   "attack_ms": 5,
+   "release_ms": 80,
+   "level": false,
+   "latency": true
+  }
+ },
+ "literal_texts_preserved": true
+}

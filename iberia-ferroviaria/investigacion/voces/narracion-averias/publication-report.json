@@ -1,0 +1,16 @@
+{
+ "schema": 1,
+ "baseline": "1e9f77c6d5fb275ed31c9b307e998d6d385f6894",
+ "recorded": 130,
+ "messages": 130,
+ "pending": [],
+ "frozen_dialogues_unchanged": 412,
+ "original_narrations_unchanged": 126,
+ "tests": [
+  "node narration-test.mjs",
+  "node averia-test.mjs",
+  "node test.mjs",
+  "node ../tools/build-web.mjs"
+ ],
+ "no_model_or_raw_audio_committed": true
+}

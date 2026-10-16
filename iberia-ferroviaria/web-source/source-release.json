@@ -200,8 +200,8 @@
     },
     {
       "file": "assets/narration-voices.js",
-      "bytes": 12331,
-      "sha256": "86fb95197fad69cded135a9e4fdbc4e4e2eb071615fe5a42bf9e01f0cae3964f"
+      "bytes": 12714,
+      "sha256": "4018db1cc15f95c49f7e34124c7d6cb3d332b93a22a9665e36554114d0565108"
     },
     {
       "file": "voice.js",
