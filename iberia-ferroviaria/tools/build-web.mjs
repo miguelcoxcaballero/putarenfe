@@ -198,9 +198,9 @@ recordings.sort((a,b)=>a.id.localeCompare(b.id));
 const available=recordings.length,pending=412-available;
 assert(available>0&&available<=412);
 const partial=available!==412;
-const gameLabel=partial?`Avance en pruebas · ${available}/412 voces completas · resto con subtítulos`:'412/412 diálogos grabados · '+narration.messages+' mensajes narrados';
+const gameLabel=partial?`Avance en pruebas · ${available}/412 voces completas · resto con subtítulos`:'412/412 diálogos grabados · '+narration.recorded+'/'+narration.messages+' mensajes narrados';
 const listeningLabel=`${available}/412 diálogos grabados · ${partial?'el resto está en producción':'catálogo completo'}`;
-catalogue.audio=audio;catalogue.label=listeningLabel+' · '+narration.messages+' mensajes narrados';
+catalogue.audio=audio;catalogue.label=listeningLabel+' · '+narration.recorded+'/'+narration.messages+' mensajes narrados';
 const narrationNames=new Map(catalogue.characters.map(c=>[c.id,c.name]));
 for(const row of narration.rows){catalogue.rows.push({...row,name:narrationNames.get(row.person),emotion:catalogue.emotions?.[row.mood]||row.mood});catalogue.audio[row.id]=narration.dialogues[row.id].url;}
 const pacoCount=recordings.filter(row=>row.person==='mayor').length;
@@ -322,7 +322,7 @@ const release={schema:1,version:'6.6.0',status:partial?'partial-preview':'comple
   trainWorkshop:{models:14,images:28,duration:5,costFraction:.12,restoredCondition:98,resolution:[1536,1024],photographicReferences:12,approvedViews:26,art:'Individual edits using actual attached photographs; paired camera and cabin geometry; three fictional models marked as concepts'},
   trackWorkshop:{configurations:27,atlases:trackAtlases.map(x=>x.url),gauges:[1668,1435,'1668/1435'],catenary:['none','3kv','25kv'],tracks:[1,2,3]},
   rescue:{photos:rescue.photos.filter(r=>r.kind==='rescue-photo').length,recordedDialogues:rescue.recordings.filter(r=>r.kind==='rescue-recording').length,expectedDialogues:rescue.expectedDialogues},
-  narration:{messages:narration.messages,aliases:narration.aliases,characters:narration.characters,recordings:narration.recordings,wholeMessages:true},
+  narration:{messages:narration.messages,recorded:narration.recorded,pending:narration.pending,aliases:narration.aliases,characters:narration.characters,recordings:narration.recordings,wholeMessages:true},
   assets,recordings,validation:{physicalMP3Hashes:true,pairedFrozenHTMLHashes:true,registeredEOS:true,
     javascriptSyntax:true,relativeURLs:true,browserTested:false,humanListening:false}};
 // Preserve the rollout cache while local previews are rebuilt before publication.

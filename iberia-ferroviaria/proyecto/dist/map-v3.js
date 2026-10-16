@@ -7,7 +7,7 @@ import {RAILWAYS} from './assets/railways.js';
 import * as S from './schedule.js';
 import * as E from './engine.js';
 import * as I from './infra.js';
-import {sunAltitude, constructionStatus, STAGES} from './operations.js';
+import {sunAltitude, constructionStatus, STAGES, tripPosition} from './operations.js';
 
 export const FAMILY_COLOR = {AVE: '#a3123a', Alvia: '#2f6f9f', Regional:'#4c9476'};
 export const GAUGE_COLOR = {std: '#a3123a', ib: '#d08a1c', mixto: '#7a4fb0'};
@@ -617,9 +617,14 @@ export class RailMap {
     }
   }
 
-  trainSprite(c, x, y, angle, color, scale, night, delayed, bus, selected) {
+  trainSprite(c, x, y, angle, color, scale, night, delayed, bus, selected, broken = false) {
     c.save(); c.translate(x, y);
     if (selected) { c.fillStyle = 'rgba(243,179,61,.35)'; c.beginPath(); c.arc(0, 0, 16 * scale, 0, Math.PI * 2); c.fill(); }
+    if (broken) { // tren parado: anillo rojo que late
+      const k = (Math.sin(performance.now() / 260) + 1) / 2;
+      c.strokeStyle = `rgba(226,91,74,${.45 + .5 * k})`; c.lineWidth = 2.5; c.beginPath(); c.arc(0, 0, (11 + 4 * k) * scale, 0, Math.PI * 2); c.stroke();
+      c.fillStyle = 'rgba(226,91,74,.18)'; c.beginPath(); c.arc(0, 0, 11 * scale, 0, Math.PI * 2); c.fill();
+    }
     if (delayed) { c.strokeStyle = 'rgba(214,60,50,.9)'; c.lineWidth = 2; c.beginPath(); c.arc(0, 0, 9 * scale, 0, Math.PI * 2); c.stroke(); }
     if (angle === null) {
       c.fillStyle = color; c.strokeStyle = night > .5 ? '#fff6dc' : '#fffaf2'; c.lineWidth = 1.6;
@@ -651,22 +656,18 @@ export class RailMap {
     let follow = null;
     for (const trip of trips) {
       if (minute < trip.dep || minute > trip.arrival) continue;
-      let pos;
-      if (trip.trip) pos = S.position(trip.trip, minute, trip.delay || 0);
-      else if (trip.coords?.length) {
-        const pts = trip.coords, cum = trip.cum, f = Math.max(0, Math.min(1, (minute - trip.dep - (trip.delay || 0)) / ((trip.scheduled - trip.dep) || 1)));
-        let idx, g;
-        if (cum?.length === pts.length) { const d = f * cum.at(-1); idx = 0; while (idx < pts.length - 2 && cum[idx + 1] < d) idx++; g = (d - cum[idx]) / ((cum[idx + 1] - cum[idx]) || 1); }
-        else { idx = Math.min(pts.length - 2, Math.floor(f * (pts.length - 1))); g = f * (pts.length - 1) - idx; }
-        const a = pts[idx], b = pts[idx + 1] || a;
-        pos = {lon: mix(a[0], b[0], g), lat: mix(a[1], b[1], g), angle: Math.atan2(-(b[1] - a[1]), (b[0] - a[0]) * .77)};
-      }
+      const pos = tripPosition(trip, minute);
       if (!pos) continue;
       const p = this.project(pos.lon, pos.lat);
       if (trip.id === this.selectedTrain) follow = p;
       if (!this.visible(p, 20)) continue;
       const color = FAMILY_COLOR[trip.family] || (trip.line !== undefined && trip.line !== null ? this.lineColor(trip.line) : '#8a3550');
-      this.trainSprite(c, p[0], p[1], pos.angle, color, scale, night, trip.delay > 5, trip.bus, trip.id === this.selectedTrain);
+      this.trainSprite(c, p[0], p[1], pos.angle, color, scale, night, trip.delay > 5, trip.bus, trip.id === this.selectedTrain, pos.broken);
+      if (pos.broken) {
+        const txt = 'AVERÍA'; c.font = '800 10px Figtree'; const wd = c.measureText(txt).width;
+        c.fillStyle = '#c43b2f'; c.beginPath(); c.roundRect(p[0] - wd / 2 - 7, p[1] - 22 - 10 * scale, wd + 14, 17, 4); c.fill();
+        c.fillStyle = '#fff'; c.textAlign = 'center'; c.fillText(txt, p[0], p[1] - 10 - 10 * scale); c.textAlign = 'left';
+      }
       this.trainPoints.push({id: trip.id, x: p[0], y: p[1]});
       if (this.zoom > 28 && trip.label) {
         c.font = '600 11px "IBM Plex Mono", monospace'; const wd = c.measureText(trip.label).width;

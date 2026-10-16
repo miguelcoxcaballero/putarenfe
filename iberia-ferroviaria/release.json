@@ -19,12 +19,12 @@
   "game": {
     "url": "index.html",
     "bytes": 38616,
-    "sha256": "63c18713596baba1dbc2bcc9b5e0b66c4f7d79365ecb903d260358e261013598"
+    "sha256": "86031496edcc69e5cce5e0f8b74ca427b9f8b7e9e724420f0cbd3c702ccef2c9"
   },
   "listening": {
     "url": "dialogos.html",
-    "bytes": 356421,
-    "sha256": "d4a1df076b891df2d7865b2ba6099ad3e099c11cbc92705980ad48aae5342097"
+    "bytes": 356429,
+    "sha256": "f899f970e21b85b0d379b606da23b3ced1c4a274903c1ff190dd3b96a15da73d"
   },
   "trainWorkshop": {
     "models": 14,
@@ -69,8 +69,35 @@
     "expectedDialogues": 70
   },
   "narration": {
-    "messages": 126,
-    "aliases": 132,
+    "messages": 130,
+    "recorded": 126,
+    "pending": [
+      {
+        "key": "breakdown-abandon",
+        "person": "riders",
+        "id": "1igs004",
+        "text": "Le habla Marisa Andén. Trescientas personas en mitad del campo, sin tren, sin autobús y sin noticias. Esto no se olvida: ni en la encuesta ni en las urnas."
+      },
+      {
+        "key": "breakdown-alert",
+        "person": "adif",
+        "id": "5w4asg",
+        "text": "Tren parado en plena vía: avería de material. El viajero espera una solución y el reloj no se para."
+      },
+      {
+        "key": "breakdown-aume",
+        "person": "rival",
+        "id": "vvvq16",
+        "text": "Jajaja. ¿Otro tren tirado, compañero? Tranquilo, que para eso está Autocares Meseta. Mis autocares ya van a recoger a tus viajeros. La factura te la mando al despacho, y a cada uno le doy una tarjeta, por si se cansan de esperar trenes."
+      },
+      {
+        "key": "breakdown-ownbus",
+        "person": "workshop",
+        "id": "a9rrzs",
+        "text": "Autobuses de la casa en camino. Los viajeros llegan por carretera y el tren, al taller. Al menos esta vez no le hemos dado el gusto al de los autocares."
+      }
+    ],
+    "aliases": 136,
     "characters": [
       "treasury",
       "minister",
@@ -3588,14 +3615,14 @@
       "kind": "generated-brand-logo"
     },
     {
-      "url": "assets/game-script-4-9a5b50df7668.js",
-      "bytes": 11711387,
-      "sha256": "9a5b50df76688c04b13d352a478523eba030696291b022f2b0c6e75600549afb"
+      "url": "assets/game-script-4-c810e6d77de7.js",
+      "bytes": 11726346,
+      "sha256": "c810e6d77de77c3c9dd59f17fed28fde49097953d3c5fe085b3d74f25ad21bed"
     },
     {
-      "url": "assets/game-style-0-398e0d4aed96.css",
-      "bytes": 2234284,
-      "sha256": "398e0d4aed968d5d88b3b6537d3bf12ae9cce79d33d5f6346a29c4329ffb7d1c"
+      "url": "assets/game-style-0-d25e12f86ebe.css",
+      "bytes": 2241750,
+      "sha256": "d25e12f86ebef3c86d4abbfb660abf690bcf01f15ffb6207da45570023e47b4a"
     },
     {
       "url": "assets/listening-script-0-28f4ae9d210e.js",
@@ -7740,6 +7767,16 @@
     "humanListening": false
   },
   "retainedAssets": [
+    {
+      "url": "assets/game-script-4-9a5b50df7668.js",
+      "bytes": 11711387,
+      "sha256": "9a5b50df76688c04b13d352a478523eba030696291b022f2b0c6e75600549afb"
+    },
+    {
+      "url": "assets/game-style-0-398e0d4aed96.css",
+      "bytes": 2234284,
+      "sha256": "398e0d4aed968d5d88b3b6537d3bf12ae9cce79d33d5f6346a29c4329ffb7d1c"
+    },
     {
       "url": "assets/game-script-4-95e906b9c7f9.js",
       "bytes": 11711683,

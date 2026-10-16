@@ -34,7 +34,7 @@ export function log(s,title,body){s.log.unshift({month:effectiveMonth(s),title,b
 export function routeCheck(s,r,m){return I.plan(s,r.via,I.profileOf(m));}
 /** Lo que permite la red para AVE, Alvia eléctrico y Alvia híbrido. */
 export function routeOptions(s,r){return {ave:I.plan(s,r.via,I.PROFILES.ave),alvia:I.plan(s,r.via,I.PROFILES.alvia),hybrid:I.plan(s,r.via,I.PROFILES.hybrid)};}
-export const canRun=(s,r,m)=>!!m&&routeCheck(s,r,m).ok;
+export const canRun=(s,r,m)=>!!m&&!m.road&&routeCheck(s,r,m).ok;
 export function isUnlocked(s,r){const o=routeOptions(s,r);return o.ave.ok||o.alvia.ok||o.hybrid.ok;}
 export function product(s,r){const f=r.fleet&&s.fleet.find(f=>f.id===r.fleet);return f?MODEL[f.model].family:null;}
 /** Mejor producto posible hoy: AVE si la red lo permite; si no, Alvia. */
@@ -102,7 +102,7 @@ export function purchaseQuote(s,model,qty,listing=null){
  const m=MODEL[model];qty=Number(qty);if(!m||!Number.isInteger(qty)||qty<1||qty>30)throw Error('Entre 1 y 30 unidades.');
  const price=m.price*(1+Math.max(0,economicYear(s)-2022)*.018),total=price*qty;
  const backlog=s.orders.filter(o=>!o.historical&&o.marketplace?.state!=='used'&&o.delivered<o.qty).reduce((n,o)=>n+o.qty-o.delivered,0);
- const lead=Math.max(m.family==='Regional'?1:16,m.lead+Math.floor(backlog/10)*2+(s.flags.backlog>s.month?8:0)-(s.flags.factory>s.month?6:0));
+ const lead=Math.max(m.family==='Regional'||m.road?1:16,m.lead+Math.floor(backlog/10)*2+(s.flags.backlog>s.month?8:0)-(s.flags.factory>s.month?6:0));
  const standard={total,deposit:total*.3,remaining:total*.7,lead,last:lead+Math.ceil(qty/2)-1,unit:price};
  let quote=listing?M.quoteListing(s,model,qty,listing,standard):standard;
  if(s.tenfe?.game){const factor=quote.item?.state==='used'&&s.tenfe.game.tech.includes('segunda')?.75:1;quote={...quote,total:quote.total*factor,deposit:quote.deposit*factor,remaining:quote.remaining*factor,unit:quote.unit*factor,lead:Math.min(3,quote.lead),last:Math.min(3,quote.lead)+Math.ceil(qty/2)-1};}

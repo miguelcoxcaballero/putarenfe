@@ -15,7 +15,7 @@ export const TERRITORY = ['sal', 'bad', 'sor', 'lug', 'fer', 'avi', 'jae', 'hue'
 const HOT = ['cor', 'sev', 'bad', 'mer', 'cac', 'pla', 'jae', 'lin'];
 const PEOPLE = ['president', 'minister', 'successor', 'treasury', 'adif', 'workshop', 'riders', 'mayor', 'rival'];
 const MOD_KINDS = ['fare', 'demand', 'service', 'speed', 'rel', 'risk', 'overtime', 'staffed', 'unstaffed', 'pilot', 'inspected', 'oncall', 'nocrew', 'transfer', 'wear'];
-const NEWS_KINDS = ['claim', 'won', 'lost', 'declined', 'work', 'workStart', 'delay', 'accel', 'promise', 'broken', 'kept', 'refit', 'breakdown', 'incident', 'cut', 'open', 'fare', 'affront', 'concession', 'grant', 'eu', 'misuse', 'reqExpired', 'preventive', 'event', 'dither', 'station', 'vanity'];
+const NEWS_KINDS = ['aume', 'claim', 'won', 'lost', 'declined', 'work', 'workStart', 'delay', 'accel', 'promise', 'broken', 'kept', 'refit', 'breakdown', 'incident', 'cut', 'open', 'fare', 'affront', 'concession', 'grant', 'eu', 'misuse', 'reqExpired', 'preventive', 'event', 'dither', 'station', 'vanity'];
 const safeId = x => typeof x === 'string' && /^[a-zA-Z0-9-]{1,80}$/.test(x);
 const fmt = x => Number(x).toLocaleString('es-ES', {maximumFractionDigits: Math.abs(x) < 10 ? 2 : 1});
 const pct = x => Math.round(x * 100);

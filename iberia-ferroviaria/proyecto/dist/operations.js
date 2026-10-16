@@ -51,7 +51,36 @@ export const RESPONSES = {
   team: {label: 'Movilizar equipo de intervención', cost: .018, factor: .3, note: 'Reduce la demora al 30 %.'},
   bus: {label: 'Plan alternativo por carretera', cost: .009, factor: .85, note: 'Mantiene la demora, pero protege la satisfacción del viajero.'},
   wait: {label: 'Esperar a la resolución ordinaria', cost: 0, factor: 1, note: 'Sin coste inmediato.'},
+  // Avería en ruta: el tren no se mueve; la decisión es qué pasa con los viajeros.
+  abandon: {label: 'Dejar a los viajeros a su suerte', cost: 0, factor: 1, note: 'Esperan al tren de rescate. La satisfacción cae y Marisa Andén lo cuenta.', done: 'Los viajeros se quedaron esperando en la vía.'},
+  ownbus: {label: 'Mandar mis autobuses', cost: .004, factor: .7, note: 'Autobuses de Tenfe desde la cochera más cercana. Protege la satisfacción.', done: 'Tus autobuses recogieron a los viajeros.'},
+  aume: {label: 'Llamar a Autocares Meseta', cost: .03, factor: .7, note: 'Íñigo manda sus autocares hoy mismo y te pasa la factura.', done: 'Autocares Meseta recogió a tus viajeros y Íñigo se lo pasó en grande.'},
 };
+/** Respuestas que admite cada incidencia: una avería en ruta se resuelve por carretera; el resto (y la avería guiada del tutorial), con el equipo. */
+export function responsesFor(s, x) {
+  const keys = x.type === 'breakdown' && x.id !== 'inc-tut' ? ['abandon', 'ownbus', 'aume'] : ['team', 'bus', 'wait'];
+  return keys.map(k => [k, RESPONSES[k]]);
+}
+export const hasBuses = s => s.fleet.some(f => MODEL[f.model]?.road && f.qty > 0);
+/** Posición de un viaje: durante la avería el tren se queda quieto donde se paró y luego sigue con el retraso. */
+export function tripPosition(trip, minute) {
+  if (minute < trip.dep || minute > trip.arrival) return null;
+  const hold = !!trip.broken && minute >= trip.broken.at && minute < trip.broken.until;
+  const m = hold ? trip.broken.at : minute, delay = hold ? trip.broken.base : (trip.delay || 0);
+  let pos = null;
+  if (trip.trip) { const p = S.position(trip.trip, m, delay); if (p) pos = {lon: p.lon, lat: p.lat, angle: p.angle, stopped: p.stopped, at: p.at, next: p.next}; }
+  else if (trip.coords?.length) {
+    const pts = trip.coords, cum = trip.cum, f = Math.max(0, Math.min(1, (m - trip.dep - delay) / ((trip.scheduled - trip.dep) || 1)));
+    let idx, g;
+    if (cum?.length === pts.length) { const d = f * cum.at(-1); idx = 0; while (idx < pts.length - 2 && cum[idx + 1] < d) idx++; g = (d - cum[idx]) / ((cum[idx + 1] - cum[idx]) || 1); }
+    else { idx = Math.min(pts.length - 2, Math.floor(f * (pts.length - 1))); g = f * (pts.length - 1) - idx; }
+    const a = pts[idx], b = pts[idx + 1] || a, mix = (p, q, t) => p + (q - p) * t;
+    pos = {lon: mix(a[0], b[0], g), lat: mix(a[1], b[1], g), angle: Math.atan2(-(b[1] - a[1]), (b[0] - a[0]) * .77)};
+  }
+  if (!pos) return null;
+  pos.broken = hold;
+  return pos;
+}
 
 const planCache = {key: null, trips: null};
 const hashCode = x => [...String(x)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
@@ -114,7 +143,7 @@ export function servicePlan(s) {
       if (t.route !== x.route) continue;
       let d = 0;
       if (x.type === 'breakdown' || !x.type) {
-        if (t.id === x.target) d = x.delay;
+        if (t.id === x.target) { d = x.delay; t.broken = {at: x.at, until: x.at + Math.round(d * factor), base: t.delay}; }
         else if (t.dep > x.at && t.dep < x.at + 70) d = Math.round(x.delay * .3);
       } else if (x.type === 'weather') {
         if (t.dep + t.duration > x.at && t.dep < x.at + x.span) d = x.delay;
@@ -209,7 +238,10 @@ export function resolveIncident(s, id, option = 'team') {
   const op = ensureOps(s), incident = op.incidents.find(x => x.trip === id);
   const response = RESPONSES[option];
   if (!response || !incident || op.phase !== 'running' || op.minute < incident.at || op.resolved.includes(id)) throw Error('No hay una incidencia pendiente que atender.');
+  if (!responsesFor(s, incident).some(([k]) => k === option)) throw Error('Esta avería se resuelve decidiendo qué hacer con los viajeros.');
+  if (option === 'ownbus' && !hasBuses(s)) throw Error('No tienes ningún autobús en la flota: cómpralos en Trenes Pop.');
   if (response.cost) E.spend(s, response.cost);
+  if (option === 'aume') V.note(s, 'aume', {route: incident.route});
   op.resolved.push(id);
   op.choices[id] = option;
 }
@@ -220,10 +252,11 @@ export function endDay(s) {
   if (op.phase !== 'running' || op.minute < dayBounds(servicePlan(s)).last) throw Error('La jornada termina cuando llega el último tren.');
   const trips = servicePlan(s), late = trips.filter(t => t.delay > 5).length, b = E.balance(s), kind = dayKind(s);
   const unattended = op.incidents.filter(x => !op.resolved.includes(x.trip)).length;
-  const protectedByBus = op.incidents.filter(x => op.choices[x.trip] === 'bus').length;
+  const protectedByBus = op.incidents.filter(x => ['bus', 'ownbus', 'aume'].includes(op.choices[x.trip])).length + op.incidents.filter(x => op.choices[x.trip] === 'ownbus').length;
+  const abandoned = op.incidents.filter(x => op.choices[x.trip] === 'abandon').length;
   const penalties = trips.reduce((v, t) => v + t.delay * .0004, 0) + (op.priority === 'punctual' ? .009 : 0);
   s.cash -= penalties;
-  s.satisfaction = E.clamp(s.satisfaction - (late / Math.max(1, trips.length)) * .5 - unattended * .15 + protectedByBus * .05, 0, 100);
+  s.satisfaction = E.clamp(s.satisfaction - (late / Math.max(1, trips.length)) * .5 - unattended * .15 - abandoned * .45 + protectedByBus * .05, 0, 100);
   const factor = {L: 1.08, S: .78, D: .7}[kind];
   const byRoute = {};
   for (const t of trips) byRoute[t.route] = (byRoute[t.route] || 0) + 1;

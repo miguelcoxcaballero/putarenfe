@@ -55,7 +55,10 @@ assert.equal(player.speaking,null,'returning to an already heard stage still can
 narrator.reset();
 if(!process.env.NARRATION_PREPRODUCTION){
 const dir='./dist/assets/narracion/',meta=JSON.parse(fs.readFileSync(dir+'manifest.json'));
-assert.equal(meta.recorded,unique.size);assert.equal(meta.expected,unique.size);
+assert.equal(meta.recorded,meta.takes.length);assert(meta.recorded<=unique.size);
+// Mensajes sin grabar todavía: solo los de la avería en ruta, que se publican con subtítulos hasta que lleguen sus voces.
+const recordedIds=new Set(meta.takes.map(t=>t.id)),pending=Object.entries(MESSAGES).filter(([,m])=>!recordedIds.has(clipId(m.person,m.text))).map(([k])=>k).sort();
+assert.deepEqual(pending,['breakdown-abandon','breakdown-alert','breakdown-aume','breakdown-ownbus'],'solo las voces de la avería están pendientes de grabar');
 for(const take of meta.takes){
  const m=unique.get(take.id);assert(m);assert.equal(take.person,m.person);
  assert.equal(take.raw,m.text);assert.equal(take.text,speechText(m.text));assert.equal(take.eos_observation.eos_found,true);

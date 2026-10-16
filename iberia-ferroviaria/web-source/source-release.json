@@ -75,13 +75,13 @@
     },
     {
       "file": "brands.js",
-      "bytes": 2231051,
-      "sha256": "284f2d977890e60070e799ddeab1f3d58f69412f4fe74086e7878fb818fa083e"
+      "bytes": 2231548,
+      "sha256": "d899e1834dd9d8363e70480d5d83eadd8a0de6e1fd7453b9832dd9712c1634c0"
     },
     {
       "file": "data.js",
-      "bytes": 14269,
-      "sha256": "20aea0465a71355b0079ff5356d3827d89cd9e875fa6ee1f395c21f2b796861b"
+      "bytes": 14624,
+      "sha256": "ef2408cc00905346377636270f66db9c11c740e83d8ceb42a2240519477e8507"
     },
     {
       "file": "story.js",
@@ -120,8 +120,8 @@
     },
     {
       "file": "marketplace.js",
-      "bytes": 19768,
-      "sha256": "1aa8f723c5564544156a1e88c37f22c48b6f987914da302bc2f80769241a2637"
+      "bytes": 19919,
+      "sha256": "47f525276e9e76857fddb0772c690be9eb4b38ad11ebe9676b429ec0b5b96690"
     },
     {
       "file": "tycoon.js",
@@ -130,8 +130,8 @@
     },
     {
       "file": "verdad.js",
-      "bytes": 84007,
-      "sha256": "8458cae9111f60e49df40a877b7c351895478bc56df1caac4421e97291923483"
+      "bytes": 84015,
+      "sha256": "bacf03f5df69f5687ddb0a3ebf4c50eb3089c37f5f74c5683c5dc6e7767a6566"
     },
     {
       "file": "rescate-data.js",
@@ -155,18 +155,18 @@
     },
     {
       "file": "engine.js",
-      "bytes": 49669,
-      "sha256": "74e5b5affe902febf8029d359fbcaf78903501f83708b1354f4e3181af9deb6d"
+      "bytes": 49686,
+      "sha256": "54112c58f10222810454fc141227d454af63320e7ef4a648aff4200ed1576764"
     },
     {
       "file": "operations.js",
-      "bytes": 20818,
-      "sha256": "eb62c67734b5014e751cd3eb4f269128d63de70e4679823b565d87ab4ddb1fdf"
+      "bytes": 23939,
+      "sha256": "3f28cb8cc91c2a00219819d49d493c8007d5a962490cdc77171aa63306e86d2a"
     },
     {
       "file": "map-v3.js",
-      "bytes": 53020,
-      "sha256": "af0972c6d95672111048ab4f2ec4604176a886f1d928899a742d464989248e3d"
+      "bytes": 53084,
+      "sha256": "9dc564d77c3b9c2a4d5578a1bf75494127c60126ec3a2577a5677457b2069ea8"
     },
     {
       "file": "train-art.js",
@@ -180,8 +180,8 @@
     },
     {
       "file": "train3d.js",
-      "bytes": 2677,
-      "sha256": "b0328502d582b9ccb3abaa89cbc607f0bfd3858bbd2aa340d4910961047717dd"
+      "bytes": 3015,
+      "sha256": "fcf5c8dbb2fc8d856844e295f80cb064ec64f3aaf299d43efee8350eb4bd64c0"
     },
     {
       "file": "city-art.js",
@@ -215,8 +215,8 @@
     },
     {
       "file": "sfx.js",
-      "bytes": 29554,
-      "sha256": "30e424dca2760fa96f84b0d9ea491b05c58a3bc5e45d0dc3f42ca26abe5b6533"
+      "bytes": 29705,
+      "sha256": "8e3342571e9dfeddb15ee75adf2d9b210adcd81f5e93fc724b7decd67ae82b06"
     },
     {
       "file": "assets/portraits.js",
@@ -250,8 +250,8 @@
     },
     {
       "file": "narration-data.js",
-      "bytes": 21184,
-      "sha256": "141f00c278a4b3bffca21525a7dcfbd18da915bae93fb752ad019a8f7ee5911a"
+      "bytes": 22278,
+      "sha256": "dec57faaee0cbb366f743d5745a4e70ccbe54cf53715a1029b0982035b464574"
     },
     {
       "file": "narration-runtime.js",
@@ -275,18 +275,18 @@
     },
     {
       "file": "train-refit.js",
-      "bytes": 20399,
-      "sha256": "b7b0edac3eeaeea1342c378ad6aab27e2bf5a01c299d596586ebcf25a09503e6"
+      "bytes": 20418,
+      "sha256": "48d0ea4304f985299ccc370adcca88264f2d9d779ee12ed49c5ca5c66f1a88e5"
     },
     {
       "file": "app.js",
-      "bytes": 180688,
-      "sha256": "9e68bd1194ee6b733fc468125174195e7ad2fe081dfbcce8f27ff5bf29d62119"
+      "bytes": 189812,
+      "sha256": "dbb67313913c5fe208a1e51f41c09bf90cc636e9fc243cb200d3f866129c2626"
     },
     {
       "file": "style-v3.css",
-      "bytes": 122116,
-      "sha256": "b964f8163d0a770aec2920c74ba56d10f6bd8641c5766f4ce2b7128790259590"
+      "bytes": 129335,
+      "sha256": "37e1244cfa38c08584aaef050c6ef4706211c05a119d9da3f0deff690cc3decb"
     },
     {
       "file": "main-menu.css",
@@ -300,8 +300,8 @@
     },
     {
       "file": "marketplace.css",
-      "bytes": 19825,
-      "sha256": "665f7f36cc510f9197af89d7f80553a58b40f9c278b61356e144ca665e75ca94"
+      "bytes": 20072,
+      "sha256": "11b04c9a28cc044e78e16b60daf5737fd552f51ca45a2999b0433224957025b6"
     },
     {
       "file": "train-refit.css",

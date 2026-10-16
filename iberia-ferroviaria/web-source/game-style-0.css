@@ -1002,6 +1002,79 @@ label[for="importSave"]{display:block;margin-top:22px;font:600 12px var(--sans);
  .adif-top{padding:12px 14px}
  body:has(#drawer:not(.hidden)) #toast{bottom:92px!important}
 }
+/* 6.7 · Menús claros: pestañas grandes con icono y pista, filtros en chips, listas con la acción en la fila */
+.drawer .menu-nav.tabs{display:flex!important;gap:6px!important;margin:0 0 10px!important;padding:0!important;border:0!important;background:none!important;overflow-x:auto;position:sticky;top:0;z-index:2;background:var(--g1)!important}
+.drawer .menu-nav.tabs button{position:relative;display:flex!important;flex-direction:column;align-items:center;gap:7px;flex:1 1 0;min-width:112px;padding:14px 10px 12px!important;border:0!important;border-radius:4px!important;background:#ffffff06!important;color:var(--txt-2)!important;font:600 12.5px var(--sans)!important;letter-spacing:.08em!important;text-transform:uppercase;white-space:nowrap;box-shadow:none!important}
+.drawer .menu-nav.tabs button svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.drawer .menu-nav.tabs button:hover{background:#ffffff10!important;color:var(--txt)!important}
+.drawer .menu-nav.tabs button.active{background:var(--mag)!important;color:#fff4ea!important}
+.drawer .menu-nav.tabs button.active::after{content:'';position:absolute;left:50%;bottom:-7px;width:12px;height:12px;background:var(--mag);transform:translateX(-50%) rotate(45deg)}
+.drawer .menu-nav.tabs button b{position:absolute;top:8px;right:8px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--cyan);color:#1a1408;font:700 11px/20px var(--sans);letter-spacing:0;text-transform:none}
+.drawer .menu-nav.tabs button b.urgent{background:#e25b4a;color:#fff}
+.drawer .menu-nav.tabs button.active b{background:#fff4ea;color:var(--mag)}
+.menu-hint{margin:16px 0 22px;padding:0 0 16px;border-bottom:1px solid var(--line);font:400 16px/1.5 var(--sans);color:var(--txt-2)}
+.menu-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 18px}
+.menu-tools input[type=search]{flex:1 1 220px;min-width:0;height:40px;padding:0 14px;border:0;border-bottom:1px solid var(--line-2);border-radius:0;background:transparent;color:var(--txt);font:15px var(--sans)}
+.menu-tools .btn{margin-left:auto}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.fchip{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border:1px solid var(--line-2);border-radius:999px;background:transparent;color:var(--txt-2);font:600 13px var(--sans);cursor:pointer}
+.fchip i{font-style:normal;font-size:11.5px;color:var(--txt-2);opacity:.8}
+.fchip:hover{color:var(--txt);border-color:var(--cyan)}
+.fchip.active{background:var(--cyan);border-color:var(--cyan);color:#1a1408}.fchip.active i{color:#1a1408;opacity:.75}
+.svc-group{margin:26px 0 6px}.svc-group:first-of-type{margin-top:6px}
+.svc-group h2{display:flex;align-items:baseline;gap:10px;margin:0;font:600 22px/1.2 var(--serif);color:var(--txt)}
+.svc-group h2 span{font:500 14px var(--sans);color:var(--txt-2)}
+.svc-group p{margin:4px 0 0;font-size:13.5px;color:var(--txt-2)}
+.svc-list{display:flex;flex-direction:column}
+.svc{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:18px;padding:4px 0;border-bottom:1px solid var(--line)}
+.svc:last-child{border-bottom:0}
+.svc-main{display:grid;grid-template-columns:78px 1fr;grid-template-areas:'chip name' 'chip state';align-items:center;column-gap:16px;row-gap:3px;min-width:0;padding:12px 0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;font:inherit}
+.svc-main:hover .svc-name{color:var(--cyan)}
+.svc-chip{grid-area:chip}.svc-chip .chip{min-width:70px;height:26px;font-size:12px}
+.svc-name{grid-area:name;font:600 19px/1.2 var(--serif);color:var(--txt)}
+.svc-state{grid-area:state;font-size:13.5px;color:var(--txt-2)}.svc-state b{color:var(--txt);font-weight:700}.svc-state em{font-style:normal}
+.svc-money{font:600 18px var(--serif);white-space:nowrap}.svc-money small{font:500 12px var(--sans);color:var(--txt-2);margin-left:2px}
+.svc-act{display:flex;gap:8px;align-items:center;justify-content:flex-end;min-width:120px}
+.svc.blocked .svc-name{color:var(--txt-2)}
+.map-links{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;margin:28px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--txt-2)}
+.map-links .linkish{color:var(--cyan);font-weight:600}
+.day-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin:18px 0 8px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.btn.big{min-height:48px;padding:0 24px;font-size:15px}
+.day-opt{display:flex;align-items:center;gap:8px;margin:0;font-size:13.5px;color:var(--txt-2)}
+.day-opt select{height:36px}
+.day-actions .day-opt:first-of-type{margin-left:auto}
+.vsec{margin:30px 0 12px;font:600 21px/1.2 var(--serif);color:var(--txt)}.vsec:first-child{margin-top:4px}
+.drawer .figures{margin-top:4px}
+@media(max-width:700px){
+ .drawer .menu-nav.tabs button{min-width:84px;padding:10px 6px 9px!important;font-size:10.5px!important;letter-spacing:.04em!important}
+ .drawer .menu-nav.tabs button svg{width:20px;height:20px}
+ .menu-hint{font-size:14.5px;margin:12px 0 16px}
+ .svc{grid-template-columns:1fr auto;gap:8px 12px}
+ .svc-money{grid-column:1/-1;padding-bottom:10px}
+ .svc-main{grid-template-columns:62px 1fr}.svc-chip .chip{min-width:56px}
+ .svc-name{font-size:17px}
+ .menu-tools .btn{margin-left:0}
+ .day-actions .day-opt:first-of-type{margin-left:0}
+}
+/* Referencias de las reformas: texto claro sobre el fondo oscuro del comparador */
+#modal .refit-references,#modal .refit-references p,#modal .refit-references li,.drawer .refit-references,.drawer .refit-references p,.drawer .refit-references li{color:var(--txt-2)!important}
+#modal .refit-references summary,.drawer .refit-references summary{color:var(--txt)!important}
+#modal .refit-references a,.drawer .refit-references a{color:var(--cyan)!important}
+
+/* 6.7 · Avería en ruta: ficha del tren parado y decisión sobre los viajeros */
+.breakdown{margin:0 0 18px;padding:0 0 16px;border-bottom:1px solid var(--line)}
+.breakdown-photo{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;margin-bottom:12px;background:#0d0f12}
+.breakdown-head .kicker{display:block;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#e25b4a}
+.breakdown-head h3{margin:4px 0 6px;font:600 22px/1.2 var(--serif);color:var(--txt)}
+.breakdown-head p{margin:0 0 12px;font-size:14px;line-height:1.5;color:var(--txt-2)}
+.breakdown-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.breakdown-options .choice{margin:0!important;padding:12px 14px!important;border:0!important;border-left:3px solid var(--mag)!important;background:#ffffff08!important;border-radius:2px!important}
+.breakdown-options .choice:hover:not(:disabled){background:#ffffff12!important;border-left-color:var(--cyan)!important}
+.breakdown-options .choice strong{display:flex;align-items:center;gap:10px;font:600 16px var(--serif);color:var(--txt)}
+.breakdown-options .choice span{display:block;margin-top:4px;font-size:12.5px;color:var(--txt-2)}
+.breakdown-options .choice:disabled{opacity:.45}
+.aume-logo{width:62px!important;height:auto;flex:0 0 auto}
+.breakdown.solved .narration-card{padding:10px 0 0}
 
 /* Full-screen game menu. Local photograph; no external request at startup. */
 dialog#modal:has(.main-menu-shell){inset:0;margin:0;width:100vw;max-width:none;height:100vh;height:100dvh;max-height:none;border:0;border-radius:0;background:#111c26;color:#edf2f5;box-shadow:none;overflow:auto}
@@ -1360,6 +1433,9 @@ dialog#modal:has(.trenespop-modal){background:#1a2221!important;border-color:#2d
 .drawer .trenespop select,.trenespop .tp-filter select,.trenespop .tp-filters select{background:#1f2827!important;border:1px solid #2d3836!important;border-radius:999px!important;padding:9px 34px 9px 16px!important;color:#f3f6f5!important;font-size:14px}
 .drawer .trenespop select:hover{border-color:#13c1ac!important}
 .drawer .trenespop .btn:not(.primary){background:#1f2827!important;border:1px solid #2d3836!important;border-radius:999px!important;color:#f3f6f5!important;padding:9px 16px!important}
+/* Foto que no carga: se ve el dibujo de reserva en lugar de un hueco */
+.tp-photo>[hidden],.tp-detail-photo>[hidden],.train-photo-pending+[hidden]{display:none!important}
+.tp-photo>svg.train-art,.tp-detail-photo>svg.train-art{background:#e9eceb}
 
 /* Visual workshop: the original and refurbished interior share one viewpoint. */
 .refit-intro{padding:18px;background:linear-gradient(125deg,#f7f0df,#eee7da);border:1px solid #ded2be;border-radius:12px;margin:12px 0 18px}

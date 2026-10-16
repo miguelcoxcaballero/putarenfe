@@ -1,4 +1,5 @@
 import * as N from './narration-runtime.js';
+import {brandLogo} from './brands.js';
 import * as J from './conexiones.js';
 import * as JUI from './conexiones-ui.js';
 import * as Tracks from './track-preview.js';
@@ -429,7 +430,7 @@ function cityInspector() {
   }).join('');
   const body = `<div class="city-hero">${citySkyline(id, c.name, pop || 30, level, light, m)}<div class="city-title"><span>${pop ? (pop >= 1000 ? n(pop / 1000, 1) + ' millones de habitantes' : n(pop) + ' mil habitantes') : 'Localidad'}</span><h2>${esc(c.name)}</h2></div></div>
   <div class="city-stats"><div><b>${active.length}/${routes.length}</b><span>conexiones</span></div><div><b>${n(pax / 30)}</b><span>viajeros/día</span></div><div><b class="${monthly >= 0 ? 'pos' : 'neg'}">${signed(monthly)}</b><span>al mes</span></div></div>
-  ${incidents.map(x => `<div class="req red"><b>${incidentGlyph(x)} ${esc(x.reason)}</b><span>${esc(routeName(state.routes.find(r => r.id === x.route)))} · demora ${x.delay} min</span><div class="actions">${Object.entries(O.RESPONSES).map(([k, v]) => `<button class="btn small ${k === 'team' ? 'primary' : ''}" data-action="respond" data-id="${x.trip}" data-option="${k}">${esc(v.label)}</button>`).join('')}</div></div>`).join('')}
+  ${incidents.map(x => `<div class="req red"><b>${incidentGlyph(x)} ${esc(x.reason)}</b><span>${esc(routeName(state.routes.find(r => r.id === x.route)))} · demora ${x.delay} min</span><div class="actions">${O.responsesFor(state, x).map(([k, v]) => `<button class="btn small ${k === 'team' ? 'primary' : ''}" data-action="respond" data-id="${x.trip}" data-option="${k}" ${k === 'ownbus' && !O.hasBuses(state) ? 'disabled' : ''}>${esc(v.label)}</button>`).join('')}</div></div>`).join('')}
   ${surges.map(x => `<div class="req gold"><b>${glyph('bolt')} ${esc(x.reason)}</b><span>Refuerza la conexión con ${esc(otherEnd(state.routes.find(r => r.id === x.route), id))} hasta ${x.need} salidas antes de las ${clock(x.until)}.</span><em>+${n(x.bonus * 1000)} mil €</em></div>`).join('')}
   ${reqs.map(q => `<div class="req"><b>${glyph('alert')} ${esc(reqText(q))}</b><span>${reqStatus(q)} · recompensa</span><em>+${q.reward} M€</em>${q.serving ? '' : `<div class="actions"><button class="btn small primary" data-action="request" data-id="${q.id}">${q.type === 'station' ? 'Mejorar estación' : q.type === 'open' ? 'Abrir conexión' : q.type === 'fare' ? 'Bajar tarifa' : q.type === 'ave' ? 'Poner un AVE' : 'Poner más trenes'}</button>${q.type === 'ave' ? `<button class="btn small ghost" data-action="route" data-id="${q.route}">Ver qué falta</button>` : ''}</div>`}</div>`).join('')}
   <h3 class="sub">Conexiones</h3><div class="conns">${cards || '<p class="muted">Sin conexiones ferroviarias en el juego.</p>'}</div>
@@ -658,6 +659,7 @@ function checkIncidents() {
       if (ui.autoPause) pause();
       showAlert(x);
       if (screen === 'ops') renderDrawer();
+      if (x.type === 'breakdown' && x.id !== 'inc-tut' && !tut && !$('modal').open) goToTrain(x.target);
     }
   }
 }
@@ -665,7 +667,7 @@ function showAlert(x, rr) {
   const r = rr || state.routes.find(r => r.id === x.route);
   if(screen){
     document.querySelector('.alert-pill')?.remove();renderNav();
-    toast(x.type==='surge'?`${x.reason}: ${x.place}. Revisa la ciudad en el mapa.`:`Incidencia: ${x.reason}. Revisa Jornada para decidir.`);
+    toast(x.type==='surge'?`${x.reason}: ${x.place}. Revisa la ciudad en el mapa.`:x.type==='breakdown'&&x.id!=='inc-tut'?N.message('breakdown-alert').text:`Incidencia: ${x.reason}. Revisa Jornada para decidir.`);
     return;
   }
   if (x.type === 'surge') {
@@ -677,9 +679,32 @@ function showAlert(x, rr) {
   document.querySelector('.alert-pill')?.remove();
   const el = document.createElement('div');
   el.className = 'alert-pill';
-  el.innerHTML = `<span>${incidentGlyph(x)}</span><span><b>${esc(x.reason)}</b> · ${esc(routeName(r))}${x.place ? ' · ' + esc(x.place) : ''}</span><button class="btn small gold" data-action="open-incidents">Decidir</button>`;
+  const breakdown = x.type === 'breakdown' && x.id !== 'inc-tut';
+  el.innerHTML = `<span>${incidentGlyph(x)}</span><span><b>${esc(x.reason)}</b> · ${esc(routeName(r))}${x.place ? ' · ' + esc(x.place) : ''}</span>${breakdown ? `<button class="btn small gold" data-action="incident-train" data-id="${esc(x.target)}">Ir al tren</button>` : '<button class="btn small gold" data-action="open-incidents">Decidir</button>'}`;
   $('game').appendChild(el);
   clearTimeout(alertTimer); alertTimer = setTimeout(() => el.remove(), 12000);
+}
+/** Lleva al tren en el mapa: pausa, lo selecciona, acerca la vista y abre su ficha. */
+function goToTrain(id) {
+  const t = findTrip(id); if (!t) return;
+  pause(); screen = null; inspect = {type: 'train', id}; map.selectedTrain = id; map.follow = false;
+  const pos = O.tripPosition(t, currentMinute()); if (pos) map.focusAt(pos.lon, pos.lat, Math.max(map.zoom, 36));
+  document.querySelector('.alert-pill')?.remove();
+  render();
+}
+const BREAKDOWN_VOICE = {aume: 'breakdown-aume', abandon: 'breakdown-abandon', ownbus: 'breakdown-ownbus'};
+/** Ficha de la avería dentro del tren: qué ha pasado y qué hacer con los viajeros. */
+function breakdownPanel(t, minute) {
+  const op = state.ops, x = op.incidents.find(x => x.target === t.id && x.type === 'breakdown' && x.id !== 'inc-tut');
+  if (!x || op.phase !== 'running' || minute < x.at) return '';
+  const solved = op.resolved.includes(x.trip), choice = op.choices?.[x.trip], picture = solved ? ({aume: 'autobus-aume', ownbus: 'autobus-tenfe-rescate', abandon: 'viajeros-tirados'}[choice] || 'evento-averia') : 'evento-averia';
+  const options = O.responsesFor(state, x).map(([k, v]) => {
+    const noBus = k === 'ownbus' && !O.hasBuses(state);
+    return `<button class="choice" data-action="respond" data-id="${esc(x.trip)}" data-option="${k}" ${noBus || state.ended ? 'disabled' : ''}><strong>${k === 'aume' ? brandLogo('AUME', {className: 'aume-logo', decorative: true}) : ''}${esc(v.label)}</strong><span>${noBus ? 'No tienes autobuses. ' : ''}${esc(v.note)} · ${v.cost ? n(v.cost * 1000) + ' mil €' : 'sin coste'}</span></button>`;
+  }).join('');
+  return `<section class="breakdown ${solved ? 'solved' : ''}"><img class="breakdown-photo" src="assets/rescate/${picture}.webp?v=6.7" alt="" loading="lazy" onerror="this.remove()">
+  <div class="breakdown-head"><span class="kicker">Avería · ${clock(x.at)}${x.place ? ' · ' + esc(x.place) : ''}</span><h3>${esc(x.reason)}</h3><p>${solved ? esc(O.RESPONSES[choice]?.done || O.RESPONSES[choice]?.label || 'Resuelta') : `Tren parado en plena vía. Unos ${x.delay} minutos de demora y ${n(t.seats || 300)} viajeros esperando. ¿Qué hacemos con ellos?`}</p></div>
+  ${solved ? (BREAKDOWN_VOICE[choice] ? N.card(BREAKDOWN_VOICE[choice]) : '') : `<div class="breakdown-options">${options}</div>${O.hasBuses(state) ? '' : '<button class="btn small" data-action="market-buses">Comprar autobuses en Trenes Pop</button>'}`}</section>`;
 }
 function finishDay() {
   try { O.endDay(state); } catch (e) { return toast(e.message); }
@@ -847,6 +872,13 @@ function header(kicker, title, text = '') {
   const name = !kicker || (title && words(title) <= words(kicker)) ? title : kicker;
   return `<header><div><h1>${name}</h1></div><button class="close" data-action="close-drawer" aria-label="Cerrar">×</button></header>`;
 }
+// Pestañas grandes de cada menú: icono, nombre, aviso numérico y una línea que dice qué se hace ahí.
+function menuNav(action, tabs, active) {
+  const nav = tabs.map(t => `<button data-action="${action}" data-id="${t.id}" class="${t.id === active ? 'active' : ''}" ${t.id === active ? 'aria-current="page"' : ''}>${icon(t.icon)}<span>${t.label}</span>${t.badge ? `<b class="${t.urgent ? 'urgent' : ''}">${t.badge}</b>` : ''}</button>`).join('');
+  const cur = tabs.find(t => t.id === active) || tabs[0];
+  return `<nav class="menu-nav tabs" aria-label="Secciones">${nav}</nav>${cur?.hint ? `<p class="menu-hint">${cur.hint}</p>` : ''}`;
+}
+const filterChips = (action, items, active) => `<div class="fchips">${items.map(([k, t, c]) => `<button class="fchip ${k === active ? 'active' : ''}" data-action="${action}" data-id="${k}">${t}${c ? `<i>${c}</i>` : ''}</button>`).join('')}</div>`;
 function renderDrawer(resetScroll = false) {
   const el = $('drawer');
   if (!screen) { el.classList.add('hidden'); return; }
@@ -894,10 +926,11 @@ function opsPage() {
     const r = state.routes.find(r => r.id === x.route), choice = op.choices?.[x.trip], solved = op.resolved.includes(x.trip);
     return `<div class="incident"><div class="split"><strong>${incidentGlyph(x)} ${esc(x.reason)}</strong><span class="status ${solved ? 'on' : 'late'}">${solved ? esc(O.RESPONSES[choice || 'team'].label) : 'Pendiente'}</span></div>
     <p>${esc(routeName(r))} · ${esc(x.label || '')}${x.place ? ' · cerca de ' + esc(x.place) : ''} · ${clock(x.at)} · demora estimada ${x.delay} min${x.type === 'weather' ? ' durante ' + Math.round(x.span / 60) + ' h' : ''}</p>
-    ${solved || op.phase !== 'running' ? '' : `<div class="actions">${Object.entries(O.RESPONSES).map(([k, v]) => `<button class="btn small ${k === 'team' ? 'primary' : ''}" data-action="respond" data-id="${x.trip}" data-option="${k}" title="${esc(v.note)}">${esc(v.label)}${v.cost ? ' · ' + n(v.cost * 1000) + ' mil €' : ''}</button>`).join('')}</div>`}</div>`;
+    ${solved || op.phase !== 'running' ? '' : `<div class="actions">${x.type === 'breakdown' && x.id !== 'inc-tut' ? `<button class="btn small primary" data-action="incident-train" data-id="${esc(x.target)}">Ir al tren</button>` : ''}${O.responsesFor(state, x).map(([k, v]) => `<button class="btn small ${k === 'team' ? 'primary' : ''}" data-action="respond" data-id="${x.trip}" data-option="${k}" title="${esc(v.note)}" ${k === 'ownbus' && !O.hasBuses(state) ? 'disabled' : ''}>${esc(v.label)}${v.cost ? ' · ' + n(v.cost * 1000) + ' mil €' : ''}</button>`).join('')}</div>`}</div>`;
   }).join('')}` : ''}
-  <div class="toolbar"><label style="margin:0">Prioridad de explotación</label><select id="dayPriority" ${op.phase !== 'planning' ? 'disabled' : ''}><option value="balanced" ${op.priority === 'balanced' ? 'selected' : ''}>Equilibrio entre coste y puntualidad</option><option value="punctual" ${op.priority === 'punctual' ? 'selected' : ''}>Refuerzo de puntualidad · 9.000 €/día</option></select>
-  <label style="margin:0 0 0 auto"><input type="checkbox" id="autoPause" ${ui.autoPause ? 'checked' : ''}> Pausar ante incidencias</label></div>
+  <div class="day-actions">${op.phase === 'planning' ? `<button class="btn primary big" data-action="ops-day-start" ${!trips.length ? 'disabled' : ''}>▶ Comienza la jornada</button>` : op.phase === 'running' ? `<button class="btn primary big" data-action="ops-day-end">Hasta el último tren</button>` : `<button class="btn big" data-action="ops-day-review">Ver parte del día</button><button class="btn primary big" data-action="skip-month" ${state.ended ? 'disabled' : ''}>Cerrar turno</button>`}
+  <label class="day-opt"><span>Prioridad</span><select id="dayPriority" ${op.phase !== 'planning' ? 'disabled' : ''}><option value="balanced" ${op.priority === 'balanced' ? 'selected' : ''}>Equilibrio coste / puntualidad</option><option value="punctual" ${op.priority === 'punctual' ? 'selected' : ''}>Puntualidad · 9.000 €/día</option></select></label>
+  <label class="day-opt"><input type="checkbox" id="autoPause" ${ui.autoPause ? 'checked' : ''}> Pausar ante incidencias</label></div>
   <h2 class="section">Próximas salidas</h2>
   ${adifBoard(planRows(next, m))}
   ${!trips.length ? '<div class="empty">No hay servicios abiertos.<p><button class="btn primary" data-action="navigate" data-screen="network">Elegir un servicio en Red</button></p></div>' : ''}
@@ -907,31 +940,33 @@ function opsPage() {
 
 function networkPage() {
   const q = ui.routeQuery.toLowerCase();
-  const tabs = [['all', 'Todas'], ['AVE', 'AVE'], ['Alvia', 'Alvia'], ['new', 'Sin tren todavía']];
-  const statuses = [['all', 'Cualquier estado'], ['active', 'En servicio'], ['closed', 'Por abrir'], ['blocked', 'Sin vía posible'], ['works', 'Con obras']];
-  const list = state.routes.filter(r => {
-    const fam = familyOf(r), [cls] = statusOf(r);
-    if (ui.routeTab === 'AVE' && fam !== 'AVE') return false;
-    if (ui.routeTab === 'Alvia' && fam !== 'Alvia') return false;
-    if (ui.routeTab === 'new' && r.real) return false;
-    if (ui.routeStatus === 'active' && !r.active) return false;
-    if (ui.routeStatus === 'closed' && cls !== 'off') return false;
-    if (ui.routeStatus === 'blocked' && cls !== 'blocked') return false;
-    if (ui.routeStatus === 'works' && !workOn(r) && !r.cut) return false;
-    return !q || (routeName(r) + ' ' + (fam || '')).toLowerCase().includes(q);
-  }).sort((a, b) => b.active - a.active || b.real - a.real || (S.routeStats(b.id, 'L')?.trips || 0) - (S.routeStats(a.id, 'L')?.trips || 0));
+  const all = state.routes.filter(r => !q || (routeName(r) + ' ' + (familyOf(r) || '')).toLowerCase().includes(q));
+  const kindOf = r => workOn(r) || r.cut ? 'works' : r.active ? 'active' : statusOf(r)[0] === 'blocked' ? 'blocked' : 'closed';
+  const groups = [['active', 'En servicio', 'Trenes que ya circulan. Añade o quita salidas con + y −.'], ['closed', 'Por abrir', 'Hay vía y tren compatible: abrir cuesta 4 M€.'], ['works', 'Con obras', 'Cortadas o en mejora hasta que termine la obra.'], ['blocked', 'Sin vía posible', 'Falta ancho, catenaria o cambiador. Mira qué falta en la ficha.']];
+  const counts = Object.fromEntries(groups.map(([k]) => [k, all.filter(r => kindOf(r) === k).length]));
+  const chips = filterChips('route-status', [['all', 'Todas', all.length], ...groups.map(([k, t]) => [k, t, counts[k]])], ui.routeStatus);
   const row = r => {
-    const [cls, label] = statusOf(r), m = r.active ? E.metrics(state, r) : null, trips = r.real ? (S.routeStats(r.id, 'L')?.trips || 0) : null, o = E.routeOptions(state, r);
-    const can = [['ave', 'AVE'], ['alvia', 'Alvia'], ['hybrid', 'Híbrido']].map(([k, t]) => `<i class="can ${o[k].ok ? 'ok' : ''}">${t}</i>`).join('');
-    return `<tr class="clickable" data-action="route" data-id="${r.id}"><td>${routeChip(r)}</td><td><button class="linkish route-link" data-action="route" data-id="${r.id}">${esc(routeName(r))}</button></td>
-    <td><span class="status ${workOn(r) ? 'works' : cls}">${workOn(r) ? 'Con obras' : r.active ? r.frequency + (r.frequency === 1 ? ' salida' : ' salidas') : label}</span></td>
-    <td class="num ${m ? (m.net >= 0 ? 'pos' : 'neg') : ''}">${m ? signed(m.net) : ''}</td></tr>`;
+    const kind = kindOf(r), m = r.active ? E.metrics(state, r) : null, o = E.routeOptions(state, r), max = r.active ? E.maxFrequency(r) : 0;
+    const fault = kind === 'blocked' ? I.faultText(state, o.hybrid.faults[0] || {type: 'nopath'}) : '';
+    const job = workOn(r);
+    const state_ = kind === 'active' ? `<b>${r.frequency}</b> salidas por sentido${m.occupancy > .93 ? ' · <em class="neg">trenes llenos</em>' : ''}` : kind === 'closed' ? (r.real ? `${n(S.routeStats(r.id, 'L')?.trips || 0)} trenes en el horario real` : 'Sin horario: lo pones tú') : kind === 'works' ? (job ? 'En obras · listo ' + when(job.due) : 'Cortada por obras de cambio de ancho') : esc(fault);
+    const money_ = m ? `<span class="svc-money ${m.net >= 0 ? 'pos' : 'neg'}">${signed(m.net)}<small>/mes</small></span>` : '';
+    const act = kind === 'active' ? `<button class="round" data-action="freq-down" data-id="${r.id}" aria-label="Menos trenes" ${r.frequency <= 1 || state.ended ? 'disabled' : ''}>−</button><button class="round plus" data-action="freq-up" data-id="${r.id}" aria-label="Más trenes" ${r.frequency >= max || state.ended ? 'disabled' : ''}>+</button>`
+      : kind === 'closed' ? `<button class="btn small primary" data-action="open-route" data-id="${r.id}" ${state.ended ? 'disabled' : ''}>Abrir · 4 M€</button>`
+      : kind === 'blocked' ? `<button class="btn small" data-action="route" data-id="${r.id}">Qué falta</button>` : `<button class="btn small" data-action="route" data-id="${r.id}">Ver obra</button>`;
+    return `<div class="svc ${kind}"><button class="svc-main" data-action="route" data-id="${r.id}"><span class="svc-chip">${routeChip(r)}</span><span class="svc-name">${esc(routeName(r))}</span><span class="svc-state">${state_}</span></button>${money_}<span class="svc-act">${act}</span></div>`;
   };
-  let body = `<div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.routeTab === k ? 'active' : ''}" data-action="route-tab" data-id="${k}">${t}</button>`).join('')}</div>
-  <div class="toolbar"><input type="search" id="routeSearch" placeholder="Busca una ciudad" value="${esc(ui.routeQuery)}" aria-label="Buscar relación"><select id="routeStatus" aria-label="Estado">${statuses.map(([k, t]) => `<option value="${k}" ${ui.routeStatus === k ? 'selected' : ''}>${t}</option>`).join('')}</select><button class="btn" data-action="new-service" ${state.ended ? 'disabled' : ''}>Relación nueva</button></div>`;
-  body += `<table class="route-list"><thead><tr><th></th><th>Relación</th><th>Estado</th><th class="num">Resultado</th></tr></thead><tbody>${list.map(row).join('')}</tbody></table>`;
-  if (!list.length) body += '<div class="empty">No hay relaciones con estos filtros.<p><button class="btn small" data-action="route-tab" data-id="all" data-clear="true">Mostrar toda la red</button></p></div>';
-  return [header('Red y servicios', 'AVE donde se pueda; Alvia donde no.', 'Lo que puede circular depende del ancho y la catenaria de cada tramo. Abrir un servicio cuesta 4 M€.'), body];
+  let body = `<div class="menu-tools">${chips}<input type="search" id="routeSearch" placeholder="Busca una ciudad" value="${esc(ui.routeQuery)}" aria-label="Buscar relación"><button class="btn" data-action="new-service" ${state.ended ? 'disabled' : ''}>＋ Relación nueva</button></div>`;
+  let shown = 0;
+  for (const [k, title, hint] of groups) {
+    if (ui.routeStatus !== 'all' && ui.routeStatus !== k) continue;
+    const list = all.filter(r => kindOf(r) === k).sort((a, b) => b.real - a.real || (S.routeStats(b.id, 'L')?.trips || 0) - (S.routeStats(a.id, 'L')?.trips || 0));
+    if (!list.length) continue;
+    shown += list.length;
+    body += `<div class="svc-group"><h2>${title}<span>${list.length}</span></h2><p>${hint}</p></div><div class="svc-list route-list">${list.map(row).join('')}</div>`;
+  }
+  if (!shown) body += '<div class="empty">No hay relaciones con estos filtros.<p><button class="btn small" data-action="route-status" data-id="all" data-clear="true">Mostrar toda la red</button></p></div>';
+  return [header('Red y servicios', 'AVE donde se pueda; Alvia donde no.'), body];
 }
 
 /** Red y horarios comparten página: un selector arriba cambia de vista. */
@@ -943,14 +978,14 @@ function trainsPage() {
   const tabs = [['fleet', 'Mi parque'], ['refits', 'Reformas'], ['market', 'Trenes Pop'], ['orders', 'Pedidos']];
   const body = ui.fleetTab === 'refits' ? Refits.pageHTML(state,ui.refitView) : (['market', 'orders'].includes(ui.fleetTab) ? marketPage(ui.fleetTab === 'market' ? 'catalogue' : 'orders')[1] : fleetPage()[1]);
   if (ui.fleetTab === 'market') return [`<header class="tp-game-strip"><button data-action="fleet-tab" data-id="fleet">‹ Mi parque</button><span>Compra material para tu red</span><button class="close" data-action="close-drawer" aria-label="Cerrar Trenespop">×</button></header>`, body];
-  return [header('Trenes', 'Los que tienes y los que vienen.', 'Los AVE solo van por ancho estándar. Los Alvia, por donde les echen.'), `<div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.fleetTab === k ? 'active' : ''}" data-action="fleet-tab" data-id="${k}">${t}</button>`).join('')}</div>` + body];
+  return [header('Trenes', 'Los que tienes y los que vienen.'), menuTabs('fleet', ui.fleetTab) + body];
 }
 function officePage(){
   const tab=['agenda','apoyo','pactos','people','cloacas'].includes(ui.tycoonTab)?ui.tycoonTab:'agenda';
   const tabs=[['agenda','Agenda'],['apoyo','Apoyo'],['pactos','Pactos'],['people','Políticas'],['cloacas','Cloacas']];
-  const existing=id=>tycoonPage(state,id).replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
+  const existing=id=>tycoonPage(state,id).replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'').replace(/<h2>Un plan para el próximo mes\.<\/h2><p>Decide qué compromisos[^<]*<\/p>/,'');
   const body=tab==='apoyo'?TenfeUI.supportHTML(state):tab==='pactos'?TenfeUI.pactsHTML(state):tab==='cloacas'?TenfeUI.scandalHTML(state):(tab==='agenda'?deskDecisionHTML():'')+existing(tab);
-  return [header('Decisiones y compromisos','Despacho'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="tycoon-tab" data-id="${id}" class="${id===tab?'active':''}">${label}</button>`).join('')}</div>`+body];
+  return [header('Decisiones y compromisos','Despacho'),menuTabs('story',tab)+body];
 }
 
 function timetablesPage() {
@@ -983,7 +1018,7 @@ function fleetPage() {
   if (ui.fleetTab === 'fleet') {
     const total = state.fleet.reduce((v, f) => v + f.qty, 0), free = state.fleet.reduce((v, f) => v + E.available(state, f), 0);
     const count = fam => state.fleet.filter(f => MODEL[f.model].family === fam).reduce((v, f) => v + f.qty, 0);
-    body += `<dl class="figures"><div><dt>Unidades</dt><dd>${n(total)}</dd></div><div><dt>AVE</dt><dd>${n(count('AVE'))}</dd></div><div><dt>Alvia + regionales</dt><dd>${n(count('Alvia')+count('Regional'))}</dd></div><div><dt>Libres</dt><dd>${n(free)}</dd></div></dl>
+    body += `<dl class="figures"><div><dt>Unidades</dt><dd>${n(total)}</dd></div><div><dt>AVE</dt><dd>${n(count('AVE'))}</dd></div><div><dt>Alvia + regionales</dt><dd>${n(count('Alvia')+count('Regional'))}</dd></div><div><dt>Autobuses</dt><dd>${n(count('Bus'))}</dd></div><div><dt>Libres</dt><dd>${n(free)}</dd></div></dl>
     <table class="fleet-table"><thead><tr><th style="width:260px"></th><th>Material</th><th class="num">Parque</th><th class="num">Libres</th><th>Estado</th></tr></thead><tbody>${state.fleet.filter(f => f.qty > 0).map(f => {
       const m = MODEL[f.model];
       return `<tr class="clickable" data-action="fleet-detail" data-id="${f.id}"><td>${trainThumb(f.model)}</td><td><button class="linkish fleet-link" data-action="fleet-detail" data-id="${f.id}">${esc(m.name)}</button><small>${esc(f.origin)}${f.maker ? ' · ' + esc(f.maker) : ''} · desde ${f.born} · ${GAUGES[m.gauge]} · ${POWERS[m.power]}</small></td><td class="num">${f.qty}</td><td class="num">${E.available(state, f)}</td><td style="min-width:120px"><div class="bar ${f.condition < 50 ? '' : 'green'}"><span style="width:${f.condition}%"></span></div><small>${n(f.condition)} %</small></td></tr>`;
@@ -1011,8 +1046,7 @@ function marketPage(view) {
 function worksPage() {
   const tabs = [['conv', 'Vías y catenaria'], ['changers', 'Cambiadores'], ['projects', 'Alta velocidad nueva'], ['running', 'En marcha']];
   const running = state.projects.filter(p => !p.done);
-  let body = `<div class="toolbar"><button class="btn" data-action="layer" data-id="gauge">Mapa de anchos</button><button class="btn" data-action="layer" data-id="power">Mapa de electrificación</button><button class="btn" data-action="layer" data-id="works">Obras en el mapa</button></div>
-  <div class="tabs">${tabs.map(([k, t]) => `<button class="${ui.worksTab === k ? 'active' : ''}" data-action="works-tab" data-id="${k}">${t}${k === 'running' && running.length ? ` <span class="muted">${running.length}</span>` : ''}</button>`).join('')}</div>`;
+  let body = `<div class="menu-tools">${filterChips('works-tab', tabs.map(([k, t]) => [k, t, k === 'running' ? running.length : 0]), ui.worksTab)}</div>`;
   if (ui.worksTab === 'running') {
     body += running.length ? `<div class="rows">${running.map(p => {
       const st = O.constructionStatus(state, p), name = p.type === 'upgrade' ? 'Mejora de servicio · ' + routeName(routeById(p.route)) : map.workName(p);
@@ -1040,7 +1074,8 @@ function worksPage() {
       <td>${job ? `<span class="status works">${esc(I.WORKS[job.work].label)} · ${when(job.due)}</span>` : I.tramoWorks(state, d.id).map(w => `<button class="btn small" data-action="work" data-work="${w.work}" data-id="${d.id}" ${state.ended ? 'disabled' : ''}>${esc(w.verb)} · ${money(w.cost)}</button>`).join(' ')}</td></tr>`;
     }).join('')}</tbody></table>`;
   }
-  return [header('Obras', 'Las vías del próximo capítulo.', 'Ancho, catenaria, cambiadores y líneas nuevas. Pulsa un tramo en los mapas de anchos o de electrificación para verlo de cerca.'), body];
+  body += `<div class="map-links"><span>Ver en el mapa</span><button class="linkish" data-action="layer" data-id="gauge">Anchos de vía</button><button class="linkish" data-action="layer" data-id="power">Electrificación</button><button class="linkish" data-action="layer" data-id="works">Obras</button></div>`;
+  return [header('Obras', 'Las vías del próximo capítulo.'), body];
 }
 
 function financePage() {
@@ -1048,11 +1083,11 @@ function financePage() {
   const tile = (ic, label, value, cls = '') => `<div class="vtile ${cls}">${glyph(ic)}<small>${label}</small><b>${value}</b></div>`;
   const max = Math.max(1, b.revenue + b.subsidy, b.cost);
   const bar = (label, v, cls) => `<div class="vflow ${cls}"><span>${label}</span><div><i style="width:${Math.min(100, Math.abs(v) / max * 100)}%"></i></div><b>${signed(v)}</b></div>`;
-  const body = `<div class="vtiles">${tile('coin', 'Caja', money(state.cash))}${tile('finance', 'Resultado / ' + unit, signed(b.net), b.net >= 0 ? 'ok' : 'bad')}${tile('archive', 'Deuda', money(state.debt))}${tile('market', 'Pedidos', money(commit))}</div>
-  <div class="vflows">${bar('Billetes', b.revenue, 'ok')}${bar('Ayudas', b.subsidy, 'ok')}${bar('Costes', -b.cost, 'bad')}</div>
-  ${state.history.length >= 2 ? '<canvas id="cashChart" class="chart" role="img" aria-label="Gráfico de tesorería"></canvas>' : '<div class="vempty">📈<p>La gráfica aparece al cerrar el primer turno</p></div>'}
-  <div class="vtools"><button class="btn" data-action="borrow" ${state.debt >= 1500 || state.ended ? 'disabled' : ''}>＋ 100 M€ de crédito</button><button class="btn" data-action="repay" ${state.debt < 100 || state.cash < 100 || state.ended ? 'disabled' : ''}>－ Devolver 100 M€</button></div>
-  <label class="vslider" for="maintenance"><span>🔧 Mantenimiento</span><input id="maintenance" type="range" min="0.6" max="1.5" step="0.1" value="${state.maintenance}" ${state.ended ? 'disabled' : ''}><b>${n(state.maintenance * 100)} %</b></label>`;
+  const body = `<h2 class="vsec">Hoy</h2><div class="vtiles">${tile('coin', 'Caja', money(state.cash))}${tile('finance', 'Resultado / ' + unit, signed(b.net), b.net >= 0 ? 'ok' : 'bad')}${tile('archive', 'Deuda', money(state.debt))}${tile('market', 'Pedidos', money(commit))}</div>
+  <h2 class="vsec">Cada ${unit}</h2><div class="vflows">${bar('Billetes', b.revenue, 'ok')}${bar('Ayudas', b.subsidy, 'ok')}${bar('Costes', -b.cost, 'bad')}</div>
+  <h2 class="vsec">Evolución de la caja</h2>${state.history.length >= 2 ? '<canvas id="cashChart" class="chart" role="img" aria-label="Gráfico de tesorería"></canvas>' : '<div class="vempty">📈<p>La gráfica aparece al cerrar el primer turno</p></div>'}
+  <h2 class="vsec">Crédito</h2><div class="vtools"><button class="btn" data-action="borrow" ${state.debt >= 1500 || state.ended ? 'disabled' : ''}>＋ 100 M€ de crédito</button><button class="btn" data-action="repay" ${state.debt < 100 || state.cash < 100 || state.ended ? 'disabled' : ''}>－ Devolver 100 M€</button></div>
+  <h2 class="vsec">Mantenimiento</h2><p class="small muted">Más mantenimiento: trenes más fiables y más caros.</p><label class="vslider" for="maintenance"><span>🔧 Gasto</span><input id="maintenance" type="range" min="0.6" max="1.5" step="0.1" value="${state.maintenance}" ${state.ended ? 'disabled' : ''}><b>${n(state.maintenance * 100)} %</b></label>`;
   return [header('Finanzas', 'Dinero'), body];
 }
 function drawChart() {
@@ -1176,9 +1211,9 @@ function trainInspector() {
     list.forEach((s, j) => { if (minute >= s.arr) here = j; });
     stops = `<ul class="stops" style="--line-color:${color}">${list.map((s, j) => `<li class="${j < here ? 'past' : j === here ? 'here' : ''}"><time>${clock(j ? s.arr : s.dep)}</time><button class="dest" style="all:unset;cursor:pointer" data-action="station" data-id="${s.station.i}">${esc(s.station.name)}</button></li>`).join('')}</ul>`;
   }
-  const pos = t.trip ? S.position(t.trip, minute, t.delay || 0) : null;
-  const where = !pos ? (minute < t.dep ? 'Sale a las ' + clock(t.dep + (t.delay || 0)) : 'Ha llegado a destino') : pos.stopped ? 'Detenido en ' + S.STATIONS[t.trip.stations[pos.at]].name : 'Hacia ' + S.STATIONS[t.trip.stations[pos.next]].name;
-  const body = `<div class="train3d" data-train3d="${tripArtKey(t, r)}"></div>
+  const pos = O.tripPosition(t, minute);
+  const where = pos?.broken ? 'Averiado en plena vía' : !pos ? (minute < t.dep ? 'Sale a las ' + clock(t.dep + (t.delay || 0)) : 'Ha llegado a destino') : t.trip ? (pos.stopped ? 'Detenido en ' + S.STATIONS[t.trip.stations[pos.at]].name : 'Hacia ' + S.STATIONS[t.trip.stations[pos.next]].name) : 'En marcha';
+  const body = `${breakdownPanel(t, minute)}<div class="train3d" data-train3d="${tripArtKey(t, r)}"></div>
   <dl class="figures"><div><dt>Estado</dt><dd style="font-size:17px">${esc(where)}</dd></div><div><dt>Retraso</dt><dd class="${t.delay > 5 ? 'neg' : 'pos'}">${t.delay ? '+' + t.delay + ' min' : 'En hora'}</dd></div></dl>
   <p class="small">${esc(t.model || (S.lineCode(t.line) === 'Alvia' ? 'Alvia' : 'AVE'))}${r ? ' · ' + esc(routeName(r)) : ''}${t.changes?.length ? ' · cambia de ancho en ' + esc(t.changes.map(x => I.NODES[x]?.name || x).join(', ')) : ''}</p>
   <div class="toolbar"><button class="btn small ${map.follow ? 'primary' : ''}" data-action="follow">${map.follow ? 'Siguiendo al tren' : 'Seguir en el mapa'}</button>${r ? `<button class="btn small" data-action="route" data-id="${r.id}">Gestionar la línea</button>` : ''}</div>
@@ -1283,27 +1318,65 @@ $('modal').addEventListener('close', () => { narrator.releaseModalToasts();narra
 // Chromium cierra el diálogo con un segundo Esc seguido aunque el primero se haya cancelado: la portada no desaparece.
 $('modal').addEventListener('close', () => { if ($('modal').open) return; if (menuOpen) intro(); else if (np) { np = null; render(); } });
 function menuChrome() { narrator.reset(); $('entry-welcome')?.remove(); if(tut){tut.suspended=true;state.tutorial=tut;autosave();tut=null;} tutorialChrome();adviceLine=null;tutorialDraft=null;menuOpen=true;pause();voices.stop();clearCoach();inductionModalKey=''; }
+const MENU = {
+  network: [
+    {id: 'routes', icon: 'network', label: 'Servicios', hint: 'Tus relaciones: abre nuevas, pon o quita trenes y mira qué le falta a cada una.'},
+    {id: 'ops', icon: 'ops', label: 'Jornada', hint: 'El día en marcha: arranca la jornada, atiende incidencias y sigue las salidas.'},
+    {id: 'works', icon: 'works', label: 'Obras', hint: 'Vías, catenaria, cambiadores de ancho y líneas nuevas.'},
+    {id: 'timetables', icon: 'timetables', label: 'Horarios', hint: 'El panel de salidas real de cualquier estación de España.'},
+    {id: 'rivals', icon: 'market', label: 'Competencia', hint: 'Quién compite contigo en cada corredor y con qué precios.'}],
+  fleet: [
+    {id: 'fleet', icon: 'fleet', label: 'Mi parque', hint: 'Los trenes que tienes, cuántos están libres y en qué estado.'},
+    {id: 'refits', icon: 'gear', label: 'Reformas', hint: 'Interiores nuevos para trenes viejos: más cómodos y más fiables.'},
+    {id: 'market', icon: 'market', label: 'Trenes Pop', hint: 'Compra trenes nuevos o de segunda mano.'},
+    {id: 'orders', icon: 'archive', label: 'Pedidos', hint: 'Lo que has encargado y cuándo llega.'}],
+  story: [
+    {id: 'agenda', icon: 'story', label: 'Agenda', hint: 'Decisiones pendientes, compromisos del consejo y próximos pasos.'},
+    {id: 'apoyo', icon: 'people', label: 'Apoyo', hint: 'Lo que opinan viajeros, territorios, plantilla y Hacienda. Decide las urnas.'},
+    {id: 'pactos', icon: 'hand', label: 'Pactos', hint: 'Compromisos con dinero por delante y premio al cumplirlos.'},
+    {id: 'people', icon: 'signal', label: 'Políticas', hint: 'Plantilla, formación de maquinistas y políticas de la compañía.'},
+    {id: 'cloacas', icon: 'alert', label: 'Cloacas', hint: 'Atajos con dinero rápido y un precio que llega después.'}],
+  progress: [
+    {id: 'campaign', icon: 'progress', label: 'Mandato', hint: 'Los cinco retos del mandato y las dos elecciones.'},
+    {id: 'hitos', icon: 'bolt', label: 'Hitos', hint: 'Cada hito de viajeros desbloquea algo y trae dinero.'},
+    {id: 'research', icon: 'gear', label: 'Investigación', hint: 'Tecnología que mejora tu red. Una investigación a la vez.'},
+    {id: 'proyectos', icon: 'cone', label: 'Megaproyectos', hint: 'Grandes obras por fases: cada fase se paga al encargarla.'}],
+  press: [
+    {id: 'paper', icon: 'press', label: 'Gaceta', hint: 'Sucesos y noticias de tu red, con sus fotos.'},
+    {id: 'journal', icon: 'archive', label: 'Diario', hint: 'Todo lo que ha pasado en tu mandato, turno a turno.'},
+    {id: 'reports', icon: 'finance', label: 'Informes', hint: 'El informe de cada turno: resultado, caja, viajeros y apoyo.'}]
+};
+function menuBadges(menu) {
+  const m = currentMinute(), b = {};
+  if (menu === 'network') { b.routes = state.routes.filter(r => r.active).length; const inc = state.ops.incidents.filter(x => m >= x.at && !state.ops.resolved.includes(x.trip)).length; if (inc) b.ops = {n: inc, urgent: true}; const w = state.projects.filter(p => !p.done).length; if (w) b.works = w; }
+  if (menu === 'fleet') { const o = state.orders.filter(o => !o.historical && o.delivered < o.qty).length; if (o) b.orders = o; const r = state.refits?.filter(x => !x.done).length; if (r) b.refits = r; }
+  if (menu === 'story') { const d = (state.tenfe?.game?.event ? 1 : 0) + (E.pendingDecision(state) ? 1 : 0); if (d) b.agenda = {n: d, urgent: true}; const p = state.tenfe?.pacts?.filter(x => x.status === 'active').length; if (p) b.pactos = p; }
+  if (menu === 'progress') { const g = state.tenfe?.game; if (g) b.campaign = g.challenges.length + '/5'; if (state.tenfe?.game?.research) b.research = {n: '⏱', urgent: false}; }
+  if (menu === 'press') { const nn = state.tenfe?.game?.news?.length; if (nn) b.paper = nn; }
+  return b;
+}
+function menuTabs(menu, active) {
+  const badges = menuBadges(menu);
+  return menuNav({network: 'net-view', fleet: 'fleet-tab', story: 'tycoon-tab', progress: 'progress-tab', press: 'press-tab'}[menu], MENU[menu].map(t => { const x = badges[t.id]; return {...t, badge: x && typeof x === 'object' ? x.n : x, urgent: !!(x && x.urgent)}; }), active);
+}
 function redPage(){
-  const tabs=[['routes','Servicios'],['ops','Jornada'],['works','Obras'],['timetables','Horarios'],['rivals','Competencia']];
   const page=ui.netView==='ops'?opsPage():ui.netView==='works'?worksPage():ui.netView==='timetables'?timetablesPage():ui.netView==='rivals'?['',tycoonPage(state,'market').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'')]:networkPage();
-  return [header('Servicios, vías y horarios','Red'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="net-view" data-id="${id}" class="${ui.netView===id?'active':''}">${label}</button>`).join('')}</div>`+page[1]];
+  return [header('Servicios, vías y horarios','Red'),menuTabs('network',ui.netView)+page[1]];
 }
 function moneyPage(){
   const [,body]=financePage();
-  return [header('Caja, compromisos y previsión','Dinero'),body+TenfeUI.forecastHTML(state)];
+  return [header('Caja, compromisos y previsión','Dinero'),`<p class="menu-hint">Lo que tienes, lo que entra y sale cada turno, y lo que viene.</p>`+body+`<h2 class="vsec">Previsión</h2>`+TenfeUI.forecastHTML(state)];
 }
 function progressPage(){
-  const tabs=[['campaign','Mandato'],['hitos','Hitos'],['research','Investigación'],['proyectos','Megaproyectos']];
   let body=ui.progressTab==='hitos'?TenfeUI.milestonesHTML(state):ui.progressTab==='research'?tycoonPage(state,'research').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,''):ui.progressTab==='proyectos'?TenfeUI.megaHTML(state):storyPage()[1];
-  if(state.tenfe?.game){if(ui.progressTab==='campaign')body=JUI.campaignHTML(state);if(ui.progressTab==='research')body=JUI.researchHTML(state)+body;}
+  if(state.tenfe?.game){if(ui.progressTab==='campaign')body=JUI.campaignHTML(state);if(ui.progressTab==='research')body=JUI.researchHTML(state)+'<h2 class="vsec">Programas de la compañía</h2>'+body;}
   if(!state.tenfe?.game&&ui.progressTab==='campaign'&&state.tenfe?.rescueStarted)body=`<div class="tenfe-rescue-summary">${state.tenfe.rescueWon?'<h2>Tenfe sale del rescate</h2><p>Tu compañía conserva su red y sigue construyendo su legado.</p>':TenfeUI.missionHTML(state)||'<h2>Tu legado sigue en marcha</h2>'}</div>`+body;
   if(state.ending==='election')body=`<p class="callout"><strong>Fin del mandato.</strong> Las urnas han elegido otra dirección. Puedes revisar tu red o comenzar una nueva partida.</p>`+body;
-  return [header('Objetivos abiertos desde el primer turno','Progreso'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="progress-tab" data-id="${id}" class="${ui.progressTab===id?'active':''}">${label}</button>`).join('')}</div>`+body];
+  return [header('Objetivos abiertos desde el primer turno','Progreso'),menuTabs('progress',ui.progressTab)+body];
 }
 function pressPage(){
-  const tabs=[['paper','Gaceta'],['journal','Diario'],['reports','Informes']];
   const body=ui.pressTab==='paper'&&state.tenfe?.game?JUI.newsHTML(state):ui.pressTab==='journal'?archivePage()[1]:ui.pressTab==='reports'?(N.card('turn-report')+state.tenfe.reports.map(r=>`<section class="tenfe-report">${TenfeUI.reportHTML(state,r)}</section>`).join('')||TenfeUI.reportHTML(state)):tycoonPage(state,'paper').replace(/<nav class="tycoon-tabs"[\s\S]*?<\/nav>/,'');
-  return [header('Lo que ocurrió en tu red','Prensa'),`<div class="tabs">${tabs.map(([id,label])=>`<button data-action="press-tab" data-id="${id}" class="${ui.pressTab===id?'active':''}">${label}</button>`).join('')}</div>`+body];
+  return [header('Lo que ocurrió en tu red','Prensa'),menuTabs('press',ui.pressTab)+body];
 }
 function showTenfeUpdate(report=false){
   if(menuOpen||np||tut||!state.tenfe||$('modal').open)return;
@@ -1576,13 +1649,15 @@ document.addEventListener('click', event => {
     case 'claim': act(() => E.claimChapter(state), 'Financiación recibida. Tu siguiente etapa está preparada.'); setTimeout(() => { const st = document.querySelector('.story'); if (st && !state.ended) speakIn(st, CHAPTERS[state.chapter].speaker, 'story'); }, 60); break;
     case 'play': playing ? pause() : play(); break;
     case 'speed': speedIndex = +id; renderDaybar(); break;
-    case 'day-start': if (layer === 'real') setLayer('network'); play();tutorialIncident();renderBoard();break;
-    case 'day-end': pause(); if (state.ops.phase === 'running') { state.ops.minute = O.dayBounds(plan()).last; finishDay(); } break;
-    case 'day-review': dayReport(); break;
+    case 'ops-day-start': case 'day-start': if (layer === 'real') setLayer('network'); play();tutorialIncident();renderBoard();break;
+    case 'ops-day-end': case 'day-end': pause(); if (state.ops.phase === 'running') { state.ops.minute = O.dayBounds(plan()).last; finishDay(); } break;
+    case 'ops-day-review': case 'day-review': dayReport(); break;
     case 'day-next': try { const monthBefore=state.month; O.nextDay(state); sfx.result(true); closeModal(); seenIncidents = new Set(); autosave(); render(); if (E.pendingDecision(state)) showDecision(); else showTenfeUpdate(state.month!==monthBefore); } catch (e) { sfx.result(false); toast(e.message); } break;
     case 'skip-month': pause();E.revalidateScene(state);if(state.tenfe?.game?.event){ui.tycoonTab='agenda';screen='story';render();toast('Elige cómo resolver el suceso del turno.');break;}if(E.pendingDecision(state)){showDecision();break;}try { const paidBefore = state.stats.requests || 0; if (O.skipMonth(state)) { sfx.result(true); autosave(); render(); const paid = (state.stats.requests || 0) - paidBefore; toast((state.tenfe?.game?'Turno cerrado. Cuentas liquidadas.':'Mes cerrado. Cuentas liquidadas.') + (paid ? ` ${paid} petición${paid > 1 ? 'es' : ''} cobrada${paid > 1 ? 's' : ''}.` : '')); if (state.tenfe?.game)showTenfeUpdate(true);else if(E.pendingDecision(state)) showDecision();else showTenfeUpdate(true); } else sfx.intent = null; } catch (e) { sfx.result(false); toast(e.message); } break;
     case 'open-incidents': document.querySelector('.alert-pill')?.remove(); navigate('ops'); if (screen !== 'ops') navigate('ops'); break;
-    case 'respond': if(act(()=>O.resolveIncident(state,id,b.dataset.option),O.RESPONSES[b.dataset.option].note)&&tut&&TOUR_STEPS[tut.step].id==='day'){tutorialMark('incident-resolved');screen=null;inspect=null;render();}break;
+    case 'respond': { const option = b.dataset.option, voice = BREAKDOWN_VOICE[option]; if(act(()=>O.resolveIncident(state,id,option),voice?N.message(voice).text:O.RESPONSES[option].note)){ if(tut&&TOUR_STEPS[tut.step].id==='day'){tutorialMark('incident-resolved');screen=null;inspect=null;render();} else if(inspect?.type==='train')renderInspector(); } break; }
+    case 'incident-train': goToTrain(id); break;
+    case 'market-buses': ui.fleetTab='market'; ui.market.family='Bus'; screen='fleet'; inspect=null; render(); break;
     case 'route': selectRoute(id); break;
     case 'city': { const c = CITY[id]; document.querySelector('.alert-pill')?.remove(); inspect = {type: 'city', id}; screen = null; map.selectedCity = id; if (c && map.zoom < 1.4) map.focusAt(c.lon, c.lat, 1.6); render(); break; }
     case 'freq-up': case 'freq-down': { const r = routeById(id), step = Math.max(1, Math.round(E.maxFrequency(r) * .1)); act(() => setService(r, r.frequency + (a === 'freq-up' ? step : -step))); break; }
@@ -1625,6 +1700,7 @@ document.addEventListener('click', event => {
     case 'route-zoom': map.focus(id, true); break;
     case 'route-trips': { const r = state.routes.find(r => r.id === id); ui.ttStation = ''; ui.ttStationId = undefined; screen = 'network'; ui.netView = 'timetables'; inspect = null; const first = S.routeTrips(dayType(), id)[0]; if (first) { ui.ttStationId = first.stations[0]; ui.ttStation = S.STATIONS[first.stations[0]].name.toLowerCase(); } render(); if (r) toast('Salidas desde ' + S.STATIONS[first?.stations[0]]?.name); break; }
     case 'route-tab': ui.routeTab = id;if(b.dataset.clear){ui.routeQuery='';ui.routeStatus='all';}renderDrawer(true); break;
+    case 'route-status': ui.routeStatus = id;if(b.dataset.clear)ui.routeQuery='';renderDrawer(true); break;
     case 'net-view': ui.netView = id; renderDrawer(true); break;
     case 'office-tab': ui.officeTab = id; renderDrawer(true); break;
     case 'train': inspect = {type: 'train', id}; map.selectedTrain = id; screen = null; render(); break;

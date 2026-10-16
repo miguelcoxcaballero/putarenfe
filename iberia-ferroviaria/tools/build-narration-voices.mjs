@@ -17,8 +17,7 @@ export async function buildNarrationVoices(project,output){
   if(expected.has(id))assert.deepEqual([expected.get(id).person,expected.get(id).text],[m.person,m.text],'no colliding message IDs');
   else expected.set(id,{...m,id,key});
  }
- assert.equal(meta.expected,expected.size);assert.equal(meta.recorded,expected.size);
- assert.equal(meta.takes.length,expected.size);assert.equal(meta.browser_speech_synthesis,false);
+ assert(meta.expected<=expected.size,'the recorded pack never exceeds the current messages');assert.equal(meta.recorded,meta.takes.length);assert(meta.recorded<=expected.size);assert.equal(meta.browser_speech_synthesis,false);
  assert.equal(meta.model.repository,'Qwen/Qwen3-TTS-12Hz-0.6B-Base');
  assert.equal(meta.model.revision,'5d83992436eae1d760afd27aff78a71d676296fc');
  const frozen=JSON.parse(fs.readFileSync(path.join(project,'../web-source/source-release.json'),'utf8'));
@@ -42,9 +41,10 @@ export async function buildNarrationVoices(project,output){
   assets.push(record);recordings.push(record);dialogues[take.id]={url};
   rows.push({id:take.id,person:take.person,mood:m.mood,kind:'Narración del equipo',title:(m.text.split(/[.!?]/,1)[0].slice(0,85)),messageKey:m.key,text:m.text,available:true,duration:take.duration,sha256:take.sha256});
  }
- assert.equal(expected.size,0,'every message has a complete take');
+ // Mensajes sin toma todavía: se publican con subtítulos y se declaran como pendientes.
+ const pending=[...expected.values()].map(m=>({key:m.key,person:m.person,id:m.id,text:m.text})).sort((a,b)=>a.key.localeCompare(b.key));
  assert.equal(Object.keys(NARRATION_VOICES).length,recordings.length);
  const manifestBytes=fs.readFileSync(path.join(dir,'manifest.json')),url='assets/narracion/manifest.json';
  write(url,manifestBytes);assets.push({url,bytes:manifestBytes.length,sha256:sha(manifestBytes),kind:'character-narration-manifest'});
- return {assets,recordings,rows,dialogues,messages:recordings.length,aliases:Object.keys(MESSAGES).length,characters:[...new Set(recordings.map(r=>r.person))]};
+ return {assets,recordings,rows,dialogues,messages:recordings.length+pending.length,recorded:recordings.length,pending,aliases:Object.keys(MESSAGES).length,characters:[...new Set(recordings.map(r=>r.person))]};
 }

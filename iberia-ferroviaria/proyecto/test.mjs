@@ -18,7 +18,7 @@ const months = (s, n) => { for (let k = 0; k < n; k++) { decideAll(s); assert(E.
 
 // 1. Solo AVE y Alvia: material, horario oficial y corredores.
 {
-  assert(MODELS.every(m => ['AVE', 'Alvia', 'Regional'].includes(m.family)), 'material AVE, Alvia y regional en la misma red');
+  assert(MODELS.every(m => ['AVE', 'Alvia', 'Regional', 'Bus'].includes(m.family)), 'material AVE, Alvia, regional y autobuses en la misma red');
   assert(MODELS.filter(m => m.family === 'AVE').every(m => m.gauge === 'uic' && m.power === 'electric'), 'los AVE son de ancho estándar fijo y eléctricos');
   assert(MODELS.filter(m => m.family === 'Alvia').every(m => m.gauge === 'variable'), 'los Alvia son de ancho variable');
   assert(MODELS.some(m => m.power === 'hybrid'), 'hay un Alvia híbrido para las vías sin catenaria');

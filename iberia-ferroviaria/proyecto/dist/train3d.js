@@ -18,7 +18,7 @@ export function trainThumb(value) {
   if (maker) return `<img class="train-photo train-3d-thumb" src="${maker[0]}" alt="${esc(maker[1])} · fotografía" loading="lazy" decoding="async" width="1536" height="1024" data-photo-series="${String(value).toLowerCase()}" onerror="this.onerror=null;this.hidden=true;this.nextElementSibling.hidden=false">`
     + trainThumb(maker[2]).replace('<img ', '<img hidden ');
   const {key, photo} = photograph(value);
-  if (key === 'bus') return trainArt('bus');
+  if (key === 'bus') return `<img class="train-photo train-3d-thumb" src="assets/rescate/autobus-tenfe.webp?v=6.7" alt="Autobús Tenfe · fotografía" loading="lazy" decoding="async" width="1536" height="1024" data-photo-series="bus" onerror="this.onerror=null;this.hidden=true;this.nextElementSibling.removeAttribute('hidden')">` + trainArt('bus').replace('<svg ', '<svg hidden ');
   if (!photo) return '<div class="train-photo-pending" role="img" aria-label="Fotografía de este material en preparación">Fotografía en preparación</div>';
   return `<img class="train-photo train-3d-thumb" src="${esc(photo.src)}" alt="${esc(photo.label)} · fotografía generada" loading="lazy" decoding="async" width="1536" height="1024" data-photo-series="${esc(photo.series)}">`;
 }

@@ -2,7 +2,7 @@ import {MODELS, MODEL, GAUGES, POWERS, VOLTAGE_TEXT} from './data.js';
 import {brandLogo, brandName} from './brands.js';
 import {plan, profileOf, faultText, keyFault} from './infra.js';
 
-export const MANUFACTURERS = ['Tardo', 'KAFKA', 'Schlimmens', 'Dörfler', 'BCBB', 'Malstom'];
+export const MANUFACTURERS = ['Tardo', 'KAFKA', 'Schlimmens', 'Dörfler', 'BCBB', 'Malstom', 'Irisar'];
 export const makerName = m => brandName(m.maker);
 /** Foto del material: Dörfler y BCBB enseñan su propio tren, no el de la serie equivalente. */
 export const photoKey = item => item.maker === 'BCBB' ? 'bcbb' : item.maker === 'Dörfler' ? 'dorfler' : MODEL[item.model]?.photo || item.model;
@@ -47,7 +47,7 @@ export function quoteListing(s, model, qty, id, standard) {
   if ((s.tenfe?.game?2050:2022 + Math.floor(s.month / 12)) < item.year) throw Error('Este tren todavía no se vende.');
   if (qty > item.stock) throw Error(`Quedan ${item.stock} unidades en este anuncio.`);
   const unit = standard.unit * item.priceFactor, total = unit * qty;
-  const lead = item.state === 'used' ? item.lead : Math.max(MODEL[model].family === 'Regional' ? 1 : 16, standard.lead + item.leadAdjustment);
+  const lead = item.state === 'used' ? item.lead : Math.max(MODEL[model].family === 'Regional' || MODEL[model].road ? 1 : 16, standard.lead + item.leadAdjustment);
   const immediate = lead === 0, depositRate = immediate ? 1 : .3;
   return {total, unit, lead, last: immediate ? 0 : lead + Math.ceil(qty / 2) - 1, deposit: total * depositRate, remaining: total * (1 - depositRate), depositRate, item};
 }
@@ -136,7 +136,7 @@ export function catalogueHTML(s, filters, quote, thumb) {
   const route = filters.route ? routeOf(s, filters.route) : null, fits = route ? items.filter(x => x.fit?.ok).length : 0;
   return `<section class="trenespop" aria-label="Trenespop, compra y venta de trenes">
     <header class="tp-header"><a class="tp-logo" href="#" data-action="market-reset" aria-label="Trenespop, todos los trenes">${brandLogo('Trenespop')}</a><form id="marketSearchForm" class="tp-search">${search}<input type="search" id="marketSearch" value="${esc(filters.query)}" placeholder="Buscar trenes, marcas y talleres" aria-label="Buscar en Trenespop"><button type="submit" aria-label="Buscar trenes">Buscar</button></form><button class="tp-favorites${filters.favorites ? ' active' : ''}" data-action="market-favorites" aria-label="${filters.favorites ? 'Salir de favoritos' : 'Ver favoritos'}" aria-pressed="${!!filters.favorites}">${heart}<span>Favoritos${favoriteCount ? ` (${favoriteCount})` : ''}</span></button></header>
-    <nav class="tp-categories" aria-label="Categorías de trenes"><span>España</span><button data-action="market-family" data-id="all" class="${filters.family === 'all' ? 'active' : ''}">Todos los trenes</button><button data-action="market-family" data-id="AVE" class="${filters.family === 'AVE' ? 'active' : ''}">Alta velocidad</button><button data-action="market-family" data-id="Alvia" class="${filters.family === 'Alvia' ? 'active' : ''}">Ancho variable</button><button data-action="market-family" data-id="Regional" class="${filters.family === 'Regional' ? 'active' : ''}">Regionales</button><button data-action="fleet-tab" data-id="orders">Mis compras</button></nav>
+    <nav class="tp-categories" aria-label="Categorías de trenes"><span>España</span><button data-action="market-family" data-id="all" class="${filters.family === 'all' ? 'active' : ''}">Todos los trenes</button><button data-action="market-family" data-id="AVE" class="${filters.family === 'AVE' ? 'active' : ''}">Alta velocidad</button><button data-action="market-family" data-id="Alvia" class="${filters.family === 'Alvia' ? 'active' : ''}">Ancho variable</button><button data-action="market-family" data-id="Regional" class="${filters.family === 'Regional' ? 'active' : ''}">Regionales</button><button data-action="market-family" data-id="Bus" class="${filters.family === 'Bus' ? 'active' : ''}">Autobuses</button><button data-action="fleet-tab" data-id="orders">Mis compras</button></nav>
     <div class="tp-filters">${select('marketState', 'Estado del tren', filters.state, [['all','Estado'],['new','Nuevo'],['used','Usado']])}${select('marketDelivery', 'Tiempo hasta el primer envío', filters.delivery, [['all','Tiempo de envío'],['0','Inmediato'],['3','Hasta 3 meses'],['12','Hasta 12 meses']])}${select('marketMaker', 'Fabricante', filters.maker, [['all','Marca'],...MANUFACTURERS.map(x => [x,x])])}${routeSelect(s, route?.id || '')}<button class="tp-clear" data-action="market-reset">Limpiar filtros</button></div>
     <div class="tp-breadcrumb">Trenespop <span>›</span> Trenes <span>›</span> ${filters.favorites ? 'Tus favoritos' : filters.state === 'used' ? 'Segunda mano' : filters.state === 'new' ? 'Nuevos' : 'Todos'}</div>
     <div class="tp-results"><div><h2>${filters.favorites ? 'Tus trenes favoritos' : 'Trenes que buscan nueva vía'}</h2><p><b id="marketResultCount">${items.length}</b> anuncios · ${route ? `<span id="marketRouteCount">${fits}</span> circulan por ${esc(route.name || route.id)}` : 'precios por unidad'}</p></div>${select('marketSort', 'Ordenar anuncios', filters.sort, [['recommended','Más relevantes'],['price','Precio: menor primero'],['delivery','Entrega más rápida'],['condition','Mejor estado']])}</div>

@@ -1,6 +1,30 @@
 // Whole messages spoken by the existing cast. Technical figures remain separate from dialogue bodies.
 import {EVENTS} from './conexiones.js';
 export const STATIC_MESSAGES={
+  "breakdown-alert": {
+    "person": "adif",
+    "text": "Tren parado en plena vía: avería de material. El viajero espera una solución y el reloj no se para.",
+    "kind": "aviso",
+    "mood": "worried"
+  },
+  "breakdown-aume": {
+    "person": "rival",
+    "text": "Jajaja. ¿Otro tren tirado, compañero? Tranquilo, que para eso está Autocares Meseta. Mis autocares ya van a recoger a tus viajeros. La factura te la mando al despacho, y a cada uno le doy una tarjeta, por si se cansan de esperar trenes.",
+    "kind": "aviso",
+    "mood": "proud"
+  },
+  "breakdown-abandon": {
+    "person": "riders",
+    "text": "Le habla Marisa Andén. Trescientas personas en mitad del campo, sin tren, sin autobús y sin noticias. Esto no se olvida: ni en la encuesta ni en las urnas.",
+    "kind": "aviso",
+    "mood": "angry"
+  },
+  "breakdown-ownbus": {
+    "person": "workshop",
+    "text": "Autobuses de la casa en camino. Los viajeros llegan por carretera y el tren, al taller. Al menos esta vez no le hemos dado el gusto al de los autocares.",
+    "kind": "aviso",
+    "mood": "determined"
+  },
   "guide-welcome": {
     "person": "minister",
     "text": "Esta es tu compañía: las vías, los trenes y las cuentas que vas a transformar. Aquí tienes el objetivo de tu mandato y una propuesta para tu siguiente jugada.",
