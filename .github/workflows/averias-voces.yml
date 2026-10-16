@@ -1,0 +1,69 @@
+name: Generar las cuatro voces de averías
+on:
+  push:
+    branches: [codex/averias-recursos]
+    paths:
+      - .github/workflows/averias-voces.yml
+      - .codex-averias/prepare-stage.py
+      - .codex-averias/validate-stage.py
+permissions:
+  contents: write
+env:
+  HF_HUB_DISABLE_PROGRESS_BARS: '1'
+  HF_HUB_DISABLE_TELEMETRY: '1'
+  HF_HUB_DISABLE_XET: '1'
+jobs:
+  voces:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: iberia-ferroviaria/proyecto/tools/requirements-qwen-voices.txt
+      - name: Preparar el entorno Qwen fijado
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          sudo install -d -o "$(id -un)" -g "$(id -gn)" /workspace/tools
+          python -m venv /workspace/tools/qwen-venv
+          source /workspace/tools/qwen-venv/bin/activate
+          python -m pip install --progress-bar off -r tools/requirements-qwen-voices.txt
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/qwen3-tts-0.6b
+          key: qwen-averias-5d83992436eae1d760afd27aff78a71d676296fc
+      - name: Preparar modelo y conservar las 126 tomas válidas
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          source /workspace/tools/qwen-venv/bin/activate
+          python tools/build_narration_voices.py --prepare --model /tmp/qwen3-tts-0.6b
+          python ../../.codex-averias/prepare-stage.py
+      - name: Inferir exclusivamente los cuatro mensajes pendientes
+        working-directory: iberia-ferroviaria/proyecto
+        run: |
+          source /workspace/tools/qwen-venv/bin/activate
+          python -u tools/build_narration_voices.py --model /tmp/qwen3-tts-0.6b --stage ../investigacion/voces/narracion-averias --shards 1 --shard 0 | tee ../investigacion/voces/narracion-averias/production.log
+          python tools/build_narration_voices.py --model /tmp/qwen3-tts-0.6b --stage ../investigacion/voces/narracion-averias --package
+          python ../../.codex-averias/validate-stage.py
+      - name: Conservar audio y sus informes en una rama temporal
+        run: |
+          git config user.name "Tenfe audio"
+          git config user.email "tenfe-audio@users.noreply.github.com"
+          git add iberia-ferroviaria/proyecto/dist/assets/narracion iberia-ferroviaria/proyecto/dist/assets/narration-voices.js
+          git add iberia-ferroviaria/investigacion/voces/narracion-averias/manifest.json iberia-ferroviaria/investigacion/voces/narracion-averias/migration-report.json iberia-ferroviaria/investigacion/voces/narracion-averias/validation-report.json iberia-ferroviaria/investigacion/voces/narracion-averias/production.log
+          git commit -m "Conserva solo las cuatro voces nuevas y 126 tomas intactas [skip ci]"
+          git push origin HEAD:refs/heads/codex/averias-voces
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: averias-voces-informes
+          path: |
+            iberia-ferroviaria/investigacion/voces/narracion-averias/*.json
+            iberia-ferroviaria/investigacion/voces/narracion-averias/production.log
